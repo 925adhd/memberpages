@@ -641,3 +641,1088 @@
     </div>
 </body>
 </html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your ADHD-Friendly Weekly Gig Plan: Target $300/Week</title>
+    <style>
+        :root {
+            --primary: #6a4c93;
+            --secondary: #8ac926;
+            --tertiary: #1982c4;
+            --accent1: #ffca3a;
+            --accent2: #ff595e;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #38b000;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f0f2f5;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+        
+        header {
+            text-align: center;
+            color: black;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+        
+        .day-navigation {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        .day-nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 5px;
+        }
+        
+        .day-link {
+            padding: 6px 8px;
+            border-radius: 6px;
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            text-align: center;
+            font-size: 0.75rem;
+            min-width: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .day-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+        }
+        
+        .day-link::after {
+            content: "↓";
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            margin-top: 2px;
+        }
+        
+        .day-link:hover::after {
+            opacity: 1;
+        }
+        
+        .current-day-highlight {
+            outline: 2px solid rgb(0, 0, 0);
+            position: relative;
+            transform: translateY(-2px);
+            box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.7), 0 0 12px 5px rgba(106, 76, 147, 0.5);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            from { box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.7), 0 0 12px 5px rgba(106, 76, 147, 0.5); }
+            50% { box-shadow: 0 0 12px 5px rgba(255, 255, 255, 0.9), 0 0 16px 8px rgba(106, 76, 147, 0.7); }
+            to { box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.7), 0 0 12px 5px rgba(106, 76, 147, 0.5); }
+        }
+        
+        @media (max-width: 380px) {
+            .day-link {
+                padding: 5px 6px;
+                font-size: 0.7rem;
+                min-width: 50px;
+                margin-bottom: 5px;
+            }
+            
+            .day-nav-links {
+                gap: 4px;
+            }
+        }
+        
+        .monday-link { background-color: #ff595e; }
+        .tuesday-link { background-color: #8ac926; }
+        .wednesday-link { background-color: #1982c4; }
+        .thursday-link { background-color: #6a4c93; }
+        .friday-link { background-color: #ffca3a; }
+        .saturday-link { background-color: #f15bb5; }
+        .sunday-link { background-color: #4cc9f0; }
+        
+        /* Remove table layout and use a container div instead */
+        .days-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .day-card {
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            width: 100%; /* Match the width of the navigation */
+            position: relative;
+            overflow: hidden; /* To contain confetti inside the card */
+            margin-bottom: 15px;
+        }
+        
+        .day-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .day-title {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: white;
+        }
+        
+        .day-subtitle {
+            font-style: italic;
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+        }
+        
+        .task-list {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .task-list h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+            font-size: 1rem;
+        }
+        
+        .tasks {
+            list-style-type: none;
+        }
+        
+        .tasks li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .bonus-tip {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .monday { background-color: #ff595e; }
+        .tuesday { background-color: #8ac926; }
+        .wednesday { background-color: #1982c4; }
+        .thursday { background-color: #6a4c93; }
+        .friday { background-color: #ffca3a; }
+        .saturday { background-color: #f15bb5; }
+        .sunday { background-color: #4cc9f0; }
+        
+        .task-checkbox {
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .task-checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+        
+        .checkmark {
+            height: 20px;
+            width: 20px;
+            background-color: #fff;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+            position: relative;
+            flex-shrink: 0;
+        }
+        
+        .task-checkbox:hover input ~ .checkmark {
+            background-color: #f0f0f0;
+        }
+        
+        .task-checkbox input:checked ~ .checkmark {
+            background-color: var(--success);
+            border-color: var(--success);
+        }
+        
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+        
+        .task-checkbox input:checked ~ .checkmark:after {
+            display: block;
+        }
+        
+        .task-checkbox .checkmark:after {
+            left: 6px;
+            top: 2px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        
+        .task-text {
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+        
+        .task-checkbox input:checked ~ .task-text {
+            text-decoration: line-through;
+            color: #888;
+        }
+        
+        .celebration {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            animation: fadeIn 0.5s ease;
+            display: none;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        a {
+            color: blue;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        
+        a:hover {
+            color: var(--tertiary);
+        }
+        
+        a:hover::after {
+            opacity: 1;
+        }
+        
+        .swipe-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .swipe-indicator {
+            width: 30px;
+            height: 5px;
+            background-color: #ddd;
+            border-radius: 3px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .indicator-active {
+            background-color: var(--primary);
+        }
+        
+        @media (max-width: 768px) {
+            .day-card {
+                width: 100%;
+                margin: 0 auto 15px auto;
+            }
+        }
+        
+        /* Action buttons */
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .action-btn {
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            flex: 1;
+        }
+        
+        .back-to-top-btn {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: var(--dark);
+        }
+        
+        .reset-day-btn {
+            background-color: rgba(255, 59, 59, 0.8);
+            color: white;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        /* Confetti styles */
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            85% {
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(500px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            top: 0;
+            z-index: 5;
+            pointer-events: none;
+            animation: confettiFall 2.5s linear forwards;
+        }
+        
+        .confetti-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Today is... </h1>
+    </header>
+    
+    <!-- Day Navigation -->
+    <section class="day-navigation" id="day-navigation">
+        <div class="day-nav-links">
+            <a href="#monday-card" class="day-link monday-link" data-day="monday">Mon</a>
+            <a href="#tuesday-card" class="day-link tuesday-link" data-day="tuesday">Tue</a>
+            <a href="#wednesday-card" class="day-link wednesday-link" data-day="wednesday">Wed</a>
+            <a href="#thursday-card" class="day-link thursday-link" data-day="thursday">Thu</a>
+            <a href="#friday-card" class="day-link friday-link" data-day="friday">Fri</a>
+            <a href="#saturday-card" class="day-link saturday-link" data-day="saturday">Sat</a>
+            <a href="#sunday-card" class="day-link sunday-link" data-day="sunday">Sun</a>
+        </div>
+        
+        <!-- Swipe indicators -->
+        <div class="swipe-indicators">
+            <div class="swipe-indicator" data-day="monday"></div>
+            <div class="swipe-indicator" data-day="tuesday"></div>
+            <div class="swipe-indicator" data-day="wednesday"></div>
+            <div class="swipe-indicator" data-day="thursday"></div>
+            <div class="swipe-indicator" data-day="friday"></div>
+            <div class="swipe-indicator" data-day="saturday"></div>
+            <div class="swipe-indicator" data-day="sunday"></div>
+        </div>
+    </section>
+    
+    <!-- Replace table with div container -->
+    <div class="days-container" id="days-container">
+        <!-- Monday -->
+        <div class="day-card monday" id="monday-card" data-day="monday">
+            <div class="confetti-container" id="monday-confetti-container"></div>
+            <h2 class="day-title">MONDAY</h2>
+            <h3 class="day-subtitle">Transcription & Testing Day (Deep Focus)</h3>
+            
+            <div class="celebration" id="monday-celebration">
+                🎉 You completed Monday's tasks! Way to start the week strong! 🎉
+            </div>
+            
+            <div class="task-list">
+                <h3>Vibe: "Let's start the week with high-paying gigs!"</h3>
+                <h3>Do This (Pick 2–3 only):</h3>
+                <ul class="tasks" id="monday-tasks">
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="monday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Complete 1-2 hours on <a href="https://www.rev.com/freelancers" target="_blank">Rev</a> ($15-$25)</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="monday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Do 1-2 <a href="https://www.usertesting.com/get-paid-to-test" target="_blank">UserTesting</a> tests ($10-$30)</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="monday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Check for studies on <a href="https://www.prolific.com/participants" target="_blank">Prolific</a> ($10-$15)</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="monday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Complete 1 audio file on <a href="https://gotranscript.com/transcription-jobs" target="_blank">GoTranscript</a> ($5-$15)</span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+            <div class="bonus-tip">
+                <strong>Bonus Dopamine:</strong> Start the week strong by focusing on high-paying tasks that require concentration. Target: $50-$70 today!
+            </div>
+            <div class="action-buttons">
+                <button class="action-btn back-to-top-btn">↑ Back to Top</button>
+                <button class="action-btn reset-day-btn" data-day="monday">Reset Day</button>
+            </div>
+        </div>
+
+        <!-- Tuesday -->
+        <div class="day-card tuesday" id="tuesday-card" data-day="tuesday">
+            <div class="confetti-container" id="tuesday-confetti-container"></div>
+            <h2 class="day-title">TUESDAY</h2>
+            <h3 class="day-subtitle">Research & Mystery Shop Day (Get Outside)</h3>
+            
+            <div class="celebration" id="tuesday-celebration">
+                🎉 You completed Tuesday's tasks! Look at you getting things done! 🎉
+            </div>
+            
+            <div class="task-list">
+                <h3>Vibe: "Mix indoor work with getting out of the house."</h3>
+                <h3>Do This (Mix of Computer & Phone):</h3>
+                <ul class="tasks" id="tuesday-tasks">
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="tuesday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Apply for a study on <a href="https://app.respondent.io/signup/?signupAs=participant" target="_blank">Respondent</a> ($50-$100)</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="tuesday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Complete a mission on <a href="https://dscout.com/participate-in-research-studies" target="_blank">dscout</a> ($10-$20)</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="tuesday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Do 1 mystery shop with <a href="https://www.bestmark.com/become-a-mystery-shopper/" target="_blank">BestMark</a> or <a href="https://www.isecretshop.com/register" target="_blank">iSecretShop</a> ($10-$25)</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="tuesday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Check for local tasks on <a href="https://www.gigspot.com/" target="_blank">GigSpot</a> ($8-$15)</span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+            <div class="bonus-tip">
+                <strong>Energy Hack:</strong> Combine a mystery shop with errands or plan it during lunch break. Target: $40-$60 today!
+            </div>
+            <div class="action-buttons">
+                <button class="action-btn back-to-top-btn">↑ Back to Top</button>
+                <button class="action-btn reset-day-btn" data-day="tuesday">Reset Day</button>
+            </div>
+        </div>
+
+        <!-- Wednesday -->
+        <div class="day-card wednesday" id="wednesday-card" data-day="wednesday">
+            <div class="confetti-container" id="wednesday-confetti-container"></div>
+            <h2 class="day-title">WEDNESDAY</h2>
+            <h3 class="day-subtitle">Mixed Day (Transcription & Surveys)</h3>
+            
+            <div class="celebration" id="wednesday-celebration">
+                🎉 You completed Wednesday's tasks! Halfway through the week! 🎉
+            </div>
+            
+            <div class="task-list">
+                <h3>Vibe: "Balancing focused work with easy wins."</h3>
+                <h3>Do This (Based on energy level):</h3>
+                <ul class="tasks" id="wednesday-tasks">
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="wednesday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">30-60 mins on <a href="https://www.transcribeme.com/legal-transcriptionists-jobs/" target="_blank">TranscribeMe</a> ($8-$15)</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="wednesday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Set up passive income apps: <a href="https://www.honeygain.com" target="_blank">Honeygain</a>, <a href="https://packetstream.io/share-bandwidth/" target="_blank">PacketStream</a> ($1-$5)</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="wednesday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Complete surveys on <a href="https://www.surveyjunkie.com/" target="_blank">Survey Junkie</a> ($5-$10)</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="wednesday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Do quick tasks on <a href="https://www.swagbucks.com/" target="_blank">Swagbucks</a> ($3-$5)</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="wednesday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Try audio transcription on <a href="https://scribie.com/transcription/freelance" target="_blank">Scribie</a> ($5-$15)</span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+            <div class="bonus-tip">
+                <strong>Mid-Week Strategy:</strong> Balance higher-effort transcription with easy surveys to maintain momentum. Target: $30-$50 today!
+            </div>
+            <div class="action-buttons">
+                <button class="action-btn back-to-top-btn">↑ Back to Top</button>
+                <button class="action-btn reset-day-btn" data-day="wednesday">Reset Day</button>
+            </div>
+        </div>
+
+        <!-- Thursday -->
+        <div class="day-card thursday" id="thursday-card" data-day="thursday">
+            <div class="confetti-container" id="thursday-confetti-container"></div>
+            <h2 class="day-title">THURSDAY</h2>
+            <h3 class="day-subtitle">User Testing & Microtask Day</h3>
+            
+            <div class="celebration" id="thursday-celebration">
+                🎉 You completed Thursday's tasks! Almost to the finish line! 🎉
+            </div>
+            
+            <div class="task-list">
+                <h3>Vibe: "Quick wins and focused testing."</h3>
+                <h3>Do This:</h3>
+                <ul class="tasks" id="thursday-tasks">
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="thursday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Check for new tests on <a href="https://www.usertesting.com/get-paid-to-test" target="_blank">UserTesting</a> ($10-$20)</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="thursday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Complete data tasks on <a href="https://neevo.definedcrowd.com/" target="_blank">Neevo</a> ($5-$10)</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="thursday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Do microtasks on <a href="https://www.clickworker.com/clickworker/" target="_blank">Clickworker</a> ($5-$10)</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="thursday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Check profile on <a href="https://www.alignerr.com/" target="_blank">Alignerr</a> for new tasks ($5-$10)</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="thursday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Monitor passive income apps ($1-$3)</span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+            <div class="bonus-tip">
+                <strong>Task Switching:</strong> Alternate between high-focus testing and easy microtasks based on your energy levels. Target: $30-$50 today!
+            </div>
+            <div class="action-buttons">
+                <button class="action-btn back-to-top-btn">↑ Back to Top</button>
+                <button class="action-btn reset-day-btn" data-day="thursday">Reset Day</button>
+            </div>
+        </div>
+
+        <!-- Friday -->
+        <div class="day-card friday" id="friday-card" data-day="friday">
+            <div class="confetti-container" id="friday-confetti-container"></div>
+            <h2 class="day-title">FRIDAY</h2>
+            <h3 class="day-subtitle">Transcription & Research Day</h3>
+            
+            <div class="celebration" id="friday-celebration">
+                🎉 You completed Friday's tasks! Strong finish to the week! 🎉
+            </div>
+            
+            <div class="task-list">
+                <h3>Vibe: "Last push before the weekend."</h3>
+                <h3>Do This:</h3>
+                <ul class="tasks" id="friday-tasks">
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="friday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">1-2 hours on <a href="https://www.3playmedia.com/company/jobs/contract-work/" target="_blank">3Play Media</a> ($15-$25)</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="friday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Complete tasks on <a href="https://workshop.castingwords.com/" target="_blank">CastingWords</a> ($8-$15)</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="friday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Apply for a study on <a href="https://www.userinterviews.com/" target="_blank">User Interviews</a> ($40-$100)</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="friday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Check all passive income apps ($1-$3)</span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+            <div class="bonus-tip">
+                <strong>Friday Focus:</strong> Aim for 1-2 high-paying tasks rather than many small ones to end the week strong. Target: $40-$60 today!
+            </div>
+            <div class="action-buttons">
+                <button class="action-btn back-to-top-btn">↑ Back to Top</button>
+                <button class="action-btn reset-day-btn" data-day="friday">Reset Day</button>
+            </div>
+        </div>
+
+        <!-- Saturday -->
+        <div class="day-card saturday" id="saturday-card" data-day="saturday">
+            <div class="confetti-container" id="saturday-confetti-container"></div>
+            <h2 class="day-title">SATURDAY</h2>
+            <h3 class="day-subtitle">Easy Survey & Shopping Day</h3>
+            
+            <div class="celebration" id="saturday-celebration">
+                🎉 You completed Saturday's tasks! Weekend warrior! 🎉
+            </div>
+            
+            <div class="task-list">
+                <h3>Vibe: "Low pressure, combine with weekend activities."</h3>
+                <h3>Do This (Phone-Friendly):</h3>
+                <ul class="tasks" id="saturday-tasks">
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="saturday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Quick surveys on <a href="https://www.paidviewpoint.com/" target="_blank">PaidViewpoint</a> ($2-$5)</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="saturday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Weekend mystery shop with <a href="https://www.secretshopper.com/shoppers/shopper-signup/shopper-signup-start" target="_blank">Secret Shopper</a> ($10-$20)</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="saturday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Use receipt scanning apps while shopping: <a href="https://www.fetch.com/" target="_blank">Fetch</a>, <a href="https://www.ibotta.com/" target="_blank">Ibotta</a> ($2-$5)</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="saturday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Check for weekend-only tasks on <a href="https://www.fieldagent.net/" target="_blank">Field Agent</a> ($3-$8)</span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+            <div class="bonus-tip">
+                <strong>Weekend Wisdom:</strong> Combine gigs with your regular shopping or outings for maximum efficiency. Target: $20-$40 today!
+            </div>
+            <div class="action-buttons">
+                <button class="action-btn back-to-top-btn">↑ Back to Top</button>
+                <button class="action-btn reset-day-btn" data-day="saturday">Reset Day</button>
+            </div>
+        </div>
+
+        <!-- Sunday -->
+        <div class="day-card sunday" id="sunday-card" data-day="sunday">
+            <div class="confetti-container" id="sunday-confetti-container"></div>
+            <h2 class="day-title">SUNDAY</h2>
+            <h3 class="day-subtitle">Rest & Easy Prep Day</h3>
+            
+            <div class="celebration" id="sunday-celebration">
+                🎉 You completed Sunday's tasks! Ready for next week! 🎉
+            </div>
+            
+            <div class="task-list">
+                <h3>Vibe: "Light tasks & setting up for next week."</h3>
+                <h3>Do This (Optional Day):</h3>
+                <ul class="tasks" id="sunday-tasks">
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="sunday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Rest day! Or quick phone surveys ($0-$10)</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="sunday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Check & update profiles on all gig sites</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="sunday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Apply for 1-2 studies for the coming week</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="task-checkbox">
+                            <input type="checkbox" class="task-input" data-day="sunday">
+                            <span class="checkmark"></span>
+                            <span class="task-text">Plan your next week (which days work best?)</span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+            <div class="bonus-tip">
+                <strong>Remember:</strong> Taking a day off is important! Use today to recharge and prepare for next week. You've already made progress toward your $300 goal!
+            </div>
+            <div class="action-buttons">
+                <button class="action-btn back-to-top-btn">↑ Back to Top</button>
+                <button class="action-btn reset-day-btn" data-day="sunday">Reset Day</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current day highlight based on actual day of week
+            const today = new Date().getDay(); // 0 = Sunday, 1 = Monday, etc.
+            const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+            const currentDay = days[today];
+            
+            // Highlight the current day in navigation
+            const currentDayLink = document.querySelector(`.day-link[data-day="${currentDay}"]`);
+            if (currentDayLink) {
+                currentDayLink.classList.add('current-day-highlight');
+            }
+            
+            // Highlight the current day's indicator
+            const currentDayIndicator = document.querySelector(`.swipe-indicator[data-day="${currentDay}"]`);
+            if (currentDayIndicator) {
+                currentDayIndicator.classList.add('indicator-active');
+            }
+            
+            // Load saved state from localStorage
+            loadSavedState();
+            
+            // Track task completion and update celebrations
+            const taskInputs = document.querySelectorAll('.task-input');
+            taskInputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    const day = this.dataset.day;
+                    checkDayCompletion(day);
+                    saveState();
+                    
+                    // Show confetti when task is checked
+                    if (this.checked) {
+                        createConfetti(day);
+                    }
+                });
+            });
+            
+            // Handle back-to-top button clicks - FIXED VERSION
+            const backToTopButtons = document.querySelectorAll('.back-to-top-btn');
+            backToTopButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Scroll to the day navigation section
+                    const navSection = document.getElementById('day-navigation');
+                    if (navSection) {
+                        navSection.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'start' 
+                        });
+                    }
+                    
+                    // Highlight the navigation bar briefly
+                    const nav = document.querySelector('.day-navigation');
+                    nav.style.transition = 'box-shadow 0.5s ease';
+                    nav.style.boxShadow = '0 0 15px rgba(106, 76, 147, 0.8)';
+                    
+                    // Remove highlight after animation
+                    setTimeout(() => {
+                        nav.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+                    }, 1000);
+                });
+            });
+            
+            // Handle reset day buttons
+            const resetDayButtons = document.querySelectorAll('.reset-day-btn');
+            resetDayButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const day = this.dataset.day;
+                    resetDay(day);
+                    saveState();
+                    createConfetti(day); // Add some fun confetti on reset too
+                });
+            });
+            
+            // Handle navigation clicks for smooth scrolling
+            const dayLinks = document.querySelectorAll('.day-link');
+            dayLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        // Update indicators
+                        document.querySelectorAll('.swipe-indicator').forEach(ind => {
+                            ind.classList.remove('indicator-active');
+                        });
+                        const day = this.dataset.day;
+                        const indicator = document.querySelector(`.swipe-indicator[data-day="${day}"]`);
+                        if (indicator) {
+                            indicator.classList.add('indicator-active');
+                        }
+                        
+                        // Scroll to the element
+                        targetElement.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Function to check if all tasks for a day are completed
+            function checkDayCompletion(day) {
+                const dayTasks = document.querySelectorAll(`.task-input[data-day="${day}"]`);
+                const allChecked = Array.from(dayTasks).every(task => task.checked);
+                const anyChecked = Array.from(dayTasks).some(task => task.checked);
+                
+                const celebration = document.getElementById(`${day}-celebration`);
+                if (celebration) {
+                    celebration.style.display = allChecked ? 'block' : 'none';
+                }
+                
+                // If all tasks are now checked, show confetti
+                if (allChecked) {
+                    createConfetti(day);
+                }
+            }
+            
+            // Function to reset a specific day
+            function resetDay(day) {
+                const dayTasks = document.querySelectorAll(`.task-input[data-day="${day}"]`);
+                dayTasks.forEach(task => {
+                    task.checked = false;
+                });
+                
+                const celebration = document.getElementById(`${day}-celebration`);
+                if (celebration) {
+                    celebration.style.display = 'none';
+                }
+            }
+            
+            // Function to reset all days
+            function resetAllDays() {
+                document.querySelectorAll('.task-input').forEach(input => {
+                    input.checked = false;
+                });
+                
+                document.querySelectorAll('.celebration').forEach(cel => {
+                    cel.style.display = 'none';
+                });
+                
+                saveState();
+            }
+            
+            // Create confetti animation WITHIN the card - ENHANCED VERSION
+            function createConfetti(day) {
+                const confettiContainer = document.getElementById(`${day}-confetti-container`);
+                if (!confettiContainer) return;
+                
+                const colors = ['#ff595e', '#ffca3a', '#8ac926', '#1982c4', '#6a4c93', '#f15bb5', '#4cc9f0'];
+                
+                // Clear any existing confetti
+                confettiContainer.innerHTML = '';
+                
+                // Get the card dimensions
+                const card = document.getElementById(`${day}-card`);
+                if (!card) return;
+                
+                // Create 120 confetti pieces for full coverage
+                for (let i = 0; i < 120; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.classList.add('confetti');
+                    
+                    // Random properties with varied shapes
+                    const size = Math.random() * 10 + 5; // Slightly larger confetti
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    
+                    // Distribute across the entire card width, but start at the top
+                    const left = Math.random() * 95 + 2.5; // 2.5% to 97.5%
+                    
+                    // Faster animation, slight variation in speed
+                    const duration = Math.random() * 1 + 1.5; // 1.5-2.5s, faster animation
+                    const delay = Math.random() * 0.3; // Less delay for faster start
+                    
+                    // Set styles
+                    confetti.style.width = `${size}px`;
+                    confetti.style.height = `${size}px`;
+                    confetti.style.backgroundColor = color;
+                    confetti.style.left = `${left}%`;
+                    // No top setting - all start from top: 0 (defined in CSS)
+                    confetti.style.animationDuration = `${duration}s`;
+                    confetti.style.animationDelay = `${delay}s`;
+                    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                    
+                    // Occasionally make diamond-shaped confetti
+                    if (Math.random() > 0.7) {
+                        confetti.style.borderRadius = '0';
+                        confetti.style.transform = `rotate(${Math.random() * 360}deg) skew(20deg, 20deg)`;
+                    } else if (Math.random() > 0.5) {
+                        // Occasionally make circular confetti
+                        confetti.style.borderRadius = '50%';
+                    }
+                    
+                    confettiContainer.appendChild(confetti);
+                }
+                
+                // Remove confetti after animations complete
+                setTimeout(() => {
+                    if (confettiContainer) {
+                        confettiContainer.innerHTML = '';
+                    }
+                }, 3000); // Cleanup time adjusted for new animation duration
+            }
+            
+            // Save current state to localStorage
+            function saveState() {
+                const checkedTasks = {};
+                
+                document.querySelectorAll('.task-input').forEach(input => {
+                    if (input.checked) {
+                        const day = input.dataset.day;
+                        const index = Array.from(document.querySelectorAll(`.task-input[data-day="${day}"]`)).indexOf(input);
+                        
+                        if (!checkedTasks[day]) {
+                            checkedTasks[day] = [];
+                        }
+                        
+                        checkedTasks[day].push(index);
+                    }
+                });
+                
+                localStorage.setItem('adhd-gig-plan-state', JSON.stringify({
+                    checkedTasks
+                }));
+            }
+            
+            // Load saved state from localStorage
+            function loadSavedState() {
+                const savedState = localStorage.getItem('adhd-gig-plan-state');
+                
+                if (savedState) {
+                    const state = JSON.parse(savedState);
+                    
+                    document.querySelectorAll('.task-input').forEach(input => {
+                        const day = input.dataset.day;
+                        const index = Array.from(document.querySelectorAll(`.task-input[data-day="${day}"]`)).indexOf(input);
+                        
+                        if (state.checkedTasks && state.checkedTasks[day] && state.checkedTasks[day].includes(index)) {
+                            input.checked = true;
+                        }
+                    });
+                    
+                    // Check completion status for each day
+                    days.forEach(day => {
+                        checkDayCompletion(day);
+                    });
+                }
+            }
+            
+            // Initialize day completion status
+            days.forEach(day => {
+                checkDayCompletion(day);
+            });
+        });
+    </script>
+</body>
+</html>
