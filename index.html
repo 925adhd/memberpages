@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>ADHD Earnings Tracker</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    body {
+      background: #f5f5f5;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding-top: max(10px, env(safe-area-inset-top));
+      padding-bottom: max(10px, env(safe-area-inset-bottom));
+    }
+    
+    .app {
+      width: 100%;
+      max-width: 420px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      padding: 20px;
+      position: relative;
+      margin-bottom: 20px;
+    }
+    
+    /* Tablet styles */
+    @media (min-width: 768px) {
+      body {
+        padding: 20px;
+      }
+      
+      .app {
+        max-width: 600px;
+        padding: 32px;
+      }
+      
+      .coins-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      
+      .bills-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .bills-grid-large {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .amt-btn {
+        min-height: 100px;
+        padding: 24px 20px;
+      }
+      
+      .amt-btn-emoji {
+        font-size: clamp(30px, 4vw, 36px);
+      }
+      
+      .amt-btn-label {
+        font-size: clamp(16px, 2.5vw, 18px);
+      }
+    }
+    
+    /* Desktop styles */
+    @media (min-width: 1024px) {
+      body {
+        padding: 40px;
+        background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+      }
+      
+      .app {
+        max-width: 800px;
+        padding: 40px;
+        border-radius: 24px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      }
+      
+      .title {
+        font-size: clamp(32px, 4vw, 40px);
+        margin-bottom: 32px;
+      }
+      
+      .progress-container {
+        margin-bottom: 32px;
+      }
+      
+      .progress-header {
+        font-size: clamp(18px, 2vw, 20px);
+        margin-bottom: 16px;
+      }
+      
+      .progress-bar {
+        height: 16px;
+      }
+      
+      .total-container {
+        padding: 32px 24px;
+        margin-bottom: 32px;
+      }
+      
+      .total-amount {
+        font-size: clamp(48px, 8vw, 64px);
+      }
+      
+      .dollar-sign {
+        font-size: clamp(38px, 6vw, 50px);
+      }
+      
+      .coins-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      
+      .bills-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .bills-grid-large {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .buttons-grid {
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+      
+      .buttons-grid:last-of-type {
+        margin-bottom: 32px;
+      }
+      
+      .amt-btn {
+        min-height: 120px;
+        padding: 28px 24px;
+        border-radius: 16px;
+      }
+      
+      .amt-btn-emoji {
+        font-size: clamp(36px, 3vw, 42px);
+      }
+      
+      .amt-btn-label {
+        font-size: clamp(18px, 2vw, 20px);
+      }
+      
+      .manual-section {
+        padding: 28px;
+        margin-bottom: 32px;
+      }
+      
+      .manual-title {
+        font-size: clamp(20px, 2.5vw, 24px);
+        margin-bottom: 20px;
+      }
+      
+      .manual-input {
+        font-size: clamp(18px, 2vw, 20px);
+        min-height: 60px;
+        padding: 20px;
+      }
+      
+      .manual-add-btn {
+        font-size: clamp(16px, 2vw, 18px);
+        min-height: 60px;
+        padding: 20px 32px;
+      }
+      
+      .action-btn {
+        font-size: clamp(16px, 2vw, 18px);
+        min-height: 60px;
+        padding: 20px;
+      }
+      
+      .goal-input {
+        font-size: clamp(18px, 2vw, 20px);
+        width: 100px;
+      }
+    }
+    
+    /* Large desktop styles */
+    @media (min-width: 1440px) {
+      .app {
+        max-width: 1000px;
+        padding: 48px;
+      }
+      
+      .coins-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      
+      .bills-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      
+      .bills-grid-large {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      
+      .amt-btn {
+        min-height: 140px;
+        padding: 32px 28px;
+      }
+      
+      .amt-btn-emoji {
+        font-size: 48px;
+      }
+      
+      .amt-btn-label {
+        font-size: 22px;
+      }
+    }
+    
+    .title {
+      color: #9333ea;
+      font-size: clamp(24px, 6vw, 28px);
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    
+    .progress-container {
+      margin-bottom: 20px;
+    }
+    
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: clamp(14px, 4vw, 16px);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    
+    .goal-section {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    
+    .goal-display {
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+      border: 2px solid transparent;
+    }
+    
+    .goal-display:hover {
+      background-color: #f3f4f6;
+    }
+    
+    .goal-input {
+      padding: 4px 8px;
+      border: 2px solid #9333ea;
+      border-radius: 6px;
+      font-size: clamp(14px, 4vw, 16px);
+      font-weight: 600;
+      width: 80px;
+      text-align: right;
+      background: white;
+    }
+    
+    .goal-input:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
+    }
+    
+    .edit-hint {
+      font-size: 12px;
+      color: #6b7280;
+      margin-left: 4px;
+    }
+    
+    .progress-bar {
+      width: 100%;
+      height: 12px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: #9333ea;
+      transition: width 0.3s ease;
+      border-radius: inherit;
+    }
+    
+    .progress-fill.goal-met {
+      background: #22c55e;
+    }
+    
+    .total-container {
+      background: #f3e8ff;
+      border-radius: 16px;
+      padding: 24px 20px;
+      text-align: center;
+      margin-bottom: 24px;
+      border: 2px solid #d8b4fe;
+    }
+    
+    .total-container.goal-met {
+      background: #dcfce7;
+      border-color: #86efac;
+    }
+    
+    .total-amount {
+      font-size: clamp(36px, 10vw, 48px);
+      font-weight: bold;
+      color: #7e22ce;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      line-height: 1;
+    }
+    
+    .total-container.goal-met .total-amount {
+      color: #15803d;
+    }
+    
+    .dollar-sign {
+      font-size: clamp(28px, 8vw, 38px);
+    }
+    
+    .last-added {
+      margin-top: 12px;
+      font-weight: bold;
+      font-size: clamp(16px, 4.5vw, 20px);
+    }
+    
+    .last-added.positive {
+      color: #16a34a;
+    }
+    
+    .last-added.negative {
+      color: #dc2626;
+    }
+    
+    .goal-message {
+      color: #16a34a;
+      font-weight: bold;
+      margin-top: 12px;
+      font-size: clamp(18px, 5vw, 20px);
+    }
+    
+    .buttons-grid {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    
+    .buttons-grid:last-of-type {
+      margin-bottom: 24px;
+    }
+    
+    .coins-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .bills-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .bills-grid-large {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Mobile landscape and small tablets */
+    @media (min-width: 480px) {
+      .coins-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      
+      .bills-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .bills-grid-large {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    .amt-btn {
+      border: none;
+      border-radius: 12px;
+      padding: 20px 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s, filter 0.2s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      min-height: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      touch-action: manipulation;
+    }
+    
+    .amt-btn:active {
+      transform: scale(0.95);
+    }
+    
+    .amt-btn:hover {
+      filter: brightness(0.95);
+    }
+    
+    .amt-btn-emoji {
+      font-size: clamp(24px, 6vw, 30px);
+      line-height: 1;
+    }
+    
+    .amt-btn-label {
+      font-size: clamp(14px, 4vw, 16px);
+      font-weight: bold;
+      line-height: 1;
+    }
+    
+    .manual-section {
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .manual-title {
+      font-size: clamp(16px, 4.5vw, 18px);
+      font-weight: bold;
+      color: #374151;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    
+    .manual-input-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: stretch;
+    }
+    
+    .manual-input {
+      padding: 16px;
+      border: 2px solid #d1d5db;
+      border-radius: 12px;
+      font-size: clamp(16px, 4.5vw, 18px);
+      font-weight: bold;
+      text-align: center;
+      background: white;
+      transition: border-color 0.2s;
+      min-height: 52px;
+    }
+    
+    .manual-input:focus {
+      outline: none;
+      border-color: #9333ea;
+      box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
+    }
+    
+    .manual-input.error {
+      border-color: #dc2626;
+      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+    }
+    
+    .manual-add-btn {
+      padding: 16px 24px;
+      background: #9333ea;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: clamp(14px, 4vw, 16px);
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      min-height: 52px;
+      width: 100%;
+      touch-action: manipulation;
+    }
+    
+    .manual-add-btn:hover {
+      background: #7c3aed;
+    }
+    
+    .manual-add-btn:active {
+      transform: scale(0.95);
+    }
+    
+    .manual-add-btn:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .error-message {
+      color: #dc2626;
+      font-size: clamp(12px, 3.5vw, 14px);
+      margin-top: 12px;
+      text-align: center;
+      font-weight: 500;
+    }
+    
+    .hidden {
+      display: none;
+    }
+    
+    .action-btns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    
+    .action-btn {
+      border: none;
+      border-radius: 12px;
+      padding: 16px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: clamp(14px, 4vw, 16px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      min-height: 52px;
+      touch-action: manipulation;
+      transition: transform 0.1s, filter 0.2s;
+    }
+    
+    .action-btn:active {
+      transform: scale(0.95);
+    }
+    
+    .action-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .undo-btn {
+      background: #ffedd5;
+      color: #c2410c;
+    }
+    
+    .reset-btn {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+    
+    .celebration {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+    
+    .celebration-box {
+      background: white;
+      border-radius: 20px;
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      animation: bounce 1s infinite;
+      width: 100%;
+      max-width: 320px;
+    }
+    
+    .celebration-text {
+      font-weight: bold;
+      color: #7e22ce;
+      font-size: clamp(20px, 6vw, 24px);
+      line-height: 1.3;
+    }
+    
+    @media (min-width: 768px) {
+      .celebration-box {
+        max-width: 400px;
+        padding: 40px 32px;
+        border-radius: 24px;
+      }
+      
+      .celebration-text {
+        font-size: clamp(24px, 4vw, 32px);
+      }
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    
+    /* Small tablets and larger phones */
+    @media (min-width: 480px) {
+      .manual-input-container {
+        flex-direction: row;
+        align-items: center;
+      }
+      
+      .manual-add-btn {
+        width: auto;
+        white-space: nowrap;
+      }
+    }
+    
+    /* Very small screens - adjust button size and spacing */
+    @media (max-width: 360px) {
+      .app {
+        padding: 16px;
+        border-radius: 16px;
+      }
+      
+      .amt-btn {
+        min-height: 70px;
+        padding: 16px 12px;
+      }
+      
+      .amt-btn-emoji {
+        font-size: clamp(20px, 5.5vw, 26px);
+      }
+      
+      .amt-btn-label {
+        font-size: clamp(12px, 3.5vw, 14px);
+      }
+      
+      .manual-section {
+        padding: 16px;
+      }
+      
+      .buttons-grid {
+        gap: 10px;
+      }
+    }
+    
+    /* Prevent zoom on input focus for iOS */
+    @media screen and (-webkit-min-device-pixel-ratio: 0) {
+      select:focus,
+      textarea:focus,
+      input:focus {
+        font-size: 16px;
+      }
+    }
+    
+    /* Safe area adjustments for devices with notches */
+    @supports (padding: max(0px)) {
+      body {
+        padding-left: max(10px, env(safe-area-inset-left));
+        padding-right: max(10px, env(safe-area-inset-right));
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <!-- Celebration Overlay -->
+    <div id="celebration" class="celebration hidden" style="display: none;">
+      <div class="celebration-box">
+        <div id="celebrationText" class="celebration-text"></div>
+      </div>
+    </div>
+    
+    <!-- Header -->
+    <h1 class="title">Weekly Win Wallet</h1>
+     <center>Gamify your savings! Set a goal, click to add income, and watch your progress bar grow. Hit milestones and celebrate wins as you go.<br><br>
+    <!-- Progress Bar -->
+    <div class="progress-container">
+      <div class="progress-header">
+        <div class="goal-section">
+          <span>Goal: $</span>
+          <span id="goalDisplay" class="goal-display" onclick="editGoal()">
+            <span id="goalAmount">300.00</span>
+          </span>
+          <input 
+            type="number" 
+            id="goalInput" 
+            class="goal-input hidden" 
+            step="0.01" 
+            min="1"
+            onblur="saveGoal()"
+            onkeypress="handleGoalEnter(event)"
+          >
+          <span class="edit-hint">✏️</span>
+        </div>
+        <span id="progressPercent">0%</span>
+      </div>
+      <div class="progress-bar">
+        <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+      </div>
+    </div>
+    
+    <!-- Total Display -->
+    <div id="totalContainer" class="total-container">
+      <div class="total-amount">
+        <span class="dollar-sign">$</span>
+        <span id="totalAmount">0.00</span>
+      </div>
+      <div id="lastAdded" class="last-added hidden"></div>
+      <div id="goalMessage" class="goal-message hidden">🏆 GOAL REACHED! 🏆</div>
+    </div>
+    
+    <!-- Amount Buttons -->
+    <div class="buttons-grid coins-grid">
+      <button class="amt-btn" style="background: #cffafe; color: #155e75;" onclick="addAmount(0.1)">
+        <div class="amt-btn-emoji">🪙</div>
+        <div class="amt-btn-label">10¢</div>
+      </button>
+      <button class="amt-btn" style="background: #dbeafe; color: #1e40af;" onclick="addAmount(0.25)">
+        <div class="amt-btn-emoji">💰</div>
+        <div class="amt-btn-label">25¢</div>
+      </button>
+      <button class="amt-btn" style="background: #e0e7ff; color: #3730a3;" onclick="addAmount(0.5)">
+        <div class="amt-btn-emoji">✨</div>
+        <div class="amt-btn-label">50¢</div>
+      </button>
+      <button class="amt-btn" style="background: #dcfce7; color: #166534;" onclick="addAmount(1)">
+        <div class="amt-btn-emoji">💚</div>
+        <div class="amt-btn-label">$1</div>
+      </button>
+    </div>
+    
+    <div class="buttons-grid bills-grid">
+      <button class="amt-btn" style="background: #d1fae5; color: #065f46;" onclick="addAmount(5)">
+        <div class="amt-btn-emoji">🌟</div>
+        <div class="amt-btn-label">$5</div>
+      </button>
+      <button class="amt-btn" style="background: #f3e8ff; color: #6b21a8;" onclick="addAmount(10)">
+        <div class="amt-btn-emoji">🚀</div>
+        <div class="amt-btn-label">$10</div>
+      </button>
+      <button class="amt-btn" style="background: #fce7f3; color: #9d174d;" onclick="addAmount(20)">
+        <div class="amt-btn-emoji">🎉</div>
+        <div class="amt-btn-label">$20</div>
+      </button>
+    </div>
+    
+    <div class="buttons-grid bills-grid-large">
+      <button class="amt-btn" style="background: #fff7ed; color: #c2410c;" onclick="addAmount(50)">
+        <div class="amt-btn-emoji">💎</div>
+        <div class="amt-btn-label">$50</div>
+      </button>
+      <button class="amt-btn" style="background: #ecfdf5; color: #047857;" onclick="addAmount(100)">
+        <div class="amt-btn-emoji">💯</div>
+        <div class="amt-btn-label">$100</div>
+      </button>
+      <button class="amt-btn" style="background: #eff6ff; color: #1d4ed8;" onclick="addAmount(150)">
+        <div class="amt-btn-emoji">🏅</div>
+        <div class="amt-btn-label">$150</div>
+      </button>
+    </div>
+    
+    <!-- Manual Entry Section -->
+    <div class="manual-section">
+      <div class="manual-title">💸 Enter Custom Amount</div>
+      <div class="manual-input-container">
+        <input 
+          type="number" 
+          id="manualInput" 
+          class="manual-input" 
+          placeholder="0.00"
+          step="0.01"
+          min="0"
+          inputmode="decimal"
+          oninput="validateManualInput()"
+          onkeypress="handleEnterKey(event)"
+        >
+        <button 
+          id="manualAddBtn" 
+          class="manual-add-btn" 
+          onclick="addManualAmount()"
+          disabled
+        >
+          Add $
+        </button>
+      </div>
+      <div id="errorMessage" class="error-message hidden"></div>
+    </div>
+    
+    <!-- Action Buttons -->
+    <div class="action-btns">
+      <button id="undoBtn" class="action-btn undo-btn" onclick="undoLastAction()" disabled>
+        ↩ Undo
+      </button>
+      <button class="action-btn reset-btn" onclick="resetTracker()">
+        ⟳ Reset
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // State variables
+    let total = 0;
+    let goal = 300;
+    let history = [];
+    let lastMilestone = null;
+    const milestones = [1, 25, 50, 100, 150, 200, 250, 300, 500];
+    
+    // Load saved data from memory storage (since localStorage isn't available)
+    function loadSavedData() {
+      // Initialize with defaults since we can't use localStorage
+      total = 0;
+      goal = 300;
+      history = [];
+      lastMilestone = null;
+    }
+    
+    // Save data (placeholder function since localStorage isn't available)
+    function saveData() {
+      // In a real environment, this would save to localStorage
+      // For now, data persists only during the session
+    }
+    
+    // DOM elements
+    const totalAmount = document.getElementById('totalAmount');
+    const totalContainer = document.getElementById('totalContainer');
+    const progressFill = document.getElementById('progressFill');
+    const progressPercent = document.getElementById('progressPercent');
+    const lastAdded = document.getElementById('lastAdded');
+    const goalMessage = document.getElementById('goalMessage');
+    const undoBtn = document.getElementById('undoBtn');
+    const celebration = document.getElementById('celebration');
+    const celebrationText = document.getElementById('celebrationText');
+    const manualInput = document.getElementById('manualInput');
+    const manualAddBtn = document.getElementById('manualAddBtn');
+    const errorMessage = document.getElementById('errorMessage');
+    const goalAmount = document.getElementById('goalAmount');
+    const goalDisplay = document.getElementById('goalDisplay');
+    const goalInput = document.getElementById('goalInput');
+    
+    // Format as currency
+    function formatNumber(num) {
+      return num.toFixed(2);
+    }
+    
+    // Update UI
+    function updateUI() {
+      // Update total
+      totalAmount.textContent = formatNumber(total);
+      
+      // Update goal display
+      goalAmount.textContent = formatNumber(goal);
+      
+      // Update progress
+      const progress = Math.min((total / goal) * 100, 100);
+      progressFill.style.width = `${progress}%`;
+      progressPercent.textContent = `${Math.round(progress)}%`;
+      
+      // Check if goal is reached
+      const goalReached = total >= goal;
+      
+      if (goalReached) {
+        progressFill.classList.add('goal-met');
+        totalContainer.classList.add('goal-met');
+        goalMessage.classList.remove('hidden');
+      } else {
+        progressFill.classList.remove('goal-met');
+        totalContainer.classList.remove('goal-met');
+        goalMessage.classList.add('hidden');
+      }
+      
+      // Update undo button
+      undoBtn.disabled = history.length === 0;
+    }
+    
+    // Edit goal
+    function editGoal() {
+      goalDisplay.classList.add('hidden');
+      goalInput.classList.remove('hidden');
+      goalInput.value = goal.toFixed(2);
+      goalInput.focus();
+      goalInput.select();
+    }
+    
+    // Handle Enter key in goal input
+    function handleGoalEnter(event) {
+      if (event.key === 'Enter') {
+        saveGoal();
+      }
+    }
+    
+    // Save goal
+    function saveGoal() {
+      const newGoal = parseFloat(goalInput.value);
+      
+      if (!isNaN(newGoal) && newGoal > 0) {
+        goal = Math.max(1, newGoal); // Minimum goal of $1
+        saveData();
+        updateUI();
+      }
+      
+      // Hide input and show display
+      goalInput.classList.add('hidden');
+      goalDisplay.classList.remove('hidden');
+    }
+    
+    // Add amount
+    function addAmount(amount) {
+      total += amount;
+      
+      // Add to history
+      history.unshift({
+        amount: amount,
+        timestamp: new Date()
+      });
+      
+      // Save data
+      saveData();
+      
+      // Show last added indicator
+      lastAdded.textContent = `+${formatNumber(amount)} 🎉`;
+      lastAdded.className = 'last-added positive';
+      lastAdded.classList.remove('hidden');
+      
+      // Check for milestone
+      checkMilestone();
+      
+      // Update UI
+      updateUI();
+      
+      // Hide last added after delay
+      setTimeout(() => {
+        lastAdded.classList.add('hidden');
+      }, 1500);
+    }
+    
+    // Validate manual input
+    function validateManualInput() {
+      const value = manualInput.value.trim();
+      const amount = parseFloat(value);
+      
+      // Clear previous error states
+      manualInput.classList.remove('error');
+      errorMessage.classList.add('hidden');
+      
+      if (value === '') {
+        manualAddBtn.disabled = true;
+        return;
+      }
+      
+      // Check if it's a valid number
+      if (isNaN(amount) || amount <= 0) {
+        showError('Please enter a valid positive number');
+        manualAddBtn.disabled = true;
+        return;
+      }
+      
+      // Check if it's too large (optional limit)
+      if (amount > 10000) {
+        showError('Amount too large (max $10,000)');
+        manualAddBtn.disabled = true;
+        return;
+      }
+      
+      // Valid input
+      manualAddBtn.disabled = false;
+    }
+    
+    // Show error message
+    function showError(message) {
+      manualInput.classList.add('error');
+      errorMessage.textContent = message;
+      errorMessage.classList.remove('hidden');
+    }
+    
+    // Handle Enter key in manual input
+    function handleEnterKey(event) {
+      if (event.key === 'Enter' && !manualAddBtn.disabled) {
+        addManualAmount();
+      }
+    }
+    
+    // Add manual amount
+    function addManualAmount() {
+      const value = manualInput.value.trim();
+      const amount = parseFloat(value);
+      
+      if (!isNaN(amount) && amount > 0) {
+        addAmount(amount);
+        
+        // Clear input
+        manualInput.value = '';
+        manualAddBtn.disabled = true;
+        manualInput.classList.remove('error');
+        errorMessage.classList.add('hidden');
+      }
+    }
+    
+    // Undo last action
+    function undoLastAction() {
+      if (history.length > 0) {
+        const lastAction = history.shift();
+        total -= lastAction.amount;
+        
+        // Save data
+        saveData();
+        
+        // Show undo indicator
+        lastAdded.textContent = `-${formatNumber(lastAction.amount)} ↶`;
+        lastAdded.className = 'last-added negative';
+        lastAdded.classList.remove('hidden');
+        
+        // Update UI
+        updateUI();
+        
+        // Hide indicator after delay
+        setTimeout(() => {
+          lastAdded.classList.add('hidden');
+        }, 1500);
+      }
+    }
+    
+    // Reset tracker
+    function resetTracker() {
+      total = 0;
+      history = [];
+      lastMilestone = null;
+      
+      // Don't reset the goal - keep user's custom goal
+      
+      lastAdded.classList.add('hidden');
+      
+      // Clear manual input
+      manualInput.value = '';
+      manualAddBtn.disabled = true;
+      manualInput.classList.remove('error');
+      errorMessage.classList.add('hidden');
+      
+      // Hide goal input if shown
+      goalInput.classList.add('hidden');
+      goalDisplay.classList.remove('hidden');
+      
+      // Hide celebration overlay
+      celebration.classList.add('hidden');
+      
+      // Update UI
+      updateUI();
+    }
+    
+    // Check for milestone
+    function checkMilestone() {
+      // Create dynamic milestones based on goal
+      const dynamicMilestones = [
+        1, 
+        Math.round(goal * 0.1), 
+        Math.round(goal * 0.25), 
+        Math.round(goal * 0.5), 
+        Math.round(goal * 0.75), 
+        goal,
+        Math.round(goal * 1.5)
+      ].filter(m => m > 0).sort((a, b) => a - b);
+      
+      const currentMilestone = dynamicMilestones.find(m => 
+        total >= m && (!lastMilestone || m > lastMilestone)
+      );
+      
+      if (currentMilestone && currentMilestone !== lastMilestone) {
+        lastMilestone = currentMilestone;
+        
+        // Save milestone data
+        saveData();
+        
+        // Show celebration
+        let message = '';
+        if (currentMilestone === 1) {
+          message = "🎯 First dollar!";
+        } else if (currentMilestone === Math.round(goal * 0.1)) {
+          message = "⚡ Great start!";
+        } else if (currentMilestone === Math.round(goal * 0.25)) {
+          message = "💰 Quarter way there!";
+        } else if (currentMilestone === Math.round(goal * 0.5)) {
+          message = "🔥 Halfway there!";
+        } else if (currentMilestone === Math.round(goal * 0.75)) {
+          message = "🚀 Almost there!";
+        } else if (currentMilestone === goal) {
+          message = "🏆 GOAL SMASHED!";
+        } else if (currentMilestone > goal) {
+          message = "👑 You're a champion!";
+        } else {
+          message = `🎉 $${currentMilestone} achieved!`;
+        }
+        
+        celebrationText.textContent = message;
+        celebration.classList.remove('hidden');
+        celebration.style.display = 'flex';
+        
+        // Hide celebration after delay
+        setTimeout(() => {
+          celebration.classList.add('hidden');
+          celebration.style.display = 'none';
+        }, 2500);
+      }
+    }
+    
+    // Hide celebration overlay
+    function hideCelebration() {
+      celebration.classList.add('hidden');
+      celebration.style.display = 'none';
+    }
+    
+    // Click to dismiss celebration
+    celebration.addEventListener('click', hideCelebration);
+    
+    // Prevent double-tap zoom on buttons
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', function (event) {
+      const now = (new Date()).getTime();
+      if (now - lastTouchEnd <= 300) {
+        event.preventDefault();
+      }
+      lastTouchEnd = now;
+    }, false);
+    
+    // Initialize
+    loadSavedData();
+    updateUI();
+    
+    // Ensure celebration is hidden on load
+    celebration.classList.add('hidden');
+    celebration.style.display = 'none';
+  </script>
+</body>
+</html>
