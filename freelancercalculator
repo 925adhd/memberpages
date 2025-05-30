@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>ADHD-Friendly Freelancer Calculator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --main-bg: #f0f4ff;
+      --button-color: #ff7a59;
+      --button-hover: #ff4d2e;
+      --text-color: #2e2e2e;
+      --accent: #ff9b85;
+      --circle-color: #8b56f3;
+      --highlight: #8bf5fa;
+      --gradient-start: #d06ef4;
+      --gradient-end: #7d4de3;
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      --card-border: rgba(255, 255, 255, 0.8);
+      --tab-inactive: rgba(255, 255, 255, 0.6);
+      --tab-active: rgba(255, 255, 255, 0.9);
+    }
+    
+    html {
+      -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Lexend', sans-serif;
+      background: linear-gradient(135deg, var(--main-bg), #e0e8ff);
+      background-attachment: fixed;
+      color: var(--text-color);
+      text-align: center;
+      overflow-x: hidden;
+      position: relative;
+      padding: 2rem 0;
+    }
+    
+    .background-bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(139,245,250,0.4), rgba(139,245,250,0.1));
+      animation: float 20s infinite ease-in-out;
+      z-index: -1;
+    }
+    
+    .bubble-1 {
+      width: 400px;
+      height: 400px;
+      left: -150px;
+      top: 15%;
+      animation-delay: -5s;
+    }
+    
+    .bubble-2 {
+      width: 300px;
+      height: 300px;
+      right: -100px;
+      bottom: 10%;
+      animation-delay: -8s;
+    }
+    
+    .bubble-3 {
+      width: 250px;
+      height: 250px;
+      right: 25%;
+      top: -80px;
+      animation-delay: -2s;
+    }
+    
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+      }
+      50% {
+        transform: translateY(-40px) scale(1.1);
+      }
+    }
+
+    h1 {
+      margin-bottom: 1.8rem;
+      background: linear-gradient(45deg, var(--button-color), var(--gradient-start));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-shadow: 0 2px 10px rgba(255, 255, 255, 0.7);
+      max-width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .calculator-container {
+      max-width: 700px;
+      width: 90%;
+      margin: 0 auto 2rem auto;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 24px;
+      padding: 2.5rem;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .calculator-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .progress {
+      height: 10px;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 5px;
+      margin-bottom: 30px;
+      overflow: hidden;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(45deg, var(--button-color), var(--gradient-start));
+      width: 33.33%;
+      transition: width 0.5s ease;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(208, 110, 244, 0.3);
+    }
+    
+    .tab-container {
+      margin-bottom: 25px;
+    }
+    
+    .tab-buttons {
+      display: flex;
+      margin-bottom: 30px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      position: relative;
+      z-index: 1;
+      padding: 5px;
+    }
+    
+    .tab-buttons::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .tab-button {
+      background: var(--tab-inactive);
+      border: none;
+      padding: 16px 0;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      flex: 1;
+      min-width: 140px;
+      text-align: center;
+      white-space: nowrap;
+      transition: all 0.3s ease;
+      color: var(--text-color);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      backdrop-filter: blur(5px);
+    }
+    
+    .tab-button:first-child {
+      border-radius: 12px 0 0 12px;
+    }
+    
+    .tab-button:last-child {
+      border-radius: 0 12px 12px 0;
+    }
+    
+    .tab-button.active {
+      background: linear-gradient(45deg, var(--button-color), var(--gradient-start));
+      color: white;
+      box-shadow: 0 4px 12px rgba(255, 122, 89, 0.3);
+    }
+    
+    .tab-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: all 0.5s ease;
+    }
+    
+    .tab-button:hover::before {
+      left: 100%;
+    }
+    
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    .input-group {
+      margin-bottom: 28px;
+      position: relative;
+      padding-left: 20px;
+      border-left: 4px solid;
+      border-image: linear-gradient(to bottom, var(--button-color), var(--gradient-start)) 1;
+      transition: all 0.3s ease;
+      text-align: left;
+    }
+    
+    .input-group:hover {
+      transform: translateX(5px);
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 600;
+      color: var(--text-color);
+      font-size: 18px;
+    }
+    
+    input, select {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid rgba(221, 221, 221, 0.5);
+      border-radius: 12px;
+      font-size: 18px;
+      appearance: none;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+      font-family: 'Lexend', sans-serif;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05) inset;
+    }
+    
+    input:focus, select:focus {
+      border-color: var(--gradient-start);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(208, 110, 244, 0.2);
+      background: rgba(255, 255, 255, 0.9);
+    }
+    
+    .reminder {
+      color: #777;
+      font-size: 15px;
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+    
+    .tip {
+      background: rgba(255, 253, 231, 0.7);
+      border-radius: 12px;
+      border-left: 4px solid #ffd600;
+      padding: 18px;
+      margin-top: 18px;
+      font-size: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+      line-height: 1.5;
+      text-align: left;
+    }
+    
+    .tip:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    button {
+      background: linear-gradient(45deg, var(--button-color), var(--gradient-start));
+      color: white;
+      border: none;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 20px;
+      appearance: none;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 15px rgba(255, 122, 89, 0.2);
+      font-family: 'Lexend', sans-serif;
+    }
+    
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: all 0.5s ease;
+    }
+    
+    button:hover, button:focus {
+      background: linear-gradient(45deg, var(--button-hover), var(--gradient-end));
+      transform: translateY(-3px);
+      box-shadow: 0 12px 20px rgba(255, 122, 89, 0.3);
+    }
+    
+    button:hover::before {
+      left: 100%;
+    }
+    
+    .button-group {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .button-group button {
+      flex: 1;
+    }
+    
+    .results {
+      margin-top: 25px;
+      padding: 25px;
+      background: rgba(240, 245, 255, 0.7);
+      border-radius: 18px;
+      display: none;
+      animation: fadeIn 0.5s ease;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      text-align: left;
+    }
+    
+    .results h2 {
+      background: linear-gradient(45deg, var(--button-color), var(--gradient-start));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-top: 0;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    .result-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      padding: 12px 15px;
+      border-bottom: 1px solid rgba(221, 221, 221, 0.5);
+      flex-wrap: wrap;
+      transition: all 0.3s ease;
+      border-radius: 10px;
+    }
+    
+    .result-item:hover {
+      transform: translateX(5px);
+      background: rgba(255, 255, 255, 0.3);
+    }
+    
+    .result-item:last-child {
+      border-bottom: none;
+    }
+    
+    .result-label {
+      font-weight: 600;
+      padding-right: 10px;
+      font-size: 17px;
+    }
+    
+    .result-value {
+      font-weight: 700;
+      background: linear-gradient(45deg, var(--button-color), var(--gradient-start));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-size: 18px;
+    }
+    
+    .particles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      z-index: -1;
+      pointer-events: none;
+    }
+    
+    .particle {
+      position: absolute;
+      background-color: var(--highlight);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      opacity: 0;
+      animation: particleAnimation 10s ease-in-out infinite;
+    }
+    
+    @keyframes particleAnimation {
+      0% {
+        opacity: 0;
+        transform: translateY(0) rotate(0deg);
+      }
+      20% {
+        opacity: 0.6;
+      }
+      80% {
+        opacity: 0.6;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-150px) rotate(360deg);
+      }
+    }
+    
+    /* Larger Desktop Styles */
+    @media(min-width: 1200px) {
+      body {
+        padding: 3rem 0;
+      }
+      
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 2rem;
+      }
+      
+      .calculator-container {
+        max-width: 800px;
+        padding: 3rem;
+      }
+      
+      .tab-button {
+        font-size: 20px;
+        padding: 18px 0;
+      }
+      
+      label {
+        font-size: 20px;
+      }
+      
+      input, select {
+        font-size: 20px;
+        padding: 16px;
+      }
+      
+      .reminder {
+        font-size: 16px;
+      }
+      
+      .tip {
+        font-size: 16px;
+        padding: 20px;
+      }
+      
+      button {
+        font-size: 20px;
+        padding: 18px;
+      }
+      
+      .results h2 {
+        font-size: 2rem;
+      }
+      
+      .result-label {
+        font-size: 18px;
+      }
+      
+      .result-value {
+        font-size: 20px;
+      }
+    }
+    
+    /* Tablet Styles */
+    @media(max-width: 768px) {
+      body {
+        padding: 20px 0;
+      }
+      
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      .calculator-container {
+        padding: 1.8rem;
+        width: 90%;
+        border-radius: 20px;
+      }
+      
+      .progress {
+        height: 8px;
+        margin-bottom: 25px;
+      }
+      
+      .tab-button {
+        font-size: 16px;
+        min-width: 110px;
+        padding: 14px 0;
+      }
+      
+      .input-group {
+        margin-bottom: 22px;
+        padding-left: 15px;
+      }
+      
+      label {
+        font-size: 16px;
+        margin-bottom: 8px;
+      }
+      
+      input, select {
+        padding: 14px;
+        font-size: 16px;
+        border-radius: 10px;
+      }
+      
+      .reminder {
+        font-size: 14px;
+      }
+      
+      .tip {
+        padding: 15px;
+        font-size: 14px;
+        margin-top: 15px;
+      }
+      
+      button {
+        padding: 15px;
+        font-size: 16px;
+        margin-top: 15px;
+      }
+      
+      .results {
+        padding: 20px;
+      }
+      
+      .results h2 {
+        font-size: 1.6rem;
+        margin-bottom: 18px;
+      }
+      
+      .result-item {
+        padding: 10px 12px;
+        margin-bottom: 15px;
+      }
+      
+      .result-label {
+        font-size: 15px;
+      }
+      
+      .result-value {
+        font-size: 16px;
+      }
+    }
+    
+    /* Mobile Styles */
+    @media(max-width: 480px) {
+      body {
+        padding: 15px 0;
+      }
+      
+      h1 {
+        font-size: 1.7rem;
+        margin-bottom: 1.2rem;
+        padding: 0 10px;
+      }
+      
+      .calculator-container {
+        padding: 1.4rem;
+        width: 92%;
+        border-radius: 16px;
+      }
+      
+      .progress {
+        height: 6px;
+        margin-bottom: 20px;
+      }
+      
+      .tab-buttons {
+        margin-bottom: 20px;
+      }
+      
+      .tab-button {
+        min-width: 90px;
+        padding: 12px 0;
+        font-size: 15px;
+      }
+      
+      .input-group {
+        margin-bottom: 18px;
+        padding-left: 12px;
+      }
+      
+      label {
+        font-size: 15px;
+        margin-bottom: 6px;
+      }
+      
+      input, select {
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 8px;
+      }
+      
+      .tip {
+        padding: 12px;
+        font-size: 13px;
+        border-radius: 8px;
+      }
+      
+      .button-group {
+        gap: 10px;
+      }
+      
+      button {
+        padding: 14px 10px;
+        font-size: 15px;
+        border-radius: 8px;
+      }
+      
+      .results {
+        padding: 15px;
+        border-radius: 12px;
+      }
+      
+      .results h2 {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+      }
+      
+      .result-item {
+        padding: 10px;
+        margin-bottom: 12px;
+        flex-direction: column;
+      }
+      
+      .result-label {
+        font-size: 14px;
+        margin-bottom: 3px;
+      }
+      
+      .result-value {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="background-bubble bubble-1"></div>
+  <div class="background-bubble bubble-2"></div>
+  <div class="background-bubble bubble-3"></div>
+  
+  <div class="particles" id="particles"></div>
+  
+  <h1>ADHD-Friendly Freelancer Calculator</h1>
+  
+  <div class="calculator-container">
+    <div class="progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <div class="tab-container">
+      <div class="tab-buttons">
+        <button class="tab-button active" onclick="openTab('incomeTab')">Income</button>
+        <button class="tab-button" onclick="openTab('expensesTab')">Expenses</button>
+        <button class="tab-button" onclick="openTab('resultsTabBtn')">Results</button>
+      </div>
+      
+      <div id="incomeTab" class="tab-content active">
+        <div class="input-group">
+          <label for="hourlyRate">Your Hourly Rate ($)</label>
+          <input type="number" id="hourlyRate" placeholder="e.g., 50" min="0" step="0.01" inputmode="decimal">
+          <div class="reminder">What you charge clients per hour</div>
+        </div>
+        
+        <div class="input-group">
+          <label for="hoursPerWeek">Hours You Plan to Work Per Week</label>
+          <input type="number" id="hoursPerWeek" placeholder="e.g., 30" min="0" max="168" step="0.5" inputmode="decimal">
+          <div class="reminder">Be realistic about your capacity with ADHD</div>
+        </div>
+        
+        <div class="input-group">
+          <label for="weeksPerYear">Weeks You Plan to Work Per Year</label>
+          <input type="number" id="weeksPerYear" placeholder="e.g., 48" min="0" max="52" value="48" inputmode="decimal">
+          <div class="tip">ADHD Tip: Factor in recovery time and unexpected down days!</div>
+        </div>
+        
+        <button onclick="nextTab('expensesTab')">Next: Expenses</button>
+      </div>
+      
+      <div id="expensesTab" class="tab-content">
+        <div class="input-group">
+          <label for="monthlyExpenses">Monthly Business Expenses ($)</label>
+          <input type="number" id="monthlyExpenses" placeholder="e.g., 500" min="0" step="0.01" inputmode="decimal">
+          <div class="reminder">Software, subscriptions, office space, etc.</div>
+        </div>
+        
+        <div class="input-group">
+          <label for="taxRate">Estimated Tax Rate (%)</label>
+          <input type="number" id="taxRate" placeholder="e.g., 30" min="0" max="100" value="30" inputmode="decimal">
+          <div class="tip">ADHD Tip: Setting aside tax money in advance helps prevent last-minute panic!</div>
+        </div>
+        
+        <div class="input-group">
+          <label for="desiredSavings">Desired Monthly Savings ($)</label>
+          <input type="number" id="desiredSavings" placeholder="e.g., 500" min="0" step="0.01" inputmode="decimal">
+          <div class="reminder">Buffer for unpredictable income months</div>
+        </div>
+        
+        <div class="button-group">
+          <button onclick="prevTab('incomeTab')">Back</button>
+          <button onclick="calculateResults()">Calculate</button>
+        </div>
+      </div>
+      
+      <div id="resultsTabBtn" class="tab-content">
+        <div class="results" id="resultsSection">
+          <h2>Your Freelance Breakdown</h2>
+          
+          <div class="result-item">
+            <span class="result-label">Potential Annual Income:</span>
+            <span class="result-value" id="annualIncome">$0</span>
+          </div>
+          
+          <div class="result-item">
+            <span class="result-label">Monthly Income (Before Tax):</span>
+            <span class="result-value" id="monthlyIncome">$0</span>
+          </div>
+          
+          <div class="result-item">
+            <span class="result-label">Estimated Monthly Tax:</span>
+            <span class="result-value" id="monthlyTax">$0</span>
+          </div>
+          
+          <div class="result-item">
+            <span class="result-label">Business Expenses:</span>
+            <span class="result-value" id="expensesResult">$0</span>
+          </div>
+          
+          <div class="result-item">
+            <span class="result-label">Savings:</span>
+            <span class="result-value" id="savingsResult">$0</span>
+          </div>
+          
+          <div class="result-item">
+            <span class="result-label">Monthly Take-Home:</span>
+            <span class="result-value" id="takeHome">$0</span>
+          </div>
+          
+          <div class="result-item">
+            <span class="result-label">Minimum Client Projects Needed:</span>
+            <span class="result-value" id="projectsNeeded">0</span>
+          </div>
+          
+          <div class="tip">
+            <strong>ADHD Pro Tip:</strong> Consider charging 20-30% more than you think you need to account for energy fluctuations and unexpected downtime.
+          </div>
+        </div>
+        
+        <div class="button-group">
+          <button onclick="prevTab('expensesTab')">Back</button>
+          <button onclick="resetCalculator()">Start Over</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Create particles
+      const particlesContainer = document.getElementById('particles');
+      for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // Random position and size
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.bottom = '-5px';
+        particle.style.width = `${Math.random() * 4 + 2}px`;
+        particle.style.height = particle.style.width;
+        
+        // Random animation timing
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+        
+        // Random color
+        const hue = 180 + Math.random() * 40;
+        const saturation = 80 + Math.random() * 20;
+        const lightness = 70 + Math.random() * 20;
+        particle.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+        
+        particlesContainer.appendChild(particle);
+      }
+    });
+    
+    function openTab(tabName) {
+      const tabContents = document.getElementsByClassName("tab-content");
+      for (let i = 0; i < tabContents.length; i++) {
+        tabContents[i].classList.remove("active");
+      }
+      
+      const tabButtons = document.getElementsByClassName("tab-button");
+      for (let i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].classList.remove("active");
+      }
+      
+      document.getElementById(tabName).classList.add("active");
+      
+      const buttons = document.getElementsByClassName("tab-button");
+      for (let i = 0; i < buttons.length; i++) {
+        if (buttons[i].getAttribute("onclick").includes(tabName)) {
+          buttons[i].classList.add("active");
+        }
+      }
+      
+      updateProgressBar(tabName);
+    }
+    
+    function nextTab(tabName) { openTab(tabName); }
+    function prevTab(tabName) { openTab(tabName); }
+    
+    function updateProgressBar(tabName) {
+      const progressBar = document.getElementById("progressBar");
+      if (tabName === "incomeTab") progressBar.style.width = "33.33%";
+      else if (tabName === "expensesTab") progressBar.style.width = "66.66%";
+      else if (tabName === "resultsTabBtn") progressBar.style.width = "100%";
+    }
+    
+    function calculateResults() {
+      const hourlyRate = parseFloat(document.getElementById("hourlyRate").value) || 0;
+      const hoursPerWeek = parseFloat(document.getElementById("hoursPerWeek").value) || 0;
+      const weeksPerYear = parseFloat(document.getElementById("weeksPerYear").value) || 48;
+      const monthlyExpenses = parseFloat(document.getElementById("monthlyExpenses").value) || 0;
+      const taxRate = parseFloat(document.getElementById("taxRate").value) || 30;
+      const desiredSavings = parseFloat(document.getElementById("desiredSavings").value) || 0;
+      
+      const annualIncome = hourlyRate * hoursPerWeek * weeksPerYear;
+      const monthlyIncome = annualIncome / 12;
+      const monthlyTax = monthlyIncome * (taxRate / 100);
+      const takeHome = monthlyIncome - monthlyTax - monthlyExpenses - desiredSavings;
+      const projectsNeeded = Math.ceil((monthlyExpenses + desiredSavings + monthlyTax) / (hourlyRate * 10));
+      
+      document.getElementById("annualIncome").textContent = formatCurrency(annualIncome);
+      document.getElementById("monthlyIncome").textContent = formatCurrency(monthlyIncome);
+      document.getElementById("monthlyTax").textContent = formatCurrency(monthlyTax);
+      document.getElementById("expensesResult").textContent = formatCurrency(monthlyExpenses);
+      document.getElementById("savingsResult").textContent = formatCurrency(desiredSavings);
+      document.getElementById("takeHome").textContent = formatCurrency(takeHome);
+      document.getElementById("projectsNeeded").textContent = projectsNeeded;
+      
+      document.getElementById("resultsSection").style.display = "block";
+      openTab("resultsTabBtn");
+    }
+    
+    function formatCurrency(amount) {
+      return "$" + amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    
+    function resetCalculator() {
+      document.getElementById("hourlyRate").value = "";
+      document.getElementById("hoursPerWeek").value = "";
+      document.getElementById("weeksPerYear").value = "48";
+      document.getElementById("monthlyExpenses").value = "";
+      document.getElementById("taxRate").value = "30";
+      document.getElementById("desiredSavings").value = "";
+      
+      document.getElementById("resultsSection").style.display = "none";
+      openTab("incomeTab");
+    }
+  </script>
+</body>
+</html>
