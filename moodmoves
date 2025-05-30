@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Mood Moves</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --main-bg: #f0f4ff;
+      --button-color: #ff7a59;
+      --button-hover: #ff4d2e;
+      --text-color: #2e2e2e;
+      --accent: #ff9b85;
+      --circle-color: #8b56f3;
+      --highlight: #8bf5fa;
+      --gradient-start: #d06ef4;
+      --gradient-end: #7d4de3;
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      --card-border: rgba(255, 255, 255, 0.8);
+      
+      /* Mood button colors */
+      --bored-color: #8075FF;
+      --overwhelmed-color: #FF75A0;
+      --low-color: #FFD166;
+      --scattered-color: #90CDF4;
+      --anxious-color: #F687B3;
+    }
+    
+    html {
+      -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Lexend', sans-serif;
+      background: linear-gradient(135deg, var(--main-bg), #e0e8ff);
+      background-attachment: fixed;
+      color: var(--text-color);
+      text-align: center;
+      overflow-x: hidden;
+      position: relative;
+      padding: 2rem 0;
+      height: 100%;
+      min-height: 100vh;
+    }
+    
+    .background-bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(139,245,250,0.4), rgba(139,245,250,0.1));
+      animation: float 20s infinite ease-in-out;
+      z-index: -1;
+    }
+    
+    .bubble-1 {
+      width: 400px;
+      height: 400px;
+      left: -150px;
+      top: 15%;
+      animation-delay: -5s;
+    }
+    
+    .bubble-2 {
+      width: 300px;
+      height: 300px;
+      right: -100px;
+      bottom: 10%;
+      animation-delay: -8s;
+    }
+    
+    .bubble-3 {
+      width: 250px;
+      height: 250px;
+      right: 25%;
+      top: -80px;
+      animation-delay: -2s;
+    }
+    
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+      }
+      50% {
+        transform: translateY(-40px) scale(1.1);
+      }
+    }
+    
+    .particles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      z-index: -1;
+      pointer-events: none;
+    }
+    
+    .particle {
+      position: absolute;
+      background-color: var(--highlight);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      opacity: 0;
+      animation: particleAnimation 10s ease-in-out infinite;
+    }
+    
+    @keyframes particleAnimation {
+      0% {
+        opacity: 0;
+        transform: translateY(0) rotate(0deg);
+      }
+      20% {
+        opacity: 0.6;
+      }
+      80% {
+        opacity: 0.6;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-150px) rotate(360deg);
+      }
+    }
+    
+    /* Floating movement elements */
+    .floating-shapes {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      z-index: -1;
+      pointer-events: none;
+    }
+    
+    .floating-circle {
+      position: absolute;
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      border-radius: 50%;
+      opacity: 0;
+      animation: floatUp 5s ease-in-out infinite;
+    }
+    
+    @keyframes floatUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      20% {
+        opacity: 0.3;
+      }
+      80% {
+        opacity: 0.3;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+    }
+    
+    /* Modified app-container to remove the white card background */
+    .app-container {
+      max-width: 550px;
+      width: 90%;
+      margin: 0 auto 2rem auto;
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    h1 {
+      margin-bottom: 1.2rem;
+      background: linear-gradient(45deg, var(--gradient-start), var(--button-color));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-shadow: 0 2px 10px rgba(255, 255, 255, 0.7);
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+    
+    .subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 1.8rem;
+      color: var(--text-color);
+      opacity: 0.8;
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.5;
+    }
+    
+    .mood-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.8rem;
+      margin: 1.5rem 0 2rem;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .mood-button {
+      background: white;
+      border: none;
+      padding: 0.9em 1.2em;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      color: white;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      font-family: 'Lexend', sans-serif;
+    }
+    
+    .mood-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: all 0.5s ease;
+    }
+    
+    .mood-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    .mood-button:hover::before {
+      left: 100%;
+    }
+    
+    .mood-button:active {
+      transform: scale(0.95);
+    }
+    
+    #bored {
+      background: linear-gradient(45deg, var(--bored-color), #6a63d8);
+    }
+    
+    #overwhelmed {
+      background: linear-gradient(45deg, var(--overwhelmed-color), #ff5487);
+    }
+    
+    #low {
+      background: linear-gradient(45deg, var(--low-color), #ffbf40);
+      color: var(--text-color);
+    }
+    
+    #scattered {
+      background: linear-gradient(45deg, var(--scattered-color), #5fa8de);
+    }
+    
+    #anxious {
+      background: linear-gradient(45deg, var(--anxious-color), #e45d97);
+    }
+    
+    #random {
+      background: linear-gradient(45deg, var(--gradient-start), var(--button-color), var(--accent));
+    }
+    
+    /* Modified response-box to have its own background */
+    .response-box {
+      margin: 1.5rem auto 0;
+      padding: 1.8rem;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      max-width: 95%;
+      position: relative;
+      z-index: 2;
+      min-height: 260px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.5s ease;
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      transform: translateY(10px);
+    }
+    
+    .response-box.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    
+    .response-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      background: linear-gradient(45deg, var(--gradient-start), var(--circle-color));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .response-content {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+    
+    /* Modified suggestion-item to remove bullet points */
+    .suggestion-item {
+      margin-bottom: 1rem;
+      text-align: center;
+      animation: fadeIn 0.5s ease;
+      padding: 1rem;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.8));
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .next-button {
+      margin-top: auto;
+      align-self: center;
+      background: linear-gradient(45deg, var(--gradient-start), var(--circle-color));
+      color: white;
+      border: none;
+      padding: 0.8em 1.4em;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 15px rgba(208, 110, 244, 0.3);
+      font-family: 'Lexend', sans-serif;
+    }
+    
+    .next-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: all 0.5s ease;
+    }
+    
+    .next-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 20px rgba(208, 110, 244, 0.4);
+    }
+    
+    .next-button:hover::before {
+      left: 100%;
+    }
+    
+    .next-button:active {
+      transform: scale(0.95);
+    }
+    
+    /* Responsive styles */
+    @media (min-width: 1200px) {
+      .app-container {
+        max-width: 650px;
+        padding: 3rem;
+      }
+      
+      h1 {
+        font-size: 3rem;
+      }
+      
+      .subtitle {
+        font-size: 1.4rem;
+      }
+      
+      .mood-button {
+        font-size: 1.1rem;
+        padding: 1em 1.4em;
+      }
+      
+      .response-title {
+        font-size: 1.6rem;
+      }
+      
+      .response-content {
+        font-size: 1.2rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      body {
+        padding: 1.5rem 0;
+      }
+      
+      .app-container {
+        padding: 2rem 1rem;
+        width: 92%;
+      }
+      
+      h1 {
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+      }
+      
+      .subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      .mood-buttons {
+        gap: 0.7rem;
+        margin: 1.2rem 0 1.8rem;
+      }
+      
+      .mood-button {
+        padding: 0.8em 1.1em;
+        font-size: 0.95rem;
+      }
+      
+      .response-box {
+        padding: 1.5rem;
+        min-height: 230px;
+      }
+      
+      .response-title {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+      }
+      
+      .response-content {
+        font-size: 1rem;
+      }
+      
+      .suggestion-item {
+        padding: 0.8rem;
+        margin-bottom: 0.8rem;
+      }
+      
+      .next-button {
+        padding: 0.7em 1.2em;
+        font-size: 0.95rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      body {
+        padding: 0.8rem 0;
+      }
+      
+      .app-container {
+        padding: 1.2rem 1rem;
+        width: 95%;
+        margin-bottom: 1rem;
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+        margin-bottom: 0.8rem;
+      }
+      
+      .subtitle {
+        font-size: 1rem;
+        margin-bottom: 1.2rem;
+      }
+      
+      .mood-buttons {
+        gap: 0.6rem;
+        margin: 1rem 0 1.5rem;
+      }
+      
+      .mood-button {
+        padding: 0.7em 1em;
+        font-size: 0.9rem;
+        border-radius: 10px;
+      }
+      
+      .response-box {
+        padding: 1.2rem;
+        min-height: 210px;
+        border-radius: 16px;
+      }
+      
+      .response-title {
+        font-size: 1.2rem;
+        margin-bottom: 0.8rem;
+      }
+      
+      .suggestion-item {
+        padding: 0.7rem;
+        margin-bottom: 0.7rem;
+        font-size: 0.95rem;
+        border-radius: 10px;
+      }
+      
+      .next-button {
+        padding: 0.6em 1.1em;
+        font-size: 0.9rem;
+        border-radius: 10px;
+      }
+    }
+    
+    /* Additional iframe compatibility styles */
+    html, body {
+      width: 100%;
+      overflow-x: hidden;
+    }
+    
+    /* Ensure app works in iframes of various sizes */
+    iframe {
+      overflow: auto !important;
+      max-width: 100%;
+    }
+    
+    /* Make sure content never overflows container */
+    * {
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <div class="background-bubble bubble-1"></div>
+  <div class="background-bubble bubble-2"></div>
+  <div class="background-bubble bubble-3"></div>
+  
+  <div class="particles" id="particles"></div>
+  <div class="floating-shapes" id="bgShapes"></div>
+  
+  <div class="app-container">
+    <h1>Mood Moves</h1>
+    <p class="subtitle">A little help for when you're not feeling your brightest. Choose your current vibe and get a boost!</p>
+    
+    <div class="mood-buttons">
+      <button class="mood-button" id="bored">Bored</button>
+      <button class="mood-button" id="overwhelmed">Overwhelmed</button>
+      <button class="mood-button" id="low">Low Energy</button>
+      <button class="mood-button" id="scattered">Scattered</button>
+      <button class="mood-button" id="anxious">Anxious</button>
+      <button class="mood-button" id="random"><span id="randomIcon"></span> Surprise Me</button>
+    </div>
+    
+    <div class="response-box" id="responseBox">
+      <div class="response-title" id="responseTitle"></div>
+      <div class="response-content" id="responseContent"></div>
+      <button class="next-button" id="nextButton">Show Me More</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Create particles
+      const particlesContainer = document.getElementById('particles');
+      for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // Random position and size
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.bottom = '-5px';
+        particle.style.width = `${Math.random() * 4 + 2}px`;
+        particle.style.height = particle.style.width;
+        
+        // Random animation timing
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+        
+        // Random color
+        const hue = 180 + Math.random() * 40;
+        const saturation = 80 + Math.random() * 20;
+        const lightness = 70 + Math.random() * 20;
+        particle.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+        
+        particlesContainer.appendChild(particle);
+      }
+      
+      // Create floating circles in background
+      const bgShapes = document.getElementById('bgShapes');
+      
+      // Create floating circles
+      for (let i = 0; i < 12; i++) {
+        const circle = document.createElement('div');
+        circle.classList.add('floating-circle');
+        
+        // Random size (smaller)
+        const size = 4 + Math.random() * 6; // 4px to 10px
+        circle.style.width = `${size}px`;
+        circle.style.height = `${size}px`;
+        
+        // Randomize position
+        circle.style.left = `${Math.random() * 90 + 5}%`;
+        circle.style.bottom = `${Math.random() * 10}%`;
+        
+        // Random animation delay and duration
+        circle.style.animationDelay = `${Math.random() * 4}s`;
+        const duration = 4 + Math.random() * 4; // 4-8s duration
+        circle.style.animationDuration = `${duration}s`;
+        
+        // Random opacity
+        circle.style.opacity = `${0.1 + Math.random() * 0.2}`;
+        
+        bgShapes.appendChild(circle);
+      }
+    });
+    
+    // Set random icon for Surprise Me button
+    const randomIcons = ['✨', '🎲', '🎯', '🔮', '⚡', '🌟', '💫', '🎪', '🎭', '🎨', '🎁', '🎊', '🎉', '🌈', '💥'];
+    document.getElementById('randomIcon').textContent = randomIcons[Math.floor(Math.random() * randomIcons.length)];
+    
+    const responses = {
+      bored: {
+        title: "Let's Zap That Boredom!",
+        suggestions: [
+          "Try a 5-minute dance break to a song that always gets you moving",
+          "Explore a weird Wikipedia article using the 'Random Article' feature",
+          "Call someone you haven't spoken to in a while and catch up",
+          "Learn 3 words in a new language and practice using them",
+          "Draw a map from memory of your neighborhood or favorite place",
+          "Try a 30-second handstand against a wall (or work toward one)",
+          "Create a playlist with only songs that start with the same letter",
+          "Take a different route home or to a familiar place",
+          "Try the 'alphabet game' - find something in your space for each letter"
+        ]
+      },
+      overwhelmed: {
+        title: "Let's Break It Down!",
+        suggestions: [
+          "Pick just one tiny task. Even if it's just sorting 5 papers or answering 1 email",
+          "Set a timer for 5 minutes and focus on only one task without distractions",
+          "Write down everything on your mind in a brain dump, then highlight only 3 priorities",
+          "Take a short walk outside - even just to the end of the block and back",
+          "Turn your phone on Do Not Disturb for 30 minutes while you focus",
+          "Tidy just one small area - like a drawer or corner of your desk",
+          "Drink a full glass of water slowly while taking deep breaths",
+          "Identify and cancel one commitment that isn't essential right now",
+          "Close all browser tabs except the one you need to focus on"
+        ]
+      },
+      low: {
+        title: "Low Battery Mode?",
+        suggestions: [
+          "Grab a full glass of water and drink it slowly, focusing on how it feels",
+          "Do a gentle 2-minute stretch focusing on your neck and shoulders",
+          "Watch your favorite funny video clip that never fails to make you smile",
+          "Step outside for 5 minutes of natural sunlight (even on a cloudy day)",
+          "Make a small, nutritious snack with protein to boost your energy",
+          "Put on upbeat music and just listen or gently move to it",
+          "Take a short power nap (set an alarm for 20 minutes)",
+          "Splash cold water on your face and massage your temples for 30 seconds",
+          "Text a friend who always makes you feel good about yourself"
+        ]
+      },
+      scattered: {
+        title: "Brain Feels Like Confetti?",
+        suggestions: [
+          "Write down exactly 3 things on your mind right now, then pick one to focus on",
+          "Clear your immediate workspace of everything except what you need right now",
+          "Do one mindful minute: focus only on your breathing for 60 seconds",
+          "Try the 'touch it once' rule for the next 15 minutes - complete small tasks immediately",
+          "Set a timer for 10 minutes and focus on only one task without switching",
+          "Use the 'elephant technique' - break down tasks into small, bite-sized pieces",
+          "Put on instrumental music (no lyrics) to help your brain focus",
+          "Try the Pomodoro technique: 25 minutes of focus, then a 5-minute break",
+          "Jot down any distracting thoughts on a 'later list' to revisit when you're done"
+        ]
+      },
+      anxious: {
+        title: "Deep Breaths, Friend.",
+        suggestions: [
+          "Practice the 4-7-8 breathing technique: inhale for 4, hold for 7, exhale for 8",
+          "Place your hand on your heart and feel it beating - you are alive and safe in this moment",
+          "Name 5 blue things you can see around you right now",
+          "Tense each muscle group in your body for 5 seconds, then release, starting from your toes",
+          "Repeat a calming phrase like 'This feeling will pass' or 'I am safe right now'",
+          "Use the 5-4-3-2-1 technique: name 5 things you see, 4 you feel, 3 you hear, 2 you smell, 1 you taste",
+          "Do a quick body scan from head to toe, noticing areas of tension and releasing them",
+          "Write down your anxious thoughts - getting them out of your head often reduces their power",
+          "Try butterfly tapping: cross your arms and gently tap alternating shoulders"
+        ]
+      }
+    };
+
+    const buttons = document.querySelectorAll('.mood-button');
+    const responseBox = document.getElementById('responseBox');
+    const responseTitle = document.getElementById('responseTitle');
+    const responseContent = document.getElementById('responseContent');
+    const nextButton = document.getElementById('nextButton');
+    
+    let currentMood = '';
+    let usedSuggestions = {};
+    
+    // Initialize used suggestions for each mood
+    Object.keys(responses).forEach(mood => {
+      usedSuggestions[mood] = [];
+    });
+    
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        let mood = button.id;
+        
+        // If "Surprise Me" pick a random mood
+        if (mood === 'random') {
+          const keys = Object.keys(responses);
+          mood = keys[Math.floor(Math.random() * keys.length)];
+        }
+        
+        currentMood = mood;
+        const moodData = responses[mood];
+        responseTitle.textContent = moodData.title;
+        
+        // Get a suggestion that hasn't been used yet
+        showNewSuggestion();
+        
+        // Show the response box
+        responseBox.classList.add('visible');
+        nextButton.style.display = 'block';
+        
+        // Scroll to response box if needed
+        setTimeout(() => {
+          responseBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+      });
+    });
+    
+    nextButton.addEventListener('click', showNewSuggestion);
+    
+    function showNewSuggestion() {
+      const moodData = responses[currentMood];
+      const usedList = usedSuggestions[currentMood];
+      
+      // If all suggestions have been used, reset the used list
+      if (usedList.length >= moodData.suggestions.length) {
+        usedSuggestions[currentMood] = [];
+      }
+      
+      // Find a suggestion that hasn't been used yet
+      let availableSuggestions = moodData.suggestions.filter(suggestion => !usedList.includes(suggestion));
+      
+      // If somehow all are used (shouldn't happen due to reset above), just pick a random one
+      if (availableSuggestions.length === 0) {
+        availableSuggestions = moodData.suggestions;
+      }
+      
+      const randomIndex = Math.floor(Math.random() * availableSuggestions.length);
+      const suggestion = availableSuggestions[randomIndex];
+      
+      // Add to used list
+      usedSuggestions[currentMood].push(suggestion);
+      
+      // Clear previous content and display the suggestion with animation
+      responseContent.innerHTML = '';
+      setTimeout(() => {
+        responseContent.innerHTML = `<div class="suggestion-item">${suggestion}</div>`;
+      }, 100);
+    }
+    
+    // Add some touch-friendly features for mobile
+    document.querySelectorAll('.mood-button, .next-button').forEach(btn => {
+      btn.addEventListener('touchstart', function() {
+        this.style.transform = 'scale(0.95)';
+      });
+      
+      btn.addEventListener('touchend', function() {
+        this.style.transform = '';
+      });
+    });
+    
+    // Handle iframe resize events
+    window.addEventListener('resize', function() {
+      // Make sure the response box is still visible if needed
+      if (responseBox.classList.contains('visible')) {
+        responseBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    });
+    
+    // Initialize for iframe compatibility
+    window.addEventListener('load', function() {
+      // Notify parent frame that content is loaded (if in iframe)
+      if (window.parent !== window) {
+        try {
+          window.parent.postMessage('mood-moves-loaded', '*');
+        } catch (e) {
+          // Silently fail if cross-origin issues
+        }
+      }
+    });
+  </script>
+</body>
+</html>
