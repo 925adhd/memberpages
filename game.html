@@ -6,7 +6,7 @@
 <title>GIR's ADHD Adventures</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0a,#1a4a1a,#2a1a4a,#4a1a2a);background-size:400% 400%;animation:bg 10s ease infinite;min-height:100vh;color:#0f0;touch-action:none;user-select:none;padding-bottom:180px}
+body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0a,#1a4a1a,#2a1a4a,#4a1a2a);background-size:400% 400%;animation:bg 10s ease infinite;min-height:100vh;color:#0f0;touch-action:none;user-select:none;padding-bottom:120px}
 @keyframes bg{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 .gc{position:relative;width:100%;min-height:calc(100vh - 180px);height:600px;overflow:visible;margin-bottom:20px}
 .gir{position:absolute;width:60px;height:75px;cursor:pointer;transition:transform .1s;z-index:100;will-change:transform;animation:breathe 2s ease-in-out infinite;pointer-events:none}
@@ -19,7 +19,7 @@ body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0
 .gir.game-over{filter:grayscale(50%) brightness(.5);animation:over 2s ease-in-out infinite}
 @keyframes over{0%,100%{opacity:1}50%{opacity:.3}}
 .dist{position:absolute;width:40px;height:40px;border-radius:50%;animation:pulse 2s infinite,float 3s ease-in-out infinite;transition:all .3s;will-change:transform;pointer-events:none}
-@keyframes pulse{0%,100%{opacity:.7}50%{opacity:1}}
+@keyframes pulse{0%,100%{opacity:.7;transform:scale(1);box-shadow:0 0 20px rgba(0,255,0,.8)}50%{opacity:1;transform:scale(1.05);box-shadow:0 0 30px rgba(0,255,0,1),0 0 40px rgba(0,255,0,.6)}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 .taco{background:#D2691E;border-radius:60% 40% 40% 60%;box-shadow:0 0 15px #FFD700;display:flex;align-items:center;justify-content:center;font-size:28px}
 .taco::before{content:"🌮"}
@@ -47,8 +47,8 @@ body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0
 .df{background:linear-gradient(90deg,#ff0,#ff4,#ff8)}
 .hs{color:#FFD700;font-weight:bold;animation:hsg 2s infinite}
 @keyframes hsg{0%,100%{text-shadow:0 0 5px #FFD700}50%{text-shadow:0 0 15px #FFD700,0 0 25px #FFD700}}
-.ctrl{position:static;background:rgba(0,20,0,.9);padding:15px;border-radius:10px;border:2px solid #0f0;color:#0f0;z-index:200;margin:20px;display:block}
 .ui-toggle{position:absolute;top:10px;right:10px;z-index:300}
+.pause-toggle{position:absolute;top:10px;right:60px;z-index:300}
 .mc{position:static;z-index:300;display:block;margin:20px auto;text-align:center;background:rgba(0,20,0,.8);padding:20px;border-radius:15px;border:2px solid #0f0;max-width:400px}
 .jc{position:relative;width:100px;height:100px;background:rgba(0,50,0,.8);border:3px solid #0f0;border-radius:50%;margin:0 auto 15px auto;touch-action:none}
 .js{position:absolute;width:30px;height:30px;background:#0f0;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);transition:none;box-shadow:0 0 10px #0f0;touch-action:none}
@@ -58,7 +58,7 @@ body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0
 .rb{background:rgba(100,100,100,.8);border-color:#888;color:#888}
 .rb.av{background:rgba(0,100,200,.8);border-color:#08f;color:#08f;animation:rp 2s infinite}
 @keyframes rp{0%,100%{box-shadow:0 0 5px #08f}50%{box-shadow:0 0 15px #08f,0 0 25px #08f}}
-.tl{position:absolute;top:10px;right:160px;background:rgba(0,20,0,.9);padding:12px;border-radius:8px;box-shadow:0 4px 15px rgba(0,255,0,.3);border:2px solid #0f0;max-width:200px;z-index:200;color:#0f0;font-size:11px}
+.tl{position:absolute;top:10px;right:120px;background:rgba(0,20,0,.9);padding:12px;border-radius:8px;box-shadow:0 4px 15px rgba(0,255,0,.3);border:2px solid #0f0;max-width:200px;z-index:200;color:#0f0;font-size:11px}
 .task{padding:4px;margin:2px 0;border-radius:4px;transition:all .3s}
 .task.completed{background:rgba(0,255,0,.2);text-decoration:line-through}
 .task.current{background:rgba(255,255,0,.2);font-weight:bold;animation:tg 2s infinite}
@@ -81,7 +81,7 @@ body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0
 .cpb{width:100%;height:18px;background:#333;border-radius:8px;margin:15px 0;overflow:hidden;border:2px solid #0f0}
 .cpf{height:100%;background:linear-gradient(90deg,#f04,#f48,#0f0);transition:width .1s;animation:pg .5s infinite}
 @keyframes pg{0%,100%{box-shadow:inset 0 0 10px rgba(0,255,0,.5)}50%{box-shadow:inset 0 0 20px rgba(0,255,0,1)}}
-.mission-hint{position:absolute;top:70px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.8);color:#0f0;padding:8px 12px;border-radius:20px;font-size:24px;border:2px solid #0f0;z-index:400;display:block;animation:pulse 2s infinite}
+.mission-hint{position:absolute;top:15px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.95);color:#0f0;padding:12px 16px;border-radius:25px;font-size:32px;border:3px solid #0f0;z-index:400;display:block;animation:pulse 2s infinite;text-shadow:0 0 10px #0f0}
 .gs{position:absolute;top:120px;left:50%;transform:translateX(-50%);background:#000;color:#0f0;padding:12px 20px;border-radius:20px;font-weight:bold;border:2px solid #0f0;animation:sb .5s ease;z-index:500;display:none;max-width:280px;text-align:center;font-size:14px}
 @keyframes sb{0%{transform:translateX(-50%) scale(0)}100%{transform:translateX(-50%) scale(1)}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.6}}
@@ -94,9 +94,20 @@ body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0
 .fp{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.9);color:#0f0;padding:15px;border-radius:12px;border:2px solid #0f0;font-size:20px;font-weight:bold;z-index:600;animation:pf 2s ease-in-out;pointer-events:none}
 @keyframes pf{0%{opacity:0;transform:translate(-50%,-50%) scale(.5)}20%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}80%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) scale(.9)}}
 
+.pause-screen{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);display:none;justify-content:center;align-items:center;z-index:450;color:#0f0;text-align:center}
+.pause-content{background:rgba(0,20,0,.9);padding:30px;border-radius:15px;border:3px solid #0f0;max-width:90%;max-height:90%;overflow-y:auto;animation:pauseGlow 2s ease-in-out infinite}
+@keyframes pauseGlow{0%,100%{box-shadow:0 0 20px #0f0}50%{box-shadow:0 0 40px #0f0,0 0 60px #0f0}}
+.pause-title{font-size:28px;margin-bottom:20px;color:#0f0;text-shadow:0 0 10px #0f0}
+.pause-section{margin:15px 0;text-align:left}
+.pause-section h4{color:#ff0;font-size:16px;margin-bottom:8px;text-shadow:0 0 5px #ff0}
+.pause-section p, .pause-section div{font-size:12px;margin:5px 0;line-height:1.4}
+.pause-controls{text-align:center;margin-top:20px}
+.resume-btn{background:#0f0;color:#000;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin:5px;font-family:inherit;font-weight:bold}
+.resume-btn:hover{background:#4f4;transform:scale(1.05)}
+
 /* Mobile optimizations */
 @media (max-width:768px){
-body{padding-bottom:200px}
+body{padding-bottom:140px}
 .gc{height:500px;min-height:500px}
 .gir{width:50px;height:65px}
 .dist{width:35px;height:35px}
@@ -115,13 +126,12 @@ body{padding-bottom:200px}
 .js{width:25px;height:25px}
 .btn{width:40px;height:40px;font-size:16px}
 .gs{font-size:12px;padding:8px 15px;max-width:250px;top:80px}
-.mission-hint{font-size:20px;padding:6px 10px;top:50px}
+.mission-hint{font-size:28px;padding:10px 14px;top:12px}
 .task{padding:2px;margin:1px 0;font-size:8px}
-.ctrl{margin:15px;padding:10px;font-size:10px}
 }
 
 @media (max-width:480px){
-body{padding-bottom:220px}
+body{padding-bottom:160px}
 .gc{height:450px;min-height:450px}
 .gir{width:45px;height:60px}
 .dist{width:32px;height:32px;font-size:20px}
@@ -142,23 +152,11 @@ body{padding-bottom:220px}
 .fs{font-size:18px}
 .ct{font-size:28px}
 .ci{font-size:14px}
-.mission-hint{font-size:18px;padding:5px 8px;top:40px}
+.mission-hint{font-size:24px;padding:8px 12px;top:10px}
 .task{font-size:7px;padding:1px}
-.ctrl{margin:10px;padding:8px;font-size:9px}
-}
-
-.controls-header{
-text-align:center;
-color:#0f0;
-font-size:16px;
-font-weight:bold;
-margin-bottom:10px;
-text-shadow:0 0 10px #0f0;
 }
 
 @media (max-width:480px){
-.controls-header{font-size:14px}
-}
 </style>
 </head>
 <body>
@@ -166,6 +164,49 @@ text-shadow:0 0 10px #0f0;
 <div class="gir" id="g">
 <img class="gn" src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/GIR_open_mouth.webp/:/rs=h:175,m" alt="Normal GIR">
 <img class="gd" src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/d1me5u2-a9635d79-16f1-474e-8fd2-428380d93f53.png/:/rs=h:175,m" alt="Disguise GIR">
+</div>
+
+<div class="pause-screen" id="pauseScreen">
+<div class="pause-content">
+<div class="pause-title">⏸️ GAME PAUSED</div>
+<div class="pause-section">
+<h4>🎮 Controls</h4>
+<div>Joystick: Move GIR around</div>
+<div>💃: Dance/Random Action</div>
+<div>🐕: Toggle Dog Disguise</div>
+<div>😴: Rest (Restore Energy)</div>
+</div>
+<div class="pause-section">
+<h4>🎯 Mission</h4>
+<p>Collect items matching your current mission! Wrong items cause big energy penalties.</p>
+</div>
+<div class="pause-section">
+<h4>🌪️ Chaos System</h4>
+<div>• High chaos = faster energy drain & erratic movement</div>
+<div>• 100 chaos = DOOM SONG mode! Tap rapidly to calm down</div>
+</div>
+<div class="pause-section">
+<h4>😵‍💫 Distraction System</h4>
+<div>• High distraction = inaccurate movement</div>
+<div>• 80+ distraction = controls might reverse!</div>
+</div>
+<div class="pause-section">
+<h4>🐕 Dog Disguise Mode</h4>
+<div>• Slower movement but better control</div>
+<div>• Less chaos/distraction buildup</div>
+<div>• Reduced energy penalties</div>
+<div>• Bonus points for correct items!</div>
+</div>
+<div class="pause-section">
+<h4>💡 Tips</h4>
+<div>• Rest when energy is low to avoid game over</div>
+<div>• Use dog mode when chaos gets too high</div>
+<div>• Watch your mission indicator - it shows what to collect!</div>
+</div>
+<div class="pause-controls">
+<button class="resume-btn" onclick="togglePause()">RESUME GAME</button>
+</div>
+</div>
 </div>
 <div class="ui">
 <h3>🤖 GIR Status</h3>
@@ -183,6 +224,9 @@ text-shadow:0 0 10px #0f0;
 <div class="ui-toggle" id="tb">
 <div class="btn" style="background:rgba(50,50,0,.8);border-color:#aa0;color:#aa0">👁️</div>
 </div>
+<div class="pause-toggle" id="pb">
+<div class="btn" style="background:rgba(0,50,100,.8);border-color:#08f;color:#08f">⏸️</div>
+</div>
 <div class="tl">
 <h4><span id="me">🌮</span> Mission</h4>
 <div id="tkc"></div>
@@ -192,32 +236,11 @@ text-shadow:0 0 10px #0f0;
 </div>
 
 <div class="mc">
-<div class="controls-header">🎮 MOBILE CONTROLS</div>
 <div class="jc" id="jc"><div class="js" id="js"></div></div>
 <div class="mb">
 <div class="btn" id="ab">💃</div>
 <div class="btn" id="db">🐕</div>
 <div class="btn rb" id="rb">😴</div>
-</div>
-</div>
-
-<div class="ctrl">
-<h4>🎮 Controls & Tips</h4>
-<div>Joystick: Move around</div>
-<div>💃: Dance/Action</div>
-<div>🐕: Dog Disguise (Stealth Mode!)</div>
-<div>😴: Rest (Restore Energy)</div>
-<div style="font-size:10px;margin-top:5px;color:#888">
-⚠️ ONLY collect items matching your mission!<br>
-Wrong items = BIG energy penalty!<br><br>
-🌪️ CHAOS SYSTEM:<br>
-- High chaos = faster energy drain & erratic movement<br>
-- 100 chaos = DOOM SONG mode!<br><br>
-😵‍💫 DISTRACTION SYSTEM:<br>
-- High distraction = inaccurate movement<br>
-- 80+ distraction = wrong direction inputs!<br><br>
-🐕 Dog mode: Slower movement but better control,<br>
-less chaos/distraction, reduced penalties.
 </div>
 </div>
 
@@ -254,7 +277,7 @@ this.rc=0;this.rr=8;this.dists=[];this.max=5;this.ct=0;
 this.tasks=[{t:'Find tacos! TACOS!',type:'taco',p:100},{t:'Collect rubber piggies',type:'rubber',p:80},{t:'Chase shiny things',type:'shiny',p:60},{t:'Eat waffles',type:'waffles',p:90},{t:'Dance with anything!',type:'any',p:50}];
 this.cm=false;this.ctimer=0;this.mct=10;this.cch=[];this.disguised=false;this.lst=0;
 this.quotes={g:["I'M GONNA SING THE DOOM SONG!",'Ooh! What does THIS button do?','WHEEE!'],t:['TACOS! I NEED TACOS!','TACOS! YES! MORE TACOS!'],p:['RUBBER PIGGY! *SQUEAKS*','I LOVE YOU, RUBBER PIGGY!'],c:['I MADE MASHED POTATOES!','MAXIMUM CHAOS!'],tired:['*yawn* I\'m getting sleepy...','Need... to... rest...'],rest:['*peaceful robot snoring*','Dreaming of tacos...']};
-this.lut=0;this.af=null;this.joystickActive=false;this.moveInterval=null;this.isMobile=('ontouchstart' in window);this.uiVisible=true;
+this.lut=0;this.af=null;this.joystickActive=false;this.moveInterval=null;this.isMobile=('ontouchstart' in window);this.uiVisible=true;this.paused=false;
 this.init()}
 init(){this.loadHS();this.updateBounds();this.updateGirSize();setTimeout(()=>{this.posG()},100);this.setupEvents();this.createStars();this.updateTasks();this.startLoop();this.startSpawn();this.startTimer();this.updateUI()}
 loadHS(){this.hs=window.ghs||0;this.ui.hs.textContent=this.hs}
@@ -265,7 +288,7 @@ posG(){if(this.pos.x===0&&this.pos.y===0){this.pos.x=Math.max(this.size.w,(this.
 createStars(){for(let i=0;i<20;i++){const s=document.createElement('div');s.className='stars';s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.animationDelay=Math.random()*2+'s';this.gc.appendChild(s)}}
 setupEvents(){if(!this.isMobile){this.g.addEventListener('click',e=>{e.preventDefault();this.dance()});document.addEventListener('keydown',e=>this.handleKey(e))}else{this.g.addEventListener('click',e=>{e.preventDefault();this.dance()});this.g.addEventListener('touchend',e=>{e.preventDefault();this.dance()})}this.setupMobile();window.addEventListener('resize',()=>{this.updateBounds();this.updateGirSize();this.posG()})}
 handleKey(e){if(this.state==='game-over')return;let key=e.key.toLowerCase();if(this.stats.d>80&&Math.random()<0.15){const keys=['arrowup','arrowdown','arrowleft','arrowright'];key=keys[Math.floor(Math.random()*keys.length)];this.showFeedback('Distracted!','#fa0')}switch(key){case 'arrowup':e.preventDefault();this.moveG(0,-this.speed);break;case 'arrowdown':e.preventDefault();this.moveG(0,this.speed);break;case 'arrowleft':e.preventDefault();this.moveG(-this.speed,0);break;case 'arrowright':e.preventDefault();this.moveG(this.speed,0);break;case ' ':e.preventDefault();this.randAction();break;case 'd':e.preventDefault();this.toggleDisguise();break;case 'r':e.preventDefault();this.toggleRest();break}}
-setupMobile(){const jc=document.getElementById('jc'),js=document.getElementById('js'),ab=document.getElementById('ab'),db=document.getElementById('db'),rb=document.getElementById('rb'),tb=document.getElementById('tb');const cx=jc.offsetWidth/2,cy=jc.offsetHeight/2,md=35;let startPos={x:0,y:0};const hs=e=>{if(this.state==='game-over')return;e.preventDefault();e.stopPropagation();this.joystickActive=true;const r=jc.getBoundingClientRect(),t=e.touches?e.touches[0]:e;startPos.x=t.clientX-r.left;startPos.y=t.clientY-r.top;jc.style.opacity='1';this.startJoystickMovement()};const hm=e=>{if(!this.joystickActive||this.state==='game-over')return;e.preventDefault();e.stopPropagation();const r=jc.getBoundingClientRect(),t=e.touches?e.touches[0]:e,x=t.clientX-r.left-cx,y=t.clientY-r.top-cy,d=Math.sqrt(x*x+y*y);let fx=x,fy=y;if(d>md){const a=Math.atan2(y,x);fx=Math.cos(a)*md;fy=Math.sin(a)*md}js.style.transform=`translate(${fx}px,${fy}px)`;this.joystickVector={x:fx/md,y:fy/md}};const he=e=>{e.preventDefault();e.stopPropagation();this.joystickActive=false;js.style.transform='translate(0px,0px)';jc.style.opacity='.8';this.joystickVector={x:0,y:0};this.stopJoystickMovement()};jc.addEventListener('touchstart',hs,{passive:false});jc.addEventListener('touchmove',hm,{passive:false});jc.addEventListener('touchend',he,{passive:false});jc.addEventListener('mousedown',hs);document.addEventListener('mousemove',hm);document.addEventListener('mouseup',he);this.joystickVector={x:0,y:0};const bp=e=>{e.preventDefault();e.stopPropagation()};const toggleUI=()=>{this.uiVisible=!this.uiVisible;const ui=document.querySelector('.ui'),tl=document.querySelector('.tl'),btn=tb.querySelector('.btn');if(this.uiVisible){ui.style.display='block';tl.style.display='block';btn.textContent='👁️';btn.style.background='rgba(50,50,0,.8)';btn.style.borderColor='#aa0';btn.style.color='#aa0'}else{ui.style.display='none';tl.style.display='none';btn.textContent='👀';btn.style.background='rgba(100,0,0,.8)';btn.style.borderColor='#a00';btn.style.color='#a00'}};['click','touchend'].forEach(evt=>{tb.addEventListener(evt,e=>{bp(e);toggleUI()},{passive:false});ab.addEventListener(evt,e=>{bp(e);this.dance()},{passive:false});db.addEventListener(evt,e=>{bp(e);this.toggleDisguise()},{passive:false});rb.addEventListener(evt,e=>{bp(e);this.toggleRest()},{passive:false})})}
+setupMobile(){const jc=document.getElementById('jc'),js=document.getElementById('js'),ab=document.getElementById('ab'),db=document.getElementById('db'),rb=document.getElementById('rb'),tb=document.getElementById('tb'),pb=document.getElementById('pb');const cx=jc.offsetWidth/2,cy=jc.offsetHeight/2,md=35;let startPos={x:0,y:0};const hs=e=>{if(this.state==='game-over')return;e.preventDefault();e.stopPropagation();this.joystickActive=true;const r=jc.getBoundingClientRect(),t=e.touches?e.touches[0]:e;startPos.x=t.clientX-r.left;startPos.y=t.clientY-r.top;jc.style.opacity='1';this.startJoystickMovement()};const hm=e=>{if(!this.joystickActive||this.state==='game-over')return;e.preventDefault();e.stopPropagation();const r=jc.getBoundingClientRect(),t=e.touches?e.touches[0]:e,x=t.clientX-r.left-cx,y=t.clientY-r.top-cy,d=Math.sqrt(x*x+y*y);let fx=x,fy=y;if(d>md){const a=Math.atan2(y,x);fx=Math.cos(a)*md;fy=Math.sin(a)*md}js.style.transform=`translate(${fx}px,${fy}px)`;this.joystickVector={x:fx/md,y:fy/md}};const he=e=>{e.preventDefault();e.stopPropagation();this.joystickActive=false;js.style.transform='translate(0px,0px)';jc.style.opacity='.8';this.joystickVector={x:0,y:0};this.stopJoystickMovement()};jc.addEventListener('touchstart',hs,{passive:false});jc.addEventListener('touchmove',hm,{passive:false});jc.addEventListener('touchend',he,{passive:false});jc.addEventListener('mousedown',hs);document.addEventListener('mousemove',hm);document.addEventListener('mouseup',he);this.joystickVector={x:0,y:0};const bp=e=>{e.preventDefault();e.stopPropagation()};const toggleUI=()=>{this.uiVisible=!this.uiVisible;const ui=document.querySelector('.ui'),tl=document.querySelector('.tl'),btn=tb.querySelector('.btn');if(this.uiVisible){ui.style.display='block';tl.style.display='block';btn.textContent='👁️';btn.style.background='rgba(50,50,0,.8)';btn.style.borderColor='#aa0';btn.style.color='#aa0'}else{ui.style.display='none';tl.style.display='none';btn.textContent='👀';btn.style.background='rgba(100,0,0,.8)';btn.style.borderColor='#a00';btn.style.color='#a00'}};['click','touchend'].forEach(evt=>{tb.addEventListener(evt,e=>{bp(e);toggleUI()},{passive:false});ab.addEventListener(evt,e=>{bp(e);this.dance()},{passive:false});db.addEventListener(evt,e=>{bp(e);this.toggleDisguise()},{passive:false});rb.addEventListener(evt,e=>{bp(e);this.toggleRest()},{passive:false});pb.addEventListener(evt,e=>{bp(e);togglePause()},{passive:false})})}
 startJoystickMovement(){if(this.moveInterval)clearInterval(this.moveInterval);this.moveInterval=setInterval(()=>{if(this.joystickActive&&this.joystickVector&&(Math.abs(this.joystickVector.x)>.1||Math.abs(this.joystickVector.y)>.1)){const baseSpeed=this.disguised?this.speed*0.6:this.speed;let mx=this.joystickVector.x*baseSpeed,my=this.joystickVector.y*baseSpeed;if(this.stats.d>80&&Math.random()<0.2){mx*=-1;my*=-1}this.moveG(mx,my)}},50)}
 stopJoystickMovement(){if(this.moveInterval){clearInterval(this.moveInterval);this.moveInterval=null}}
 moveG(dx,dy){if(this.state!=='active')return;if(this.stats.e<=0){this.gameOver();return}const moveSpeed=this.disguised?0.6:1;let nx=this.pos.x+(dx*moveSpeed),ny=this.pos.y+(dy*moveSpeed);if(this.stats.d>60){const inaccuracy=Math.random()*10-5;nx+=inaccuracy;ny+=inaccuracy}if(this.stats.c>70&&Math.random()<0.3){const chaosX=(Math.random()-0.5)*15;const chaosY=(Math.random()-0.5)*15;nx+=chaosX;ny+=chaosY}nx=Math.max(0,Math.min(nx,this.bounds.w-this.size.w));ny=Math.max(0,Math.min(ny,this.bounds.h-this.size.h));if(nx!==this.pos.x||ny!==this.pos.y){this.pos.x=nx;this.pos.y=ny;this.g.style.left=nx+'px';this.g.style.top=ny+'px';const energyCost=this.disguised?this.cost*0.6:this.cost;this.modStats({e:-energyCost});this.checkCol()}}
@@ -289,10 +312,11 @@ exitChaos(){this.cm=false;this.ui.cm2.style.display='none';this.cch.forEach(h=>{
 showSpeech(msg){const now=Date.now();if(now-this.lst<500)return;this.lst=now;const sp=this.ui.gs;sp.textContent=msg;sp.style.display='block';setTimeout(()=>{sp.style.display='none'},3000)}
 showFeedback(msg,col='#0f0'){const fb=document.createElement('div');fb.className='fp';fb.textContent=msg;fb.style.color=col;document.body.appendChild(fb);setTimeout(()=>{if(fb.parentNode)fb.remove()},2000)}
 updateUI(){this.stats.c=Math.max(0,Math.min(100,this.stats.c));this.stats.e=Math.max(0,Math.min(100,this.stats.e));this.stats.d=Math.max(0,Math.min(100,this.stats.d));this.ui.cm.style.width=this.stats.c+'%';this.ui.em.style.width=this.stats.e+'%';this.ui.dm.style.width=this.stats.d+'%';if(this.stats.c>=90){this.ui.cm.style.background='linear-gradient(90deg,#f84,#f04,#f84)';this.ui.cm.style.animation='blink .5s infinite'}else if(this.stats.c>=70){this.ui.cm.style.background='linear-gradient(90deg,#f84,#f48,#f8c)';this.ui.cm.style.animation='none'}else{this.ui.cm.style.background='linear-gradient(90deg,#f04,#f48,#f8c)';this.ui.cm.style.animation='none'}if(this.stats.d>=80){this.ui.dm.style.background='linear-gradient(90deg,#f84,#fa0,#f84)';this.ui.dm.style.animation='blink .8s infinite'}else if(this.stats.d>=60){this.ui.dm.style.background='linear-gradient(90deg,#fa0,#ff4,#fa8)';this.ui.dm.style.animation='none'}else{this.ui.dm.style.background='linear-gradient(90deg,#ff0,#ff4,#ff8)';this.ui.dm.style.animation='none'}this.ui.sc.textContent=this.score;this.ui.tc.textContent=this.tc;this.ui.ic.textContent=this.ic;let statusText=this.disguised?'🐕 Dog Mode':'Active';if(this.stats.c>=90)statusText+=' 🌪️ CRITICAL!';else if(this.stats.c>=70)statusText+=' ⚡ Chaotic';if(this.stats.d>=80)statusText+=' 😵 ADHD!';else if(this.stats.d>=60)statusText+=' 😵‍💫 Distracted';const sds={active:statusText,resting:'😴 Resting','game-over':'💀 Game Over'};this.ui.gst.textContent=sds[this.state];if(this.rc>0){this.ui.rb.textContent=Math.ceil(this.rc);this.ui.rb.classList.remove('av');this.ui.rb.style.background='rgba(100,100,100,.8)';this.ui.rb.style.borderColor='#888';this.ui.rb.style.color='#888'}else if(this.state==='resting'){this.ui.rb.textContent='😴';this.ui.rb.classList.add('av');this.ui.rb.style.background='rgba(0,100,200,.8)';this.ui.rb.style.borderColor='#08f';this.ui.rb.style.color='#08f'}else{this.ui.rb.textContent='😴';this.ui.rb.classList.remove('av');this.ui.rb.style.background='rgba(0,50,0,.8)';this.ui.rb.style.borderColor='#0f0';this.ui.rb.style.color='#0f0'}this.g.classList.toggle('hyperactive',this.stats.c>80&&this.state==='active');this.g.classList.toggle('distracted',this.stats.d>60&&this.state==='active');if(this.cm)this.updateChaos()}
-startLoop(){const loop=ct=>{if(this.state==='game-over')return;if(ct-this.lut<16.67){this.af=requestAnimationFrame(loop);return}this.lut=ct;if(this.state==='active'){const chaosRate=this.disguised?-.25:-.15;const distractRate=this.disguised?-.2:-.1;let energyDrain=-.01;if(this.stats.c>90)energyDrain=-.25;else if(this.stats.c>80)energyDrain=-.15;else if(this.stats.c>70)energyDrain=-.08;this.modStats({c:chaosRate,e:energyDrain,d:distractRate});if(this.stats.c>=100&&!this.cm){this.enterChaos();this.stats.c=90}if(this.stats.d>70&&Math.random()>.98){const rx=(Math.random()-.5)*40,ry=(Math.random()-.5)*40;this.moveG(rx,ry);this.showSpeech('Ooh! Distracted!');}if(this.stats.c>80&&Math.random()>.995){const rx=(Math.random()-.5)*60,ry=(Math.random()-.5)*60;this.moveG(rx,ry);this.showSpeech('Chaos impulse!');}if(this.stats.d>80&&Math.random()>.992){this.randAction();this.showSpeech('Wait, what was I doing?');}if(Math.random()>.9995){const rx=(Math.random()-.5)*60,ry=(Math.random()-.5)*60;this.moveG(rx,ry);this.showSpeech('What\'s there?')}if(Math.random()>.9998)this.sayQuote('g')}else if(this.state==='resting'){const restRate=this.stats.e<20?this.rr*2:this.rr;this.modStats({e:restRate/60,c:-.4,d:-.3});if(Math.random()>.999)this.sayQuote('rest')}if(this.cm){this.ctimer-=.016;if(this.ctimer<=0)this.exitChaos()}if(this.rc>0)this.rc-=.016;this.updateUI();this.af=requestAnimationFrame(loop)};this.af=requestAnimationFrame(loop)}
+startLoop(){const loop=ct=>{if(this.state==='game-over')return;if(this.paused){this.af=requestAnimationFrame(loop);return}if(ct-this.lut<16.67){this.af=requestAnimationFrame(loop);return}this.lut=ct;if(this.state==='active'){const chaosRate=this.disguised?-.25:-.15;const distractRate=this.disguised?-.2:-.1;let energyDrain=-.01;if(this.stats.c>90)energyDrain=-.25;else if(this.stats.c>80)energyDrain=-.15;else if(this.stats.c>70)energyDrain=-.08;this.modStats({c:chaosRate,e:energyDrain,d:distractRate});if(this.stats.c>=100&&!this.cm){this.enterChaos();this.stats.c=90}if(this.stats.d>70&&Math.random()>.98){const rx=(Math.random()-.5)*40,ry=(Math.random()-.5)*40;this.moveG(rx,ry);this.showSpeech('Ooh! Distracted!');}if(this.stats.c>80&&Math.random()>.995){const rx=(Math.random()-.5)*60,ry=(Math.random()-.5)*60;this.moveG(rx,ry);this.showSpeech('Chaos impulse!');}if(this.stats.d>80&&Math.random()>.992){this.randAction();this.showSpeech('Wait, what was I doing?');}if(Math.random()>.9995){const rx=(Math.random()-.5)*60,ry=(Math.random()-.5)*60;this.moveG(rx,ry);this.showSpeech('What\'s there?')}if(Math.random()>.9998)this.sayQuote('g')}else if(this.state==='resting'){const restRate=this.stats.e<20?this.rr*2:this.rr;this.modStats({e:restRate/60,c:-.4,d:-.3});if(Math.random()>.999)this.sayQuote('rest')}if(this.cm){this.ctimer-=.016;if(this.ctimer<=0)this.exitChaos()}if(this.rc>0)this.rc-=.016;this.updateUI();this.af=requestAnimationFrame(loop)};this.af=requestAnimationFrame(loop)}
 startTimer(){setInterval(()=>{if(this.state!=='game-over'){this.time++;this.ui.tm.textContent=this.time}},1000)}
 }
-function restart(){document.getElementById('gos').style.display='none';if(window.gg){if(window.gg.af)cancelAnimationFrame(window.gg.af);window.gg.stopJoystickMovement()}document.querySelectorAll('.dist').forEach(el=>el.remove());const g=document.getElementById('g');g.classList.remove('game-over','resting','hyperactive','distracted','disguise');window.gg=new G()}
+function togglePause(){if(!window.gg||window.gg.state==='game-over')return;window.gg.paused=!window.gg.paused;const pauseScreen=document.getElementById('pauseScreen'),pauseBtn=document.getElementById('pb').querySelector('.btn');if(window.gg.paused){pauseScreen.style.display='flex';pauseBtn.textContent='▶️';pauseBtn.style.background='rgba(0,100,0,.8)';pauseBtn.style.borderColor='#0f0';pauseBtn.style.color='#0f0'}else{pauseScreen.style.display='none';pauseBtn.textContent='⏸️';pauseBtn.style.background='rgba(0,50,100,.8)';pauseBtn.style.borderColor='#08f';pauseBtn.style.color='#08f'}}
+function restart(){document.getElementById('gos').style.display='none';document.getElementById('pauseScreen').style.display='none';if(window.gg){if(window.gg.af)cancelAnimationFrame(window.gg.af);window.gg.stopJoystickMovement()}document.querySelectorAll('.dist').forEach(el=>el.remove());const g=document.getElementById('g');g.classList.remove('game-over','resting','hyperactive','distracted','disguise');window.gg=new G()}
 window.addEventListener('load',()=>{window.gg=new G()});
 </script>
 </body>
