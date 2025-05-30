@@ -6,7 +6,7 @@
 <title>GIR's ADHD Adventures</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0a,#1a4a1a,#2a1a4a,#4a1a2a);background-size:400% 400%;animation:bg 10s ease infinite;min-height:100vh;color:#0f0;touch-action:none;user-select:none;padding-bottom:75px}
+body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0a,#1a4a1a,#2a1a4a,#4a1a2a);background-size:400% 400%;animation:bg 10s ease infinite;min-height:100vh;color:#0f0;touch-action:none;user-select:none;padding-bottom:50px}
 @keyframes bg{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 .gc{position:relative;width:100%;min-height:calc(100vh - 120px);height:620px;overflow:visible;margin-bottom:20px}
 .gir{position:absolute;width:60px;height:75px;cursor:pointer;transition:transform .1s;z-index:100;will-change:transform;animation:breathe 2s ease-in-out infinite;pointer-events:none}
@@ -62,8 +62,8 @@ body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0
 .task.completed{background:rgba(0,255,0,.2);text-decoration:line-through}
 .task.current{background:rgba(255,255,0,.2);font-weight:bold;animation:tg 2s infinite}
 @keyframes tg{0%,100%{box-shadow:0 0 5px rgba(255,255,0,.5)}50%{box-shadow:0 0 15px rgba(255,255,0,1)}}
-.gos{position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(0,0,0,.9);display:none;justify-content:center;align-items:center;z-index:500;color:#f04;text-align:center;overflow:hidden}
-.goc{background:rgba(20,0,0,.9);padding:30px;border-radius:15px;border:3px solid #f04;animation:gog 2s ease-in-out infinite;max-width:90%}
+.gos{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.9);display:none;z-index:500;color:#f04;text-align:center;padding:20px;box-sizing:border-box;overflow-y:auto}
+.goc{background:rgba(20,0,0,.9);padding:30px;border-radius:15px;border:3px solid #f04;animation:gog 2s ease-in-out infinite;max-width:90%;margin:10vh auto;min-height:fit-content}
 @keyframes gog{0%,100%{box-shadow:0 0 20px #f04}50%{box-shadow:0 0 40px #f04,0 0 60px #f04}}
 .got{font-size:28px;margin-bottom:15px;color:#f04}
 .fs{font-size:20px;margin:12px 0;color:#0f0}
@@ -106,7 +106,7 @@ body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0
 
 /* Mobile optimizations */
 @media (max-width:768px){
-body{padding-bottom:85px}
+body{padding-bottom:60px}
 .gc{height:540px;min-height:540px}
 .gir{width:50px;height:65px}
 .dist{width:35px;height:35px}
@@ -132,7 +132,7 @@ body{padding-bottom:85px}
 }
 
 @media (max-width:480px){
-body{padding-bottom:80px}
+body{padding-bottom:55px}
 .gc{height:490px;min-height:490px}
 .gir{width:45px;height:60px}
 .dist{width:32px;height:32px;font-size:20px}
