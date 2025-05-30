@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your ADHD-Friendly Daily Gig Plan: Target $300/Week</title>
+    <style>
+        :root {
+            --primary: #6a4c93;
+            --secondary: #8ac926;
+            --tertiary: #1982c4;
+            --accent1: #ffca3a;
+            --accent2: #ff595e;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #38b000;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            background-color: transparent;
+            padding: 0;
+            margin: 0;
+        }
+
+        .anytime-heading {
+            background-color: #6a4c93;
+            border-radius: 10px;
+            padding: 15px 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .anytime-heading h2 {
+            color: white;
+            margin-bottom: 5px;
+            font-size: 1.5rem;
+        }
+
+        .anytime-heading p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+        }
+
+        details {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* Different border colors for each dropdown */
+        details.rules {
+            border-left: 6px solid var(--accent1);
+        }
+        
+        details.anytime-tasks {
+            border-left: 6px solid var(--primary);
+        }
+        
+        details.income-breakdown {
+            border-left: 6px solid var(--success);
+        }
+        
+        details.maximizing-earnings {
+            border-left: 6px solid var(--tertiary);
+        }
+        
+        details.platform-categories {
+            border-left: 6px solid var(--primary);
+        }
+
+        summary {
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        /* Summary color matches border */
+        details.rules summary {
+            color: var(--accent1);
+        }
+        
+        details.anytime-tasks summary {
+            color: var(--primary);
+        }
+        
+        details.income-breakdown summary {
+            color: var(--success);
+        }
+        
+        details.maximizing-earnings summary {
+            color: var(--tertiary);
+        }
+        
+        details.platform-categories summary {
+            color: var(--primary);
+        }
+
+        details[open] summary {
+            color: var(--primary);
+        }
+
+        .rules ul {
+            list-style-type: none;
+            margin-top: 10px;
+        }
+
+        .rules li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .rules li:before {
+            content: "✨";
+            position: absolute;
+            left: 0;
+            color: var(--accent1);
+        }
+
+        strong {
+            font-weight: bold;
+        }
+
+        .anytime-tasks h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .anytime-tasks p {
+            text-align: center;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .anytime-tasks-list {
+            list-style-type: none;
+        }
+
+        .task-item {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .task-checkbox {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .task-label {
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .task-checkbox:checked + .task-label {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        .celebration {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 1.3rem;
+            color: var(--success);
+            animation: bounce 0.5s infinite alternate;
+            display: none;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0px); }
+            to { transform: translateY(-10px); }
+        }
+
+        .reset-button {
+            display: block;
+            margin: 20px auto 0;
+            background-color: #6a4c93;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .reset-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        
+        /* Income Breakdown Styles */
+        .income-breakdown p {
+            margin-bottom: 15px;
+            font-style: italic;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .income-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .income-table th, .income-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .income-table th {
+            background-color: rgba(106, 76, 147, 0.1);
+            font-weight: 600;
+        }
+        
+        .income-table tr:hover {
+            background-color: rgba(138, 201, 38, 0.1);
+        }
+        
+        .income-table td:last-child {
+            font-weight: 600;
+            color: #38b000;
+        }
+        
+        .income-total {
+            text-align: right;
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .income-notes {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+        
+        /* Maximizing Earnings Styles */
+        .maximizing-earnings ol {
+            padding-left: 25px;
+        }
+        
+        .maximizing-earnings li {
+            margin-bottom: 10px;
+        }
+        
+        .maximizing-earnings .highlight {
+            color: var(--tertiary);
+            font-weight: bold;
+        }
+        
+        .maximizing-earnings p {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        
+        /* Platform Categories Styles */
+        .category-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .category-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .category-card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--accent1);
+        }
+        
+        .category-card ul {
+            list-style-type: none;
+        }
+        
+        .category-card li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .category-card li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--tertiary);
+        }
+        
+        .platform-pay {
+            font-size: 0.8rem;
+            color: #38b000;
+            margin-left: 5px;
+        }
+        
+        a {
+            color: #1982c4;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="anytime-heading">
+        <h2>Your ADHD-Friendly Daily Gig Plan: Target $300/Week</h2>
+        <p>Flexible structure, maximum dopamine, minimum pressure</p>
+    </div>
+
+    <details class="rules">
+        <summary>THE RULES</summary>
+        <ul>
+            <li><strong>No guilt if skipped.</strong> Just keep going, even if you miss a day.</li>
+            <li><strong>Stack easy wins.</strong> Start with tasks that take <5 mins to build momentum.</li>
+            <li><strong>Rotate platforms.</strong> Switch between apps to keep things fresh and exciting.</li>
+            <li><strong>Celebrate tiny wins.</strong> Even small earnings add up!</li>
+            <li><strong>Focus on strengths.</strong> Prioritize tasks that match your skills and energy level.</li>
+        </ul>
+    </details>
+
+    <details class="anytime-tasks">
+        <summary>ANYTIME TASKS</summary>
+        <p>Use these flexible tasks whenever you have a few spare minutes or need a change of pace</p>
+
+        <div class="celebration" id="anytime-celebration">
+            🎉 Great job! Keep that momentum going! 🎉
+        </div>
+
+        <div class="anytime-tasks-list" id="anytime-tasks-list">
+            <!-- Tasks will be populated by JavaScript -->
+
+        </div>
+
+        <button class="reset-button" id="reset-button">Reset Tasks</button>
+    </details>
+    
+    <!-- New Income Breakdown Section -->
+    <details class="income-breakdown">
+        <summary>WEEKLY INCOME BREAKDOWN</summary>
+        <p>(Assuming higher effort and consistent daily participation)</p>
+        
+        <table class="income-table">
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Activities</th>
+                    <th>Est. Daily Earnings</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Monday</td>
+                    <td>
+                        Rev, GoTranscript,
+                        Prolific, UserTesting
+                    </td>
+                    <td>$50–$70</td>
+                </tr>
+                <tr>
+                    <td>Tuesday</td>
+                    <td>
+                        dscout, Respondent,
+                        BestMark, iSecretShop
+                    </td>
+                    <td>$40–$60</td>
+                </tr>
+                <tr>
+                    <td>Wednesday</td>
+                    <td>
+                        TranscribeMe, Scribie,
+                        SurveyJunkie, Swagbucks,
+                        Passive Apps Setup
+                    </td>
+                    <td>$30–$50</td>
+                </tr>
+                <tr>
+                    <td>Thursday</td>
+                    <td>
+                        UserTesting, Neevo,
+                        Clickworker, Alignerr,
+                        Passive Income (ongoing)
+                    </td>
+                    <td>$30–$50</td>
+                </tr>
+                <tr>
+                    <td>Friday</td>
+                    <td>
+                        3Play Media, CastingWords,
+                        User Interviews,
+                        Passive Income (ongoing)
+                    </td>
+                    <td>$40–$60</td>
+                </tr>
+                <tr>
+                    <td>Saturday</td>
+                    <td>
+                        PaidViewpoint, PrizeRebel,
+                        weekend opportunities,
+                        Passive Income (ongoing)
+                    </td>
+                    <td>$15–$30</td>
+                </tr>
+                <tr>
+                    <td>Sunday</td>
+                    <td>
+                        Clickworker, Crowdtap,
+                        minimal effort,
+                        Passive Income (ongoing)
+                    </td>
+                    <td>$10–$20</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="income-total">
+            Weekly Potential: $100–$300
+        </div>
+        
+        <div class="income-notes">
+            <strong>Note:</strong> These estimates reflect realistic earnings but assume consistent effort on high-paying tasks. The plan targets higher-paying opportunities on days with more mental energy (Monday, Tuesday, Friday) and uses easier tasks for low-energy days.
+        </div>
+    </details>
+
+    <!-- New Maximizing Earnings Section -->
+    <details class="maximizing-earnings">
+        <summary>MAXIMIZING EARNINGS</summary>
+        <ol>
+            <li><strong>Focus on transcription & user testing:</strong> These categories offer the <span class="highlight">highest hourly rates</span> and most reliable income.</li>
+            <li><strong>Set up passive income apps:</strong> Let them run in the background while you work on active tasks to create <span class="highlight">additional income streams</span>.</li>
+            <li><strong>Specialize by day:</strong> Dedicate certain days to specific platform types to build <span class="highlight">efficiency and routine</span>.</li>
+            <li><strong>Multi-app strategy:</strong> Always have 2-3 platforms open so you can <span class="highlight">switch when bored</span> or when tasks are unavailable.</li>
+            <li><strong>Weekly scheduling hack:</strong> Work more on Monday-Tuesday when motivation is high, then taper down for the weekend.</li>
+        </ol>
+        <p>With this strategic approach, you'll hit your <span class="highlight">$300/week goal</span> by focusing on high-value transcription, user testing, and research studies while maintaining multiple income streams!</p>
+    </details>
+    
+    <!-- Platform Categories Section -->
+    <details class="platform-categories">
+        <summary>PLATFORM CATEGORIES</summary>
+        <p style="text-align: center; margin-bottom: 15px;">All the platforms organized by type so you can mix and match based on your energy and interests!</p>
+        
+        <div class="category-container">
+            <!-- Transcription Category -->
+            <div class="category-card">
+                <h3>Transcription Platforms</h3>
+                <ul>
+                    <li><a href="https://www.rev.com/freelancers" target="_blank">Rev</a> <span class="platform-pay">($5-$30/hr)</span></li>
+                    <li><a href="https://www.transcribeme.com/legal-transcriptionists-jobs/" target="_blank">TranscribeMe</a> <span class="platform-pay">($15-$25/hr)</span></li>
+                    <li><a href="https://scribie.com/transcription/freelance" target="_blank">Scribie</a> <span class="platform-pay">($5-$20/hr)</span></li>
+                    <li><a href="https://gotranscript.com/transcription-jobs#apply-now" target="_blank">GoTranscript</a> <span class="platform-pay">($10-$25/hr)</span></li>
+                    <li><a href="https://tigerfish.com/transcription-jobs/" target="_blank">Tigerfish</a> <span class="platform-pay">($10-$25/hr)</span></li>
+                    <li><a href="https://workshop.castingwords.com/" target="_blank">CastingWords</a> <span class="platform-pay">($8-$20/hr)</span></li>
+                    <li><a href="https://typists.quicktate.com/transcribers/signup" target="_blank">Quicktate</a> <span class="platform-pay">($5-$15/hr)</span></li>
+                    <li><a href="https://www.speechpad.com/worker" target="_blank">Speechpad</a> <span class="platform-pay">($10-$20/hr)</span></li>
+                    <li><a href="https://www.3playmedia.com/join-our-team/contractor-job-openings/" target="_blank">3Play Media</a> <span class="platform-pay">($10-$30/hr)</span></li>
+                </ul>
+            </div>
+            
+            <!-- Research & User Testing -->
+            <div class="category-card">
+                <h3>Research & User Testing</h3>
+                <ul>
+                    <li><a href="https://www.prolific.com/participants" target="_blank">Prolific</a> <span class="platform-pay">($8-$15/hr)</span></li>
+                    <li><a href="https://dscout.com/participate-in-research-studies" target="_blank">dscout</a> <span class="platform-pay">($10-$100/study)</span></li>
+                    <li><a href="https://app.respondent.io/signup/?signupAs=participant" target="_blank">Respondent</a> <span class="platform-pay">($50-$200/study)</span></li>
+                    <li><a href="https://www.usertesting.com/get-paid-to-test" target="_blank">UserTesting</a> <span class="platform-pay">($10-$60/test)</span></li>
+                    <li><a href="https://www.userinterviews.com/" target="_blank">User Interviews</a> <span class="platform-pay">($40-$200/study)</span></li>
+                    <li><a href="https://neevo.definedcrowd.com/" target="_blank">Neevo</a> <span class="platform-pay">($5-$20/task)</span></li>
+                    <li><a href="https://www.outlier.ai/" target="_blank">Outlier</a> <span class="platform-pay">($10-$50/study)</span></li>
+                    <li><a href="https://www.dataannotation.com/" target="_blank">DataAnnotation</a> <span class="platform-pay">($8-$20/hr)</span></li>
+                </ul>
+            </div>
+            
+            <!-- Surveys & Rewards -->
+            <div class="category-card">
+                <h3>Surveys & Rewards</h3>
+                <ul>
+                    <li><a href="https://www.surveyjunkie.com/" target="_blank">Survey Junkie</a> <span class="platform-pay">($1-$10/survey)</span></li>
+                    <li><a href="https://www.swagbucks.com/" target="_blank">Swagbucks</a> <span class="platform-pay">($1-$5/task)</span></li>
+                    <li><a href="https://members.pineconeresearch.com/#/" target="_blank">Pinecone Research</a> <span class="platform-pay">($3-$5/survey)</span></li>
+                    <li><a href="https://www.lifepointspanel.com/" target="_blank">LifePoints</a> <span class="platform-pay">($0.50-$5/survey)</span></li>
+                    <li><a href="https://crowdtap.com/" target="_blank">Crowdtap</a> <span class="platform-pay">($1-$5/task)</span></li>
+                    <li><a href="https://www.paidviewpoint.com/" target="_blank">PaidViewpoint</a> <span class="platform-pay">($0.50-$2/survey)</span></li>
+                    <li><a href="https://www.prizerebel.com/" target="_blank">PrizeRebel</a> <span class="platform-pay">($1-$5/task)</span></li>
+                    <li><a href="https://www.productreportcard.com/" target="_blank">ProductReportCard</a> <span class="platform-pay">($1-$20/survey)</span></li>
+                </ul>
+            </div>
+            
+            <!-- Mystery Shopping -->
+            <div class="category-card">
+                <h3>Mystery Shopping</h3>
+                <ul>
+                    <li><a href="https://www.bestmark.com/become-a-mystery-shopper/" target="_blank">BestMark</a> <span class="platform-pay">($10-$50/shop)</span></li>
+                    <li><a href="https://www.isecretshop.com/register" target="_blank">iSecretShop</a> <span class="platform-pay">($5-$25/shop)</span></li>
+                    <li><a href="https://shopper.marketforce.com/#/login/newShopper/Apply" target="_blank">MarketForce</a> <span class="platform-pay">($5-$30/shop)</span></li>
+                    <li><a href="https://www.secretshopper.com/shoppers/shopper-signup/shopper-signup-start" target="_blank">Secret Shopper</a> <span class="platform-pay">($10-$40/shop)</span></li>
+                    <li><a href="https://www.gigspot.com/" target="_blank">GigSpot</a> <span class="platform-pay">($8-$35/gig)</span></li>
+                    <li><a href="https://prestomobilesurveys.com/become-a-mystery-shopper/" target="_blank">Presto</a> <span class="platform-pay">($5-$25/shop)</span></li>
+                </ul>
+            </div>
+
+            <!-- Passive Income -->
+            <div class="category-card">
+                <h3>Passive Income Apps</h3>
+                <ul>
+                    <li><a href="https://www.honeygain.com" target="_blank">Honeygain</a> <span class="platform-pay">($1-$5/day)</span></li>
+                    <li><a href="https://modeearnapp.com/" target="_blank">Mode Earn</a> <span class="platform-pay">($0.50-$2/day)</span></li>
+                    <li><a href="https://pawns.app/" target="_blank">Pawns</a> <span class="platform-pay">($0.50-$3/day)</span></li>
+                    <li><a href="https://packetstream.io/" target="_blank">PacketStream</a> <span class="platform-pay">($0.50-$2/day)</span></li>
+                    <li><a href="https://bytlixir.com/" target="_blank">ByteLixir</a> <span class="platform-pay">($0.50-$2/day)</span></li>
+                </ul>
+            </div>
+            
+            <!-- Microtask Platforms -->
+            <div class="category-card">
+                <h3>Microtask Platforms</h3>
+                <ul>
+                    <li><a href="https://www.clickworker.com/" target="_blank">Clickworker</a> <span class="platform-pay">($3-$10/hr)</span></li>
+                    <li><a href="https://www.alignerr.com/" target="_blank">Alignerr</a> <span class="platform-pay">($5-$15/hr)</span></li>
+                    <li><a href="http://bit.ly/3QOW7hg" target="_blank">Microworkers</a> <span class="platform-pay">($3-$8/hr)</span></li>
+                </ul>
+            </div>
+        </div>
+    </details>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tasks = [
+                "Complete a transcription task on Rev ($5-$15)",
+                "Answer questions on Crowdtap ($2-$5)",
+                "Check for studies on Prolific ($10-$20)",
+                "Set up passive income apps ($1-$5)",
+                "Complete surveys on Survey Junkie ($5-$10)",
+                "Play Games on Mistplay/Justplay ($2-$5)"
+            ];
+
+            const tasksList = document.getElementById('anytime-tasks-list');
+            const celebration = document.getElementById('anytime-celebration');
+
+            // Create and append tasks
+            tasks.forEach((task, index) => {
+                const taskItem = document.createElement('div');
+                taskItem.className = 'task-item';
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = 'anytime-task-' + index;
+                checkbox.className = 'task-checkbox';
+
+                const label = document.createElement('label');
+                label.htmlFor = 'anytime-task-' + index;
+                label.className = 'task-label';
+                label.textContent = task;
+
+                // Get state from localStorage
+                const storageKey = 'anytime-task-' + index;
+                if (localStorage.getItem(storageKey) === 'true') {
+                    checkbox.checked = true;
+                }
+
+                // Add change event listener
+                checkbox.addEventListener('change', function() {
+                    localStorage.setItem(storageKey, this.checked);
+                    updateCelebration();
+                });
+
+                taskItem.appendChild(checkbox);
+                taskItem.appendChild(label);
+                tasksList.appendChild(taskItem);
+            });
+
+            // Update celebration display
+            function updateCelebration() {
+                const checkboxes = document.querySelectorAll('.task-checkbox');
+                let checkedCount = 0;
+
+                checkboxes.forEach(function(cb) {
+                    if (cb.checked) {
+                        checkedCount++;
+                    }
+                });
+
+                // Show celebration if 2 or more tasks are checked
+                if (checkedCount >= 2) {
+                    celebration.style.display = 'block';
+                } else {
+                    celebration.style.display = 'none';
+                }
+            }
+
+            // Check initial state
+            updateCelebration();
+
+            // Reset button functionality
+            const resetButton = document.getElementById('reset-button');
+            resetButton.addEventListener('click', function() {
+                const checkboxes = document.querySelectorAll('.task-checkbox');
+
+                checkboxes.forEach(function(checkbox, index) {
+                    checkbox.checked = false;
+                    localStorage.removeItem('anytime-task-' + index);
+                });
+
+                celebration.style.display = 'none';
+            });
+        });
+    </script>
+
+    <!-- Footer message -->
+    <div style="text-align: center; margin-top: 30px; padding: 15px; background-color: #f8f9fa; border-radius: 10px; font-size: 0.9rem;">
+        <p>Remember: This plan is flexible. Adapt it to your energy levels and needs.</p></br>
+        <p>I can't guarantee you'll earn a specific amount — this is just a guideline based on personal experience and realistic effort. Results will vary depending on your time, energy, and consistency.</p>
+        <p style="margin-top: 10px;">💫 <strong>Every dollar adds up. Every effort counts.</strong> 💫</p>
+    </div>
+</body>
+</html>
