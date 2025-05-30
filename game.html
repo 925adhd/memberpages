@@ -6,9 +6,9 @@
 <title>GIR's ADHD Adventures</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0a,#1a4a1a,#2a1a4a,#4a1a2a);background-size:400% 400%;animation:bg 10s ease infinite;min-height:100vh;overflow:hidden;color:#0f0;touch-action:none;user-select:none}
+body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0a,#1a4a1a,#2a1a4a,#4a1a2a);background-size:400% 400%;animation:bg 10s ease infinite;min-height:100vh;color:#0f0;touch-action:none;user-select:none;padding-bottom:180px}
 @keyframes bg{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-.gc{position:relative;width:100vw;height:100vh;overflow:hidden}
+.gc{position:relative;width:100%;min-height:calc(100vh - 180px);height:600px;overflow:visible;margin-bottom:20px}
 .gir{position:absolute;width:60px;height:75px;cursor:pointer;transition:transform .1s;z-index:100;will-change:transform;animation:breathe 2s ease-in-out infinite;pointer-events:none}
 .gn,.gd{width:100%;height:100%;object-fit:contain;pointer-events:none}
 .gn{display:block}.gd{display:none}
@@ -47,10 +47,10 @@ body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0
 .df{background:linear-gradient(90deg,#ff0,#ff4,#ff8)}
 .hs{color:#FFD700;font-weight:bold;animation:hsg 2s infinite}
 @keyframes hsg{0%,100%{text-shadow:0 0 5px #FFD700}50%{text-shadow:0 0 15px #FFD700,0 0 25px #FFD700}}
-.ctrl{position:absolute;bottom:20px;left:20px;background:rgba(0,20,0,.9);padding:15px;border-radius:10px;border:2px solid #0f0;color:#0f0;z-index:200;display:none}
-.ui-toggle{position:fixed;bottom:20px;left:20px;z-index:300}
-.mc{position:fixed;bottom:20px;right:20px;z-index:300;display:block}
-.jc{position:relative;width:100px;height:100px;background:rgba(0,50,0,.8);border:3px solid #0f0;border-radius:50%;margin-bottom:10px;touch-action:none}
+.ctrl{position:static;background:rgba(0,20,0,.9);padding:15px;border-radius:10px;border:2px solid #0f0;color:#0f0;z-index:200;margin:20px;display:block}
+.ui-toggle{position:absolute;top:10px;right:10px;z-index:300}
+.mc{position:static;z-index:300;display:block;margin:20px auto;text-align:center;background:rgba(0,20,0,.8);padding:20px;border-radius:15px;border:2px solid #0f0;max-width:400px}
+.jc{position:relative;width:100px;height:100px;background:rgba(0,50,0,.8);border:3px solid #0f0;border-radius:50%;margin:0 auto 15px auto;touch-action:none}
 .js{position:absolute;width:30px;height:30px;background:#0f0;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);transition:none;box-shadow:0 0 10px #0f0;touch-action:none}
 .mb{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
 .btn{width:45px;height:45px;background:rgba(0,50,0,.8);border:2px solid #0f0;border-radius:50%;color:#0f0;font-size:18px;display:flex;align-items:center;justify-content:center;user-select:none;touch-action:manipulation;font-weight:bold}
@@ -58,7 +58,7 @@ body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0
 .rb{background:rgba(100,100,100,.8);border-color:#888;color:#888}
 .rb.av{background:rgba(0,100,200,.8);border-color:#08f;color:#08f;animation:rp 2s infinite}
 @keyframes rp{0%,100%{box-shadow:0 0 5px #08f}50%{box-shadow:0 0 15px #08f,0 0 25px #08f}}
-.tl{position:absolute;top:10px;right:10px;background:rgba(0,20,0,.9);padding:12px;border-radius:8px;box-shadow:0 4px 15px rgba(0,255,0,.3);border:2px solid #0f0;max-width:200px;z-index:200;color:#0f0;font-size:11px}
+.tl{position:absolute;top:10px;right:160px;background:rgba(0,20,0,.9);padding:12px;border-radius:8px;box-shadow:0 4px 15px rgba(0,255,0,.3);border:2px solid #0f0;max-width:200px;z-index:200;color:#0f0;font-size:11px}
 .task{padding:4px;margin:2px 0;border-radius:4px;transition:all .3s}
 .task.completed{background:rgba(0,255,0,.2);text-decoration:line-through}
 .task.current{background:rgba(255,255,0,.2);font-weight:bold;animation:tg 2s infinite}
@@ -81,8 +81,8 @@ body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0
 .cpb{width:100%;height:18px;background:#333;border-radius:8px;margin:15px 0;overflow:hidden;border:2px solid #0f0}
 .cpf{height:100%;background:linear-gradient(90deg,#f04,#f48,#0f0);transition:width .1s;animation:pg .5s infinite}
 @keyframes pg{0%,100%{box-shadow:inset 0 0 10px rgba(0,255,0,.5)}50%{box-shadow:inset 0 0 20px rgba(0,255,0,1)}}
-.mission-hint{position:fixed;top:10px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.8);color:#0f0;padding:8px 12px;border-radius:20px;font-size:24px;border:2px solid #0f0;z-index:400;display:block;animation:pulse 2s infinite}
-.gs{position:fixed;top:120px;left:50%;transform:translateX(-50%);background:#000;color:#0f0;padding:12px 20px;border-radius:20px;font-weight:bold;border:2px solid #0f0;animation:sb .5s ease;z-index:500;display:none;max-width:280px;text-align:center;font-size:14px}
+.mission-hint{position:absolute;top:70px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.8);color:#0f0;padding:8px 12px;border-radius:20px;font-size:24px;border:2px solid #0f0;z-index:400;display:block;animation:pulse 2s infinite}
+.gs{position:absolute;top:120px;left:50%;transform:translateX(-50%);background:#000;color:#0f0;padding:12px 20px;border-radius:20px;font-weight:bold;border:2px solid #0f0;animation:sb .5s ease;z-index:500;display:none;max-width:280px;text-align:center;font-size:14px}
 @keyframes sb{0%{transform:translateX(-50%) scale(0)}100%{transform:translateX(-50%) scale(1)}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.6}}
 .gir.hyperactive{animation:gb .3s infinite}
@@ -96,6 +96,8 @@ body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0
 
 /* Mobile optimizations */
 @media (max-width:768px){
+body{padding-bottom:200px}
+.gc{height:500px;min-height:500px}
 .gir{width:50px;height:65px}
 .dist{width:35px;height:35px}
 .ui{top:5px;left:5px;padding:6px;font-size:9px;background:rgba(0,20,0,.7);max-width:140px}
@@ -107,18 +109,20 @@ body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0
 .gir-eyes::before,.gir-eyes::after{width:4px;height:4px}
 .meter{width:80px;height:10px}
 .tl{top:5px;right:5px;padding:6px;font-size:9px;max-width:120px;background:rgba(0,20,0,.7)}
-.mc{bottom:15px;right:15px}
-.ui-toggle{bottom:15px;left:15px}
+.mc{margin:15px;padding:15px}
+.ui-toggle{top:5px;right:140px}
 .jc{width:90px;height:90px}
 .js{width:25px;height:25px}
 .btn{width:40px;height:40px;font-size:16px}
 .gs{font-size:12px;padding:8px 15px;max-width:250px;top:80px}
-.mission-hint{font-size:20px;padding:6px 10px;top:8px}
+.mission-hint{font-size:20px;padding:6px 10px;top:50px}
 .task{padding:2px;margin:1px 0;font-size:8px}
-.ctrl{display:none !important}
+.ctrl{margin:15px;padding:10px;font-size:10px}
 }
 
 @media (max-width:480px){
+body{padding-bottom:220px}
+.gc{height:450px;min-height:450px}
 .gir{width:45px;height:60px}
 .dist{width:32px;height:32px;font-size:20px}
 .ui{font-size:8px;padding:4px;max-width:120px;background:rgba(0,15,0,.6)}
@@ -129,8 +133,8 @@ body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0
 .gir-eyes::before,.gir-eyes::after{width:3px;height:3px}
 .meter{width:70px;height:8px}
 .tl{font-size:8px;padding:4px;max-width:110px;background:rgba(0,15,0,.6)}
-.mc{bottom:10px;right:10px}
-.ui-toggle{bottom:10px;left:10px}
+.mc{margin:10px;padding:12px}
+.ui-toggle{top:5px;right:120px}
 .jc{width:80px;height:80px}
 .js{width:22px;height:22px}
 .btn{width:36px;height:36px;font-size:14px}
@@ -138,8 +142,22 @@ body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0
 .fs{font-size:18px}
 .ct{font-size:28px}
 .ci{font-size:14px}
-.mission-hint{font-size:18px;padding:5px 8px;top:5px}
+.mission-hint{font-size:18px;padding:5px 8px;top:40px}
 .task{font-size:7px;padding:1px}
+.ctrl{margin:10px;padding:8px;font-size:9px}
+}
+
+.controls-header{
+text-align:center;
+color:#0f0;
+font-size:16px;
+font-weight:bold;
+margin-bottom:10px;
+text-shadow:0 0 10px #0f0;
+}
+
+@media (max-width:480px){
+.controls-header{font-size:14px}
 }
 </style>
 </head>
@@ -162,15 +180,34 @@ body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0
 <div id="gst">Active</div>
 </div>
 </div>
+<div class="ui-toggle" id="tb">
+<div class="btn" style="background:rgba(50,50,0,.8);border-color:#aa0;color:#aa0">👁️</div>
+</div>
+<div class="tl">
+<h4><span id="me">🌮</span> Mission</h4>
+<div id="tkc"></div>
+</div>
+<div class="mission-hint" id="mh">🌮</div>
+<div class="gs" id="gs"></div>
+</div>
+
+<div class="mc">
+<div class="controls-header">🎮 MOBILE CONTROLS</div>
+<div class="jc" id="jc"><div class="js" id="js"></div></div>
+<div class="mb">
+<div class="btn" id="ab">💃</div>
+<div class="btn" id="db">🐕</div>
+<div class="btn rb" id="rb">😴</div>
+</div>
+</div>
+
 <div class="ctrl">
-<h4>🎮 Controls</h4>
-<div>Arrows: Move</div>
-<div>Space: Dance/Action</div>
-<div>Click: Dance</div>
-<div>D: Dog Disguise (Stealth Mode!)</div>
-<div>R: Rest (Restore Energy)</div>
+<h4>🎮 Controls & Tips</h4>
+<div>Joystick: Move around</div>
+<div>💃: Dance/Action</div>
+<div>🐕: Dog Disguise (Stealth Mode!)</div>
+<div>😴: Rest (Restore Energy)</div>
 <div style="font-size:10px;margin-top:5px;color:#888">
-Mobile: 💃=Dance/Action, 🐕=Dog Disguise, 😴=Rest<br>
 ⚠️ ONLY collect items matching your mission!<br>
 Wrong items = BIG energy penalty!<br><br>
 🌪️ CHAOS SYSTEM:<br>
@@ -183,21 +220,7 @@ Wrong items = BIG energy penalty!<br><br>
 less chaos/distraction, reduced penalties.
 </div>
 </div>
-<div class="mc">
-<div class="jc" id="jc"><div class="js" id="js"></div></div>
-<div class="mb">
-<div class="btn" id="ab">💃</div>
-<div class="btn" id="db">🐕</div>
-<div class="btn rb" id="rb">😴</div>
-</div>
-</div>
-<div class="ui-toggle" id="tb">
-<div class="btn" style="background:rgba(50,50,0,.8);border-color:#aa0;color:#aa0">👁️</div>
-</div>
-<div class="tl">
-<h4><span id="me">🌮</span> Mission</h4>
-<div id="tkc"></div>
-</div>
+
 <div class="gos" id="gos">
 <div class="goc">
 <div class="got">GIR.EXE STOPPED</div>
@@ -218,9 +241,7 @@ less chaos/distraction, reduced penalties.
 <div style="color:#0f0;font-size:12px" id="ds">"Doom..."</div>
 </div>
 </div>
-<div class="mission-hint" id="mh">🌮</div>
-<div class="gs" id="gs"></div>
-</div>
+
 <script>
 class G{
 constructor(){
