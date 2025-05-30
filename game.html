@@ -6,9 +6,9 @@
 <title>GIR's ADHD Adventures</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0a,#1a4a1a,#2a1a4a,#4a1a2a);background-size:400% 400%;animation:bg 10s ease infinite;min-height:100vh;color:#0f0;touch-action:none;user-select:none;padding-bottom:100px}
+body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0a,#1a4a1a,#2a1a4a,#4a1a2a);background-size:400% 400%;animation:bg 10s ease infinite;min-height:100vh;color:#0f0;touch-action:none;user-select:none;padding-bottom:75px}
 @keyframes bg{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-.gc{position:relative;width:100%;min-height:calc(100vh - 160px);height:600px;overflow:visible;margin-bottom:20px}
+.gc{position:relative;width:100%;min-height:calc(100vh - 120px);height:620px;overflow:visible;margin-bottom:20px}
 .gir{position:absolute;width:60px;height:75px;cursor:pointer;transition:transform .1s;z-index:100;will-change:transform;animation:breathe 2s ease-in-out infinite;pointer-events:none}
 .gn,.gd{width:100%;height:100%;object-fit:contain;pointer-events:none}
 .gn{display:block}.gd{display:none}
@@ -106,8 +106,8 @@ body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0
 
 /* Mobile optimizations */
 @media (max-width:768px){
-body{padding-bottom:110px}
-.gc{height:500px;min-height:500px}
+body{padding-bottom:85px}
+.gc{height:540px;min-height:540px}
 .gir{width:50px;height:65px}
 .dist{width:35px;height:35px}
 .ui{top:5px;left:5px;padding:6px;font-size:9px;background:rgba(0,20,0,.7);max-width:140px}
@@ -119,22 +119,21 @@ body{padding-bottom:110px}
 .gir-eyes::before,.gir-eyes::after{width:4px;height:4px}
 .meter{width:80px;height:10px}
 .tl{top:5px;right:5px;padding:6px;font-size:9px;max-width:120px;background:rgba(0,20,0,.7)}
-.mc{margin:10px auto 5px auto;padding:12px;max-width:300px}
-.top-controls{margin-bottom:6px}
-.mb{margin:6px 0}
-.jc{width:70px;height:70px}
-.js{width:22px;height:22px}
-.btn{width:34px;height:34px;font-size:14px}
+.mc{margin:6px auto 4px auto;padding:8px;max-width:260px}
+.top-controls{margin-bottom:4px}
+.mb{margin:4px 0;gap:3px}
+.jc{width:60px;height:60px}
+.js{width:18px;height:18px}
+.btn{width:28px;height:28px;font-size:12px}
 .gs{font-size:10px;padding:4px 8px;max-width:180px;top:55px}
 .fp{top:100px;right:5px;font-size:12px;padding:6px 8px;max-width:120px}
-.mission-hint{font-size:28px;padding:10px 14px;top:12px;max-width:300px}
-.gos{top:25%;width:95%;max-width:350px}
+.mission-hint{font-size:28px;padding:10px 14px;top:12px;max-width:260px}
 .task{padding:2px;margin:1px 0;font-size:8px}
 }
 
 @media (max-width:480px){
-body{padding-bottom:105px}
-.gc{height:450px;min-height:450px}
+body{padding-bottom:80px}
+.gc{height:490px;min-height:490px}
 .gir{width:45px;height:60px}
 .dist{width:32px;height:32px;font-size:20px}
 .ui{font-size:8px;padding:4px;max-width:120px;background:rgba(0,15,0,.6)}
@@ -145,20 +144,19 @@ body{padding-bottom:105px}
 .gir-eyes::before,.gir-eyes::after{width:3px;height:3px}
 .meter{width:70px;height:8px}
 .tl{font-size:8px;padding:4px;max-width:110px;background:rgba(0,15,0,.6)}
-.mc{margin:8px auto 3px auto;padding:10px;max-width:280px}
-.top-controls{margin-bottom:5px}
-.mb{margin:5px 0}
-.jc{width:65px;height:65px}
-.js{width:20px;height:20px}
-.btn{width:32px;height:32px;font-size:13px}
+.mc{margin:4px auto 2px auto;padding:6px;max-width:240px}
+.top-controls{margin-bottom:3px}
+.mb{margin:3px 0;gap:2px}
+.jc{width:55px;height:55px}
+.js{width:16px;height:16px}
+.btn{width:26px;height:26px;font-size:11px}
 .got{font-size:24px}
 .fs{font-size:18px}
 .ct{font-size:28px}
 .ci{font-size:14px}
 .gs{font-size:9px;padding:3px 6px;max-width:150px;top:50px}
 .fp{top:90px;right:3px;font-size:11px;padding:4px 6px;max-width:100px}
-.mission-hint{font-size:24px;padding:8px 12px;top:10px;max-width:280px}
-.gos{top:22%;width:96%;max-width:300px}
+.mission-hint{font-size:24px;padding:8px 12px;top:10px;max-width:240px}
 .task{font-size:7px;padding:1px}
 }
 </style>
@@ -292,7 +290,7 @@ posG(){if(this.pos.x===0&&this.pos.y===0){this.pos.x=Math.max(this.size.w,(this.
 createStars(){for(let i=0;i<20;i++){const s=document.createElement('div');s.className='stars';s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.animationDelay=Math.random()*2+'s';this.gc.appendChild(s)}}
 setupEvents(){if(!this.isMobile){this.g.addEventListener('click',e=>{e.preventDefault();this.dance()});document.addEventListener('keydown',e=>this.handleKey(e))}else{this.g.addEventListener('click',e=>{e.preventDefault();this.dance()});this.g.addEventListener('touchend',e=>{e.preventDefault();this.dance()})}this.setupMobile();window.addEventListener('resize',()=>{this.updateBounds();this.updateGirSize();this.posG()})}
 handleKey(e){if(this.state==='game-over')return;let key=e.key.toLowerCase();if(this.stats.d>80&&Math.random()<0.15){const keys=['arrowup','arrowdown','arrowleft','arrowright'];key=keys[Math.floor(Math.random()*keys.length)];this.showFeedback('Distracted!','#fa0')}switch(key){case 'arrowup':e.preventDefault();this.moveG(0,-this.speed);break;case 'arrowdown':e.preventDefault();this.moveG(0,this.speed);break;case 'arrowleft':e.preventDefault();this.moveG(-this.speed,0);break;case 'arrowright':e.preventDefault();this.moveG(this.speed,0);break;case ' ':e.preventDefault();this.randAction();break;case 'd':e.preventDefault();this.toggleDisguise();break;case 'r':e.preventDefault();this.toggleRest();break}}
-setupMobile(){const jc=document.getElementById('jc'),js=document.getElementById('js'),ab=document.getElementById('ab'),db=document.getElementById('db'),rb=document.getElementById('rb'),tb=document.getElementById('tb'),pb=document.getElementById('pb');const cx=jc.offsetWidth/2,cy=jc.offsetHeight/2,md=35;let startPos={x:0,y:0};const hs=e=>{if(this.state==='game-over')return;e.preventDefault();e.stopPropagation();this.joystickActive=true;const r=jc.getBoundingClientRect(),t=e.touches?e.touches[0]:e;startPos.x=t.clientX-r.left;startPos.y=t.clientY-r.top;jc.style.opacity='1';this.startJoystickMovement()};const hm=e=>{if(!this.joystickActive||this.state==='game-over')return;e.preventDefault();e.stopPropagation();const r=jc.getBoundingClientRect(),t=e.touches?e.touches[0]:e,x=t.clientX-r.left-cx,y=t.clientY-r.top-cy,d=Math.sqrt(x*x+y*y);let fx=x,fy=y;if(d>md){const a=Math.atan2(y,x);fx=Math.cos(a)*md;fy=Math.sin(a)*md}js.style.transform=`translate(calc(-50% + ${fx}px), calc(-50% + ${fy}px))`;this.joystickVector={x:fx/md,y:fy/md}};const he=e=>{e.preventDefault();e.stopPropagation();this.joystickActive=false;js.style.transform='translate(-50%,-50%)';jc.style.opacity='.8';this.joystickVector={x:0,y:0};this.stopJoystickMovement()};jc.addEventListener('touchstart',hs,{passive:false});jc.addEventListener('touchmove',hm,{passive:false});jc.addEventListener('touchend',he,{passive:false});jc.addEventListener('mousedown',hs);document.addEventListener('mousemove',hm);document.addEventListener('mouseup',he);this.joystickVector={x:0,y:0};const bp=e=>{e.preventDefault();e.stopPropagation()};const toggleUI=()=>{this.uiVisible=!this.uiVisible;const ui=document.querySelector('.ui'),tl=document.querySelector('.tl'),btn=tb;if(this.uiVisible){ui.style.display='block';tl.style.display='block';btn.textContent='👁️';btn.style.background='rgba(50,50,0,.8)';btn.style.borderColor='#aa0';btn.style.color='#aa0'}else{ui.style.display='none';tl.style.display='none';btn.textContent='👀';btn.style.background='rgba(100,0,0,.8)';btn.style.borderColor='#a00';btn.style.color='#a00'}};['click','touchend'].forEach(evt=>{tb.addEventListener(evt,e=>{bp(e);toggleUI()},{passive:false});ab.addEventListener(evt,e=>{bp(e);this.dance()},{passive:false});db.addEventListener(evt,e=>{bp(e);this.toggleDisguise()},{passive:false});rb.addEventListener(evt,e=>{bp(e);this.toggleRest()},{passive:false});pb.addEventListener(evt,e=>{bp(e);togglePause()},{passive:false})})}
+setupMobile(){const jc=document.getElementById('jc'),js=document.getElementById('js'),ab=document.getElementById('ab'),db=document.getElementById('db'),rb=document.getElementById('rb'),tb=document.getElementById('tb'),pb=document.getElementById('pb');const cx=jc.offsetWidth/2,cy=jc.offsetHeight/2,md=30;let startPos={x:0,y:0};const hs=e=>{if(this.state==='game-over')return;e.preventDefault();e.stopPropagation();this.joystickActive=true;const r=jc.getBoundingClientRect(),t=e.touches?e.touches[0]:e;startPos.x=t.clientX-r.left;startPos.y=t.clientY-r.top;jc.style.opacity='1';this.startJoystickMovement()};const hm=e=>{if(!this.joystickActive||this.state==='game-over')return;e.preventDefault();e.stopPropagation();const r=jc.getBoundingClientRect(),t=e.touches?e.touches[0]:e,x=t.clientX-r.left-cx,y=t.clientY-r.top-cy,d=Math.sqrt(x*x+y*y);let fx=x,fy=y;if(d>md){const a=Math.atan2(y,x);fx=Math.cos(a)*md;fy=Math.sin(a)*md}js.style.transform=`translate(calc(-50% + ${fx}px), calc(-50% + ${fy}px))`;this.joystickVector={x:fx/md,y:fy/md}};const he=e=>{e.preventDefault();e.stopPropagation();this.joystickActive=false;js.style.transform='translate(-50%,-50%)';jc.style.opacity='.8';this.joystickVector={x:0,y:0};this.stopJoystickMovement()};jc.addEventListener('touchstart',hs,{passive:false});jc.addEventListener('touchmove',hm,{passive:false});jc.addEventListener('touchend',he,{passive:false});jc.addEventListener('mousedown',hs);document.addEventListener('mousemove',hm);document.addEventListener('mouseup',he);this.joystickVector={x:0,y:0};const bp=e=>{e.preventDefault();e.stopPropagation()};const toggleUI=()=>{this.uiVisible=!this.uiVisible;const ui=document.querySelector('.ui'),tl=document.querySelector('.tl'),btn=tb;if(this.uiVisible){ui.style.display='block';tl.style.display='block';btn.textContent='👁️';btn.style.background='rgba(50,50,0,.8)';btn.style.borderColor='#aa0';btn.style.color='#aa0'}else{ui.style.display='none';tl.style.display='none';btn.textContent='👀';btn.style.background='rgba(100,0,0,.8)';btn.style.borderColor='#a00';btn.style.color='#a00'}};['click','touchend'].forEach(evt=>{tb.addEventListener(evt,e=>{bp(e);toggleUI()},{passive:false});ab.addEventListener(evt,e=>{bp(e);this.dance()},{passive:false});db.addEventListener(evt,e=>{bp(e);this.toggleDisguise()},{passive:false});rb.addEventListener(evt,e=>{bp(e);this.toggleRest()},{passive:false});pb.addEventListener(evt,e=>{bp(e);togglePause()},{passive:false})})}
 startJoystickMovement(){if(this.moveInterval)clearInterval(this.moveInterval);this.moveInterval=setInterval(()=>{if(this.joystickActive&&this.joystickVector&&(Math.abs(this.joystickVector.x)>.1||Math.abs(this.joystickVector.y)>.1)){const baseSpeed=this.disguised?this.speed*0.6:this.speed;let mx=this.joystickVector.x*baseSpeed,my=this.joystickVector.y*baseSpeed;if(this.stats.d>80&&Math.random()<0.2){mx*=-1;my*=-1}this.moveG(mx,my)}},50)}
 stopJoystickMovement(){if(this.moveInterval){clearInterval(this.moveInterval);this.moveInterval=null}}
 moveG(dx,dy){if(this.state!=='active')return;if(this.stats.e<=0){this.gameOver();return}const moveSpeed=this.disguised?0.6:1;let nx=this.pos.x+(dx*moveSpeed),ny=this.pos.y+(dy*moveSpeed);if(this.stats.d>60){const inaccuracy=Math.random()*10-5;nx+=inaccuracy;ny+=inaccuracy}if(this.stats.c>70&&Math.random()<0.3){const chaosX=(Math.random()-0.5)*15;const chaosY=(Math.random()-0.5)*15;nx+=chaosX;ny+=chaosY}nx=Math.max(0,Math.min(nx,this.bounds.w-this.size.w));ny=Math.max(0,Math.min(ny,this.bounds.h-this.size.h));if(nx!==this.pos.x||ny!==this.pos.y){this.pos.x=nx;this.pos.y=ny;this.g.style.left=nx+'px';this.g.style.top=ny+'px';const energyCost=this.disguised?this.cost*0.6:this.cost;this.modStats({e:-energyCost});this.checkCol()}}
