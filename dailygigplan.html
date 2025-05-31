@@ -77,44 +77,6 @@
             font-style: italic;
         }
 
-        /* Compact Earnings Tracker */
-        .earnings-tracker {
-            background: var(--gradient-success);
-            border-radius: 12px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            color: white;
-            text-align: center;
-        }
-
-        .earnings-tracker h3 {
-            font-size: 1rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .earnings-display {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.75rem;
-        }
-
-        .earnings-item {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 0.75rem;
-            border-radius: 8px;
-            backdrop-filter: blur(10px);
-        }
-
-        .earnings-amount {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 0.25rem;
-        }
-
-        .earnings-item div:last-child {
-            font-size: 0.8rem;
-        }
-
         /* Simplified Plan Selector */
         .plan-selector {
             background: rgba(255, 255, 255, 0.05);
@@ -423,6 +385,25 @@
 
         details[open] {
             border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* High-value tasks get the turquoise gradient */
+        .anytime-tasks {
+            background: var(--gradient-success);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .anytime-tasks[open] {
+            border-color: rgba(16, 185, 129, 0.5);
+        }
+
+        .anytime-tasks summary {
+            color: white;
+            font-weight: 700;
+        }
+
+        .anytime-tasks p {
+            color: rgba(255, 255, 255, 0.9);
         }
 
         summary {
@@ -753,29 +734,6 @@
         <h1>ADHD-Friendly Gig Plan</h1>
         <p>Target $200-400/Week</p>
     </header>
-
-    <!-- Enhanced Earnings Tracker -->
-    <div class="earnings-tracker">
-        <h3>📊 Weekly Earnings</h3>
-        <div class="earnings-display">
-            <div class="earnings-item">
-                <div class="earnings-amount" id="daily-target">$40</div>
-                <div>Daily Target</div>
-            </div>
-            <div class="earnings-item">
-                <div class="earnings-amount" id="weekly-target">$280</div>
-                <div>Weekly Goal</div>
-            </div>
-            <div class="earnings-item">
-                <div class="earnings-amount" id="current-earnings">$0</div>
-                <div>Current Total</div>
-            </div>
-            <div class="earnings-item">
-                <div class="earnings-amount" id="remaining">$280</div>
-                <div>Remaining</div>
-            </div>
-        </div>
-    </div>
 
     <!-- Plan Selector -->
     <section class="plan-selector">
@@ -1383,7 +1341,6 @@
                     }
                     
                     updateAnytimeCelebration();
-                    updateEarningsTracker();
                 });
 
                 taskItem.appendChild(checkbox);
@@ -1453,21 +1410,12 @@
                 anytimeCelebration.style.display = checkedCount >= 2 ? 'block' : 'none';
             }
 
-            function updateEarningsTracker() {
-                const completedTasks = document.querySelectorAll('.task-checkbox:checked, .weekly-task-input:checked').length;
-                const estimatedEarnings = completedTasks * 25;
-                
-                document.getElementById('current-earnings').textContent = `$${estimatedEarnings}`;
-                document.getElementById('remaining').textContent = `$${Math.max(0, 280 - estimatedEarnings)}`;
-            }
-
             document.getElementById('reset-anytime-button').addEventListener('click', function() {
                 document.querySelectorAll('.task-checkbox').forEach((checkbox) => {
                     checkbox.checked = false;
                 });
                 window.anytimeTaskState = {};
                 anytimeCelebration.style.display = 'none';
-                updateEarningsTracker();
             });
 
             // Weekly plan functionality
@@ -1509,7 +1457,6 @@
                     
                     checkWeeklyDayCompletion(day);
                     saveWeeklyState();
-                    updateEarningsTracker();
                 });
             });
 
@@ -1583,7 +1530,6 @@
                     const day = this.dataset.day;
                     resetWeeklyDay(day);
                     saveWeeklyState();
-                    updateEarningsTracker();
                 });
             });
 
@@ -1677,7 +1623,6 @@
             // Initialize
             loadWeeklyState();
             updateAnytimeCelebration();
-            updateEarningsTracker();
             days.forEach(day => {
                 checkWeeklyDayCompletion(day);
             });
