@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breathwork Studio - Professional Breathing Exercises</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #0a0e1a;
+            --secondary-bg: #1a1f2e;
+            --card-bg: rgba(255, 255, 255, 0.02);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a8b8;
+            --text-muted: #6b7280;
+            --accent-blue: #4f46e5;
+            --accent-teal: #06b6d4;
+            --accent-emerald: #10b981;
+            --accent-amber: #f59e0b;
+            --accent-rose: #f43f5e;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.15);
+            --shadow-medium: 0 8px 40px rgba(0, 0, 0, 0.25);
+            --shadow-strong: 0 16px 64px rgba(0, 0, 0, 0.35);
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-calm: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            --gradient-focus: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+            --gradient-energy: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            --gradient-sleep: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Background Effects */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at top, rgba(79, 70, 229, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at bottom right, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+            z-index: -2;
+        }
+
+        .floating-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.3;
+            z-index: -1;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .orb-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent-blue);
+            top: -150px;
+            right: -150px;
+            animation-delay: -5s;
+        }
+
+        .orb-2 {
+            width: 200px;
+            height: 200px;
+            background: var(--accent-teal);
+            bottom: -100px;
+            left: -100px;
+            animation-delay: -10s;
+        }
+
+        .orb-3 {
+            width: 250px;
+            height: 250px;
+            background: var(--accent-emerald);
+            top: 40%;
+            right: -125px;
+            animation-delay: -15s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-30px, -30px) scale(1.1); }
+            66% { transform: translate(30px, -20px) scale(0.9); }
+        }
+
+        /* Layout */
+        .app-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            font-family: 'Crimson Text', serif;
+        }
+
+        /* Glass Card Component */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Exercise Selection Grid */
+        .exercises-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .exercise-card {
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exercise-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--exercise-gradient);
+            border-radius: 24px 24px 0 0;
+        }
+
+        .exercise-card[data-type="calm"]::before { background: var(--gradient-calm); }
+        .exercise-card[data-type="focus"]::before { background: var(--gradient-focus); }
+        .exercise-card[data-type="energy"]::before { background: var(--gradient-energy); }
+        .exercise-card[data-type="sleep"]::before { background: var(--gradient-sleep); }
+
+        .exercise-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: var(--exercise-gradient);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.3s ease;
+        }
+
+        .exercise-card:hover .exercise-icon {
+            transform: scale(1.1);
+        }
+
+        .exercise-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .exercise-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .exercise-description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .exercise-stats {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Session Setup */
+        .session-setup {
+            display: none;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .setup-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .setup-description {
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .setup-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .option-group {
+            text-align: left;
+        }
+
+        .option-label {
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .option-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .option-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .option-btn:hover {
+            background: var(--glass-bg);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .option-btn.selected {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: white;
+        }
+
+        .toggle-switch {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .switch {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background: var(--card-bg);
+            border-radius: 24px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .switch.active {
+            background: var(--accent-blue);
+        }
+
+        .switch-handle {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .switch.active .switch-handle {
+            transform: translateX(26px);
+        }
+
+        /* Breathing Session */
+        .breathing-session {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .session-header {
+            margin-bottom: 3rem;
+        }
+
+        .session-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .session-progress {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .breathing-visualizer {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            margin: 0 auto 3rem;
+        }
+
+        .breath-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            box-shadow: 0 0 60px rgba(79, 70, 229, 0.3);
+            transition: all 0.1s ease;
+        }
+
+        .breath-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        .ring-1 { width: 240px; height: 240px; }
+        .ring-2 { width: 260px; height: 260px; }
+        .ring-3 { width: 280px; height: 280px; }
+
+        .breath-instruction {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+
+        .breath-count {
+            display: block;
+            font-size: 2rem;
+            margin-top: 0.5rem;
+        }
+
+        .session-controls {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .control-btn {
+            background: var(--glass-bg);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .control-btn:hover {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+
+        .control-btn.primary {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+
+        /* Session Complete */
+        .session-complete {
+            display: none;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .completion-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2rem;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .completion-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .completion-message {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .session-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .session-stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .session-stat-value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .session-stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn.secondary {
+            background: var(--glass-bg);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+        }
+
+        .btn.secondary:hover {
+            background: var(--card-bg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .app-container {
+                padding: 1rem;
+            }
+
+            .exercises-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .exercise-card {
+                padding: 1.5rem;
+            }
+
+            .breathing-visualizer {
+                width: 240px;
+                height: 240px;
+            }
+
+            .breath-circle {
+                width: 160px;
+                height: 160px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .slide-up {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes breatheIn {
+            from {
+                transform: translate(-50%, -50%) scale(0.8);
+                box-shadow: 0 0 30px rgba(79, 70, 229, 0.2);
+            }
+            to {
+                transform: translate(-50%, -50%) scale(1.2);
+                box-shadow: 0 0 80px rgba(79, 70, 229, 0.6);
+            }
+        }
+
+        @keyframes breatheOut {
+            from {
+                transform: translate(-50%, -50%) scale(1.2);
+                box-shadow: 0 0 80px rgba(79, 70, 229, 0.6);
+            }
+            to {
+                transform: translate(-50%, -50%) scale(0.8);
+                box-shadow: 0 0 30px rgba(79, 70, 229, 0.2);
+            }
+        }
+
+        @keyframes ripple {
+            from {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            to {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(2);
+            }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Focus styles */
+        .exercise-card:focus,
+        .btn:focus,
+        .option-btn:focus,
+        .control-btn:focus {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    <div class="floating-orb orb-1"></div>
+    <div class="floating-orb orb-2"></div>
+    <div class="floating-orb orb-3"></div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="logo">Breathwork Studio</h1>
+            <p class="tagline">Professional breathing exercises for mind and body wellness</p>
+        </header>
+
+        <!-- Exercise Selection -->
+        <section id="exerciseSelection" class="fade-in">
+            <div class="exercises-grid">
+                <div class="glass-card exercise-card" data-type="calm" tabindex="0" role="button" aria-label="Calming breath exercise">
+                    <div class="exercise-icon" style="background: var(--gradient-calm);">🌊</div>
+                    <h3 class="exercise-title">Calming Breath</h3>
+                    <p class="exercise-subtitle">4:2:6:2 Breathing</p>
+                    <p class="exercise-description">Extended exhale breathing to activate your parasympathetic nervous system and reduce anxiety naturally.</p>
+                    <div class="exercise-stats">
+                        <div class="stat">
+                            <div class="stat-value">5-10</div>
+                            <div class="stat-label">Minutes</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">Calm</div>
+                            <div class="stat-label">Effect</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card exercise-card" data-type="focus" tabindex="0" role="button" aria-label="Focus breath exercise">
+                    <div class="exercise-icon" style="background: var(--gradient-focus);">🧠</div>
+                    <h3 class="exercise-title">Box Breathing</h3>
+                    <p class="exercise-subtitle">4:4:4:4 Breathing</p>
+                    <p class="exercise-description">Military-grade breathing technique used by Navy SEALs to enhance concentration and mental clarity.</p>
+                    <div class="exercise-stats">
+                        <div class="stat">
+                            <div class="stat-value">5-15</div>
+                            <div class="stat-label">Minutes</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">Focus</div>
+                            <div class="stat-label">Effect</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card exercise-card" data-type="energy" tabindex="0" role="button" aria-label="Energizing breath exercise">
+                    <div class="exercise-icon" style="background: var(--gradient-energy);">⚡</div>
+                    <h3 class="exercise-title">Energizing Breath</h3>
+                    <p class="exercise-subtitle">Bellows Breathing</p>
+                    <p class="exercise-description">Dynamic breathing technique to increase alertness, energy, and mental sharpness naturally.</p>
+                    <div class="exercise-stats">
+                        <div class="stat">
+                            <div class="stat-value">3-7</div>
+                            <div class="stat-label">Minutes</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">Energy</div>
+                            <div class="stat-label">Effect</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card exercise-card" data-type="sleep" tabindex="0" role="button" aria-label="Sleep breath exercise">
+                    <div class="exercise-icon" style="background: var(--gradient-sleep);">🌙</div>
+                    <h3 class="exercise-title">Sleep Breath</h3>
+                    <p class="exercise-subtitle">4:7:8 Breathing</p>
+                    <p class="exercise-description">Dr. Andrew Weil's scientifically-backed technique to fall asleep faster and improve sleep quality.</p>
+                    <div class="exercise-stats">
+                        <div class="stat">
+                            <div class="stat-value">4-8</div>
+                            <div class="stat-label">Minutes</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">Sleep</div>
+                            <div class="stat-label">Effect</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Session Setup -->
+        <section id="sessionSetup" class="glass-card session-setup">
+            <h2 class="setup-title" id="setupTitle">Calming Breath Session</h2>
+            <p class="setup-description" id="setupDescription">
+                Prepare for your calming breath session. This technique uses extended exhales to naturally activate your relaxation response.
+            </p>
+
+            <div class="setup-options">
+                <div class="option-group">
+                    <label class="option-label">Session Duration</label>
+                    <div class="option-buttons">
+                        <button class="option-btn selected" data-option="duration" data-value="5">5 min</button>
+                        <button class="option-btn" data-option="duration" data-value="10">10 min</button>
+                        <button class="option-btn" data-option="duration" data-value="15">15 min</button>
+                        <button class="option-btn" data-option="duration" data-value="20">20 min</button>
+                    </div>
+                </div>
+
+                <div class="option-group">
+                    <label class="option-label">Experience Level</label>
+                    <div class="option-buttons">
+                        <button class="option-btn selected" data-option="level" data-value="beginner">Beginner</button>
+                        <button class="option-btn" data-option="level" data-value="intermediate">Intermediate</button>
+                        <button class="option-btn" data-option="level" data-value="advanced">Advanced</button>
+                    </div>
+                </div>
+
+                <div class="option-group">
+                    <label class="option-label">Guidance</label>
+                    <div class="option-buttons">
+                        <button class="option-btn selected" data-option="guidance" data-value="full">Full Guidance</button>
+                        <button class="option-btn" data-option="guidance" data-value="minimal">Minimal</button>
+                        <button class="option-btn" data-option="guidance" data-value="silent">Silent</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="toggle-switch">
+                <span>Audio Guidance</span>
+                <div class="switch active" id="audioToggle">
+                    <div class="switch-handle"></div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn" id="startSessionBtn">Begin Session</button>
+                <button class="btn secondary" id="backToExercisesBtn">Back to Exercises</button>
+            </div>
+        </section>
+
+        <!-- Breathing Session -->
+        <section id="breathingSession" class="breathing-session">
+            <div class="session-header">
+                <h2 class="session-title" id="sessionTitle">Calming Breath</h2>
+                <p class="session-progress" id="sessionProgress">Round 1 of 10</p>
+            </div>
+
+            <div class="breathing-visualizer">
+                <div class="breath-ring ring-1"></div>
+                <div class="breath-ring ring-2"></div>
+                <div class="breath-ring ring-3"></div>
+                <div class="breath-circle" id="breathCircle">
+                    <div class="breath-instruction" id="breathInstruction">
+                        Get Ready
+                        <span class="breath-count" id="breathCount">3</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="session-controls">
+                <button class="control-btn" id="pauseBtn">Pause</button>
+                <button class="control-btn" id="endSessionBtn">End Session</button>
+            </div>
+        </section>
+
+        <!-- Session Complete -->
+        <section id="sessionComplete" class="glass-card session-complete">
+            <div class="completion-icon">✨</div>
+            <h2 class="completion-title">Session Complete</h2>
+            <p class="completion-message" id="completionMessage">
+                Excellent work! You've completed your calming breath session. Your nervous system has been gently guided into a more relaxed state.
+            </p>
+
+            <div class="session-stats">
+                <div class="session-stat">
+                    <div class="session-stat-value" id="completedRounds">8</div>
+                    <div class="session-stat-label">Rounds Completed</div>
+                </div>
+                <div class="session-stat">
+                    <div class="session-stat-value" id="totalTime">5:30</div>
+                    <div class="session-stat-label">Total Time</div>
+                </div>
+                <div class="session-stat">
+                    <div class="session-stat-value" id="sessionStreak">3</div>
+                    <div class="session-stat-label">Day Streak</div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn" id="newSessionBtn">New Session</button>
+                <button class="btn secondary" id="repeatSessionBtn">Repeat Session</button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        class BreathworkStudio {
+            constructor() {
+                this.currentExercise = null;
+                this.sessionSettings = {
+                    duration: 5,
+                    level: 'beginner',
+                    guidance: 'full',
+                    audioEnabled: true
+                };
+                this.sessionState = {
+                    isActive: false,
+                    isPaused: false,
+                    currentRound: 0,
+                    currentPhase: 0,
+                    startTime: null,
+                    totalRounds: 0
+                };
+                this.breathingTimer = null;
+                this.audioContext = null;
+                this.init();
+            }
+
+            init() {
+                this.bindEvents();
+                this.initializeAudio();
+            }
+
+            bindEvents() {
+                // Exercise selection
+                document.querySelectorAll('.exercise-card').forEach(card => {
+                    card.addEventListener('click', (e) => this.selectExercise(e.currentTarget.dataset.type));
+                    card.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            this.selectExercise(e.currentTarget.dataset.type);
+                        }
+                    });
+                });
+
+                // Setup options
+                document.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => this.updateSetting(e.currentTarget));
+                });
+
+                // Audio toggle
+                document.getElementById('audioToggle').addEventListener('click', () => this.toggleAudio());
+
+                // Navigation buttons
+                document.getElementById('startSessionBtn').addEventListener('click', () => this.startSession());
+                document.getElementById('backToExercisesBtn').addEventListener('click', () => this.showExerciseSelection());
+                document.getElementById('pauseBtn').addEventListener('click', () => this.togglePause());
+                document.getElementById('endSessionBtn').addEventListener('click', () => this.endSession());
+                document.getElementById('newSessionBtn').addEventListener('click', () => this.showExerciseSelection());
+                document.getElementById('repeatSessionBtn').addEventListener('click', () => this.startSession());
+            }
+
+            async initializeAudio() {
+                try {
+                    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                } catch (error) {
+                    console.log('Audio not available');
+                    this.sessionSettings.audioEnabled = false;
+                }
+            }
+
+            selectExercise(type) {
+                this.currentExercise = type;
+                this.showSessionSetup();
+            }
+
+            showExerciseSelection() {
+                document.getElementById('exerciseSelection').style.display = 'block';
+                document.getElementById('sessionSetup').style.display = 'none';
+                document.getElementById('breathingSession').style.display = 'none';
+                document.getElementById('sessionComplete').style.display = 'none';
+            }
+
+            showSessionSetup() {
+                const exercises = {
+                    calm: {
+                        title: 'Calming Breath Session',
+                        description: 'Prepare for your calming breath session. This technique uses extended exhales to naturally activate your relaxation response and reduce stress hormones.'
+                    },
+                    focus: {
+                        title: 'Box Breathing Session', 
+                        description: 'Get ready for box breathing. This military-grade technique creates mental clarity and sustained concentration through balanced breathing patterns.'
+                    },
+                    energy: {
+                        title: 'Energizing Breath Session',
+                        description: 'Prepare for energizing breath work. This dynamic technique will naturally increase your alertness and mental energy through controlled hyperventilation.'
+                    },
+                    sleep: {
+                        title: 'Sleep Breath Session',
+                        description: 'Ready for sleep breathing. This scientifically-proven technique helps your nervous system transition into deep relaxation for better sleep.'
+                    }
+                };
+
+                const exercise = exercises[this.currentExercise];
+                document.getElementById('setupTitle').textContent = exercise.title;
+                document.getElementById('setupDescription').textContent = exercise.description;
+
+                document.getElementById('exerciseSelection').style.display = 'none';
+                document.getElementById('sessionSetup').style.display = 'block';
+            }
+
+            updateSetting(button) {
+                const option = button.dataset.option;
+                const value = button.dataset.value;
+                
+                // Update button states
+                button.parentElement.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.classList.remove('selected');
+                });
+                button.classList.add('selected');
+
+                // Update settings
+                this.sessionSettings[option] = option === 'duration' ? parseInt(value) : value;
+            }
+
+            toggleAudio() {
+                const toggle = document.getElementById('audioToggle');
+                this.sessionSettings.audioEnabled = !this.sessionSettings.audioEnabled;
+                toggle.classList.toggle('active', this.sessionSettings.audioEnabled);
+            }
+
+            startSession() {
+                this.sessionState = {
+                    isActive: true,
+                    isPaused: false,
+                    currentRound: 0,
+                    currentPhase: 0,
+                    startTime: Date.now(),
+                    totalRounds: this.calculateTotalRounds()
+                };
+
+                document.getElementById('sessionSetup').style.display = 'none';
+                document.getElementById('sessionComplete').style.display = 'none';
+                document.getElementById('breathingSession').style.display = 'flex';
+
+                this.updateSessionHeader();
+                this.startBreathingCycle();
+            }
+
+            calculateTotalRounds() {
+                const patterns = {
+                    calm: { cycleTime: 14, rounds: Math.floor(this.sessionSettings.duration * 60 / 14) },
+                    focus: { cycleTime: 16, rounds: Math.floor(this.sessionSettings.duration * 60 / 16) },
+                    energy: { cycleTime: 8, rounds: Math.floor(this.sessionSettings.duration * 60 / 8) },
+                    sleep: { cycleTime: 19, rounds: Math.floor(this.sessionSettings.duration * 60 / 19) }
+                };
+                return patterns[this.currentExercise].rounds;
+            }
+
+            updateSessionHeader() {
+                const titles = {
+                    calm: 'Calming Breath',
+                    focus: 'Box Breathing',
+                    energy: 'Energizing Breath',
+                    sleep: 'Sleep Breath'
+                };
+                
+                document.getElementById('sessionTitle').textContent = titles[this.currentExercise];
+                this.updateProgress();
+            }
+
+            updateProgress() {
+                document.getElementById('sessionProgress').textContent = 
+                    `Round ${this.sessionState.currentRound + 1} of ${this.sessionState.totalRounds}`;
+            }
+
+            startBreathingCycle() {
+                if (!this.sessionState.isActive) return;
+
+                const patterns = {
+                    calm: [
+                        { phase: 'Breathe In', duration: 4, instruction: 'Inhale slowly' },
+                        { phase: 'Hold', duration: 2, instruction: 'Hold gently' },
+                        { phase: 'Breathe Out', duration: 6, instruction: 'Exhale completely' },
+                        { phase: 'Pause', duration: 2, instruction: 'Rest' }
+                    ],
+                    focus: [
+                        { phase: 'Breathe In', duration: 4, instruction: 'Inhale' },
+                        { phase: 'Hold', duration: 4, instruction: 'Hold' },
+                        { phase: 'Breathe Out', duration: 4, instruction: 'Exhale' },
+                        { phase: 'Hold', duration: 4, instruction: 'Hold' }
+                    ],
+                    energy: [
+                        { phase: 'Quick Inhale', duration: 1, instruction: 'Quick in' },
+                        { phase: 'Quick Exhale', duration: 1, instruction: 'Quick out' },
+                        { phase: 'Quick Inhale', duration: 1, instruction: 'Quick in' },
+                        { phase: 'Quick Exhale', duration: 1, instruction: 'Quick out' },
+                        { phase: 'Deep Inhale', duration: 2, instruction: 'Deep in' },
+                        { phase: 'Long Exhale', duration: 2, instruction: 'Long out' }
+                    ],
+                    sleep: [
+                        { phase: 'Breathe In', duration: 4, instruction: 'Breathe in quietly' },
+                        { phase: 'Hold', duration: 7, instruction: 'Hold completely' },
+                        { phase: 'Breathe Out', duration: 8, instruction: 'Exhale with whoosh' }
+                    ]
+                };
+
+                const pattern = patterns[this.currentExercise];
+                this.executePhases(pattern);
+            }
+
+            executePhases(pattern) {
+                if (this.sessionState.currentPhase >= pattern.length) {
+                    this.sessionState.currentPhase = 0;
+                    this.sessionState.currentRound++;
+                    this.updateProgress();
+
+                    if (this.sessionState.currentRound >= this.sessionState.totalRounds) {
+                        this.completeSession();
+                        return;
+                    }
+                }
+
+                if (!this.sessionState.isActive || this.sessionState.isPaused) return;
+
+                const currentPhase = pattern[this.sessionState.currentPhase];
+                this.executePhase(currentPhase, pattern);
+            }
+
+            executePhase(phase, pattern) {
+                const instruction = document.getElementById('breathInstruction');
+                const count = document.getElementById('breathCount');
+                const circle = document.getElementById('breathCircle');
+
+                instruction.childNodes[0].textContent = phase.instruction;
+                
+                // Visual animation
+                if (phase.phase.includes('In') || phase.phase.includes('Inhale')) {
+                    circle.style.animation = `breatheIn ${phase.duration}s ease-in-out forwards`;
+                } else if (phase.phase.includes('Out') || phase.phase.includes('Exhale')) {
+                    circle.style.animation = `breatheOut ${phase.duration}s ease-in-out forwards`;
+                }
+
+                // Countdown
+                let timeLeft = phase.duration;
+                count.textContent = Math.ceil(timeLeft);
+
+                const countdown = setInterval(() => {
+                    timeLeft -= 0.1;
+                    count.textContent = Math.ceil(Math.max(0, timeLeft));
+                    
+                    if (timeLeft <= 0) {
+                        clearInterval(countdown);
+                        this.sessionState.currentPhase++;
+                        setTimeout(() => this.executePhases(pattern), 100);
+                    }
+                }, 100);
+
+                // Store interval for cleanup
+                this.breathingTimer = countdown;
+
+                // Audio cue
+                if (this.sessionSettings.audioEnabled && this.audioContext) {
+                    this.playAudioCue(phase.phase);
+                }
+            }
+
+            playAudioCue(phaseType) {
+                if (!this.audioContext) return;
+
+                const oscillator = this.audioContext.createOscillator();
+                const gainNode = this.audioContext.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(this.audioContext.destination);
+
+                // Different tones for different phases
+                if (phaseType.includes('In') || phaseType.includes('Inhale')) {
+                    oscillator.frequency.setValueAtTime(440, this.audioContext.currentTime); // A4
+                } else if (phaseType.includes('Out') || phaseType.includes('Exhale')) {
+                    oscillator.frequency.setValueAtTime(220, this.audioContext.currentTime); // A3
+                } else {
+                    oscillator.frequency.setValueAtTime(330, this.audioContext.currentTime); // E4
+                }
+
+                oscillator.type = 'sine';
+                gainNode.gain.setValueAtTime(0, this.audioContext.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0.1, this.audioContext.currentTime + 0.1);
+                gainNode.gain.linearRampToValueAtTime(0, this.audioContext.currentTime + 0.3);
+
+                oscillator.start(this.audioContext.currentTime);
+                oscillator.stop(this.audioContext.currentTime + 0.3);
+            }
+
+            togglePause() {
+                this.sessionState.isPaused = !this.sessionState.isPaused;
+                const pauseBtn = document.getElementById('pauseBtn');
+                pauseBtn.textContent = this.sessionState.isPaused ? 'Resume' : 'Pause';
+
+                if (!this.sessionState.isPaused) {
+                    this.startBreathingCycle();
+                } else if (this.breathingTimer) {
+                    clearInterval(this.breathingTimer);
+                }
+            }
+
+            endSession() {
+                this.sessionState.isActive = false;
+                if (this.breathingTimer) {
+                    clearInterval(this.breathingTimer);
+                }
+                this.completeSession();
+            }
+
+            completeSession() {
+                this.sessionState.isActive = false;
+                if (this.breathingTimer) {
+                    clearInterval(this.breathingTimer);
+                }
+
+                // Calculate stats
+                const endTime = Date.now();
+                const totalTimeMs = endTime - this.sessionState.startTime;
+                const minutes = Math.floor(totalTimeMs / 60000);
+                const seconds = Math.floor((totalTimeMs % 60000) / 1000);
+
+                // Update completion screen
+                document.getElementById('completedRounds').textContent = this.sessionState.currentRound;
+                document.getElementById('totalTime').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                // Update streak (simulated)
+                const currentStreak = parseInt(localStorage.getItem('breathwork-streak') || '0') + 1;
+                localStorage.setItem('breathwork-streak', currentStreak.toString());
+                document.getElementById('sessionStreak').textContent = currentStreak;
+
+                // Update completion message
+                const messages = {
+                    calm: 'Excellent work! Your nervous system has been gently guided into a more relaxed state. You should feel calmer and more centered.',
+                    focus: 'Outstanding! Your mind is now clear and focused. This balanced breathing has optimized your concentration and mental clarity.',
+                    energy: 'Fantastic! Your energy levels have been naturally boosted. You should feel more alert and mentally sharp.',
+                    sleep: 'Perfect! Your body is now prepared for deep, restful sleep. Your nervous system has shifted into relaxation mode.'
+                };
+                document.getElementById('completionMessage').textContent = messages[this.currentExercise];
+
+                // Show completion screen
+                document.getElementById('breathingSession').style.display = 'none';
+                document.getElementById('sessionComplete').style.display = 'block';
+            }
+        }
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', () => {
+            new BreathworkStudio();
+        });
+    </script>
+</body>
+</html>
