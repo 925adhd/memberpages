@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <title>MindShift - Brain-Based Help</title>
+  <title>Brain-Based Help</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital@0;1&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -61,6 +61,14 @@
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
       -webkit-text-size-adjust: 100%;
+    }
+
+    /* Emoji-specific styling to prevent squishing */
+    .emoji {
+      font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', 'Android Emoji', 'EmojiSymbols', 'EmojiOne Mozilla', 'Twemoji Mozilla', 'Segoe UI Symbol', 'Noto Emoji';
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
     }
 
     /* Background Effects */
@@ -167,18 +175,6 @@
     .header-content {
       position: relative;
       z-index: 1;
-    }
-    
-    .app-title {
-      font-size: 3rem;
-      font-weight: 800;
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.03em;
-      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      background: linear-gradient(45deg, #ffffff, #f1f5f9);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
     }
     
     .app-subtitle {
@@ -296,34 +292,23 @@
     .category-header {
       display: flex;
       align-items: center;
-      gap: 1.5rem;
+      gap: 1rem;
       margin-bottom: 1rem;
     }
     
     .category-icon {
-      width: 64px;
-      height: 64px;
-      border-radius: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2rem;
-      color: white;
-      position: relative;
-      box-shadow: var(--shadow-medium);
+      font-size: 3rem;
       transition: all 0.3s ease;
+      font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', 'Android Emoji', 'EmojiSymbols', 'EmojiOne Mozilla', 'Twemoji Mozilla', 'Segoe UI Symbol', 'Noto Emoji';
+      line-height: 1;
+      flex-shrink: 0;
     }
     
-    .executive-function .category-icon { background: var(--executive-function); }
-    .emotional-regulation .category-icon { background: var(--emotional-regulation); }
-    .focus-attention .category-icon { background: var(--focus-attention); }
-    .energy-motivation .category-icon { background: var(--energy-motivation); }
-    .anxiety-overwhelm .category-icon { background: var(--anxiety-overwhelm); }
-    .dopamine-reward .category-icon { background: var(--dopamine-reward); }
-    
     .mood-category:hover .category-icon {
-      transform: scale(1.1) rotate(5deg);
-      box-shadow: var(--shadow-strong);
+      transform: scale(1.2);
     }
     
     .category-title {
@@ -511,6 +496,8 @@
       justify-content: center;
       font-size: 0.8rem;
       font-weight: 900;
+      font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', 'Android Emoji', 'EmojiSymbols', 'EmojiOne Mozilla', 'Twemoji Mozilla', 'Segoe UI Symbol', 'Noto Emoji';
+      line-height: 1;
     }
     
     .strategy-steps ol {
@@ -590,6 +577,11 @@
       min-width: 180px;
       justify-content: center;
       backdrop-filter: blur(10px);
+    }
+    
+    .btn .emoji {
+      font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', 'Android Emoji', 'EmojiSymbols', 'EmojiOne Mozilla', 'Twemoji Mozilla', 'Segoe UI Symbol', 'Noto Emoji';
+      line-height: 1;
     }
     
     .btn::before {
@@ -745,10 +737,6 @@
         padding: 1.5rem 0.75rem 1rem;
       }
       
-      .app-title {
-        font-size: 1.8rem;
-      }
-      
       .app-subtitle {
         font-size: 1rem;
       }
@@ -763,9 +751,7 @@
       }
       
       .category-icon {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
+        font-size: 2rem;
       }
       
       .category-title {
@@ -854,7 +840,6 @@
   <div class="app-container">
     <header class="header">
       <div class="header-content">
-        <h1 class="app-title">🧠 MindShift</h1>
         <p class="app-subtitle">Simple brain tricks that really work - backed by science</p>
       </div>
     </header>
@@ -867,7 +852,7 @@
       <div class="mood-categories">
         <div class="mood-category executive-function" data-category="executive" tabindex="0" role="button" aria-label="Can't get organized">
           <div class="category-header">
-            <div class="category-icon">🧠</div>
+            <div class="category-icon"><span class="emoji">🧠</span></div>
             <div>
               <div class="category-title">Can't Get Organized</div>
               <p class="category-description">
@@ -879,7 +864,7 @@
         
         <div class="mood-category emotional-regulation" data-category="emotional" tabindex="0" role="button" aria-label="Feelings are huge">
           <div class="category-header">
-            <div class="category-icon">🌊</div>
+            <div class="category-icon"><span class="emoji">🌊</span></div>
             <div>
               <div class="category-title">Feelings Are Huge</div>
               <p class="category-description">
@@ -891,7 +876,7 @@
         
         <div class="mood-category focus-attention" data-category="focus" tabindex="0" role="button" aria-label="Can't focus">
           <div class="category-header">
-            <div class="category-icon">🎯</div>
+            <div class="category-icon"><span class="emoji">🎯</span></div>
             <div>
               <div class="category-title">Can't Focus</div>
               <p class="category-description">
@@ -903,7 +888,7 @@
         
         <div class="mood-category energy-motivation" data-category="energy" tabindex="0" role="button" aria-label="No energy">
           <div class="category-header">
-            <div class="category-icon">⚡</div>
+            <div class="category-icon"><span class="emoji">⚡</span></div>
             <div>
               <div class="category-title">No Energy</div>
               <p class="category-description">
@@ -915,7 +900,7 @@
         
         <div class="mood-category anxiety-overwhelm" data-category="anxiety" tabindex="0" role="button" aria-label="Everything's too much">
           <div class="category-header">
-            <div class="category-icon">🌪️</div>
+            <div class="category-icon"><span class="emoji">🌪️</span></div>
             <div>
               <div class="category-title">Everything's Too Much</div>
               <p class="category-description">
@@ -927,7 +912,7 @@
         
         <div class="mood-category dopamine-reward" data-category="reward" tabindex="0" role="button" aria-label="Super bored">
           <div class="category-header">
-            <div class="category-icon">🎪</div>
+            <div class="category-icon"><span class="emoji">🎪</span></div>
             <div>
               <div class="category-title">Super Bored</div>
               <p class="category-description">
@@ -948,11 +933,11 @@
         
         <div class="action-buttons">
           <button class="btn btn-primary" id="newStrategyBtn">
-            <span>🔄</span>
+            <span class="emoji">🔄</span>
             Try Something Else
           </button>
           <button class="btn btn-secondary" id="timerBtn">
-            <span>⏱️</span>
+            <span class="emoji">⏱️</span>
             Start Focus Timer
           </button>
         </div>
@@ -963,8 +948,8 @@
             <div class="progress-fill" id="progressFill"></div>
           </div>
           <div class="action-buttons">
-            <button class="btn btn-secondary" id="pauseBtn">⏸️ Pause</button>
-            <button class="btn btn-secondary" id="resetBtn">🔄 Reset</button>
+            <button class="btn btn-secondary" id="pauseBtn"><span class="emoji">⏸️</span> Pause</button>
+            <button class="btn btn-secondary" id="resetBtn"><span class="emoji">🔄</span> Reset</button>
           </div>
         </div>
       </div>
@@ -972,10 +957,10 @@
     
     <footer class="professional-footer">
       <p class="disclaimer">
-        <strong>💡 Note:</strong> These are helpful tools, not medical advice. If you need more help, talk to a doctor or therapist.
+        <strong><span class="emoji">💡</span> Note:</strong> These are helpful tools, not medical advice. If you need more help, talk to a doctor or therapist.
       </p>
       <p class="professional-credits">
-        ✨ Made with brain science • 🧠 ADHD-friendly design
+        <span class="emoji">✨</span> Made with brain science • <span class="emoji">🧠</span> ADHD-friendly design
       </p>
     </footer>
   </div>
@@ -1349,12 +1334,12 @@
         timeLeft = totalTime;
         updateTimerDisplay();
         startTimer();
-        timerBtn.innerHTML = '<span>⏹️</span> Stop Timer';
+        timerBtn.innerHTML = '<span class="emoji">⏹️</span> Stop Timer';
       } else {
         // Hide timer
         stopTimer();
         timerSection.style.display = 'none';
-        timerBtn.innerHTML = '<span>⏱️</span> Start Focus Timer';
+        timerBtn.innerHTML = '<span class="emoji">⏱️</span> Start Focus Timer';
       }
     }
 
@@ -1362,7 +1347,7 @@
       if (timer) clearInterval(timer);
       
       isTimerRunning = true;
-      pauseBtn.innerHTML = '⏸️ Pause';
+      pauseBtn.innerHTML = '<span class="emoji">⏸️</span> Pause';
       
       timer = setInterval(() => {
         timeLeft--;
@@ -1382,7 +1367,7 @@
       if (isTimerRunning) {
         clearInterval(timer);
         isTimerRunning = false;
-        pauseBtn.innerHTML = '▶️ Start';
+        pauseBtn.innerHTML = '<span class="emoji">▶️</span> Start';
       } else {
         startTimer();
       }
@@ -1401,7 +1386,7 @@
       timeLeft = totalTime;
       updateTimerDisplay();
       updateProgress();
-      pauseBtn.innerHTML = '⏸️ Pause';
+      pauseBtn.innerHTML = '<span class="emoji">⏸️</span> Pause';
     }
 
     function updateTimerDisplay() {
@@ -1430,6 +1415,8 @@
             pointer-events: none;
             z-index: 1000;
             animation: confetti-fall 3s ease-out forwards;
+            font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', 'Android Emoji', 'EmojiSymbols', 'EmojiOne Mozilla', 'Twemoji Mozilla', 'Segoe UI Symbol', 'Noto Emoji';
+            line-height: 1;
           `;
           document.body.appendChild(emoji);
           
