@@ -56,9 +56,11 @@
       color: var(--text-primary);
       line-height: 1.7;
       min-height: 100vh;
-      padding: 1rem;
+      padding: 0.5rem;
       position: relative;
       overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      -webkit-text-size-adjust: 100%;
     }
 
     /* Background Effects */
@@ -125,12 +127,12 @@
     }
     
     .app-container {
-      max-width: 900px;
-      margin: 0 auto;
+      max-width: 100%;
+      margin: 0;
       background: var(--glass-bg);
       backdrop-filter: blur(20px);
       border: 1px solid var(--border-subtle);
-      border-radius: 32px;
+      border-radius: 20px;
       box-shadow: var(--shadow-strong);
       overflow: hidden;
       position: relative;
@@ -139,7 +141,7 @@
     .header {
       background: var(--gradient-primary);
       color: white;
-      padding: 3rem 2rem 2.5rem;
+      padding: 2rem 1rem 1.5rem;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -217,21 +219,22 @@
     
     .intro-text {
       text-align: center;
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
       color: var(--text-secondary);
-      font-size: 1.2rem;
-      max-width: 700px;
+      font-size: 1.1rem;
+      max-width: 100%;
       margin-left: auto;
       margin-right: auto;
       font-weight: 500;
-      line-height: 1.8;
+      line-height: 1.6;
+      padding: 0 0.5rem;
     }
     
     .mood-categories {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
-      margin-bottom: 3rem;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
     }
     
     .mood-category {
@@ -731,63 +734,112 @@
       }
     }
     
-    /* Responsive design */
-    @media (max-width: 768px) {
-      body {
-        padding: 0.5rem;
-      }
-      
-      .app-title {
-        font-size: 2.2rem;
-      }
-      
-      .app-subtitle {
-        font-size: 1.1rem;
+    /* Mobile-first responsive design optimized for embedded apps */
+    @media (max-width: 480px) {
+      .app-container {
+        border-radius: 12px;
+        margin: 0;
       }
       
       .header {
-        padding: 2rem 1.5rem;
+        padding: 1.5rem 0.75rem 1rem;
+      }
+      
+      .app-title {
+        font-size: 1.8rem;
+      }
+      
+      .app-subtitle {
+        font-size: 1rem;
       }
       
       .main-content {
-        padding: 2rem 1.5rem;
-      }
-      
-      .mood-categories {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+        padding: 1rem 0.75rem;
       }
       
       .mood-category {
-        padding: 1.5rem;
+        padding: 1rem;
+        min-height: 100px;
+      }
+      
+      .category-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
+      
+      .category-title {
+        font-size: 1.1rem;
+      }
+      
+      .category-description {
+        font-size: 0.85rem;
       }
       
       .response-section {
-        padding: 2rem 1.5rem;
+        padding: 1rem 0.75rem;
       }
       
       .strategy-card {
-        padding: 1.5rem;
-      }
-      
-      .action-buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .btn {
-        width: 100%;
-        max-width: 300px;
+        padding: 1rem;
       }
       
       .timer-display {
-        font-size: 2.5rem;
+        font-size: 2rem;
       }
-
-      .category-header {
-        flex-direction: column;
-        text-align: center;
-        gap: 1rem;
+      
+      .professional-footer {
+        padding: 1.5rem 0.75rem;
+      }
+    }
+    
+    /* Larger mobile devices */
+    @media (min-width: 481px) and (max-width: 768px) {
+      .mood-categories {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+      
+      .action-buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      
+      .btn {
+        flex: 1;
+        min-width: 140px;
+        max-width: 200px;
+      }
+    }
+    
+    /* Tablet and larger */
+    @media (min-width: 769px) {
+      .app-container {
+        max-width: 700px;
+        margin: 0 auto;
+        border-radius: 24px;
+      }
+      
+      .mood-categories {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+      
+      .main-content {
+        padding: 2rem;
+      }
+      
+      .response-section {
+        padding: 2rem;
+      }
+      
+      .action-buttons {
+        flex-direction: row;
+        gap: 1.5rem;
+      }
+      
+      .btn {
+        max-width: 220px;
       }
     }
   </style>
