@@ -34,7 +34,6 @@
       padding: 0;
       box-sizing: border-box;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      -webkit-tap-highlight-color: transparent;
     }
     
     body {
@@ -67,6 +66,7 @@
       opacity: 0.3;
       z-index: -1;
       animation: float 20s infinite ease-in-out;
+      pointer-events: none;
     }
     
     .orb-1 {
@@ -190,6 +190,7 @@
       height: 200%;
       background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
       animation: shimmer 4s infinite;
+      pointer-events: none;
     }
     
     .stats-title {
@@ -266,7 +267,6 @@
       min-height: 44px;
       display: inline-flex;
       align-items: center;
-      touch-action: manipulation;
       transition: all 0.3s ease;
     }
     
@@ -338,6 +338,7 @@
       height: 200%;
       background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
       animation: shimmer 5s infinite;
+      pointer-events: none;
     }
     
     .total-box.complete {
@@ -393,7 +394,6 @@
       font-weight: 700;
       font-size: 11px;
       min-height: 70px;
-      touch-action: manipulation;
       user-select: none;
       position: relative;
       overflow: hidden;
@@ -409,6 +409,7 @@
       background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
       transform: translateX(-100%);
       transition: transform 0.6s;
+      pointer-events: none;
     }
     
     .platform-btn:hover::before {
@@ -448,7 +449,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      touch-action: manipulation;
       user-select: none;
       color: var(--text-primary);
       box-shadow: var(--shadow-soft);
@@ -528,7 +528,6 @@
       white-space: nowrap;
       min-height: 56px;
       min-width: 80px;
-      touch-action: manipulation;
       user-select: none;
       transition: all 0.3s ease;
       box-shadow: var(--shadow-soft);
@@ -621,7 +620,6 @@
       font-size: 12px;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       min-height: 56px;
-      touch-action: manipulation;
       user-select: none;
       background: var(--glass-bg);
       backdrop-filter: blur(20px);
@@ -882,7 +880,7 @@
     <div class="progress-section">
       <div class="progress-header">
         <div>
-          Goal: $<span class="goal-area" id="goalArea" onclick="editGoal()">
+          Goal: $<span class="goal-area" id="goalArea">
             <span id="goalAmount">50.00</span>
           </span>
           <input type="number" id="goalInput" class="goal-input hidden" step="0.01" min="1">
@@ -903,35 +901,35 @@
     <!-- Platform Selection -->
     <div class="section-title">💼 Select Platform</div>
     <div class="platform-grid">
-      <button class="platform-btn" style="background: linear-gradient(135deg, #ff6b6b, #ff5252);" onclick="selectPlatform('DoorDash', [3.50, 7.50, 12.00, 18.00])">
+      <button class="platform-btn" style="background: linear-gradient(135deg, #ff6b6b, #ff5252);">
         <div class="platform-emoji">🍕</div>
         <div>DoorDash</div>
       </button>
-      <button class="platform-btn" style="background: linear-gradient(135deg, #4ecdc4, #26d0ce);" onclick="selectPlatform('Uber', [4.00, 8.50, 15.00, 25.00])">
+      <button class="platform-btn" style="background: linear-gradient(135deg, #4ecdc4, #26d0ce);">
         <div class="platform-emoji">🚗</div>
         <div>Uber</div>
       </button>
-      <button class="platform-btn" style="background: linear-gradient(135deg, #45b7d1, #2196f3);" onclick="selectPlatform('Surveys', [0.10, 0.50, 1.25, 3.00])">
+      <button class="platform-btn" style="background: linear-gradient(135deg, #45b7d1, #2196f3);">
         <div class="platform-emoji">📋</div>
         <div>Surveys</div>
       </button>
-      <button class="platform-btn" style="background: linear-gradient(135deg, #96ceb4, #4caf50);" onclick="selectPlatform('Fiverr', [5.00, 15.00, 25.00, 50.00])">
+      <button class="platform-btn" style="background: linear-gradient(135deg, #96ceb4, #4caf50);">
         <div class="platform-emoji">💻</div>
         <div>Fiverr</div>
       </button>
-      <button class="platform-btn" style="background: linear-gradient(135deg, #ffecd2, #fcb69f);" onclick="selectPlatform('Instacart', [8.00, 15.00, 25.00, 35.00])">
+      <button class="platform-btn" style="background: linear-gradient(135deg, #ffecd2, #fcb69f);">
         <div class="platform-emoji">🛒</div>
         <div>Instacart</div>
       </button>
-      <button class="platform-btn" style="background: linear-gradient(135deg, #a8edea, #fed6e3);" onclick="selectPlatform('Upwork', [10.00, 25.00, 50.00, 100.00])">
+      <button class="platform-btn" style="background: linear-gradient(135deg, #a8edea, #fed6e3);">
         <div class="platform-emoji">📝</div>
         <div>Upwork</div>
       </button>
-      <button class="platform-btn" style="background: linear-gradient(135deg, #d299c2, #fef9d7);" onclick="selectPlatform('Micro Work', [0.10, 0.25, 0.75, 2.00])">
+      <button class="platform-btn" style="background: linear-gradient(135deg, #d299c2, #fef9d7);">
         <div class="platform-emoji">⚡</div>
         <div>Micro Work</div>
       </button>
-      <button class="platform-btn" style="background: linear-gradient(135deg, #89f7fe, #66a6ff);" onclick="selectPlatform('Other', [2.50, 5.00, 10.00, 15.00])">
+      <button class="platform-btn" style="background: linear-gradient(135deg, #89f7fe, #66a6ff);">
         <div class="platform-emoji">✨</div>
         <div>Other</div>
       </button>
@@ -940,10 +938,10 @@
     <!-- Quick Add -->
     <div class="section-title">⚡ Quick Add</div>
     <div class="quick-grid" id="quickGrid">
-      <button class="quick-btn" onclick="addEarning(2.50, 'Quick Add')">$2.50</button>
-      <button class="quick-btn" onclick="addEarning(5.00, 'Quick Add')">$5.00</button>
-      <button class="quick-btn" onclick="addEarning(10.00, 'Quick Add')">$10.00</button>
-      <button class="quick-btn" onclick="addEarning(15.00, 'Quick Add')">$15.00</button>
+      <button class="quick-btn">$2.50</button>
+      <button class="quick-btn">$5.00</button>
+      <button class="quick-btn">$10.00</button>
+      <button class="quick-btn">$15.00</button>
     </div>
     
     <!-- Manual Entry -->
@@ -951,7 +949,7 @@
       <div class="section-title" style="margin-bottom: 12px;">💰 Custom Amount</div>
       <div class="manual-input-row">
         <input type="number" id="manualInput" class="manual-input" placeholder="0.00" step="0.01" min="0" inputmode="decimal">
-        <button id="manualBtn" class="manual-btn" onclick="addManualAmount()" disabled>Add</button>
+        <button id="manualBtn" class="manual-btn" disabled>Add</button>
       </div>
     </div>
     
@@ -959,7 +957,7 @@
     <div class="history-section">
       <div class="history-header">
         <div class="section-title" style="margin: 0;">📜 Today's Earnings</div>
-        <button class="manual-btn clear-btn" onclick="clearHistory()">Clear</button>
+        <button class="manual-btn clear-btn">Clear</button>
       </div>
       <div class="history-list" id="historyList">
         <div style="text-align: center; color: var(--text-muted); padding: 20px;">
@@ -970,9 +968,9 @@
     
     <!-- Action Buttons -->
     <div class="action-grid">
-      <button id="undoBtn" class="action-btn undo-btn" onclick="undoLast()" disabled>↩ Undo</button>
-      <button class="action-btn reset-btn" onclick="resetAll()">🔄 Reset</button>
-      <button class="action-btn export-btn" onclick="exportData()">📊 Export</button>
+      <button id="undoBtn" class="action-btn undo-btn" disabled>↩ Undo</button>
+      <button class="action-btn reset-btn">🔄 Reset</button>
+      <button class="action-btn export-btn">📊 Export</button>
     </div>
   </div>
 
@@ -983,6 +981,18 @@
     let taskCount = 0;
     let history = [];
     let currentPlatform = '';
+    
+    // Platform data
+    const platforms = {
+      'DoorDash': [3.50, 7.50, 12.00, 18.00],
+      'Uber': [4.00, 8.50, 15.00, 25.00],
+      'Surveys': [0.10, 0.50, 1.25, 3.00],
+      'Fiverr': [5.00, 15.00, 25.00, 50.00],
+      'Instacart': [8.00, 15.00, 25.00, 35.00],
+      'Upwork': [10.00, 25.00, 50.00, 100.00],
+      'Micro Work': [0.10, 0.25, 0.75, 2.00],
+      'Other': [2.50, 5.00, 10.00, 15.00]
+    };
     
     // DOM elements
     const elements = {
@@ -1005,14 +1015,6 @@
       notification: document.getElementById('notification'),
       notificationText: document.getElementById('notificationText')
     };
-    
-    // Prevent zoom on input focus (iOS)
-    const inputs = document.querySelectorAll('input');
-    inputs.forEach(input => {
-      input.addEventListener('focus', function() {
-        this.style.fontSize = '16px';
-      });
-    });
     
     // Show notification
     function showNotification(message, type = 'success') {
@@ -1147,14 +1149,19 @@
       // Reset after 30 seconds
       setTimeout(() => {
         if (currentPlatform === platform) {
-          elements.quickGrid.innerHTML = 
-            '<button class="quick-btn" onclick="addEarning(2.50, \'Quick Add\')">$2.50</button>' +
-            '<button class="quick-btn" onclick="addEarning(5.00, \'Quick Add\')">$5.00</button>' +
-            '<button class="quick-btn" onclick="addEarning(10.00, \'Quick Add\')">$10.00</button>' +
-            '<button class="quick-btn" onclick="addEarning(15.00, \'Quick Add\')">$15.00</button>';
+          resetQuickButtons();
           currentPlatform = '';
         }
       }, 30000);
+    }
+    
+    // Reset quick buttons
+    function resetQuickButtons() {
+      elements.quickGrid.innerHTML = 
+        '<button class="quick-btn" onclick="addEarning(2.50, \'Quick Add\')">$2.50</button>' +
+        '<button class="quick-btn" onclick="addEarning(5.00, \'Quick Add\')">$5.00</button>' +
+        '<button class="quick-btn" onclick="addEarning(10.00, \'Quick Add\')">$10.00</button>' +
+        '<button class="quick-btn" onclick="addEarning(15.00, \'Quick Add\')">$15.00</button>';
     }
     
     // Manual amount validation
@@ -1240,6 +1247,7 @@
         history = [];
         dailyGoal = 50;
         currentPlatform = '';
+        resetQuickButtons();
         updateUI();
         showNotification('Everything reset! Fresh start! 🌅', 'milestone');
       }
@@ -1296,29 +1304,38 @@
       document.body.removeChild(textArea);
     }
     
+    // Event listeners setup
+    function setupEventListeners() {
+      // Platform buttons
+      const platformButtons = document.querySelectorAll('.platform-btn');
+      platformButtons.forEach((btn, index) => {
+        const platformNames = ['DoorDash', 'Uber', 'Surveys', 'Fiverr', 'Instacart', 'Upwork', 'Micro Work', 'Other'];
+        const platformName = platformNames[index];
+        btn.addEventListener('click', () => {
+          selectPlatform(platformName, platforms[platformName]);
+        });
+      });
+      
+      // Goal area click
+      elements.goalArea.addEventListener('click', editGoal);
+      
+      // Manual button
+      elements.manualBtn.addEventListener('click', addManualAmount);
+      
+      // Action buttons
+      elements.undoBtn.addEventListener('click', undoLast);
+      document.querySelector('.reset-btn').addEventListener('click', resetAll);
+      document.querySelector('.export-btn').addEventListener('click', exportData);
+      document.querySelector('.clear-btn').addEventListener('click', clearHistory);
+      
+      // Default quick buttons
+      resetQuickButtons();
+    }
+    
     // Initialize app
     function init() {
+      setupEventListeners();
       updateUI();
-      showNotification('Welcome back! Ready to earn some money? 🚀', 'milestone');
-      
-      // Prevent pull-to-refresh on mobile
-      document.body.addEventListener('touchstart', function(e) {
-        if (e.touches.length !== 1) { return; }
-        const scrollY = window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop;
-        if (scrollY === 0) {
-          e.preventDefault();
-        }
-      }, { passive: false });
-      
-      // Prevent double-tap zoom
-      let lastTouchEnd = 0;
-      document.addEventListener('touchend', function (event) {
-        const now = (new Date()).getTime();
-        if (now - lastTouchEnd <= 300) {
-          event.preventDefault();
-        }
-        lastTouchEnd = now;
-      }, false);
     }
     
     // Start the app
