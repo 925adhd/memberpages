@@ -4,29 +4,34 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <title>MindShift - Brain-Based Help</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital@0;1&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary-blue: #3b82f6;
-      --primary-blue-hover: #2563eb;
-      --secondary-teal: #06b6d4;
+      --primary-bg: #0a0e1a;
+      --secondary-bg: #1a1f2e;
+      --card-bg: rgba(255, 255, 255, 0.02);
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --text-primary: #ffffff;
+      --text-secondary: #a0a8b8;
+      --text-muted: #6b7280;
+      --accent-blue: #4f46e5;
+      --accent-teal: #06b6d4;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
       --accent-purple: #8b5cf6;
-      --accent-green: #10b981;
-      --accent-orange: #f59e0b;
-      --accent-pink: #ec4899;
-      --accent-red: #ef4444;
-      --warm-gray: #6b7280;
-      --light-gray: #f8fafc;
-      --white: #ffffff;
-      --text-primary: #1e293b;
-      --text-secondary: #475569;
-      --border-light: #e2e8f0;
-      --success-green: #10b981;
-      --warning-amber: #f59e0b;
-      --focus-ring: rgba(59, 130, 246, 0.3);
+      --border-subtle: rgba(255, 255, 255, 0.1);
+      --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.15);
+      --shadow-medium: 0 8px 40px rgba(0, 0, 0, 0.25);
+      --shadow-strong: 0 16px 64px rgba(0, 0, 0, 0.35);
+      --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-success: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+      --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+      --gradient-info: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 100%);
+      --focus-ring: rgba(79, 70, 229, 0.5);
       
-      /* High contrast ADHD-friendly colors */
-      --executive-function: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      /* ADHD-friendly brain category colors */
+      --executive-function: linear-gradient(135deg, #4f46e5, #3b38d8);
       --emotional-regulation: linear-gradient(135deg, #06b6d4, #0891b2);
       --focus-attention: linear-gradient(135deg, #8b5cf6, #7c3aed);
       --energy-motivation: linear-gradient(135deg, #10b981, #059669);
@@ -38,6 +43,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
     
     html {
@@ -46,9 +52,7 @@
     }
     
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 50%, #cbd5e1 100%);
-      background-attachment: fixed;
+      background: var(--primary-bg);
       color: var(--text-primary);
       line-height: 1.7;
       min-height: 100vh;
@@ -56,103 +60,84 @@
       position: relative;
       overflow-x: hidden;
     }
-    
-    /* Animated background elements */
-    .background-shapes {
+
+    /* Background Effects */
+    .bg-gradient {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      overflow: hidden;
-      pointer-events: none;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at top, rgba(79, 70, 229, 0.15) 0%, transparent 50%),
+                  radial-gradient(ellipse at bottom right, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+      z-index: -2;
     }
-    
-    .floating-shape {
-      position: absolute;
+
+    .floating-orb {
+      position: fixed;
       border-radius: 50%;
-      opacity: 0.1;
+      filter: blur(40px);
+      opacity: 0.3;
+      z-index: -1;
       animation: float 20s infinite ease-in-out;
     }
-    
-    .shape-1 {
-      width: 200px;
-      height: 200px;
-      background: var(--primary-blue);
-      top: 10%;
-      left: -50px;
-      animation-delay: 0s;
-    }
-    
-    .shape-2 {
-      width: 150px;
-      height: 150px;
-      background: var(--accent-purple);
-      top: 60%;
-      right: -30px;
+
+    .orb-1 {
+      width: 300px;
+      height: 300px;
+      background: var(--accent-blue);
+      top: -150px;
+      right: -150px;
       animation-delay: -5s;
     }
-    
-    .shape-3 {
-      width: 100px;
-      height: 100px;
-      background: var(--secondary-teal);
-      top: 30%;
-      right: 20%;
+
+    .orb-2 {
+      width: 200px;
+      height: 200px;
+      background: var(--accent-teal);
+      bottom: -100px;
+      left: -100px;
       animation-delay: -10s;
     }
-    
-    .shape-4 {
-      width: 120px;
-      height: 120px;
-      background: var(--accent-green);
-      bottom: 20%;
-      left: 10%;
+
+    .orb-3 {
+      width: 250px;
+      height: 250px;
+      background: var(--accent-emerald);
+      top: 40%;
+      right: -125px;
       animation-delay: -15s;
     }
-    
+
+    .orb-4 {
+      width: 180px;
+      height: 180px;
+      background: var(--accent-purple);
+      top: 20%;
+      left: -90px;
+      animation-delay: -8s;
+    }
+
     @keyframes float {
-      0%, 100% {
-        transform: translateY(0px) rotate(0deg) scale(1);
-      }
-      33% {
-        transform: translateY(-30px) rotate(120deg) scale(1.1);
-      }
-      66% {
-        transform: translateY(20px) rotate(240deg) scale(0.9);
-      }
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(-30px, -30px) scale(1.1); }
+      66% { transform: translate(30px, -20px) scale(0.9); }
     }
     
     .app-container {
       max-width: 900px;
       margin: 0 auto;
-      background: var(--white);
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
       border-radius: 32px;
-      box-shadow: 
-        0 25px 50px rgba(0, 0, 0, 0.15),
-        0 0 0 1px rgba(255, 255, 255, 0.8);
+      box-shadow: var(--shadow-strong);
       overflow: hidden;
-      border: 3px solid transparent;
-      background-clip: padding-box;
       position: relative;
     }
     
-    .app-container::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(45deg, var(--primary-blue), var(--accent-purple), var(--secondary-teal));
-      border-radius: 32px;
-      z-index: -1;
-      margin: -3px;
-    }
-    
     .header {
-      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-purple) 50%, var(--secondary-teal) 100%);
+      background: var(--gradient-primary);
       color: white;
       padding: 3rem 2rem 2.5rem;
       text-align: center;
@@ -163,13 +148,18 @@
     .header::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: 
-        radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+      animation: shimmer 3s infinite;
+      pointer-events: none;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(30deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(30deg); }
     }
     
     .header-content {
@@ -196,6 +186,8 @@
       max-width: 600px;
       margin: 0 auto 2rem;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      font-family: 'Crimson Text', serif;
+      font-style: italic;
     }
     
     .evidence-badge {
@@ -208,19 +200,19 @@
       border-radius: 25px;
       font-size: 1rem;
       font-weight: 600;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: var(--shadow-soft);
       transition: all 0.3s ease;
     }
     
     .evidence-badge:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+      box-shadow: var(--shadow-medium);
     }
     
     .main-content {
       padding: 3rem 2rem;
-      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.05) 100%);
     }
     
     .intro-text {
@@ -243,15 +235,16 @@
     }
     
     .mood-category {
-      background: var(--white);
-      border: 3px solid var(--border-light);
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
       border-radius: 24px;
       padding: 2rem;
       cursor: pointer;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      box-shadow: var(--shadow-soft);
       transform: translateY(0);
     }
     
@@ -261,14 +254,14 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 6px;
+      height: 4px;
       transition: all 0.3s ease;
     }
     
     .mood-category:hover {
       transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-      border-color: transparent;
+      box-shadow: var(--shadow-medium);
+      border-color: rgba(255, 255, 255, 0.2);
     }
     
     .mood-category:active {
@@ -276,13 +269,13 @@
     }
     
     .mood-category.selected {
-      border-color: transparent;
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%);
+      border-color: var(--accent-blue);
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%);
       transform: translateY(-4px);
-      box-shadow: 0 16px 32px rgba(59, 130, 246, 0.2);
+      box-shadow: 0 16px 32px rgba(79, 70, 229, 0.3);
     }
     
-    /* Category-specific hover effects */
+    /* Category-specific styling */
     .executive-function::before { background: var(--executive-function); }
     .emotional-regulation::before { background: var(--emotional-regulation); }
     .focus-attention::before { background: var(--focus-attention); }
@@ -314,7 +307,7 @@
       font-size: 2rem;
       color: white;
       position: relative;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      box-shadow: var(--shadow-medium);
       transition: all 0.3s ease;
     }
     
@@ -327,7 +320,7 @@
     
     .mood-category:hover .category-icon {
       transform: scale(1.1) rotate(5deg);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+      box-shadow: var(--shadow-strong);
     }
     
     .category-title {
@@ -344,21 +337,17 @@
       font-weight: 500;
     }
     
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-    
     .response-section {
       margin-top: 3rem;
       padding: 3rem;
-      background: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #f1f5f9 100%);
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
       border-radius: 28px;
-      border: 3px solid var(--border-light);
       display: none;
       position: relative;
       overflow: hidden;
-      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+      box-shadow: var(--shadow-soft);
     }
     
     .response-section::before {
@@ -368,7 +357,7 @@
       left: 0;
       right: 0;
       height: 4px;
-      background: linear-gradient(90deg, var(--primary-blue), var(--accent-purple), var(--secondary-teal));
+      background: var(--gradient-primary);
     }
     
     .response-section.visible {
@@ -395,7 +384,7 @@
     .response-title {
       font-size: 2.2rem;
       font-weight: 800;
-      background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
+      background: var(--gradient-primary);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -407,15 +396,17 @@
       color: var(--text-secondary);
       font-size: 1.1rem;
       font-weight: 500;
+      font-style: italic;
     }
     
     .strategy-card {
-      background: var(--white);
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-subtle);
       border-radius: 20px;
       padding: 2.5rem;
       margin-bottom: 2rem;
-      border: 2px solid var(--border-light);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      box-shadow: var(--shadow-soft);
       position: relative;
       overflow: hidden;
       transition: all 0.3s ease;
@@ -423,7 +414,8 @@
     
     .strategy-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+      box-shadow: var(--shadow-medium);
+      border-color: rgba(255, 255, 255, 0.2);
     }
     
     .strategy-card::before {
@@ -433,7 +425,7 @@
       left: 0;
       right: 0;
       height: 4px;
-      background: linear-gradient(90deg, var(--accent-green), var(--primary-blue));
+      background: var(--gradient-success);
     }
     
     .strategy-header {
@@ -447,7 +439,7 @@
       flex-shrink: 0;
       width: 48px;
       height: 48px;
-      background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
+      background: var(--gradient-primary);
       color: white;
       border-radius: 16px;
       display: flex;
@@ -455,12 +447,13 @@
       justify-content: center;
       font-weight: 800;
       font-size: 1.2rem;
-      box-shadow: 0 6px 12px rgba(59, 130, 246, 0.3);
+      box-shadow: var(--shadow-soft);
       transition: all 0.3s ease;
     }
     
     .strategy-card:hover .strategy-number {
       transform: scale(1.1) rotate(5deg);
+      box-shadow: var(--shadow-medium);
     }
     
     .strategy-content {
@@ -483,17 +476,18 @@
     }
     
     .strategy-steps {
-      background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-subtle);
       border-radius: 16px;
       padding: 1.5rem;
       margin-bottom: 1.5rem;
-      border: 2px solid rgba(59, 130, 246, 0.1);
     }
     
     .strategy-steps h4 {
       font-size: 1rem;
       font-weight: 700;
-      color: var(--primary-blue);
+      color: var(--accent-blue);
       margin-bottom: 1rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
@@ -504,7 +498,7 @@
     
     .strategy-steps h4::before {
       content: '✓';
-      background: var(--accent-green);
+      background: var(--accent-emerald);
       color: white;
       width: 20px;
       height: 20px;
@@ -540,7 +534,7 @@
       top: 0;
       width: 32px;
       height: 32px;
-      background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
+      background: var(--gradient-primary);
       color: white;
       border-radius: 50%;
       display: flex;
@@ -548,18 +542,19 @@
       justify-content: center;
       font-weight: 700;
       font-size: 0.9rem;
-      box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+      box-shadow: var(--shadow-soft);
     }
     
     .evidence-note {
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.1));
-      border: 2px solid rgba(139, 92, 246, 0.3);
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(79, 70, 229, 0.1));
+      border: 1px solid rgba(139, 92, 246, 0.3);
       border-radius: 16px;
       padding: 1.5rem;
       font-size: 0.95rem;
       color: var(--text-primary);
       position: relative;
       overflow: hidden;
+      backdrop-filter: blur(10px);
     }
     
     .evidence-note strong {
@@ -591,6 +586,7 @@
       overflow: hidden;
       min-width: 180px;
       justify-content: center;
+      backdrop-filter: blur(10px);
     }
     
     .btn::before {
@@ -609,42 +605,46 @@
     }
     
     .btn-primary {
-      background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
+      background: var(--gradient-primary);
       color: white;
-      box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
     
     .btn-primary:hover {
       transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 16px 32px rgba(59, 130, 246, 0.4);
+      box-shadow: var(--shadow-medium);
     }
     
     .btn-secondary {
-      background: var(--white);
+      background: var(--glass-bg);
       color: var(--text-primary);
-      border: 2px solid var(--border-light);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
     }
     
     .btn-secondary:hover {
-      background: var(--light-gray);
+      background: var(--card-bg);
       transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+      box-shadow: var(--shadow-medium);
+      border-color: rgba(255, 255, 255, 0.3);
     }
     
     .timer-section {
       margin-top: 2rem;
       padding: 2rem;
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1));
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
       border-radius: 20px;
-      border: 2px solid rgba(16, 185, 129, 0.2);
       text-align: center;
+      border-left: 4px solid var(--accent-emerald);
     }
     
     .timer-display {
       font-size: 3rem;
       font-weight: 800;
-      background: linear-gradient(135deg, var(--accent-green), var(--primary-blue));
+      background: var(--gradient-success);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -656,16 +656,17 @@
     .progress-bar {
       width: 100%;
       height: 12px;
-      background: rgba(255, 255, 255, 0.5);
+      background: var(--card-bg);
       border-radius: 8px;
       overflow: hidden;
       margin: 2rem 0;
-      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border-subtle);
     }
     
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, var(--accent-green), var(--primary-blue), var(--accent-purple));
+      background: var(--gradient-success);
       border-radius: 8px;
       transition: width 0.3s ease;
       width: 0%;
@@ -673,10 +674,11 @@
     }
     
     .professional-footer {
-      background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
       padding: 3rem 2rem;
       text-align: center;
-      border-top: 1px solid var(--border-light);
+      border-top: 1px solid var(--border-subtle);
     }
     
     .disclaimer {
@@ -690,7 +692,7 @@
     
     .professional-credits {
       font-size: 0.85rem;
-      color: var(--warm-gray);
+      color: var(--text-muted);
       font-weight: 600;
     }
     
@@ -716,23 +718,6 @@
       outline-offset: 4px;
     }
     
-    /* High contrast mode support */
-    @media (prefers-contrast: high) {
-      :root {
-        --text-primary: #000000;
-        --text-secondary: #333333;
-        --border-light: #666666;
-      }
-      
-      .mood-category {
-        border-width: 4px;
-      }
-      
-      .btn {
-        border-width: 3px;
-      }
-    }
-    
     /* Reduced motion support */
     @media (prefers-reduced-motion: reduce) {
       * {
@@ -741,7 +726,7 @@
         transition-duration: 0.01ms !important;
       }
       
-      .floating-shape {
+      .floating-orb {
         animation: none;
       }
     }
@@ -798,56 +783,27 @@
       .timer-display {
         font-size: 2.5rem;
       }
-    }
-    
-    /* Responsive adjustments for brain tags */
-    @media (max-width: 768px) {
-      .brain-tag {
-        top: 0.75rem;
-        right: 0.75rem;
-        font-size: 0.65rem;
-        padding: 0.3rem 0.6rem;
-        max-width: 70px;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .brain-tag {
-        position: relative;
-        top: auto;
-        right: auto;
-        margin: 0 auto 0.5rem;
-        display: block;
-        width: fit-content;
-        max-width: none;
-      }
-      
+
       .category-header {
         flex-direction: column;
         text-align: center;
         gap: 1rem;
-        margin-top: 0.5rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="background-shapes">
-    <div class="floating-shape shape-1"></div>
-    <div class="floating-shape shape-2"></div>
-    <div class="floating-shape shape-3"></div>
-    <div class="floating-shape shape-4"></div>
-  </div>
+  <div class="bg-gradient"></div>
+  <div class="floating-orb orb-1"></div>
+  <div class="floating-orb orb-2"></div>
+  <div class="floating-orb orb-3"></div>
+  <div class="floating-orb orb-4"></div>
   
   <div class="app-container">
     <header class="header">
       <div class="header-content">
         <h1 class="app-title">🧠 MindShift</h1>
         <p class="app-subtitle">Simple brain tricks that really work - backed by science</p>
-        <div class="evidence-badge">
-          <span>✨</span>
-          <span>Made for ADHD brains</span>
-        </div>
       </div>
     </header>
     
