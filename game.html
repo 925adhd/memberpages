@@ -353,6 +353,19 @@ startTimer(){setInterval(()=>{if(this.state!=='game-over'){this.time++;this.ui.t
 function togglePause(){if(!window.gg||window.gg.state==='game-over')return;window.gg.paused=!window.gg.paused;const pauseScreen=document.getElementById('pauseScreen'),pauseBtn=document.getElementById('pb');if(window.gg.paused){pauseScreen.style.display='flex';pauseBtn.textContent='▶️';pauseBtn.style.background='rgba(0,100,0,.8)';pauseBtn.style.borderColor='#0f0';pauseBtn.style.color='#0f0'}else{pauseScreen.style.display='none';pauseBtn.textContent='⏸️';pauseBtn.style.background='rgba(0,50,100,.8)';pauseBtn.style.borderColor='#08f';pauseBtn.style.color='#08f'}}
 function restart(){document.getElementById('gos').style.display='none';document.getElementById('pauseScreen').style.display='none';if(window.gg){if(window.gg.af)cancelAnimationFrame(window.gg.af);window.gg.stopJoystickMovement()}document.querySelectorAll('.dist').forEach(el=>el.remove());const g=document.getElementById('g');g.classList.remove('game-over','resting','hyperactive','distracted','disguise');window.gg=new G()}
 window.addEventListener('load',()=>{window.gg=new G()});
+    
+    
+function togglePause() {
+  const pauseScreen = document.getElementById("pauseScreen");
+  if (pauseScreen.style.display === "flex") {
+    pauseScreen.style.display = "none";
+  } else {
+    pauseScreen.style.display = "flex";
+  }
+}
+
+// Click handler for the pause button
+document.getElementById("pb").addEventListener("click", togglePause);
 </script>
 </body>
 </html>
