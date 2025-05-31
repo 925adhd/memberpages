@@ -1,19 +1,794 @@
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realistic ADHD-Friendly Gig Plan: Target $200-400/Week</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #0a0e1a;
+            --secondary-bg: #1a1f2e;
+            --card-bg: rgba(255, 255, 255, 0.02);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a8b8;
+            --text-muted: #6b7280;
+            --accent-blue: #4f46e5;
+            --accent-teal: #06b6d4;
+            --accent-emerald: #10b981;
+            --accent-amber: #f59e0b;
+            --accent-rose: #f43f5e;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.15);
+            --shadow-medium: 0 8px 40px rgba(0, 0, 0, 0.25);
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-success: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            padding: 12px;
+        }
+
+        /* Background Effects - Simplified for mobile */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at top, rgba(79, 70, 229, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        /* Compact Header */
+        .main-header {
+            background: var(--gradient-primary);
+            border-radius: 16px;
+            padding: 1.25rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .main-header h1 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 0.25rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .main-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        /* Compact Earnings Tracker */
+        .earnings-tracker {
+            background: var(--gradient-success);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            color: white;
+            text-align: center;
+        }
+
+        .earnings-tracker h3 {
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .earnings-display {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        .earnings-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.75rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .earnings-amount {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+
+        .earnings-item div:last-child {
+            font-size: 0.8rem;
+        }
+
+        /* Simplified Plan Selector */
+        .plan-selector {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .plan-selector h2 {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .plan-buttons {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .plan-btn {
+            flex: 1;
+            padding: 0.875rem;
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            text-align: center;
+            min-height: 44px; /* Better touch target */
+        }
+
+        .plan-btn.active {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: white;
+        }
+
+        .plan-section {
+            display: none;
+        }
+
+        .plan-section.active {
+            display: block;
+        }
+
+        /* MOBILE-OPTIMIZED DAY NAVIGATION */
+        .day-navigation {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            position: sticky;
+            top: 12px;
+            z-index: 100;
+        }
+
+        .day-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .nav-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .nav-toggle {
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 0.375rem 0.75rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            min-height: 32px;
+        }
+
+        .day-nav-links {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .day-nav-links.collapsed {
+            display: none;
+        }
+
+        .day-link {
+            padding: 0.625rem 0.5rem;
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 0.8rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            min-height: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .day-link:hover, .day-link:active {
+            background: var(--accent-blue);
+            color: white;
+            border-color: var(--accent-blue);
+        }
+
+        .current-day-highlight {
+            background: var(--accent-emerald) !important;
+            color: white !important;
+            border-color: var(--accent-emerald) !important;
+        }
+
+        /* Compact Day Cards */
+        .day-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .day-card.monday { border-left: 3px solid #ff595e; }
+        .day-card.tuesday { border-left: 3px solid #8ac926; }
+        .day-card.wednesday { border-left: 3px solid #1982c4; }
+        .day-card.thursday { border-left: 3px solid #6a4c93; }
+        .day-card.friday { border-left: 3px solid #ffca3a; }
+        .day-card.saturday { border-left: 3px solid #f15bb5; }
+        .day-card.sunday { border-left: 3px solid #4cc9f0; }
+
+        .day-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.25rem;
+            font-weight: 700;
+        }
+
+        .day-subtitle {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .earnings-target {
+            background: var(--gradient-success);
+            color: white;
+            padding: 0.625rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* Simplified Task Lists */
+        .task-list {
+            background: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .task-list h3 {
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .tasks {
+            list-style-type: none;
+        }
+
+        .tasks li {
+            margin-bottom: 0.75rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            padding: 0.75rem;
+        }
+
+        /* Mobile-Optimized Checkboxes */
+        .weekly-task-checkbox {
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+            min-height: 44px; /* Better touch target */
+            padding: 0.25rem 0;
+        }
+
+        .weekly-task-checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .checkmark {
+            height: 20px;
+            width: 20px;
+            background: var(--card-bg);
+            border: 2px solid var(--border-subtle);
+            border-radius: 4px;
+            margin-right: 0.75rem;
+            margin-top: 2px;
+            position: relative;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .weekly-task-checkbox input:checked ~ .checkmark {
+            background: var(--accent-emerald);
+            border-color: var(--accent-emerald);
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .weekly-task-checkbox input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        .weekly-task-checkbox .checkmark:after {
+            left: 6px;
+            top: 2px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .weekly-task-text {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            flex: 1;
+        }
+
+        .weekly-task-checkbox input:checked ~ .weekly-task-text {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        /* Compact Celebration */
+        .weekly-celebration {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: white;
+            background: var(--gradient-success);
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-weight: 600;
+            display: none;
+        }
+
+        /* Compact Bonus Tips */
+        .bonus-tip {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-subtle);
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            border-left: 3px solid var(--accent-amber);
+        }
+
+        .bonus-tip strong {
+            color: var(--accent-amber);
+        }
+
+        /* Mobile Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .action-btn {
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            padding: 0.75rem;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .reset-day-btn {
+            background: linear-gradient(135deg, var(--accent-rose), rgba(244, 63, 94, 0.8));
+            color: white;
+            border-color: var(--accent-rose);
+        }
+
+        /* Simplified Details/Accordion for mobile */
+        details {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        details[open] {
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        summary {
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--text-primary);
+            padding: 0.5rem 0;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Anytime Tasks - Mobile Optimized */
+        .anytime-tasks-list {
+            list-style-type: none;
+            margin-top: 1rem;
+        }
+
+        .task-item {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: flex-start;
+            background: var(--card-bg);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .task-checkbox {
+            margin-right: 0.75rem;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-top: 2px;
+            accent-color: var(--accent-blue);
+        }
+
+        .task-content {
+            flex: 1;
+        }
+
+        .task-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .task-earnings {
+            color: var(--accent-emerald);
+            font-weight: 600;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .task-tips {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .celebration {
+            text-align: center;
+            margin: 1rem 0;
+            font-size: 1.1rem;
+            color: var(--accent-emerald);
+            display: none;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--accent-emerald);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .reset-button {
+            display: block;
+            margin: 1rem auto 0;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            min-height: 44px;
+        }
+
+        /* Platform Categories - Simplified for mobile */
+        .category-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .category-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        .category-card.high-value {
+            border-top: 3px solid var(--accent-rose);
+        }
+
+        .category-card.medium-value {
+            border-top: 3px solid var(--accent-amber);
+        }
+
+        .category-card.passive-value {
+            border-top: 3px solid var(--accent-teal);
+        }
+
+        .category-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .category-card ul {
+            list-style-type: none;
+        }
+
+        .category-card li {
+            padding: 0.75rem;
+            background: var(--card-bg);
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            border: 1px solid var(--border-subtle);
+            font-size: 0.85rem;
+        }
+
+        .platform-pay {
+            color: var(--accent-emerald);
+            font-weight: 600;
+            float: right;
+            font-size: 0.75rem;
+        }
+
+        .platform-tips {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            display: block;
+            margin-top: 0.5rem;
+            line-height: 1.3;
+        }
+
+        /* Confetti */
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(300px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            top: 0;
+            z-index: 5;
+            pointer-events: none;
+            animation: confettiFall 2s linear forwards;
+        }
+
+        .confetti-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Links */
+        a {
+            color: var(--accent-teal);
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: var(--accent-blue);
+            text-decoration: underline;
+        }
+
+        /* Priority indicators - smaller for mobile */
+        .priority-indicator {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .high-priority {
+            background: var(--accent-rose);
+            color: white;
+        }
+
+        .medium-priority {
+            background: var(--accent-amber);
+            color: white;
+        }
+
+        .passive-priority {
+            background: var(--accent-teal);
+            color: white;
+        }
+
+        /* Rules styling */
+        .rules ul {
+            list-style-type: none;
+            margin-top: 1rem;
+        }
+
+        .rules li {
+            margin-bottom: 0.75rem;
+            position: relative;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            font-size: 0.9rem;
+        }
+
+        .rules li:before {
+            content: "✨";
+            position: absolute;
+            left: 0;
+            color: var(--accent-amber);
+        }
+
+        .rules li strong {
+            color: var(--text-primary);
+        }
+
+        /* Income table - mobile responsive */
+        .income-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            font-size: 0.8rem;
+        }
+
+        .income-table th, .income-table td {
+            padding: 0.75rem 0.5rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .income-table th {
+            background: rgba(79, 70, 229, 0.1);
+            font-weight: 600;
+            font-size: 0.75rem;
+        }
+
+        .income-total {
+            text-align: center;
+            margin-top: 1rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--accent-rose);
+            background: rgba(244, 63, 94, 0.1);
+            padding: 0.75rem;
+            border-radius: 8px;
+        }
+
+        .income-notes {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-subtle);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus styles */
+        .plan-btn:focus,
+        .reset-button:focus,
+        .action-btn:focus,
+        .nav-toggle:focus,
+        details:focus {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 2px;
+        }
+    </style>
 </head>
 <body>
     <div class="bg-gradient"></div>
-    <div class="floating-orb orb-1"></div>
-    <div class="floating-orb orb-2"></div>
-    <div class="floating-orb orb-3"></div>
+    
     <!-- Main Header -->
     <header class="main-header">
-        <h1>Your Realistic ADHD-Friendly Gig Plan</h1>
-        <p>Evidence-based structure, maximum dopamine, honest earnings - Target $200-400/Week</p>
+        <h1>ADHD-Friendly Gig Plan</h1>
+        <p>Target $200-400/Week</p>
     </header>
 
     <!-- Enhanced Earnings Tracker -->
     <div class="earnings-tracker">
-        <h3>📊 Weekly Earnings Tracker</h3>
+        <h3>📊 Weekly Earnings</h3>
         <div class="earnings-display">
             <div class="earnings-item">
                 <div class="earnings-amount" id="daily-target">$40</div>
@@ -38,8 +813,8 @@
     <section class="plan-selector">
         <h2>Choose Your Approach</h2>
         <div class="plan-buttons">
-            <button class="plan-btn flexible-btn" data-plan="flexible">Flexible "Anytime" Tasks</button>
-            <button class="plan-btn structured-btn" data-plan="structured">Structured Weekly Plan</button>
+            <button class="plan-btn flexible-btn" data-plan="flexible">Flexible Tasks</button>
+            <button class="plan-btn structured-btn" data-plan="structured">Weekly Plan</button>
         </div>
     </section>
 
@@ -51,210 +826,78 @@
                 <li><strong>No guilt if skipped.</strong> Just keep going, even if you miss a day.</li>
                 <li><strong>Focus on high-value first.</strong> Start with $20+/hour tasks when energy is high.</li>
                 <li><strong>Stack easy wins.</strong> Build momentum with quick tasks during low energy.</li>
-                <li><strong>Rotate platforms.</strong> Switch between apps to keep things fresh and exciting.</li>
-                <li><strong>Celebrate every win.</strong> Even small earnings add up to your weekly goal!</li>
+                <li><strong>Rotate platforms.</strong> Switch between apps to keep things fresh.</li>
+                <li><strong>Celebrate every win.</strong> Even small earnings add up!</li>
             </ul>
         </details>
 
         <details class="anytime-tasks">
-            <summary>HIGH-VALUE ANYTIME TASKS <span class="priority-indicator high-priority">PRIORITY</span></summary>
-            <p style="text-align: center; margin-bottom: 15px;">Focus on these when you have good energy and concentration</p>
+            <summary>HIGH-VALUE TASKS <span class="priority-indicator high-priority">PRIORITY</span></summary>
+            <p style="text-align: center; margin-bottom: 15px; font-size: 0.9rem;">Focus on these when you have good energy</p>
 
             <div class="celebration" id="anytime-celebration">
                 🎉 Great job! Keep that momentum going! 🎉
             </div>
 
             <div class="anytime-tasks-list" id="anytime-tasks-list">
-                <!-- High-value tasks will be populated by JavaScript -->
+                <!-- Tasks will be populated by JavaScript -->
             </div>
 
             <button class="reset-button" id="reset-anytime-button">Reset Tasks</button>
         </details>
         
-        <details class="income-breakdown">
-            <summary>ENHANCED WEEKLY INCOME BREAKDOWN</summary>
-            <p style="text-align: center; margin-bottom: 15px; font-style: italic;">(Optimized for higher earnings and realistic daily participation)</p>
-            
-            <table class="income-table">
-                <thead>
-                    <tr>
-                        <th>Day</th>
-                        <th>High-Value Focus</th>
-                        <th>Enhanced Daily Target</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Monday</td>
-                        <td>Respondent Studies, UserTesting Premium, Rev Rush Jobs</td>
-                        <td>$80–$120</td>
-                    </tr>
-                    <tr>
-                        <td>Tuesday</td>
-                        <td>User Interviews, dscout Missions, Prolific Studies</td>
-                        <td>$70–$100</td>
-                    </tr>
-                    <tr>
-                        <td>Wednesday</td>
-                        <td>Transcription Focus, Data Annotation, AI Training</td>
-                        <td>$60–$90</td>
-                    </tr>
-                    <tr>
-                        <td>Thursday</td>
-                        <td>UserTesting, Research Studies, Mystery Shopping</td>
-                        <td>$60–$90</td>
-                    </tr>
-                    <tr>
-                        <td>Friday</td>
-                        <td>Freelance Projects, 3Play Media, High-Pay Tasks</td>
-                        <td>$70–$100</td>
-                    </tr>
-                    <tr>
-                        <td>Saturday</td>
-                        <td>Flexible Tasks, Weekend Studies, Quick Wins</td>
-                        <td>$30–$60</td>
-                    </tr>
-                    <tr>
-                        <td>Sunday</td>
-                        <td>Planning, Applications, Light Tasks</td>
-                        <td>$20–$40</td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <div class="income-total">
-                Weekly Potential: $200–$400
-            </div>
-            
-            <div class="income-notes">
-                <strong>Updated Note:</strong> These estimates reflect realistic earnings based on actual user reports from Reddit and review sites. Earnings vary significantly based on experience, time invested, and platform availability. Focus on Respondent and User Interviews for highest earning potential.
-            </div>
-        </details>
-
-        <details class="maximizing-earnings">
-            <summary>ENHANCED EARNINGS STRATEGY <span class="priority-indicator high-priority">READ THIS</span></summary>
-            <ol style="padding-left: 25px;">
-                <li style="margin-bottom: 15px;"><strong>Priority System:</strong> Always tackle <span style="color: var(--high-value); font-weight: bold;">$20+/hour tasks first</span> when your energy and focus are peak. Save easy tasks for low-energy periods.</li>
-                <li style="margin-bottom: 15px;"><strong>Peak Hours Strategy:</strong> Work during <span style="color: var(--tertiary); font-weight: bold;">9 AM - 2 PM</span> when research studies and high-paying tasks are most available.</li>
-                <li style="margin-bottom: 15px;"><strong>Application Blitz:</strong> <span style="color: var(--tertiary); font-weight: bold;">Apply to 10+ studies daily</span> on Respondent and User Interviews. Most people only apply to 1-2.</li>
-                <li style="margin-bottom: 15px;"><strong>Platform Specialization:</strong> Pick 2-3 platforms and become <span style="color: var(--tertiary); font-weight: bold;">really good</span> at them rather than spreading thin across many.</li>
-                <li style="margin-bottom: 15px;"><strong>Compound Earnings:</strong> Use passive income apps while doing active tasks to create <span style="color: var(--tertiary); font-weight: bold;">double income streams</span>.</li>
-                <li style="margin-bottom: 10px;"><strong>Quality Over Quantity:</strong> One $50 study beats ten $2 surveys. Always prioritize higher-value opportunities.</li>
-            </ol>
-            <p style="text-align: center; margin-top: 20px; font-weight: bold; background: rgba(255, 107, 107, 0.1); padding: 15px; border-radius: 8px;">
-                🎯 <span style="color: var(--accent-rose);">With this strategic approach, you'll consistently hit $200-400+ per week</span> by focusing on high-value work during peak hours and maintaining multiple income streams!
-            </p>
-        </details>
-        
         <details class="platform-categories">
-            <summary>OPTIMIZED PLATFORM CATEGORIES</summary>
-            <p style="text-align: center; margin-bottom: 15px;">Prioritized by earning potential and time efficiency!</p>
+            <summary>PLATFORM CATEGORIES</summary>
+            <p style="text-align: center; margin-bottom: 15px; font-size: 0.9rem;">Prioritized by earning potential</p>
             
             <div class="category-container">
                 <div class="category-card high-value">
-                    <h3>🎯 Premium Research (Priority #1) <span class="priority-indicator high-priority">$25-75/hr</span></h3>
+                    <h3>🎯 Premium Research <span class="priority-indicator high-priority">$25-75/hr</span></h3>
                     <ul>
-                        <li><a href="https://app.respondent.io/" target="_blank">Respondent</a> <span class="platform-pay">$50-200/study</span>
+                        <li><a href="https://app.respondent.io/" target="_blank">Respondent</a> <span class="platform-pay">$50-200</span>
                             <span class="platform-tips">Apply to 5+ studies daily, higher acceptance in mornings</span>
                         </li>
-                        <li><a href="https://www.userinterviews.com/" target="_blank">User Interviews</a> <span class="platform-pay">$40-150/study</span>
-                            <span class="platform-tips">Complete profile 100%, apply within first hour of posting</span>
+                        <li><a href="https://www.userinterviews.com/" target="_blank">User Interviews</a> <span class="platform-pay">$40-150</span>
+                            <span class="platform-tips">Complete profile 100%, apply within first hour</span>
                         </li>
-                        <li><a href="https://dscout.com/participate" target="_blank">dscout</a> <span class="platform-pay">$25-100/mission</span>
+                        <li><a href="https://dscout.com/participate" target="_blank">dscout</a> <span class="platform-pay">$25-100</span>
                             <span class="platform-tips">Upload photos/videos quickly, follow instructions exactly</span>
                         </li>
                         <li><a href="https://www.prolific.com/" target="_blank">Prolific</a> <span class="platform-pay">$8-15/hr</span>
-                            <span class="platform-tips">Check hourly, pre-screen honestly for better matches. $8/hr minimum</span>
+                            <span class="platform-tips">Check hourly, $8/hr minimum guaranteed</span>
                         </li>
                     </ul>
                 </div>
                 
-                <div class="category-card high-value">
-                    <h3>💼 Premium Transcription <span class="priority-indicator high-priority">$20-40/hr</span></h3>
-                    <ul>
-                        <li><a href="https://www.rev.com/freelancers" target="_blank">Rev (Standard Jobs)</a> <span class="platform-pay">$8-15/hr</span>
-                            <span class="platform-tips">Beginners often earn $5-10/hr. Quality varies greatly by audio</span>
-                        </li>
-                        <li><a href="https://www.3playmedia.com/careers/" target="_blank">3Play Media</a> <span class="platform-pay">$15-30/hr</span>
-                            <span class="platform-tips">Higher rates for experienced transcribers</span>
-                        </li>
-                        <li><a href="https://www.transcribeme.com/" target="_blank">TranscribeMe</a> <span class="platform-pay">$15-25/hr</span>
-                            <span class="platform-tips">Use foot pedal, work during peak hours for more tasks</span>
-                        </li>
-                        <li><a href="https://gotranscript.com/" target="_blank">GoTranscript</a> <span class="platform-pay">$10-25/hr</span>
-                            <span class="platform-tips">Maintain high ratings for access to better jobs</span>
-                        </li>
-                    </ul>
-                </div>
-
                 <div class="category-card medium-value">
                     <h3>🧪 User Testing & AI <span class="priority-indicator medium-priority">$15-30/hr</span></h3>
                     <ul>
-                        <li><a href="https://www.usertesting.com/" target="_blank">UserTesting</a> <span class="platform-pay">$10/test (most tests)</span>
-                            <span class="platform-tips">Check every 2 hours, speak clearly and think aloud. Live tests pay $30-60</span>
+                        <li><a href="https://www.usertesting.com/" target="_blank">UserTesting</a> <span class="platform-pay">$10/test</span>
+                            <span class="platform-tips">Check every 2 hours, speak clearly. Live tests pay $30-60</span>
                         </li>
                         <li><a href="https://www.outlier.ai/" target="_blank">Outlier AI</a> <span class="platform-pay">$15-50/hr</span>
                             <span class="platform-tips">Focus on your expertise areas, maintain high ratings</span>
                         </li>
-                        <li><a href="https://neevo.definedcrowd.com/" target="_blank">Neevo</a> <span class="platform-pay">$10-20/hr</span>
-                            <span class="platform-tips">Read guidelines carefully, accuracy over speed</span>
+                        <li><a href="https://www.rev.com/freelancers" target="_blank">Rev</a> <span class="platform-pay">$8-15/hr</span>
+                            <span class="platform-tips">Quality varies by audio. Rush jobs pay more</span>
                         </li>
-                        <li><a href="https://appen.com/" target="_blank">Appen</a> <span class="platform-pay">$10-18/hr</span>
-                            <span class="platform-tips">Pass qualification tests, work consistently for bonuses</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="category-card medium-value">
-                    <h3>🛍️ Mystery Shopping & Gigs <span class="priority-indicator medium-priority">$8-25/task</span></h3>
-                    <ul>
-                        <li><a href="https://www.bestmark.com/" target="_blank">BestMark</a> <span class="platform-pay">$10-50/shop</span>
-                            <span class="platform-tips">Plan routes efficiently, take clear photos</span>
-                        </li>
-                        <li><a href="https://www.isecretshop.com/" target="_blank">iSecretShop</a> <span class="platform-pay">$5-25/shop</span>
-                            <span class="platform-tips">Combine with regular errands</span>
-                        </li>
-                        <li><a href="https://www.fieldagent.net/" target="_blank">Field Agent</a> <span class="platform-pay">$3-12/task</span>
-                            <span class="platform-tips">Grab tasks near your location quickly</span>
-                        </li>
-                        <li><a href="https://gigwalk.com/" target="_blank">Gigwalk</a> <span class="platform-pay">$3-20/task</span>
-                            <span class="platform-tips">Complete while running errands</span>
+                        <li><a href="https://www.clickworker.com/" target="_blank">Clickworker</a> <span class="platform-pay">$8-15/hr</span>
+                            <span class="platform-tips">Maintain high spam accuracy for more HITs</span>
                         </li>
                     </ul>
                 </div>
 
                 <div class="category-card passive-value">
-                    <h3>💰 Passive Income Setup <span class="priority-indicator passive-priority">$1-5/day</span></h3>
+                    <h3>💰 Quick Wins <span class="priority-indicator passive-priority">$3-25/task</span></h3>
                     <ul>
-                        <li><a href="https://www.honeygain.com/" target="_blank">Honeygain</a> <span class="platform-pay">$0.50-2/day</span>
-                            <span class="platform-tips">Realistic: $5-20/month total. Depends heavily on location and IP demand</span>
+                        <li><a href="https://www.bestmark.com/" target="_blank">Mystery Shopping</a> <span class="platform-pay">$10-50</span>
+                            <span class="platform-tips">Combine with regular errands for efficiency</span>
                         </li>
-                        <li><a href="https://pawns.app/" target="_blank">Pawns</a> <span class="platform-pay">$0.25-1/day</span>
-                            <span class="platform-tips">$5-15/month realistic. Bandwidth sharing + surveys combined</span>
+                        <li><a href="https://crowdtap.com/" target="_blank">Crowdtap</a> <span class="platform-pay">$1-5</span>
+                            <span class="platform-tips">Check multiple times daily, quick tasks</span>
                         </li>
-                        <li><a href="https://www.swagbucks.com/" target="_blank">Swagbucks Watch</a> <span class="platform-pay">$0.25-1/day</span>
-                            <span class="platform-tips">Run videos passively. Very location dependent</span>
-                        </li>
-                        <li><a href="https://www.inboxdollars.com/" target="_blank">InboxDollars</a> <span class="platform-pay">$0.10-0.50/day</span>
-                            <span class="platform-tips">Mostly email offers. Set up separate email, very low earnings</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="category-card medium-value">
-                    <h3>⚡ Quick Wins (Low Energy) <span class="priority-indicator medium-priority">$5-15/task</span></h3>
-                    <ul>
-                        <li><a href="https://www.clickworker.com/" target="_blank">Clickworker</a> <span class="platform-pay">$8-15/hr</span>
-                            <span class="platform-tips">Maintain high spam accuracy, work on multiple HITs</span>
-                        </li>
-                        <li><a href="https://crowdtap.com/" target="_blank">Crowdtap</a> <span class="platform-pay">$1-5/task</span>
-                            <span class="platform-tips">Check multiple times daily, complete in batches</span>
-                        </li>
-                        <li><a href="https://www.surveyjunkie.com/" target="_blank">Survey Junkie</a> <span class="platform-pay">$1-10/survey</span>
-                            <span class="platform-tips">Complete profile surveys for better matches</span>
-                        </li>
-                        <li><a href="https://scribie.com/" target="_blank">Scribie</a> <span class="platform-pay">$5-15/hr</span>
-                            <span class="platform-tips">Work during less busy hours, maintain accuracy</span>
+                        <li><a href="https://www.honeygain.com/" target="_blank">Passive Income</a> <span class="platform-pay">$5-20/mo</span>
+                            <span class="platform-tips">Honeygain, Pawns - set and forget</span>
                         </li>
                     </ul>
                 </div>
@@ -264,15 +907,20 @@
 
     <!-- Structured Plan Section -->
     <section id="structured-plan" class="plan-section">
+        <!-- Mobile-Optimized Day Navigation -->
         <div class="day-navigation" id="day-navigation">
-            <div class="day-nav-links">
-                <a href="#monday-card" class="day-link monday-link" data-day="monday">Monday</a>
-                <a href="#tuesday-card" class="day-link tuesday-link" data-day="tuesday">Tuesday</a>
-                <a href="#wednesday-card" class="day-link wednesday-link" data-day="wednesday">Wednesday</a>
-                <a href="#thursday-card" class="day-link thursday-link" data-day="thursday">Thursday</a>
-                <a href="#friday-card" class="day-link friday-link" data-day="friday">Friday</a>
-                <a href="#saturday-card" class="day-link saturday-link" data-day="saturday">Saturday</a>
-                <a href="#sunday-card" class="day-link sunday-link" data-day="sunday">Sunday</a>
+            <div class="day-nav-header">
+                <span class="nav-title">Weekly Schedule</span>
+                <button class="nav-toggle" id="nav-toggle">Show Days</button>
+            </div>
+            <div class="day-nav-links collapsed" id="day-nav-links">
+                <a href="#monday-card" class="day-link monday-link" data-day="monday">Mon</a>
+                <a href="#tuesday-card" class="day-link tuesday-link" data-day="tuesday">Tue</a>
+                <a href="#wednesday-card" class="day-link wednesday-link" data-day="wednesday">Wed</a>
+                <a href="#thursday-card" class="day-link thursday-link" data-day="thursday">Thu</a>
+                <a href="#friday-card" class="day-link friday-link" data-day="friday">Fri</a>
+                <a href="#saturday-card" class="day-link saturday-link" data-day="saturday">Sat</a>
+                <a href="#sunday-card" class="day-link sunday-link" data-day="sunday">Sun</a>
             </div>
         </div>
         
@@ -281,15 +929,15 @@
             <div class="day-card monday" id="monday-card" data-day="monday">
                 <div class="confetti-container" id="monday-confetti-container"></div>
                 <h2 class="day-title">MONDAY</h2>
-                <h3 class="day-subtitle">High-Value Focus Day (Peak Energy)</h3>
+                <h3 class="day-subtitle">High-Value Focus Day</h3>
                 <div class="earnings-target">🎯 Target: $80-120</div>
                 
                 <div class="weekly-celebration" id="monday-celebration">
-                    🎉 You completed Monday's high-value tasks! Strong start! 🎉
+                    🎉 Monday tasks completed! Strong start! 🎉
                 </div>
                 
                 <div class="task-list">
-                    <h3>Priority Tasks (Pick 2-3 based on availability):</h3>
+                    <h3>Priority Tasks:</h3>
                     <ul class="tasks" id="monday-tasks">
                         <li>
                             <label class="weekly-task-checkbox">
@@ -322,7 +970,7 @@
                     </ul>
                 </div>
                 <div class="bonus-tip">
-                    <strong>Monday Strategy:</strong> Start strong with high-paying applications and transcription work. Monday energy is perfect for concentration-heavy tasks that pay $20+/hour!
+                    <strong>Monday Strategy:</strong> Start strong with high-paying applications and transcription work. Monday energy is perfect for concentration-heavy tasks!
                 </div>
                 <div class="action-buttons">
                     <button class="action-btn back-to-top-btn">↑ Back to Top</button>
@@ -334,15 +982,15 @@
             <div class="day-card tuesday" id="tuesday-card" data-day="tuesday">
                 <div class="confetti-container" id="tuesday-confetti-container"></div>
                 <h2 class="day-title">TUESDAY</h2>
-                <h3 class="day-subtitle">Research & Live Studies Day</h3>
+                <h3 class="day-subtitle">Research & Live Studies</h3>
                 <div class="earnings-target">🎯 Target: $70-100</div>
                 
                 <div class="weekly-celebration" id="tuesday-celebration">
-                    🎉 Tuesday's research tasks completed! You're building momentum! 🎉
+                    🎉 Tuesday tasks completed! Building momentum! 🎉
                 </div>
                 
                 <div class="task-list">
-                    <h3>Focus on live interactions and studies:</h3>
+                    <h3>Focus on live interactions:</h3>
                     <ul class="tasks" id="tuesday-tasks">
                         <li>
                             <label class="weekly-task-checkbox">
@@ -355,7 +1003,7 @@
                             <label class="weekly-task-checkbox">
                                 <input type="checkbox" class="weekly-task-input" data-day="tuesday">
                                 <span class="checkmark"></span>
-                                <span class="weekly-task-text">Check <a href="https://www.prolific.com/" target="_blank">Prolific</a> every 2 hours for studies ($12-25/hr)</span>
+                                <span class="weekly-task-text">Check <a href="https://www.prolific.com/" target="_blank">Prolific</a> every 2 hours ($12-25/hr)</span>
                             </label>
                         </li>
                         <li>
@@ -375,7 +1023,7 @@
                     </ul>
                 </div>
                 <div class="bonus-tip">
-                    <strong>Tuesday Focus:</strong> Combine screen work with getting out of the house. Perfect day for mystery shopping between research studies!
+                    <strong>Tuesday Focus:</strong> Combine screen work with getting out of the house. Perfect for mystery shopping between research studies!
                 </div>
                 <div class="action-buttons">
                     <button class="action-btn back-to-top-btn">↑ Back to Top</button>
@@ -387,42 +1035,42 @@
             <div class="day-card wednesday" id="wednesday-card" data-day="wednesday">
                 <div class="confetti-container" id="wednesday-confetti-container"></div>
                 <h2 class="day-title">WEDNESDAY</h2>
-                <h3 class="day-subtitle">Transcription & AI Training Focus</h3>
+                <h3 class="day-subtitle">Transcription & AI Focus</h3>
                 <div class="earnings-target">🎯 Target: $60-90</div>
                 
                 <div class="weekly-celebration" id="wednesday-celebration">
-                    🎉 Wednesday's focused work done! Halfway to your weekly goal! 🎉
+                    🎉 Wednesday done! Halfway to your goal! 🎉
                 </div>
                 
                 <div class="task-list">
-                    <h3>Deep work day - minimize distractions:</h3>
+                    <h3>Deep work day:</h3>
                     <ul class="tasks" id="wednesday-tasks">
                         <li>
                             <label class="weekly-task-checkbox">
                                 <input type="checkbox" class="weekly-task-input" data-day="wednesday">
                                 <span class="checkmark"></span>
-                                <span class="weekly-task-text">2-3 hours on <a href="https://www.3playmedia.com/" target="_blank">3Play Media</a> ($15-30/hr)</span>
+                                <span class="weekly-task-text">2-3 hours on <a href="https://www.rev.com/freelancers" target="_blank">Rev transcription</a> ($15-30/hr)</span>
                             </label>
                         </li>
                         <li>
                             <label class="weekly-task-checkbox">
                                 <input type="checkbox" class="weekly-task-input" data-day="wednesday">
                                 <span class="checkmark"></span>
-                                <span class="weekly-task-text">Complete <a href="https://www.transcribeme.com/" target="_blank">TranscribeMe</a> files ($15-25/hr)</span>
+                                <span class="weekly-task-text">Complete <a href="https://www.outlier.ai/" target="_blank">Outlier AI</a> tasks ($15-50/hr)</span>
                             </label>
                         </li>
                         <li>
                             <label class="weekly-task-checkbox">
                                 <input type="checkbox" class="weekly-task-input" data-day="wednesday">
                                 <span class="checkmark"></span>
-                                <span class="weekly-task-text">Set up passive income apps if not done yet ($1-5/day ongoing)</span>
+                                <span class="weekly-task-text">Set up passive income apps ($1-5/day ongoing)</span>
                             </label>
                         </li>
                         <li>
                             <label class="weekly-task-checkbox">
                                 <input type="checkbox" class="weekly-task-input" data-day="wednesday">
                                 <span class="checkmark"></span>
-                                <span class="weekly-task-text">Work on <a href="https://neevo.definedcrowd.com/" target="_blank">Neevo</a> data tasks ($10-20/hr)</span>
+                                <span class="weekly-task-text">Work on <a href="https://www.clickworker.com/" target="_blank">Clickworker</a> HITs ($8-15/hr)</span>
                             </label>
                         </li>
                     </ul>
@@ -444,11 +1092,11 @@
                 <div class="earnings-target">🎯 Target: $60-90</div>
                 
                 <div class="weekly-celebration" id="thursday-celebration">
-                    🎉 Thursday's diverse tasks completed! Almost to the weekend! 🎉
+                    🎉 Thursday completed! Almost to the weekend! 🎉
                 </div>
                 
                 <div class="task-list">
-                    <h3>Variety day - switch between different types:</h3>
+                    <h3>Variety day:</h3>
                     <ul class="tasks" id="thursday-tasks">
                         <li>
                             <label class="weekly-task-checkbox">
@@ -461,21 +1109,21 @@
                             <label class="weekly-task-checkbox">
                                 <input type="checkbox" class="weekly-task-input" data-day="thursday">
                                 <span class="checkmark"></span>
-                                <span class="weekly-task-text">Complete <a href="https://appen.com/" target="_blank">Appen</a> qualification tasks ($10-18/hr)</span>
+                                <span class="weekly-task-text">Complete qualification tasks ($10-18/hr)</span>
                             </label>
                         </li>
                         <li>
                             <label class="weekly-task-checkbox">
                                 <input type="checkbox" class="weekly-task-input" data-day="thursday">
                                 <span class="checkmark"></span>
-                                <span class="weekly-task-text">Apply to weekend research studies for next week</span>
+                                <span class="weekly-task-text">Apply to weekend research studies</span>
                             </label>
                         </li>
                         <li>
                             <label class="weekly-task-checkbox">
                                 <input type="checkbox" class="weekly-task-input" data-day="thursday">
                                 <span class="checkmark"></span>
-                                <span class="weekly-task-text">Check passive income earnings and optimize settings</span>
+                                <span class="weekly-task-text">Check passive income earnings</span>
                             </label>
                         </li>
                     </ul>
@@ -497,38 +1145,38 @@
                 <div class="earnings-target">🎯 Target: $70-100</div>
                 
                 <div class="weekly-celebration" id="friday-celebration">
-                    🎉 Friday's tasks completed! Strong finish to the week! 🎉
+                    🎉 Friday done! Strong finish to the week! 🎉
                 </div>
                 
                 <div class="task-list">
-                    <h3>End the week strong with high-value work:</h3>
+                    <h3>End the week strong:</h3>
                     <ul class="tasks" id="friday-tasks">
                         <li>
                             <label class="weekly-task-checkbox">
                                 <input type="checkbox" class="weekly-task-input" data-day="friday">
                                 <span class="checkmark"></span>
-                                <span class="weekly-task-text">Focus session on highest-paying platform available</span>
+                                <span class="weekly-task-text">Focus session on highest-paying platform</span>
                             </label>
                         </li>
                         <li>
                             <label class="weekly-task-checkbox">
                                 <input type="checkbox" class="weekly-task-input" data-day="friday">
                                 <span class="checkmark"></span>
-                                <span class="weekly-task-text">Complete any pending high-value applications</span>
+                                <span class="weekly-task-text">Complete pending high-value applications</span>
                             </label>
                         </li>
                         <li>
                             <label class="weekly-task-checkbox">
                                 <input type="checkbox" class="weekly-task-input" data-day="friday">
                                 <span class="checkmark"></span>
-                                <span class="weekly-task-text">Final <a href="https://gotranscript.com/" target="_blank">GoTranscript</a> push ($10-25/hr)</span>
+                                <span class="weekly-task-text">Final transcription push ($10-25/hr)</span>
                             </label>
                         </li>
                         <li>
                             <label class="weekly-task-checkbox">
                                 <input type="checkbox" class="weekly-task-input" data-day="friday">
                                 <span class="checkmark"></span>
-                                <span class="weekly-task-text">Plan next week's high-value opportunities</span>
+                                <span class="weekly-task-text">Plan next week's opportunities</span>
                             </label>
                         </li>
                     </ul>
@@ -550,11 +1198,11 @@
                 <div class="earnings-target">🎯 Target: $30-60</div>
                 
                 <div class="weekly-celebration" id="saturday-celebration">
-                    🎉 Saturday's flexible tasks done! Weekend warrior! 🎉
+                    🎉 Saturday done! Weekend warrior! 🎉
                 </div>
                 
                 <div class="task-list">
-                    <h3>Light work combined with weekend activities:</h3>
+                    <h3>Light work + weekend activities:</h3>
                     <ul class="tasks" id="saturday-tasks">
                         <li>
                             <label class="weekly-task-checkbox">
@@ -567,21 +1215,21 @@
                             <label class="weekly-task-checkbox">
                                 <input type="checkbox" class="weekly-task-input" data-day="saturday">
                                 <span class="checkmark"></span>
-                                <span class="weekly-task-text">Check for weekend <a href="https://www.fieldagent.net/" target="_blank">Field Agent</a> tasks ($3-12 each)</span>
+                                <span class="weekly-task-text">Check for weekend tasks ($3-12 each)</span>
                             </label>
                         </li>
                         <li>
                             <label class="weekly-task-checkbox">
                                 <input type="checkbox" class="weekly-task-input" data-day="saturday">
                                 <span class="checkmark"></span>
-                                <span class="weekly-task-text">Quick <a href="https://www.clickworker.com/" target="_blank">Clickworker</a> tasks during downtime ($8-15/hr)</span>
+                                <span class="weekly-task-text">Quick tasks during downtime ($8-15/hr)</span>
                             </label>
                         </li>
                         <li>
                             <label class="weekly-task-checkbox">
                                 <input type="checkbox" class="weekly-task-input" data-day="saturday">
                                 <span class="checkmark"></span>
-                                <span class="weekly-task-text">Check all passive income apps are running smoothly</span>
+                                <span class="weekly-task-text">Check passive income apps are running</span>
                             </label>
                         </li>
                     </ul>
@@ -599,42 +1247,42 @@
             <div class="day-card sunday" id="sunday-card" data-day="sunday">
                 <div class="confetti-container" id="sunday-confetti-container"></div>
                 <h2 class="day-title">SUNDAY</h2>
-                <h3 class="day-subtitle">Planning & Light Work Day</h3>
+                <h3 class="day-subtitle">Planning & Light Work</h3>
                 <div class="earnings-target">🎯 Target: $20-40</div>
                 
                 <div class="weekly-celebration" id="sunday-celebration">
-                    🎉 Sunday's prep completed! Ready to crush next week! 🎉
+                    🎉 Sunday prep completed! Ready to crush next week! 🎉
                 </div>
                 
                 <div class="task-list">
-                    <h3>Prepare for next week's success:</h3>
+                    <h3>Prepare for success:</h3>
                     <ul class="tasks" id="sunday-tasks">
                         <li>
                             <label class="weekly-task-checkbox">
                                 <input type="checkbox" class="weekly-task-input" data-day="sunday">
                                 <span class="checkmark"></span>
-                                <span class="weekly-task-text">Apply to 10+ studies for next week (Respondent, User Interviews)</span>
+                                <span class="weekly-task-text">Apply to 10+ studies for next week</span>
                             </label>
                         </li>
                         <li>
                             <label class="weekly-task-checkbox">
                                 <input type="checkbox" class="weekly-task-input" data-day="sunday">
                                 <span class="checkmark"></span>
-                                <span class="weekly-task-text">Update all platform profiles and qualifications</span>
+                                <span class="weekly-task-text">Update all platform profiles</span>
                             </label>
                         </li>
                         <li>
                             <label class="weekly-task-checkbox">
                                 <input type="checkbox" class="weekly-task-input" data-day="sunday">
                                 <span class="checkmark"></span>
-                                <span class="weekly-task-text">Light tasks: <a href="https://crowdtap.com/" target="_blank">Crowdtap</a> or <a href="https://www.surveyjunkie.com/" target="_blank">Survey Junkie</a> ($5-15)</span>
+                                <span class="weekly-task-text">Light tasks: surveys or quick gigs ($5-15)</span>
                             </label>
                         </li>
                         <li>
                             <label class="weekly-task-checkbox">
                                 <input type="checkbox" class="weekly-task-input" data-day="sunday">
                                 <span class="checkmark"></span>
-                                <span class="weekly-task-text">Calculate weekly earnings and plan next week's goals</span>
+                                <span class="weekly-task-text">Calculate weekly earnings and plan next week</span>
                             </label>
                         </li>
                     </ul>
@@ -652,15 +1300,15 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <p>Remember: This enhanced plan focuses on higher-value opportunities while maintaining ADHD-friendly flexibility.</p>
+        <p>Remember: This plan focuses on higher-value opportunities while maintaining ADHD-friendly flexibility.</p>
         <br>
-        <p>The $200-400 weekly target is achievable through strategic focus on $20+/hour tasks and consistent daily effort. Results will vary based on availability, qualifications, and time invested.</p>
+        <p>The $200-400 weekly target is achievable through strategic focus on $20+/hour tasks and consistent daily effort.</p>
         <p style="margin-top: 10px;">💫 <strong>Every high-value task completed gets you closer to financial freedom.</strong> 💫</p>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Enhanced task database with higher-value focus
+            // Enhanced task database
             const anytimeTasks = [
                 {
                     title: "Apply to 3+ Respondent studies",
@@ -670,12 +1318,12 @@
                 {
                     title: "Complete 1 hour of Rev transcription",
                     earnings: "$8-15",
-                    tips: "Beginners often earn $5-10/hr. Audio quality varies greatly"
+                    tips: "Beginners often earn $5-10/hr. Audio quality varies"
                 },
                 {
                     title: "Check UserTesting for tests",
                     earnings: "$10/test",
-                    tips: "Most tests pay $10 and take 15-20 minutes. Live tests pay more"
+                    tips: "Most tests pay $10 and take 15-20 minutes"
                 },
                 {
                     title: "Complete a dscout mission",
@@ -685,7 +1333,7 @@
                 {
                     title: "Work on Prolific studies",
                     earnings: "$8-15/hr",
-                    tips: "Check hourly, $8/hr minimum guaranteed by platform"
+                    tips: "Check hourly, $8/hr minimum guaranteed"
                 },
                 {
                     title: "Complete Outlier AI tasks",
@@ -695,7 +1343,7 @@
                 {
                     title: "Set up passive income apps",
                     earnings: "$1-5/day ongoing",
-                    tips: "Honeygain, Pawns, Swagbucks - realistic: $10-30/month total"
+                    tips: "Honeygain, Pawns - realistic: $10-30/month total"
                 },
                 {
                     title: "Do mystery shopping task",
@@ -703,6 +1351,15 @@
                     tips: "Combine with regular errands for efficiency"
                 }
             ];
+
+            // Mobile Navigation Toggle
+            const navToggle = document.getElementById('nav-toggle');
+            const dayNavLinks = document.getElementById('day-nav-links');
+            
+            navToggle.addEventListener('click', function() {
+                dayNavLinks.classList.toggle('collapsed');
+                this.textContent = dayNavLinks.classList.contains('collapsed') ? 'Show Days' : 'Hide Days';
+            });
 
             // Plan selector functionality
             const planButtons = document.querySelectorAll('.plan-btn');
@@ -712,20 +1369,15 @@
                 button.addEventListener('click', function() {
                     const selectedPlan = this.dataset.plan;
                     
-                    // Remove active class from all buttons
                     planButtons.forEach(btn => btn.classList.remove('active'));
-                    // Add active class to clicked button
                     this.classList.add('active');
                     
-                    // Hide all plan sections
                     planSections.forEach(section => section.classList.remove('active'));
                     
-                    // Show selected plan
                     const targetSection = document.getElementById(`${selectedPlan}-plan`);
                     if (targetSection) {
                         targetSection.classList.add('active');
                         
-                        // If flexible plan is selected, automatically open the high-value tasks
                         if (selectedPlan === 'flexible') {
                             setTimeout(() => {
                                 const anytimeTasksDetails = document.querySelector('.anytime-tasks');
@@ -741,11 +1393,10 @@
             // Set default to show flexible plan
             document.querySelector('.flexible-btn').click();
 
-            // Enhanced anytime tasks functionality with confetti
+            // Anytime tasks functionality
             const anytimeTasksList = document.getElementById('anytime-tasks-list');
             const anytimeCelebration = document.getElementById('anytime-celebration');
 
-            // Create enhanced anytime tasks
             anytimeTasks.forEach((task, index) => {
                 const taskItem = document.createElement('div');
                 taskItem.className = 'task-item';
@@ -774,7 +1425,6 @@
                 taskContent.appendChild(earnings);
                 taskContent.appendChild(tips);
 
-                // Get state from memory
                 const storageKey = 'anytime-task-' + index;
                 if (window.anytimeTaskState && window.anytimeTaskState[storageKey]) {
                     checkbox.checked = true;
@@ -784,7 +1434,6 @@
                     if (!window.anytimeTaskState) window.anytimeTaskState = {};
                     window.anytimeTaskState[storageKey] = this.checked;
                     
-                    // Trigger confetti for anytime task completion
                     if (this.checked) {
                         createAnytimeTaskConfetti();
                     }
@@ -798,12 +1447,10 @@
                 anytimeTasksList.appendChild(taskItem);
             });
 
-            // Confetti for anytime tasks
             function createAnytimeTaskConfetti() {
                 const anytimeSection = document.querySelector('.anytime-tasks');
                 if (!anytimeSection) return;
                 
-                // Create temporary confetti container for anytime tasks
                 let confettiContainer = anytimeSection.querySelector('.anytime-confetti-container');
                 if (!confettiContainer) {
                     confettiContainer = document.createElement('div');
@@ -820,22 +1467,17 @@
                     anytimeSection.appendChild(confettiContainer);
                 }
                 
-                const aestheticColors = [
-                    '#4f46e5', '#06b6d4', '#10b981', '#f59e0b', '#f43f5e',
-                    '#667eea', '#764ba2', '#8b5cf6', '#ec4899'
-                ];
+                const colors = ['#4f46e5', '#06b6d4', '#10b981', '#f59e0b', '#f43f5e'];
                 
-                // Quick burst for anytime task
-                for (let i = 0; i < 20; i++) {
+                for (let i = 0; i < 15; i++) {
                     const confetti = document.createElement('div');
                     confetti.style.position = 'absolute';
                     confetti.style.pointerEvents = 'none';
                     
                     const size = Math.random() * 6 + 3;
-                    const color = aestheticColors[Math.floor(Math.random() * aestheticColors.length)];
+                    const color = colors[Math.floor(Math.random() * colors.length)];
                     const left = Math.random() * 100;
                     const duration = Math.random() * 1 + 0.8;
-                    const delay = Math.random() * 0.1;
                     
                     confetti.style.width = `${size}px`;
                     confetti.style.height = `${size}px`;
@@ -843,20 +1485,11 @@
                     confetti.style.left = `${left}%`;
                     confetti.style.top = '0';
                     confetti.style.animation = `confettiFall ${duration}s linear forwards`;
-                    confetti.style.animationDelay = `${delay}s`;
-                    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-                    confetti.style.zIndex = '25';
-                    
-                    if (Math.random() > 0.5) {
-                        confetti.style.borderRadius = '50%';
-                    } else {
-                        confetti.style.borderRadius = '2px';
-                    }
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
                     
                     confettiContainer.appendChild(confetti);
                 }
                 
-                // Clean up
                 setTimeout(() => {
                     const pieces = confettiContainer.querySelectorAll('div');
                     pieces.forEach(piece => {
@@ -864,7 +1497,7 @@
                             piece.parentNode.removeChild(piece);
                         }
                     });
-                }, 2000);
+                }, 1500);
             }
 
             function updateAnytimeCelebration() {
@@ -876,26 +1509,16 @@
                 anytimeCelebration.style.display = checkedCount >= 2 ? 'block' : 'none';
             }
 
-            // Enhanced earnings tracker
             function updateEarningsTracker() {
                 const completedTasks = document.querySelectorAll('.task-checkbox:checked, .weekly-task-input:checked').length;
-                const estimatedEarnings = completedTasks * 25; // Rough estimate of $25 per task
+                const estimatedEarnings = completedTasks * 25;
                 
-                document.getElementById('current-earnings').textContent = `${estimatedEarnings}`;
-                document.getElementById('remaining').textContent = `${Math.max(0, 280 - estimatedEarnings)}`;
-                
-                // Update color based on progress
-                const earningsTracker = document.querySelector('.earnings-tracker');
-                if (estimatedEarnings >= 280) {
-                    earningsTracker.style.background = 'linear-gradient(135deg, #00b894, #00cec9)';
-                } else if (estimatedEarnings >= 140) {
-                    earningsTracker.style.background = 'linear-gradient(135deg, #fdcb6e, #e17055)';
-                }
+                document.getElementById('current-earnings').textContent = `$${estimatedEarnings}`;
+                document.getElementById('remaining').textContent = `$${Math.max(0, 280 - estimatedEarnings)}`;
             }
 
-            // Reset anytime tasks
             document.getElementById('reset-anytime-button').addEventListener('click', function() {
-                document.querySelectorAll('.task-checkbox').forEach((checkbox, index) => {
+                document.querySelectorAll('.task-checkbox').forEach((checkbox) => {
                     checkbox.checked = false;
                 });
                 window.anytimeTaskState = {};
@@ -908,19 +1531,16 @@
             const today = new Date().getDay();
             const currentDay = days[today];
             
-            // Highlight current day
             const currentDayLink = document.querySelector(`.day-link[data-day="${currentDay}"]`);
             if (currentDayLink) {
                 currentDayLink.classList.add('current-day-highlight');
             }
 
-            // Weekly task tracking
             const weeklyTaskInputs = document.querySelectorAll('.weekly-task-input');
             weeklyTaskInputs.forEach(input => {
                 input.addEventListener('change', function() {
                     const day = this.dataset.day;
                     
-                    // Trigger confetti when task is completed (checked)
                     if (this.checked) {
                         createTaskConfetti(day);
                     }
@@ -940,7 +1560,6 @@
                     const wasVisible = celebration.style.display === 'block';
                     celebration.style.display = allChecked ? 'block' : 'none';
                     
-                    // Trigger big celebration confetti when day is first completed
                     if (allChecked && !wasVisible) {
                         createConfetti(day);
                     }
@@ -983,7 +1602,7 @@
                 }
             }
 
-            // Handle day navigation
+            // Day navigation
             const dayLinks = document.querySelectorAll('.day-link');
             dayLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
@@ -996,6 +1615,12 @@
                             behavior: 'smooth',
                             block: 'start'
                         });
+                        
+                        // Auto-collapse navigation on mobile after selection
+                        if (window.innerWidth <= 768) {
+                            dayNavLinks.classList.add('collapsed');
+                            navToggle.textContent = 'Show Days';
+                        }
                     }
                 });
             });
@@ -1042,61 +1667,31 @@
                 }
             }
 
-            // Enhanced confetti animation for individual task completion
             function createTaskConfetti(day) {
                 const confettiContainer = document.getElementById(`${day}-confetti-container`);
                 if (!confettiContainer) return;
                 
-                // Aesthetic colors matching the design theme
-                const aestheticColors = [
-                    '#4f46e5', // accent-blue
-                    '#06b6d4', // accent-teal  
-                    '#10b981', // accent-emerald
-                    '#f59e0b', // accent-amber
-                    '#f43f5e', // accent-rose
-                    '#667eea', // gradient blue
-                    '#764ba2', // gradient purple
-                    '#8b5cf6', // violet
-                    '#ec4899', // pink
-                    '#06b6d4'  // cyan
-                ];
+                const colors = ['#4f46e5', '#06b6d4', '#10b981', '#f59e0b', '#f43f5e'];
                 
-                // Create smaller burst of confetti for individual task completion
-                for (let i = 0; i < 25; i++) {
+                for (let i = 0; i < 20; i++) {
                     const confetti = document.createElement('div');
                     confetti.classList.add('confetti');
                     
-                    const size = Math.random() * 8 + 4; // Smaller pieces
-                    const color = aestheticColors[Math.floor(Math.random() * aestheticColors.length)];
-                    const left = Math.random() * 100; // Full width spread
-                    const duration = Math.random() * 1.5 + 1; // Faster fall
-                    const delay = Math.random() * 0.2; // Quick burst
+                    const size = Math.random() * 8 + 4;
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    const left = Math.random() * 100;
+                    const duration = Math.random() * 1.5 + 1;
                     
                     confetti.style.width = `${size}px`;
                     confetti.style.height = `${size}px`;
                     confetti.style.backgroundColor = color;
                     confetti.style.left = `${left}%`;
                     confetti.style.animationDuration = `${duration}s`;
-                    confetti.style.animationDelay = `${delay}s`;
-                    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-                    confetti.style.zIndex = '15'; // Higher z-index for task confetti
-                    
-                    // Mix of shapes for variety
-                    const shapeRand = Math.random();
-                    if (shapeRand > 0.7) {
-                        confetti.style.borderRadius = '0'; // Square
-                        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-                    } else if (shapeRand > 0.4) {
-                        confetti.style.borderRadius = '50%'; // Circle
-                    } else {
-                        confetti.style.borderRadius = '2px'; // Rounded square
-                        confetti.style.transform = `rotate(${Math.random() * 360}deg) skew(15deg, 5deg)`;
-                    }
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
                     
                     confettiContainer.appendChild(confetti);
                 }
                 
-                // Clean up confetti after animation
                 setTimeout(() => {
                     const taskConfetti = confettiContainer.querySelectorAll('.confetti');
                     taskConfetti.forEach(piece => {
@@ -1104,32 +1699,25 @@
                             piece.parentNode.removeChild(piece);
                         }
                     });
-                }, 2500);
+                }, 2000);
             }
 
-            // Enhanced confetti animation for full day completion
             function createConfetti(day) {
                 const confettiContainer = document.getElementById(`${day}-confetti-container`);
                 if (!confettiContainer) return;
                 
-                // Full aesthetic color palette for day completion celebration
-                const celebrationColors = [
-                    '#4f46e5', '#06b6d4', '#10b981', '#f59e0b', '#f43f5e',
-                    '#667eea', '#764ba2', '#8b5cf6', '#ec4899', '#06b6d4',
-                    '#fbbf24', '#34d399', '#60a5fa', '#a78bfa', '#fb7185'
-                ];
+                const colors = ['#4f46e5', '#06b6d4', '#10b981', '#f59e0b', '#f43f5e', '#8b5cf6', '#ec4899'];
                 
-                confettiContainer.innerHTML = ''; // Clear any existing confetti
+                confettiContainer.innerHTML = '';
                 
-                // Larger celebration for complete day
-                for (let i = 0; i < 150; i++) {
+                for (let i = 0; i < 100; i++) {
                     const confetti = document.createElement('div');
                     confetti.classList.add('confetti');
                     
-                    const size = Math.random() * 12 + 6; // Larger pieces for celebration
-                    const color = celebrationColors[Math.floor(Math.random() * celebrationColors.length)];
+                    const size = Math.random() * 10 + 5;
+                    const color = colors[Math.floor(Math.random() * colors.length)];
                     const left = Math.random() * 95 + 2.5;
-                    const duration = Math.random() * 2 + 2; // Longer fall for drama
+                    const duration = Math.random() * 2 + 2;
                     const delay = Math.random() * 0.5;
                     
                     confetti.style.width = `${size}px`;
@@ -1138,20 +1726,7 @@
                     confetti.style.left = `${left}%`;
                     confetti.style.animationDuration = `${duration}s`;
                     confetti.style.animationDelay = `${delay}s`;
-                    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-                    confetti.style.zIndex = '10'; // Lower z-index for background celebration
-                    
-                    // More variety for celebration
-                    const shapeRand = Math.random();
-                    if (shapeRand > 0.6) {
-                        confetti.style.borderRadius = '0';
-                        confetti.style.transform = `rotate(${Math.random() * 360}deg) skew(20deg, 20deg)`;
-                    } else if (shapeRand > 0.3) {
-                        confetti.style.borderRadius = '50%';
-                    } else {
-                        confetti.style.borderRadius = '4px';
-                        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-                    }
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '4px';
                     
                     confettiContainer.appendChild(confetti);
                 }
@@ -1160,7 +1735,7 @@
                     if (confettiContainer) {
                         confettiContainer.innerHTML = '';
                     }
-                }, 4000); // Longer cleanup for celebration
+                }, 3000);
             }
 
             // Initialize
@@ -1173,1154 +1748,4 @@
         });
     </script>
 </body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Realistic ADHD-Friendly Gig Plan: Target $200-400/Week</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital@0;1&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-bg: #0a0e1a;
-            --secondary-bg: #1a1f2e;
-            --card-bg: rgba(255, 255, 255, 0.02);
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --text-primary: #ffffff;
-            --text-secondary: #a0a8b8;
-            --text-muted: #6b7280;
-            --accent-blue: #4f46e5;
-            --accent-teal: #06b6d4;
-            --accent-emerald: #10b981;
-            --accent-amber: #f59e0b;
-            --accent-rose: #f43f5e;
-            --border-subtle: rgba(255, 255, 255, 0.1);
-            --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.15);
-            --shadow-medium: 0 8px 40px rgba(0, 0, 0, 0.25);
-            --shadow-strong: 0 16px 64px rgba(0, 0, 0, 0.35);
-            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-success: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
-            --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
-            --gradient-info: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 100%);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        }
-
-        body {
-            background: var(--primary-bg);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-            min-height: 100vh;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 15px;
-        }
-
-        /* Background Effects */
-        .bg-gradient {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(ellipse at top, rgba(79, 70, 229, 0.15) 0%, transparent 50%),
-                        radial-gradient(ellipse at bottom right, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
-            z-index: -2;
-        }
-
-        .floating-orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(40px);
-            opacity: 0.3;
-            z-index: -1;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        .orb-1 {
-            width: 300px;
-            height: 300px;
-            background: var(--accent-blue);
-            top: -150px;
-            right: -150px;
-            animation-delay: -5s;
-        }
-
-        .orb-2 {
-            width: 200px;
-            height: 200px;
-            background: var(--accent-teal);
-            bottom: -100px;
-            left: -100px;
-            animation-delay: -10s;
-        }
-
-        .orb-3 {
-            width: 250px;
-            height: 250px;
-            background: var(--accent-emerald);
-            top: 40%;
-            right: -125px;
-            animation-delay: -15s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-30px, -30px) scale(1.1); }
-            66% { transform: translate(30px, -20px) scale(0.9); }
-        }
-
-        /* Glass Card Component */
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-subtle);
-            border-radius: 24px;
-            box-shadow: var(--shadow-soft);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .glass-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-medium);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .main-header {
-            background: var(--gradient-primary);
-            border-radius: 24px;
-            padding: 2rem;
-            text-align: center;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow-medium);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .main-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(30deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(30deg); }
-        }
-
-        .main-header h1 {
-            color: white;
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            position: relative;
-            z-index: 1;
-        }
-
-        .main-header p {
-            color: rgba(255, 255, 255, 0.95);
-            font-size: 1.1rem;
-            position: relative;
-            z-index: 1;
-            font-style: italic;
-            font-family: 'Crimson Text', serif;
-        }
-
-        .earnings-tracker {
-            background: var(--gradient-success);
-            border-radius: 20px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            color: white;
-            text-align: center;
-            box-shadow: var(--shadow-soft);
-        }
-
-        .earnings-tracker h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .earnings-display {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .earnings-item {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 1rem;
-            border-radius: 12px;
-            backdrop-filter: blur(10px);
-        }
-
-        .earnings-amount {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        .plan-selector {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-subtle);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow-soft);
-        }
-
-        .plan-selector h2 {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-
-        .plan-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .plan-btn {
-            padding: 1rem 1.5rem;
-            border: 1px solid var(--border-subtle);
-            border-radius: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 1rem;
-            background: var(--card-bg);
-            color: var(--text-primary);
-            backdrop-filter: blur(10px);
-        }
-
-        .plan-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-soft);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .plan-btn.active {
-            background: var(--accent-blue);
-            border-color: var(--accent-blue);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-medium);
-        }
-
-        .plan-section {
-            display: none;
-        }
-
-        .plan-section.active {
-            display: block;
-        }
-
-        /* Enhanced Details Styling */
-        details {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-subtle);
-            border-radius: 20px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow-soft);
-            transition: all 0.3s ease;
-        }
-
-        details:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-medium);
-        }
-
-        details[open] {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-medium);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        details.rules {
-            border-left: 4px solid var(--accent-amber);
-        }
-
-        details.anytime-tasks {
-            border-left: 4px solid var(--accent-blue);
-        }
-
-        details.income-breakdown {
-            border-left: 4px solid var(--accent-emerald);
-        }
-
-        details.maximizing-earnings {
-            border-left: 4px solid var(--accent-rose);
-        }
-
-        details.platform-categories {
-            border-left: 4px solid var(--accent-teal);
-        }
-
-        summary {
-            font-size: 1.3rem;
-            font-weight: 600;
-            cursor: pointer;
-            color: var(--text-primary);
-            transition: color 0.3s ease;
-            padding: 0.5rem 0;
-        }
-
-        summary:hover {
-            color: var(--accent-blue);
-        }
-
-        details.rules summary {
-            color: var(--accent-amber);
-        }
-
-        details.anytime-tasks summary {
-            color: var(--accent-blue);
-        }
-
-        details.income-breakdown summary {
-            color: var(--accent-emerald);
-        }
-
-        details.maximizing-earnings summary {
-            color: var(--accent-rose);
-        }
-
-        details.platform-categories summary {
-            color: var(--accent-teal);
-        }
-
-        .priority-indicator {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            margin-left: 0.5rem;
-            backdrop-filter: blur(10px);
-        }
-
-        .high-priority {
-            background: linear-gradient(135deg, var(--accent-rose), rgba(244, 63, 94, 0.8));
-            color: white;
-        }
-
-        .medium-priority {
-            background: linear-gradient(135deg, var(--accent-amber), rgba(245, 158, 11, 0.8));
-            color: white;
-        }
-
-        .passive-priority {
-            background: linear-gradient(135deg, var(--accent-teal), rgba(6, 182, 212, 0.8));
-            color: white;
-        }
-
-        .rules ul {
-            list-style-type: none;
-            margin-top: 1rem;
-        }
-
-        .rules li {
-            margin-bottom: 1rem;
-            position: relative;
-            padding-left: 2rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .rules li:before {
-            content: "✨";
-            position: absolute;
-            left: 0;
-            color: var(--accent-amber);
-            font-size: 1.2rem;
-        }
-
-        .rules li strong {
-            color: var(--text-primary);
-        }
-
-        /* Enhanced Anytime Tasks */
-        .anytime-tasks-list {
-            list-style-type: none;
-        }
-
-        .task-item {
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: flex-start;
-            background: var(--card-bg);
-            padding: 1rem;
-            border-radius: 12px;
-            border: 1px solid var(--border-subtle);
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .task-item:hover {
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-soft);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .task-checkbox {
-            margin-right: 1rem;
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-            flex-shrink: 0;
-            margin-top: 2px;
-            accent-color: var(--accent-blue);
-        }
-
-        .task-content {
-            flex: 1;
-        }
-
-        .task-title {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-        }
-
-        .task-earnings {
-            color: var(--accent-emerald);
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .task-tips {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            font-style: italic;
-            line-height: 1.4;
-        }
-
-        .task-checkbox:checked + .task-content .task-title {
-            text-decoration: line-through;
-            color: var(--text-muted);
-        }
-
-        .celebration {
-            text-align: center;
-            margin: 1rem 0;
-            font-size: 1.3rem;
-            color: var(--accent-emerald);
-            animation: bounce 0.5s infinite alternate;
-            display: none;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-subtle);
-            border-radius: 12px;
-            padding: 1rem;
-        }
-
-        @keyframes bounce {
-            from { transform: translateY(0px); }
-            to { transform: translateY(-10px); }
-        }
-
-        .reset-button {
-            display: block;
-            margin: 1.5rem auto 0;
-            background: var(--gradient-primary);
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: 600;
-            box-shadow: var(--shadow-soft);
-            transition: all 0.3s ease;
-        }
-
-        .reset-button:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-medium);
-        }
-
-        /* Enhanced Income Table */
-        .income-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-            background: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-        }
-
-        .income-table th, .income-table td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .income-table th {
-            background: rgba(79, 70, 229, 0.1);
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .income-table tr:hover {
-            background: rgba(16, 185, 129, 0.1);
-        }
-
-        .income-table td {
-            color: var(--text-secondary);
-        }
-
-        .income-table td:last-child {
-            font-weight: 600;
-            color: var(--accent-emerald);
-        }
-
-        .income-total {
-            text-align: right;
-            margin-top: 1rem;
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: var(--accent-rose);
-            background: var(--glass-bg);
-            padding: 1rem;
-            border-radius: 12px;
-            backdrop-filter: blur(10px);
-        }
-
-        .income-notes {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-subtle);
-            padding: 1rem;
-            border-radius: 12px;
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .income-notes strong {
-            color: var(--text-primary);
-        }
-
-        /* Enhanced Platform Categories */
-        .category-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .category-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-subtle);
-            border-radius: 16px;
-            padding: 1.5rem;
-            box-shadow: var(--shadow-soft);
-            transition: all 0.3s ease;
-        }
-
-        .category-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-medium);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .category-card.high-value {
-            border-top: 4px solid var(--accent-rose);
-        }
-
-        .category-card.medium-value {
-            border-top: 4px solid var(--accent-amber);
-        }
-
-        .category-card.passive-value {
-            border-top: 4px solid var(--accent-teal);
-        }
-
-        .category-card h3 {
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--accent-amber);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-        }
-
-        .category-card ul {
-            list-style-type: none;
-        }
-
-        .category-card li {
-            position: relative;
-            padding: 0.75rem;
-            background: var(--card-bg);
-            border-radius: 8px;
-            margin-bottom: 0.75rem;
-            border: 1px solid var(--border-subtle);
-            transition: all 0.3s ease;
-        }
-
-        .category-card li:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .category-card li:before {
-            content: "→";
-            position: absolute;
-            left: 0.75rem;
-            color: var(--accent-teal);
-            font-weight: bold;
-        }
-
-        .category-card li {
-            padding-left: 2rem;
-        }
-
-        .platform-pay {
-            font-size: 0.8rem;
-            color: var(--accent-emerald);
-            font-weight: 600;
-            float: right;
-        }
-
-        .platform-tips {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            display: block;
-            margin-top: 0.5rem;
-            font-style: italic;
-            line-height: 1.3;
-        }
-
-        /* UPDATED WEEKLY PLAN STYLING */
-        .day-navigation {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-subtle);
-            border-radius: 20px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow-soft);
-            position: sticky;
-            top: 15px;
-            z-index: 100;
-        }
-
-        .day-nav-links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.75rem;
-            margin-bottom: 0;
-        }
-
-        .day-link {
-            padding: 0.75rem 1rem;
-            border-radius: 12px;
-            color: var(--text-primary);
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            text-align: center;
-            font-size: 0.9rem;
-            min-width: 80px;
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-subtle);
-            box-shadow: var(--shadow-soft);
-        }
-
-        .day-link:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-medium);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .current-day-highlight {
-            background: var(--accent-blue) !important;
-            color: white !important;
-            border-color: var(--accent-blue) !important;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 8px 3px rgba(79, 70, 229, 0.5); }
-            50% { box-shadow: 0 0 16px 8px rgba(79, 70, 229, 0.7); }
-        }
-
-        .days-container {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* UPDATED DAY CARD STYLING - GLASS MORPHISM */
-        .day-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-subtle);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: var(--shadow-soft);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 2rem;
-        }
-
-        .day-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-medium);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Day-specific accent borders */
-        .day-card.monday {
-            border-left: 4px solid #ff595e;
-        }
-
-        .day-card.tuesday {
-            border-left: 4px solid #8ac926;
-        }
-
-        .day-card.wednesday {
-            border-left: 4px solid #1982c4;
-        }
-
-        .day-card.thursday {
-            border-left: 4px solid #6a4c93;
-        }
-
-        .day-card.friday {
-            border-left: 4px solid #ffca3a;
-        }
-
-        .day-card.saturday {
-            border-left: 4px solid #f15bb5;
-        }
-
-        .day-card.sunday {
-            border-left: 4px solid #4cc9f0;
-        }
-
-        .day-title {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-            font-weight: 700;
-        }
-
-        .day-subtitle {
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            color: var(--text-secondary);
-            font-size: 1rem;
-            font-family: 'Crimson Text', serif;
-        }
-
-        .earnings-target {
-            background: var(--gradient-success);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 20px;
-            margin-bottom: 1.5rem;
-            text-align: center;
-            font-weight: 600;
-            font-size: 1.1rem;
-            box-shadow: var(--shadow-soft);
-        }
-
-        /* UPDATED TASK LIST STYLING */
-        .task-list {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-subtle);
-            padding: 1.5rem;
-            border-radius: 16px;
-            margin-bottom: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .task-list:hover {
-            background: rgba(255, 255, 255, 0.07);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .task-list h3 {
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-
-        .tasks {
-            list-style-type: none;
-        }
-
-        .tasks li {
-            margin-bottom: 1rem;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-subtle);
-            border-radius: 12px;
-            padding: 0.75rem;
-            transition: all 0.3s ease;
-        }
-
-        .tasks li:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.3);
-            transform: translateY(-1px);
-        }
-
-        .bonus-tip {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-subtle);
-            padding: 1.5rem;
-            border-radius: 16px;
-            font-weight: 500;
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            border-left: 4px solid var(--accent-amber);
-        }
-
-        .bonus-tip strong {
-            color: var(--accent-amber);
-        }
-
-        /* Enhanced checkbox styles */
-        .weekly-task-checkbox {
-            cursor: pointer;
-            user-select: none;
-            position: relative;
-            display: flex;
-            align-items: center;
-            color: var(--text-secondary);
-            transition: color 0.3s ease;
-            width: 100%;
-        }
-
-        .weekly-task-checkbox:hover {
-            color: var(--text-primary);
-        }
-
-        .weekly-task-checkbox input {
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-            height: 0;
-            width: 0;
-        }
-
-        .checkmark {
-            height: 20px;
-            width: 20px;
-            background: var(--card-bg);
-            border: 2px solid var(--border-subtle);
-            border-radius: 6px;
-            margin-right: 1rem;
-            position: relative;
-            flex-shrink: 0;
-            transition: all 0.3s ease;
-        }
-
-        .weekly-task-checkbox:hover input ~ .checkmark {
-            background: var(--glass-bg);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .weekly-task-checkbox input:checked ~ .checkmark {
-            background: var(--accent-emerald);
-            border-color: var(--accent-emerald);
-        }
-
-        .checkmark:after {
-            content: "";
-            position: absolute;
-            display: none;
-        }
-
-        .weekly-task-checkbox input:checked ~ .checkmark:after {
-            display: block;
-        }
-
-        .weekly-task-checkbox .checkmark:after {
-            left: 6px;
-            top: 2px;
-            width: 5px;
-            height: 10px;
-            border: solid white;
-            border-width: 0 2px 2px 0;
-            transform: rotate(45deg);
-        }
-
-        .weekly-task-text {
-            transition: all 0.3s ease;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        .weekly-task-checkbox input:checked ~ .weekly-task-text {
-            text-decoration: line-through;
-            color: var(--text-muted);
-        }
-
-        .weekly-celebration {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
-            color: white;
-            background: var(--gradient-success);
-            padding: 1rem;
-            border-radius: 12px;
-            font-weight: 600;
-            animation: fadeIn 0.5s ease;
-            display: none;
-            box-shadow: var(--shadow-soft);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .action-btn {
-            border: 1px solid var(--border-subtle);
-            border-radius: 12px;
-            padding: 0.75rem 1rem;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            flex: 1;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            color: var(--text-primary);
-        }
-
-        .back-to-top-btn {
-            color: var(--text-primary);
-        }
-
-        .reset-day-btn {
-            background: linear-gradient(135deg, var(--accent-rose), rgba(244, 63, 94, 0.8));
-            color: white;
-            border-color: var(--accent-rose);
-        }
-
-        .action-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-soft);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Confetti Animation */
-        @keyframes confettiFall {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            85% {
-                opacity: 0.9;
-            }
-            100% {
-                transform: translateY(500px) rotate(720deg);
-                opacity: 0;
-            }
-        }
-
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            top: 0;
-            z-index: 5;
-            pointer-events: none;
-            animation: confettiFall 2.5s linear forwards;
-        }
-
-        .confetti-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 10;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding: 2rem;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-subtle);
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .footer strong {
-            color: var(--text-primary);
-        }
-
-        /* Links */
-        a {
-            color: var(--accent-teal);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            color: var(--accent-blue);
-            text-decoration: underline;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            body {
-                padding: 1rem;
-            }
-
-            .main-header {
-                padding: 1.5rem;
-                margin-bottom: 1.5rem;
-                border-radius: 16px;
-            }
-
-            .main-header h1 {
-                font-size: 1.5rem;
-                margin-bottom: 0.5rem;
-                line-height: 1.3;
-            }
-
-            .main-header p {
-                font-size: 1rem;
-                line-height: 1.4;
-            }
-
-            .plan-buttons {
-                flex-direction: column;
-            }
-
-            .day-nav-links {
-                gap: 0.5rem;
-            }
-
-            .day-link {
-                padding: 0.5rem 0.75rem;
-                font-size: 0.8rem;
-                min-width: 70px;
-            }
-
-            .category-container {
-                grid-template-columns: 1fr;
-            }
-
-            .earnings-display {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .day-card {
-                padding: 1.5rem;
-            }
-
-            .day-navigation {
-                top: 10px;
-                padding: 1rem;
-            }
-        }
-
-        /* For very small phones */
-        @media (max-width: 480px) {
-            .main-header {
-                padding: 1rem;
-                margin-bottom: 1rem;
-            }
-
-            .main-header h1 {
-                font-size: 1.3rem;
-                margin-bottom: 0.25rem;
-            }
-
-            .main-header p {
-                font-size: 0.9rem;
-            }
-
-            .earnings-display {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation Classes */
-        .fade-in {
-            opacity: 0;
-            animation: fadeInAnimation 0.5s ease forwards;
-        }
-
-        .slide-up {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: slideUpAnimation 0.5s ease forwards;
-        }
-
-        @keyframes fadeInAnimation {
-            to { opacity: 1; }
-        }
-
-        @keyframes slideUpAnimation {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Focus styles for accessibility */
-        .plan-btn:focus,
-        .reset-button:focus,
-        .action-btn:focus,
-        details:focus {
-            outline: 2px solid var(--accent-blue);
-            outline-offset: 2px;
-        }
+</html>
