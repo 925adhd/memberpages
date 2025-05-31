@@ -48,10 +48,11 @@ body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0
 .hs{color:#FFD700;font-weight:bold;animation:hsg 2s infinite}
 @keyframes hsg{0%,100%{text-shadow:0 0 5px #FFD700}50%{text-shadow:0 0 15px #FFD700,0 0 25px #FFD700}}
 .mc{position:static;z-index:300;display:block;margin:15px auto 10px auto;text-align:center;background:rgba(0,20,0,.8);padding:15px;border-radius:12px;border:2px solid #0f0;max-width:320px}
-.top-controls{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.jc{position:relative;width:80px;height:80px;background:rgba(0,50,0,.8);border:3px solid #0f0;border-radius:50%;margin:0 auto 10px auto;touch-action:none}
+.top-controls{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;width:100%}
+.center-controls{display:flex;gap:6px;justify-content:center;align-items:center}
+.jc{position:relative;width:80px;height:80px;background:rgba(0,50,0,.8);border:3px solid #0f0;border-radius:50%;margin:0 auto;touch-action:none}
 .js{position:absolute;width:25px;height:25px;background:#0f0;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);transition:none;box-shadow:0 0 10px #0f0;touch-action:none}
-.mb{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;align-items:center}
+.mb{display:none}
 .btn{width:38px;height:38px;background:rgba(0,50,0,.8);border:2px solid #0f0;border-radius:50%;color:#0f0;font-size:16px;display:flex;align-items:center;justify-content:center;user-select:none;touch-action:manipulation;font-weight:bold}
 .btn:active{background:rgba(0,255,0,.3);transform:scale(.95)}
 .rb{background:rgba(100,100,100,.8);border-color:#888;color:#888}
@@ -62,8 +63,40 @@ body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0
 .task.completed{background:rgba(0,255,0,.2);text-decoration:line-through}
 .task.current{background:rgba(255,255,0,.2);font-weight:bold;animation:tg 2s infinite}
 @keyframes tg{0%,100%{box-shadow:0 0 5px rgba(255,255,0,.5)}50%{box-shadow:0 0 15px rgba(255,255,0,1)}}
-.gos{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.9);display:none;z-index:500;color:#f04;text-align:center;padding:20px;box-sizing:border-box;overflow-y:auto}
-.goc{background:rgba(20,0,0,.9);padding:30px;border-radius:15px;border:3px solid #f04;animation:gog 2s ease-in-out infinite;max-width:90%;margin:10vh auto;min-height:fit-content}
+
+/* FIXED GAME OVER SCREEN */
+.gos{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.9);
+    display:none;
+    z-index:500;
+    color:#f04;
+    text-align:center;
+    padding:20px;
+    box-sizing:border-box;
+    overflow-y:auto;
+    /* ADD THESE FOR PROPER CENTERING */
+    justify-content:center;
+    align-items:center;
+}
+
+.goc{
+    background:rgba(20,0,0,.9);
+    padding:30px;
+    border-radius:15px;
+    border:3px solid #f04;
+    animation:gog 2s ease-in-out infinite;
+    max-width:90%;
+    width:100%;
+    max-width:400px;
+    min-height:fit-content;
+    /* REMOVE MARGIN AUTO SINCE WE'RE USING FLEXBOX NOW */
+}
+
 @keyframes gog{0%,100%{box-shadow:0 0 20px #f04}50%{box-shadow:0 0 40px #f04,0 0 60px #f04}}
 .got{font-size:28px;margin-bottom:15px;color:#f04}
 .fs{font-size:20px;margin:12px 0;color:#0f0}
@@ -106,8 +139,8 @@ body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0
 
 /* Mobile optimizations */
 @media (max-width:768px){
-body{padding-bottom:60px}
-.gc{height:540px;min-height:540px}
+body{padding-bottom:40px}
+.gc{height:520px;min-height:520px}
 .gir{width:50px;height:65px}
 .dist{width:35px;height:35px}
 .ui{top:5px;left:5px;padding:6px;font-size:9px;background:rgba(0,20,0,.7);max-width:140px}
@@ -119,9 +152,9 @@ body{padding-bottom:60px}
 .gir-eyes::before,.gir-eyes::after{width:4px;height:4px}
 .meter{width:80px;height:10px}
 .tl{top:5px;right:5px;padding:6px;font-size:9px;max-width:120px;background:rgba(0,20,0,.7)}
-.mc{margin:6px auto 4px auto;padding:8px;max-width:260px}
-.top-controls{margin-bottom:4px}
-.mb{margin:4px 0;gap:3px}
+.mc{margin:3px auto 3px auto;padding:6px;max-width:280px}
+.top-controls{margin-bottom:10px}
+.center-controls{gap:4px}
 .jc{width:60px;height:60px}
 .js{width:18px;height:18px}
 .btn{width:28px;height:28px;font-size:12px}
@@ -132,8 +165,8 @@ body{padding-bottom:60px}
 }
 
 @media (max-width:480px){
-body{padding-bottom:55px}
-.gc{height:490px;min-height:490px}
+body{padding-bottom:35px}
+.gc{height:470px;min-height:470px}
 .gir{width:45px;height:60px}
 .dist{width:32px;height:32px;font-size:20px}
 .ui{font-size:8px;padding:4px;max-width:120px;background:rgba(0,15,0,.6)}
@@ -144,9 +177,9 @@ body{padding-bottom:55px}
 .gir-eyes::before,.gir-eyes::after{width:3px;height:3px}
 .meter{width:70px;height:8px}
 .tl{font-size:8px;padding:4px;max-width:110px;background:rgba(0,15,0,.6)}
-.mc{margin:4px auto 2px auto;padding:6px;max-width:240px}
-.top-controls{margin-bottom:3px}
-.mb{margin:3px 0;gap:2px}
+.mc{margin:2px auto 2px auto;padding:4px;max-width:260px}
+.top-controls{margin-bottom:8px}
+.center-controls{gap:3px}
 .jc{width:55px;height:55px}
 .js{width:16px;height:16px}
 .btn{width:26px;height:26px;font-size:11px}
@@ -236,12 +269,12 @@ body{padding-bottom:55px}
 <div class="mc">
 <div class="top-controls">
 <div class="btn" id="pb" style="background:rgba(0,50,100,.8);border-color:#08f;color:#08f">⏸️</div>
-<div class="btn" id="tb" style="background:rgba(50,50,0,.8);border-color:#aa0;color:#aa0">👁️</div>
-</div>
-<div class="mb">
+<div class="center-controls">
 <div class="btn" id="ab">💃</div>
 <div class="btn" id="db">🐕</div>
 <div class="btn rb" id="rb">😴</div>
+</div>
+<div class="btn" id="tb" style="background:rgba(50,50,0,.8);border-color:#aa0;color:#aa0">👁️</div>
 </div>
 <div class="jc" id="jc"><div class="js" id="js"></div></div>
 </div>
