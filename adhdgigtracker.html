@@ -41,6 +41,30 @@
       font-size: 14px;
       margin-bottom: 24px;
     }
+
+    /* Data Expiration Warning */
+    .expiration-warning {
+      background: linear-gradient(135deg, #fef3c7 0%, #f59e0b 100%);
+      border: 2px solid #d97706;
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 16px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: #92400e;
+    }
+
+    .expiration-warning.urgent {
+      background: linear-gradient(135deg, #fee2e2 0%, #ef4444 100%);
+      border-color: #dc2626;
+      color: #991b1b;
+    }
+
+    .expiration-warning .days-left {
+      font-size: 14px;
+      font-weight: 800;
+    }
     
     /* Today's Stats */
     .stats-box {
@@ -437,6 +461,12 @@
     <h1 class="title">🧠 ADHD Gig Tracker</h1>
     <p class="subtitle">Simple earnings tracking for neurodivergent minds</p>
     
+    <!-- Data Expiration Warning -->
+    <div id="expirationWarning" class="expiration-warning hidden">
+      <div>⚠️ Data expires in <span class="days-left" id="daysLeft"></span> days</div>
+      <div style="font-size: 10px; margin-top: 4px;">Export your data to save it permanently!</div>
+    </div>
+    
     <!-- Today's Stats -->
     <div class="stats-box">
       <div class="stats-title">🔥 Today's Progress</div>
@@ -555,12 +585,22 @@
   </div>
 
   <script>
-    // Simple state
+    // Storage keys
+    const STORAGE_KEYS = {
+      DATA: 'adhdGigTracker_data',
+      EXPIRY: 'adhdGigTracker_expiry'
+    };
+    
+    // Data expiration (7 days in milliseconds)
+    const EXPIRY_DURATION = 7 * 24 * 60 * 60 * 1000;
+    
+    // App state
     let totalEarnings = 0;
     let dailyGoal = 50;
     let taskCount = 0;
     let history = [];
     let currentPlatform = '';
+    let dataExpiry = null;
     
     // DOM elements
     const elements = {
@@ -581,8 +621,132 @@
       manualBtn: document.getElementById('manualBtn'),
       quickGrid: document.getElementById('quickGrid'),
       notification: document.getElementById('notification'),
-      notificationText: document.getElementById('notificationText')
+      notificationText: document.getElementById('notificationText'),
+      expirationWarning: document.getElementById('expirationWarning'),
+      daysLeft: document.getElementById('daysLeft')
     };
+    
+    // Check if localStorage is available
+    function isStorageAvailable() {
+      try {
+        localStorage.setItem('test', 'test');
+        localStorage.removeItem('test');
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+    
+    // Save data to localStorage
+    function saveData() {
+      if (!isStorageAvailable()) return;
+      
+      const data = {
+        totalEarnings,
+        dailyGoal,
+        taskCount,
+        history,
+        currentPlatform,
+        lastUpdated: Date.now()
+      };
+      
+      try {
+        localStorage.setItem(STORAGE_KEYS.DATA, JSON.stringify(data));
+        if (!dataExpiry) {
+          dataExpiry = Date.now() + EXPIRY_DURATION;
+          localStorage.setItem(STORAGE_KEYS.EXPIRY, dataExpiry.toString());
+        }
+      } catch (e) {
+        console.warn('Failed to save data:', e);
+      }
+    }
+    
+    // Load data from localStorage
+    function loadData() {
+      if (!isStorageAvailable()) return false;
+      
+      try {
+        // Check expiration first
+        const expiryStr = localStorage.getItem(STORAGE_KEYS.EXPIRY);
+        if (expiryStr) {
+          dataExpiry = parseInt(expiryStr);
+          if (Date.now() > dataExpiry) {
+            // Data expired, clear it
+            clearStoredData();
+            showNotification('⚠️ Your data expired and was cleared. Export regularly to keep your data!', 'error');
+            return false;
+          }
+        }
+        
+        // Load data
+        const dataStr = localStorage.getItem(STORAGE_KEYS.DATA);
+        if (dataStr) {
+          const data = JSON.parse(dataStr);
+          totalEarnings = data.totalEarnings || 0;
+          dailyGoal = data.dailyGoal || 50;
+          taskCount = data.taskCount || 0;
+          history = data.history || [];
+          currentPlatform = data.currentPlatform || '';
+          
+          showNotification('💾 Your data was restored! Welcome back!', 'milestone');
+          return true;
+        }
+      } catch (e) {
+        console.warn('Failed to load data:', e);
+        clearStoredData();
+      }
+      
+      return false;
+    }
+    
+    // Clear stored data
+    function clearStoredData() {
+      if (!isStorageAvailable()) return;
+      
+      try {
+        localStorage.removeItem(STORAGE_KEYS.DATA);
+        localStorage.removeItem(STORAGE_KEYS.EXPIRY);
+        dataExpiry = null;
+      } catch (e) {
+        console.warn('Failed to clear stored data:', e);
+      }
+    }
+    
+    // Update expiration warning
+    function updateExpirationWarning() {
+      if (!dataExpiry) {
+        elements.expirationWarning.classList.add('hidden');
+        return;
+      }
+      
+      const daysLeft = Math.ceil((dataExpiry - Date.now()) / (24 * 60 * 60 * 1000));
+      
+      if (daysLeft <= 0) {
+        // Data expired
+        clearStoredData();
+        totalEarnings = 0;
+        dailyGoal = 50;
+        taskCount = 0;
+        history = [];
+        currentPlatform = '';
+        updateUI();
+        showNotification('⚠️ Your data expired and was cleared. Export regularly to keep your data!', 'error');
+        return;
+      }
+      
+      if (daysLeft <= 7) {
+        elements.daysLeft.textContent = daysLeft;
+        elements.expirationWarning.classList.remove('hidden');
+        
+        if (daysLeft <= 2) {
+          elements.expirationWarning.classList.add('urgent');
+        } else {
+          elements.expirationWarning.classList.remove('urgent');
+        }
+      } else {
+        elements.expirationWarning.classList.add('hidden');
+      }
+    }
     
     // Show notification
     function showNotification(message, type = 'success') {
@@ -624,6 +788,12 @@
       
       // Update history
       updateHistory();
+      
+      // Update expiration warning
+      updateExpirationWarning();
+      
+      // Save data
+      saveData();
     }
     
     // Update history display
@@ -680,7 +850,7 @@
       
       if (currentMilestone) {
         setTimeout(() => {
-          showNotification('🎉 $' + currentMilestone + ' milestone reached! 🎉', 'milestone');
+          showNotification('🎉  + currentMilestone + ' milestone reached! 🎉', 'milestone');
         }, 500);
       }
       
@@ -698,7 +868,7 @@
       
       // Update quick buttons
       elements.quickGrid.innerHTML = amounts.map(amount => 
-        '<button class="quick-btn platform-active" onclick="addEarning(' + amount + ', \'' + platform + '\')">$' + amount.toFixed(2) + '</button>'
+        '<button class="quick-btn platform-active" onclick="addEarning(' + amount + ', \'' + platform + '\')"> + amount.toFixed(2) + '</button>'
       ).join('');
       
       showNotification(platform + ' selected! Tap amounts below 🎯', 'milestone');
@@ -754,7 +924,7 @@
       if (newGoal && newGoal > 0) {
         dailyGoal = newGoal;
         updateUI();
-        showNotification('Goal updated to $' + dailyGoal.toFixed(2) + '! 🎯');
+        showNotification('Goal updated to  + dailyGoal.toFixed(2) + '! 🎯');
       }
       elements.goalInput.classList.add('hidden');
       elements.goalArea.classList.remove('hidden');
@@ -767,7 +937,7 @@
         totalEarnings -= last.amount;
         taskCount = Math.max(0, taskCount - 1);
         updateUI();
-        showNotification('Undid $' + last.amount.toFixed(2) + ' from ' + last.platform, 'error');
+        showNotification('Undid  + last.amount.toFixed(2) + ' from ' + last.platform, 'error');
       }
     }
     
@@ -782,12 +952,13 @@
     
     // Reset all
     function resetAll() {
-      if (confirm('Reset everything? This will clear all earnings and reset your goal.')) {
+      if (confirm('Reset everything? This will clear all earnings, reset your goal, and remove saved data.')) {
         totalEarnings = 0;
         taskCount = 0;
         history = [];
         dailyGoal = 50;
         currentPlatform = '';
+        clearStoredData();
         updateUI();
         showNotification('Everything reset! Fresh start! 🌅', 'milestone');
       }
@@ -797,23 +968,36 @@
     function exportData() {
       const today = new Date().toLocaleDateString();
       const avgPerTask = taskCount > 0 ? (totalEarnings / taskCount).toFixed(2) : '0.00';
+      const daysLeftText = dataExpiry ? Math.ceil((dataExpiry - Date.now()) / (24 * 60 * 60 * 1000)) : 'N/A';
       
       const textData = '🧠 ADHD Gig Tracker Report - ' + today + '\n\n' +
         '💰 SUMMARY:\n' +
-        '• Total Earned: $' + totalEarnings.toFixed(2) + '\n' +
-        '• Daily Goal: $' + dailyGoal.toFixed(2) + ' (' + Math.round((totalEarnings / dailyGoal) * 100) + '% complete)\n' +
+        '• Total Earned:  + totalEarnings.toFixed(2) + '\n' +
+        '• Daily Goal:  + dailyGoal.toFixed(2) + ' (' + Math.round((totalEarnings / dailyGoal) * 100) + '% complete)\n' +
         '• Tasks Completed: ' + taskCount + '\n' +
-        '• Average per Task: $' + avgPerTask + '\n\n' +
+        '• Average per Task:  + avgPerTask + '\n' +
+        '• Data expires in: ' + daysLeftText + ' days\n\n' +
         '📜 EARNINGS HISTORY:\n' +
         (history.length > 0 ? 
-          history.map(entry => '• ' + entry.time + ' - ' + entry.platform + ': $' + entry.amount.toFixed(2)).join('\n') 
+          history.map(entry => '• ' + entry.time + ' - ' + entry.platform + ':  + entry.amount.toFixed(2)).join('\n') 
           : '• No earnings recorded yet'
         ) + '\n\n' +
+        '💡 TIP: Export your data regularly to keep it safe!\n' +
         '---\nGenerated by ADHD Gig Tracker 🎯';
       
       // Copy to clipboard
       navigator.clipboard.writeText(textData).then(() => {
-        showNotification('Data copied to clipboard! 📋 Paste anywhere!', 'milestone');
+        showNotification('📋 Data exported! Paste anywhere to save permanently!', 'milestone');
+        
+        // Show reminder about data expiration
+        if (dataExpiry) {
+          const daysLeft = Math.ceil((dataExpiry - Date.now()) / (24 * 60 * 60 * 1000));
+          if (daysLeft <= 3) {
+            setTimeout(() => {
+              showNotification('⚠️ Remember: Your data expires in ' + daysLeft + ' days!', 'error');
+            }, 3500);
+          }
+        }
       }).catch(() => {
         // Fallback for older browsers
         const textArea = document.createElement('textarea');
@@ -822,15 +1006,76 @@
         textArea.select();
         document.execCommand('copy');
         document.body.removeChild(textArea);
-        showNotification('Data copied to clipboard! 📋', 'milestone');
+        showNotification('📋 Data exported! Paste anywhere to save!', 'milestone');
       });
+    }
+    
+    // Check expiration periodically
+    function startExpirationCheck() {
+      setInterval(() => {
+        updateExpirationWarning();
+      }, 60000); // Check every minute
+    }
+    
+    // Show data retention reminder
+    function showDataReminder() {
+      if (isStorageAvailable() && (totalEarnings > 0 || history.length > 0)) {
+        // Show reminder after 3 days of use
+        const reminderKey = 'adhdTracker_reminderShown';
+        const reminderShown = localStorage.getItem(reminderKey);
+        
+        if (!reminderShown) {
+          setTimeout(() => {
+            showNotification('💡 Tip: Your data is saved for 7 days. Export regularly to keep it forever!', 'milestone');
+            localStorage.setItem(reminderKey, 'true');
+          }, 30000); // Show after 30 seconds
+        }
+      }
     }
     
     // Initialize app
     function init() {
+      // Try to load saved data
+      const dataLoaded = loadData();
+      
+      // Update UI
       updateUI();
-      showNotification('Welcome back! Ready to earn some money? 🚀', 'milestone');
+      
+      // Start expiration checking
+      startExpirationCheck();
+      
+      // Show appropriate welcome message
+      if (dataLoaded) {
+        // Data was restored
+        setTimeout(() => {
+          updateExpirationWarning();
+        }, 2000);
+      } else {
+        // New session
+        showNotification('Welcome! Your data will be saved for 7 days 🚀', 'milestone');
+        
+        // Set up expiration for new users
+        if (isStorageAvailable()) {
+          dataExpiry = Date.now() + EXPIRY_DURATION;
+          localStorage.setItem(STORAGE_KEYS.EXPIRY, dataExpiry.toString());
+        }
+      }
+      
+      // Show data reminder
+      showDataReminder();
     }
+    
+    // Handle page unload
+    window.addEventListener('beforeunload', function() {
+      saveData();
+    });
+    
+    // Save data periodically
+    setInterval(() => {
+      if (totalEarnings > 0 || history.length > 0) {
+        saveData();
+      }
+    }, 30000); // Save every 30 seconds if there's data
     
     // Start the app
     if (document.readyState === 'loading') {
