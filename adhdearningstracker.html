@@ -1,843 +1,254 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>More actions
+
+
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ADHD Gig Tracker</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }
-    
-    body {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      padding: 20px;
-      min-height: 100vh;
-    }
-    
-    .container {
-      max-width: 500px;
-      margin: 0 auto;
-      background: white;
-      border-radius: 20px;
-      padding: 24px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
-    
-    .title {
-      text-align: center;
-      color: #5b21b6;
-      font-size: 24px;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-    
-    .subtitle {
-      text-align: center;
-      color: #6b7280;
-      font-size: 14px;
-      margin-bottom: 24px;
-    }
-    
-    /* Today's Stats */
-    .stats-box {
-      background: linear-gradient(135deg, #fef3c7 0%, #fbbf24 100%);
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 24px;
-      border: 3px solid #f59e0b;
-    }
-    
-    .stats-title {
-      font-weight: 700;
-      color: #92400e;
-      margin-bottom: 12px;
-      text-align: center;
-    }
-    
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-    
-    .stat-item {
-      text-align: center;
-      background: rgba(255,255,255,0.3);
-      padding: 12px;
-      border-radius: 12px;
-    }
-    
-    .stat-value {
-      font-size: 18px;
-      font-weight: 800;
-      color: #92400e;
-    }
-    
-    .stat-label {
-      font-size: 10px;
-      color: #92400e;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-    
-    /* Progress */
-    .progress-section {
-      margin-bottom: 24px;
-    }
-    
-    .progress-header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 8px;
-      font-weight: 600;
-    }
-    
-    .goal-area {
-      cursor: pointer;
-      padding: 4px;
-      border-radius: 6px;
-    }
-    
-    .goal-area:hover {
-      background: #f3f4f6;
-    }
-    
-    .goal-input {
-      width: 80px;
-      padding: 4px;
-      border: 2px solid #8b5cf6;
-      border-radius: 6px;
-      text-align: right;
-      font-weight: 600;
-    }
-    
-    .progress-bar {
-      width: 100%;
-      height: 12px;
-      background: #e5e7eb;
-      border-radius: 999px;
-      overflow: hidden;
-    }
-    
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #8b5cf6 0%, #06b6d4 100%);
-      transition: width 0.3s ease;
-    }
-    
-    .progress-fill.complete {
-      background: linear-gradient(90deg, #10b981 0%, #34d399 100%);
-    }
-    
-    /* Total Display */
-    .total-box {
-      background: linear-gradient(135deg, #f3e8ff 0%, #e879f9 100%);
-      border-radius: 16px;
-      padding: 24px;
-      text-align: center;
-      margin-bottom: 24px;
-      border: 3px solid #d946ef;
-    }
-    
-    .total-box.complete {
-      background: linear-gradient(135deg, #dcfce7 0%, #34d399 100%);
-      border-color: #10b981;
-    }
-    
-    .total-amount {
-      font-size: 40px;
-      font-weight: 900;
-      color: #7c3aed;
-      margin-bottom: 8px;
-    }
-    
-    .total-box.complete .total-amount {
-      color: #047857;
-    }
-    
-    .total-info {
-      font-size: 14px;
-      font-weight: 600;
-      color: #6b46c1;
-    }
-    
-    .total-box.complete .total-info {
-      color: #047857;
-    }
-    
-    /* Platform Selection */
-    .section-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: #374151;
-      margin-bottom: 16px;
-      text-align: center;
-    }
-    
-    .platform-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-    
-    .platform-btn {
-      border: none;
-      border-radius: 16px;
-      padding: 16px 12px;
-      cursor: pointer;
-      transition: all 0.2s;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      font-weight: 700;
-      font-size: 12px;
-    }
-    
-    .platform-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-    }
-    
-    .platform-btn:active {
-      transform: scale(0.95);
-    }
-    
-    .platform-emoji {
-      font-size: 24px;
-    }
-    
-    /* Quick Add Buttons */
-    .quick-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin-bottom: 20px;
-    }
-    
-    .quick-btn {
-      padding: 12px 8px;
-      border: 2px solid #e5e7eb;
-      background: white;
-      border-radius: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-size: 12px;
-    }
-    
-    .quick-btn:hover {
-      border-color: #8b5cf6;
-      background: #f3e8ff;
-      color: #7c3aed;
-    }
-    
-    .quick-btn.platform-active {
-      background: #8b5cf6;
-      color: white;
-      border-color: #8b5cf6;
-    }
-    
-    /* Manual Entry */
-    .manual-section {
-      background: #f8fafc;
-      border: 2px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 16px;
-      margin-bottom: 20px;
-    }
-    
-    .manual-input-row {
-      display: flex;
-      gap: 8px;
-    }
-    
-    .manual-input {
-      flex: 1;
-      padding: 12px;
-      border: 2px solid #d1d5db;
-      border-radius: 12px;
-      font-size: 16px;
-      font-weight: 600;
-      text-align: center;
-    }
-    
-    .manual-input:focus {
-      outline: none;
-      border-color: #8b5cf6;
-      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
-    }
-    
-    .manual-btn {
-      padding: 12px 20px;
-      background: #8b5cf6;
-      color: white;
-      border: none;
-      border-radius: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-    
-    .manual-btn:hover {
-      background: #7c3aed;
-    }
-    
-    .manual-btn:disabled {
-      background: #9ca3af;
-      cursor: not-allowed;
-    }
-    
-    /* History */
-    .history-section {
-      background: #f8fafc;
-      border: 2px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 16px;
-      margin-bottom: 20px;
-    }
-    
-    .history-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-    
-    .history-list {
-      max-height: 120px;
-      overflow-y: auto;
-    }
-    
-    .history-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 8px 0;
-      border-bottom: 1px solid #e5e7eb;
-      font-size: 12px;
-    }
-    
-    .history-item:last-child {
-      border-bottom: none;
-    }
-    
-    .history-platform {
-      font-weight: 600;
-      color: #374151;
-    }
-    
-    .history-amount {
-      font-weight: 700;
-      color: #10b981;
-    }
-    
-    /* Action Buttons */
-    .action-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-    }
-    
-    .action-btn {
-      padding: 12px 8px;
-      border: none;
-      border-radius: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 12px;
-      transition: all 0.2s;
-    }
-    
-    .undo-btn {
-      background: #fbbf24;
-      color: #92400e;
-    }
-    
-    .reset-btn {
-      background: #ef4444;
-      color: white;
-    }
-    
-    .export-btn {
-      background: #06b6d4;
-      color: white;
-    }
-    
-    .action-btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-    
-    /* Notification */
-    .notification {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #10b981;
-      color: white;
-      padding: 12px 16px;
-      border-radius: 12px;
-      font-weight: 600;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      transform: translateX(400px);
-      transition: transform 0.3s ease;
-      z-index: 1000;
-    }
-    
-    .notification.show {
-      transform: translateX(0);
-    }
-    
-    .notification.error {
-      background: #ef4444;
-    }
-    
-    .notification.milestone {
-      background: #f59e0b;
-    }
-    
-    /* Hidden */
-    .hidden {
-      display: none !important;
-    }
-    
-    /* Responsive */
-    @media (min-width: 480px) {
-      .platform-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-    
-    @media (min-width: 768px) {
-      .container {
-        max-width: 600px;
-        padding: 32px;
-      }
-      
-      .platform-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
-  </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            padding: 12px;
+            margin: 0;
+            color: #2d3748;
+            max-width: 100%;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #4c1d95;
+            margin: 15px 0 20px;
+            font-size: 24px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            padding: 0 10px;
+        }
+        
+        .schedule-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            padding: 0 5px;
+        }
+        
+        .time-block {
+            background: white;
+            border-radius: 10px;
+            padding: 12px;
+            box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+            border-left: 5px solid;
+            transition: transform 0.2s;
+        }
+        
+        .time-block:active {
+            transform: translateY(-3px);
+        }
+        
+        .time {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #1a202c;
+            display: flex;
+            align-items: center;
+        }
+        
+        .icon {
+            margin-right: 6px;
+            font-size: 18px;
+        }
+        
+        .title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #2c5282;
+        }
+        
+        .description {
+            font-size: 14px;
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+        
+        .platforms {
+            background: #f7fafc;
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            margin-top: 6px;
+        }
+        
+        .platforms span {
+            font-weight: bold;
+            color: #4a5568;
+        }
+        
+        .boost {
+            background: #e6fffa;
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #2c7a7b;
+            display: flex;
+            align-items: center;
+        }
+        
+        .boost-icon {
+            margin-right: 5px;
+        }
+        
+        .morning { border-color: #f6ad55; }
+        .work { border-color: #4299e1; }
+        .break { border-color: #68d391; }
+        .evening { border-color: #9f7aea; }
+        
+        /* Make touch targets larger */
+        .time-block, .platforms, .boost {
+            -webkit-tap-highlight-color: rgba(0,0,0,0.1);
+        }
+        
+        .platforms a {
+            color: #2c5282;
+            text-decoration: none;
+            font-weight: bold;
+            border-bottom: 1px dotted #2c5282;
+            transition: all 0.2s;
+        }
+        
+        .platforms a:hover {
+            color: #1a365d;
+            border-bottom: 1px solid #1a365d;
+        }
+        
+        .platforms a:active {
+            transform: translateY(1px);
+        }
+        
+        /* Better spacing on very small screens */
+        @media (max-width: 320px) {
+            body {
+                padding: 8px;
+            }
+            
+            .time-block {
+                padding: 10px;
+            }
+            
+            .title {
+                font-size: 16px;
+            }
+            
+            .time {
+                font-size: 14px;
+            }
+            
+            .description {
+                font-size: 13px;
+            }
+            
+            .platforms, .boost {
+                padding: 6px 8px;
+                font-size: 12px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Notification -->
-    <div id="notification" class="notification">
-      <span id="notificationText"></span>
-    </div>
-    
-    <!-- Header -->
-    <h1 class="title">🧠 ADHD Gig Tracker</h1>
-    <p class="subtitle">Simple earnings tracking for neurodivergent minds</p>
-    
-    <!-- Today's Stats -->
-    <div class="stats-box">
-      <div class="stats-title">🔥 Today's Progress</div>
-      <div class="stats-grid">
-        <div class="stat-item">
-          <div class="stat-value" id="todayTotal">$0.00</div>
-          <div class="stat-label">Earned</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-value" id="todayTasks">0</div>
-          <div class="stat-label">Tasks</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-value" id="todayAvg">$0.00</div>
-          <div class="stat-label">Average</div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Progress -->
-    <div class="progress-section">
-      <div class="progress-header">
-        <div>
-          Goal: $<span class="goal-area" id="goalArea" onclick="editGoal()">
-            <span id="goalAmount">50.00</span>
-          </span>
-          <input type="number" id="goalInput" class="goal-input hidden" step="0.01" min="1">
-        </div>
-        <span id="progressPercent">0%</span>
-      </div>
-      <div class="progress-bar">
-        <div id="progressFill" class="progress-fill" style="width: 0%"></div>
-      </div>
-    </div>
-    
-    <!-- Total Display -->
-    <div id="totalBox" class="total-box">
-      <div class="total-amount">$<span id="totalAmount">0.00</span></div>
-      <div class="total-info" id="totalInfo">Ready to start earning! 🚀</div>
-    </div>
-    
-    <!-- Platform Selection -->
-    <div class="section-title">💼 Select Platform</div>
-    <div class="platform-grid">
-      <button class="platform-btn" style="background: linear-gradient(135deg, #ff6b6b, #ff5252);" onclick="selectPlatform('DoorDash', [3.50, 7.50, 12.00, 18.00])">
-        <div class="platform-emoji">🍕</div>
-        <div>DoorDash</div>
-      </button>
-      <button class="platform-btn" style="background: linear-gradient(135deg, #4ecdc4, #26d0ce);" onclick="selectPlatform('Uber', [4.00, 8.50, 15.00, 25.00])">
-        <div class="platform-emoji">🚗</div>
-        <div>Uber</div>
-      </button>
-      <button class="platform-btn" style="background: linear-gradient(135deg, #45b7d1, #2196f3);" onclick="selectPlatform('Surveys', [0.10, 0.50, 1.25, 3.00])">
-        <div class="platform-emoji">📋</div>
-        <div>Surveys</div>
-      </button>
-      <button class="platform-btn" style="background: linear-gradient(135deg, #96ceb4, #4caf50);" onclick="selectPlatform('Fiverr', [5.00, 15.00, 25.00, 50.00])">
-        <div class="platform-emoji">💻</div>
-        <div>Fiverr</div>
-      </button>
-      <button class="platform-btn" style="background: linear-gradient(135deg, #ffecd2, #fcb69f);" onclick="selectPlatform('Instacart', [8.00, 15.00, 25.00, 35.00])">
-        <div class="platform-emoji">🛒</div>
-        <div>Instacart</div>
-      </button>
-      <button class="platform-btn" style="background: linear-gradient(135deg, #a8edea, #fed6e3);" onclick="selectPlatform('Upwork', [10.00, 25.00, 50.00, 100.00])">
-        <div class="platform-emoji">📝</div>
-        <div>Upwork</div>
-      </button>
-      <button class="platform-btn" style="background: linear-gradient(135deg, #d299c2, #fef9d7);" onclick="selectPlatform('Micro Work', [0.10, 0.25, 0.75, 2.00])">
-        <div class="platform-emoji">⚡</div>
-        <div>Micro Work</div>
-      </button>
-      <button class="platform-btn" style="background: linear-gradient(135deg, #89f7fe, #66a6ff);" onclick="selectPlatform('Other', [2.50, 5.00, 10.00, 15.00])">
-        <div class="platform-emoji">✨</div>
-        <div>Other</div>
-      </button>
-    </div>
-    
-    <!-- Quick Add -->
-    <div class="section-title">⚡ Quick Add</div>
-    <div class="quick-grid" id="quickGrid">
-      <button class="quick-btn" onclick="addEarning(2.50, 'Quick Add')">$2.50</button>
-      <button class="quick-btn" onclick="addEarning(5.00, 'Quick Add')">$5.00</button>
-      <button class="quick-btn" onclick="addEarning(10.00, 'Quick Add')">$10.00</button>
-      <button class="quick-btn" onclick="addEarning(15.00, 'Quick Add')">$15.00</button>
-    </div>
-    
-    <!-- Manual Entry -->
-    <div class="manual-section">
-      <div class="section-title" style="margin-bottom: 12px;">💰 Custom Amount</div>
-      <div class="manual-input-row">
-        <input type="number" id="manualInput" class="manual-input" placeholder="0.00" step="0.01" min="0">
-        <button id="manualBtn" class="manual-btn" onclick="addManualAmount()" disabled>Add</button>
-      </div>
-    </div>
-    
-    <!-- History -->
-    <div class="history-section">
-      <div class="history-header">
-        <div class="section-title" style="margin: 0;">📜 Today's Earnings</div>
-        <button class="manual-btn" style="background: #ef4444; padding: 6px 12px; font-size: 10px;" onclick="clearHistory()">Clear</button>
-      </div>
-      <div class="history-list" id="historyList">
-        <div style="text-align: center; color: #6b7280; padding: 20px;">
-          Start adding earnings to see your progress! 🎯
-        </div>
-      </div>
-    </div>
-    
-    <!-- Action Buttons -->
-    <div class="action-grid">
-      <button id="undoBtn" class="action-btn undo-btn" onclick="undoLast()" disabled>↩ Undo</button>
-      <button class="action-btn reset-btn" onclick="resetAll()">🔄 Reset</button>
-      <button class="action-btn export-btn" onclick="exportData()">📊 Export</button>
-    </div>
-  </div>
+    <h1>🧠 ADHD-FRIENDLY HOURLY SCHEDULE 🎯</h1>
+  <center>  This ADHD-friendly schedule is here to help you make the most of your day—without the overwhelm. It's broken into easy, color-coded time blocks that guide you through focused work, breaks, and dopamine-friendly boosts.
 
-  <script>
-    // Simple state
-    let totalEarnings = 0;
-    let dailyGoal = 50;
-    let taskCount = 0;
-    let history = [];
-    let currentPlatform = '';
-    
-    // DOM elements
-    const elements = {
-      totalAmount: document.getElementById('totalAmount'),
-      totalBox: document.getElementById('totalBox'),
-      totalInfo: document.getElementById('totalInfo'),
-      todayTotal: document.getElementById('todayTotal'),
-      todayTasks: document.getElementById('todayTasks'),
-      todayAvg: document.getElementById('todayAvg'),
-      goalAmount: document.getElementById('goalAmount'),
-      goalArea: document.getElementById('goalArea'),
-      goalInput: document.getElementById('goalInput'),
-      progressFill: document.getElementById('progressFill'),
-      progressPercent: document.getElementById('progressPercent'),
-      historyList: document.getElementById('historyList'),
-      undoBtn: document.getElementById('undoBtn'),
-      manualInput: document.getElementById('manualInput'),
-      manualBtn: document.getElementById('manualBtn'),
-      quickGrid: document.getElementById('quickGrid'),
-      notification: document.getElementById('notification'),
-      notificationText: document.getElementById('notificationText')
-    };
-    
-    // Show notification
-    function showNotification(message, type = 'success') {
-      elements.notificationText.textContent = message;
-      elements.notification.className = 'notification ' + type + ' show';
-      setTimeout(() => {
-        elements.notification.classList.remove('show');
-      }, 3000);
-    }
-    
-    // Update all UI
-    function updateUI() {
-      // Update totals
-      elements.totalAmount.textContent = totalEarnings.toFixed(2);
-      elements.todayTotal.textContent = '$' + totalEarnings.toFixed(2);
-      elements.todayTasks.textContent = taskCount;
-      elements.todayAvg.textContent = '$' + (taskCount > 0 ? (totalEarnings / taskCount).toFixed(2) : '0.00');
-      elements.goalAmount.textContent = dailyGoal.toFixed(2);
-      
-      // Update progress
-      const progress = Math.min((totalEarnings / dailyGoal) * 100, 100);
-      elements.progressFill.style.width = progress + '%';
-      elements.progressPercent.textContent = Math.round(progress) + '%';
-      
-      // Update goal status
-      if (totalEarnings >= dailyGoal) {
-        elements.totalBox.classList.add('complete');
-        elements.progressFill.classList.add('complete');
-        elements.totalInfo.textContent = '🏆 GOAL CRUSHED! Amazing work!';
-      } else {
-        elements.totalBox.classList.remove('complete');
-        elements.progressFill.classList.remove('complete');
-        const remaining = dailyGoal - totalEarnings;
-        elements.totalInfo.textContent = '$' + remaining.toFixed(2) + ' to goal • Keep going! 💪';
-      }
-      
-      // Update undo button
-      elements.undoBtn.disabled = history.length === 0;
-      
-      // Update history
-      updateHistory();
-    }
-    
-    // Update history display
-    function updateHistory() {
-      if (history.length === 0) {
-        elements.historyList.innerHTML = '<div style="text-align: center; color: #6b7280; padding: 20px;">Start adding earnings to see your progress! 🎯</div>';
-        return;
-      }
-      
-      elements.historyList.innerHTML = history.map(entry => 
-        '<div class="history-item">' +
-          '<div>' +
-            '<div class="history-platform">' + entry.platform + '</div>' +
-            '<div style="font-size: 10px; color: #6b7280;">' + entry.time + '</div>' +
-          '</div>' +
-          '<div class="history-amount">+$' + entry.amount.toFixed(2) + '</div>' +
-        '</div>'
-      ).join('');
-    }
-    
-    // Add earning
-    function addEarning(amount, platform) {
-      totalEarnings += amount;
-      taskCount++;
-      
-      // Add to history
-      const now = new Date();
-      history.unshift({
-        amount: amount,
-        platform: platform,
-        time: now.toLocaleTimeString(),
-        timestamp: now
-      });
-      
-      // Keep only last 20 entries
-      if (history.length > 20) {
-        history = history.slice(0, 20);
-      }
-      
-      // Check milestones
-      checkMilestones();
-      
-      // Update UI
-      updateUI();
-      
-      // Show success
-      showNotification('+$' + amount.toFixed(2) + ' from ' + platform + '! 💰');
-    }
-    
-    // Check for milestones
-    function checkMilestones() {
-      const milestones = [5, 10, 25, 50, 100];
-      const currentMilestone = milestones.find(m => totalEarnings >= m && totalEarnings - history[0].amount < m);
-      
-      if (currentMilestone) {
-        setTimeout(() => {
-          showNotification('🎉 $' + currentMilestone + ' milestone reached! 🎉', 'milestone');
-        }, 500);
-      }
-      
-      // Goal reached
-      if (totalEarnings >= dailyGoal && totalEarnings - history[0].amount < dailyGoal) {
-        setTimeout(() => {
-          showNotification('🏆 DAILY GOAL SMASHED! You are incredible! 🏆', 'milestone');
-        }, 1000);
-      }
-    }
-    
-    // Select platform
-    function selectPlatform(platform, amounts) {
-      currentPlatform = platform;
-      
-      // Update quick buttons
-      elements.quickGrid.innerHTML = amounts.map(amount => 
-        '<button class="quick-btn platform-active" onclick="addEarning(' + amount + ', \'' + platform + '\')">$' + amount.toFixed(2) + '</button>'
-      ).join('');
-      
-      showNotification(platform + ' selected! Tap amounts below 🎯', 'milestone');
-      
-      // Reset after 30 seconds
-      setTimeout(() => {
-        elements.quickGrid.innerHTML = 
-          '<button class="quick-btn" onclick="addEarning(2.50, \'Quick Add\')">$2.50</button>' +
-          '<button class="quick-btn" onclick="addEarning(5.00, \'Quick Add\')">$5.00</button>' +
-          '<button class="quick-btn" onclick="addEarning(10.00, \'Quick Add\')">$10.00</button>' +
-          '<button class="quick-btn" onclick="addEarning(15.00, \'Quick Add\')">$15.00</button>';
-      }, 30000);
-    }
-    
-    // Manual amount validation
-    elements.manualInput.addEventListener('input', function() {
-      const value = parseFloat(this.value);
-      elements.manualBtn.disabled = !value || value <= 0;
-    });
-    
-    elements.manualInput.addEventListener('keypress', function(e) {
-      if (e.key === 'Enter' && !elements.manualBtn.disabled) {
-        addManualAmount();
-      }
-    });
-    
-    // Add manual amount
-    function addManualAmount() {
-      const amount = parseFloat(elements.manualInput.value);
-      if (amount && amount > 0) {
-        addEarning(amount, currentPlatform || 'Manual Entry');
-        elements.manualInput.value = '';
-        elements.manualBtn.disabled = true;
-      }
-    }
-    
-    // Goal editing
-    function editGoal() {
-      elements.goalArea.classList.add('hidden');
-      elements.goalInput.classList.remove('hidden');
-      elements.goalInput.value = dailyGoal.toFixed(2);
-      elements.goalInput.focus();
-      elements.goalInput.select();
-    }
-    
-    elements.goalInput.addEventListener('blur', saveGoal);
-    elements.goalInput.addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') saveGoal();
-    });
-    
-    function saveGoal() {
-      const newGoal = parseFloat(elements.goalInput.value);
-      if (newGoal && newGoal > 0) {
-        dailyGoal = newGoal;
-        updateUI();
-        showNotification('Goal updated to $' + dailyGoal.toFixed(2) + '! 🎯');
-      }
-      elements.goalInput.classList.add('hidden');
-      elements.goalArea.classList.remove('hidden');
-    }
-    
-    // Undo last
-    function undoLast() {
-      if (history.length > 0) {
-        const last = history.shift();
-        totalEarnings -= last.amount;
-        taskCount = Math.max(0, taskCount - 1);
-        updateUI();
-        showNotification('Undid $' + last.amount.toFixed(2) + ' from ' + last.platform, 'error');
-      }
-    }
-    
-    // Clear history
-    function clearHistory() {
-      if (confirm('Clear all earnings for today? This cannot be undone.')) {
-        history = [];
-        updateUI();
-        showNotification('History cleared! 🧹');
-      }
-    }
-    
-    // Reset all
-    function resetAll() {
-      if (confirm('Reset everything? This will clear all earnings and reset your goal.')) {
-        totalEarnings = 0;
-        taskCount = 0;
-        history = [];
-        dailyGoal = 50;
-        currentPlatform = '';
-        updateUI();
-        showNotification('Everything reset! Fresh start! 🌅', 'milestone');
-      }
-    }
-    
-    // Export data
-    function exportData() {
-      const today = new Date().toLocaleDateString();
-      const avgPerTask = taskCount > 0 ? (totalEarnings / taskCount).toFixed(2) : '0.00';
-      
-      const textData = '🧠 ADHD Gig Tracker Report - ' + today + '\n\n' +
-        '💰 SUMMARY:\n' +
-        '• Total Earned: $' + totalEarnings.toFixed(2) + '\n' +
-        '• Daily Goal: $' + dailyGoal.toFixed(2) + ' (' + Math.round((totalEarnings / dailyGoal) * 100) + '% complete)\n' +
-        '• Tasks Completed: ' + taskCount + '\n' +
-        '• Average per Task: $' + avgPerTask + '\n\n' +
-        '📜 EARNINGS HISTORY:\n' +
-        (history.length > 0 ? 
-          history.map(entry => '• ' + entry.time + ' - ' + entry.platform + ': $' + entry.amount.toFixed(2)).join('\n') 
-          : '• No earnings recorded yet'
-        ) + '\n\n' +
-        '---\nGenerated by ADHD Gig Tracker 🎯';
-      
-      // Copy to clipboard
-      navigator.clipboard.writeText(textData).then(() => {
-        showNotification('Data copied to clipboard! 📋 Paste anywhere!', 'milestone');
-      }).catch(() => {
-        // Fallback for older browsers
-        const textArea = document.createElement('textarea');
-        textArea.value = textData;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-        showNotification('Data copied to clipboard! 📋', 'milestone');
-      });
-    }
-    
-    // Initialize app
-    function init() {
-      updateUI();
-      showNotification('Welcome back! Ready to earn some money? 🚀', 'milestone');
-    }
-    
-    // Start the app
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', init);
-    } else {
-      init();
-    }
-  </script>
+    Tap or scroll through each section to see what kind of tasks work best</br><br>
+    <div class="schedule-container">
+        <div class="time-block morning">
+            <div class="time">⏰ 7:00 AM - 8:00 AM</div>
+            <div class="title">Morning Routine & Energize</div>
+            <div class="description">Get ready for the day, have breakfast, and prep for productivity. Boost your energy with a short walk or ADHD-friendly activities.</div>
+            <div class="boost">✨ <span class="boost-icon">🔋</span> <strong>Dopamine Boost:</strong> Quick task completion for immediate rewards</div>
+        </div>
+        
+        <div class="time-block work">
+            <div class="time">⏰ 8:00 AM - 9:30 AM</div>
+            <div class="title">High-Paying Surveys & Passive Income</div>
+            <div class="description">Focus on high-paying surveys that require thoughtful answers. Run passive apps in the background.</div>
+            <div class="platforms"><span>💻 Platforms:</span> <a href="https://prolific.co" target="_blank">Prolific</a>, <a href="https://www.usertesting.com/get-paid-to-test" target="_blank">UserTesting</a>, <a href="https://surveyjunkie.com" target="_blank">Survey Junkie</a>, <a href="https://crowdtap.com" target="_blank">CrowdTap</a>, <a href="https://yougov.com" target="_blank">YouGov</a></div>
+        </div>
+        
+        <div class="time-block break">
+            <div class="time">⏰ 9:30 AM - 10:00 AM</div>
+            <div class="title">Break (ADHD Reset)</div>
+            <div class="description">Take a short break, stretch, grab a snack or beverage. Reset your mind before more demanding tasks.</div>
+            <div class="boost">✨ <span class="boost-icon">🧠</span> <strong>Reset Tip:</strong> Try a 5-minute stretching routine or quick walk</div>
+        </div>
+        
+        <div class="time-block work">
+            <div class="time">⏰ 10:00 AM - 12:00 PM</div>
+            <div class="title">Freelance & Gig Work</div>
+            <div class="description">Focus on high-value freelancing and data annotation gigs. Dedicate time to high-effort, high-reward work.</div>
+            <div class="platforms"><span>💻 Platforms:</span> <a href="https://fiverr.com" target="_blank">Fiverr</a>, <a href="https://freelancer.com" target="_blank">Freelancer</a>, <a href="https://alignerr.com" target="_blank">Alignerr</a>, <a href="https://dataannotation.tech" target="_blank">DataAnnotation.tech</a></div>
+        </div>
+        
+        <div class="time-block break">
+            <div class="time">⏰ 12:00 PM - 1:00 PM</div>
+            <div class="title">Lunch & Family Time</div>
+            <div class="description">Take a break, have lunch, relax, and enjoy downtime.</div>
+            <div class="boost">✨ <span class="boost-icon">🍽️</span> <strong>Nutrition Tip:</strong> Include protein to maintain focus later</div>
+        </div>
+        
+        <div class="time-block work">
+            <div class="time">⏰ 1:00 PM - 2:30 PM</div>
+            <div class="title">Shopping & Flipping (Higher Profit Potential)</div>
+            <div class="description">Check for high-profit items to flip or sell. Focus on platforms with significant return potential.</div>
+            <div class="platforms"><span>💻 Platforms:</span> <a href="https://panel.amazon.com" target="_blank">Amazon Shopper Panel</a>, <a href="https://offerup.com" target="_blank">OfferUp</a>, <a href="https://brickseek.com" target="_blank">BrickSeek</a>, <a href="https://www.freestufffinder.com" target="_blank">FreeStuffFinder</a></div>
+        </div>
+        
+        <div class="time-block break">
+            <div class="time">⏰ 2:30 PM - 3:00 PM</div>
+            <div class="title">Break (Recalibrate)</div>
+            <div class="description">Short break to reset focus. Organize your workspace or enjoy a small dopamine boost.</div>
+            <div class="boost">✨ <span class="boost-icon">🔄</span> <strong>Recalibration Tip:</strong> Try a quick sensory exercise</div>
+        </div>
+        
+        <div class="time-block work">
+            <div class="time">⏰ 3:00 PM - 4:30 PM</div>
+            <div class="title">Gig Apps & Field Work</div>
+            <div class="description">Complete small gigs or fieldwork tasks for flexible, decent-paying work.</div>
+            <div class="platforms"><span>💻 Platforms:</span> <a href="https://www.clickworker.com/clickworker/" target="_blank">Clickworker</a>, <a href="https://app.fieldagent.net/" target="_blank">Field Agent</a>, <a href="https://prestoshopper.com" target="_blank">Presto Shopper</a>, <a href="https://premise.com" target="_blank">Premise</a>, <a href="https://www.streetbees.com/sbx/streetbees-app" target="_blank">Streetbees</a></div>
+        </div>
+        
+        <div class="time-block work">
+            <div class="time">⏰ 4:30 PM - 6:00 PM</div>
+            <div class="title">Passive & Mobile Rewards</div>
+            <div class="description">Use mobile apps for rewards during low-effort activities like watching TV.</div>
+            <div class="platforms"><span>📱 Platforms:</span> <a href="https://mistplay.com" target="_blank">MistPlay</a>, <a href="https://rewardedplay.com" target="_blank">Rewarded Play</a></div>
+        </div>
+        
+        <div class="time-block break">
+            <div class="time">⏰ 6:00 PM - 7:00 PM</div>
+            <div class="title">Dinner & Relaxation</div>
+            <div class="description">Have dinner and unwind. Recharge for the evening.</div>
+            <div class="boost">✨ <span class="boost-icon">🌅</span> <strong>Relaxation Tip:</strong> Step away from screens for 15+ minutes</div>
+        </div>
+        
+        <div class="time-block evening">
+            <div class="time">⏰ 7:00 PM - 8:30 PM</div>
+            <div class="title">Product Testing & High-Value Surveys</div>
+            <div class="description">Focus on lucrative product testing and research surveys.</div>
+            <div class="platforms"><span>💻 Platforms:</span> <a href="https://productreportcard.com" target="_blank">Product Report Card</a>, <a href="https://yougov.com" target="_blank">YouGov</a>, <a href="https://surveytime.app" target="_blank">Surveytime</a></div>
+        </div>
+        
+        <div class="time-block evening">
+            <div class="time">⏰ 8:30 PM - 9:00 PM</div>
+            <div class="title">Final Passive Income Apps & Small Tasks</div>
+            <div class="description">Complete final passive tasks for easy rewards before winding down.</div>
+            <div class="platforms"><span>📱 Platforms:</span> <a href="https://swagbucks.com" target="_blank">Swagbucks</a>, <a href="https://mypoints.com" target="_blank">MyPoints</a>, <a href="https://prizerebel.com" target="_blank">PrizeRebel</a>, <a href="https://attapoll.app" target="_blank">AttaPoll</a></div>
+        </div>
+        
+        <div class="time-block evening">
+            <div class="time">⏰ 9:00 PM - 10:00 PM</div>
+            <div class="title">Wind Down & Light Social Media</div>
+            <div class="description">Relax, scroll social media, or prep for the next day.</div>
+            <div class="boost">✨ <span class="boost-icon">😴</span> <strong>Wind Down Tip:</strong> Reduce blue light exposure to help with sleep</div>
+        </div>More actions
+    </div>
 </body>
 </html>
