@@ -2,186 +2,380 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>ADHD Gig Tracker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital@0;1&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary-bg: #0a0e1a;
+      --secondary-bg: #1a1f2e;
+      --card-bg: rgba(255, 255, 255, 0.02);
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --text-primary: #ffffff;
+      --text-secondary: #a0a8b8;
+      --text-muted: #6b7280;
+      --accent-blue: #4f46e5;
+      --accent-teal: #06b6d4;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --border-subtle: rgba(255, 255, 255, 0.1);
+      --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.15);
+      --shadow-medium: 0 8px 40px rgba(0, 0, 0, 0.25);
+      --shadow-strong: 0 16px 64px rgba(0, 0, 0, 0.35);
+      --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-success: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+      --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+      --gradient-info: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 100%);
+    }
+    
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-tap-highlight-color: transparent;
     }
     
     body {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      padding: 20px;
+      background: var(--primary-bg);
+      color: var(--text-primary);
+      padding: 12px;
       min-height: 100vh;
+      font-size: 16px;
+      line-height: 1.4;
+      overflow-x: hidden;
+      position: relative;
+    }
+    
+    /* Background Effects */
+    .bg-gradient {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at top, rgba(79, 70, 229, 0.15) 0%, transparent 50%),
+                  radial-gradient(ellipse at bottom right, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+      z-index: -2;
+    }
+    
+    .floating-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(40px);
+      opacity: 0.3;
+      z-index: -1;
+      animation: float 20s infinite ease-in-out;
+    }
+    
+    .orb-1 {
+      width: 200px;
+      height: 200px;
+      background: var(--accent-blue);
+      top: -100px;
+      right: -100px;
+      animation-delay: -5s;
+    }
+    
+    .orb-2 {
+      width: 150px;
+      height: 150px;
+      background: var(--accent-teal);
+      bottom: -75px;
+      left: -75px;
+      animation-delay: -10s;
+    }
+    
+    .orb-3 {
+      width: 180px;
+      height: 180px;
+      background: var(--accent-emerald);
+      top: 40%;
+      right: -90px;
+      animation-delay: -15s;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(-20px, -20px) scale(1.1); }
+      66% { transform: translate(20px, -15px) scale(0.9); }
+    }
+    
+    /* Glass Card Component */
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      box-shadow: var(--shadow-soft);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .glass-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-medium);
+      border-color: rgba(255, 255, 255, 0.2);
     }
     
     .container {
-      max-width: 500px;
+      max-width: 100%;
       margin: 0 auto;
-      background: white;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
       border-radius: 20px;
-      padding: 24px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      padding: 16px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
+      animation: shimmer 6s infinite;
+      pointer-events: none;
+    }
+    
+    @keyframes shimmer {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(30deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(30deg); }
     }
     
     .title {
       text-align: center;
-      color: #5b21b6;
-      font-size: 24px;
+      color: var(--text-primary);
+      font-size: 22px;
       font-weight: 800;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
+      position: relative;
+      z-index: 1;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     }
     
     .subtitle {
       text-align: center;
-      color: #6b7280;
-      font-size: 14px;
-      margin-bottom: 24px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+      font-family: 'Crimson Text', serif;
+      font-style: italic;
     }
     
     /* Today's Stats */
     .stats-box {
-      background: linear-gradient(135deg, #fef3c7 0%, #fbbf24 100%);
+      background: var(--gradient-success);
       border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 24px;
-      border: 3px solid #f59e0b;
+      padding: 16px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .stats-box::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+      animation: shimmer 4s infinite;
     }
     
     .stats-title {
       font-weight: 700;
-      color: #92400e;
+      color: white;
       margin-bottom: 12px;
       text-align: center;
+      font-size: 14px;
+      position: relative;
+      z-index: 1;
     }
     
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
     }
     
     .stat-item {
       text-align: center;
-      background: rgba(255,255,255,0.3);
-      padding: 12px;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      padding: 12px 8px;
       border-radius: 12px;
+      min-height: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.1);
     }
     
     .stat-value {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 800;
-      color: #92400e;
+      color: white;
+      line-height: 1.2;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
     }
     
     .stat-label {
-      font-size: 10px;
-      color: #92400e;
+      font-size: 9px;
+      color: rgba(255,255,255,0.9);
       text-transform: uppercase;
       font-weight: 600;
+      margin-top: 2px;
     }
     
     /* Progress */
     .progress-section {
-      margin-bottom: 24px;
+      margin-bottom: 20px;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 16px;
     }
     
     .progress-header {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       margin-bottom: 8px;
       font-weight: 600;
+      font-size: 14px;
+      color: var(--text-primary);
     }
     
     .goal-area {
       cursor: pointer;
-      padding: 4px;
+      padding: 6px;
       border-radius: 6px;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      touch-action: manipulation;
+      transition: all 0.3s ease;
     }
     
-    .goal-area:hover {
-      background: #f3f4f6;
+    .goal-area:hover, .goal-area:active {
+      background: var(--glass-bg);
     }
     
     .goal-input {
       width: 80px;
-      padding: 4px;
-      border: 2px solid #8b5cf6;
+      padding: 8px;
+      border: 2px solid var(--accent-blue);
       border-radius: 6px;
       text-align: right;
       font-weight: 600;
+      font-size: 16px;
+      background: var(--card-bg);
+      color: var(--text-primary);
+      backdrop-filter: blur(10px);
+    }
+    
+    .goal-input:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
     }
     
     .progress-bar {
       width: 100%;
-      height: 12px;
-      background: #e5e7eb;
+      height: 14px;
+      background: var(--card-bg);
       border-radius: 999px;
       overflow: hidden;
+      border: 1px solid var(--border-subtle);
     }
     
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, #8b5cf6 0%, #06b6d4 100%);
+      background: var(--gradient-info);
       transition: width 0.3s ease;
+      box-shadow: 0 0 10px rgba(79, 70, 229, 0.5);
     }
     
     .progress-fill.complete {
-      background: linear-gradient(90deg, #10b981 0%, #34d399 100%);
+      background: var(--gradient-success);
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
     }
     
     /* Total Display */
     .total-box {
-      background: linear-gradient(135deg, #f3e8ff 0%, #e879f9 100%);
+      background: var(--gradient-info);
       border-radius: 16px;
-      padding: 24px;
+      padding: 20px;
       text-align: center;
-      margin-bottom: 24px;
-      border: 3px solid #d946ef;
+      margin-bottom: 20px;
+      min-height: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .total-box::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+      animation: shimmer 5s infinite;
     }
     
     .total-box.complete {
-      background: linear-gradient(135deg, #dcfce7 0%, #34d399 100%);
-      border-color: #10b981;
+      background: var(--gradient-success);
     }
     
     .total-amount {
-      font-size: 40px;
+      font-size: 32px;
       font-weight: 900;
-      color: #7c3aed;
-      margin-bottom: 8px;
-    }
-    
-    .total-box.complete .total-amount {
-      color: #047857;
+      color: white;
+      margin-bottom: 6px;
+      line-height: 1.1;
+      position: relative;
+      z-index: 1;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     }
     
     .total-info {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
-      color: #6b46c1;
-    }
-    
-    .total-box.complete .total-info {
-      color: #047857;
+      color: rgba(255,255,255,0.95);
+      position: relative;
+      z-index: 1;
     }
     
     /* Platform Selection */
     .section-title {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 700;
-      color: #374151;
-      margin-bottom: 16px;
+      color: var(--text-primary);
+      margin-bottom: 12px;
       text-align: center;
     }
     
     .platform-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      gap: 10px;
       margin-bottom: 20px;
     }
     
@@ -190,117 +384,181 @@
       border-radius: 16px;
       padding: 16px 12px;
       cursor: pointer;
-      transition: all 0.2s;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow-soft);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       font-weight: 700;
-      font-size: 12px;
+      font-size: 11px;
+      min-height: 70px;
+      touch-action: manipulation;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
     }
     
-    .platform-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    .platform-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s;
+    }
+    
+    .platform-btn:hover::before {
+      transform: translateX(100%);
     }
     
     .platform-btn:active {
       transform: scale(0.95);
+      box-shadow: var(--shadow-medium);
     }
     
     .platform-emoji {
-      font-size: 24px;
+      font-size: 20px;
+      position: relative;
+      z-index: 1;
     }
     
     /* Quick Add Buttons */
     .quick-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
       margin-bottom: 20px;
     }
     
     .quick-btn {
-      padding: 12px 8px;
-      border: 2px solid #e5e7eb;
-      background: white;
-      border-radius: 12px;
+      padding: 16px 12px;
+      border: 1px solid var(--border-subtle);
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border-radius: 16px;
       font-weight: 700;
       cursor: pointer;
-      transition: all 0.2s;
-      font-size: 12px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-size: 14px;
+      min-height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      touch-action: manipulation;
+      user-select: none;
+      color: var(--text-primary);
+      box-shadow: var(--shadow-soft);
     }
     
     .quick-btn:hover {
-      border-color: #8b5cf6;
-      background: #f3e8ff;
-      color: #7c3aed;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-medium);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    
+    .quick-btn:active {
+      transform: scale(0.95);
     }
     
     .quick-btn.platform-active {
-      background: #8b5cf6;
+      background: var(--accent-blue);
       color: white;
-      border-color: #8b5cf6;
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 20px rgba(79, 70, 229, 0.4);
+    }
+    
+    .quick-btn.platform-active:active {
+      background: var(--accent-teal);
+      border-color: var(--accent-teal);
     }
     
     /* Manual Entry */
     .manual-section {
-      background: #f8fafc;
-      border: 2px solid #e2e8f0;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
       border-radius: 16px;
       padding: 16px;
       margin-bottom: 20px;
+      box-shadow: var(--shadow-soft);
     }
     
     .manual-input-row {
       display: flex;
-      gap: 8px;
+      gap: 10px;
     }
     
     .manual-input {
       flex: 1;
-      padding: 12px;
-      border: 2px solid #d1d5db;
+      padding: 16px;
+      border: 1px solid var(--border-subtle);
       border-radius: 12px;
       font-size: 16px;
       font-weight: 600;
       text-align: center;
+      min-height: 56px;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      color: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+    
+    .manual-input::placeholder {
+      color: var(--text-muted);
     }
     
     .manual-input:focus {
       outline: none;
-      border-color: #8b5cf6;
-      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
     }
     
     .manual-btn {
-      padding: 12px 20px;
-      background: #8b5cf6;
+      padding: 16px 20px;
+      background: var(--gradient-primary);
       color: white;
       border: none;
       border-radius: 12px;
       font-weight: 700;
       cursor: pointer;
       white-space: nowrap;
+      min-height: 56px;
+      min-width: 80px;
+      touch-action: manipulation;
+      user-select: none;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-soft);
     }
     
     .manual-btn:hover {
-      background: #7c3aed;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-medium);
+    }
+    
+    .manual-btn:active {
+      transform: scale(0.95);
     }
     
     .manual-btn:disabled {
-      background: #9ca3af;
+      background: var(--text-muted);
       cursor: not-allowed;
+      transform: none;
+      opacity: 0.6;
     }
     
     /* History */
     .history-section {
-      background: #f8fafc;
-      border: 2px solid #e2e8f0;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
       border-radius: 16px;
       padding: 16px;
       margin-bottom: 20px;
+      box-shadow: var(--shadow-soft);
     }
     
     .history-header {
@@ -311,16 +569,19 @@
     }
     
     .history-list {
-      max-height: 120px;
+      max-height: 140px;
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
     
     .history-item {
       display: flex;
       justify-content: space-between;
-      padding: 8px 0;
-      border-bottom: 1px solid #e5e7eb;
-      font-size: 12px;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 13px;
+      min-height: 44px;
     }
     
     .history-item:last-child {
@@ -329,77 +590,130 @@
     
     .history-platform {
       font-weight: 600;
-      color: #374151;
+      color: var(--text-primary);
+    }
+    
+    .history-time {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
     }
     
     .history-amount {
       font-weight: 700;
-      color: #10b981;
+      color: var(--accent-emerald);
+      font-size: 14px;
     }
     
     /* Action Buttons */
     .action-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
+      gap: 10px;
     }
     
     .action-btn {
-      padding: 12px 8px;
-      border: none;
+      padding: 16px 8px;
+      border: 1px solid var(--border-subtle);
       border-radius: 12px;
       font-weight: 600;
       cursor: pointer;
       font-size: 12px;
-      transition: all 0.2s;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      min-height: 56px;
+      touch-action: manipulation;
+      user-select: none;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      box-shadow: var(--shadow-soft);
+    }
+    
+    .action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-medium);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    
+    .action-btn:active {
+      transform: scale(0.95);
     }
     
     .undo-btn {
-      background: #fbbf24;
-      color: #92400e;
+      background: var(--gradient-warning);
+      color: white;
+      border-color: var(--accent-amber);
     }
     
     .reset-btn {
-      background: #ef4444;
+      background: linear-gradient(135deg, var(--accent-rose), rgba(244, 63, 94, 0.8));
       color: white;
+      border-color: var(--accent-rose);
     }
     
     .export-btn {
-      background: #06b6d4;
+      background: var(--gradient-info);
       color: white;
+      border-color: var(--accent-teal);
     }
     
     .action-btn:disabled {
       opacity: 0.5;
       cursor: not-allowed;
+      transform: none;
+    }
+    
+    .clear-btn {
+      background: linear-gradient(135deg, var(--accent-rose), rgba(244, 63, 94, 0.8));
+      color: white;
+      padding: 8px 12px;
+      font-size: 10px;
+      min-height: 36px;
+      border-radius: 8px;
+      border-color: var(--accent-rose);
     }
     
     /* Notification */
     .notification {
       position: fixed;
       top: 20px;
-      right: 20px;
-      background: #10b981;
-      color: white;
-      padding: 12px 16px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      padding: 12px 20px;
       border-radius: 12px;
       font-weight: 600;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      transform: translateX(400px);
+      box-shadow: var(--shadow-medium);
       transition: transform 0.3s ease;
       z-index: 1000;
+      max-width: calc(100vw - 40px);
+      text-align: center;
+      font-size: 14px;
     }
     
     .notification.show {
-      transform: translateX(0);
+      transform: translateX(-50%) translateY(0);
     }
     
     .notification.error {
-      background: #ef4444;
+      background: linear-gradient(135deg, var(--accent-rose), rgba(244, 63, 94, 0.9));
+      color: white;
+      border-color: var(--accent-rose);
     }
     
     .notification.milestone {
-      background: #f59e0b;
+      background: var(--gradient-warning);
+      color: white;
+      border-color: var(--accent-amber);
+      box-shadow: 0 0 30px rgba(245, 158, 11, 0.5);
+    }
+    
+    .notification.success {
+      background: var(--gradient-success);
+      color: white;
+      border-color: var(--accent-emerald);
     }
     
     /* Hidden */
@@ -407,26 +721,134 @@
       display: none !important;
     }
     
-    /* Responsive */
-    @media (min-width: 480px) {
-      .platform-grid {
-        grid-template-columns: repeat(3, 1fr);
+    /* Mobile-specific optimizations */
+    @media (max-width: 480px) {
+      body {
+        padding: 8px;
       }
-    }
-    
-    @media (min-width: 768px) {
+      
       .container {
-        max-width: 600px;
-        padding: 32px;
+        padding: 12px;
+        border-radius: 16px;
+      }
+      
+      .stats-grid {
+        gap: 6px;
+      }
+      
+      .stat-item {
+        padding: 10px 6px;
+        min-height: 55px;
+      }
+      
+      .stat-value {
+        font-size: 14px;
+      }
+      
+      .total-amount {
+        font-size: 28px;
       }
       
       .platform-grid {
-        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
       }
+      
+      .platform-btn {
+        padding: 14px 10px;
+        min-height: 65px;
+        border-radius: 12px;
+      }
+      
+      .platform-emoji {
+        font-size: 18px;
+      }
+      
+      .quick-grid {
+        gap: 8px;
+      }
+      
+      .quick-btn {
+        min-height: 52px;
+        font-size: 13px;
+        border-radius: 12px;
+      }
+      
+      .action-grid {
+        gap: 8px;
+      }
+      
+      .action-btn {
+        min-height: 52px;
+        font-size: 11px;
+        border-radius: 8px;
+      }
+    }
+    
+    /* Landscape mobile optimization */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .stats-box, .total-box {
+        padding: 12px;
+        margin-bottom: 16px;
+      }
+      
+      .section-title {
+        margin-bottom: 8px;
+      }
+      
+      .platform-grid, .quick-grid, .manual-section, .history-section {
+        margin-bottom: 16px;
+      }
+      
+      .history-list {
+        max-height: 100px;
+      }
+    }
+    
+    /* For very small screens */
+    @media (max-width: 320px) {
+      .title {
+        font-size: 20px;
+      }
+      
+      .subtitle {
+        font-size: 12px;
+      }
+      
+      .stat-value {
+        font-size: 13px;
+      }
+      
+      .total-amount {
+        font-size: 24px;
+      }
+      
+      .platform-btn {
+        font-size: 10px;
+        min-height: 60px;
+      }
+      
+      .quick-btn {
+        font-size: 12px;
+      }
+    }
+
+    /* Focus styles for accessibility */
+    .platform-btn:focus,
+    .quick-btn:focus,
+    .manual-btn:focus,
+    .action-btn:focus {
+      outline: 2px solid var(--accent-blue);
+      outline-offset: 2px;
     }
   </style>
 </head>
 <body>
+  <!-- Background Effects -->
+  <div class="bg-gradient"></div>
+  <div class="floating-orb orb-1"></div>
+  <div class="floating-orb orb-2"></div>
+  <div class="floating-orb orb-3"></div>
+
   <div class="container">
     <!-- Notification -->
     <div id="notification" class="notification">
@@ -528,7 +950,7 @@
     <div class="manual-section">
       <div class="section-title" style="margin-bottom: 12px;">💰 Custom Amount</div>
       <div class="manual-input-row">
-        <input type="number" id="manualInput" class="manual-input" placeholder="0.00" step="0.01" min="0">
+        <input type="number" id="manualInput" class="manual-input" placeholder="0.00" step="0.01" min="0" inputmode="decimal">
         <button id="manualBtn" class="manual-btn" onclick="addManualAmount()" disabled>Add</button>
       </div>
     </div>
@@ -537,10 +959,10 @@
     <div class="history-section">
       <div class="history-header">
         <div class="section-title" style="margin: 0;">📜 Today's Earnings</div>
-        <button class="manual-btn" style="background: #ef4444; padding: 6px 12px; font-size: 10px;" onclick="clearHistory()">Clear</button>
+        <button class="manual-btn clear-btn" onclick="clearHistory()">Clear</button>
       </div>
       <div class="history-list" id="historyList">
-        <div style="text-align: center; color: #6b7280; padding: 20px;">
+        <div style="text-align: center; color: var(--text-muted); padding: 20px;">
           Start adding earnings to see your progress! 🎯
         </div>
       </div>
@@ -583,6 +1005,14 @@
       notification: document.getElementById('notification'),
       notificationText: document.getElementById('notificationText')
     };
+    
+    // Prevent zoom on input focus (iOS)
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+      input.addEventListener('focus', function() {
+        this.style.fontSize = '16px';
+      });
+    });
     
     // Show notification
     function showNotification(message, type = 'success') {
@@ -629,7 +1059,7 @@
     // Update history display
     function updateHistory() {
       if (history.length === 0) {
-        elements.historyList.innerHTML = '<div style="text-align: center; color: #6b7280; padding: 20px;">Start adding earnings to see your progress! 🎯</div>';
+        elements.historyList.innerHTML = '<div style="text-align: center; color: var(--text-muted); padding: 20px;">Start adding earnings to see your progress! 🎯</div>';
         return;
       }
       
@@ -637,7 +1067,7 @@
         '<div class="history-item">' +
           '<div>' +
             '<div class="history-platform">' + entry.platform + '</div>' +
-            '<div style="font-size: 10px; color: #6b7280;">' + entry.time + '</div>' +
+            '<div class="history-time">' + entry.time + '</div>' +
           '</div>' +
           '<div class="history-amount">+$' + entry.amount.toFixed(2) + '</div>' +
         '</div>'
@@ -654,7 +1084,7 @@
       history.unshift({
         amount: amount,
         platform: platform,
-        time: now.toLocaleTimeString(),
+        time: now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
         timestamp: now
       });
       
@@ -671,6 +1101,11 @@
       
       // Show success
       showNotification('+$' + amount.toFixed(2) + ' from ' + platform + '! 💰');
+      
+      // Haptic feedback if available
+      if (navigator.vibrate) {
+        navigator.vibrate(50);
+      }
     }
     
     // Check for milestones
@@ -681,6 +1116,9 @@
       if (currentMilestone) {
         setTimeout(() => {
           showNotification('🎉 $' + currentMilestone + ' milestone reached! 🎉', 'milestone');
+          if (navigator.vibrate) {
+            navigator.vibrate([100, 50, 100]);
+          }
         }, 500);
       }
       
@@ -688,6 +1126,9 @@
       if (totalEarnings >= dailyGoal && totalEarnings - history[0].amount < dailyGoal) {
         setTimeout(() => {
           showNotification('🏆 DAILY GOAL SMASHED! You are incredible! 🏆', 'milestone');
+          if (navigator.vibrate) {
+            navigator.vibrate([200, 100, 200, 100, 200]);
+          }
         }, 1000);
       }
     }
@@ -705,11 +1146,14 @@
       
       // Reset after 30 seconds
       setTimeout(() => {
-        elements.quickGrid.innerHTML = 
-          '<button class="quick-btn" onclick="addEarning(2.50, \'Quick Add\')">$2.50</button>' +
-          '<button class="quick-btn" onclick="addEarning(5.00, \'Quick Add\')">$5.00</button>' +
-          '<button class="quick-btn" onclick="addEarning(10.00, \'Quick Add\')">$10.00</button>' +
-          '<button class="quick-btn" onclick="addEarning(15.00, \'Quick Add\')">$15.00</button>';
+        if (currentPlatform === platform) {
+          elements.quickGrid.innerHTML = 
+            '<button class="quick-btn" onclick="addEarning(2.50, \'Quick Add\')">$2.50</button>' +
+            '<button class="quick-btn" onclick="addEarning(5.00, \'Quick Add\')">$5.00</button>' +
+            '<button class="quick-btn" onclick="addEarning(10.00, \'Quick Add\')">$10.00</button>' +
+            '<button class="quick-btn" onclick="addEarning(15.00, \'Quick Add\')">$15.00</button>';
+          currentPlatform = '';
+        }
       }, 30000);
     }
     
@@ -722,6 +1166,7 @@
     elements.manualInput.addEventListener('keypress', function(e) {
       if (e.key === 'Enter' && !elements.manualBtn.disabled) {
         addManualAmount();
+        this.blur(); // Hide keyboard on mobile
       }
     });
     
@@ -732,6 +1177,7 @@
         addEarning(amount, currentPlatform || 'Manual Entry');
         elements.manualInput.value = '';
         elements.manualBtn.disabled = true;
+        elements.manualInput.blur(); // Hide keyboard
       }
     }
     
@@ -746,7 +1192,10 @@
     
     elements.goalInput.addEventListener('blur', saveGoal);
     elements.goalInput.addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') saveGoal();
+      if (e.key === 'Enter') {
+        saveGoal();
+        this.blur();
+      }
     });
     
     function saveGoal() {
@@ -768,6 +1217,9 @@
         taskCount = Math.max(0, taskCount - 1);
         updateUI();
         showNotification('Undid $' + last.amount.toFixed(2) + ' from ' + last.platform, 'error');
+        if (navigator.vibrate) {
+          navigator.vibrate(100);
+        }
       }
     }
     
@@ -812,24 +1264,61 @@
         '---\nGenerated by ADHD Gig Tracker 🎯';
       
       // Copy to clipboard
-      navigator.clipboard.writeText(textData).then(() => {
-        showNotification('Data copied to clipboard! 📋 Paste anywhere!', 'milestone');
-      }).catch(() => {
-        // Fallback for older browsers
-        const textArea = document.createElement('textarea');
-        textArea.value = textData;
-        document.body.appendChild(textArea);
-        textArea.select();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(textData).then(() => {
+          showNotification('Data copied to clipboard! 📋 Paste anywhere!', 'milestone');
+        }).catch(() => {
+          fallbackCopy(textData);
+        });
+      } else {
+        fallbackCopy(textData);
+      }
+    }
+    
+    // Fallback copy function
+    function fallbackCopy(text) {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      textArea.style.top = '-999999px';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      
+      try {
         document.execCommand('copy');
-        document.body.removeChild(textArea);
         showNotification('Data copied to clipboard! 📋', 'milestone');
-      });
+      } catch (err) {
+        showNotification('Copy failed. Please try again.', 'error');
+      }
+      
+      document.body.removeChild(textArea);
     }
     
     // Initialize app
     function init() {
       updateUI();
       showNotification('Welcome back! Ready to earn some money? 🚀', 'milestone');
+      
+      // Prevent pull-to-refresh on mobile
+      document.body.addEventListener('touchstart', function(e) {
+        if (e.touches.length !== 1) { return; }
+        const scrollY = window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop;
+        if (scrollY === 0) {
+          e.preventDefault();
+        }
+      }, { passive: false });
+      
+      // Prevent double-tap zoom
+      let lastTouchEnd = 0;
+      document.addEventListener('touchend', function (event) {
+        const now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+          event.preventDefault();
+        }
+        lastTouchEnd = now;
+      }, false);
     }
     
     // Start the app
