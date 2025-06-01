@@ -100,23 +100,26 @@
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
             border: 1px solid var(--border-subtle);
-            border-radius: 0 0 24px 24px;
-            padding: 20px;
+            border-radius: 20px;
+            padding: 25px;
             text-align: center;
             box-shadow: var(--shadow-soft);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            margin-bottom: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .header:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+            border-color: rgba(255, 255, 255, 0.2);
         }
         
         .header h1 {
             margin: 0 0 15px 0;
             font-size: 2rem;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #667eea;
+            text-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
             font-weight: 700;
         }
         
@@ -167,6 +170,69 @@
         
         .current-block-indicator.rest-mode {
             background: var(--gradient-info);
+        }
+        
+        .status-legend {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .status-legend:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .status-legend h3 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .legend-items {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        .legend-indicator {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        
+        .current-indicator {
+            background: var(--accent-emerald);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+            animation: pulse-dot 2s infinite;
+        }
+        
+        .upcoming-indicator {
+            background: var(--accent-blue);
+        }
+        
+        .past-indicator {
+            background: var(--text-muted);
+        }
+        
+        @keyframes pulse-dot {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
         }
         
         @keyframes pulse {
@@ -428,53 +494,10 @@
         .low-value { border-left: 4px solid var(--accent-emerald); }
         .break-time { border-left: 4px solid var(--accent-blue); }
         
-        .focus-timer {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--gradient-primary);
-            color: white;
-            padding: 20px;
-            border-radius: 50px;
-            box-shadow: var(--shadow-medium);
-            z-index: 1000;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-        }
-        
-        .focus-timer:hover {
-            transform: scale(1.05);
-            box-shadow: var(--shadow-strong);
-        }
-        
-        .focus-timer.running {
-            background: var(--gradient-warning);
-            animation: timerPulse 1s infinite;
-        }
-        
-        @keyframes timerPulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
-        }
-
-        .timer-label {
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .timer-display {
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
-        
         @media (max-width: 768px) {
             .header {
-                padding: 15px;
-                margin-bottom: 15px;
+                padding: 20px;
+                margin: 15px auto;
             }
 
             .header h1 {
@@ -495,14 +518,21 @@
                 padding: 20px;
             }
             
-            .current-task-title {
-                font-size: 1.2rem;
+            .status-legend {
+                margin: 15px;
+                padding: 20px;
             }
             
-            .focus-timer {
-                bottom: 15px;
-                right: 15px;
-                padding: 15px;
+            .status-legend h3 {
+                font-size: 1.1rem;
+            }
+            
+            .legend-item {
+                font-size: 0.9rem;
+            }
+            
+            .current-task-title {
+                font-size: 1.2rem;
             }
             
             .platform-links {
@@ -578,26 +608,47 @@
     </div>
 
     <div class="current-block-indicator" id="currentBlock">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <div style="background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600;">
+                🔥 CURRENT ACTIVITY
+            </div>
+            <div id="currentStatus" style="background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600;">
+                ⏰ NOW
+            </div>
+        </div>
         <div class="current-task-title" id="currentTitle">🌙 Rest Mode</div>
         <div class="current-task-desc" id="currentDesc">Perfect time to recharge! Your brain needs downtime to process and prepare for peak performance.</div>
         <div class="priority-badges" id="currentPriorities"></div>
         <div class="quick-actions" id="currentActions"></div>
     </div>
 
-    <div class="schedule-container" id="scheduleContainer">
-        <!-- Schedule blocks will be populated by JavaScript -->
+    <div class="status-legend">
+        <h3>📋 Schedule Status Guide</h3>
+        <div class="legend-items">
+            <div class="legend-item">
+                <div class="legend-indicator current-indicator"></div>
+                <span><strong>Current Activity</strong> - What you should be doing right now</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-indicator upcoming-indicator"></div>
+                <span><strong>Upcoming</strong> - Future time blocks to prepare for</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-indicator past-indicator"></div>
+                <span><strong>Completed</strong> - Past time blocks (add your earnings!)</span>
+            </div>
+        </div>
     </div>
 
-    <div class="focus-timer" id="focusTimer">
-        <div class="timer-label">⏱️ Focus</div>
-        <div class="timer-display" id="timerDisplay">25:00</div>
+    <div class="schedule-container" id="scheduleContainer">
+        <!-- Schedule blocks will be populated by JavaScript -->
     </div>
 
     <script>
         // Schedule data
         const schedule = [
             {
-                time: "07:00-08:00",
+                time: "7:00 AM - 8:00 AM",
                 title: "🌅 Morning Boost & Quick Wins",
                 description: "Start with easy tasks for immediate dopamine hits. Set up passive apps and complete 2-3 quick surveys.",
                 earnings: "$8-15",
@@ -611,7 +662,7 @@
                 category: "medium-value"
             },
             {
-                time: "08:00-10:00",
+                time: "8:00 AM - 10:00 AM",
                 title: "💎 High-Value Deep Work",
                 description: "Peak focus time! Apply to studies and tackle best available tasks. Include application time in expectations.",
                 earnings: "$15-30",
@@ -625,7 +676,7 @@
                 category: "high-value"
             },
             {
-                time: "10:00-10:30",
+                time: "10:00 AM - 10:30 AM",
                 title: "🔄 Energy Reset Break",
                 description: "Essential ADHD break! Move your body, hydrate, and reset your focus. Don't skip this!",
                 earnings: "Investment",
@@ -635,7 +686,7 @@
                 category: "break-time"
             },
             {
-                time: "10:30-12:30",
+                time: "10:30 AM - 12:30 PM",
                 title: "💼 Freelance & Skill-Based Work",
                 description: "Use remaining morning focus for freelance gigs. Realistic expectations for beginners to intermediate level.",
                 earnings: "$15-30",
@@ -649,7 +700,7 @@
                 category: "high-value"
             },
             {
-                time: "12:30-13:30",
+                time: "12:30 PM - 1:30 PM",
                 title: "🍽️ Lunch & Social Recharge",
                 description: "Proper nutrition break! Eat protein for sustained afternoon energy.",
                 earnings: "Energy",
@@ -659,7 +710,7 @@
                 category: "break-time"
             },
             {
-                time: "13:30-15:00",
+                time: "1:30 PM - 3:00 PM",
                 title: "📱 Mobile & Passive Earnings",
                 description: "Post-lunch dip is perfect for easier mobile tasks. Passive apps earn $1-3/day realistically.",
                 earnings: "$8-15",
@@ -673,7 +724,7 @@
                 category: "medium-value"
             },
             {
-                time: "15:00-15:30",
+                time: "3:00 PM - 3:30 PM",
                 title: "⚡ Power Break & Planning",
                 description: "Mid-afternoon reset! Review earnings, plan remaining tasks, and re-energize for the final push.",
                 earnings: "Strategy",
@@ -683,7 +734,7 @@
                 category: "break-time"
             },
             {
-                time: "15:30-17:30",
+                time: "3:30 PM - 5:30 PM",
                 title: "🛒 Shopping & Research",
                 description: "Afternoon energy for research-heavy tasks. Hunt for deals and opportunities. Include research time in expectations.",
                 earnings: "$10-25",
@@ -697,7 +748,7 @@
                 category: "medium-value"
             },
             {
-                time: "17:30-19:00",
+                time: "5:30 PM - 7:00 PM",
                 title: "🎯 Field Work & Tasks",
                 description: "Evening energy for location-based tasks. Tasks may be limited by location and availability.",
                 earnings: "$10-25",
@@ -710,7 +761,7 @@
                 category: "medium-value"
             },
             {
-                time: "19:00-20:00",
+                time: "7:00 PM - 8:00 PM",
                 title: "🍽️ Dinner & Family Time",
                 description: "Important transition time! Eat well, connect with family, and prepare for evening tasks.",
                 earnings: "Relationship",
@@ -720,7 +771,7 @@
                 category: "break-time"
             },
             {
-                time: "20:00-21:30",
+                time: "8:00 PM - 9:30 PM",
                 title: "🔬 Evening Focus: Research",
                 description: "Second wind time! Perfect for detailed surveys and research. Realistic survey completion rates.",
                 earnings: "$12-25",
@@ -734,7 +785,7 @@
                 category: "high-value"
             },
             {
-                time: "21:30-22:30",
+                time: "9:30 PM - 10:30 PM",
                 title: "🌙 Easy Wind-Down Tasks",
                 description: "Low-effort, high-reward tasks perfect for tired brains.",
                 earnings: "$8-15",
@@ -762,13 +813,6 @@
         if (window.weekEarnings && !isNaN(parseFloat(window.weekEarnings))) {
             earnings.week = parseFloat(window.weekEarnings);
         }
-
-        let timer = {
-            minutes: 25,
-            seconds: 0,
-            isRunning: false,
-            interval: null
-        };
 
         // Initialize
         function init() {
@@ -799,17 +843,29 @@
             }
         }
 
+        function parseTimeString(timeStr) {
+            // Parse "7:00 AM" or "10:30 PM" format to minutes since midnight
+            const [time, period] = timeStr.trim().split(' ');
+            const [hours, minutes] = time.split(':').map(Number);
+            
+            let hour24 = hours;
+            if (period === 'PM' && hours !== 12) {
+                hour24 += 12;
+            } else if (period === 'AM' && hours === 12) {
+                hour24 = 0;
+            }
+            
+            return hour24 * 60 + minutes;
+        }
+
         function getCurrentBlock() {
             const now = new Date();
             const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
             for (let block of schedule) {
-                const [start, end] = block.time.split('-');
-                const [startH, startM] = start.split(':').map(Number);
-                const [endH, endM] = end.split(':').map(Number);
-                
-                const startMinutes = startH * 60 + startM;
-                const endMinutes = endH * 60 + endM;
+                const [start, end] = block.time.split(' - ');
+                const startMinutes = parseTimeString(start);
+                const endMinutes = parseTimeString(end);
                 
                 if (currentMinutes >= startMinutes && currentMinutes < endMinutes) {
                     return block;
@@ -826,11 +882,13 @@
                 const desc = document.getElementById('currentDesc');
                 const priorities = document.getElementById('currentPriorities');
                 const actions = document.getElementById('currentActions');
+                const status = document.getElementById('currentStatus');
 
                 if (currentBlock) {
                     indicator.className = 'current-block-indicator';
                     title.textContent = currentBlock.title;
                     desc.textContent = currentBlock.description;
+                    status.textContent = `⏰ ${currentBlock.time}`;
                     
                     priorities.innerHTML = `
                         <div class="priority-badge ${currentBlock.priority}-priority">
@@ -851,7 +909,8 @@
                 } else {
                     indicator.className = 'current-block-indicator rest-mode';
                     title.textContent = '🌙 Rest Mode';
-                    desc.textContent = 'Perfect time to recharge! Your brain needs downtime.';
+                    desc.textContent = 'Perfect time to recharge! Your brain needs downtime between scheduled activities.';
+                    status.textContent = '😴 OFF HOURS';
                     priorities.innerHTML = '<div class="priority-badge" style="background: rgba(139, 92, 246, 0.2); color: var(--accent-blue); border: 1px solid rgba(139, 92, 246, 0.3);">RECOVERY TIME</div>';
                     actions.innerHTML = '<div class="action-btn">😴 Rest & Recharge</div>';
                 }
@@ -867,12 +926,9 @@
                 const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
                 container.innerHTML = schedule.map((block, index) => {
-                    const [start, end] = block.time.split('-');
-                    const [startH, startM] = start.split(':').map(Number);
-                    const [endH, endM] = end.split(':').map(Number);
-                    
-                    const startMinutes = startH * 60 + startM;
-                    const endMinutes = endH * 60 + endM;
+                    const [start, end] = block.time.split(' - ');
+                    const startMinutes = parseTimeString(start);
+                    const endMinutes = parseTimeString(end);
                     
                     let blockClass = `time-block ${block.category}`;
                     if (currentMinutes >= startMinutes && currentMinutes < endMinutes) {
@@ -895,7 +951,7 @@
                     return `
                         <div class="${blockClass}">
                             <div class="time-header">
-                                <div class="time">⏰ ${block.time.replace('-', ' - ')}</div>
+                                <div class="time">⏰ ${block.time}</div>
                                 <div class="earnings-potential">${block.earnings}</div>
                             </div>
                             <div class="title">${block.title}</div>
@@ -982,54 +1038,8 @@
             }
         }
 
-        function toggleTimer() {
-            try {
-                const timerEl = document.getElementById('focusTimer');
-                
-                if (timer.isRunning) {
-                    clearInterval(timer.interval);
-                    timer.isRunning = false;
-                    timer.minutes = 25;
-                    timer.seconds = 0;
-                    timerEl.classList.remove('running');
-                    updateTimerDisplay();
-                } else {
-                    timer.isRunning = true;
-                    timerEl.classList.add('running');
-                    timer.interval = setInterval(() => {
-                        if (timer.seconds === 0) {
-                            if (timer.minutes === 0) {
-                                toggleTimer();
-                                alert('🎉 Focus session complete! Time for a break.');
-                                return;
-                            }
-                            timer.minutes--;
-                            timer.seconds = 59;
-                        } else {
-                            timer.seconds--;
-                        }
-                        updateTimerDisplay();
-                    }, 1000);
-                }
-            } catch (error) {
-                console.error('Timer error:', error);
-            }
-        }
-
-        function updateTimerDisplay() {
-            try {
-                const display = document.getElementById('timerDisplay');
-                const minutes = timer.minutes.toString().padStart(2, '0');
-                const seconds = timer.seconds.toString().padStart(2, '0');
-                display.textContent = `${minutes}:${seconds}`;
-            } catch (error) {
-                console.error('Timer display error:', error);
-            }
-        }
-
         // Event listeners
         document.addEventListener('DOMContentLoaded', init);
-        document.getElementById('focusTimer').addEventListener('click', toggleTimer);
 
         // Add CSS animation
         const style = document.createElement('style');
