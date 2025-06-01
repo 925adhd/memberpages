@@ -374,6 +374,10 @@
             border-color: var(--accent-rose);
         }
 
+        .reset-day-btn:hover {
+            opacity: 0.9;
+        }
+
         /* Simplified Details/Accordion for mobile */
         details {
             background: rgba(255, 255, 255, 0.05);
@@ -387,25 +391,6 @@
             border-color: rgba(255, 255, 255, 0.2);
         }
 
-        /* High-value tasks get the turquoise gradient */
-        .anytime-tasks {
-            background: var(--gradient-success);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-        }
-
-        .anytime-tasks[open] {
-            border-color: rgba(16, 185, 129, 0.5);
-        }
-
-        .anytime-tasks summary {
-            color: white;
-            font-weight: 700;
-        }
-
-        .anytime-tasks p {
-            color: rgba(255, 255, 255, 0.9);
-        }
-
         summary {
             font-size: 1.1rem;
             font-weight: 600;
@@ -417,78 +402,198 @@
             align-items: center;
         }
 
-        /* Anytime Tasks - Mobile Optimized */
-        .anytime-tasks-list {
-            list-style-type: none;
-            margin-top: 1rem;
-        }
-
-        .task-item {
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: flex-start;
-            background: var(--card-bg);
-            padding: 1rem;
-            border-radius: 10px;
+        /* Flexible Mode High-Value Tasks - Styled like day cards */
+        .flexible-tasks-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
             border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            border-left: 3px solid var(--accent-emerald);
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
         }
 
-        .task-checkbox {
-            margin-right: 0.75rem;
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-            flex-shrink: 0;
-            margin-top: 2px;
-            accent-color: var(--accent-blue);
+        .flexible-tasks-header {
+            margin-bottom: 1rem;
         }
 
-        .task-content {
-            flex: 1;
+        .flexible-day-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
         }
 
-        .task-title {
+        .flexible-day-subtitle {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .flexible-earnings-target {
+            background: var(--gradient-success);
+            color: white;
+            padding: 0.625rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align: center;
             font-weight: 600;
-            margin-bottom: 0.5rem;
             font-size: 0.95rem;
         }
 
-        .task-earnings {
+        .flexible-task-list {
+            background: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .flexible-task-list h3 {
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .flexible-tasks {
+            list-style-type: none;
+        }
+
+        .flexible-tasks li {
+            margin-bottom: 0.75rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            padding: 0.75rem;
+        }
+
+        .flexible-task-checkbox-container {
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+            min-height: 44px;
+            padding: 0.25rem 0;
+        }
+
+        .flexible-task-checkbox-container input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .flexible-checkmark {
+            height: 20px;
+            width: 20px;
+            background: var(--card-bg);
+            border: 2px solid var(--border-subtle);
+            border-radius: 4px;
+            margin-right: 0.75rem;
+            margin-top: 2px;
+            position: relative;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .flexible-task-checkbox-container input:checked ~ .flexible-checkmark {
+            background: var(--accent-emerald);
+            border-color: var(--accent-emerald);
+        }
+
+        .flexible-checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .flexible-task-checkbox-container input:checked ~ .flexible-checkmark:after {
+            display: block;
+        }
+
+        .flexible-task-checkbox-container .flexible-checkmark:after {
+            left: 6px;
+            top: 2px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .flexible-task-text {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            flex: 1;
+        }
+
+        .flexible-task-checkbox-container input:checked ~ .flexible-task-text {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        .flexible-task-earnings {
             color: var(--accent-emerald);
             font-weight: 600;
             font-size: 0.8rem;
-            margin-bottom: 0.5rem;
+            display: block;
+            margin: 0.25rem 0;
         }
 
-        .task-tips {
+        .flexible-task-tips {
             font-size: 0.75rem;
             color: var(--text-muted);
             line-height: 1.4;
         }
 
-        .celebration {
+        .flexible-celebration {
             text-align: center;
-            margin: 1rem 0;
-            font-size: 1.1rem;
-            color: var(--accent-emerald);
-            display: none;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid var(--accent-emerald);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: white;
+            background: var(--gradient-success);
+            padding: 0.75rem;
             border-radius: 8px;
-            padding: 1rem;
+            font-weight: 600;
+            display: none;
         }
 
-        .reset-button {
-            display: block;
-            margin: 1rem auto 0;
-            background: var(--gradient-primary);
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
+        /* Energy Filter Buttons */
+        .energy-filter-btn {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
             border-radius: 8px;
             cursor: pointer;
-            font-weight: 600;
+            transition: all 0.3s ease;
             min-height: 44px;
+            text-align: left;
+            color: var(--text-primary);
+        }
+
+        .energy-filter-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .energy-filter-btn.active {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: var(--accent-emerald);
+        }
+
+        .energy-filter-btn p {
+            margin: 0;
+        }
+
+        .energy-filter-btn strong {
+            display: block;
         }
 
         /* Platform Categories - Simplified for mobile */
@@ -717,8 +822,8 @@
 
         /* Focus styles */
         .plan-btn:focus,
-        .reset-button:focus,
         .action-btn:focus,
+        .energy-filter-btn:focus,
         .nav-toggle:focus,
         details:focus {
             outline: 2px solid var(--accent-blue);
@@ -735,104 +840,147 @@
         <p>Target $200-400/Week</p>
     </header>
 
-    <!-- Plan Selector -->
+    <!-- THE RULES - Now moved above plan selector -->
+    <details class="rules">
+        <summary>THE RULES</summary>
+        <ul>
+            <li><strong>No guilt if skipped.</strong> Just keep going, even if you miss a day.</li>
+            <li><strong>Focus on high-value first.</strong> Start with $20+/hour tasks when energy is high.</li>
+            <li><strong>Stack easy wins.</strong> Build momentum with quick tasks during low energy.</li>
+            <li><strong>Rotate platforms.</strong> Switch between apps to keep things fresh.</li>
+            <li><strong>Celebrate every win.</strong> Even small earnings add up!</li>
+        </ul>
+    </details>
+
+    <!-- Organization Style Selector - Now more prominent -->
     <section class="plan-selector">
-        <h2>Choose Your Approach</h2>
+        <h2>Choose Your Organization Style</h2>
+        <p style="text-align: center; margin-bottom: 1rem; color: var(--text-secondary); font-size: 0.9rem;">
+            Both use the same high-value tasks - pick what works for your brain today
+        </p>
         <div class="plan-buttons">
-            <button class="plan-btn flexible-btn" data-plan="flexible">Flexible Tasks</button>
-            <button class="plan-btn structured-btn" data-plan="structured">Weekly Plan</button>
+            <button class="plan-btn flexible-btn" data-plan="flexible">
+                <div style="font-weight: 700; margin-bottom: 0.25rem;">🎯 Free Flow</div>
+                <div style="font-size: 0.75rem; opacity: 0.8;">Work at your own pace</div>
+            </button>
+            <button class="plan-btn structured-btn" data-plan="structured">
+                <div style="font-weight: 700; margin-bottom: 0.25rem;">📅 Daily Structure</div>
+                <div style="font-size: 0.75rem; opacity: 0.8;">Monday-Sunday breakdown</div>
+            </button>
         </div>
     </section>
 
-    <!-- Flexible Plan Section -->
+    <!-- PLATFORM CATEGORIES - Reference for finding more work -->
+    <details class="platform-categories">
+        <summary>PLATFORM CATEGORIES <span class="priority-indicator passive-priority">REFERENCE</span></summary>
+        <p style="text-align: center; margin-bottom: 15px; font-size: 0.9rem;">Bookmark these - Prioritized by earning potential</p>
+        
+        <div class="category-container">
+            <div class="category-card high-value">
+                <h3>🎯 Premium Research <span class="priority-indicator high-priority">$25-75/hr</span></h3>
+                <ul>
+                    <li><a href="https://app.respondent.io/" target="_blank">Respondent</a> <span class="platform-pay">$50-200</span>
+                        <span class="platform-tips">Apply to 5+ studies daily, higher acceptance in mornings</span>
+                    </li>
+                    <li><a href="https://www.userinterviews.com/" target="_blank">User Interviews</a> <span class="platform-pay">$40-150</span>
+                        <span class="platform-tips">Complete profile 100%, apply within first hour</span>
+                    </li>
+                    <li><a href="https://dscout.com/participate" target="_blank">dscout</a> <span class="platform-pay">$25-100</span>
+                        <span class="platform-tips">Upload photos/videos quickly, follow instructions exactly</span>
+                    </li>
+                    <li><a href="https://www.prolific.com/" target="_blank">Prolific</a> <span class="platform-pay">$8-15/hr</span>
+                        <span class="platform-tips">Check hourly, $8/hr minimum guaranteed</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="category-card medium-value">
+                <h3>🧪 User Testing & AI <span class="priority-indicator medium-priority">$15-30/hr</span></h3>
+                <ul>
+                    <li><a href="https://www.usertesting.com/" target="_blank">UserTesting</a> <span class="platform-pay">$10/test</span>
+                        <span class="platform-tips">Check every 2 hours, speak clearly. Live tests pay $30-60</span>
+                    </li>
+                    <li><a href="https://www.outlier.ai/" target="_blank">Outlier AI</a> <span class="platform-pay">$15-50/hr</span>
+                        <span class="platform-tips">Focus on your expertise areas, maintain high ratings</span>
+                    </li>
+                    <li><a href="https://www.rev.com/freelancers" target="_blank">Rev</a> <span class="platform-pay">$8-15/hr</span>
+                        <span class="platform-tips">Quality varies by audio. Rush jobs pay more</span>
+                    </li>
+                    <li><a href="https://www.clickworker.com/" target="_blank">Clickworker</a> <span class="platform-pay">$8-15/hr</span>
+                        <span class="platform-tips">Maintain high spam accuracy for more HITs</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="category-card passive-value">
+                <h3>💰 Quick Wins <span class="priority-indicator passive-priority">$3-25/task</span></h3>
+                <ul>
+                    <li><a href="https://www.bestmark.com/" target="_blank">Mystery Shopping</a> <span class="platform-pay">$10-50</span>
+                        <span class="platform-tips">Combine with regular errands for efficiency</span>
+                    </li>
+                    <li><a href="https://crowdtap.com/" target="_blank">Crowdtap</a> <span class="platform-pay">$1-5</span>
+                        <span class="platform-tips">Check multiple times daily, quick tasks</span>
+                    </li>
+                    <li><a href="https://www.honeygain.com/" target="_blank">Passive Income</a> <span class="platform-pay">$5-20/mo</span>
+                        <span class="platform-tips">Honeygain, Pawns - set and forget</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </details>
+
+    <!-- Free Flow Organization -->
     <section id="flexible-plan" class="plan-section">
-        <details class="rules">
-            <summary>THE RULES</summary>
-            <ul>
-                <li><strong>No guilt if skipped.</strong> Just keep going, even if you miss a day.</li>
-                <li><strong>Focus on high-value first.</strong> Start with $20+/hour tasks when energy is high.</li>
-                <li><strong>Stack easy wins.</strong> Build momentum with quick tasks during low energy.</li>
-                <li><strong>Rotate platforms.</strong> Switch between apps to keep things fresh.</li>
-                <li><strong>Celebrate every win.</strong> Even small earnings add up!</li>
-            </ul>
-        </details>
+        <!-- Energy Level Filters -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem;">
+            <button class="energy-filter-btn" id="high-energy-btn" data-filter="high">
+                <strong style="color: var(--accent-emerald); font-size: 0.85rem;">🔥 High Energy</strong>
+                <p style="color: var(--text-secondary); font-size: 0.8rem; margin-top: 0.25rem;">Show $25+ tasks</p>
+            </button>
+            <button class="energy-filter-btn" id="low-energy-btn" data-filter="low">
+                <strong style="color: var(--accent-teal); font-size: 0.85rem;">⚡ Low Energy</strong>
+                <p style="color: var(--text-secondary); font-size: 0.8rem; margin-top: 0.25rem;">Show quick wins</p>
+            </button>
+        </div>
 
-        <details class="anytime-tasks">
-            <summary>HIGH-VALUE TASKS <span class="priority-indicator high-priority">PRIORITY</span></summary>
-            <p style="text-align: center; margin-bottom: 15px; font-size: 0.9rem;">Focus on these when you have good energy</p>
+        <div class="flexible-tasks-container">
+            <div class="confetti-container" id="flexible-confetti-container"></div>
+            
+            <h2 class="flexible-day-title">FREE FLOW</h2>
+            <h3 class="flexible-day-subtitle">Work at Your Own Pace</h3>
+            <div class="flexible-earnings-target">🎯 Target: $200-400/Week</div>
 
-            <div class="celebration" id="anytime-celebration">
+            <div class="flexible-celebration" id="flexible-celebration">
                 🎉 Great job! Keep that momentum going! 🎉
             </div>
 
-            <div class="anytime-tasks-list" id="anytime-tasks-list">
-                <!-- Tasks will be populated by JavaScript -->
+            <div class="flexible-task-list">
+                <h3 id="task-list-header">High-Value Tasks:</h3>
+                <ul class="flexible-tasks" id="flexible-tasks-list">
+                    <!-- Tasks will be populated by JavaScript -->
+                </ul>
             </div>
 
-            <button class="reset-button" id="reset-anytime-button">Reset Tasks</button>
-        </details>
-        
-        <details class="platform-categories">
-            <summary>PLATFORM CATEGORIES</summary>
-            <p style="text-align: center; margin-bottom: 15px; font-size: 0.9rem;">Prioritized by earning potential</p>
+            <div class="bonus-tip">
+                <strong>Free Flow Strategy:</strong> Work through these tasks based on your energy level and available time. No pressure, no schedule - just consistent progress!
+            </div>
             
-            <div class="category-container">
-                <div class="category-card high-value">
-                    <h3>🎯 Premium Research <span class="priority-indicator high-priority">$25-75/hr</span></h3>
-                    <ul>
-                        <li><a href="https://app.respondent.io/" target="_blank">Respondent</a> <span class="platform-pay">$50-200</span>
-                            <span class="platform-tips">Apply to 5+ studies daily, higher acceptance in mornings</span>
-                        </li>
-                        <li><a href="https://www.userinterviews.com/" target="_blank">User Interviews</a> <span class="platform-pay">$40-150</span>
-                            <span class="platform-tips">Complete profile 100%, apply within first hour</span>
-                        </li>
-                        <li><a href="https://dscout.com/participate" target="_blank">dscout</a> <span class="platform-pay">$25-100</span>
-                            <span class="platform-tips">Upload photos/videos quickly, follow instructions exactly</span>
-                        </li>
-                        <li><a href="https://www.prolific.com/" target="_blank">Prolific</a> <span class="platform-pay">$8-15/hr</span>
-                            <span class="platform-tips">Check hourly, $8/hr minimum guaranteed</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="category-card medium-value">
-                    <h3>🧪 User Testing & AI <span class="priority-indicator medium-priority">$15-30/hr</span></h3>
-                    <ul>
-                        <li><a href="https://www.usertesting.com/" target="_blank">UserTesting</a> <span class="platform-pay">$10/test</span>
-                            <span class="platform-tips">Check every 2 hours, speak clearly. Live tests pay $30-60</span>
-                        </li>
-                        <li><a href="https://www.outlier.ai/" target="_blank">Outlier AI</a> <span class="platform-pay">$15-50/hr</span>
-                            <span class="platform-tips">Focus on your expertise areas, maintain high ratings</span>
-                        </li>
-                        <li><a href="https://www.rev.com/freelancers" target="_blank">Rev</a> <span class="platform-pay">$8-15/hr</span>
-                            <span class="platform-tips">Quality varies by audio. Rush jobs pay more</span>
-                        </li>
-                        <li><a href="https://www.clickworker.com/" target="_blank">Clickworker</a> <span class="platform-pay">$8-15/hr</span>
-                            <span class="platform-tips">Maintain high spam accuracy for more HITs</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="category-card passive-value">
-                    <h3>💰 Quick Wins <span class="priority-indicator passive-priority">$3-25/task</span></h3>
-                    <ul>
-                        <li><a href="https://www.bestmark.com/" target="_blank">Mystery Shopping</a> <span class="platform-pay">$10-50</span>
-                            <span class="platform-tips">Combine with regular errands for efficiency</span>
-                        </li>
-                        <li><a href="https://crowdtap.com/" target="_blank">Crowdtap</a> <span class="platform-pay">$1-5</span>
-                            <span class="platform-tips">Check multiple times daily, quick tasks</span>
-                        </li>
-                        <li><a href="https://www.honeygain.com/" target="_blank">Passive Income</a> <span class="platform-pay">$5-20/mo</span>
-                            <span class="platform-tips">Honeygain, Pawns - set and forget</span>
-                        </li>
-                    </ul>
-                </div>
+            <div class="action-buttons">
+                <button class="action-btn back-to-top-btn">↑ Back to Top</button>
+                <button class="action-btn reset-day-btn" id="reset-flexible-button">Reset Tasks</button>
             </div>
-        </details>
+        </div>
     </section>
 
-    <!-- Structured Plan Section -->
+    <!-- Daily Structure Organization -->
     <section id="structured-plan" class="plan-section">
+        <div style="text-align: center; padding: 1rem; background: rgba(79, 70, 229, 0.1); border: 1px solid var(--accent-blue); border-radius: 12px; margin-bottom: 1rem;">
+            <h3 style="color: var(--accent-blue); margin-bottom: 0.5rem;">📅 Daily Structure Mode Active</h3>
+            <p style="color: var(--text-secondary); font-size: 0.85rem;">
+                Organized breakdown using the platform categories above. Each day focuses on specific earning strategies.
+            </p>
+        </div>
+        
         <!-- Slim Day Navigation -->
         <div class="slim-day-nav" id="slim-day-nav">
             <a href="#monday-card" class="slim-day-link" data-day="monday">Mon</a>
@@ -1227,47 +1375,55 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Enhanced task database
-            const anytimeTasks = [
+            // Enhanced task database with energy levels
+            const flexibleTasks = [
                 {
                     title: "Apply to 3+ Respondent studies",
                     earnings: "$50-200 each",
-                    tips: "Apply in mornings for better acceptance rates"
-                },
-                {
-                    title: "Complete 1 hour of Rev transcription",
-                    earnings: "$8-15",
-                    tips: "Beginners often earn $5-10/hr. Audio quality varies"
-                },
-                {
-                    title: "Check UserTesting for tests",
-                    earnings: "$10/test",
-                    tips: "Most tests pay $10 and take 15-20 minutes"
+                    tips: "Apply in mornings for better acceptance rates",
+                    energy: "high"
                 },
                 {
                     title: "Complete a dscout mission",
                     earnings: "$25-100",
-                    tips: "Upload content quickly and follow instructions exactly"
-                },
-                {
-                    title: "Work on Prolific studies",
-                    earnings: "$8-15/hr",
-                    tips: "Check hourly, $8/hr minimum guaranteed"
+                    tips: "Upload content quickly and follow instructions exactly",
+                    energy: "high"
                 },
                 {
                     title: "Complete Outlier AI tasks",
                     earnings: "$15-50/hr",
-                    tips: "Focus on your expertise areas for better ratings"
+                    tips: "Focus on your expertise areas for better ratings",
+                    energy: "high"
+                },
+                {
+                    title: "Complete 1 hour of Rev transcription",
+                    earnings: "$8-15",
+                    tips: "Beginners often earn $5-10/hr. Audio quality varies",
+                    energy: "low"
+                },
+                {
+                    title: "Check UserTesting for tests",
+                    earnings: "$10/test",
+                    tips: "Most tests pay $10 and take 15-20 minutes",
+                    energy: "low"
+                },
+                {
+                    title: "Work on Prolific studies",
+                    earnings: "$8-15/hr",
+                    tips: "Check hourly, $8/hr minimum guaranteed",
+                    energy: "low"
                 },
                 {
                     title: "Set up passive income apps",
                     earnings: "$1-5/day ongoing",
-                    tips: "Honeygain, Pawns - realistic: $10-30/month total"
+                    tips: "Honeygain, Pawns - realistic: $10-30/month total",
+                    energy: "low"
                 },
                 {
                     title: "Do mystery shopping task",
                     earnings: "$10-50",
-                    tips: "Combine with regular errands for efficiency"
+                    tips: "Combine with regular errands for efficiency",
+                    energy: "low"
                 }
             ];
 
@@ -1294,78 +1450,117 @@
             // Set default to show flexible plan
             document.querySelector('.flexible-btn').click();
 
-            // Anytime tasks functionality
-            const anytimeTasksList = document.getElementById('anytime-tasks-list');
-            const anytimeCelebration = document.getElementById('anytime-celebration');
+            // Flexible tasks functionality
+            const flexibleTasksList = document.getElementById('flexible-tasks-list');
+            const flexibleCelebration = document.getElementById('flexible-celebration');
+            const taskListHeader = document.getElementById('task-list-header');
 
-            anytimeTasks.forEach((task, index) => {
-                const taskItem = document.createElement('div');
-                taskItem.className = 'task-item';
+            flexibleTasks.forEach((task, index) => {
+                const taskItem = document.createElement('li');
+                taskItem.setAttribute('data-energy', task.energy);
+
+                const taskLabel = document.createElement('label');
+                taskLabel.className = 'flexible-task-checkbox-container';
 
                 const checkbox = document.createElement('input');
                 checkbox.type = 'checkbox';
-                checkbox.id = 'anytime-task-' + index;
-                checkbox.className = 'task-checkbox';
+                checkbox.id = 'flexible-task-' + index;
+                checkbox.className = 'flexible-task-input';
 
-                const taskContent = document.createElement('div');
-                taskContent.className = 'task-content';
+                const checkmark = document.createElement('span');
+                checkmark.className = 'flexible-checkmark';
 
-                const title = document.createElement('div');
-                title.className = 'task-title';
-                title.textContent = task.title;
+                const taskTextSpan = document.createElement('span');
+                taskTextSpan.className = 'flexible-task-text';
+                
+                const taskTitle = document.createElement('div');
+                taskTitle.textContent = task.title;
+                taskTitle.style.fontWeight = '600';
+                taskTitle.style.marginBottom = '0.25rem';
 
-                const earnings = document.createElement('div');
-                earnings.className = 'task-earnings';
-                earnings.textContent = task.earnings;
+                const taskEarnings = document.createElement('div');
+                taskEarnings.className = 'flexible-task-earnings';
+                taskEarnings.textContent = task.earnings;
 
-                const tips = document.createElement('div');
-                tips.className = 'task-tips';
-                tips.textContent = `💡 ${task.tips}`;
+                const taskTips = document.createElement('div');
+                taskTips.className = 'flexible-task-tips';
+                taskTips.textContent = `💡 ${task.tips}`;
 
-                taskContent.appendChild(title);
-                taskContent.appendChild(earnings);
-                taskContent.appendChild(tips);
+                taskTextSpan.appendChild(taskTitle);
+                taskTextSpan.appendChild(taskEarnings);
+                taskTextSpan.appendChild(taskTips);
 
-                const storageKey = 'anytime-task-' + index;
-                if (window.anytimeTaskState && window.anytimeTaskState[storageKey]) {
+                taskLabel.appendChild(checkbox);
+                taskLabel.appendChild(checkmark);
+                taskLabel.appendChild(taskTextSpan);
+
+                taskItem.appendChild(taskLabel);
+
+                const storageKey = 'flexible-task-' + index;
+                if (window.flexibleTaskState && window.flexibleTaskState[storageKey]) {
                     checkbox.checked = true;
                 }
 
                 checkbox.addEventListener('change', function() {
-                    if (!window.anytimeTaskState) window.anytimeTaskState = {};
-                    window.anytimeTaskState[storageKey] = this.checked;
+                    if (!window.flexibleTaskState) window.flexibleTaskState = {};
+                    window.flexibleTaskState[storageKey] = this.checked;
                     
                     if (this.checked) {
-                        createAnytimeTaskConfetti();
+                        createFlexibleTaskConfetti();
                     }
                     
-                    updateAnytimeCelebration();
+                    updateFlexibleCelebration();
                 });
 
-                taskItem.appendChild(checkbox);
-                taskItem.appendChild(taskContent);
-                anytimeTasksList.appendChild(taskItem);
+                flexibleTasksList.appendChild(taskItem);
             });
 
-            function createAnytimeTaskConfetti() {
-                const anytimeSection = document.querySelector('.anytime-tasks');
-                if (!anytimeSection) return;
+            // Energy filter functionality
+            const highEnergyBtn = document.getElementById('high-energy-btn');
+            const lowEnergyBtn = document.getElementById('low-energy-btn');
+            let currentFilter = 'all';
+
+            function filterTasks(energyLevel) {
+                const tasks = flexibleTasksList.querySelectorAll('li');
                 
-                let confettiContainer = anytimeSection.querySelector('.anytime-confetti-container');
-                if (!confettiContainer) {
-                    confettiContainer = document.createElement('div');
-                    confettiContainer.className = 'confetti-container anytime-confetti-container';
-                    confettiContainer.style.position = 'absolute';
-                    confettiContainer.style.top = '0';
-                    confettiContainer.style.left = '0';
-                    confettiContainer.style.width = '100%';
-                    confettiContainer.style.height = '100%';
-                    confettiContainer.style.pointerEvents = 'none';
-                    confettiContainer.style.overflow = 'hidden';
-                    confettiContainer.style.zIndex = '20';
-                    anytimeSection.style.position = 'relative';
-                    anytimeSection.appendChild(confettiContainer);
+                tasks.forEach(task => {
+                    if (energyLevel === 'all' || task.getAttribute('data-energy') === energyLevel) {
+                        task.style.display = 'block';
+                    } else {
+                        task.style.display = 'none';
+                    }
+                });
+
+                // Update header
+                if (energyLevel === 'high') {
+                    taskListHeader.textContent = 'High-Energy Tasks ($25+):';
+                } else if (energyLevel === 'low') {
+                    taskListHeader.textContent = 'Low-Energy Tasks:';
+                } else {
+                    taskListHeader.textContent = 'High-Value Tasks:';
                 }
+
+                // Update button states
+                highEnergyBtn.classList.toggle('active', energyLevel === 'high');
+                lowEnergyBtn.classList.toggle('active', energyLevel === 'low');
+                
+                currentFilter = energyLevel;
+            }
+
+            highEnergyBtn.addEventListener('click', () => {
+                filterTasks(currentFilter === 'high' ? 'all' : 'high');
+            });
+
+            lowEnergyBtn.addEventListener('click', () => {
+                filterTasks(currentFilter === 'low' ? 'all' : 'low');
+            });
+
+            function createFlexibleTaskConfetti() {
+                const flexibleContainer = document.querySelector('.flexible-tasks-container');
+                if (!flexibleContainer) return;
+                
+                const confettiContainer = document.getElementById('flexible-confetti-container');
+                if (!confettiContainer) return;
                 
                 const colors = ['#4f46e5', '#06b6d4', '#10b981', '#f59e0b', '#f43f5e'];
                 
@@ -1400,21 +1595,21 @@
                 }, 1500);
             }
 
-            function updateAnytimeCelebration() {
-                const checkboxes = document.querySelectorAll('.task-checkbox');
+            function updateFlexibleCelebration() {
+                const checkboxes = document.querySelectorAll('.flexible-task-input');
                 let checkedCount = 0;
                 checkboxes.forEach(cb => {
                     if (cb.checked) checkedCount++;
                 });
-                anytimeCelebration.style.display = checkedCount >= 2 ? 'block' : 'none';
+                flexibleCelebration.style.display = checkedCount >= 2 ? 'block' : 'none';
             }
 
-            document.getElementById('reset-anytime-button').addEventListener('click', function() {
-                document.querySelectorAll('.task-checkbox').forEach((checkbox) => {
+            document.getElementById('reset-flexible-button').addEventListener('click', function() {
+                document.querySelectorAll('.flexible-task-input').forEach((checkbox) => {
                     checkbox.checked = false;
                 });
-                window.anytimeTaskState = {};
-                anytimeCelebration.style.display = 'none';
+                window.flexibleTaskState = {};
+                flexibleCelebration.style.display = 'none';
             });
 
             // Weekly plan functionality
@@ -1621,7 +1816,7 @@
 
             // Initialize
             loadWeeklyState();
-            updateAnytimeCelebration();
+            updateFlexibleCelebration();
             days.forEach(day => {
                 checkWeeklyDayCompletion(day);
             });
