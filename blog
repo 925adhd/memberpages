@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>They Told Me to Focus on Myself. So I Did.</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 1rem;
+      line-height: 1.6;
+      color: #222;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    h2 {
+      margin-top: 2rem;
+    }
+    .meta {
+      color: #777;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+    .checklist li {
+      list-style: none;
+      margin-bottom: 0.5rem;
+    }
+    .checklist li::before {
+      content: '✅ ';
+      margin-right: 0.25rem;
+    }
+    .lightbulb {
+      list-style: none;
+    }
+    .lightbulb li::before {
+      content: '💡 ';
+      margin-right: 0.25rem;
+    }
+    blockquote {
+      border-left: 4px solid #ccc;
+      padding-left: 1rem;
+      color: #555;
+      font-style: italic;
+    }
+    .callout {
+      margin-top: 2rem;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    .cta {
+      margin-top: 2rem;
+      font-size: 1.1rem;
+      background: #fef3c7;
+      padding: 1rem;
+      border-left: 6px solid #fbbf24;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>They Told Me to Focus on Myself. So I Did.</h1>
+  <div class="meta">June 1, 2025 | ADHD in the Workplace, Personal ADHD Insights/Rants</div>
+
+  <p>I didn’t learn the importance of focusing on myself from some self-help book or wellness podcast.</p>
+  <p>I learned it at work—<br>in a manipulative meeting<br>with bosses who couldn’t take accountability.</p>
+
+  <h2>The Tension You Could Feel in the Room</h2>
+  <p>There was something off in our team.</p>
+  <p>Everyone was working hard.<br>But there was a heaviness—unspoken tension, awkward silences, the kind that makes your stomach tighten.</p>
+  <p>I saw it. I felt it.<br>And eventually… I showed it.</p>
+
+  <h2>The Private Meeting</h2>
+  <p>One day, I got pulled aside.</p>
+  <blockquote>“What’s going on with you?”</blockquote>
+
+  <p>I decided to answer honestly. Not passive-aggressively. Not rudely. Just real.</p>
+  <p>I asked if I could speak freely. They said yes.</p>
+  <p>So I shared what I saw. What I felt.<br>I thought leadership wanted feedback, truth, clarity.</p>
+  <p>But then came the corporate plot twist:</p>
+  <blockquote>
+    “You just need to focus on yourself.”<br>
+    “If you want to be a leader, that’s not how you should act.”
+  </blockquote>
+  <p>(And by the way—I never said I wanted to be a leader.)</p>
+
+  <h2>The Lesson I Wasn’t Supposed to Learn</h2>
+  <p>Looking back, that moment taught me more than they meant it to.</p>
+  <p>They weren’t trying to help. They were trying to silence me.</p>
+  <p>They made the problem <em>me</em>—instead of addressing the real issues.</p>
+  <p>They used “focus on yourself” as a shield against accountability.</p>
+
+  <h2>So I Took Their Advice—But On My Terms</h2>
+  <p>Yeah, I started focusing on myself. But not the way they wanted.</p>
+  <ul class="checklist">
+    <li>I focused on protecting my energy</li>
+    <li>I started trusting my gut</li>
+    <li>I realized I am a leader—not because I play the game, but because I’m not afraid to name what others avoid</li>
+  </ul>
+
+  <h2>ADHD Doesn’t Make Me the Problem</h2>
+  <p>It makes me <strong>aware</strong>.</p>
+  <ul class="lightbulb">
+    <li>I notice patterns</li>
+    <li>I ask uncomfortable questions</li>
+    <li>I care—sometimes too loudly for people who prefer silence</li>
+  </ul>
+  <p>ADHD doesn’t make me a bad employee.<br>It makes me sensitive to chaos, dysfunction, and fake leadership.</p>
+
+  <h2>Reclaim the Phrase</h2>
+  <p>If someone told you to “just focus on yourself” in a moment when you needed support—</p>
+  <p>You can reclaim that.<br>You can flip it. Rewire it.<br>Turn it into your own kind of power.</p>
+  <p class="callout">Because now? I am focusing on myself. And it’s making me dangerous—<br>in the best possible way.</p>
+
+  <div class="cta">
+    💥 <strong>Ready to thrive on your own terms?</strong><br><br>
+    That’s what <strong>925 ADHD</strong> is here for.<br><br>
+    Let’s turn every shutdown into a comeback.<br>
+    Let’s make <em>“focus on yourself”</em> mean freedom.<br>
+    Let’s make ADHD your edge—not your weakness.<br><br>
+    👉 <strong>Start your comeback</strong>
+  </div>
+
+</body>
+</html>
