@@ -6,6 +6,7 @@
   <title>925 ADHD Blog Feed</title>
   <style>
     body { font-family: Arial, sans-serif; max-width: 600px; margin: 2rem auto; padding: 1rem; }
+    h1 { font-size: 1.8rem; color: #333; }
     h3 { margin-bottom: 0.2rem; }
     a { color: #0077cc; text-decoration: none; }
     a:hover { text-decoration: underline; }
@@ -17,7 +18,7 @@
   <div id="blog-posts">Loading posts...</div>
 
   <script>
-    const rssToJsonUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://925adhd.com/blog/';
+    const rssToJsonUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://925adhd.com/blog/f.rss';
 
     fetch(rssToJsonUrl)
       .then(response => response.json())
@@ -25,7 +26,10 @@
         const container = document.getElementById('blog-posts');
         container.innerHTML = ''; // Clear loading message
         data.items.forEach(post => {
-          const postHtml = `<h3><a href="${post.link}" target="_blank" rel="noopener noreferrer">${post.title}</a></h3><p>${new Date(post.pubDate).toLocaleDateString()}</p>`;
+          const postHtml = `
+            <h3><a href="${post.link}" target="_blank" rel="noopener noreferrer">${post.title}</a></h3>
+            <p>${new Date(post.pubDate).toLocaleDateString()}</p>
+          `;
           container.insertAdjacentHTML('beforeend', postHtml);
         });
       })
