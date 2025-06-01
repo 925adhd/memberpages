@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>925 ADHD Hacks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-bg: #0a0e1a;
+      --secondary-bg: #1a1f2e;
+      --card-bg: rgba(255, 255, 255, 0.02);
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --text-primary: #ffffff;
+      --text-secondary: #a0a8b8;
+      --text-muted: #6b7280;
+      --accent-blue: #4f46e5;
+      --accent-teal: #06b6d4;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --accent-purple: #8b5cf6;
+      --accent-orange: #f97316;
+      --border-subtle: rgba(255, 255, 255, 0.1);
+      --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.15);
+      --shadow-medium: 0 8px 40px rgba(0, 0, 0, 0.25);
+      --shadow-strong: 0 16px 64px rgba(0, 0, 0, 0.35);
+      --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-success: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+      --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+      --gradient-info: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 100%);
+      --gradient-hacks: linear-gradient(135deg, #8b5cf6 0%, #f97316 50%, #ef4444 100%);
+      --gradient-brain: linear-gradient(135deg, #ec4899 0%, #8b5cf6 50%, #06b6d4 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background: var(--primary-bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* Background Effects - Different from blog */
+    .bg-gradient {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at top left, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
+                  radial-gradient(ellipse at bottom right, rgba(249, 115, 22, 0.08) 0%, transparent 50%),
+                  radial-gradient(ellipse at center, rgba(236, 72, 153, 0.06) 0%, transparent 70%);
+      z-index: -2;
+      animation: hackGradientShift 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes hackGradientShift {
+      0% { 
+        background: radial-gradient(ellipse at top left, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
+                    radial-gradient(ellipse at bottom right, rgba(249, 115, 22, 0.08) 0%, transparent 50%),
+                    radial-gradient(ellipse at center, rgba(236, 72, 153, 0.06) 0%, transparent 70%);
+      }
+      33% { 
+        background: radial-gradient(ellipse at top right, rgba(245, 158, 11, 0.1) 0%, transparent 50%),
+                    radial-gradient(ellipse at bottom left, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                    radial-gradient(ellipse at center top, rgba(6, 182, 212, 0.08) 0%, transparent 70%);
+      }
+      66% { 
+        background: radial-gradient(ellipse at center, rgba(239, 68, 68, 0.1) 0%, transparent 50%),
+                    radial-gradient(ellipse at top, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+                    radial-gradient(ellipse at bottom, rgba(139, 92, 246, 0.06) 0%, transparent 70%);
+      }
+      100% { 
+        background: radial-gradient(ellipse at bottom, rgba(6, 182, 212, 0.12) 0%, transparent 50%),
+                    radial-gradient(ellipse at top left, rgba(249, 115, 22, 0.1) 0%, transparent 50%),
+                    radial-gradient(ellipse at right, rgba(236, 72, 153, 0.08) 0%, transparent 70%);
+      }
+    }
+
+    .floating-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(45px);
+      opacity: 0.15;
+      z-index: -1;
+      animation: hackFloat 25s infinite ease-in-out;
+    }
+
+    .orb-1 {
+      width: 280px;
+      height: 280px;
+      background: var(--accent-purple);
+      top: -140px;
+      right: -140px;
+      animation-delay: -3s;
+    }
+
+    .orb-2 {
+      width: 220px;
+      height: 220px;
+      background: var(--accent-orange);
+      bottom: -110px;
+      left: -110px;
+      animation-delay: -12s;
+    }
+
+    .orb-3 {
+      width: 190px;
+      height: 190px;
+      background: var(--accent-rose);
+      top: 30%;
+      left: -95px;
+      animation-delay: -7s;
+    }
+
+    .orb-4 {
+      width: 240px;
+      height: 240px;
+      background: var(--accent-teal);
+      bottom: 20%;
+      right: -120px;
+      animation-delay: -18s;
+    }
+
+    @keyframes hackFloat {
+      0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      25% { transform: translate(-40px, -25px) scale(1.2) rotate(90deg); }
+      50% { transform: translate(25px, -35px) scale(0.8) rotate(180deg); }
+      75% { transform: translate(-20px, 20px) scale(1.1) rotate(270deg); }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 25px;
+      padding: 3rem;
+      text-align: center;
+      box-shadow: var(--shadow-medium);
+      margin-bottom: 2rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      animation: slideUp 0.8s ease-out;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(139, 92, 246, 0.08), transparent);
+      animation: hackShimmer 5s infinite;
+      pointer-events: none;
+    }
+
+    @keyframes hackShimmer {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .header:hover {
+      transform: translateY(-5px) scale(1.01);
+      box-shadow: var(--shadow-strong);
+      border-color: rgba(139, 92, 246, 0.3);
+    }
+
+    .header-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      animation: brainPulse 3s infinite ease-in-out;
+    }
+
+    @keyframes brainPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      background: var(--gradient-hacks);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: hackTextGradient 5s ease-in-out infinite;
+      font-weight: 800;
+      letter-spacing: -2px;
+      margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes hackTextGradient {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+      font-weight: 500;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 1.5rem;
+    }
+
+    .controls {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 25px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .filter-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      padding: 0.8rem 1.5rem;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .filter-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--gradient-hacks);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .filter-btn span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      color: white;
+      border-color: transparent;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .filter-btn:hover::before,
+    .filter-btn.active::before {
+      opacity: 1;
+    }
+
+    .sort-select {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      padding: 0.8rem 1.5rem;
+      border-radius: 25px;
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .hack-grid {
+      display: grid;
+      gap: 2rem;
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .hack-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 25px;
+      padding: 2.5rem;
+      box-shadow: var(--shadow-soft);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      animation: slideInUp 0.8s ease-out both;
+      animation-delay: calc(var(--i) * 0.15s);
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .hack-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--gradient-hacks);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1;
+    }
+
+    .hack-card:hover::before {
+      opacity: 0.04;
+    }
+
+    .hack-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: var(--shadow-strong);
+      border-color: rgba(139, 92, 246, 0.3);
+    }
+
+    .hack-card.productivity {
+      border-left: 5px solid var(--accent-purple);
+    }
+
+    .hack-card.focus {
+      border-left: 5px solid var(--accent-orange);
+    }
+
+    .hack-card.energy {
+      border-left: 5px solid var(--accent-rose);
+    }
+
+    .hack-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hack-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+      gap: 1rem;
+    }
+
+    .hack-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .hack-meta {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .hack-category {
+      background: var(--card-bg);
+      color: var(--text-secondary);
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid var(--border-subtle);
+      backdrop-filter: blur(10px);
+    }
+
+    .hack-category.productivity { 
+      background: rgba(139, 92, 246, 0.15);
+      color: var(--accent-purple);
+      border-color: rgba(139, 92, 246, 0.3);
+    }
+
+    .hack-category.focus { 
+      background: rgba(249, 115, 22, 0.15);
+      color: var(--accent-orange);
+      border-color: rgba(249, 115, 22, 0.3);
+    }
+
+    .hack-category.energy { 
+      background: rgba(244, 63, 94, 0.15);
+      color: var(--accent-rose);
+      border-color: rgba(244, 63, 94, 0.3);
+    }
+
+    .hack-description {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    .hack-excerpt {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .try-hack {
+      background: var(--gradient-hacks);
+      color: white;
+      padding: 0.8rem 2rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-soft);
+      border: none;
+      cursor: pointer;
+    }
+
+    .try-hack:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .try-hack::after {
+      content: '🚀';
+      transition: transform 0.3s ease;
+    }
+
+    .try-hack:hover::after {
+      transform: scale(1.2);
+    }
+
+    .brain-indicator {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-size: 1.5rem;
+      animation: brainGlow 2.5s infinite;
+    }
+
+    @keyframes brainGlow {
+      0%, 100% { opacity: 0.7; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+
+    .featured-image {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin-bottom: 1.5rem;
+      transition: all 0.4s ease;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .hack-card:hover .featured-image {
+      transform: scale(1.03);
+      border-color: rgba(139, 92, 246, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 1rem; }
+      .header { 
+        padding: 2rem;
+        margin-bottom: 1.5rem;
+      }
+      h1 { font-size: 2.2rem; }
+      .hack-card { padding: 2rem; }
+      .hack-title { font-size: 1.3rem; }
+      .controls { 
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1.5rem;
+      }
+      .hack-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .featured-image { height: 180px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-gradient"></div>
+  <div class="floating-orb orb-1"></div>
+  <div class="floating-orb orb-2"></div>
+  <div class="floating-orb orb-3"></div>
+  <div class="floating-orb orb-4"></div>
+
+  <div class="container">
+    <div class="header">
+      <div class="header-icon">🧠</div>
+      <h1>ADHD Hacks</h1>
+      <p class="subtitle">Experiment with proven strategies designed for ADHD minds</p>
+    </div>
+
+    <div class="controls">
+      <button class="filter-btn active" data-filter="all"><span>All Hacks</span></button>
+      <button class="filter-btn" data-filter="productivity"><span>Productivity</span></button>
+      <button class="filter-btn" data-filter="focus"><span>Focus</span></button>
+      <button class="filter-btn" data-filter="energy"><span>Energy</span></button>
+      <select class="sort-select" id="sortSelect">
+        <option value="title">Alphabetical</option>
+        <option value="category">By Category</option>
+      </select>
+    </div>
+    
+    <div class="hack-grid" id="hackGrid">
+      <!-- Hacks will be populated by JavaScript -->
+    </div>
+  </div>
+
+  <script>
+    // ADHD Hacks data - Consolidated with best 5-minute rule version
+    const adhdHacks = [
+      {
+        title: "The Ultimate 5-Minute Rule",
+        description: "Master the most powerful ADHD productivity hack - the scientifically-backed 5-Minute Rule that transforms procrastination into unstoppable momentum.",
+        content: "Struggling to get started on tasks? The 5-Minute Rule is the ultimate weapon against ADHD procrastination and the foundation of sustainable productivity. Here's how it works: Set a timer for exactly 5 minutes and commit to working on ONE specific task without any distractions during that time. The magic happens because you're hacking your brain's resistance to getting started - often the biggest hurdle for ADHD minds. By committing to just 5 minutes, you trick your brain into thinking 'this isn't a big deal,' which bypasses the overwhelming feelings that cause procrastination. Most importantly, you'll discover that starting is 90% of the battle. Once you begin, momentum takes over and you'll often continue working well past the 5-minute mark. The science behind this technique lies in how it activates your brain's dopamine reward system and builds what psychologists call 'task initiation' - a crucial executive function that ADHD brains struggle with. Use this hack for any task: cleaning, studying, work projects, exercise, or even difficult conversations. The key is being specific about what you'll do in those 5 minutes and protecting that time from all distractions. This simple technique has helped thousands of people with ADHD transform their relationship with productivity, turning overwhelming to-do lists into manageable, momentum-building victories.",
+        category: "Productivity",
+        image: "https://res.cloudinary.com/glide/image/upload/onboarding_img/019595a6-cb70-7aa8-acd6-fa5a3567fed7"
+      },
+      {
+        title: "Staying Organized with a Magnetic Board",
+        description: "Learn how a magnetic board can help you keep important tasks and reminders at your fingertips.",
+        content: "Are you tired of forgetting important tasks and reminders? A magnetic board is a simple yet effective tool that can help you stay organized and on top of your responsibilities. Place it somewhere you see daily - like your refrigerator or office wall. Use colorful magnets to hold notes, deadlines, and priority tasks. The visual reminder system works perfectly for ADHD brains that benefit from external cues. You can categorize by urgency, use different colors for different life areas, or simply use it as a brain dump for everything you need to remember.",
+        category: "Focus",
+        image: "https://res.cloudinary.com/glide/image/upload/onboarding_img/019595a6-cb70-7aa8-acd7-04d4a23243c0"
+      },
+      {
+        title: "Boost Productivity with the Power of Comfy Shoes",
+        description: "Discover how wearing shoes while working from home can increase focus",
+        content: "I've got a confession to make: I'm a firm believer that what you wear can impact your mood and productivity. That's why I'm excited to share a simple ADHD hack that's worked wonders for me - keeping my shoes on while working from home! 👟 Not only does this trick keep my feet comfortable, but it also tricks my brain into thinking I'm ready to tackle the day. It's amazing how a small change like this can snowball into increased focus and motivation. 💫 So, next time you're working from home, give it a try - you might be surprised at how much more productive you become!",
+        category: "Energy",
+        image: "https://res.cloudinary.com/glide/image/upload/onboarding_img/019595a6-cb71-7aa8-acd7-143c5462f6d2"
+      },
+      {
+        title: "Make Cleaning a Breeze with Dawn Powerwash",
+        description: "Discover how Dawn Powerwash can simplify your cleaning routine",
+        content: "Cleaning can be a daunting task, especially when you're short on time or energy. That's why I'm excited to share my latest ADHD hack - Dawn Powerwash! 🚿 This incredible cleaning product makes quick work of even the toughest messes, leaving your home sparkling clean and fresh. With Dawn Powerwash, you can say goodbye to scrubbing and soaking, and hello to a cleaner, more organized home. So, what are you waiting for? Give it a try and experience the thrill of a job well done! 💪",
+        category: "Energy",
+        image: "https://res.cloudinary.com/glide/image/upload/onboarding_img/019595a6-cb71-7aa8-acd7-20198e0c2986"
+      },
+      {
+        title: "Easy ADHD Hacks to Boost Productivity",
+        description: "Top tips and tricks to overcome ADHD challenges",
+        content: "Transform your daily struggles into manageable wins with these proven ADHD strategies. Start with small, consistent actions that build momentum throughout your day. Focus on productivity boosters like the 5-Minute Rule for beating procrastination, energy hacks like wearing shoes while working from home to stay alert, and organization tools like magnetic boards for visual reminders. The key is experimenting with different techniques to find what works for your unique ADHD brain and lifestyle.",
+        category: "Productivity",
+        image: "https://res.cloudinary.com/glide/image/upload/onboarding_img/019595a6-cb71-7aa8-acd7-291048316410"
+      }
+    ];
+
+    let filteredHacks = [...adhdHacks];
+    let currentFilter = 'all';
+    let currentSort = 'title';
+
+    function getCategoryClass(category) {
+      if (category === 'Productivity') return 'productivity';
+      if (category === 'Focus') return 'focus';
+      if (category === 'Energy') return 'energy';
+      return 'productivity';
+    }
+
+    function updateStats() {
+      const productivity = adhdHacks.filter(hack => hack.category === 'Productivity').length;
+      const focus = adhdHacks.filter(hack => hack.category === 'Focus').length;
+      const energy = adhdHacks.filter(hack => hack.category === 'Energy').length;
+      
+      document.getElementById('productivity-count').textContent = productivity;
+      document.getElementById('focus-count').textContent = focus;
+      document.getElementById('energy-count').textContent = energy;
+    }
+
+    function filterHacks(category) {
+      if (category === 'all') {
+        filteredHacks = [...adhdHacks];
+      } else if (category === 'productivity') {
+        filteredHacks = adhdHacks.filter(hack => hack.category === 'Productivity');
+      } else if (category === 'focus') {
+        filteredHacks = adhdHacks.filter(hack => hack.category === 'Focus');
+      } else if (category === 'energy') {
+        filteredHacks = adhdHacks.filter(hack => hack.category === 'Energy');
+      }
+      
+      sortHacks(currentSort);
+      renderHacks();
+    }
+
+    function sortHacks(sortType) {
+      if (sortType === 'title') {
+        filteredHacks.sort((a, b) => a.title.localeCompare(b.title));
+      } else if (sortType === 'category') {
+        filteredHacks.sort((a, b) => a.category.localeCompare(b.category));
+      }
+    }
+
+    function renderHacks() {
+      const grid = document.getElementById('hackGrid');
+      
+      const hacksHtml = filteredHacks.map((hack, index) => {
+        const categoryClass = getCategoryClass(hack.category);
+        const brainEmoji = categoryClass === 'productivity' ? '🎯' : categoryClass === 'focus' ? '🔥' : '⚡';
+        
+        return `
+          <div class="hack-card ${categoryClass}" style="--i: ${index}">
+            <div class="brain-indicator">${brainEmoji}</div>
+            <div class="hack-content">
+              <img src="${hack.image}" alt="${hack.title}" class="featured-image" onerror="this.style.display='none'">
+              <div class="hack-header">
+                <h3 class="hack-title">${hack.title}</h3>
+              </div>
+              <div class="hack-meta">
+                <span class="hack-category ${categoryClass}">${hack.category} Hack</span>
+              </div>
+              <div class="hack-description">${hack.description}</div>
+              <div class="hack-excerpt">${hack.content}</div>
+              <button class="try-hack" onclick="tryHack(${index})">
+                Try This Hack
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      grid.innerHTML = hacksHtml;
+    }
+
+    function tryHack(hackIndex) {
+      const hack = filteredHacks[hackIndex];
+      if (hack) {
+        // Create a modal-style display with hack-specific content
+        const modal = document.createElement('div');
+        modal.style.cssText = `
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.8);
+          backdrop-filter: blur(10px);
+          z-index: 10000;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 2rem;
+          animation: fadeIn 0.3s ease;
+        `;
+        
+        // Get hack-specific content
+        const hackSpecificContent = getHackSpecificContent(hack);
+        
+        modal.innerHTML = `
+          <div style="
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 25px;
+            padding: 2.5rem;
+            max-width: ${hackSpecificContent.isUltimate ? '700px' : '600px'};
+            width: 100%;
+            box-shadow: var(--shadow-strong);
+            position: relative;
+            max-height: 85vh;
+            overflow-y: auto;
+          ">
+            <button onclick="this.closest('[style*=\"position: fixed\"]').remove()" style="
+              position: absolute;
+              top: 1rem;
+              right: 1rem;
+              background: var(--card-bg);
+              border: 1px solid var(--border-subtle);
+              color: var(--text-primary);
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              cursor: pointer;
+              font-size: 1.2rem;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            ">×</button>
+            
+            <h2 style="
+              color: var(--text-primary);
+              font-size: ${hackSpecificContent.isUltimate ? '2rem' : '1.8rem'};
+              margin-bottom: 1rem;
+              background: var(--gradient-hacks);
+              background-size: 200% 200%;
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              background-clip: text;
+            ">🧠 ${hack.title}</h2>
+            
+            ${hackSpecificContent.quickStart}
+            
+            <div style="
+              color: var(--text-secondary);
+              line-height: 1.7;
+              margin-bottom: 2rem;
+              font-size: 1rem;
+            ">${hack.content}</div>
+            
+            ${hackSpecificContent.stepByStep}
+            
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+              <button onclick="this.closest('[style*=\"position: fixed\"]').remove()" style="
+                background: var(--gradient-hacks);
+                color: white;
+                padding: 0.8rem 2rem;
+                border: none;
+                border-radius: 25px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+              ">Got It! Let's Try 🚀</button>
+            </div>
+          </div>
+        `;
+        
+        document.body.appendChild(modal);
+        
+        // Close on background click
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            modal.remove();
+          }
+        });
+      }
+    }
+
+    function getHackSpecificContent(hack) {
+      switch(hack.title) {
+        case "The Ultimate 5-Minute Rule":
+          return {
+            isUltimate: true,
+            quickStart: `
+              <div style="
+                background: rgba(139, 92, 246, 0.1);
+                border: 1px solid rgba(139, 92, 246, 0.2);
+                padding: 1.5rem;
+                border-radius: 15px;
+                margin-bottom: 1.5rem;
+              ">
+                <strong style="color: var(--accent-purple); font-size: 1.1rem;">⏱️ The Science-Backed Quick Start:</strong>
+                <p style="color: var(--text-secondary); margin-top: 0.8rem; line-height: 1.6; font-size: 1rem;">
+                  ${hack.description} This technique works because it bypasses your brain's resistance to getting started - the #1 ADHD challenge.
+                </p>
+              </div>
+            `,
+            stepByStep: `
+              <div style="
+                background: var(--card-bg);
+                border: 1px solid var(--border-subtle);
+                padding: 1.5rem;
+                border-radius: 15px;
+                margin-bottom: 1.5rem;
+              ">
+                <h3 style="color: var(--accent-emerald); margin-bottom: 1rem; font-size: 1.2rem;">
+                  🎯 The Ultimate 5-Minute Protocol:
+                </h3>
+                <ol style="color: var(--text-secondary); line-height: 1.7; padding-left: 1.2rem; font-size: 1rem;">
+                  <li style="margin-bottom: 0.8rem;"><strong>Choose ONE specific task</strong> (not "clean the house" but "sort mail on kitchen counter")</li>
+                  <li style="margin-bottom: 0.8rem;"><strong>Set a timer for exactly 5 minutes</strong> (use your phone or a physical timer)</li>
+                  <li style="margin-bottom: 0.8rem;"><strong>Eliminate ALL distractions</strong> (phone away, notifications off)</li>
+                  <li style="margin-bottom: 0.8rem;"><strong>Start immediately</strong> when the timer begins - no prep, just action</li>
+                  <li style="margin-bottom: 0.8rem;"><strong>Stop when the timer rings</strong> (even if you want to continue - this builds trust with your brain)</li>
+                  <li><strong>Celebrate the win!</strong> You just proved you can do anything for 5 minutes</li>
+                </ol>
+              </div>
+              
+              <div style="
+                background: rgba(16, 185, 129, 0.1);
+                border: 1px solid rgba(16, 185, 129, 0.2);
+                padding: 1.5rem;
+                border-radius: 15px;
+                margin-bottom: 1.5rem;
+              ">
+                <h4 style="color: var(--accent-emerald); margin-bottom: 1rem; font-size: 1.1rem;">
+                  🧠 Why This Works for ADHD Brains:
+                </h4>
+                <ul style="color: var(--text-secondary); line-height: 1.6; padding-left: 1.2rem; font-size: 0.95rem;">
+                  <li style="margin-bottom: 0.5rem;">Breaks through task initiation paralysis</li>
+                  <li style="margin-bottom: 0.5rem;">Activates dopamine reward pathways</li>
+                  <li style="margin-bottom: 0.5rem;">Builds momentum without overwhelming your executive functions</li>
+                  <li>Creates positive associations with task completion</li>
+                </ul>
+              </div>
+            `
+          };
+
+        case "Boost Productivity with the Power of Comfy Shoes":
+          return {
+            isUltimate: false,
+            quickStart: `
+              <div style="
+                background: rgba(244, 63, 94, 0.1);
+                border: 1px solid rgba(244, 63, 94, 0.2);
+                padding: 1rem;
+                border-radius: 15px;
+                margin-bottom: 1.5rem;
+              ">
+                <strong style="color: var(--accent-rose);">👟 Quick Start:</strong>
+                <p style="color: var(--text-secondary); margin-top: 0.5rem; line-height: 1.6;">
+                  Put on your shoes right now, even if you're working from home. This simple act signals to your brain that you're "ready for business."
+                </p>
+              </div>
+            `,
+            stepByStep: `
+              <div style="
+                background: var(--card-bg);
+                border: 1px solid var(--border-subtle);
+                padding: 1.5rem;
+                border-radius: 15px;
+                margin-bottom: 1.5rem;
+              ">
+                <h3 style="color: var(--accent-rose); margin-bottom: 1rem; font-size: 1.1rem;">
+                  👟 How to Use the Shoe Hack:
+                </h3>
+                <ol style="color: var(--text-secondary); line-height: 1.6; padding-left: 1.2rem;">
+                  <li style="margin-bottom: 0.5rem;">Choose comfortable, supportive shoes you'd wear to the office</li>
+                  <li style="margin-bottom: 0.5rem;">Put them on first thing when you start your work day</li>
+                  <li style="margin-bottom: 0.5rem;">Keep them on during your entire work session</li>
+                  <li style="margin-bottom: 0.5rem;">Notice how your posture and mindset shift</li>
+                  <li>Use this as a "work mode" trigger throughout your day</li>
+                </ol>
+              </div>
+            `
+          };
+
+        case "Staying Organized with a Magnetic Board":
+          return {
+            isUltimate: false,
+            quickStart: `
+              <div style="
+                background: rgba(249, 115, 22, 0.1);
+                border: 1px solid rgba(249, 115, 22, 0.2);
+                padding: 1rem;
+                border-radius: 15px;
+                margin-bottom: 1.5rem;
+              ">
+                <strong style="color: var(--accent-orange);">🧲 Quick Start:</strong>
+                <p style="color: var(--text-secondary); margin-top: 0.5rem; line-height: 1.6;">
+                  Find a magnetic board or use your refrigerator as a visual command center for tasks and reminders.
+                </p>
+              </div>
+            `,
+            stepByStep: `
+              <div style="
+                background: var(--card-bg);
+                border: 1px solid var(--border-subtle);
+                padding: 1.5rem;
+                border-radius: 15px;
+                margin-bottom: 1.5rem;
+              ">
+                <h3 style="color: var(--accent-orange); margin-bottom: 1rem; font-size: 1.1rem;">
+                  🧲 Setting Up Your Magnetic Board:
+                </h3>
+                <ol style="color: var(--text-secondary); line-height: 1.6; padding-left: 1.2rem;">
+                  <li style="margin-bottom: 0.5rem;">Choose a high-traffic location you see multiple times daily</li>
+                  <li style="margin-bottom: 0.5rem;">Get colorful magnets for different categories (red=urgent, blue=work, etc.)</li>
+                  <li style="margin-bottom: 0.5rem;">Write one task or reminder per sticky note</li>
+                  <li style="margin-bottom: 0.5rem;">Group similar items together by color or area</li>
+                  <li>Move completed items to a "done" section for that dopamine hit!</li>
+                </ol>
+              </div>
+            `
+          };
+
+        case "Make Cleaning a Breeze with Dawn Powerwash":
+          return {
+            isUltimate: false,
+            quickStart: `
+              <div style="
+                background: rgba(6, 182, 212, 0.1);
+                border: 1px solid rgba(6, 182, 212, 0.2);
+                padding: 1rem;
+                border-radius: 15px;
+                margin-bottom: 1.5rem;
+              ">
+                <strong style="color: var(--accent-teal);">🚿 Quick Start:</strong>
+                <p style="color: var(--text-secondary); margin-top: 0.5rem; line-height: 1.6;">
+                  Get Dawn Powerwash spray to make cleaning feel effortless and satisfying for your ADHD brain.
+                </p>
+              </div>
+            `,
+            stepByStep: `
+              <div style="
+                background: var(--card-bg);
+                border: 1px solid var(--border-subtle);
+                padding: 1.5rem;
+                border-radius: 15px;
+                margin-bottom: 1.5rem;
+              ">
+                <h3 style="color: var(--accent-teal); margin-bottom: 1rem; font-size: 1.1rem;">
+                  🚿 How to Use Dawn Powerwash Effectively:
+                </h3>
+                <ol style="color: var(--text-secondary); line-height: 1.6; padding-left: 1.2rem;">
+                  <li style="margin-bottom: 0.5rem;">Spray directly on dishes, pans, or surfaces - no scrubbing needed</li>
+                  <li style="margin-bottom: 0.5rem;">Let it sit for 30 seconds to break down grease and grime</li>
+                  <li style="margin-bottom: 0.5rem;">Rinse with warm water and watch everything slide off</li>
+                  <li style="margin-bottom: 0.5rem;">Keep a bottle in kitchen and bathroom for quick wins</li>
+                  <li>Use for instant cleaning motivation when overwhelmed by mess</li>
+                </ol>
+              </div>
+            `
+          };
+
+        default:
+          return {
+            isUltimate: false,
+            quickStart: `
+              <div style="
+                background: rgba(139, 92, 246, 0.1);
+                border: 1px solid rgba(139, 92, 246, 0.2);
+                padding: 1rem;
+                border-radius: 15px;
+                margin-bottom: 1.5rem;
+              ">
+                <strong style="color: var(--accent-purple);">💡 Quick Start:</strong>
+                <p style="color: var(--text-secondary); margin-top: 0.5rem; line-height: 1.6;">
+                  ${hack.description}
+                </p>
+              </div>
+            `,
+            stepByStep: `
+              <div style="
+                background: var(--card-bg);
+                border: 1px solid var(--border-subtle);
+                padding: 1.5rem;
+                border-radius: 15px;
+                margin-bottom: 1.5rem;
+              ">
+                <h3 style="color: var(--accent-emerald); margin-bottom: 1rem; font-size: 1.1rem;">
+                  🎯 How to Get Started:
+                </h3>
+                <ol style="color: var(--text-secondary); line-height: 1.6; padding-left: 1.2rem;">
+                  <li style="margin-bottom: 0.5rem;">Start small and experiment with this technique</li>
+                  <li style="margin-bottom: 0.5rem;">Apply it to one specific situation first</li>
+                  <li style="margin-bottom: 0.5rem;">Notice what works best for your ADHD brain</li>
+                  <li>Adjust and refine based on your experience</li>
+                </ol>
+              </div>
+            `
+          };
+      }
+    }
+
+    // Event listeners
+    document.addEventListener('DOMContentLoaded', () => {
+      sortHacks(currentSort);
+      renderHacks();
+
+      // Filter buttons
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentFilter = btn.dataset.filter;
+          filterHacks(currentFilter);
+        });
+      });
+
+      // Sort select
+      document.getElementById('sortSelect').addEventListener('change', (e) => {
+        currentSort = e.target.value;
+        sortHacks(currentSort);
+        renderHacks();
+      });
+    });
+  </script>
+</body>
+</html>
