@@ -107,6 +107,8 @@
             max-width: 1200px;
             margin: 20px auto;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
         
         .header:hover {
@@ -157,164 +159,6 @@
         .earning-stat.week { color: var(--accent-blue); }
         .earning-stat.target { color: var(--accent-rose); }
         
-        .current-block-indicator {
-            background: var(--gradient-success);
-            color: white;
-            padding: 25px;
-            margin: 20px;
-            border-radius: 20px;
-            box-shadow: var(--shadow-medium);
-            animation: pulse 2s infinite;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .current-block-indicator.rest-mode {
-            background: var(--gradient-info);
-        }
-        
-        .status-legend {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-subtle);
-            border-radius: 20px;
-            padding: 25px;
-            margin: 20px;
-            box-shadow: var(--shadow-soft);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .status-legend:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-medium);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-        
-        .status-legend h3 {
-            color: var(--text-primary);
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-        
-        .legend-items {
-            display: grid;
-            gap: 12px;
-        }
-        
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-        
-        .legend-indicator {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-        
-        .current-indicator {
-            background: var(--accent-emerald);
-            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
-            animation: pulse-dot 2s infinite;
-        }
-        
-        .upcoming-indicator {
-            background: var(--accent-blue);
-        }
-        
-        .past-indicator {
-            background: var(--text-muted);
-        }
-        
-        @keyframes pulse-dot {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.2); opacity: 0.8; }
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-        }
-        
-        .current-task-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .current-task-desc {
-            font-size: 1rem;
-            opacity: 0.95;
-            margin-bottom: 15px;
-            line-height: 1.5;
-        }
-        
-        .priority-badges {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
-        }
-        
-        .priority-badge {
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            backdrop-filter: blur(10px);
-        }
-        
-        .high-priority { 
-            background: rgba(244, 63, 94, 0.2);
-            color: var(--accent-rose);
-            border: 1px solid rgba(244, 63, 94, 0.3);
-        }
-        .medium-priority { 
-            background: rgba(245, 158, 11, 0.2);
-            color: var(--accent-amber);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-        }
-        .low-priority { 
-            background: rgba(16, 185, 129, 0.2);
-            color: var(--accent-emerald);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-        }
-        
-        .quick-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .action-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            backdrop-filter: blur(10px);
-            font-size: 0.9rem;
-        }
-        
-        .action-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-soft);
-        }
-        
         .schedule-container {
             padding: 20px;
             display: grid;
@@ -343,11 +187,12 @@
             border: 2px solid var(--accent-emerald);
             background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05));
             animation: glow 2s infinite alternate;
+            transform: translateY(-3px);
         }
         
         @keyframes glow {
-            from { box-shadow: var(--shadow-soft); }
-            to { box-shadow: 0 8px 30px rgba(16, 185, 129, 0.3); }
+            from { box-shadow: 0 8px 30px rgba(16, 185, 129, 0.3); }
+            to { box-shadow: 0 12px 40px rgba(16, 185, 129, 0.5); }
         }
         
         .time-block.past {
@@ -513,37 +358,6 @@
                 font-size: 0.9rem;
             }
             
-            .current-block-indicator {
-                margin: 15px;
-                padding: 20px;
-            }
-            
-            .status-legend {
-                margin: 15px;
-                padding: 20px;
-            }
-            
-            .status-legend h3 {
-                font-size: 1.1rem;
-            }
-            
-            .legend-item {
-                font-size: 0.9rem;
-            }
-            
-            .current-task-title {
-                font-size: 1.2rem;
-            }
-            
-            .platform-links {
-                gap: 6px;
-            }
-            
-            .platform-link {
-                font-size: 0.75rem;
-                padding: 5px 10px;
-            }
-
             .time-block {
                 padding: 20px;
             }
@@ -565,6 +379,15 @@
             .earnings-input input {
                 width: 100%;
             }
+
+            .platform-links {
+                gap: 6px;
+            }
+            
+            .platform-link {
+                font-size: 0.75rem;
+                padding: 5px 10px;
+            }
         }
 
         /* Add shimmer effect for header */
@@ -584,11 +407,6 @@
             0% { transform: translateX(-100%) translateY(-100%) rotate(30deg); }
             100% { transform: translateX(100%) translateY(100%) rotate(30deg); }
         }
-
-        .header {
-            position: relative;
-            overflow: hidden;
-        }
     </style>
 </head>
 <body>
@@ -604,39 +422,6 @@
             <div class="earning-stat today">Today: $<span id="todayEarnings">0.00</span></div>
             <div class="earning-stat week">Week: $<span id="weekEarnings">0.00</span></div>
             <div class="earning-stat target">Target: $<span id="dailyTarget">35.00</span></div>
-        </div>
-    </div>
-
-    <div class="current-block-indicator" id="currentBlock">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-            <div style="background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600;">
-                🔥 CURRENT ACTIVITY
-            </div>
-            <div id="currentStatus" style="background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600;">
-                ⏰ NOW
-            </div>
-        </div>
-        <div class="current-task-title" id="currentTitle">🌙 Rest Mode</div>
-        <div class="current-task-desc" id="currentDesc">Perfect time to recharge! Your brain needs downtime to process and prepare for peak performance.</div>
-        <div class="priority-badges" id="currentPriorities"></div>
-        <div class="quick-actions" id="currentActions"></div>
-    </div>
-
-    <div class="status-legend">
-        <h3>📋 Schedule Status Guide</h3>
-        <div class="legend-items">
-            <div class="legend-item">
-                <div class="legend-indicator current-indicator"></div>
-                <span><strong>Current Activity</strong> - What you should be doing right now</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-indicator upcoming-indicator"></div>
-                <span><strong>Upcoming</strong> - Future time blocks to prepare for</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-indicator past-indicator"></div>
-                <span><strong>Completed</strong> - Past time blocks (add your earnings!)</span>
-            </div>
         </div>
     </div>
 
@@ -818,12 +603,11 @@
         function init() {
             try {
                 updateTime();
-                updateCurrentBlock();
                 renderSchedule();
                 updateEarningsDisplay();
                 
                 setInterval(updateTime, 1000);
-                setInterval(updateCurrentBlock, 60000);
+                setInterval(renderSchedule, 60000); // Update schedule highlighting every minute
             } catch (error) {
                 console.error('Initialization error:', error);
             }
@@ -856,67 +640,6 @@
             }
             
             return hour24 * 60 + minutes;
-        }
-
-        function getCurrentBlock() {
-            const now = new Date();
-            const currentMinutes = now.getHours() * 60 + now.getMinutes();
-
-            for (let block of schedule) {
-                const [start, end] = block.time.split(' - ');
-                const startMinutes = parseTimeString(start);
-                const endMinutes = parseTimeString(end);
-                
-                if (currentMinutes >= startMinutes && currentMinutes < endMinutes) {
-                    return block;
-                }
-            }
-            return null;
-        }
-
-        function updateCurrentBlock() {
-            try {
-                const currentBlock = getCurrentBlock();
-                const indicator = document.getElementById('currentBlock');
-                const title = document.getElementById('currentTitle');
-                const desc = document.getElementById('currentDesc');
-                const priorities = document.getElementById('currentPriorities');
-                const actions = document.getElementById('currentActions');
-                const status = document.getElementById('currentStatus');
-
-                if (currentBlock) {
-                    indicator.className = 'current-block-indicator';
-                    title.textContent = currentBlock.title;
-                    desc.textContent = currentBlock.description;
-                    status.textContent = `⏰ ${currentBlock.time}`;
-                    
-                    priorities.innerHTML = `
-                        <div class="priority-badge ${currentBlock.priority}-priority">
-                            ${currentBlock.priority.toUpperCase()} PRIORITY
-                        </div>
-                        <div class="priority-badge" style="background: rgba(16, 185, 129, 0.2); color: var(--accent-emerald); border: 1px solid rgba(16, 185, 129, 0.3);">
-                            ${currentBlock.earnings}
-                        </div>
-                    `;
-                    
-                    if (currentBlock.platforms && currentBlock.platforms.length > 0) {
-                        actions.innerHTML = currentBlock.platforms.slice(0, 3).map(platform => 
-                            `<a href="${platform.url}" target="_blank" class="action-btn">🚀 ${platform.name}</a>`
-                        ).join('');
-                    } else {
-                        actions.innerHTML = '<div class="action-btn">✨ Focus on rest</div>';
-                    }
-                } else {
-                    indicator.className = 'current-block-indicator rest-mode';
-                    title.textContent = '🌙 Rest Mode';
-                    desc.textContent = 'Perfect time to recharge! Your brain needs downtime between scheduled activities.';
-                    status.textContent = '😴 OFF HOURS';
-                    priorities.innerHTML = '<div class="priority-badge" style="background: rgba(139, 92, 246, 0.2); color: var(--accent-blue); border: 1px solid rgba(139, 92, 246, 0.3);">RECOVERY TIME</div>';
-                    actions.innerHTML = '<div class="action-btn">😴 Rest & Recharge</div>';
-                }
-            } catch (error) {
-                console.error('Current block update error:', error);
-            }
         }
 
         function renderSchedule() {
