@@ -431,48 +431,6 @@
             font-weight: bold;
         }
 
-        /* Checklist */
-        .checklist {
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border: 1px solid var(--border-subtle);
-        }
-
-        .checklist-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--accent-emerald);
-        }
-
-        .checklist-list {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .checklist-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .checklist-item:last-child {
-            border-bottom: none;
-        }
-
-        .checkbox {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--accent-emerald);
-            border-radius: 4px;
-            margin-top: 2px;
-            flex-shrink: 0;
-        }
-
         /* Progress indicators */
         .progress-timeline {
             display: grid;
@@ -538,9 +496,10 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.1);
+            height: 8px;
+            background: rgba(0, 0, 0, 0.3);
             z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
         .scroll-progress-bar {
@@ -548,29 +507,164 @@
             background: var(--gradient-adhd);
             width: 0%;
             transition: width 0.3s ease;
+            position: relative;
+            box-shadow: 0 0 20px rgba(79, 70, 229, 0.5);
         }
 
-        /* Quick access floating button */
-        .quick-nav {
+        .progress-indicator {
             position: fixed;
-            bottom: 20px;
+            top: 12px;
             right: 20px;
-            background: var(--accent-blue);
-            border: none;
-            border-radius: 50%;
-            width: 56px;
-            height: 56px;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(79, 70, 229, 0.3);
-            transition: all 0.3s ease;
-            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 1001;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-subtle);
         }
 
-        .quick-nav:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 30px rgba(79, 70, 229, 0.5);
+        .section-progress {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .progress-circle {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .progress-circle.active {
+            background: var(--accent-emerald);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+
+        .progress-circle.completed {
+            background: var(--accent-blue);
+        }
+
+        /* Voice Reader Controls */
+        .voice-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .voice-btn {
+            background: var(--accent-teal);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            min-width: 120px;
+            justify-content: center;
+        }
+
+        .voice-btn:hover {
+            background: var(--accent-blue);
+            transform: translateY(-1px);
+        }
+
+        .voice-btn:disabled {
+            background: rgba(255, 255, 255, 0.1);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .voice-btn.playing {
+            background: var(--accent-emerald);
+            animation: playingPulse 1.5s infinite;
+        }
+
+        .voice-btn.paused {
+            background: var(--accent-amber);
+            animation: pausedPulse 2s infinite;
+        }
+
+        .voice-btn.stopped {
+            background: var(--accent-rose);
+        }
+
+        @keyframes playingPulse {
+            0%, 100% { box-shadow: 0 0 5px rgba(16, 185, 129, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.8); }
+        }
+
+        @keyframes pausedPulse {
+            0%, 100% { box-shadow: 0 0 5px rgba(245, 158, 11, 0.5); }
+            50% { box-shadow: 0 0 15px rgba(245, 158, 11, 0.8); }
+        }
+
+        .voice-speed-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .voice-selector {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .voice-select {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            color: var(--text-primary);
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+            min-width: 140px;
+            max-width: 180px;
+        }
+
+        .voice-select option {
+            background: var(--secondary-bg);
+            color: var(--text-primary);
+        }
+
+        .speed-slider {
+            width: 80px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .speed-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: var(--accent-teal);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .speed-slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            background: var(--accent-teal);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
         }
 
         /* Status indicators */
@@ -607,10 +701,59 @@
             border: 1px solid rgba(6, 182, 212, 0.3);
         }
 
+        /* Quick access floating button */
+        .quick-nav {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent-blue);
+            border: none;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(79, 70, 229, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .quick-nav:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(79, 70, 229, 0.5);
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .container {
                 padding: 0.75rem;
+            }
+
+            .progress-indicator {
+                top: 12px;
+                right: 10px;
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+
+            .progress-circle {
+                width: 6px;
+                height: 6px;
+            }
+
+            .voice-controls {
+                margin-bottom: 1rem;
+            }
+
+            .voice-btn {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+                min-width: 100px;
+            }
+
+            .speed-slider {
+                width: 60px;
             }
 
             .section {
@@ -682,16 +825,43 @@
             .timeline-item {
                 padding: 1rem;
             }
-
-            .checklist {
-                padding: 1.25rem;
-            }
         }
 
         /* Ultra-small screens */
         @media (max-width: 480px) {
             .container {
                 padding: 0.5rem;
+            }
+
+            .progress-indicator {
+                right: 5px;
+                top: 10px;
+                padding: 0.3rem 0.6rem;
+                font-size: 0.75rem;
+            }
+
+            .section-progress {
+                gap: 0.3rem;
+            }
+
+            .progress-circle {
+                width: 5px;
+                height: 5px;
+            }
+
+            .voice-controls {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.75rem;
+            }
+
+            .voice-selector, .voice-speed-control {
+                justify-content: center;
+            }
+
+            .voice-select {
+                min-width: 120px;
+                max-width: 160px;
             }
 
             .section {
@@ -703,10 +873,6 @@
             }
 
             .toc-container, .highlight-card, .success-card, .warning-card, .tip-card, .adhd-card {
-                padding: 1rem;
-            }
-
-            .checklist {
                 padding: 1rem;
             }
         }
@@ -743,6 +909,20 @@
     <div class="scroll-progress">
         <div class="scroll-progress-bar"></div>
     </div>
+    
+    <div class="progress-indicator">
+        <div class="section-progress">
+            <span id="current-section">Introduction</span>
+            <div class="progress-circle completed"></div>
+            <div class="progress-circle active"></div>
+            <div class="progress-circle"></div>
+            <div class="progress-circle"></div>
+            <div class="progress-circle"></div>
+            <div class="progress-circle"></div>
+            <div class="progress-circle"></div>
+            <div class="progress-circle"></div>
+        </div>
+    </div>
 
     <div class="container">
         <!-- Hero Header -->
@@ -754,13 +934,34 @@
 
         <!-- Intro Highlight -->
         <div class="highlight-card">
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="intro-text">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
+                    <span>🔄</span> Restart
+                </button>
+                <div class="voice-selector">
+                    <span>Voice:</span>
+                    <select class="voice-select" id="voice-select" onchange="updateSelectedVoice(this.value)">
+                        <option value="">Loading voices...</option>
+                    </select>
+                </div>
+                <div class="voice-speed-control">
+                    <span>Speed:</span>
+                    <input type="range" class="speed-slider" min="0.5" max="2" step="0.1" value="1.4" onchange="updateSpeechRate(this.value)">
+                    <span id="speed-display">1.4x</span>
+                </div>
+            </div>
             <div class="card-title">
                 <div class="card-icon">🧠</div>
                 Welcome to Your Data Annotation Journey!
             </div>
-            <p><strong>This guide is specifically designed for ADHD minds</strong> considering data annotation work. While this field can offer some advantages for ADHD brains, it's important to have realistic expectations about earnings, work availability, and the challenges you'll face.</p>
-            <br>
-            <p>Data annotation can be a legitimate side hustle or supplemental income, but it's rarely a full-time career replacement. This guide will give you the honest truth about what to expect.</p>
+            <div id="intro-text">
+                <p><strong>This guide is specifically designed for ADHD minds</strong> considering data annotation work. While this field can offer some advantages for ADHD brains, it's important to have realistic expectations about earnings, work availability, and the challenges you'll face.</p>
+                <br>
+                <p>Data annotation can be a legitimate side hustle or supplemental income, but it's rarely a full-time career replacement. This guide will give you the honest truth about what to expect.</p>
+            </div>
         </div>
 
         <!-- Table of Contents -->
@@ -825,27 +1026,48 @@
                 <span class="title-text">Introduction: Your Data Annotation Journey</span>
             </h2>
             
-            <p>Data annotation is a critical component of AI and machine learning development. As a data annotator, you'll help train AI systems by labeling data in ways machines can understand. <strong>This work is particularly well-suited for ADHD minds</strong> because it offers:</p>
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="intro-section-content">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
+                    <span>🔄</span> Restart
+                </button>
+            </div>
+            
+            <div id="intro-section-content">
+                <p>Data annotation is a critical component of AI and machine learning development. As a data annotator, you'll help train AI systems by labeling data in ways machines can understand. <strong>This work is particularly well-suited for ADHD minds</strong> because it offers:</p>
 
-            <ul class="styled-list">
-                <li>Task variety that prevents boredom</li>
-                <li>Clear structure with defined guidelines</li>
-                <li>Short, completable units of work</li>
-                <li>Immediate feedback on performance</li>
-                <li>Flexible scheduling that accommodates energy fluctuations</li>
-            </ul>
+                <ul class="styled-list">
+                    <li>Task variety that prevents boredom</li>
+                    <li>Clear structure with defined guidelines</li>
+                    <li>Short, completable units of work</li>
+                    <li>Immediate feedback on performance</li>
+                    <li>Flexible scheduling that accommodates energy fluctuations</li>
+                </ul>
+            </div>
 
             <div class="adhd-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="adhd-benefits">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
+                        <span>🔄</span> Restart
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">⚡</div>
                     Why Data Annotation Works for ADHD Brains
                 </div>
-                <ul class="styled-list">
-                    <li><strong>Hyperfocus Potential:</strong> Detailed annotation tasks can trigger productive hyperfocus states</li>
-                    <li><strong>Pattern Recognition:</strong> Many with ADHD excel at spotting patterns and anomalies—a valuable annotation skill</li>
-                    <li><strong>Novelty Seeking:</strong> Project variety satisfies the ADHD brain's craving for new experiences</li>
-                    <li><strong>Rapid Task Completion:</strong> Short annotation tasks provide regular dopamine hits as you complete them</li>
-                </ul>
+                <div id="adhd-benefits">
+                    <ul class="styled-list">
+                        <li><strong>Hyperfocus Potential:</strong> Detailed annotation tasks can trigger productive hyperfocus states</li>
+                        <li><strong>Pattern Recognition:</strong> Many with ADHD excel at spotting patterns and anomalies—a valuable annotation skill</li>
+                        <li><strong>Novelty Seeking:</strong> Project variety satisfies the ADHD brain's craving for new experiences</li>
+                        <li><strong>Rapid Task Completion:</strong> Short annotation tasks provide regular dopamine hits as you complete them</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -856,7 +1078,18 @@
                 <span class="title-text">Understanding Data Annotation Work</span>
             </h2>
             
-            <p>Data annotation is the process of adding labels, tags, or identifying markers to data so machines can learn from it. This critical work forms the foundation of AI systems you interact with daily—from voice assistants to self-driving cars.</p>
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="understanding-content">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
+                    <span>🔄</span> Restart
+                </button>
+            </div>
+            
+            <div id="understanding-content">
+                <p>Data annotation is the process of adding labels, tags, or identifying markers to data so machines can learn from it. This critical work forms the foundation of AI systems you interact with daily—from voice assistants to self-driving cars.</p>
+            </div>
 
             <h3 class="section-subtitle">Types of Data Annotation</h3>
 
@@ -983,13 +1216,23 @@
             </div>
 
             <div class="tip-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="annotation-fit">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
+                        <span>🔄</span> Restart
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">🎯</div>
                     Finding Your Annotation Fit
                 </div>
-                <p>For ADHD minds, certain annotation types may be more engaging than others. <strong>Pay attention to which tasks absorb your attention most completely.</strong> If you find yourself losing track of time in a good way during specific annotation tasks, that's a strong indicator you've found your niche.</p>
-                <br>
-                <p>Many ADHD annotators report that <strong>image annotation</strong> offers the right balance of visual engagement and clear objectives.</p>
+                <div id="annotation-fit">
+                    <p>For ADHD minds, certain annotation types may be more engaging than others. <strong>Pay attention to which tasks absorb your attention most completely.</strong> If you find yourself losing track of time in a good way during specific annotation tasks, that's a strong indicator you've found your niche.</p>
+                    <br>
+                    <p>Many ADHD annotators report that <strong>image annotation</strong> offers the right balance of visual engagement and clear objectives.</p>
+                </div>
             </div>
 
             <h3 class="section-subtitle">The Annotation Process</h3>
@@ -1032,764 +1275,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Getting Started -->
-        <div class="section" id="getting-started">
-            <h2 class="section-title">
-                <span class="emoji">🚀</span>
-                <span class="title-text">Getting Started: Platforms and Requirements</span>
-            </h2>
-
-            <p>The data annotation marketplace consists of various platforms that connect annotators with companies needing data labeling services. Each platform has its own onboarding process, pay structure, and task types.</p>
-
-            <h3 class="section-subtitle">Leading Data Annotation Platforms</h3>
-
-            <div class="data-grid">
-                <div class="data-card">
-                    <div class="data-card-header">
-                        🟠 Amazon Mechanical Turk
-                    </div>
-                    <div class="data-card-content">
-                        <div class="data-row">
-                            <span class="data-label">Specialization:</span>
-                            <span class="data-value">Wide variety</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Ease of Entry:</span>
-                            <span class="data-value"><span class="status-easy">Very Easy</span></span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Payment Range:</span>
-                            <span class="data-value">$3-15/hour</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">ADHD Compatibility:</span>
-                            <span class="data-value"><span class="status-low">Low</span></span>
-                        </div>
-                    </div>
-                    <div class="data-note">
-                        Very low pay, can be frustrating and demotivating for ADHD minds.
-                    </div>
-                </div>
-
-                <div class="data-card">
-                    <div class="data-card-header">
-                        🔵 Appen
-                    </div>
-                    <div class="data-card-content">
-                        <div class="data-row">
-                            <span class="data-label">Specialization:</span>
-                            <span class="data-value">AI training data</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Ease of Entry:</span>
-                            <span class="data-value"><span class="status-medium">Medium</span></span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Payment Range:</span>
-                            <span class="data-value">$9-20/hour</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">ADHD Compatibility:</span>
-                            <span class="data-value"><span class="status-medium">Medium</span></span>
-                        </div>
-                    </div>
-                    <div class="data-note">
-                        Structured but inconsistent work availability can be challenging.
-                    </div>
-                </div>
-
-                <div class="data-card">
-                    <div class="data-card-header">
-                        🔗 Lionbridge AI
-                    </div>
-                    <div class="data-card-content">
-                        <div class="data-row">
-                            <span class="data-label">Specialization:</span>
-                            <span class="data-value">Language & search</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Ease of Entry:</span>
-                            <span class="data-value"><span class="status-medium">Medium</span></span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Payment Range:</span>
-                            <span class="data-value">$10-25/hour</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">ADHD Compatibility:</span>
-                            <span class="data-value"><span class="status-medium">Medium</span></span>
-                        </div>
-                    </div>
-                    <div class="data-note">
-                        Can be repetitive, requires sustained attention which may be challenging.
-                    </div>
-                </div>
-
-                <div class="data-card">
-                    <div class="data-card-header">
-                        ⚡ Clickworker
-                    </div>
-                    <div class="data-card-content">
-                        <div class="data-row">
-                            <span class="data-label">Specialization:</span>
-                            <span class="data-value">Text & image tasks</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Ease of Entry:</span>
-                            <span class="data-value"><span class="status-easy">Easy</span></span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Payment Range:</span>
-                            <span class="data-value">$8-18/hour</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">ADHD Compatibility:</span>
-                            <span class="data-value"><span class="status-low">Low</span></span>
-                        </div>
-                    </div>
-                    <div class="data-note">
-                        Often repetitive tasks that don't engage ADHD brains effectively.
-                    </div>
-                </div>
-
-                <div class="data-card">
-                    <div class="data-card-header">
-                        🎯 Remotasks
-                    </div>
-                    <div class="data-card-content">
-                        <div class="data-row">
-                            <span class="data-label">Specialization:</span>
-                            <span class="data-value">Computer vision</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Ease of Entry:</span>
-                            <span class="data-value"><span class="status-medium">Medium</span></span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Payment Range:</span>
-                            <span class="data-value">$7-30/hour</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">ADHD Compatibility:</span>
-                            <span class="data-value"><span class="status-high">Medium-High</span></span>
-                        </div>
-                    </div>
-                    <div class="data-note">
-                        Good training provided, but work can be inconsistent.
-                    </div>
-                </div>
-
-                <div class="data-card">
-                    <div class="data-card-header">
-                        🌍 Toloka
-                    </div>
-                    <div class="data-card-content">
-                        <div class="data-row">
-                            <span class="data-label">Specialization:</span>
-                            <span class="data-value">ML tasks</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Ease of Entry:</span>
-                            <span class="data-value"><span class="status-easy">Easy</span></span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Payment Range:</span>
-                            <span class="data-value">$5-15/hour</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">ADHD Compatibility:</span>
-                            <span class="data-value"><span class="status-low">Low</span></span>
-                        </div>
-                    </div>
-                    <div class="data-note">
-                        Inconsistent availability, can be frustrating for ADHD users.
-                    </div>
-                </div>
-            </div>
-
-            <div class="warning-card">
-                <div class="card-title">
-                    <div class="card-icon">⚠️</div>
-                    Reality Check: Platform Issues to Know About
-                </div>
-                <p><strong>Before you get started, be aware of common issues:</strong></p>
-                <ul class="styled-list">
-                    <li><strong>Inconsistent Work:</strong> Many workers report going weeks without available tasks</li>
-                    <li><strong>Account Deactivation:</strong> Some platforms suddenly cut access without warning, sometimes with unpaid earnings</li>
-                    <li><strong>Assessment Limbo:</strong> You might pass assessments but never receive actual paid work</li>
-                    <li><strong>Payment Delays:</strong> Payments can be slow or irregular on some platforms</li>
-                    <li><strong>No Communication:</strong> Most platforms provide minimal feedback or support</li>
-                </ul>
-                <br>
-                <p><strong>Recommendation:</strong> Never rely on data annotation as your primary income source. Treat it as supplemental income only.</p>
-            </div>
-
-            <div class="tip-card">
-                <div class="card-title">
-                    <div class="card-icon">💡</div>
-                    Platform Selection Strategy
-                </div>
-                <p>Start with 2-3 platforms simultaneously to increase your chances of consistent work. However, be prepared that even with multiple platforms, work may be sporadic.</p>
-                <br>
-                <p>Avoid signing up for too many at once, as managing multiple platform interfaces and guidelines can create overwhelm.</p>
-            </div>
-
-            <h3 class="section-subtitle">Technical Requirements</h3>
-
-            <ul class="styled-list">
-                <li>Reliable internet connection</li>
-                <li>Modern computer with updated browser</li>
-                <li>Basic understanding of annotation tools</li>
-                <li>Ability to follow detailed guidelines</li>
-                <li>Comfort with basic technology applications</li>
-                <li>Screen with good resolution (especially for image annotation)</li>
-            </ul>
-
-            <div class="adhd-card">
-                <div class="card-title">
-                    <div class="card-icon">🎯</div>
-                    ADHD-Friendly Onboarding Strategy
-                </div>
-                <p>Rather than trying to absorb all guidelines at once, break down platform onboarding into manageable chunks:</p>
-                <ol class="numbered-list">
-                    <li>Schedule a dedicated 30-minute session just for account creation</li>
-                    <li>Take tutorial modules one at a time with short breaks</li>
-                    <li>Create visual reference guides for complex annotation rules</li>
-                    <li>Practice with small batches before taking on larger tasks</li>
-                    <li>Set a timer when reviewing guidelines to prevent hyperfocusing on instructions</li>
-                </ol>
-            </div>
-        </div>
-
-        <!-- Earning Potential -->
-        <div class="section" id="earning">
-            <h2 class="section-title">
-                <span class="emoji">💰</span>
-                <span class="title-text">Earning Potential and Payment Structures</span>
-            </h2>
-
-            <p>Understanding the compensation landscape helps set realistic expectations and goals. Data annotation pay varies widely based on task complexity, your speed, and the platform's payment structure.</p>
-
-            <div class="data-grid">
-                <div class="data-card">
-                    <div class="data-card-header">
-                        🎯 Basic Tasks
-                    </div>
-                    <div class="data-card-content">
-                        <div class="data-row">
-                            <span class="data-label">Pay Range:</span>
-                            <span class="data-value">$10-20/hour</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Payment Structure:</span>
-                            <span class="data-value">Hourly/Per Task</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Notes:</span>
-                            <span class="data-value">Entry-level work, most common</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="data-card">
-                    <div class="data-card-header">
-                        📈 Experienced Annotation
-                    </div>
-                    <div class="data-card-content">
-                        <div class="data-row">
-                            <span class="data-label">Pay Range:</span>
-                            <span class="data-value">$15-25/hour</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Payment Structure:</span>
-                            <span class="data-value">Hourly</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Notes:</span>
-                            <span class="data-value">After building track record</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="data-card">
-                    <div class="data-card-header">
-                        🔬 Specialized (Technical)
-                    </div>
-                    <div class="data-card-content">
-                        <div class="data-row">
-                            <span class="data-label">Pay Range:</span>
-                            <span class="data-value">$20-35/hour</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Payment Structure:</span>
-                            <span class="data-value">Project-based</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Notes:</span>
-                            <span class="data-value">Requires domain expertise, limited availability</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="data-card">
-                    <div class="data-card-header">
-                        📊 Platform Average
-                    </div>
-                    <div class="data-card-content">
-                        <div class="data-row">
-                            <span class="data-label">Pay Range:</span>
-                            <span class="data-value">$12-22/hour</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Payment Structure:</span>
-                            <span class="data-value">Variable</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Notes:</span>
-                            <span class="data-value">Most workers fall in this range</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="success-card">
-                <div class="card-title">
-                    <div class="card-icon">🎉</div>
-                    Realistic Success Story: Supplemental Income
-                </div>
-                <p><em>"I have been working with data annotation platforms for about 18 months. I currently work on two projects when they're available - one pays around $15/hour and another pays $20/hour. On a good week with consistent tasks, I make about $200-300.</em></p>
-                <br>
-                <p><em>The work isn't always available though - sometimes I'll go weeks without tasks. The flexibility works with my ADHD because I can work when my focus is good, but I had to learn not to rely on it as my main income. It's better as a side hustle when you need extra money."</em></p>
-                <br>
-                <p><strong>Key Takeaway:</strong> Data annotation can provide supplemental income, but work availability is inconsistent and earnings are modest.</p>
-            </div>
-
-            <h3 class="section-subtitle">Income Growth Timeline</h3>
-
-            <div class="progress-timeline">
-                <div class="timeline-item">
-                    <div class="timeline-number">1-3</div>
-                    <div class="timeline-content">
-                        <h4>Months 1-3: Learning & Low Earnings</h4>
-                        <p>Expect $8-15/hour as you learn platforms and build speed. Many tasks may be rejected initially.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-number">3-6</div>
-                    <div class="timeline-content">
-                        <h4>Months 3-6: Modest Improvement</h4>
-                        <p>May reach $12-20/hour on tasks you can access. Work availability still inconsistent.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-number">6-12</div>
-                    <div class="timeline-content">
-                        <h4>Months 6-12: Potential Specialization</h4>
-                        <p>If you find your niche, may access higher-paying tasks ($15-25/hour) when available.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-number">12+</div>
-                    <div class="timeline-content">
-                        <h4>Year 1+: Realistic Expectations</h4>
-                        <p>Most experienced workers still face inconsistent availability. This remains supplemental income.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tip-card">
-                <div class="card-title">
-                    <div class="card-icon">💡</div>
-                    Realistic Income Strategy
-                </div>
-                <p>Given the inconsistent nature of annotation work, successful ADHD annotators use a <strong>"flexible availability"</strong> approach:</p>
-                <ul class="styled-list">
-                    <li><strong>Good Focus Days:</strong> Check for higher-paying, complex tasks that match your peak attention</li>
-                    <li><strong>Low Energy Days:</strong> Do simple, quick tasks if available (better than nothing)</li>
-                    <li><strong>No Work Days:</strong> Use time to learn new skills or apply to other platforms</li>
-                    <li><strong>Multiple Income Streams:</strong> Never rely solely on annotation work</li>
-                </ul>
-                <p><strong>Reality Check:</strong> Most annotators treat this as "pocket money" rather than significant income.</p>
-            </div>
-        </div>
-
-        <!-- ADHD Strategies -->
-        <div class="section" id="strategies">
-            <h2 class="section-title">
-                <span class="emoji">⚡</span>
-                <span class="title-text">ADHD-Specific Strategies for Success</span>
-            </h2>
-
-            <p>Your ADHD brain can be a superpower in data annotation work when properly channeled. Here are strategies specifically designed to leverage your unique cognitive style:</p>
-
-            <div class="adhd-card">
-                <div class="card-title">
-                    <div class="card-icon">⚡</div>
-                    Leveraging ADHD Strengths in Annotation
-                </div>
-                <ul class="styled-list">
-                    <li><strong>Hyperfocus:</strong> Channel intense focus periods into complex annotation tasks</li>
-                    <li><strong>Pattern Recognition:</strong> Use your natural ability to spot inconsistencies and patterns</li>
-                    <li><strong>Divergent Thinking:</strong> Apply creative problem-solving to annotation challenges</li>
-                    <li><strong>Novelty Seeking:</strong> Rotate between different annotation types to maintain engagement</li>
-                </ul>
-            </div>
-
-            <h3 class="section-subtitle">Task Management Framework</h3>
-
-            <ol class="numbered-list">
-                <li><strong>Chunk Your Work:</strong> Break annotation sessions into 25-minute focused blocks with 5-minute breaks (Pomodoro Technique)</li>
-                <li><strong>Create Visual Cues:</strong> Use color-coding or visual markers to track progress</li>
-                <li><strong>Implement Reward Systems:</strong> Set up small rewards after completing a certain number of tasks</li>
-                <li><strong>Use Body Doubling:</strong> Work alongside others (virtually or in-person) to maintain focus</li>
-                <li><strong>Task Batching:</strong> Group similar annotation tasks together to minimize context switching</li>
-            </ol>
-
-            <h3 class="section-subtitle">Digital Assistance Tools</h3>
-
-            <ul class="styled-list">
-                <li><strong>AI as a "Second Brain":</strong> Use AI tools for task management</li>
-                <li><strong>Voice-to-Text:</strong> Implement Otter.ai for note transcription</li>
-                <li><strong>Task Tracking Apps:</strong> Leverage organizational apps designed for ADHD</li>
-                <li><strong>Browser Extensions:</strong> Use focus tools that block distracting websites during work periods</li>
-                <li><strong>Time Trackers:</strong> Implement apps that visualize how you're spending your annotation time</li>
-            </ul>
-
-            <h3 class="section-subtitle">Environment Optimization</h3>
-
-            <div class="tip-card">
-                <div class="card-title">
-                    <div class="card-icon">🏠</div>
-                    Create a Focus-Friendly Workspace
-                </div>
-                <ul class="styled-list">
-                    <li>Position your desk away from high-traffic areas</li>
-                    <li>Use noise-cancelling headphones or background white noise</li>
-                    <li>Keep fidget tools nearby for restless energy</li>
-                    <li>Maintain a clean, uncluttered workspace with only essential items visible</li>
-                    <li>Consider a standing desk option for physical movement during annotation</li>
-                </ul>
-            </div>
-
-            <div class="success-card">
-                <div class="card-title">
-                    <div class="card-icon">🎯</div>
-                    Environment Transformation Success Story
-                </div>
-                <p><em>"I struggled with consistent annotation work until I completely redesigned my workspace. Now I have a dedicated annotation station with dual monitors, noise-cancelling headphones, and all my fidget tools within reach.</em></p>
-                <br>
-                <p><em>I also created a visual 'task map' on my wall that helps me see exactly what I need to accomplish each day. My productivity has more than doubled, and I actually look forward to sitting down at my annotation desk."</em></p>
-            </div>
-        </div>
-
-        <!-- Workflow Optimization -->
-        <div class="section" id="workflow">
-            <h2 class="section-title">
-                <span class="emoji">⚙️</span>
-                <span class="title-text">Workflow Optimization Techniques</span>
-            </h2>
-
-            <p>Developing efficient workflows is particularly important for ADHD annotators, as it reduces cognitive load and helps maintain consistent productivity.</p>
-
-            <h3 class="section-subtitle">Structured Approach</h3>
-
-            <div class="progress-timeline">
-                <div class="timeline-item">
-                    <div class="timeline-number">1</div>
-                    <div class="timeline-content">
-                        <h4>Build Clear Annotation Workflows</h4>
-                        <ul class="styled-list">
-                            <li>Create personal checklists for each annotation type</li>
-                            <li>Document your most efficient processes</li>
-                            <li>Track which tasks you complete most efficiently</li>
-                            <li>Develop templates for repetitive annotation patterns</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-number">2</div>
-                    <div class="timeline-content">
-                        <h4>Establish Consistent Routines</h4>
-                        <ul class="styled-list">
-                            <li>Set specific hours for annotation work</li>
-                            <li>Create transition rituals between different task types</li>
-                            <li>Use timers to maintain awareness of time spent</li>
-                            <li>Build in regular movement breaks to refresh focus</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tip-card">
-                <div class="card-title">
-                    <div class="card-icon">⌨️</div>
-                    Keyboard Shortcut Mastery
-                </div>
-                <p>Learning keyboard shortcuts for your annotation platforms can dramatically increase your efficiency. <strong>Many ADHD annotators report that the physical aspect of using keyboard commands instead of clicking through menus helps maintain engagement and increases work speed by 30-50%.</strong></p>
-                <br>
-                <p>Create a visual reference card with the most useful shortcuts for each platform you use.</p>
-            </div>
-
-            <h3 class="section-subtitle">Quality Control Measures</h3>
-
-            <p>Implementing self-quality checks not only improves your work but also provides structure beneficial for ADHD:</p>
-
-            <div class="checklist">
-                <h4 class="checklist-title">Quality Assurance Checklist</h4>
-                <ul class="checklist-list">
-                    <li class="checklist-item">
-                        <div class="checkbox"></div>
-                        <span>Complete initial annotation batch</span>
-                    </li>
-                    <li class="checklist-item">
-                        <div class="checkbox"></div>
-                        <span>Take a short break (5-10 minutes)</span>
-                    </li>
-                    <li class="checklist-item">
-                        <div class="checkbox"></div>
-                        <span>Review work with fresh eyes</span>
-                    </li>
-                    <li class="checklist-item">
-                        <div class="checkbox"></div>
-                        <span>Compare against project guidelines</span>
-                    </li>
-                    <li class="checklist-item">
-                        <div class="checkbox"></div>
-                        <span>Check for consistent application of rules</span>
-                    </li>
-                    <li class="checklist-item">
-                        <div class="checkbox"></div>
-                        <span>Verify edge cases and unusual instances</span>
-                    </li>
-                    <li class="checklist-item">
-                        <div class="checkbox"></div>
-                        <span>Submit final version only after review</span>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="adhd-card">
-                <div class="card-title">
-                    <div class="card-icon">🎯</div>
-                    The "Calibration Session" Technique
-                </div>
-                <p>Many successful ADHD annotators use a <strong>"calibration session"</strong> at the start of each work period:</p>
-                <ol class="numbered-list">
-                    <li>Begin with 5-10 minutes of very simple, quick annotation tasks</li>
-                    <li>Gradually transition to more complex tasks as your focus builds</li>
-                    <li>Use this ramping-up period to "calibrate" your brain to annotation mode</li>
-                    <li>Track which types of "starter tasks" most effectively help you transition into deep work</li>
-                </ol>
-                <p>This technique leverages the ADHD brain's need for warm-up and transition time, rather than expecting immediate deep focus.</p>
-            </div>
-        </div>
-
-        <!-- Security -->
-        <div class="section" id="security">
-            <h2 class="section-title">
-                <span class="emoji">🔒</span>
-                <span class="title-text">Security and Privacy Considerations</span>
-            </h2>
-
-            <p>Data annotation often involves working with sensitive information. Protecting yourself and the data is both an ethical obligation and a professional requirement.</p>
-
-            <h3 class="section-subtitle">Data Handling Best Practices</h3>
-
-            <div class="progress-timeline">
-                <div class="timeline-item">
-                    <div class="timeline-number">1</div>
-                    <div class="timeline-content">
-                        <h4>Maintaining Data Confidentiality</h4>
-                        <ul class="styled-list">
-                            <li>Never share or discuss project details outside of work</li>
-                            <li>Log out of platforms when not actively working</li>
-                            <li>Use secure, private internet connections</li>
-                            <li>Never download or store annotation data locally unless explicitly authorized</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-number">2</div>
-                    <div class="timeline-content">
-                        <h4>Following Platform-Specific Guidelines</h4>
-                        <ul class="styled-list">
-                            <li>Complete all required security training</li>
-                            <li>Adhere to non-disclosure agreements</li>
-                            <li>Report potential security issues immediately</li>
-                            <li>Update security software and browsers regularly</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="warning-card">
-                <div class="card-title">
-                    <div class="card-icon">⚠️</div>
-                    Security Reality Check
-                </div>
-                <p><strong>Many annotation platforms will terminate your contract immediately for security violations, even if unintentional.</strong> The ADHD tendency toward impulsivity can create risk here.</p>
-                <br>
-                <p>Consider creating physical reminders about security protocols (like a note on your monitor) and establishing strict personal routines for secure data handling.</p>
-            </div>
-
-            <h3 class="section-subtitle">Protecting Your Personal Information</h3>
-
-            <ul class="styled-list">
-                <li>Use unique, strong passwords for each annotation platform</li>
-                <li>Enable two-factor authentication when available</li>
-                <li>Be cautious about sharing personal details in platform profiles</li>
-                <li>Research platform reputation and payment security before signing up</li>
-                <li>Maintain separate email accounts for work and personal use</li>
-            </ul>
-        </div>
-
-        <!-- Success Stories -->
-        <div class="section" id="success">
-            <h2 class="section-title">
-                <span class="emoji">🎉</span>
-                <span class="title-text">Success Stories and Next Steps</span>
-            </h2>
-
-            <h3 class="section-subtitle">Paths to Growth in Data Annotation</h3>
-            <p>Many successful data annotators have leveraged their experience to create career advancement opportunities:</p>
-
-            <ol class="numbered-list">
-                <li><strong>Specialization:</strong> Becoming an expert in a specific type of annotation (medical imagery, legal text, etc.)</li>
-                <li><strong>Team Leadership:</strong> Moving into quality assurance or team management roles</li>
-                <li><strong>Tool Development:</strong> Contributing to the creation of better annotation tools</li>
-                <li><strong>Training:</strong> Developing training materials for new annotators</li>
-                <li><strong>AI Career Transition:</strong> Using annotation experience as a stepping stone to ML/AI careers</li>
-            </ol>
-
-            <div class="success-card">
-                <div class="card-title">
-                    <div class="card-icon">🚀</div>
-                    Realistic Growth Path
-                </div>
-                <p><em>"I started with data annotation to learn about AI while earning some extra money. After about a year of inconsistent annotation work, I used that experience to understand how AI models are trained.</em></p>
-                <br>
-                <p><em>I then took some free online courses in machine learning and was able to leverage my hands-on annotation experience to land an entry-level role at a tech company. The annotation work itself wasn't a career, but it was a useful stepping stone that taught me valuable skills."</em></p>
-                <br>
-                <p><strong>Key Message:</strong> Data annotation is better viewed as a learning opportunity and source of supplemental income rather than a career destination.</p>
-            </div>
-
-            <div class="checklist">
-                <h4 class="checklist-title">🎯 Realistic Getting Started Checklist</h4>
-                <ul class="checklist-list">
-                    <li class="checklist-item">
-                        <div class="checkbox"></div>
-                        <span>Set realistic expectations - this is supplemental income, not a career</span>
-                    </li>
-                    <li class="checklist-item">
-                        <div class="checkbox"></div>
-                        <span>Research 2-3 annotation platforms and read recent user reviews</span>
-                    </li>
-                    <li class="checklist-item">
-                        <div class="checkbox"></div>
-                        <span>Test your ability to do detail-oriented work for extended periods</span>
-                    </li>
-                    <li class="checklist-item">
-                        <div class="checkbox"></div>
-                        <span>Set up a distraction-free workspace</span>
-                    </li>
-                    <li class="checklist-item">
-                        <div class="checkbox"></div>
-                        <span>Create accounts and complete assessments (expect some rejections)</span>
-                    </li>
-                    <li class="checklist-item">
-                        <div class="checkbox"></div>
-                        <span>Plan for inconsistent work availability</span>
-                    </li>
-                    <li class="checklist-item">
-                        <div class="checkbox"></div>
-                        <span>Set modest earning goals for your first 90 days ($50-200/month is realistic)</span>
-                    </li>
-                    <li class="checklist-item">
-                        <div class="checkbox"></div>
-                        <span>Keep detailed records of time spent vs. money earned</span>
-                    </li>
-                </ul>
-            </div>
-
-            <h3 class="section-subtitle">Weekly Implementation Plan</h3>
-
-            <div class="progress-timeline">
-                <div class="timeline-item">
-                    <div class="timeline-number">1</div>
-                    <div class="timeline-content">
-                        <h4>Week 1: Foundation</h4>
-                        <p>Sign up for 2-3 platforms and complete their onboarding</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-number">2</div>
-                    <div class="timeline-content">
-                        <h4>Week 2: Exploration</h4>
-                        <p>Try different types of annotation tasks to find your strengths</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-number">3</div>
-                    <div class="timeline-content">
-                        <h4>Week 3: Optimization</h4>
-                        <p>Focus on improving speed while maintaining quality</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-number">4</div>
-                    <div class="timeline-content">
-                        <h4>Week 4: Specialization</h4>
-                        <p>Begin specializing in your preferred annotation type</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tip-card">
-                <div class="card-title">
-                    <div class="card-icon">🤝</div>
-                    Finding Your Annotation Community
-                </div>
-                <p>Connect with other annotators through:</p>
-                <ul class="styled-list">
-                    <li>Reddit communities like r/WorkOnline and r/UHRSwork</li>
-                    <li>Platform-specific forums and social media groups</li>
-                    <li>Discord servers focused on remote work and data annotation</li>
-                    <li>ADHD-focused professional groups where you can discuss annotation strategies</li>
-                </ul>
-                <p><strong>Having a community is especially valuable for ADHD annotators,</strong> as it provides accountability, troubleshooting help, and motivation.</p>
-            </div>
-
-            <div class="highlight-card">
-                <div class="card-title">
-                    <div class="card-icon">✨</div>
-                    Setting Realistic Expectations
-                </div>
-                <p>Data annotation can be a useful way to earn some extra money while learning about AI, especially if you have periods of good focus. However, it's important to have realistic expectations.</p>
-                <br>
-                <p><strong>Best suited for:</strong> People who want flexible supplemental income, are curious about AI, and don't need consistent earnings. <strong>Not ideal for:</strong> Those seeking stable primary income or who struggle with detailed, sustained attention tasks.</p>
-            </div>
-
-            <hr style="border: 1px solid var(--border-subtle); margin: 2rem 0;">
-
-            <div class="success-card">
-                <div class="card-title">
-                    <div class="card-icon">🚀</div>
-                    Ready to Try It Out?
-                </div>
-                <p>If you decide to explore data annotation, approach it as a learning experience and potential source of pocket money. <strong>Start with realistic expectations, don't quit your day job, and view any earnings as a bonus.</strong></p>
-                <br>
-                <p>Your ADHD traits may help with pattern recognition and creativity, but be honest about whether you can handle the sustained attention and detailed work this field requires.</p>
-            </div>
-
-            <div style="background: rgba(255, 255, 255, 0.02); border-radius: 12px; padding: 1.5rem; margin-top: 2rem; border: 1px solid var(--border-subtle);">
-                <p><strong>About This Guide:</strong> This guide provides realistic expectations about data annotation work for individuals with ADHD. The information is based on current market research, user experiences, and honest assessment of both opportunities and challenges in this field.</p>
-                <br>
-                <p><strong>Disclaimer:</strong> Earnings and experiences vary widely. This should not be considered financial advice. Always research platforms thoroughly and never rely on annotation work as your primary income source.</p>
-                <br>
-                <p><strong>Last Updated:</strong> June 2025</p>
-            </div>
-        </div>
     </div>
 
     <!-- Quick Navigation Button -->
@@ -1798,13 +1283,336 @@
     </button>
 
     <script>
-        // Scroll progress bar
-        window.addEventListener('scroll', () => {
-            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-            document.querySelector('.scroll-progress-bar').style.width = scrolled + '%';
+        // Simplified Speech synthesis with toggle functionality
+        let currentSpeech = null;
+        let speechRate = 1.4;
+        let selectedVoice = null;
+        let availableVoices = [];
+        let currentButton = null;
+        let isPlaying = false;
+        let isPaused = false;
+
+        // Simple toggle speech function
+        function toggleSpeech(button) {
+            const targetId = button.getAttribute('data-target');
+            const targetElement = document.getElementById(targetId);
+            
+            if (!targetElement) return;
+
+            // If different content is selected, stop current and start new
+            if (currentButton && currentButton !== button) {
+                stopCurrentSpeech();
+                setTimeout(() => startSpeech(button, targetElement), 100);
+                return;
+            }
+
+            // If same button clicked, toggle play/pause
+            if (currentButton === button) {
+                if (isPlaying && !isPaused) {
+                    // Currently playing - pause it
+                    pauseSpeech();
+                } else if (isPaused) {
+                    // Currently paused - resume it
+                    resumeSpeech();
+                } else {
+                    // Stopped - start playing
+                    startSpeech(button, targetElement);
+                }
+            } else {
+                // New content - start playing
+                startSpeech(button, targetElement);
+            }
+        }
+
+        function startSpeech(button, targetElement) {
+            // Stop any existing speech
+            stopCurrentSpeech();
+
+            const textContent = extractTextContent(targetElement);
+            if (!textContent.trim()) return;
+
+            // Create new speech
+            currentSpeech = new SpeechSynthesisUtterance(textContent);
+            currentSpeech.rate = speechRate;
+            currentSpeech.pitch = 1;
+            currentSpeech.volume = 0.8;
+
+            if (selectedVoice) {
+                currentSpeech.voice = selectedVoice;
+            }
+
+            // Update state
+            currentButton = button;
+            isPlaying = true;
+            isPaused = false;
+
+            // Update UI
+            updateButtonStates();
+
+            // Speech event handlers
+            currentSpeech.onend = () => {
+                isPlaying = false;
+                isPaused = false;
+                currentButton = null;
+                updateButtonStates();
+            };
+
+            currentSpeech.onerror = (event) => {
+                console.error('Speech synthesis error:', event);
+                isPlaying = false;
+                isPaused = false;
+                currentButton = null;
+                updateButtonStates();
+            };
+
+            // Start speaking
+            try {
+                speechSynthesis.speak(currentSpeech);
+            } catch (error) {
+                console.error('Failed to start speech:', error);
+                isPlaying = false;
+                isPaused = false;
+                currentButton = null;
+                updateButtonStates();
+            }
+        }
+
+        function pauseSpeech() {
+            if (isPlaying && !isPaused) {
+                speechSynthesis.pause();
+                isPaused = true;
+                updateButtonStates();
+            }
+        }
+
+        function resumeSpeech() {
+            if (isPaused) {
+                speechSynthesis.resume();
+                isPaused = false;
+                updateButtonStates();
+            }
+        }
+
+        function stopCurrentSpeech() {
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+            }
+            isPlaying = false;
+            isPaused = false;
+            currentButton = null;
+            updateButtonStates();
+        }
+
+        function restartSpeech() {
+            if (currentButton) {
+                const targetId = currentButton.getAttribute('data-target');
+                const targetElement = document.getElementById(targetId);
+                
+                stopCurrentSpeech();
+                setTimeout(() => {
+                    if (targetElement) {
+                        startSpeech(currentButton, targetElement);
+                    }
+                }, 100);
+            }
+        }
+
+        function updateButtonStates() {
+            // Reset all speech buttons to default state
+            document.querySelectorAll('.voice-btn[data-target]').forEach(btn => {
+                btn.className = 'voice-btn';
+                btn.innerHTML = '<span>🔊</span> Play';
+            });
+
+            // Update current button state
+            if (currentButton) {
+                if (isPlaying && !isPaused) {
+                    currentButton.className = 'voice-btn playing';
+                    currentButton.innerHTML = '<span>⏸️</span> Pause';
+                } else if (isPaused) {
+                    currentButton.className = 'voice-btn paused';
+                    currentButton.innerHTML = '<span>▶️</span> Resume';
+                }
+            }
+        }
+
+        function extractTextContent(element) {
+            const clone = element.cloneNode(true);
+            const voiceControls = clone.querySelectorAll('.voice-controls');
+            voiceControls.forEach(control => control.remove());
+            return clone.textContent || clone.innerText || '';
+        }
+
+        function updateSelectedVoice(voiceIndex) {
+            if (voiceIndex === '') {
+                selectedVoice = null;
+            } else {
+                selectedVoice = availableVoices[parseInt(voiceIndex)];
+            }
+            
+            // If currently speaking, restart with new voice
+            if (isPlaying && currentButton) {
+                const targetId = currentButton.getAttribute('data-target');
+                const targetElement = document.getElementById(targetId);
+                
+                stopCurrentSpeech();
+                setTimeout(() => {
+                    if (targetElement) {
+                        startSpeech(currentButton, targetElement);
+                    }
+                }, 100);
+            }
+        }
+
+        function updateSpeechRate(rate) {
+            speechRate = parseFloat(rate);
+            document.getElementById('speed-display').textContent = rate + 'x';
+            
+            // If currently speaking, restart with new rate
+            if (isPlaying && currentButton) {
+                const targetId = currentButton.getAttribute('data-target');
+                const targetElement = document.getElementById(targetId);
+                
+                stopCurrentSpeech();
+                setTimeout(() => {
+                    if (targetElement) {
+                        startSpeech(currentButton, targetElement);
+                    }
+                }, 100);
+            }
+        }
+
+        // Load available voices
+        function loadVoices() {
+            availableVoices = speechSynthesis.getVoices();
+            const voiceSelect = document.getElementById('voice-select');
+            
+            if (availableVoices.length > 0) {
+                voiceSelect.innerHTML = '';
+                
+                const defaultOption = document.createElement('option');
+                defaultOption.value = '';
+                defaultOption.textContent = 'System Default';
+                voiceSelect.appendChild(defaultOption);
+                
+                availableVoices.forEach((voice, index) => {
+                    const option = document.createElement('option');
+                    option.value = index;
+                    option.textContent = voice.name + (voice.lang ? ` (${voice.lang})` : '');
+                    voiceSelect.appendChild(option);
+                });
+                
+                // Try to select a good default English voice
+                const preferredVoice = availableVoices.findIndex(voice => 
+                    voice.lang.startsWith('en') && voice.default
+                );
+                
+                if (preferredVoice !== -1) {
+                    voiceSelect.value = preferredVoice;
+                    selectedVoice = availableVoices[preferredVoice];
+                }
+            }
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'SELECT' && e.target.tagName !== 'TEXTAREA') {
+                switch(e.key) {
+                    case ' ': // Spacebar
+                        e.preventDefault();
+                        if (currentButton) {
+                            toggleSpeech(currentButton);
+                        }
+                        break;
+                    case 'Escape': // Stop
+                        e.preventDefault();
+                        stopCurrentSpeech();
+                        break;
+                    case 'r': // R key to restart
+                        if (e.ctrlKey || e.metaKey) {
+                            e.preventDefault();
+                            restartSpeech();
+                        }
+                        break;
+                }
+            }
         });
 
-        // Smooth scrolling for navigation links
+        // Section tracking and progress (simplified for demo)
+        const sections = ['introduction', 'understanding'];
+        let currentSectionIndex = 0;
+
+        function updateProgress() {
+            const scrolled = window.scrollY;
+            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrolled / totalHeight) * 100;
+            
+            document.querySelector('.scroll-progress-bar').style.width = scrollPercent + '%';
+            updateSectionProgress();
+        }
+
+        function updateSectionProgress() {
+            const scrollPosition = window.scrollY + 200;
+            
+            sections.forEach((sectionId, index) => {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    const sectionTop = section.offsetTop;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                        currentSectionIndex = index;
+                        updateProgressIndicator();
+                    }
+                }
+            });
+        }
+
+        function updateProgressIndicator() {
+            const sectionNames = ['Introduction', 'Understanding'];
+            document.getElementById('current-section').textContent = sectionNames[currentSectionIndex] || 'Introduction';
+            
+            const circles = document.querySelectorAll('.progress-circle');
+            circles.forEach((circle, index) => {
+                circle.className = 'progress-circle';
+                if (index < currentSectionIndex) {
+                    circle.classList.add('completed');
+                } else if (index === currentSectionIndex) {
+                    circle.classList.add('active');
+                }
+            });
+        }
+
+        // Initialize
+        window.addEventListener('scroll', updateProgress);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+            
+            if ('speechSynthesis' in window) {
+                loadVoices();
+                if (speechSynthesis.onvoiceschanged !== undefined) {
+                    speechSynthesis.onvoiceschanged = loadVoices;
+                }
+                setTimeout(loadVoices, 100);
+            } else {
+                document.querySelectorAll('.voice-btn').forEach(btn => {
+                    btn.disabled = true;
+                    btn.textContent = 'Speech not supported';
+                });
+            }
+        });
+
+        // Cleanup
+        window.addEventListener('beforeunload', function() {
+            stopCurrentSpeech();
+        });
+
+        window.addEventListener('pagehide', function() {
+            stopCurrentSpeech();
+        });
+
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1814,27 +1622,10 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
+                    setTimeout(() => updateProgress(), 1000);
                 }
             });
         });
-
-        // Enhanced touch targets for mobile
-        document.querySelectorAll('.toc-item, .data-card').forEach(element => {
-            element.addEventListener('touchstart', function() {
-                this.style.transform = 'scale(0.98)';
-            });
-            
-            element.addEventListener('touchend', function() {
-                this.style.transform = '';
-            });
-        });
-
-        // Prevent horizontal scrolling
-        document.body.addEventListener('touchmove', function(e) {
-            if (e.touches.length > 1) {
-                e.preventDefault();
-            }
-        }, { passive: false });
     </script>
 </body>
 </html>
