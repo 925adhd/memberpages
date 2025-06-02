@@ -41,6 +41,7 @@
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            font-size: 16px;
         }
 
         /* Background Effects */
@@ -72,20 +73,20 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 100%;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem;
         }
 
         /* Header */
         .hero-header {
             text-align: center;
-            padding: 3rem 0 4rem;
+            padding: 2rem 1rem 3rem;
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
-            border-radius: 24px;
+            border-radius: 20px;
             border: 1px solid var(--border-subtle);
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             position: relative;
             overflow: hidden;
         }
@@ -108,7 +109,7 @@
         }
 
         .main-title {
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(1.5rem, 6vw, 2.5rem);
             font-weight: 700;
             background: var(--gradient-adhd);
             background-size: 200% 200%;
@@ -126,9 +127,9 @@
         }
 
         .subtitle {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             color: var(--text-secondary);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .date-badge {
@@ -141,47 +142,56 @@
             border: 1px solid rgba(79, 70, 229, 0.3);
         }
 
-        /* Table of Contents */
+        /* Mobile-optimized navigation */
         .toc-container {
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
             border-radius: 16px;
             border: 1px solid var(--border-subtle);
-            padding: 2rem;
-            margin-bottom: 3rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .toc-title {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 600;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             color: var(--accent-teal);
         }
 
-        .toc-list {
-            list-style: none;
+        .toc-grid {
             display: grid;
             gap: 0.75rem;
+            grid-template-columns: 1fr;
         }
 
         .toc-item {
             background: rgba(255, 255, 255, 0.02);
-            border-radius: 8px;
+            border-radius: 12px;
             border: 1px solid var(--border-subtle);
             transition: all 0.3s ease;
+            min-height: 60px;
         }
 
-        .toc-item:hover {
+        .toc-item:hover, .toc-item:active {
             background: rgba(255, 255, 255, 0.05);
             border-color: var(--accent-teal);
+            transform: translateY(-1px);
         }
 
         .toc-link {
-            display: block;
+            display: flex;
+            align-items: center;
             padding: 1rem;
             color: var(--text-primary);
             text-decoration: none;
             font-weight: 500;
+            gap: 0.75rem;
+        }
+
+        .toc-emoji {
+            font-size: 1.5rem;
+            flex-shrink: 0;
         }
 
         /* Section Styling */
@@ -190,8 +200,8 @@
             backdrop-filter: blur(20px);
             border-radius: 16px;
             border: 1px solid var(--border-subtle);
-            padding: 2.5rem;
-            margin-bottom: 2rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
             transition: all 0.3s ease;
         }
 
@@ -200,17 +210,18 @@
         }
 
         .section-title {
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: 600;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
             gap: 0.75rem;
+            flex-wrap: wrap;
         }
 
         .section-title .emoji {
-            font-size: 2.2rem;
-            filter: none;
+            font-size: 1.8rem;
+            flex-shrink: 0;
         }
 
         .section-title .title-text {
@@ -218,70 +229,59 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            flex: 1;
+            min-width: 200px;
         }
 
         .section-subtitle {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            margin: 2rem 0 1rem;
+            margin: 1.5rem 0 1rem;
             color: var(--accent-emerald);
         }
 
         .subsection-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            margin: 1.5rem 0 1rem;
+            margin: 1.25rem 0 0.75rem;
             color: var(--accent-purple);
         }
 
         /* Content Cards */
+        .highlight-card, .success-card, .warning-card, .tip-card, .adhd-card {
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            backdrop-filter: blur(10px);
+        }
+
         .highlight-card {
             background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(16, 185, 129, 0.1));
             border: 1px solid rgba(79, 70, 229, 0.2);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            backdrop-filter: blur(10px);
         }
 
         .success-card {
             background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1));
             border: 1px solid rgba(16, 185, 129, 0.3);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            backdrop-filter: blur(10px);
         }
 
         .warning-card {
             background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(239, 68, 68, 0.1));
             border: 1px solid rgba(245, 158, 11, 0.3);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            backdrop-filter: blur(10px);
         }
 
         .tip-card {
             background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(139, 92, 246, 0.1));
             border: 1px solid rgba(6, 182, 212, 0.3);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            backdrop-filter: blur(10px);
         }
 
         .adhd-card {
             background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(79, 70, 229, 0.1));
             border: 1px solid rgba(139, 92, 246, 0.3);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            backdrop-filter: blur(10px);
         }
 
         .card-title {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 1rem;
             display: flex;
@@ -297,6 +297,7 @@
             align-items: center;
             justify-content: center;
             font-size: 14px;
+            flex-shrink: 0;
         }
 
         .highlight-card .card-icon { background: var(--accent-blue); }
@@ -305,34 +306,73 @@
         .tip-card .card-icon { background: var(--accent-teal); }
         .adhd-card .card-icon { background: var(--accent-purple); }
 
-        /* Tables */
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 12px;
-            overflow: hidden;
+        /* Mobile-optimized data cards (replacing tables) */
+        .data-grid {
+            display: grid;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .data-card {
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 1.25rem;
+            transition: all 0.3s ease;
         }
 
-        .data-table th {
-            background: rgba(79, 70, 229, 0.2);
-            color: var(--text-primary);
+        .data-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent-teal);
+            transform: translateY(-1px);
+        }
+
+        .data-card-header {
             font-weight: 600;
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border-subtle);
+            font-size: 1.1rem;
+            color: var(--accent-blue);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .data-table td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--border-subtle);
-            vertical-align: top;
+        .data-card-content {
+            display: grid;
+            gap: 0.5rem;
         }
 
-        .data-table tr:hover {
-            background: rgba(255, 255, 255, 0.02);
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .data-row:last-child {
+            border-bottom: none;
+        }
+
+        .data-label {
+            font-weight: 500;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+            margin-right: 1rem;
+        }
+
+        .data-value {
+            color: var(--text-primary);
+            text-align: right;
+            font-weight: 500;
+        }
+
+        .data-note {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         /* Lists */
@@ -395,15 +435,15 @@
         .checklist {
             background: rgba(255, 255, 255, 0.02);
             border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
             border: 1px solid var(--border-subtle);
         }
 
         .checklist-title {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             color: var(--accent-emerald);
         }
 
@@ -436,15 +476,15 @@
         /* Progress indicators */
         .progress-timeline {
             display: grid;
-            gap: 1.5rem;
-            margin: 2rem 0;
+            gap: 1rem;
+            margin: 1.5rem 0;
         }
 
         .timeline-item {
             display: flex;
             align-items: flex-start;
             gap: 1rem;
-            padding: 1.5rem;
+            padding: 1.25rem;
             background: rgba(255, 255, 255, 0.02);
             border-radius: 12px;
             border: 1px solid var(--border-subtle);
@@ -453,7 +493,7 @@
         .timeline-number {
             background: var(--accent-blue);
             color: white;
-            width: 32px;
+            min-width: 32px;
             height: 32px;
             border-radius: 50%;
             display: flex;
@@ -461,42 +501,20 @@
             justify-content: center;
             font-weight: bold;
             flex-shrink: 0;
+            font-size: 0.9rem;
+        }
+
+        .timeline-content {
+            flex: 1;
         }
 
         .timeline-content h4 {
             margin: 0 0 0.5rem;
             color: var(--accent-teal);
+            font-size: 1rem;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-
-            .section {
-                padding: 1.5rem;
-            }
-
-            .hero-header {
-                padding: 2rem 1rem 3rem;
-            }
-
-            .main-title {
-                font-size: 2rem;
-            }
-
-            .data-table {
-                font-size: 0.9rem;
-            }
-
-            .data-table th,
-            .data-table td {
-                padding: 0.75rem 0.5rem;
-            }
-        }
-
-        /* Focus indicators for ADHD */
+        /* Focus helpers for ADHD */
         .focus-helper {
             position: fixed;
             top: 20px;
@@ -531,6 +549,192 @@
             width: 0%;
             transition: width 0.3s ease;
         }
+
+        /* Quick access floating button */
+        .quick-nav {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent-blue);
+            border: none;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(79, 70, 229, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .quick-nav:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(79, 70, 229, 0.5);
+        }
+
+        /* Status indicators */
+        .status-indicator {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .status-high {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--accent-emerald);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status-medium {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--accent-amber);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .status-low {
+            background: rgba(244, 63, 94, 0.2);
+            color: var(--accent-rose);
+            border: 1px solid rgba(244, 63, 94, 0.3);
+        }
+
+        .status-easy {
+            background: rgba(6, 182, 212, 0.2);
+            color: var(--accent-teal);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0.75rem;
+            }
+
+            .section {
+                padding: 1.25rem;
+                margin-bottom: 1.25rem;
+                border-radius: 12px;
+            }
+
+            .hero-header {
+                padding: 1.5rem 1rem 2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .main-title {
+                font-size: clamp(1.25rem, 5vw, 2rem);
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .section-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .card-title {
+                font-size: 1.1rem;
+            }
+
+            .toc-container {
+                padding: 1.25rem;
+            }
+
+            .highlight-card, .success-card, .warning-card, .tip-card, .adhd-card {
+                padding: 1.25rem;
+            }
+
+            .data-card {
+                padding: 1rem;
+            }
+
+            .data-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.25rem;
+            }
+
+            .data-value {
+                text-align: left;
+            }
+
+            .focus-helper {
+                top: 10px;
+                right: 10px;
+            }
+
+            .quick-nav {
+                bottom: 15px;
+                right: 15px;
+                width: 50px;
+                height: 50px;
+                font-size: 18px;
+            }
+
+            .timeline-item {
+                padding: 1rem;
+            }
+
+            .checklist {
+                padding: 1.25rem;
+            }
+        }
+
+        /* Ultra-small screens */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0.5rem;
+            }
+
+            .section {
+                padding: 1rem;
+            }
+
+            .hero-header {
+                padding: 1rem 0.75rem 1.5rem;
+            }
+
+            .toc-container, .highlight-card, .success-card, .warning-card, .tip-card, .adhd-card {
+                padding: 1rem;
+            }
+
+            .checklist {
+                padding: 1rem;
+            }
+        }
+
+        /* High contrast mode for accessibility */
+        @media (prefers-contrast: high) {
+            :root {
+                --border-subtle: rgba(255, 255, 255, 0.3);
+                --card-bg: rgba(255, 255, 255, 0.1);
+                --glass-bg: rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        /* Reduced motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+            .bg-gradient,
+            .hero-header::before,
+            .main-title,
+            .focus-helper {
+                animation: none;
+            }
+            
+            .toc-item:hover,
+            .data-card:hover,
+            .quick-nav:hover {
+                transform: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -562,16 +766,56 @@
         <!-- Table of Contents -->
         <div class="toc-container">
             <h2 class="toc-title">📋 Quick Navigation</h2>
-            <ol class="toc-list">
-                <li class="toc-item"><a href="#introduction" class="toc-link">🎯 Introduction: Your Data Annotation Journey</a></li>
-                <li class="toc-item"><a href="#understanding" class="toc-link">🔍 Understanding Data Annotation Work</a></li>
-                <li class="toc-item"><a href="#getting-started" class="toc-link">🚀 Getting Started: Platforms and Requirements</a></li>
-                <li class="toc-item"><a href="#earning" class="toc-link">💰 Earning Potential and Payment Structures</a></li>
-                <li class="toc-item"><a href="#strategies" class="toc-link">⚡ ADHD-Specific Strategies for Success</a></li>
-                <li class="toc-item"><a href="#workflow" class="toc-link">⚙️ Workflow Optimization Techniques</a></li>
-                <li class="toc-item"><a href="#security" class="toc-link">🔒 Security and Privacy Considerations</a></li>
-                <li class="toc-item"><a href="#success" class="toc-link">🎉 Success Stories and Next Steps</a></li>
-            </ol>
+            <div class="toc-grid">
+                <div class="toc-item">
+                    <a href="#introduction" class="toc-link">
+                        <span class="toc-emoji">🎯</span>
+                        <span>Introduction: Your Data Annotation Journey</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#understanding" class="toc-link">
+                        <span class="toc-emoji">🔍</span>
+                        <span>Understanding Data Annotation Work</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#getting-started" class="toc-link">
+                        <span class="toc-emoji">🚀</span>
+                        <span>Getting Started: Platforms and Requirements</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#earning" class="toc-link">
+                        <span class="toc-emoji">💰</span>
+                        <span>Earning Potential and Payment Structures</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#strategies" class="toc-link">
+                        <span class="toc-emoji">⚡</span>
+                        <span>ADHD-Specific Strategies for Success</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#workflow" class="toc-link">
+                        <span class="toc-emoji">⚙️</span>
+                        <span>Workflow Optimization Techniques</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#security" class="toc-link">
+                        <span class="toc-emoji">🔒</span>
+                        <span>Security and Privacy Considerations</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#success" class="toc-link">
+                        <span class="toc-emoji">🎉</span>
+                        <span>Success Stories and Next Steps</span>
+                    </a>
+                </div>
+            </div>
         </div>
 
         <!-- Introduction Section -->
@@ -616,54 +860,127 @@
 
             <h3 class="section-subtitle">Types of Data Annotation</h3>
 
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Annotation Type</th>
-                        <th>Key Tasks</th>
-                        <th>Tools Used</th>
-                        <th>Skill Requirements</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Text Annotation</strong></td>
-                        <td>Syntactic Parsing, Named Entity Recognition, Sentiment Analysis</td>
-                        <td>Prodigy, LightTag, Amazon Comprehend</td>
-                        <td>Language proficiency, attention to detail</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Image Annotation</strong></td>
-                        <td>Keypoints, Bounding Boxes, Polygons</td>
-                        <td>Labelbox, SuperAnnotate, CVAT</td>
-                        <td>Visual acuity, spatial awareness</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Video Annotation</strong></td>
-                        <td>Object Tracking, Activity Recognition</td>
-                        <td>V7 Darwin, Scalabel, Annotell</td>
-                        <td>Temporal understanding, consistency</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Audio Annotation</strong></td>
-                        <td>Phoneme Transcription, Speaker Identification</td>
-                        <td>Sonix, Rev, Otter.ai</td>
-                        <td>Audio perception, language skills</td>
-                    </tr>
-                    <tr>
-                        <td><strong>3D Data Annotation</strong></td>
-                        <td>Point Cloud Segmentation, Object Classification</td>
-                        <td>Scale AI, Pointly</td>
-                        <td>Spatial visualization, technical knowledge</td>
-                    </tr>
-                    <tr>
-                        <td><strong>LLM Annotation</strong></td>
-                        <td>Text Classification, Q&A Pairing</td>
-                        <td>Hugging Face, Snorkel</td>
-                        <td>Language understanding, context awareness</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="data-grid">
+                <div class="data-card">
+                    <div class="data-card-header">
+                        📝 Text Annotation
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Key Tasks:</span>
+                            <span class="data-value">Syntactic Parsing, Named Entity Recognition, Sentiment Analysis</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Tools Used:</span>
+                            <span class="data-value">Prodigy, LightTag, Amazon Comprehend</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Skill Requirements:</span>
+                            <span class="data-value">Language proficiency, attention to detail</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🖼️ Image Annotation
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Key Tasks:</span>
+                            <span class="data-value">Keypoints, Bounding Boxes, Polygons</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Tools Used:</span>
+                            <span class="data-value">Labelbox, SuperAnnotate, CVAT</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Skill Requirements:</span>
+                            <span class="data-value">Visual acuity, spatial awareness</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🎬 Video Annotation
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Key Tasks:</span>
+                            <span class="data-value">Object Tracking, Activity Recognition</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Tools Used:</span>
+                            <span class="data-value">V7 Darwin, Scalabel, Annotell</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Skill Requirements:</span>
+                            <span class="data-value">Temporal understanding, consistency</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🎵 Audio Annotation
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Key Tasks:</span>
+                            <span class="data-value">Phoneme Transcription, Speaker Identification</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Tools Used:</span>
+                            <span class="data-value">Sonix, Rev, Otter.ai</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Skill Requirements:</span>
+                            <span class="data-value">Audio perception, language skills</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🔮 3D Data Annotation
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Key Tasks:</span>
+                            <span class="data-value">Point Cloud Segmentation, Object Classification</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Tools Used:</span>
+                            <span class="data-value">Scale AI, Pointly</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Skill Requirements:</span>
+                            <span class="data-value">Spatial visualization, technical knowledge</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🤖 LLM Annotation
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Key Tasks:</span>
+                            <span class="data-value">Text Classification, Q&A Pairing</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Tools Used:</span>
+                            <span class="data-value">Hugging Face, Snorkel</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Skill Requirements:</span>
+                            <span class="data-value">Language understanding, context awareness</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="tip-card">
                 <div class="card-title">
@@ -727,61 +1044,169 @@
 
             <h3 class="section-subtitle">Leading Data Annotation Platforms</h3>
 
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Platform</th>
-                        <th>Specialization</th>
-                        <th>Ease of Entry</th>
-                        <th>Payment Range</th>
-                        <th>ADHD Compatibility</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Amazon Mechanical Turk</strong></td>
-                        <td>Wide variety</td>
-                        <td>Very Easy</td>
-                        <td>$3-15/hour</td>
-                        <td>Low (very low pay, can be frustrating and demotivating)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Appen</strong></td>
-                        <td>AI training data</td>
-                        <td>Medium</td>
-                        <td>$9-20/hour</td>
-                        <td>Medium (structured but inconsistent work availability)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Lionbridge AI</strong></td>
-                        <td>Language & search</td>
-                        <td>Medium</td>
-                        <td>$10-25/hour</td>
-                        <td>Medium (can be repetitive, requires sustained attention)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Clickworker</strong></td>
-                        <td>Text & image tasks</td>
-                        <td>Easy</td>
-                        <td>$8-18/hour</td>
-                        <td>Low (often repetitive tasks that don't engage ADHD brains)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Remotasks</strong></td>
-                        <td>Computer vision</td>
-                        <td>Medium</td>
-                        <td>$7-30/hour</td>
-                        <td>Medium-High (good training, but work can be inconsistent)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Toloka</strong></td>
-                        <td>ML tasks</td>
-                        <td>Easy</td>
-                        <td>$5-15/hour</td>
-                        <td>Low (inconsistent availability, can be frustrating)</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="data-grid">
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🟠 Amazon Mechanical Turk
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Specialization:</span>
+                            <span class="data-value">Wide variety</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Ease of Entry:</span>
+                            <span class="data-value"><span class="status-easy">Very Easy</span></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Payment Range:</span>
+                            <span class="data-value">$3-15/hour</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-low">Low</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Very low pay, can be frustrating and demotivating for ADHD minds.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🔵 Appen
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Specialization:</span>
+                            <span class="data-value">AI training data</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Ease of Entry:</span>
+                            <span class="data-value"><span class="status-medium">Medium</span></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Payment Range:</span>
+                            <span class="data-value">$9-20/hour</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-medium">Medium</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Structured but inconsistent work availability can be challenging.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🔗 Lionbridge AI
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Specialization:</span>
+                            <span class="data-value">Language & search</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Ease of Entry:</span>
+                            <span class="data-value"><span class="status-medium">Medium</span></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Payment Range:</span>
+                            <span class="data-value">$10-25/hour</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-medium">Medium</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Can be repetitive, requires sustained attention which may be challenging.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        ⚡ Clickworker
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Specialization:</span>
+                            <span class="data-value">Text & image tasks</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Ease of Entry:</span>
+                            <span class="data-value"><span class="status-easy">Easy</span></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Payment Range:</span>
+                            <span class="data-value">$8-18/hour</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-low">Low</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Often repetitive tasks that don't engage ADHD brains effectively.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🎯 Remotasks
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Specialization:</span>
+                            <span class="data-value">Computer vision</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Ease of Entry:</span>
+                            <span class="data-value"><span class="status-medium">Medium</span></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Payment Range:</span>
+                            <span class="data-value">$7-30/hour</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-high">Medium-High</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Good training provided, but work can be inconsistent.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🌍 Toloka
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Specialization:</span>
+                            <span class="data-value">ML tasks</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Ease of Entry:</span>
+                            <span class="data-value"><span class="status-easy">Easy</span></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Payment Range:</span>
+                            <span class="data-value">$5-15/hour</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-low">Low</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Inconsistent availability, can be frustrating for ADHD users.
+                    </div>
+                </div>
+            </div>
 
             <div class="warning-card">
                 <div class="card-title">
@@ -800,9 +1225,9 @@
                 <p><strong>Recommendation:</strong> Never rely on data annotation as your primary income source. Treat it as supplemental income only.</p>
             </div>
 
-            <div class="warning-card">
+            <div class="tip-card">
                 <div class="card-title">
-                    <div class="card-icon">⚠️</div>
+                    <div class="card-icon">💡</div>
                     Platform Selection Strategy
                 </div>
                 <p>Start with 2-3 platforms simultaneously to increase your chances of consistent work. However, be prepared that even with multiple platforms, work may be sporadic.</p>
@@ -846,42 +1271,87 @@
 
             <p>Understanding the compensation landscape helps set realistic expectations and goals. Data annotation pay varies widely based on task complexity, your speed, and the platform's payment structure.</p>
 
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Task Type</th>
-                        <th>Pay Range</th>
-                        <th>Payment Structure</th>
-                        <th>Notes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Basic Tasks</strong></td>
-                        <td>$10-20/hour</td>
-                        <td>Hourly/Per Task</td>
-                        <td>Entry-level work, most common</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Experienced Annotation</strong></td>
-                        <td>$15-25/hour</td>
-                        <td>Hourly</td>
-                        <td>After building track record</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Specialized (Technical)</strong></td>
-                        <td>$20-35/hour</td>
-                        <td>Project-based</td>
-                        <td>Requires domain expertise, limited availability</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Platform Average</strong></td>
-                        <td>$12-22/hour</td>
-                        <td>Variable</td>
-                        <td>Most workers fall in this range</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="data-grid">
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🎯 Basic Tasks
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Pay Range:</span>
+                            <span class="data-value">$10-20/hour</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Payment Structure:</span>
+                            <span class="data-value">Hourly/Per Task</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Notes:</span>
+                            <span class="data-value">Entry-level work, most common</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        📈 Experienced Annotation
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Pay Range:</span>
+                            <span class="data-value">$15-25/hour</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Payment Structure:</span>
+                            <span class="data-value">Hourly</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Notes:</span>
+                            <span class="data-value">After building track record</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🔬 Specialized (Technical)
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Pay Range:</span>
+                            <span class="data-value">$20-35/hour</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Payment Structure:</span>
+                            <span class="data-value">Project-based</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Notes:</span>
+                            <span class="data-value">Requires domain expertise, limited availability</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        📊 Platform Average
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Pay Range:</span>
+                            <span class="data-value">$12-22/hour</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Payment Structure:</span>
+                            <span class="data-value">Variable</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Notes:</span>
+                            <span class="data-value">Most workers fall in this range</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="success-card">
                 <div class="card-title">
@@ -1300,7 +1770,7 @@
                 <p><strong>Best suited for:</strong> People who want flexible supplemental income, are curious about AI, and don't need consistent earnings. <strong>Not ideal for:</strong> Those seeking stable primary income or who struggle with detailed, sustained attention tasks.</p>
             </div>
 
-            <hr style="border: 1px solid var(--border-subtle); margin: 3rem 0;">
+            <hr style="border: 1px solid var(--border-subtle); margin: 2rem 0;">
 
             <div class="success-card">
                 <div class="card-title">
@@ -1312,7 +1782,7 @@
                 <p>Your ADHD traits may help with pattern recognition and creativity, but be honest about whether you can handle the sustained attention and detailed work this field requires.</p>
             </div>
 
-            <div style="background: rgba(255, 255, 255, 0.02); border-radius: 12px; padding: 2rem; margin-top: 2rem; border: 1px solid var(--border-subtle);">
+            <div style="background: rgba(255, 255, 255, 0.02); border-radius: 12px; padding: 1.5rem; margin-top: 2rem; border: 1px solid var(--border-subtle);">
                 <p><strong>About This Guide:</strong> This guide provides realistic expectations about data annotation work for individuals with ADHD. The information is based on current market research, user experiences, and honest assessment of both opportunities and challenges in this field.</p>
                 <br>
                 <p><strong>Disclaimer:</strong> Earnings and experiences vary widely. This should not be considered financial advice. Always research platforms thoroughly and never rely on annotation work as your primary income source.</p>
@@ -1321,6 +1791,11 @@
             </div>
         </div>
     </div>
+
+    <!-- Quick Navigation Button -->
+    <button class="quick-nav" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Back to top">
+        ↑
+    </button>
 
     <script>
         // Scroll progress bar
@@ -1342,6 +1817,24 @@
                 }
             });
         });
+
+        // Enhanced touch targets for mobile
+        document.querySelectorAll('.toc-item, .data-card').forEach(element => {
+            element.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.98)';
+            });
+            
+            element.addEventListener('touchend', function() {
+                this.style.transform = '';
+            });
+        });
+
+        // Prevent horizontal scrolling
+        document.body.addEventListener('touchmove', function(e) {
+            if (e.touches.length > 1) {
+                e.preventDefault();
+            }
+        }, { passive: false });
     </script>
 </body>
 </html>
