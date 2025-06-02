@@ -41,6 +41,7 @@
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            font-size: 16px;
         }
 
         /* Background Effects */
@@ -72,20 +73,20 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 100%;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem;
         }
 
         /* Header */
         .hero-header {
             text-align: center;
-            padding: 3rem 0 4rem;
+            padding: 2rem 1rem 3rem;
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
-            border-radius: 24px;
+            border-radius: 20px;
             border: 1px solid var(--border-subtle);
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             position: relative;
             overflow: hidden;
         }
@@ -108,7 +109,7 @@
         }
 
         .main-title {
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(1.5rem, 6vw, 2.5rem);
             font-weight: 700;
             background: var(--gradient-adhd);
             background-size: 200% 200%;
@@ -126,9 +127,9 @@
         }
 
         .subtitle {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             color: var(--text-secondary);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .date-badge {
@@ -141,47 +142,56 @@
             border: 1px solid rgba(79, 70, 229, 0.3);
         }
 
-        /* Table of Contents */
+        /* Mobile-optimized navigation */
         .toc-container {
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
             border-radius: 16px;
             border: 1px solid var(--border-subtle);
-            padding: 2rem;
-            margin-bottom: 3rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .toc-title {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 600;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             color: var(--accent-teal);
         }
 
-        .toc-list {
-            list-style: none;
+        .toc-grid {
             display: grid;
             gap: 0.75rem;
+            grid-template-columns: 1fr;
         }
 
         .toc-item {
             background: rgba(255, 255, 255, 0.02);
-            border-radius: 8px;
+            border-radius: 12px;
             border: 1px solid var(--border-subtle);
             transition: all 0.3s ease;
+            min-height: 60px;
         }
 
-        .toc-item:hover {
+        .toc-item:hover, .toc-item:active {
             background: rgba(255, 255, 255, 0.05);
             border-color: var(--accent-teal);
+            transform: translateY(-1px);
         }
 
         .toc-link {
-            display: block;
+            display: flex;
+            align-items: center;
             padding: 1rem;
             color: var(--text-primary);
             text-decoration: none;
             font-weight: 500;
+            gap: 0.75rem;
+        }
+
+        .toc-emoji {
+            font-size: 1.5rem;
+            flex-shrink: 0;
         }
 
         /* Section Styling */
@@ -190,8 +200,8 @@
             backdrop-filter: blur(20px);
             border-radius: 16px;
             border: 1px solid var(--border-subtle);
-            padding: 2.5rem;
-            margin-bottom: 2rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
             transition: all 0.3s ease;
         }
 
@@ -200,17 +210,18 @@
         }
 
         .section-title {
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: 600;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
             gap: 0.75rem;
+            flex-wrap: wrap;
         }
 
         .section-title .emoji {
-            font-size: 2.2rem;
-            filter: none;
+            font-size: 1.8rem;
+            flex-shrink: 0;
         }
 
         .section-title .title-text {
@@ -218,70 +229,59 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            flex: 1;
+            min-width: 200px;
         }
 
         .section-subtitle {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            margin: 2rem 0 1rem;
+            margin: 1.5rem 0 1rem;
             color: var(--accent-emerald);
         }
 
         .subsection-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            margin: 1.5rem 0 1rem;
+            margin: 1.25rem 0 0.75rem;
             color: var(--accent-purple);
         }
 
         /* Content Cards */
+        .highlight-card, .success-card, .warning-card, .tip-card, .adhd-card {
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            backdrop-filter: blur(10px);
+        }
+
         .highlight-card {
             background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(16, 185, 129, 0.1));
             border: 1px solid rgba(79, 70, 229, 0.2);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            backdrop-filter: blur(10px);
         }
 
         .success-card {
             background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1));
             border: 1px solid rgba(16, 185, 129, 0.3);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            backdrop-filter: blur(10px);
         }
 
         .warning-card {
             background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(239, 68, 68, 0.1));
             border: 1px solid rgba(245, 158, 11, 0.3);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            backdrop-filter: blur(10px);
         }
 
         .tip-card {
             background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(139, 92, 246, 0.1));
             border: 1px solid rgba(6, 182, 212, 0.3);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            backdrop-filter: blur(10px);
         }
 
         .adhd-card {
             background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(79, 70, 229, 0.1));
             border: 1px solid rgba(139, 92, 246, 0.3);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            backdrop-filter: blur(10px);
         }
 
         .card-title {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 1rem;
             display: flex;
@@ -297,6 +297,7 @@
             align-items: center;
             justify-content: center;
             font-size: 14px;
+            flex-shrink: 0;
         }
 
         .highlight-card .card-icon { background: var(--accent-blue); }
@@ -305,34 +306,73 @@
         .tip-card .card-icon { background: var(--accent-teal); }
         .adhd-card .card-icon { background: var(--accent-purple); }
 
-        /* Tables */
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 12px;
-            overflow: hidden;
+        /* Mobile-optimized data cards (replacing tables) */
+        .data-grid {
+            display: grid;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .data-card {
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 1.25rem;
+            transition: all 0.3s ease;
         }
 
-        .data-table th {
-            background: rgba(79, 70, 229, 0.2);
-            color: var(--text-primary);
+        .data-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent-teal);
+            transform: translateY(-1px);
+        }
+
+        .data-card-header {
             font-weight: 600;
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border-subtle);
+            font-size: 1.1rem;
+            color: var(--accent-blue);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .data-table td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--border-subtle);
-            vertical-align: top;
+        .data-card-content {
+            display: grid;
+            gap: 0.5rem;
         }
 
-        .data-table tr:hover {
-            background: rgba(255, 255, 255, 0.02);
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .data-row:last-child {
+            border-bottom: none;
+        }
+
+        .data-label {
+            font-weight: 500;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+            margin-right: 1rem;
+        }
+
+        .data-value {
+            color: var(--text-primary);
+            text-align: right;
+            font-weight: 500;
+        }
+
+        .data-note {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         /* Lists */
@@ -398,6 +438,7 @@
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 500;
+            white-space: nowrap;
         }
 
         .status-declining {
@@ -424,35 +465,7 @@
             border: 1px solid rgba(6, 182, 212, 0.3);
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-
-            .section {
-                padding: 1.5rem;
-            }
-
-            .hero-header {
-                padding: 2rem 1rem 3rem;
-            }
-
-            .main-title {
-                font-size: 2rem;
-            }
-
-            .data-table {
-                font-size: 0.9rem;
-            }
-
-            .data-table th,
-            .data-table td {
-                padding: 0.75rem 0.5rem;
-            }
-        }
-
-        /* Focus indicators for ADHD */
+        /* Focus helpers for ADHD */
         .focus-helper {
             position: fixed;
             top: 20px;
@@ -487,6 +500,146 @@
             width: 0%;
             transition: width 0.3s ease;
         }
+
+        /* Quick access floating button */
+        .quick-nav {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent-blue);
+            border: none;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(79, 70, 229, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .quick-nav:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(79, 70, 229, 0.5);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0.75rem;
+            }
+
+            .section {
+                padding: 1.25rem;
+                margin-bottom: 1.25rem;
+                border-radius: 12px;
+            }
+
+            .hero-header {
+                padding: 1.5rem 1rem 2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .main-title {
+                font-size: clamp(1.25rem, 5vw, 2rem);
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .section-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .card-title {
+                font-size: 1.1rem;
+            }
+
+            .toc-container {
+                padding: 1.25rem;
+            }
+
+            .highlight-card, .success-card, .warning-card, .tip-card, .adhd-card {
+                padding: 1.25rem;
+            }
+
+            .data-card {
+                padding: 1rem;
+            }
+
+            .data-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.25rem;
+            }
+
+            .data-value {
+                text-align: left;
+            }
+
+            .focus-helper {
+                top: 10px;
+                right: 10px;
+            }
+
+            .quick-nav {
+                bottom: 15px;
+                right: 15px;
+                width: 50px;
+                height: 50px;
+                font-size: 18px;
+            }
+        }
+
+        /* Ultra-small screens */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0.5rem;
+            }
+
+            .section {
+                padding: 1rem;
+            }
+
+            .hero-header {
+                padding: 1rem 0.75rem 1.5rem;
+            }
+
+            .toc-container, .highlight-card, .success-card, .warning-card, .tip-card, .adhd-card {
+                padding: 1rem;
+            }
+        }
+
+        /* High contrast mode for accessibility */
+        @media (prefers-contrast: high) {
+            :root {
+                --border-subtle: rgba(255, 255, 255, 0.3);
+                --card-bg: rgba(255, 255, 255, 0.1);
+                --glass-bg: rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        /* Reduced motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+            .bg-gradient,
+            .hero-header::before,
+            .main-title,
+            .focus-helper {
+                animation: none;
+            }
+            
+            .toc-item:hover,
+            .data-card:hover,
+            .quick-nav:hover {
+                transform: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -518,16 +671,56 @@
         <!-- Table of Contents -->
         <div class="toc-container">
             <h2 class="toc-title">📋 Quick Navigation</h2>
-            <ol class="toc-list">
-                <li class="toc-item"><a href="#reality-check" class="toc-link">💰 Earnings Reality: What You Actually Need to Know</a></li>
-                <li class="toc-item"><a href="#adhd-challenges" class="toc-link">🧠 ADHD & Social Media: The Hidden Challenges</a></li>
-                <li class="toc-item"><a href="#platform-breakdown" class="toc-link">📱 Platform Requirements & Realistic Expectations</a></li>
-                <li class="toc-item"><a href="#adhd-strategies" class="toc-link">⚡ ADHD-Specific Success Strategies</a></li>
-                <li class="toc-item"><a href="#sustainable-growth" class="toc-link">🌱 Building Sustainable Growth (Without Burnout)</a></li>
-                <li class="toc-item"><a href="#monetization-streams" class="toc-link">💸 Diversified Income Streams for ADHD Minds</a></li>
-                <li class="toc-item"><a href="#avoiding-pitfalls" class="toc-link">🚫 Avoiding Common ADHD Pitfalls</a></li>
-                <li class="toc-item"><a href="#getting-started" class="toc-link">🚀 Getting Started: The Realistic Plan</a></li>
-            </ol>
+            <div class="toc-grid">
+                <div class="toc-item">
+                    <a href="#reality-check" class="toc-link">
+                        <span class="toc-emoji">💰</span>
+                        <span>Earnings Reality: What You Actually Need to Know</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#adhd-challenges" class="toc-link">
+                        <span class="toc-emoji">🧠</span>
+                        <span>ADHD & Social Media: The Hidden Challenges</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#platform-breakdown" class="toc-link">
+                        <span class="toc-emoji">📱</span>
+                        <span>Platform Requirements & Realistic Expectations</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#adhd-strategies" class="toc-link">
+                        <span class="toc-emoji">⚡</span>
+                        <span>ADHD-Specific Success Strategies</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#sustainable-growth" class="toc-link">
+                        <span class="toc-emoji">🌱</span>
+                        <span>Building Sustainable Growth (Without Burnout)</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#monetization-streams" class="toc-link">
+                        <span class="toc-emoji">💸</span>
+                        <span>Diversified Income Streams for ADHD Minds</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#avoiding-pitfalls" class="toc-link">
+                        <span class="toc-emoji">🚫</span>
+                        <span>Avoiding Common ADHD Pitfalls</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#getting-started" class="toc-link">
+                        <span class="toc-emoji">🚀</span>
+                        <span>Getting Started: The Realistic Plan</span>
+                    </a>
+                </div>
+            </div>
         </div>
 
         <!-- Earnings Reality -->
@@ -555,47 +748,99 @@
 
             <h3 class="section-subtitle">Realistic Earnings by Follower Count</h3>
 
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Follower Tier</th>
-                        <th>Typical Range</th>
-                        <th>Earnings Per Post</th>
-                        <th>Monthly Potential</th>
-                        <th>ADHD Reality Check</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Nano (500-10k)</strong></td>
-                        <td>Starting level</td>
-                        <td>$10-$100</td>
-                        <td>$100-$800</td>
-                        <td>Most achievable for ADHD brains starting out</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Micro (10k-100k)</strong></td>
-                        <td>Sweet spot</td>
-                        <td>$100-$1,000</td>
-                        <td>$800-$5,000</td>
-                        <td>Requires consistent posting - challenging with ADHD</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Macro (100k-1M)</strong></td>
-                        <td>Competitive</td>
-                        <td>$1,000-$10,000</td>
-                        <td>$5,000-$50,000</td>
-                        <td>High pressure, may trigger ADHD burnout</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Mega (1M+)</strong></td>
-                        <td>Celebrity level</td>
-                        <td>$10,000-$100,000+</td>
-                        <td>$50,000+</td>
-                        <td>Requires team management - often overwhelming</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="data-grid">
+                <div class="data-card">
+                    <div class="data-card-header">
+                        📊 Nano Influencer (500-10k followers)
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Earnings Per Post:</span>
+                            <span class="data-value">$10-$100</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Monthly Potential:</span>
+                            <span class="data-value">$100-$800</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-realistic">High</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Most achievable for ADHD brains starting out. Lower pressure, more manageable expectations.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        📈 Micro Influencer (10k-100k followers)
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Earnings Per Post:</span>
+                            <span class="data-value">$100-$1,000</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Monthly Potential:</span>
+                            <span class="data-value">$800-$5,000</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-competitive">Medium</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Requires consistent posting - challenging with ADHD. Sweet spot for earnings vs. effort.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🎯 Macro Influencer (100k-1M followers)
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Earnings Per Post:</span>
+                            <span class="data-value">$1,000-$10,000</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Monthly Potential:</span>
+                            <span class="data-value">$5,000-$50,000</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-competitive">Low</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        High pressure environment. May trigger ADHD burnout due to constant demands.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🌟 Mega Influencer (1M+ followers)
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Earnings Per Post:</span>
+                            <span class="data-value">$10,000-$100,000+</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Monthly Potential:</span>
+                            <span class="data-value">$50,000+</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-declining">Very Low</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Celebrity level requires team management - often overwhelming for ADHD minds.
+                    </div>
+                </div>
+            </div>
 
             <div class="warning-card">
                 <div class="card-title">
@@ -648,44 +893,89 @@
                 </ul>
             </div>
 
-            <h3 class="section-subtitle">Platform-Specific ADHD Challenges</h3>
+            <h3 class="section-subtitle">Platform-Specific ADHD Analysis</h3>
 
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Platform</th>
-                        <th>ADHD Benefits</th>
-                        <th>ADHD Challenges</th>
-                        <th>Risk Level</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>TikTok</strong></td>
-                        <td>Short content matches attention span</td>
-                        <td>Highly addictive algorithm, endless scroll</td>
-                        <td><span class="status-declining">High Risk</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Instagram</strong></td>
-                        <td>Visual creativity, Stories variety</td>
-                        <td>Comparison culture, perfectionism pressure</td>
-                        <td><span class="status-competitive">Medium Risk</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>YouTube</strong></td>
-                        <td>Long-form allows deep dives</td>
-                        <td>High editing requirements, inconsistent uploads</td>
-                        <td><span class="status-realistic">Lower Risk</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>LinkedIn</strong></td>
-                        <td>Professional networking, text-based</td>
-                        <td>Less engaging, requires consistent professionalism</td>
-                        <td><span class="status-realistic">Lowest Risk</span></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="data-grid">
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🎵 TikTok
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">ADHD Benefits:</span>
+                            <span class="data-value">Short content matches attention span</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Challenges:</span>
+                            <span class="data-value">Highly addictive algorithm, endless scroll</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Risk Level:</span>
+                            <span class="data-value"><span class="status-declining">High Risk</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        📸 Instagram
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">ADHD Benefits:</span>
+                            <span class="data-value">Visual creativity, Stories variety</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Challenges:</span>
+                            <span class="data-value">Comparison culture, perfectionism pressure</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Risk Level:</span>
+                            <span class="data-value"><span class="status-competitive">Medium Risk</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        📺 YouTube
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">ADHD Benefits:</span>
+                            <span class="data-value">Long-form allows deep dives</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Challenges:</span>
+                            <span class="data-value">High editing requirements, inconsistent uploads</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Risk Level:</span>
+                            <span class="data-value"><span class="status-realistic">Lower Risk</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        💼 LinkedIn
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">ADHD Benefits:</span>
+                            <span class="data-value">Professional networking, text-based</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Challenges:</span>
+                            <span class="data-value">Less engaging, requires consistent professionalism</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Risk Level:</span>
+                            <span class="data-value"><span class="status-realistic">Lowest Risk</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Platform Breakdown -->
@@ -746,47 +1036,115 @@
 
             <h3 class="section-subtitle">Platform Comparison for ADHD Creators</h3>
 
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Platform</th>
-                        <th>Posting Requirement</th>
-                        <th>Content Length</th>
-                        <th>ADHD Compatibility</th>
-                        <th>Monetization Speed</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>TikTok</strong></td>
-                        <td>Daily optimal</td>
-                        <td>15-60 seconds</td>
-                        <td>Medium - Short but frequent</td>
-                        <td>Fast virality, low earnings</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Instagram</strong></td>
-                        <td>3-7x per week</td>
-                        <td>Variable</td>
-                        <td>High - Multiple formats</td>
-                        <td>Medium - requires followers</td>
-                    </tr>
-                    <tr>
-                        <td><strong>YouTube</strong></td>
-                        <td>Weekly minimum</td>
-                        <td>2-20+ minutes</td>
-                        <td>Very High - suits hyperfocus</td>
-                        <td>Slow but sustainable</td>
-                    </tr>
-                    <tr>
-                        <td><strong>LinkedIn</strong></td>
-                        <td>2-3x per week</td>
-                        <td>Text + image</td>
-                        <td>High - professional, less pressure</td>
-                        <td>Slow but valuable connections</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="data-grid">
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🎵 TikTok Analysis
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Posting Requirement:</span>
+                            <span class="data-value">Daily optimal</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Content Length:</span>
+                            <span class="data-value">15-60 seconds</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-competitive">Medium</span></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Monetization Speed:</span>
+                            <span class="data-value">Fast virality, low earnings</span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Short content suits ADHD attention span, but daily posting requirement can be overwhelming.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        📸 Instagram Analysis
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Posting Requirement:</span>
+                            <span class="data-value">3-7x per week</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Content Length:</span>
+                            <span class="data-value">Variable formats</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-realistic">High</span></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Monetization Speed:</span>
+                            <span class="data-value">Medium - requires followers</span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Multiple content formats accommodate ADHD variety needs. Stories, Reels, and posts offer flexibility.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        📺 YouTube Analysis
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Posting Requirement:</span>
+                            <span class="data-value">Weekly minimum</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Content Length:</span>
+                            <span class="data-value">2-20+ minutes</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-realistic">Very High</span></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Monetization Speed:</span>
+                            <span class="data-value">Slow but sustainable</span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Perfect for hyperfocus sessions. Lower posting frequency requirements suit ADHD energy patterns.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        💼 LinkedIn Analysis
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Posting Requirement:</span>
+                            <span class="data-value">2-3x per week</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Content Length:</span>
+                            <span class="data-value">Text + image</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-realistic">High</span></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Monetization Speed:</span>
+                            <span class="data-value">Slow but valuable connections</span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Professional environment with less pressure. Text-based content is easier for many ADHD creators.
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- ADHD Strategies -->
@@ -830,42 +1188,87 @@
 
             <h3 class="section-subtitle">Managing ADHD-Specific Challenges</h3>
 
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>ADHD Challenge</th>
-                        <th>How It Affects Content</th>
-                        <th>Practical Solution</th>
-                        <th>Tools/Apps</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Time Blindness</strong></td>
-                        <td>Missing posting deadlines</td>
-                        <td>Use scheduling tools extensively</td>
-                        <td>Later, Buffer, Creator Studio</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Perfectionism</strong></td>
-                        <td>Never publishing content</td>
-                        <td>"Good enough" rule - 80% complete is published</td>
-                        <td>Set timers for editing sessions</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Rejection Sensitivity</strong></td>
-                        <td>Devastated by negative comments</td>
-                        <td>Limit comment checking, have supportive friends moderate</td>
-                        <td>Comment moderation filters</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Interest Cycling</strong></td>
-                        <td>Losing passion for niche</td>
-                        <td>Embrace variety as your brand</td>
-                        <td>Content pillars spanning interests</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="data-grid">
+                <div class="data-card">
+                    <div class="data-card-header">
+                        ⏰ Time Blindness
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">How It Affects Content:</span>
+                            <span class="data-value">Missing posting deadlines</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Practical Solution:</span>
+                            <span class="data-value">Use scheduling tools extensively</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Recommended Tools:</span>
+                            <span class="data-value">Later, Buffer, Creator Studio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        ✨ Perfectionism
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">How It Affects Content:</span>
+                            <span class="data-value">Never publishing content</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Practical Solution:</span>
+                            <span class="data-value">"Good enough" rule - 80% complete is published</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Recommended Tools:</span>
+                            <span class="data-value">Set timers for editing sessions</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        💔 Rejection Sensitivity
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">How It Affects Content:</span>
+                            <span class="data-value">Devastated by negative comments</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Practical Solution:</span>
+                            <span class="data-value">Limit comment checking, have supportive friends moderate</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Recommended Tools:</span>
+                            <span class="data-value">Comment moderation filters</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🔄 Interest Cycling
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">How It Affects Content:</span>
+                            <span class="data-value">Losing passion for niche</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Practical Solution:</span>
+                            <span class="data-value">Embrace variety as your brand</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Recommended Tools:</span>
+                            <span class="data-value">Content pillars spanning interests</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Sustainable Growth -->
@@ -983,47 +1386,103 @@
 
             <h3 class="section-subtitle">Income Stream Risk Assessment for ADHD</h3>
 
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Income Stream</th>
-                        <th>Setup Effort</th>
-                        <th>Ongoing Effort</th>
-                        <th>ADHD Sustainability</th>
-                        <th>Income Potential</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Affiliate Marketing</strong></td>
-                        <td>Low</td>
-                        <td>Low</td>
-                        <td><span class="status-realistic">High</span></td>
-                        <td>$100-$2,000/month</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Sponsored Posts</strong></td>
-                        <td>Medium</td>
-                        <td>Medium</td>
-                        <td><span class="status-competitive">Medium</span></td>
-                        <td>$500-$10,000/post</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Online Courses</strong></td>
-                        <td>High</td>
-                        <td>Low</td>
-                        <td><span class="status-realistic">High</span></td>
-                        <td>$1,000-$50,000/month</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Daily Content Creation</strong></td>
-                        <td>Low</td>
-                        <td>Very High</td>
-                        <td><span class="status-declining">Low</span></td>
-                        <td>Variable</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="data-grid">
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🔗 Affiliate Marketing
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Setup Effort:</span>
+                            <span class="data-value">Low</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Ongoing Effort:</span>
+                            <span class="data-value">Low</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Sustainability:</span>
+                            <span class="data-value"><span class="status-realistic">High</span></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Income Potential:</span>
+                            <span class="data-value">$100-$2,000/month</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        📝 Sponsored Posts
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Setup Effort:</span>
+                            <span class="data-value">Medium</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Ongoing Effort:</span>
+                            <span class="data-value">Medium</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Sustainability:</span>
+                            <span class="data-value"><span class="status-competitive">Medium</span></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Income Potential:</span>
+                            <span class="data-value">$500-$10,000/post</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🎓 Online Courses
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Setup Effort:</span>
+                            <span class="data-value">High</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Ongoing Effort:</span>
+                            <span class="data-value">Low</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Sustainability:</span>
+                            <span class="data-value"><span class="status-realistic">High</span></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Income Potential:</span>
+                            <span class="data-value">$1,000-$50,000/month</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        📱 Daily Content Creation
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Setup Effort:</span>
+                            <span class="data-value">Low</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Ongoing Effort:</span>
+                            <span class="data-value">Very High</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Sustainability:</span>
+                            <span class="data-value"><span class="status-declining">Low</span></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Income Potential:</span>
+                            <span class="data-value">Variable</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Avoiding Pitfalls -->
@@ -1149,7 +1608,7 @@
 
             <hr style="border: 1px solid var(--border-subtle); margin: 3rem 0;">
 
-            <div style="background: rgba(255, 255, 255, 0.02); border-radius: 12px; padding: 2rem; margin-top: 2rem; border: 1px solid var(--border-subtle);">
+            <div style="background: rgba(255, 255, 255, 0.02); border-radius: 12px; padding: 1.5rem; margin-top: 2rem; border: 1px solid var(--border-subtle);">
                 <p><strong>About This Guide:</strong> This guide provides realistic, evidence-based information about social media monetization for individuals with ADHD. All statistics are sourced from 2024-2025 industry reports and research studies.</p>
                 <br>
                 <p><strong>Disclaimer:</strong> Social media monetization requires significant time investment and results vary widely. This should not be considered financial advice. Income potential depends on many factors including niche, consistency, and market conditions.</p>
@@ -1160,6 +1619,11 @@
             </div>
         </div>
     </div>
+
+    <!-- Quick Navigation Button -->
+    <button class="quick-nav" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Back to top">
+        ↑
+    </button>
 
     <script>
         // Scroll progress bar
@@ -1181,6 +1645,24 @@
                 }
             });
         });
+
+        // Enhanced touch targets for mobile
+        document.querySelectorAll('.toc-item, .data-card').forEach(element => {
+            element.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.98)';
+            });
+            
+            element.addEventListener('touchend', function() {
+                this.style.transform = '';
+            });
+        });
+
+        // Prevent horizontal scrolling
+        document.body.addEventListener('touchmove', function(e) {
+            if (e.touches.length > 1) {
+                e.preventDefault();
+            }
+        }, { passive: false });
     </script>
 </body>
 </html>
