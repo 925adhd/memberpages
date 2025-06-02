@@ -376,6 +376,7 @@
       font-size: 0.85rem;
       box-shadow: var(--shadow-soft);
       animation: pulse 3s infinite;
+      opacity: 0.7;
     }
 
     @keyframes pulse {
@@ -551,6 +552,10 @@
       return icons[Math.floor(Math.random() * icons.length)];
     }
 
+    function createFallbackImage(icon) {
+      return `<div class="post-image-placeholder">${icon}</div>`;
+    }
+
     fetch(rssToJsonUrl)
       .then(response => response.json())
       .then(data => {
@@ -580,9 +585,10 @@
             imageUrl = extractImageFromContent(post.description || post.content);
           }
           
+          const adhdIcon = getAdhdIcon();
           const imageHtml = imageUrl 
-            ? `<img src="${imageUrl}" alt="${post.title}" class="post-image" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\"post-image-placeholder\\">${getAdhdIcon()}</div>'">`
-            : `<div class="post-image-placeholder">${getAdhdIcon()}</div>`;
+            ? `<img src="${imageUrl}" alt="${post.title}" class="post-image" loading="lazy" onerror="this.outerHTML = '${createFallbackImage(adhdIcon).replace(/'/g, "&apos;")}';">`
+            : createFallbackImage(adhdIcon);
           
           return `
             <div class="post-card" style="--i: ${index}">
