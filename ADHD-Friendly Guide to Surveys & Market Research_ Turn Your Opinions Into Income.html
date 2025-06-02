@@ -41,6 +41,7 @@
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            font-size: 16px;
         }
 
         /* Background Effects */
@@ -72,20 +73,20 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 100%;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem;
         }
 
         /* Header */
         .hero-header {
             text-align: center;
-            padding: 3rem 0 4rem;
+            padding: 2rem 1rem 3rem;
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
-            border-radius: 24px;
+            border-radius: 20px;
             border: 1px solid var(--border-subtle);
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             position: relative;
             overflow: hidden;
         }
@@ -108,7 +109,7 @@
         }
 
         .main-title {
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(1.5rem, 6vw, 2.5rem);
             font-weight: 700;
             background: var(--gradient-adhd);
             background-size: 200% 200%;
@@ -126,9 +127,9 @@
         }
 
         .subtitle {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             color: var(--text-secondary);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .date-badge {
@@ -141,47 +142,56 @@
             border: 1px solid rgba(79, 70, 229, 0.3);
         }
 
-        /* Table of Contents */
+        /* Mobile-optimized navigation */
         .toc-container {
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
             border-radius: 16px;
             border: 1px solid var(--border-subtle);
-            padding: 2rem;
-            margin-bottom: 3rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .toc-title {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 600;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             color: var(--accent-teal);
         }
 
-        .toc-list {
-            list-style: none;
+        .toc-grid {
             display: grid;
             gap: 0.75rem;
+            grid-template-columns: 1fr;
         }
 
         .toc-item {
             background: rgba(255, 255, 255, 0.02);
-            border-radius: 8px;
+            border-radius: 12px;
             border: 1px solid var(--border-subtle);
             transition: all 0.3s ease;
+            min-height: 60px;
         }
 
-        .toc-item:hover {
+        .toc-item:hover, .toc-item:active {
             background: rgba(255, 255, 255, 0.05);
             border-color: var(--accent-teal);
+            transform: translateY(-1px);
         }
 
         .toc-link {
-            display: block;
+            display: flex;
+            align-items: center;
             padding: 1rem;
             color: var(--text-primary);
             text-decoration: none;
             font-weight: 500;
+            gap: 0.75rem;
+        }
+
+        .toc-emoji {
+            font-size: 1.5rem;
+            flex-shrink: 0;
         }
 
         /* Section Styling */
@@ -190,8 +200,8 @@
             backdrop-filter: blur(20px);
             border-radius: 16px;
             border: 1px solid var(--border-subtle);
-            padding: 2.5rem;
-            margin-bottom: 2rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
             transition: all 0.3s ease;
         }
 
@@ -200,17 +210,18 @@
         }
 
         .section-title {
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: 600;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
             gap: 0.75rem;
+            flex-wrap: wrap;
         }
 
         .section-title .emoji {
-            font-size: 2.2rem;
-            filter: none;
+            font-size: 1.8rem;
+            flex-shrink: 0;
         }
 
         .section-title .title-text {
@@ -218,70 +229,59 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            flex: 1;
+            min-width: 200px;
         }
 
         .section-subtitle {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            margin: 2rem 0 1rem;
+            margin: 1.5rem 0 1rem;
             color: var(--accent-emerald);
         }
 
         .subsection-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            margin: 1.5rem 0 1rem;
+            margin: 1.25rem 0 0.75rem;
             color: var(--accent-purple);
         }
 
         /* Content Cards */
+        .highlight-card, .success-card, .warning-card, .tip-card, .adhd-card {
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            backdrop-filter: blur(10px);
+        }
+
         .highlight-card {
             background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(16, 185, 129, 0.1));
             border: 1px solid rgba(79, 70, 229, 0.2);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            backdrop-filter: blur(10px);
         }
 
         .success-card {
             background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1));
             border: 1px solid rgba(16, 185, 129, 0.3);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            backdrop-filter: blur(10px);
         }
 
         .warning-card {
             background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(239, 68, 68, 0.1));
             border: 1px solid rgba(245, 158, 11, 0.3);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            backdrop-filter: blur(10px);
         }
 
         .tip-card {
             background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(139, 92, 246, 0.1));
             border: 1px solid rgba(6, 182, 212, 0.3);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            backdrop-filter: blur(10px);
         }
 
         .adhd-card {
             background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(79, 70, 229, 0.1));
             border: 1px solid rgba(139, 92, 246, 0.3);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            backdrop-filter: blur(10px);
         }
 
         .card-title {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 1rem;
             display: flex;
@@ -297,6 +297,7 @@
             align-items: center;
             justify-content: center;
             font-size: 14px;
+            flex-shrink: 0;
         }
 
         .highlight-card .card-icon { background: var(--accent-blue); }
@@ -305,34 +306,73 @@
         .tip-card .card-icon { background: var(--accent-teal); }
         .adhd-card .card-icon { background: var(--accent-purple); }
 
-        /* Tables */
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 12px;
-            overflow: hidden;
+        /* Mobile-optimized data cards (replacing tables) */
+        .data-grid {
+            display: grid;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .data-card {
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 1.25rem;
+            transition: all 0.3s ease;
         }
 
-        .data-table th {
-            background: rgba(79, 70, 229, 0.2);
-            color: var(--text-primary);
+        .data-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent-teal);
+            transform: translateY(-1px);
+        }
+
+        .data-card-header {
             font-weight: 600;
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border-subtle);
+            font-size: 1.1rem;
+            color: var(--accent-blue);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .data-table td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--border-subtle);
-            vertical-align: top;
+        .data-card-content {
+            display: grid;
+            gap: 0.5rem;
         }
 
-        .data-table tr:hover {
-            background: rgba(255, 255, 255, 0.02);
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .data-row:last-child {
+            border-bottom: none;
+        }
+
+        .data-label {
+            font-weight: 500;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+            margin-right: 1rem;
+        }
+
+        .data-value {
+            color: var(--text-primary);
+            text-align: right;
+            font-weight: 500;
+        }
+
+        .data-note {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         /* Lists */
@@ -394,21 +434,21 @@
         /* Star Rating */
         .star-rating {
             color: #ffd700;
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
 
         /* Progress indicators */
         .progress-timeline {
             display: grid;
-            gap: 1.5rem;
-            margin: 2rem 0;
+            gap: 1rem;
+            margin: 1.5rem 0;
         }
 
         .timeline-item {
             display: flex;
             align-items: flex-start;
             gap: 1rem;
-            padding: 1.5rem;
+            padding: 1.25rem;
             background: rgba(255, 255, 255, 0.02);
             border-radius: 12px;
             border: 1px solid var(--border-subtle);
@@ -417,7 +457,7 @@
         .timeline-number {
             background: var(--accent-blue);
             color: white;
-            width: 32px;
+            min-width: 32px;
             height: 32px;
             border-radius: 50%;
             display: flex;
@@ -425,42 +465,20 @@
             justify-content: center;
             font-weight: bold;
             flex-shrink: 0;
+            font-size: 0.9rem;
+        }
+
+        .timeline-content {
+            flex: 1;
         }
 
         .timeline-content h4 {
             margin: 0 0 0.5rem;
             color: var(--accent-teal);
+            font-size: 1rem;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-
-            .section {
-                padding: 1.5rem;
-            }
-
-            .hero-header {
-                padding: 2rem 1rem 3rem;
-            }
-
-            .main-title {
-                font-size: 2rem;
-            }
-
-            .data-table {
-                font-size: 0.9rem;
-            }
-
-            .data-table th,
-            .data-table td {
-                padding: 0.75rem 0.5rem;
-            }
-        }
-
-        /* Focus indicators for ADHD */
+        /* Focus helpers for ADHD */
         .focus-helper {
             position: fixed;
             top: 20px;
@@ -495,6 +513,150 @@
             width: 0%;
             transition: width 0.3s ease;
         }
+
+        /* Quick access floating button */
+        .quick-nav {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent-blue);
+            border: none;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(79, 70, 229, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .quick-nav:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(79, 70, 229, 0.5);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0.75rem;
+            }
+
+            .section {
+                padding: 1.25rem;
+                margin-bottom: 1.25rem;
+                border-radius: 12px;
+            }
+
+            .hero-header {
+                padding: 1.5rem 1rem 2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .main-title {
+                font-size: clamp(1.25rem, 5vw, 2rem);
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .section-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .card-title {
+                font-size: 1.1rem;
+            }
+
+            .toc-container {
+                padding: 1.25rem;
+            }
+
+            .highlight-card, .success-card, .warning-card, .tip-card, .adhd-card {
+                padding: 1.25rem;
+            }
+
+            .data-card {
+                padding: 1rem;
+            }
+
+            .data-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.25rem;
+            }
+
+            .data-value {
+                text-align: left;
+            }
+
+            .focus-helper {
+                top: 10px;
+                right: 10px;
+            }
+
+            .quick-nav {
+                bottom: 15px;
+                right: 15px;
+                width: 50px;
+                height: 50px;
+                font-size: 18px;
+            }
+
+            .timeline-item {
+                padding: 1rem;
+            }
+        }
+
+        /* Ultra-small screens */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0.5rem;
+            }
+
+            .section {
+                padding: 1rem;
+            }
+
+            .hero-header {
+                padding: 1rem 0.75rem 1.5rem;
+            }
+
+            .toc-container, .highlight-card, .success-card, .warning-card, .tip-card, .adhd-card {
+                padding: 1rem;
+            }
+        }
+
+        /* High contrast mode for accessibility */
+        @media (prefers-contrast: high) {
+            :root {
+                --border-subtle: rgba(255, 255, 255, 0.3);
+                --card-bg: rgba(255, 255, 255, 0.1);
+                --glass-bg: rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        /* Reduced motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+            .bg-gradient,
+            .hero-header::before,
+            .main-title,
+            .focus-helper {
+                animation: none;
+            }
+            
+            .toc-item:hover,
+            .data-card:hover,
+            .quick-nav:hover {
+                transform: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -526,16 +688,56 @@
         <!-- Table of Contents -->
         <div class="toc-container">
             <h2 class="toc-title">📋 Quick Navigation</h2>
-            <ol class="toc-list">
-                <li class="toc-item"><a href="#introduction" class="toc-link">🎯 Why Survey Work Can Work for ADHD Minds</a></li>
-                <li class="toc-item"><a href="#platforms" class="toc-link">🔍 Realistic Platform Comparison</a></li>
-                <li class="toc-item"><a href="#earnings" class="toc-link">💰 Honest Earnings Expectations</a></li>
-                <li class="toc-item"><a href="#adhd-strategies" class="toc-link">⚡ ADHD-Specific Success Strategies</a></li>
-                <li class="toc-item"><a href="#focus-techniques" class="toc-link">🎯 Focus Maintenance Techniques</a></li>
-                <li class="toc-item"><a href="#time-management" class="toc-link">⏰ Time Management Framework</a></li>
-                <li class="toc-item"><a href="#real-experiences" class="toc-link">📝 Real-World Experiences</a></li>
-                <li class="toc-item"><a href="#getting-started" class="toc-link">🚀 Getting Started Checklist</a></li>
-            </ol>
+            <div class="toc-grid">
+                <div class="toc-item">
+                    <a href="#introduction" class="toc-link">
+                        <span class="toc-emoji">🎯</span>
+                        <span>Why Survey Work Can Work for ADHD Minds</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#platforms" class="toc-link">
+                        <span class="toc-emoji">🔍</span>
+                        <span>Realistic Platform Comparison</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#earnings" class="toc-link">
+                        <span class="toc-emoji">💰</span>
+                        <span>Honest Earnings Expectations</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#adhd-strategies" class="toc-link">
+                        <span class="toc-emoji">⚡</span>
+                        <span>ADHD-Specific Success Strategies</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#focus-techniques" class="toc-link">
+                        <span class="toc-emoji">🎯</span>
+                        <span>Focus Maintenance Techniques</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#time-management" class="toc-link">
+                        <span class="toc-emoji">⏰</span>
+                        <span>Time Management Framework</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#real-experiences" class="toc-link">
+                        <span class="toc-emoji">📝</span>
+                        <span>Real-World Experiences</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#getting-started" class="toc-link">
+                        <span class="toc-emoji">🚀</span>
+                        <span>Getting Started Checklist</span>
+                    </a>
+                </div>
+            </div>
         </div>
 
         <!-- Introduction Section -->
@@ -579,61 +781,145 @@
             
             <p>Not all survey platforms are equal. Here's an honest assessment based on current user experiences and pay rates:</p>
 
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Platform</th>
-                        <th>Best For</th>
-                        <th>Realistic Pay</th>
-                        <th>ADHD Rating</th>
-                        <th>Reality Check</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Prolific</strong></td>
-                        <td>Academic research</td>
-                        <td>$6.50+/hour guaranteed</td>
-                        <td><span class="star-rating">★★★★★</span></td>
-                        <td>High quality but limited availability, waiting list</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Survey Junkie</strong></td>
-                        <td>Consistent availability</td>
-                        <td>$0.15-$3/survey ($3-5/hour)</td>
-                        <td><span class="star-rating">★★★☆☆</span></td>
-                        <td>Reliable but low pay, can be repetitive</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Swagbucks</strong></td>
-                        <td>Variety of activities</td>
-                        <td>$0.40-$2/survey ($3-6/hour)</td>
-                        <td><span class="star-rating">★★★☆☆</span></td>
-                        <td>Multiple earning options but interface is cluttered</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Respondent.io</strong></td>
-                        <td>High-paying focus groups</td>
-                        <td>$100+/hour (when selected)</td>
-                        <td><span class="star-rating">★★☆☆☆</span></td>
-                        <td>Very competitive - 1 in 20+ acceptance rate</td>
-                    </tr>
-                    <tr>
-                        <td><strong>UserTesting</strong></td>
-                        <td>Website feedback</td>
-                        <td>$10/20-min test ($30/hour)</td>
-                        <td><span class="star-rating">★★★★☆</span></td>
-                        <td>Good pay but tests fill up quickly</td>
-                    </tr>
-                    <tr>
-                        <td><strong>dscout</strong></td>
-                        <td>Product testing missions</td>
-                        <td>$2-100/mission</td>
-                        <td><span class="star-rating">★★★☆☆</span></td>
-                        <td>Engaging but unpaid screeners, inconsistent work</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="data-grid">
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🎓 Prolific
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Best For:</span>
+                            <span class="data-value">Academic research</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Realistic Pay:</span>
+                            <span class="data-value">$6.50+/hour guaranteed</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Rating:</span>
+                            <span class="data-value"><span class="star-rating">★★★★★</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        High quality but limited availability, often has a waiting list for new users.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        📊 Survey Junkie
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Best For:</span>
+                            <span class="data-value">Consistent availability</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Realistic Pay:</span>
+                            <span class="data-value">$0.15-$3/survey ($3-5/hour)</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Rating:</span>
+                            <span class="data-value"><span class="star-rating">★★★☆☆</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Reliable but low pay, can be repetitive which may not engage ADHD minds.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🏆 Swagbucks
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Best For:</span>
+                            <span class="data-value">Variety of activities</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Realistic Pay:</span>
+                            <span class="data-value">$0.40-$2/survey ($3-6/hour)</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Rating:</span>
+                            <span class="data-value"><span class="star-rating">★★★☆☆</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Multiple earning options but interface is cluttered, which can overwhelm ADHD users.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        💼 Respondent.io
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Best For:</span>
+                            <span class="data-value">High-paying focus groups</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Realistic Pay:</span>
+                            <span class="data-value">$100+/hour (when selected)</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Rating:</span>
+                            <span class="data-value"><span class="star-rating">★★☆☆☆</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Very competitive - 1 in 20+ acceptance rate. Can be frustrating for ADHD rejection sensitivity.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        💻 UserTesting
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Best For:</span>
+                            <span class="data-value">Website feedback</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Realistic Pay:</span>
+                            <span class="data-value">$10/20-min test ($30/hour)</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Rating:</span>
+                            <span class="data-value"><span class="star-rating">★★★★☆</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Good pay and engaging tasks, but tests fill up quickly requiring fast response times.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        📱 dscout
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Best For:</span>
+                            <span class="data-value">Product testing missions</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Realistic Pay:</span>
+                            <span class="data-value">$2-100/mission</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Rating:</span>
+                            <span class="data-value"><span class="star-rating">★★★☆☆</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Engaging but unpaid screeners, inconsistent work availability can be frustrating.
+                    </div>
+                </div>
+            </div>
 
             <div class="warning-card">
                 <div class="card-title">
@@ -667,42 +953,87 @@
 
             <h3 class="section-subtitle">Survey Value Assessment</h3>
 
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Value Rating</th>
-                        <th>Hourly Rate</th>
-                        <th>When to Accept</th>
-                        <th>Example</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Excellent</strong></td>
-                        <td>$8+/hour</td>
-                        <td>Always take these</td>
-                        <td>Prolific academic studies, UserTesting</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Good</strong></td>
-                        <td>$5-8/hour</td>
-                        <td>During high-focus periods</td>
-                        <td>Longer, well-paying surveys</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Acceptable</strong></td>
-                        <td>$3-5/hour</td>
-                        <td>When you need easy tasks</td>
-                        <td>Quick surveys while watching TV</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Skip</strong></td>
-                        <td>Under $3/hour</td>
-                        <td>Not worth your time</td>
-                        <td>Long surveys with tiny rewards</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="data-grid">
+                <div class="data-card">
+                    <div class="data-card-header">
+                        ⭐ Excellent Value
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Hourly Rate:</span>
+                            <span class="data-value">$8+/hour</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">When to Accept:</span>
+                            <span class="data-value">Always take these</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Example:</span>
+                            <span class="data-value">Prolific academic studies, UserTesting</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        👍 Good Value
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Hourly Rate:</span>
+                            <span class="data-value">$5-8/hour</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">When to Accept:</span>
+                            <span class="data-value">During high-focus periods</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Example:</span>
+                            <span class="data-value">Longer, well-paying surveys</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        ✅ Acceptable Value
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Hourly Rate:</span>
+                            <span class="data-value">$3-5/hour</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">When to Accept:</span>
+                            <span class="data-value">When you need easy tasks</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Example:</span>
+                            <span class="data-value">Quick surveys while watching TV</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        ❌ Skip These
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Hourly Rate:</span>
+                            <span class="data-value">Under $3/hour</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">When to Accept:</span>
+                            <span class="data-value">Not worth your time</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Example:</span>
+                            <span class="data-value">Long surveys with tiny rewards</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="tip-card">
                 <div class="card-title">
@@ -832,42 +1163,87 @@
 
             <h3 class="section-subtitle">Weekly Survey Strategy</h3>
 
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Activity</th>
-                        <th>Weekly Target</th>
-                        <th>Best Time</th>
-                        <th>Expected Earnings</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>High-value surveys (Prolific)</td>
-                        <td>2-3 surveys</td>
-                        <td>Peak focus periods</td>
-                        <td>$15-30</td>
-                    </tr>
-                    <tr>
-                        <td>Regular surveys (Survey Junkie)</td>
-                        <td>8-12 surveys</td>
-                        <td>Medium energy times</td>
-                        <td>$15-25</td>
-                    </tr>
-                    <tr>
-                        <td>Quick hits (Swagbucks)</td>
-                        <td>10-15 short tasks</td>
-                        <td>Low focus/background time</td>
-                        <td>$10-20</td>
-                    </tr>
-                    <tr>
-                        <td>Platform checking</td>
-                        <td>Daily 5-minute checks</td>
-                        <td>Set routine times</td>
-                        <td>Opportunity identification</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="data-grid">
+                <div class="data-card">
+                    <div class="data-card-header">
+                        ⭐ High-value surveys (Prolific)
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Weekly Target:</span>
+                            <span class="data-value">2-3 surveys</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Best Time:</span>
+                            <span class="data-value">Peak focus periods</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Expected Earnings:</span>
+                            <span class="data-value">$15-30</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        📊 Regular surveys (Survey Junkie)
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Weekly Target:</span>
+                            <span class="data-value">8-12 surveys</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Best Time:</span>
+                            <span class="data-value">Medium energy times</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Expected Earnings:</span>
+                            <span class="data-value">$15-25</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        ⚡ Quick hits (Swagbucks)
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Weekly Target:</span>
+                            <span class="data-value">10-15 short tasks</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Best Time:</span>
+                            <span class="data-value">Low focus/background time</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Expected Earnings:</span>
+                            <span class="data-value">$10-20</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🔍 Platform checking
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Weekly Target:</span>
+                            <span class="data-value">Daily 5-minute checks</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Best Time:</span>
+                            <span class="data-value">Set routine times</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Expected Earnings:</span>
+                            <span class="data-value">Opportunity identification</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="warning-card">
                 <div class="card-title">
@@ -977,9 +1353,9 @@
                 <p>Your ADHD traits of curiosity and ability to hyperfocus can be assets, but be honest about the challenges of sustained attention and low pay rates.</p>
             </div>
 
-            <hr style="border: 1px solid var(--border-subtle); margin: 3rem 0;">
+            <hr style="border: 1px solid var(--border-subtle); margin: 2rem 0;">
 
-            <div style="background: rgba(255, 255, 255, 0.02); border-radius: 12px; padding: 2rem; margin-top: 2rem; border: 1px solid var(--border-subtle);">
+            <div style="background: rgba(255, 255, 255, 0.02); border-radius: 12px; padding: 1.5rem; margin-top: 2rem; border: 1px solid var(--border-subtle);">
                 <p><strong>About This Guide:</strong> This guide provides realistic expectations about survey and market research work for individuals with ADHD. Information is based on current platform research, user experiences, and honest assessment of earning potential.</p>
                 <br>
                 <p><strong>Disclaimer:</strong> Earnings vary widely based on demographics, time investment, and platform availability. This should not be considered financial advice. Survey work is best treated as supplemental income only.</p>
@@ -988,6 +1364,11 @@
             </div>
         </div>
     </div>
+
+    <!-- Quick Navigation Button -->
+    <button class="quick-nav" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Back to top">
+        ↑
+    </button>
 
     <script>
         // Scroll progress bar
@@ -1009,6 +1390,24 @@
                 }
             });
         });
+
+        // Enhanced touch targets for mobile
+        document.querySelectorAll('.toc-item, .data-card').forEach(element => {
+            element.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.98)';
+            });
+            
+            element.addEventListener('touchend', function() {
+                this.style.transform = '';
+            });
+        });
+
+        // Prevent horizontal scrolling
+        document.body.addEventListener('touchmove', function(e) {
+            if (e.touches.length > 1) {
+                e.preventDefault();
+            }
+        }, { passive: false });
     </script>
 </body>
 </html>
