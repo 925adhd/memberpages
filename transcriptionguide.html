@@ -472,6 +472,209 @@
             font-size: 1rem;
         }
 
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .scroll-progress-bar {
+            height: 100%;
+            background: var(--gradient-adhd);
+            width: 0%;
+            transition: width 0.3s ease;
+            position: relative;
+            box-shadow: 0 0 30px rgba(79, 70, 229, 0.8), 0 0 60px rgba(16, 185, 129, 0.4);
+            animation: progressGlow 2s ease-in-out infinite alternate;
+        }
+
+        .scroll-progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6));
+            animation: progressShine 3s ease-in-out infinite;
+        }
+
+        @keyframes progressGlow {
+            0% { 
+                box-shadow: 0 0 20px rgba(79, 70, 229, 0.6), 0 0 40px rgba(16, 185, 129, 0.3);
+            }
+            100% { 
+                box-shadow: 0 0 40px rgba(79, 70, 229, 1), 0 0 80px rgba(16, 185, 129, 0.6);
+            }
+        }
+
+        @keyframes progressShine {
+            0%, 100% { transform: translateX(-20px); opacity: 0; }
+            50% { transform: translateX(0); opacity: 1; }
+        }
+
+        .progress-indicator {
+            position: fixed;
+            top: 10px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: var(--text-primary);
+            padding: 0.4rem 0.8rem;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 999;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .section-progress {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .progress-circle {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .progress-circle.active {
+            background: var(--accent-emerald);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+
+        .progress-circle.completed {
+            background: var(--accent-blue);
+        }
+
+        /* Voice Reader Controls */
+        .voice-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .voice-btn {
+            background: var(--accent-teal);
+            border: none;
+            border-radius: 6px;
+            color: white;
+            padding: 0.35rem 0.7rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-weight: 500;
+            min-width: 85px;
+            justify-content: center;
+        }
+
+        .voice-btn:hover {
+            background: var(--accent-blue);
+            transform: translateY(-1px);
+        }
+
+        .voice-btn:disabled {
+            background: rgba(255, 255, 255, 0.1);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .voice-btn.playing {
+            background: var(--accent-emerald);
+            animation: playingPulse 1.5s infinite;
+        }
+
+        .voice-btn.paused {
+            background: var(--accent-amber);
+            animation: pausedPulse 2s infinite;
+        }
+
+        .voice-btn.stopped {
+            background: var(--accent-rose);
+        }
+
+        @keyframes playingPulse {
+            0%, 100% { box-shadow: 0 0 5px rgba(16, 185, 129, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.8); }
+        }
+
+        @keyframes pausedPulse {
+            0%, 100% { box-shadow: 0 0 5px rgba(245, 158, 11, 0.5); }
+            50% { box-shadow: 0 0 15px rgba(245, 158, 11, 0.8); }
+        }
+
+        .voice-speed-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .voice-selector {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .voice-select {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            color: var(--text-primary);
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+            min-width: 140px;
+            max-width: 180px;
+        }
+
+        .voice-select option {
+            background: var(--secondary-bg);
+            color: var(--text-primary);
+        }
+
+        .speed-slider {
+            width: 80px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .speed-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: var(--accent-teal);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .speed-slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            background: var(--accent-teal);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+
         /* Status indicators */
         .status-indicator {
             display: inline-block;
@@ -518,42 +721,6 @@
             border: 1px solid rgba(244, 63, 94, 0.3);
         }
 
-        /* Focus helpers for ADHD */
-        .focus-helper {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 12px;
-            height: 12px;
-            background: var(--accent-emerald);
-            border-radius: 50%;
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
-            animation: focusPulse 2s infinite;
-            z-index: 1000;
-        }
-
-        @keyframes focusPulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.2); }
-        }
-
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.1);
-            z-index: 1000;
-        }
-
-        .scroll-progress-bar {
-            height: 100%;
-            background: var(--gradient-adhd);
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
         /* Quick access floating button */
         .quick-nav {
             position: fixed;
@@ -581,6 +748,32 @@
         @media (max-width: 768px) {
             .container {
                 padding: 0.75rem;
+            }
+
+            .progress-indicator {
+                top: 10px;
+                right: 10px;
+                padding: 0.3rem 0.6rem;
+                font-size: 0.75rem;
+            }
+
+            .progress-circle {
+                width: 6px;
+                height: 6px;
+            }
+
+            .voice-controls {
+                margin-bottom: 0.75rem;
+            }
+
+            .voice-btn {
+                font-size: 0.75rem;
+                padding: 0.3rem 0.6rem;
+                min-width: 75px;
+            }
+
+            .speed-slider {
+                width: 60px;
             }
 
             .section {
@@ -636,11 +829,6 @@
                 text-align: left;
             }
 
-            .focus-helper {
-                top: 10px;
-                right: 10px;
-            }
-
             .quick-nav {
                 bottom: 15px;
                 right: 15px;
@@ -658,6 +846,36 @@
         @media (max-width: 480px) {
             .container {
                 padding: 0.5rem;
+            }
+
+            .progress-indicator {
+                right: 5px;
+                top: 8px;
+                padding: 0.25rem 0.5rem;
+                font-size: 0.7rem;
+            }
+
+            .section-progress {
+                gap: 0.3rem;
+            }
+
+            .progress-circle {
+                width: 5px;
+                height: 5px;
+            }
+
+            .voice-controls {
+                gap: 0.5rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .voice-selector, .voice-speed-control {
+                justify-content: center;
+            }
+
+            .voice-select {
+                min-width: 120px;
+                max-width: 160px;
             }
 
             .section {
@@ -686,8 +904,7 @@
         @media (prefers-reduced-motion: reduce) {
             .bg-gradient,
             .hero-header::before,
-            .main-title,
-            .focus-helper {
+            .main-title {
                 animation: none;
             }
             
@@ -701,9 +918,22 @@
 </head>
 <body>
     <div class="bg-gradient"></div>
-    <div class="focus-helper"></div>
     <div class="scroll-progress">
         <div class="scroll-progress-bar"></div>
+    </div>
+    
+    <div class="progress-indicator">
+        <div class="section-progress">
+            <span id="current-section">Introduction</span>
+            <div class="progress-circle completed"></div>
+            <div class="progress-circle active"></div>
+            <div class="progress-circle"></div>
+            <div class="progress-circle"></div>
+            <div class="progress-circle"></div>
+            <div class="progress-circle"></div>
+            <div class="progress-circle"></div>
+            <div class="progress-circle"></div>
+        </div>
     </div>
 
     <div class="container">
@@ -716,13 +946,34 @@
 
         <!-- Intro Highlight -->
         <div class="warning-card">
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="reality-check-intro">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
+                </button>
+                <div class="voice-selector">
+                    <span>Voice:</span>
+                    <select class="voice-select" id="voice-select" onchange="updateSelectedVoice(this.value)">
+                        <option value="">Loading voices...</option>
+                    </select>
+                </div>
+                <div class="voice-speed-control">
+                    <span>Speed:</span>
+                    <input type="range" class="speed-slider" min="0.5" max="2" step="0.1" value="1.4" onchange="updateSpeechRate(this.value)">
+                    <span id="speed-display">1.4x</span>
+                </div>
+            </div>
             <div class="card-title">
                 <div class="card-icon">⚠️</div>
                 Important Reality Check
             </div>
-            <p><strong>The transcription industry is rapidly changing due to AI.</strong> While transcription work can still provide supplemental income, traditional transcription jobs are declining as AI tools become more accurate and widespread.</p>
-            <br>
-            <p>This guide provides honest expectations about current opportunities, realistic earnings ($150-400/month for most), and the evolving landscape of transcription work.</p>
+            <div id="reality-check-intro">
+                <p><strong>The transcription industry is rapidly changing due to AI.</strong> While transcription work can still provide supplemental income, traditional transcription jobs are declining as AI tools become more accurate and widespread.</p>
+                <br>
+                <p>This guide provides honest expectations about current opportunities, realistic earnings ($150-400/month for most), and the evolving landscape of transcription work.</p>
+            </div>
         </div>
 
         <!-- Table of Contents -->
@@ -787,38 +1038,69 @@
                 <span class="title-text">Current State of Transcription for ADHD Minds</span>
             </h2>
             
-            <p>Transcription work can still offer some advantages for ADHD brains, but the landscape has changed dramatically. Here's what you need to know:</p>
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="intro-content">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
+                </button>
+            </div>
+            
+            <div id="intro-content">
+                <p>Transcription work can still offer some advantages for ADHD brains, but the landscape has changed dramatically. Here's what you need to know:</p>
+            </div>
 
             <div class="adhd-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="adhd-traits">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">⚡</div>
                     Why Some ADHD Traits Still Work for Transcription
                 </div>
-                <ul class="styled-list">
-                    <li><strong>Flexible Timing:</strong> Work when your focus is naturally strongest</li>
-                    <li><strong>Clear Tasks:</strong> Audio files have defined start and end points</li>
-                    <li><strong>Variety:</strong> Different content can maintain interest</li>
-                    <li><strong>Detail Focus:</strong> When hyperfocused, ADHD minds can excel at accuracy</li>
-                </ul>
-                <br>
-                <p><strong>Current Challenges for ADHD Brains:</strong></p>
-                <ul class="styled-list">
-                    <li><strong>Low Pay:</strong> Most platforms now pay $150-400/month, which can be demotivating</li>
-                    <li><strong>Competition:</strong> Many platforms have waitlists or have paused hiring</li>
-                    <li><strong>AI Competition:</strong> Increasingly competing with automated transcription</li>
-                    <li><strong>Audio Quality:</strong> Poor audio requires sustained attention that can be challenging</li>
-                    <li><strong>Repetitive Work:</strong> Much remaining work is editing AI transcripts, which can be boring</li>
-                </ul>
+                <div id="adhd-traits">
+                    <ul class="styled-list">
+                        <li><strong>Flexible Timing:</strong> Work when your focus is naturally strongest</li>
+                        <li><strong>Clear Tasks:</strong> Audio files have defined start and end points</li>
+                        <li><strong>Variety:</strong> Different content can maintain interest</li>
+                        <li><strong>Detail Focus:</strong> When hyperfocused, ADHD minds can excel at accuracy</li>
+                    </ul>
+                    <br>
+                    <p><strong>Current Challenges for ADHD Brains:</strong></p>
+                    <ul class="styled-list">
+                        <li><strong>Low Pay:</strong> Most platforms now pay $150-400/month, which can be demotivating</li>
+                        <li><strong>Competition:</strong> Many platforms have waitlists or have paused hiring</li>
+                        <li><strong>AI Competition:</strong> Increasingly competing with automated transcription</li>
+                        <li><strong>Audio Quality:</strong> Poor audio requires sustained attention that can be challenging</li>
+                        <li><strong>Repetitive Work:</strong> Much remaining work is editing AI transcripts, which can be boring</li>
+                    </ul>
+                </div>
             </div>
 
             <div class="highlight-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="industry-status">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">📊</div>
                     Industry Status 2025
                 </div>
-                <p>The Bureau of Labor Statistics projects a <strong>4.7% decline</strong> in medical transcription jobs by 2033. Many traditional transcription roles are being replaced by AI-assisted workflows.</p>
-                <br>
-                <p><strong>What this means:</strong> Transcription is transitioning from a potential career to mostly supplemental income, with emphasis on specialized skills and AI collaboration.</p>
+                <div id="industry-status">
+                    <p>The Bureau of Labor Statistics projects a <strong>4.7% decline</strong> in medical transcription jobs by 2033. Many traditional transcription roles are being replaced by AI-assisted workflows.</p>
+                    <br>
+                    <p><strong>What this means:</strong> Transcription is transitioning from a potential career to mostly supplemental income, with emphasis on specialized skills and AI collaboration.</p>
+                </div>
             </div>
         </div>
 
@@ -829,7 +1111,18 @@
                 <span class="title-text">Realistic Platform Comparison & Earnings</span>
             </h2>
             
-            <p>Here's the honest truth about current transcription platform earnings and availability:</p>
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="platform-intro">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
+                </button>
+            </div>
+            
+            <div id="platform-intro">
+                <p>Here's the honest truth about current transcription platform earnings and availability:</p>
+            </div>
 
             <div class="data-grid">
                 <div class="data-card">
@@ -949,13 +1242,23 @@
             </div>
 
             <div class="warning-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="earnings-reality">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">⚠️</div>
                     Earnings Reality Check
                 </div>
-                <p><strong>Most transcriptionists now earn $150-400 per month,</strong> not the $1,600-2,400 sometimes advertised. The field has become highly competitive with many platforms having waitlists or hiring freezes.</p>
-                <br>
-                <p><strong>Competition factors:</strong> AI tools, large freelancer pools, and declining demand for human-only transcription have significantly impacted earning potential.</p>
+                <div id="earnings-reality">
+                    <p><strong>Most transcriptionists now earn $150-400 per month,</strong> not the $1,600-2,400 sometimes advertised. The field has become highly competitive with many platforms having waitlists or hiring freezes.</p>
+                    <br>
+                    <p><strong>Competition factors:</strong> AI tools, large freelancer pools, and declining demand for human-only transcription have significantly impacted earning potential.</p>
+                </div>
             </div>
         </div>
 
@@ -966,21 +1269,42 @@
                 <span class="title-text">AI Impact: The Real Story</span>
             </h2>
 
-            <p>AI has fundamentally changed transcription work. Rather than eliminating all human roles, it has shifted what transcriptionists do:</p>
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="ai-intro">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
+                </button>
+            </div>
+
+            <div id="ai-intro">
+                <p>AI has fundamentally changed transcription work. Rather than eliminating all human roles, it has shifted what transcriptionists do:</p>
+            </div>
 
             <h3 class="section-subtitle">Current AI Capabilities</h3>
 
             <div class="highlight-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="ai-stats">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">📊</div>
                     AI Transcription Stats 2025
                 </div>
-                <ul class="styled-list">
-                    <li><strong>90% accuracy</strong> for clear audio with standard accents</li>
-                    <li><strong>5-minute turnaround</strong> for 30-minute audio files</li>
-                    <li><strong>52 languages</strong> supported by advanced systems</li>
-                    <li><strong>35% more documentation</strong> generated for virtual visits</li>
-                </ul>
+                <div id="ai-stats">
+                    <ul class="styled-list">
+                        <li><strong>90% accuracy</strong> for clear audio with standard accents</li>
+                        <li><strong>5-minute turnaround</strong> for 30-minute audio files</li>
+                        <li><strong>52 languages</strong> supported by advanced systems</li>
+                        <li><strong>35% more documentation</strong> generated for virtual visits</li>
+                    </ul>
+                </div>
             </div>
 
             <h3 class="section-subtitle">Emerging Human Roles</h3>
@@ -1080,11 +1404,21 @@
             </div>
 
             <div class="tip-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="adhd-advantage">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">💡</div>
                     ADHD Advantage in AI Era
                 </div>
-                <p>Many ADHD transcriptionists report being particularly good at <strong>spotting AI errors</strong> that others miss. The pattern recognition and detail hyperfocus that can come with ADHD are valuable for identifying where AI gets confused or makes contextual mistakes.</p>
+                <div id="adhd-advantage">
+                    <p>Many ADHD transcriptionists report being particularly good at <strong>spotting AI errors</strong> that others miss. The pattern recognition and detail hyperfocus that can come with ADHD are valuable for identifying where AI gets confused or makes contextual mistakes.</p>
+                </div>
             </div>
         </div>
 
@@ -1098,17 +1432,27 @@
             <h3 class="section-subtitle">Working With Your ADHD Brain</h3>
 
             <div class="adhd-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="energy-matching">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">🎯</div>
                     The "Energy-Matching" System
                 </div>
-                <p>Match transcription tasks to your current energy and focus level:</p>
-                <ul class="styled-list">
-                    <li><strong>High Energy:</strong> Tackle difficult audio, medical transcription, or complex editing</li>
-                    <li><strong>Medium Energy:</strong> Standard transcription tasks, routine AI editing</li>
-                    <li><strong>Low Energy:</strong> Simple proofreading, very clear audio files</li>
-                    <li><strong>No Energy:</strong> Skip transcription entirely - don't force it when exhausted</li>
-                </ul>
+                <div id="energy-matching">
+                    <p>Match transcription tasks to your current energy and focus level:</p>
+                    <ul class="styled-list">
+                        <li><strong>High Energy:</strong> Tackle difficult audio, medical transcription, or complex editing</li>
+                        <li><strong>Medium Energy:</strong> Standard transcription tasks, routine AI editing</li>
+                        <li><strong>Low Energy:</strong> Simple proofreading, very clear audio files</li>
+                        <li><strong>No Energy:</strong> Skip transcription entirely - don't force it when exhausted</li>
+                    </ul>
+                </div>
             </div>
 
             <h3 class="section-subtitle">Managing ADHD Challenges in Transcription</h3>
@@ -1249,33 +1593,53 @@
             </div>
 
             <div class="tip-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="typing-practice">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">⌨️</div>
                     ADHD-Friendly Typing Practice
                 </div>
-                <p>Traditional typing tutors can be boring for ADHD minds. Try these engaging alternatives:</p>
-                <ul class="styled-list">
-                    <li><strong>TypeRacer:</strong> Competitive racing format with immediate feedback</li>
-                    <li><strong>Nitro Type:</strong> Car racing theme that gamifies practice</li>
-                    <li><strong>Keybr:</strong> Adapts to your weak spots automatically</li>
-                    <li><strong>10FastFingers:</strong> Quick tests that provide dopamine hits</li>
-                </ul>
+                <div id="typing-practice">
+                    <p>Traditional typing tutors can be boring for ADHD minds. Try these engaging alternatives:</p>
+                    <ul class="styled-list">
+                        <li><strong>TypeRacer:</strong> Competitive racing format with immediate feedback</li>
+                        <li><strong>Nitro Type:</strong> Car racing theme that gamifies practice</li>
+                        <li><strong>Keybr:</strong> Adapts to your weak spots automatically</li>
+                        <li><strong>10FastFingers:</strong> Quick tests that provide dopamine hits</li>
+                    </ul>
+                </div>
             </div>
 
             <h3 class="section-subtitle">Equipment Essentials (Budget-Friendly)</h3>
 
             <div class="highlight-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="equipment-setup">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">🎧</div>
                     Realistic Equipment Setup
                 </div>
-                <p><strong>Don't over-invest initially.</strong> Start with basics and upgrade only if you're earning consistently:</p>
-                <ul class="styled-list">
-                    <li><strong>Good Headphones:</strong> $30-60 range (Sony, Audio-Technica budget models)</li>
-                    <li><strong>Transcription Software:</strong> Start with free Express Scribe or oTranscribe</li>
-                    <li><strong>Text Expander:</strong> $0-5/month for common medical terms/phrases</li>
-                    <li><strong>Foot Pedal:</strong> Only after confirming you'll continue ($40-60)</li>
-                </ul>
+                <div id="equipment-setup">
+                    <p><strong>Don't over-invest initially.</strong> Start with basics and upgrade only if you're earning consistently:</p>
+                    <ul class="styled-list">
+                        <li><strong>Good Headphones:</strong> $30-60 range (Sony, Audio-Technica budget models)</li>
+                        <li><strong>Transcription Software:</strong> Start with free Express Scribe or oTranscribe</li>
+                        <li><strong>Text Expander:</strong> $0-5/month for common medical terms/phrases</li>
+                        <li><strong>Foot Pedal:</strong> Only after confirming you'll continue ($40-60)</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -1286,16 +1650,37 @@
                 <span class="title-text">Remaining Specialization Opportunities</span>
             </h2>
 
-            <p>While general transcription is declining, some specialized areas still offer opportunities:</p>
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="specialization-intro">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
+                </button>
+            </div>
+
+            <div id="specialization-intro">
+                <p>While general transcription is declining, some specialized areas still offer opportunities:</p>
+            </div>
 
             <div class="warning-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="medical-reality">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">⚠️</div>
                     Medical Transcription Reality Check
                 </div>
-                <p><strong>Medical transcription is at "imminent risk" of automation.</strong> Many hospitals already use voice recognition software extensively. While opportunities exist, they often require significant training investment (6-12 months) for a declining field.</p>
-                <br>
-                <p><strong>Consider carefully:</strong> Medical transcription training programs may not provide good ROI given AI adoption in healthcare.</p>
+                <div id="medical-reality">
+                    <p><strong>Medical transcription is at "imminent risk" of automation.</strong> Many hospitals already use voice recognition software extensively. While opportunities exist, they often require significant training investment (6-12 months) for a declining field.</p>
+                    <br>
+                    <p><strong>Consider carefully:</strong> Medical transcription training programs may not provide good ROI given AI adoption in healthcare.</p>
+                </div>
             </div>
 
             <h3 class="section-subtitle">Remaining Niche Opportunities</h3>
@@ -1403,32 +1788,52 @@
             </h2>
 
             <div class="success-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="transitional-approach">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">🎯</div>
                     Transitional Approach
                 </div>
-                <p>Instead of viewing transcription as a long-term career, consider it a stepping stone to AI-collaborative roles:</p>
-                <ul class="styled-list">
-                    <li><strong>Learn AI Editing:</strong> Focus on correcting AI transcripts rather than starting from scratch</li>
-                    <li><strong>Develop QA Skills:</strong> Become expert at identifying common AI errors</li>
-                    <li><strong>Build Domain Knowledge:</strong> Specialize in areas where context matters</li>
-                    <li><strong>Consider Adjacent Fields:</strong> Content writing, proofreading, virtual assistance</li>
-                </ul>
+                <div id="transitional-approach">
+                    <p>Instead of viewing transcription as a long-term career, consider it a stepping stone to AI-collaborative roles:</p>
+                    <ul class="styled-list">
+                        <li><strong>Learn AI Editing:</strong> Focus on correcting AI transcripts rather than starting from scratch</li>
+                        <li><strong>Develop QA Skills:</strong> Become expert at identifying common AI errors</li>
+                        <li><strong>Build Domain Knowledge:</strong> Specialize in areas where context matters</li>
+                        <li><strong>Consider Adjacent Fields:</strong> Content writing, proofreading, virtual assistance</li>
+                    </ul>
+                </div>
             </div>
 
             <h3 class="section-subtitle">Skills That Remain Valuable</h3>
 
             <div class="adhd-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="ai-collaboration">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">🧠</div>
                     ADHD Advantages in AI-Human Collaboration
                 </div>
-                <ul class="styled-list">
-                    <li><strong>Pattern Recognition:</strong> ADHD brains often excel at spotting inconsistencies</li>
-                    <li><strong>Hyperfocus on Details:</strong> When engaged, can catch errors others miss</li>
-                    <li><strong>Contextual Thinking:</strong> Understanding when AI misses nuance or context</li>
-                    <li><strong>Creative Problem-Solving:</strong> Finding solutions when AI gets confused</li>
-                </ul>
+                <div id="ai-collaboration">
+                    <ul class="styled-list">
+                        <li><strong>Pattern Recognition:</strong> ADHD brains often excel at spotting inconsistencies</li>
+                        <li><strong>Hyperfocus on Details:</strong> When engaged, can catch errors others miss</li>
+                        <li><strong>Contextual Thinking:</strong> Understanding when AI misses nuance or context</li>
+                        <li><strong>Creative Problem-Solving:</strong> Finding solutions when AI gets confused</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -1440,58 +1845,88 @@
             </h2>
 
             <div class="highlight-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="realistic-expectations">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">✨</div>
                     Setting Realistic Expectations
                 </div>
-                <p>Transcription work today is best viewed as <strong>supplemental income</strong> while learning skills for the AI-collaborative future. Most people earn $150-400/month with consistent effort.</p>
-                <br>
-                <p><strong>Best for:</strong> People who need flexible income, enjoy language work, and are interested in learning AI collaboration skills.</p>
-                <p><strong>Not ideal for:</strong> Those seeking substantial income or who find repetitive audio work frustrating.</p>
+                <div id="realistic-expectations">
+                    <p>Transcription work today is best viewed as <strong>supplemental income</strong> while learning skills for the AI-collaborative future. Most people earn $150-400/month with consistent effort.</p>
+                    <br>
+                    <p><strong>Best for:</strong> People who need flexible income, enjoy language work, and are interested in learning AI collaboration skills.</p>
+                    <p><strong>Not ideal for:</strong> Those seeking substantial income or who find repetitive audio work frustrating.</p>
+                </div>
             </div>
 
             <div class="adhd-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="action-plan">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">📋</div>
                     ADHD-Friendly Action Plan
                 </div>
-                <ol class="numbered-list">
-                    <li><strong>Skill Assessment:</strong> Test your typing speed and audio processing abilities first</li>
-                    <li><strong>Platform Research:</strong> Apply to 2-3 platforms, expect waitlists or rejections</li>
-                    <li><strong>Start Small:</strong> Begin with shortest available files to build confidence</li>
-                    <li><strong>Track Everything:</strong> Monitor time spent vs. earnings to assess viability</li>
-                    <li><strong>Plan Transition:</strong> Use transcription experience to build toward AI-collaborative roles</li>
-                </ol>
+                <div id="action-plan">
+                    <ol class="numbered-list">
+                        <li><strong>Skill Assessment:</strong> Test your typing speed and audio processing abilities first</li>
+                        <li><strong>Platform Research:</strong> Apply to 2-3 platforms, expect waitlists or rejections</li>
+                        <li><strong>Start Small:</strong> Begin with shortest available files to build confidence</li>
+                        <li><strong>Track Everything:</strong> Monitor time spent vs. earnings to assess viability</li>
+                        <li><strong>Plan Transition:</strong> Use transcription experience to build toward AI-collaborative roles</li>
+                    </ol>
+                </div>
             </div>
 
             <div class="warning-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="first-month">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">⚠️</div>
                     First Month Reality Check
                 </div>
-                <p><strong>Expect to earn very little initially</strong> while learning platforms and building speed. Many new transcriptionists earn under $50 in their first month.</p>
-                <br>
-                <p><strong>Timeline:</strong> Month 1: $20-50 (learning), Month 2-3: $100-200 (improving), Month 4+: $150-400 (if work is available)</p>
+                <div id="first-month">
+                    <p><strong>Expect to earn very little initially</strong> while learning platforms and building speed. Many new transcriptionists earn under $50 in their first month.</p>
+                    <br>
+                    <p><strong>Timeline:</strong> Month 1: $20-50 (learning), Month 2-3: $100-200 (improving), Month 4+: $150-400 (if work is available)</p>
+                </div>
             </div>
 
             <div class="success-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="ready-to-try">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">🎉</div>
                     Ready to Try?
                 </div>
-                <p>If you decide to explore transcription, <strong>approach it as a learning experience</strong> and potential stepping stone rather than a career destination. Your ADHD traits of attention to detail and pattern recognition can be assets in this AI-transitioning field.</p>
-                <br>
-                <p>Focus on building skills that will remain valuable: AI collaboration, quality assurance, and specialized domain knowledge.</p>
-            </div>
-
-            <hr style="border: 1px solid var(--border-subtle); margin: 2rem 0;">
-
-            <div style="background: rgba(255, 255, 255, 0.02); border-radius: 12px; padding: 1.5rem; margin-top: 2rem; border: 1px solid var(--border-subtle);">
-                <p><strong>About This Guide:</strong> This guide provides realistic expectations about transcription work for individuals with ADHD in the current AI-impacted marketplace. Information is based on 2024-2025 industry data and honest assessment of earning potential.</p>
-                <br>
-                <p><strong>Disclaimer:</strong> The transcription industry is rapidly evolving. Earnings vary widely and many traditional roles are being automated. This should not be considered career advice - transcription is best treated as supplemental income.</p>
-                <br>
-                <p><strong>Last Updated:</strong> June 2025</p>
+                <div id="ready-to-try">
+                    <p>If you decide to explore transcription, <strong>approach it as a learning experience</strong> and potential stepping stone rather than a career destination. Your ADHD traits of attention to detail and pattern recognition can be assets in this AI-transitioning field.</p>
+                    <br>
+                    <p>Focus on building skills that will remain valuable: AI collaboration, quality assurance, and specialized domain knowledge.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -1502,13 +1937,326 @@
     </button>
 
     <script>
-        // Scroll progress bar
-        window.addEventListener('scroll', () => {
-            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-            document.querySelector('.scroll-progress-bar').style.width = scrolled + '%';
+        // Simplified Speech synthesis with toggle functionality
+        let currentSpeech = null;
+        let speechRate = 1.4;
+        let selectedVoice = null;
+        let availableVoices = [];
+        let currentButton = null;
+        let isPlaying = false;
+        let isPaused = false;
+
+        // Simple toggle speech function
+        function toggleSpeech(button) {
+            const targetId = button.getAttribute('data-target');
+            const targetElement = document.getElementById(targetId);
+            
+            if (!targetElement) return;
+
+            // If different content is selected, stop current and start new
+            if (currentButton && currentButton !== button) {
+                stopSpeech();
+                setTimeout(() => startSpeech(button, targetElement), 100);
+                return;
+            }
+
+            // If same button clicked, toggle play/pause
+            if (currentButton === button) {
+                if (isPlaying && !isPaused) {
+                    // Currently playing - pause it
+                    pauseSpeech();
+                } else if (isPaused) {
+                    // Currently paused - resume it
+                    resumeSpeech();
+                } else {
+                    // Stopped - start playing
+                    startSpeech(button, targetElement);
+                }
+            } else {
+                // New content - start playing
+                startSpeech(button, targetElement);
+            }
+        }
+
+        function startSpeech(button, targetElement) {
+            // Stop any existing speech
+            stopSpeech();
+
+            const textContent = extractTextContent(targetElement);
+            if (!textContent.trim()) return;
+
+            // Create new speech
+            currentSpeech = new SpeechSynthesisUtterance(textContent);
+            currentSpeech.rate = speechRate;
+            currentSpeech.pitch = 1;
+            currentSpeech.volume = 0.8;
+
+            if (selectedVoice) {
+                currentSpeech.voice = selectedVoice;
+            }
+
+            // Update state
+            currentButton = button;
+            isPlaying = true;
+            isPaused = false;
+
+            // Update UI
+            updateButtonStates();
+
+            // Speech event handlers
+            currentSpeech.onend = () => {
+                isPlaying = false;
+                isPaused = false;
+                currentButton = null;
+                updateButtonStates();
+            };
+
+            currentSpeech.onerror = (event) => {
+                console.error('Speech synthesis error:', event);
+                isPlaying = false;
+                isPaused = false;
+                currentButton = null;
+                updateButtonStates();
+            };
+
+            // Start speaking
+            try {
+                speechSynthesis.speak(currentSpeech);
+            } catch (error) {
+                console.error('Failed to start speech:', error);
+                isPlaying = false;
+                isPaused = false;
+                currentButton = null;
+                updateButtonStates();
+            }
+        }
+
+        function pauseSpeech() {
+            if (isPlaying && !isPaused) {
+                speechSynthesis.pause();
+                isPaused = true;
+                updateButtonStates();
+            }
+        }
+
+        function resumeSpeech() {
+            if (isPaused) {
+                speechSynthesis.resume();
+                isPaused = false;
+                updateButtonStates();
+            }
+        }
+
+        function stopSpeech() {
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+            }
+            isPlaying = false;
+            isPaused = false;
+            currentButton = null;
+            updateButtonStates();
+        }
+
+        function updateButtonStates() {
+            // Reset all speech buttons to default state
+            document.querySelectorAll('.voice-btn[data-target]').forEach(btn => {
+                btn.className = 'voice-btn';
+                btn.innerHTML = '<span>🔊</span> Play';
+            });
+
+            // Update current button state
+            if (currentButton) {
+                if (isPlaying && !isPaused) {
+                    currentButton.className = 'voice-btn playing';
+                    currentButton.innerHTML = '<span>⏸️</span> Pause';
+                } else if (isPaused) {
+                    currentButton.className = 'voice-btn paused';
+                    currentButton.innerHTML = '<span>▶️</span> Resume';
+                }
+            }
+        }
+
+        function extractTextContent(element) {
+            const clone = element.cloneNode(true);
+            const voiceControls = clone.querySelectorAll('.voice-controls');
+            voiceControls.forEach(control => control.remove());
+            return clone.textContent || clone.innerText || '';
+        }
+
+        function updateSelectedVoice(voiceIndex) {
+            if (voiceIndex === '') {
+                selectedVoice = null;
+            } else {
+                selectedVoice = availableVoices[parseInt(voiceIndex)];
+            }
+            
+            // If currently speaking, restart with new voice
+            if (isPlaying && currentButton) {
+                const targetId = currentButton.getAttribute('data-target');
+                const targetElement = document.getElementById(targetId);
+                
+                stopSpeech();
+                setTimeout(() => {
+                    if (targetElement) {
+                        startSpeech(currentButton, targetElement);
+                    }
+                }, 100);
+            }
+        }
+
+        function updateSpeechRate(rate) {
+            speechRate = parseFloat(rate);
+            document.getElementById('speed-display').textContent = rate + 'x';
+            
+            // If currently speaking, restart with new rate
+            if (isPlaying && currentButton) {
+                const targetId = currentButton.getAttribute('data-target');
+                const targetElement = document.getElementById(targetId);
+                
+                stopSpeech();
+                setTimeout(() => {
+                    if (targetElement) {
+                        startSpeech(currentButton, targetElement);
+                    }
+                }, 100);
+            }
+        }
+
+        // Load available voices
+        function loadVoices() {
+            availableVoices = speechSynthesis.getVoices();
+            const voiceSelect = document.getElementById('voice-select');
+            
+            if (availableVoices.length > 0) {
+                voiceSelect.innerHTML = '';
+                
+                const defaultOption = document.createElement('option');
+                defaultOption.value = '';
+                defaultOption.textContent = 'System Default';
+                voiceSelect.appendChild(defaultOption);
+                
+                availableVoices.forEach((voice, index) => {
+                    const option = document.createElement('option');
+                    option.value = index;
+                    option.textContent = voice.name + (voice.lang ? ` (${voice.lang})` : '');
+                    voiceSelect.appendChild(option);
+                });
+                
+                // Try to select a good default English voice
+                const preferredVoice = availableVoices.findIndex(voice => 
+                    voice.lang.startsWith('en') && voice.default
+                );
+                
+                if (preferredVoice !== -1) {
+                    voiceSelect.value = preferredVoice;
+                    selectedVoice = availableVoices[preferredVoice];
+                }
+            }
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'SELECT' && e.target.tagName !== 'TEXTAREA') {
+                switch(e.key) {
+                    case ' ': // Spacebar
+                        e.preventDefault();
+                        if (currentButton) {
+                            toggleSpeech(currentButton);
+                        }
+                        break;
+                    case 'Escape': // Stop
+                        e.preventDefault();
+                        stopSpeech();
+                        break;
+                }
+            }
         });
 
-        // Smooth scrolling for navigation links
+        // Section tracking and progress
+        const sections = ['introduction', 'platforms', 'ai-reality', 'adhd-strategies', 'skills', 'specializations', 'future-proof', 'getting-started'];
+        let currentSectionIndex = 0;
+
+        function updateProgress() {
+            const scrolled = window.scrollY;
+            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrolled / totalHeight) * 100;
+            
+            document.querySelector('.scroll-progress-bar').style.width = scrollPercent + '%';
+            updateSectionProgress();
+        }
+
+        function updateSectionProgress() {
+            const scrollPosition = window.scrollY + 200;
+            
+            sections.forEach((sectionId, index) => {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    const sectionTop = section.offsetTop;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                        currentSectionIndex = index;
+                        updateProgressIndicator();
+                    }
+                }
+            });
+        }
+
+        function updateProgressIndicator() {
+            const sectionNames = [
+                'Introduction',
+                'Platform Comparison',
+                'AI Impact',
+                'ADHD Strategies',
+                'Skills & Setup',
+                'Specializations',
+                'Future-Proofing',
+                'Getting Started'
+            ];
+            
+            document.getElementById('current-section').textContent = sectionNames[currentSectionIndex] || 'Introduction';
+            
+            const circles = document.querySelectorAll('.progress-circle');
+            circles.forEach((circle, index) => {
+                circle.className = 'progress-circle';
+                if (index < currentSectionIndex) {
+                    circle.classList.add('completed');
+                } else if (index === currentSectionIndex) {
+                    circle.classList.add('active');
+                }
+            });
+        }
+
+        // Initialize
+        window.addEventListener('scroll', updateProgress);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+            
+            if ('speechSynthesis' in window) {
+                loadVoices();
+                if (speechSynthesis.onvoiceschanged !== undefined) {
+                    speechSynthesis.onvoiceschanged = loadVoices;
+                }
+                setTimeout(loadVoices, 100);
+            } else {
+                document.querySelectorAll('.voice-btn').forEach(btn => {
+                    btn.disabled = true;
+                    btn.textContent = 'Speech not supported';
+                });
+            }
+        });
+
+        // Cleanup
+        window.addEventListener('beforeunload', function() {
+            stopSpeech();
+        });
+
+        window.addEventListener('pagehide', function() {
+            stopSpeech();
+        });
+
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1518,27 +2266,10 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
+                    setTimeout(() => updateProgress(), 1000);
                 }
             });
         });
-
-        // Enhanced touch targets for mobile
-        document.querySelectorAll('.toc-item, .data-card').forEach(element => {
-            element.addEventListener('touchstart', function() {
-                this.style.transform = 'scale(0.98)';
-            });
-            
-            element.addEventListener('touchend', function() {
-                this.style.transform = '';
-            });
-        });
-
-        // Prevent horizontal scrolling
-        document.body.addEventListener('touchmove', function(e) {
-            if (e.touches.length > 1) {
-                e.preventDefault();
-            }
-        }, { passive: false });
     </script>
 </body>
 </html>
