@@ -4,609 +4,1344 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADHD-Friendly Guide to Data Annotation: Turn Your Focus into Income</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-bg: #0f1114;
+            --secondary-bg: #1a1d23;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: #b4bcd0;
+            --text-muted: #8892a6;
+            --accent-blue: #4f46e5;
+            --accent-teal: #06b6d4;
+            --accent-emerald: #10b981;
+            --accent-amber: #f59e0b;
+            --accent-rose: #f43f5e;
+            --accent-purple: #8b5cf6;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.15);
+            --shadow-medium: 0 8px 40px rgba(0, 0, 0, 0.25);
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-success: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+            --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+            --gradient-adhd: linear-gradient(135deg, #4f46e5 0%, #06b6d4 50%, #10b981 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
             line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+            overflow-x: hidden;
         }
-        h1, h2, h3 {
-            color: #2c3e50;
-        }
-        h1 {
-            font-size: 24px;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-        }
-        h2 {
-            font-size: 20px;
-            border-left: 4px solid #3498db;
-            padding-left: 10px;
-            margin-top: 30px;
-        }
-        h3 {
-            font-size: 18px;
-            color: #2980b9;
-        }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin: 20px 0;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .highlight-box {
-            background-color: #e8f4f8;
-            border-left: 5px solid #3498db;
-            padding: 15px;
-            margin: 20px 0;
-        }
-        .success-story {
-            background-color: #e8f5e9;
-            border-left: 5px solid #4caf50;
-            padding: 15px;
-            margin: 20px 0;
-        }
-        .warning-box {
-            background-color: #fff3e0;
-            border-left: 5px solid #ff9800;
-            padding: 15px;
-            margin: 20px 0;
-        }
-        .tip-box {
-            background-color: #e1f5fe;
-            border-left: 5px solid #03a9f4;
-            padding: 15px;
-            margin: 20px 0;
-        }
-        .adhd-strategy {
-            background-color: #f3e5f5;
-            border-left: 5px solid #9c27b0;
-            padding: 15px;
-            margin: 20px 0;
-        }
-        .checklist {
-            background-color: #f9f9f9;
-            padding: 15px;
-            margin: 20px 0;
-            border: 1px solid #ddd;
-        }
-        .checklist ul {
-            list-style-type: none;
-            padding-left: 10px;
-        }
-        .checklist li {
-            margin-bottom: 10px;
-            position: relative;
-            padding-left: 30px;
-        }
-        .checklist li:before {
-            content: "□";
-            position: absolute;
+
+        /* Background Effects */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
             left: 0;
-            font-size: 20px;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at top, rgba(79, 70, 229, 0.1) 0%, transparent 50%),
+                        radial-gradient(ellipse at bottom right, rgba(16, 185, 129, 0.08) 0%, transparent 50%);
+            z-index: -1;
+            animation: gradientShift 20s ease-in-out infinite alternate;
         }
-        .footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
+
+        @keyframes gradientShift {
+            0% { 
+                background: radial-gradient(ellipse at top, rgba(79, 70, 229, 0.1) 0%, transparent 50%),
+                            radial-gradient(ellipse at bottom right, rgba(16, 185, 129, 0.08) 0%, transparent 50%);
+            }
+            50% { 
+                background: radial-gradient(ellipse at top left, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                            radial-gradient(ellipse at bottom, rgba(6, 182, 212, 0.08) 0%, transparent 50%);
+            }
+            100% { 
+                background: radial-gradient(ellipse at top right, rgba(245, 158, 11, 0.08) 0%, transparent 50%),
+                            radial-gradient(ellipse at bottom left, rgba(244, 63, 94, 0.08) 0%, transparent 50%);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        .hero-header {
+            text-align: center;
+            padding: 3rem 0 4rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            border: 1px solid var(--border-subtle);
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.03), transparent);
+            animation: shimmer 6s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(30deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(30deg); }
+        }
+
+        .main-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            background: var(--gradient-adhd);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textGradient 4s ease-in-out infinite;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        @keyframes textGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .date-badge {
+            display: inline-block;
+            background: rgba(79, 70, 229, 0.2);
+            color: var(--accent-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(79, 70, 229, 0.3);
+        }
+
+        /* Table of Contents */
+        .toc-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .toc-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--accent-teal);
+        }
+
+        .toc-list {
+            list-style: none;
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .toc-item {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s ease;
+        }
+
+        .toc-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent-teal);
+        }
+
+        .toc-link {
+            display: block;
+            padding: 1rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Section Styling */
+        .section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .section:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title .emoji {
+            font-size: 2.2rem;
+            filter: none;
+        }
+
+        .section-title .title-text {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            color: var(--accent-emerald);
+        }
+
+        .subsection-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 1.5rem 0 1rem;
+            color: var(--accent-purple);
+        }
+
+        /* Content Cards */
+        .highlight-card {
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(16, 185, 129, 0.1));
+            border: 1px solid rgba(79, 70, 229, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .success-card {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1));
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .warning-card {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(239, 68, 68, 0.1));
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .tip-card {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(139, 92, 246, 0.1));
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .adhd-card {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(79, 70, 229, 0.1));
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             font-size: 14px;
+        }
+
+        .highlight-card .card-icon { background: var(--accent-blue); }
+        .success-card .card-icon { background: var(--accent-emerald); }
+        .warning-card .card-icon { background: var(--accent-amber); }
+        .tip-card .card-icon { background: var(--accent-teal); }
+        .adhd-card .card-icon { background: var(--accent-purple); }
+
+        /* Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .data-table th {
+            background: rgba(79, 70, 229, 0.2);
+            color: var(--text-primary);
+            font-weight: 600;
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-subtle);
+            vertical-align: top;
+        }
+
+        .data-table tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* Lists */
+        .styled-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .styled-list li {
+            position: relative;
+            padding: 0.75rem 0 0.75rem 2.5rem;
+            margin-bottom: 0.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-teal);
+        }
+
+        .styled-list li::before {
+            content: '→';
+            position: absolute;
+            left: 1rem;
+            color: var(--accent-teal);
+            font-weight: bold;
+        }
+
+        .numbered-list {
+            counter-reset: step-counter;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .numbered-list li {
+            position: relative;
+            padding: 1rem 0 1rem 3rem;
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-blue);
+            counter-increment: step-counter;
+        }
+
+        .numbered-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            background: var(--accent-blue);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        /* Checklist */
+        .checklist {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .checklist-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--accent-emerald);
+        }
+
+        .checklist-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent-emerald);
+            border-radius: 4px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        /* Progress indicators */
+        .progress-timeline {
+            display: grid;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .timeline-number {
+            background: var(--accent-blue);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .timeline-content h4 {
+            margin: 0 0 0.5rem;
+            color: var(--accent-teal);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .hero-header {
+                padding: 2rem 1rem 3rem;
+            }
+
+            .main-title {
+                font-size: 2rem;
+            }
+
+            .data-table {
+                font-size: 0.9rem;
+            }
+
+            .data-table th,
+            .data-table td {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+
+        /* Focus indicators for ADHD */
+        .focus-helper {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-emerald);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+            animation: focusPulse 2s infinite;
+            z-index: 1000;
+        }
+
+        @keyframes focusPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.2); }
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+        }
+
+        .scroll-progress-bar {
+            height: 100%;
+            background: var(--gradient-adhd);
+            width: 0%;
+            transition: width 0.3s ease;
         }
     </style>
 </head>
 <body>
-    <h1>ADHD-Friendly Guide to Data Annotation: Turn Your Focus into Income</h1>
-    
-    <p><em>Created: April 14, 2025</em></p>
-    
-    <div class="highlight-box">
-        <p>Welcome to your comprehensive guide to data annotation work! This guide is specifically designed for individuals with ADHD who want to leverage their unique cognitive strengths in the growing field of data annotation. Data annotation offers that perfect mix of structured tasks with enough variety to keep your ADHD brain engaged while generating income on your own terms.</p>
-        <p>Whether you're looking for flexible remote work, a side hustle, or a potential career path, this guide will walk you through everything you need to know to succeed in data annotation with an ADHD brain.</p>
+    <div class="bg-gradient"></div>
+    <div class="focus-helper"></div>
+    <div class="scroll-progress">
+        <div class="scroll-progress-bar"></div>
     </div>
-    
-    <h2>Table of Contents</h2>
-    <ol>
-        <li><a href="#introduction">Introduction: Your Data Annotation Journey</a></li>
-        <li><a href="#understanding-data-annotation">Understanding Data Annotation Work</a></li>
-        <li><a href="#getting-started">Getting Started: Platforms and Requirements</a></li>
-        <li><a href="#earning-potential">Earning Potential and Payment Structures</a></li>
-        <li><a href="#adhd-strategies">ADHD-Specific Strategies for Success</a></li>
-        <li><a href="#workflow-optimization">Workflow Optimization Techniques</a></li>
-        <li><a href="#security-privacy">Security and Privacy Considerations</a></li>
-        <li><a href="#success-stories">Success Stories and Next Steps</a></li>
-    </ol>
-    
-    <h2 id="introduction">Introduction: Your Data Annotation Journey</h2>
-    
-    <p>Data annotation is a critical component of artificial intelligence and machine learning development. As a data annotator, you'll be helping to train AI systems by labeling data in ways machines can understand. This work is particularly well-suited for ADHD minds because it offers:</p>
-    
-    <ul>
-        <li>Task variety that prevents boredom</li>
-        <li>Clear structure with defined guidelines</li>
-        <li>Short, completable units of work</li>
-        <li>Immediate feedback on performance</li>
-        <li>Flexible scheduling that accommodates energy fluctuations</li>
-    </ul>
-    
-    <div class="adhd-strategy">
-        <h3>Why Data Annotation Works for ADHD Brains:</h3>
-        <ul>
-            <li><strong>Hyperfocus Potential:</strong> The detailed nature of annotation tasks can trigger productive hyperfocus states</li>
-            <li><strong>Pattern Recognition:</strong> Many with ADHD excel at spotting patterns and anomalies—a valuable skill in data annotation</li>
-            <li><strong>Novelty Seeking:</strong> The variety of projects and data types satisfies the ADHD brain's craving for novelty</li>
-            <li><strong>Rapid Task Completion:</strong> Short annotation tasks provide regular dopamine hits as you complete them</li>
-        </ul>
-    </div>
-    
-    <h2 id="understanding-data-annotation">Understanding Data Annotation Work</h2>
-    
-    <p>Data annotation is the process of adding labels, tags, or other identifying markers to data so that machines can learn from it. This critical work forms the foundation of many AI systems you interact with daily—from voice assistants to self-driving cars.</p>
-    
-    <h3>Types of Data Annotation</h3>
-    
-    <table>
-        <tr>
-            <th>Annotation Type</th>
-            <th>Key Tasks</th>
-            <th>Tools Used</th>
-            <th>Skill Requirements</th>
-        </tr>
-        <tr>
-            <td>Text Annotation</td>
-            <td>Syntactic Parsing, Named Entity Recognition, Sentiment Analysis</td>
-            <td>Prodigy, LightTag, Amazon Comprehend</td>
-            <td>Language proficiency, attention to detail</td>
-        </tr>
-        <tr>
-            <td>Image Annotation</td>
-            <td>Keypoints, Bounding Boxes, Polygons</td>
-            <td>Labelbox, SuperAnnotate, CVAT</td>
-            <td>Visual acuity, spatial awareness</td>
-        </tr>
-        <tr>
-            <td>Video Annotation</td>
-            <td>Object Tracking, Activity Recognition</td>
-            <td>V7 Darwin, Scalabel, Annotell</td>
-            <td>Temporal understanding, consistency</td>
-        </tr>
-        <tr>
-            <td>Audio Annotation</td>
-            <td>Phoneme Transcription, Speaker Identification</td>
-            <td>Sonix, Rev, Otter.ai</td>
-            <td>Audio perception, language skills</td>
-        </tr>
-        <tr>
-            <td>3D Data Annotation</td>
-            <td>Point Cloud Segmentation, Object Classification</td>
-            <td>Scale AI, Pointly</td>
-            <td>Spatial visualization, technical knowledge</td>
-        </tr>
-        <tr>
-            <td>LLM Annotation</td>
-            <td>Text Classification, Q&A Pairing</td>
-            <td>Hugging Face, Snorkel</td>
-            <td>Language understanding, context awareness</td>
-        </tr>
-    </table>
-    
-    <div class="tip-box">
-        <h3>Finding Your Annotation Fit:</h3>
-        <p>For ADHD minds, certain annotation types may be more engaging than others. Pay attention to which tasks absorb your attention most completely. If you find yourself losing track of time in a good way during specific annotation tasks, that's a strong indicator you've found your niche. Many ADHD annotators report that image annotation offers the right balance of visual engagement and clear objectives.</p>
-    </div>
-    
-    <h3>The Annotation Process</h3>
-    
-    <ol>
-        <li><strong>Task Assignment:</strong> You receive a batch of data to annotate according to specific guidelines</li>
-        <li><strong>Annotation Work:</strong> Using specialized tools, you add the required labels, tags, or markers to the data</li>
-        <li><strong>Quality Review:</strong> Your work is checked against standards or cross-verified with other annotators</li>
-        <li><strong>Feedback Loop:</strong> You receive feedback on accuracy and areas for improvement</li>
-        <li><strong>Skill Development:</strong> Over time, you build expertise and can tackle more complex annotation tasks</li>
-    </ol>
-    
-    <h2 id="getting-started">Getting Started: Platforms and Requirements</h2>
-    
-    <p>The data annotation marketplace consists of various platforms that connect annotators with companies needing data labeling services. Each platform has its own onboarding process, pay structure, and task types.</p>
-    
-    <h3>Leading Data Annotation Platforms</h3>
-    
-    <table>
-        <tr>
-            <th>Platform</th>
-            <th>Specialization</th>
-            <th>Ease of Entry</th>
-            <th>Payment Range</th>
-            <th>ADHD Compatibility</th>
-        </tr>
-        <tr>
-            <td>Amazon Mechanical Turk</td>
-            <td>Wide variety</td>
-            <td>Very Easy</td>
-            <td>$3-15/hour</td>
-            <td>Medium (high variety but low pay can be demotivating)</td>
-        </tr>
-        <tr>
-            <td>Appen</td>
-            <td>AI training data</td>
-            <td>Medium</td>
-            <td>$9-20/hour</td>
-            <td>High (structured projects with clear guidelines)</td>
-        </tr>
-        <tr>
-            <td>Lionbridge AI</td>
-            <td>Language & search</td>
-            <td>Medium</td>
-            <td>$10-25/hour</td>
-            <td>High (regular work and structured tasks)</td>
-        </tr>
-        <tr>
-            <td>Clickworker</td>
-            <td>Text & image tasks</td>
-            <td>Easy</td>
-            <td>$8-18/hour</td>
-            <td>Medium (simple tasks but sometimes repetitive)</td>
-        </tr>
-        <tr>
-            <td>Remotasks</td>
-            <td>Computer vision</td>
-            <td>Medium</td>
-            <td>$7-30/hour</td>
-            <td>Very High (excellent training and engaging tasks)</td>
-        </tr>
-        <tr>
-            <td>Toloka</td>
-            <td>ML tasks</td>
-            <td>Easy</td>
-            <td>$5-15/hour</td>
-            <td>Medium (intuitive interface but variable task availability)</td>
-        </tr>
-    </table>
-    
-    <div class="warning-box">
-        <h3>Platform Selection Strategy:</h3>
-        <p>Many experienced ADHD annotators recommend starting with 2-3 platforms simultaneously. This approach provides variety and ensures you'll have tasks available when your focus is strong. However, avoid signing up for too many at once, as managing multiple platform interfaces and guidelines can create overwhelm.</p>
-    </div>
-    
-    <h3>Technical Requirements</h3>
-    
-    <p>To succeed in data annotation, you'll need:</p>
-    <ul>
-        <li>Reliable internet connection</li>
-        <li>Modern computer with updated browser</li>
-        <li>Basic understanding of annotation tools</li>
-        <li>Ability to follow detailed guidelines</li>
-        <li>Comfort with basic technology applications</li>
-        <li>Screen with good resolution (especially for image annotation)</li>
-    </ul>
-    
-    <h3>Professional Requirements</h3>
-    
-    <ol>
-        <li><strong>Quality Control Standards:</strong>
-            <ul>
-                <li>Consistent accuracy in annotations</li>
-                <li>Regular performance reviews</li>
-                <li>Adherence to project guidelines</li>
-                <li>Inter-annotator agreement checks</li>
+
+    <div class="container">
+        <!-- Hero Header -->
+        <div class="hero-header">
+            <h1 class="main-title">ADHD-Friendly Guide to Data Annotation</h1>
+            <p class="subtitle">Realistic Expectations for Supplemental Income</p>
+            <div class="date-badge">✨ Created: April 14, 2025</div>
+        </div>
+
+        <!-- Intro Highlight -->
+        <div class="highlight-card">
+            <div class="card-title">
+                <div class="card-icon">🧠</div>
+                Welcome to Your Data Annotation Journey!
+            </div>
+            <p><strong>This guide is specifically designed for ADHD minds</strong> considering data annotation work. While this field can offer some advantages for ADHD brains, it's important to have realistic expectations about earnings, work availability, and the challenges you'll face.</p>
+            <br>
+            <p>Data annotation can be a legitimate side hustle or supplemental income, but it's rarely a full-time career replacement. This guide will give you the honest truth about what to expect.</p>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="toc-container">
+            <h2 class="toc-title">📋 Quick Navigation</h2>
+            <ol class="toc-list">
+                <li class="toc-item"><a href="#introduction" class="toc-link">🎯 Introduction: Your Data Annotation Journey</a></li>
+                <li class="toc-item"><a href="#understanding" class="toc-link">🔍 Understanding Data Annotation Work</a></li>
+                <li class="toc-item"><a href="#getting-started" class="toc-link">🚀 Getting Started: Platforms and Requirements</a></li>
+                <li class="toc-item"><a href="#earning" class="toc-link">💰 Earning Potential and Payment Structures</a></li>
+                <li class="toc-item"><a href="#strategies" class="toc-link">⚡ ADHD-Specific Strategies for Success</a></li>
+                <li class="toc-item"><a href="#workflow" class="toc-link">⚙️ Workflow Optimization Techniques</a></li>
+                <li class="toc-item"><a href="#security" class="toc-link">🔒 Security and Privacy Considerations</a></li>
+                <li class="toc-item"><a href="#success" class="toc-link">🎉 Success Stories and Next Steps</a></li>
+            </ol>
+        </div>
+
+        <!-- Introduction Section -->
+        <div class="section" id="introduction">
+            <h2 class="section-title">
+                <span class="emoji">🎯</span>
+                <span class="title-text">Introduction: Your Data Annotation Journey</span>
+            </h2>
+            
+            <p>Data annotation is a critical component of AI and machine learning development. As a data annotator, you'll help train AI systems by labeling data in ways machines can understand. <strong>This work is particularly well-suited for ADHD minds</strong> because it offers:</p>
+
+            <ul class="styled-list">
+                <li>Task variety that prevents boredom</li>
+                <li>Clear structure with defined guidelines</li>
+                <li>Short, completable units of work</li>
+                <li>Immediate feedback on performance</li>
+                <li>Flexible scheduling that accommodates energy fluctuations</li>
             </ul>
-        </li>
-        <li><strong>Domain Expertise:</strong>
-            <ul>
-                <li>Field-specific knowledge for specialized projects</li>
-                <li>Understanding of annotation conventions</li>
-                <li>Ability to interpret complex guidelines</li>
+
+            <div class="adhd-card">
+                <div class="card-title">
+                    <div class="card-icon">⚡</div>
+                    Why Data Annotation Works for ADHD Brains
+                </div>
+                <ul class="styled-list">
+                    <li><strong>Hyperfocus Potential:</strong> Detailed annotation tasks can trigger productive hyperfocus states</li>
+                    <li><strong>Pattern Recognition:</strong> Many with ADHD excel at spotting patterns and anomalies—a valuable annotation skill</li>
+                    <li><strong>Novelty Seeking:</strong> Project variety satisfies the ADHD brain's craving for new experiences</li>
+                    <li><strong>Rapid Task Completion:</strong> Short annotation tasks provide regular dopamine hits as you complete them</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Understanding Data Annotation -->
+        <div class="section" id="understanding">
+            <h2 class="section-title">
+                <span class="emoji">🔍</span>
+                <span class="title-text">Understanding Data Annotation Work</span>
+            </h2>
+            
+            <p>Data annotation is the process of adding labels, tags, or identifying markers to data so machines can learn from it. This critical work forms the foundation of AI systems you interact with daily—from voice assistants to self-driving cars.</p>
+
+            <h3 class="section-subtitle">Types of Data Annotation</h3>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Annotation Type</th>
+                        <th>Key Tasks</th>
+                        <th>Tools Used</th>
+                        <th>Skill Requirements</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Text Annotation</strong></td>
+                        <td>Syntactic Parsing, Named Entity Recognition, Sentiment Analysis</td>
+                        <td>Prodigy, LightTag, Amazon Comprehend</td>
+                        <td>Language proficiency, attention to detail</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Image Annotation</strong></td>
+                        <td>Keypoints, Bounding Boxes, Polygons</td>
+                        <td>Labelbox, SuperAnnotate, CVAT</td>
+                        <td>Visual acuity, spatial awareness</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Video Annotation</strong></td>
+                        <td>Object Tracking, Activity Recognition</td>
+                        <td>V7 Darwin, Scalabel, Annotell</td>
+                        <td>Temporal understanding, consistency</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Audio Annotation</strong></td>
+                        <td>Phoneme Transcription, Speaker Identification</td>
+                        <td>Sonix, Rev, Otter.ai</td>
+                        <td>Audio perception, language skills</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3D Data Annotation</strong></td>
+                        <td>Point Cloud Segmentation, Object Classification</td>
+                        <td>Scale AI, Pointly</td>
+                        <td>Spatial visualization, technical knowledge</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LLM Annotation</strong></td>
+                        <td>Text Classification, Q&A Pairing</td>
+                        <td>Hugging Face, Snorkel</td>
+                        <td>Language understanding, context awareness</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip-card">
+                <div class="card-title">
+                    <div class="card-icon">🎯</div>
+                    Finding Your Annotation Fit
+                </div>
+                <p>For ADHD minds, certain annotation types may be more engaging than others. <strong>Pay attention to which tasks absorb your attention most completely.</strong> If you find yourself losing track of time in a good way during specific annotation tasks, that's a strong indicator you've found your niche.</p>
+                <br>
+                <p>Many ADHD annotators report that <strong>image annotation</strong> offers the right balance of visual engagement and clear objectives.</p>
+            </div>
+
+            <h3 class="section-subtitle">The Annotation Process</h3>
+
+            <div class="progress-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-number">1</div>
+                    <div class="timeline-content">
+                        <h4>Task Assignment</h4>
+                        <p>You receive a batch of data to annotate according to specific guidelines</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">2</div>
+                    <div class="timeline-content">
+                        <h4>Annotation Work</h4>
+                        <p>Using specialized tools, you add required labels, tags, or markers to the data</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">3</div>
+                    <div class="timeline-content">
+                        <h4>Quality Review</h4>
+                        <p>Your work is checked against standards or cross-verified with other annotators</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">4</div>
+                    <div class="timeline-content">
+                        <h4>Feedback Loop</h4>
+                        <p>You receive feedback on accuracy and areas for improvement</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">5</div>
+                    <div class="timeline-content">
+                        <h4>Skill Development</h4>
+                        <p>Over time, you build expertise and can tackle more complex annotation tasks</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Getting Started -->
+        <div class="section" id="getting-started">
+            <h2 class="section-title">
+                <span class="emoji">🚀</span>
+                <span class="title-text">Getting Started: Platforms and Requirements</span>
+            </h2>
+
+            <p>The data annotation marketplace consists of various platforms that connect annotators with companies needing data labeling services. Each platform has its own onboarding process, pay structure, and task types.</p>
+
+            <h3 class="section-subtitle">Leading Data Annotation Platforms</h3>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Platform</th>
+                        <th>Specialization</th>
+                        <th>Ease of Entry</th>
+                        <th>Payment Range</th>
+                        <th>ADHD Compatibility</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Amazon Mechanical Turk</strong></td>
+                        <td>Wide variety</td>
+                        <td>Very Easy</td>
+                        <td>$3-15/hour</td>
+                        <td>Low (very low pay, can be frustrating and demotivating)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Appen</strong></td>
+                        <td>AI training data</td>
+                        <td>Medium</td>
+                        <td>$9-20/hour</td>
+                        <td>Medium (structured but inconsistent work availability)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lionbridge AI</strong></td>
+                        <td>Language & search</td>
+                        <td>Medium</td>
+                        <td>$10-25/hour</td>
+                        <td>Medium (can be repetitive, requires sustained attention)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Clickworker</strong></td>
+                        <td>Text & image tasks</td>
+                        <td>Easy</td>
+                        <td>$8-18/hour</td>
+                        <td>Low (often repetitive tasks that don't engage ADHD brains)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Remotasks</strong></td>
+                        <td>Computer vision</td>
+                        <td>Medium</td>
+                        <td>$7-30/hour</td>
+                        <td>Medium-High (good training, but work can be inconsistent)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Toloka</strong></td>
+                        <td>ML tasks</td>
+                        <td>Easy</td>
+                        <td>$5-15/hour</td>
+                        <td>Low (inconsistent availability, can be frustrating)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="warning-card">
+                <div class="card-title">
+                    <div class="card-icon">⚠️</div>
+                    Reality Check: Platform Issues to Know About
+                </div>
+                <p><strong>Before you get started, be aware of common issues:</strong></p>
+                <ul class="styled-list">
+                    <li><strong>Inconsistent Work:</strong> Many workers report going weeks without available tasks</li>
+                    <li><strong>Account Deactivation:</strong> Some platforms suddenly cut access without warning, sometimes with unpaid earnings</li>
+                    <li><strong>Assessment Limbo:</strong> You might pass assessments but never receive actual paid work</li>
+                    <li><strong>Payment Delays:</strong> Payments can be slow or irregular on some platforms</li>
+                    <li><strong>No Communication:</strong> Most platforms provide minimal feedback or support</li>
+                </ul>
+                <br>
+                <p><strong>Recommendation:</strong> Never rely on data annotation as your primary income source. Treat it as supplemental income only.</p>
+            </div>
+
+            <div class="warning-card">
+                <div class="card-title">
+                    <div class="card-icon">⚠️</div>
+                    Platform Selection Strategy
+                </div>
+                <p>Start with 2-3 platforms simultaneously to increase your chances of consistent work. However, be prepared that even with multiple platforms, work may be sporadic.</p>
+                <br>
+                <p>Avoid signing up for too many at once, as managing multiple platform interfaces and guidelines can create overwhelm.</p>
+            </div>
+
+            <h3 class="section-subtitle">Technical Requirements</h3>
+
+            <ul class="styled-list">
+                <li>Reliable internet connection</li>
+                <li>Modern computer with updated browser</li>
+                <li>Basic understanding of annotation tools</li>
+                <li>Ability to follow detailed guidelines</li>
+                <li>Comfort with basic technology applications</li>
+                <li>Screen with good resolution (especially for image annotation)</li>
             </ul>
-        </li>
-    </ol>
-    
-    <div class="adhd-strategy">
-        <h3>ADHD-Friendly Onboarding Strategy:</h3>
-        <p>Rather than trying to absorb all guidelines at once, break down platform onboarding into manageable chunks:</p>
-        <ol>
-            <li>Schedule a dedicated 30-minute session just for account creation</li>
-            <li>Take tutorial modules one at a time with short breaks</li>
-            <li>Create visual reference guides for complex annotation rules</li>
-            <li>Practice with small batches before taking on larger tasks</li>
-            <li>Set a timer when reviewing guidelines to prevent hyperfocusing on instructions</li>
-        </ol>
-    </div>
-    
-    <h2 id="earning-potential">Earning Potential and Payment Structures</h2>
-    
-    <p>Understanding the compensation landscape helps set realistic expectations and goals. Data annotation pay varies widely based on task complexity, your speed, and the platform's payment structure.</p>
-    
-    <table>
-        <tr>
-            <th>Task Type</th>
-            <th>Pay Range</th>
-            <th>Payment Structure</th>
-            <th>Notes</th>
-        </tr>
-        <tr>
-            <td>Basic Tasks</td>
-            <td>$20/hour</td>
-            <td>Hourly/Per Task</td>
-            <td>Entry-level work</td>
-        </tr>
-        <tr>
-            <td>Coding Tasks</td>
-            <td>$40/hour</td>
-            <td>Project-based</td>
-            <td>Requires technical skills</td>
-        </tr>
-        <tr>
-            <td>Specialized (Chemistry)</td>
-            <td>$60/hour</td>
-            <td>Hourly</td>
-            <td>Domain expertise needed</td>
-        </tr>
-        <tr>
-            <td>General Data Labeling</td>
-            <td>Variable</td>
-            <td>Per piece/hour</td>
-            <td>Location-dependent rates</td>
-        </tr>
-    </table>
-    
-    <h3>Success Story Spotlight</h3>
-    <div class="success-story">
-        <h3>From Side Hustle to Sustainable Income:</h3>
-        <p>"I have been working at [DataAnnotation.Tech] for almost 2 years... I am currently working on two projects, one for $20 per hour and one for $25 per hour. I am making about $400-$500 a week. The flexibility works perfectly with my ADHD because I can work when my focus is strongest and take breaks when I need to without anyone micromanaging me. I started with simple image annotation tasks and now specialize in medical imaging annotation."</p>
-        <p><strong>Key Takeaway:</strong> Consistent participation and specialization can lead to higher-paying opportunities over time.</p>
-    </div>
-    
-    <h3>Income Growth Timeline</h3>
-    
-    <ol>
-        <li><strong>Months 1-3:</strong> Expect to earn below average as you learn platforms and build speed</li>
-        <li><strong>Months 3-6:</strong> Reach baseline earning rates as your efficiency improves</li>
-        <li><strong>Months 6-12:</strong> Potential for premium tasks as you develop expertise</li>
-        <li><strong>Year 1+:</strong> Opportunity for specialized roles with higher compensation</li>
-    </ol>
-    
-    <div class="tip-box">
-        <h3>Income Optimization Strategy:</h3>
-        <p>Many successful ADHD data annotators use a "tier system" approach, where they categorize tasks by focus level required:</p>
-        <ul>
-            <li><strong>High Focus Tasks:</strong> Save complex, higher-paying tasks for your peak energy periods</li>
-            <li><strong>Medium Focus Tasks:</strong> Moderately complex tasks for regular work sessions</li>
-            <li><strong>Low Focus Tasks:</strong> Simple, quick tasks for low-energy periods when you still want to be productive</li>
-        </ul>
-        <p>This approach helps maximize earnings while working with your natural energy fluctuations rather than against them.</p>
-    </div>
-    
-    <h2 id="adhd-strategies">ADHD-Specific Strategies for Success</h2>
-    
-    <p>Your ADHD brain can be a superpower in data annotation work when properly channeled. Here are strategies specifically designed to leverage your unique cognitive style:</p>
-    
-    <div class="adhd-strategy">
-        <h3>Leveraging ADHD Strengths in Annotation:</h3>
-        <ul>
-            <li><strong>Hyperfocus:</strong> Channel intense focus periods into complex annotation tasks</li>
-            <li><strong>Pattern Recognition:</strong> Use your natural ability to spot inconsistencies and patterns</li>
-            <li><strong>Divergent Thinking:</strong> Apply creative problem-solving to annotation challenges</li>
-            <li><strong>Novelty Seeking:</strong> Rotate between different annotation types to maintain engagement</li>
-        </ul>
-    </div>
-    
-    <h3>Task Management Framework</h3>
-    <ol>
-        <li><strong>Chunk Your Work:</strong> Break annotation sessions into 25-minute focused blocks with 5-minute breaks (Pomodoro Technique)</li>
-        <li><strong>Create Visual Cues:</strong> Use color-coding or visual markers to track progress</li>
-        <li><strong>Implement Reward Systems:</strong> Set up small rewards after completing a certain number of tasks</li>
-        <li><strong>Use Body Doubling:</strong> Work alongside others (virtually or in-person) to maintain focus</li>
-        <li><strong>Task Batching:</strong> Group similar annotation tasks together to minimize context switching</li>
-    </ol>
-    
-    <h3>Digital Assistance Tools</h3>
-    <ul>
-        <li><strong>AI as a "Second Brain":</strong> Use AI tools for task management</li>
-        <li><strong>Voice-to-Text:</strong> Implement Otter.ai for note transcription</li>
-        <li><strong>Task Tracking Apps:</strong> Leverage organizational apps designed for ADHD</li>
-        <li><strong>Browser Extensions:</strong> Use focus tools that block distracting websites during work periods</li>
-        <li><strong>Time Trackers:</strong> Implement apps that visualize how you're spending your annotation time</li>
-    </ul>
-    
-    <h3>Environment Optimization</h3>
-    <h4>Create a Focus-Friendly Workspace:</h4>
-    <ul>
-        <li>Position your desk away from high-traffic areas</li>
-        <li>Use noise-cancelling headphones or background white noise</li>
-        <li>Keep fidget tools nearby for restless energy</li>
-        <li>Maintain a clean, uncluttered workspace with only essential items visible</li>
-        <li>Consider a standing desk option for physical movement during annotation</li>
-    </ul>
-    
-    <div class="success-story">
-        <h3>Environment Transformation:</h3>
-        <p>"I struggled with consistent annotation work until I completely redesigned my workspace. Now I have a dedicated annotation station with dual monitors, noise-cancelling headphones, and all my fidget tools within reach. I also created a visual 'task map' on my wall that helps me see exactly what I need to accomplish each day. My productivity has more than doubled, and I actually look forward to sitting down at my annotation desk."</p>
-    </div>
-    
-    <h4>Task Structure Enhancement:</h4>
-    <ul>
-        <li>Clear step-by-step instructions are crucial for ADHD minds</li>
-        <li>Well-defined, bite-sized tasks improve focus and maintain engagement</li>
-        <li>Regular feedback loops provide the dopamine hits that ADHD brains crave</li>
-        <li>Create personal shorthand notes for common annotation patterns</li>
-    </ul>
-    
-    <h2 id="workflow-optimization">Workflow Optimization Techniques</h2>
-    
-    <p>Developing efficient workflows is particularly important for ADHD annotators, as it reduces cognitive load and helps maintain consistent productivity.</p>
-    
-    <h3>Structured Approach</h3>
-    <ol>
-        <li><strong>Build Clear Annotation Workflows:</strong>
-            <ul>
-                <li>Create personal checklists for each annotation type</li>
-                <li>Document your most efficient processes</li>
-                <li>Track which tasks you complete most efficiently</li>
-                <li>Develop templates for repetitive annotation patterns</li>
+
+            <div class="adhd-card">
+                <div class="card-title">
+                    <div class="card-icon">🎯</div>
+                    ADHD-Friendly Onboarding Strategy
+                </div>
+                <p>Rather than trying to absorb all guidelines at once, break down platform onboarding into manageable chunks:</p>
+                <ol class="numbered-list">
+                    <li>Schedule a dedicated 30-minute session just for account creation</li>
+                    <li>Take tutorial modules one at a time with short breaks</li>
+                    <li>Create visual reference guides for complex annotation rules</li>
+                    <li>Practice with small batches before taking on larger tasks</li>
+                    <li>Set a timer when reviewing guidelines to prevent hyperfocusing on instructions</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Earning Potential -->
+        <div class="section" id="earning">
+            <h2 class="section-title">
+                <span class="emoji">💰</span>
+                <span class="title-text">Earning Potential and Payment Structures</span>
+            </h2>
+
+            <p>Understanding the compensation landscape helps set realistic expectations and goals. Data annotation pay varies widely based on task complexity, your speed, and the platform's payment structure.</p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Task Type</th>
+                        <th>Pay Range</th>
+                        <th>Payment Structure</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Basic Tasks</strong></td>
+                        <td>$10-20/hour</td>
+                        <td>Hourly/Per Task</td>
+                        <td>Entry-level work, most common</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Experienced Annotation</strong></td>
+                        <td>$15-25/hour</td>
+                        <td>Hourly</td>
+                        <td>After building track record</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Specialized (Technical)</strong></td>
+                        <td>$20-35/hour</td>
+                        <td>Project-based</td>
+                        <td>Requires domain expertise, limited availability</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Platform Average</strong></td>
+                        <td>$12-22/hour</td>
+                        <td>Variable</td>
+                        <td>Most workers fall in this range</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="success-card">
+                <div class="card-title">
+                    <div class="card-icon">🎉</div>
+                    Realistic Success Story: Supplemental Income
+                </div>
+                <p><em>"I have been working with data annotation platforms for about 18 months. I currently work on two projects when they're available - one pays around $15/hour and another pays $20/hour. On a good week with consistent tasks, I make about $200-300.</em></p>
+                <br>
+                <p><em>The work isn't always available though - sometimes I'll go weeks without tasks. The flexibility works with my ADHD because I can work when my focus is good, but I had to learn not to rely on it as my main income. It's better as a side hustle when you need extra money."</em></p>
+                <br>
+                <p><strong>Key Takeaway:</strong> Data annotation can provide supplemental income, but work availability is inconsistent and earnings are modest.</p>
+            </div>
+
+            <h3 class="section-subtitle">Income Growth Timeline</h3>
+
+            <div class="progress-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-number">1-3</div>
+                    <div class="timeline-content">
+                        <h4>Months 1-3: Learning & Low Earnings</h4>
+                        <p>Expect $8-15/hour as you learn platforms and build speed. Many tasks may be rejected initially.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">3-6</div>
+                    <div class="timeline-content">
+                        <h4>Months 3-6: Modest Improvement</h4>
+                        <p>May reach $12-20/hour on tasks you can access. Work availability still inconsistent.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">6-12</div>
+                    <div class="timeline-content">
+                        <h4>Months 6-12: Potential Specialization</h4>
+                        <p>If you find your niche, may access higher-paying tasks ($15-25/hour) when available.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">12+</div>
+                    <div class="timeline-content">
+                        <h4>Year 1+: Realistic Expectations</h4>
+                        <p>Most experienced workers still face inconsistent availability. This remains supplemental income.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="card-title">
+                    <div class="card-icon">💡</div>
+                    Realistic Income Strategy
+                </div>
+                <p>Given the inconsistent nature of annotation work, successful ADHD annotators use a <strong>"flexible availability"</strong> approach:</p>
+                <ul class="styled-list">
+                    <li><strong>Good Focus Days:</strong> Check for higher-paying, complex tasks that match your peak attention</li>
+                    <li><strong>Low Energy Days:</strong> Do simple, quick tasks if available (better than nothing)</li>
+                    <li><strong>No Work Days:</strong> Use time to learn new skills or apply to other platforms</li>
+                    <li><strong>Multiple Income Streams:</strong> Never rely solely on annotation work</li>
+                </ul>
+                <p><strong>Reality Check:</strong> Most annotators treat this as "pocket money" rather than significant income.</p>
+            </div>
+        </div>
+
+        <!-- ADHD Strategies -->
+        <div class="section" id="strategies">
+            <h2 class="section-title">
+                <span class="emoji">⚡</span>
+                <span class="title-text">ADHD-Specific Strategies for Success</span>
+            </h2>
+
+            <p>Your ADHD brain can be a superpower in data annotation work when properly channeled. Here are strategies specifically designed to leverage your unique cognitive style:</p>
+
+            <div class="adhd-card">
+                <div class="card-title">
+                    <div class="card-icon">⚡</div>
+                    Leveraging ADHD Strengths in Annotation
+                </div>
+                <ul class="styled-list">
+                    <li><strong>Hyperfocus:</strong> Channel intense focus periods into complex annotation tasks</li>
+                    <li><strong>Pattern Recognition:</strong> Use your natural ability to spot inconsistencies and patterns</li>
+                    <li><strong>Divergent Thinking:</strong> Apply creative problem-solving to annotation challenges</li>
+                    <li><strong>Novelty Seeking:</strong> Rotate between different annotation types to maintain engagement</li>
+                </ul>
+            </div>
+
+            <h3 class="section-subtitle">Task Management Framework</h3>
+
+            <ol class="numbered-list">
+                <li><strong>Chunk Your Work:</strong> Break annotation sessions into 25-minute focused blocks with 5-minute breaks (Pomodoro Technique)</li>
+                <li><strong>Create Visual Cues:</strong> Use color-coding or visual markers to track progress</li>
+                <li><strong>Implement Reward Systems:</strong> Set up small rewards after completing a certain number of tasks</li>
+                <li><strong>Use Body Doubling:</strong> Work alongside others (virtually or in-person) to maintain focus</li>
+                <li><strong>Task Batching:</strong> Group similar annotation tasks together to minimize context switching</li>
+            </ol>
+
+            <h3 class="section-subtitle">Digital Assistance Tools</h3>
+
+            <ul class="styled-list">
+                <li><strong>AI as a "Second Brain":</strong> Use AI tools for task management</li>
+                <li><strong>Voice-to-Text:</strong> Implement Otter.ai for note transcription</li>
+                <li><strong>Task Tracking Apps:</strong> Leverage organizational apps designed for ADHD</li>
+                <li><strong>Browser Extensions:</strong> Use focus tools that block distracting websites during work periods</li>
+                <li><strong>Time Trackers:</strong> Implement apps that visualize how you're spending your annotation time</li>
             </ul>
-        </li>
-        <li><strong>Establish Consistent Routines:</strong>
-            <ul>
-                <li>Set specific hours for annotation work</li>
-                <li>Create transition rituals between different task types</li>
-                <li>Use timers to maintain awareness of time spent</li>
-                <li>Build in regular movement breaks to refresh focus</li>
+
+            <h3 class="section-subtitle">Environment Optimization</h3>
+
+            <div class="tip-card">
+                <div class="card-title">
+                    <div class="card-icon">🏠</div>
+                    Create a Focus-Friendly Workspace
+                </div>
+                <ul class="styled-list">
+                    <li>Position your desk away from high-traffic areas</li>
+                    <li>Use noise-cancelling headphones or background white noise</li>
+                    <li>Keep fidget tools nearby for restless energy</li>
+                    <li>Maintain a clean, uncluttered workspace with only essential items visible</li>
+                    <li>Consider a standing desk option for physical movement during annotation</li>
+                </ul>
+            </div>
+
+            <div class="success-card">
+                <div class="card-title">
+                    <div class="card-icon">🎯</div>
+                    Environment Transformation Success Story
+                </div>
+                <p><em>"I struggled with consistent annotation work until I completely redesigned my workspace. Now I have a dedicated annotation station with dual monitors, noise-cancelling headphones, and all my fidget tools within reach.</em></p>
+                <br>
+                <p><em>I also created a visual 'task map' on my wall that helps me see exactly what I need to accomplish each day. My productivity has more than doubled, and I actually look forward to sitting down at my annotation desk."</em></p>
+            </div>
+        </div>
+
+        <!-- Workflow Optimization -->
+        <div class="section" id="workflow">
+            <h2 class="section-title">
+                <span class="emoji">⚙️</span>
+                <span class="title-text">Workflow Optimization Techniques</span>
+            </h2>
+
+            <p>Developing efficient workflows is particularly important for ADHD annotators, as it reduces cognitive load and helps maintain consistent productivity.</p>
+
+            <h3 class="section-subtitle">Structured Approach</h3>
+
+            <div class="progress-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-number">1</div>
+                    <div class="timeline-content">
+                        <h4>Build Clear Annotation Workflows</h4>
+                        <ul class="styled-list">
+                            <li>Create personal checklists for each annotation type</li>
+                            <li>Document your most efficient processes</li>
+                            <li>Track which tasks you complete most efficiently</li>
+                            <li>Develop templates for repetitive annotation patterns</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">2</div>
+                    <div class="timeline-content">
+                        <h4>Establish Consistent Routines</h4>
+                        <ul class="styled-list">
+                            <li>Set specific hours for annotation work</li>
+                            <li>Create transition rituals between different task types</li>
+                            <li>Use timers to maintain awareness of time spent</li>
+                            <li>Build in regular movement breaks to refresh focus</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="card-title">
+                    <div class="card-icon">⌨️</div>
+                    Keyboard Shortcut Mastery
+                </div>
+                <p>Learning keyboard shortcuts for your annotation platforms can dramatically increase your efficiency. <strong>Many ADHD annotators report that the physical aspect of using keyboard commands instead of clicking through menus helps maintain engagement and increases work speed by 30-50%.</strong></p>
+                <br>
+                <p>Create a visual reference card with the most useful shortcuts for each platform you use.</p>
+            </div>
+
+            <h3 class="section-subtitle">Quality Control Measures</h3>
+
+            <p>Implementing self-quality checks not only improves your work but also provides structure beneficial for ADHD:</p>
+
+            <div class="checklist">
+                <h4 class="checklist-title">Quality Assurance Checklist</h4>
+                <ul class="checklist-list">
+                    <li class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Complete initial annotation batch</span>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Take a short break (5-10 minutes)</span>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Review work with fresh eyes</span>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Compare against project guidelines</span>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Check for consistent application of rules</span>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Verify edge cases and unusual instances</span>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Submit final version only after review</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="adhd-card">
+                <div class="card-title">
+                    <div class="card-icon">🎯</div>
+                    The "Calibration Session" Technique
+                </div>
+                <p>Many successful ADHD annotators use a <strong>"calibration session"</strong> at the start of each work period:</p>
+                <ol class="numbered-list">
+                    <li>Begin with 5-10 minutes of very simple, quick annotation tasks</li>
+                    <li>Gradually transition to more complex tasks as your focus builds</li>
+                    <li>Use this ramping-up period to "calibrate" your brain to annotation mode</li>
+                    <li>Track which types of "starter tasks" most effectively help you transition into deep work</li>
+                </ol>
+                <p>This technique leverages the ADHD brain's need for warm-up and transition time, rather than expecting immediate deep focus.</p>
+            </div>
+        </div>
+
+        <!-- Security -->
+        <div class="section" id="security">
+            <h2 class="section-title">
+                <span class="emoji">🔒</span>
+                <span class="title-text">Security and Privacy Considerations</span>
+            </h2>
+
+            <p>Data annotation often involves working with sensitive information. Protecting yourself and the data is both an ethical obligation and a professional requirement.</p>
+
+            <h3 class="section-subtitle">Data Handling Best Practices</h3>
+
+            <div class="progress-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-number">1</div>
+                    <div class="timeline-content">
+                        <h4>Maintaining Data Confidentiality</h4>
+                        <ul class="styled-list">
+                            <li>Never share or discuss project details outside of work</li>
+                            <li>Log out of platforms when not actively working</li>
+                            <li>Use secure, private internet connections</li>
+                            <li>Never download or store annotation data locally unless explicitly authorized</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">2</div>
+                    <div class="timeline-content">
+                        <h4>Following Platform-Specific Guidelines</h4>
+                        <ul class="styled-list">
+                            <li>Complete all required security training</li>
+                            <li>Adhere to non-disclosure agreements</li>
+                            <li>Report potential security issues immediately</li>
+                            <li>Update security software and browsers regularly</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning-card">
+                <div class="card-title">
+                    <div class="card-icon">⚠️</div>
+                    Security Reality Check
+                </div>
+                <p><strong>Many annotation platforms will terminate your contract immediately for security violations, even if unintentional.</strong> The ADHD tendency toward impulsivity can create risk here.</p>
+                <br>
+                <p>Consider creating physical reminders about security protocols (like a note on your monitor) and establishing strict personal routines for secure data handling.</p>
+            </div>
+
+            <h3 class="section-subtitle">Protecting Your Personal Information</h3>
+
+            <ul class="styled-list">
+                <li>Use unique, strong passwords for each annotation platform</li>
+                <li>Enable two-factor authentication when available</li>
+                <li>Be cautious about sharing personal details in platform profiles</li>
+                <li>Research platform reputation and payment security before signing up</li>
+                <li>Maintain separate email accounts for work and personal use</li>
             </ul>
-        </li>
-    </ol>
-    
-    <div class="tip-box">
-        <h3>Keyboard Shortcut Mastery:</h3>
-        <p>Learning keyboard shortcuts for your annotation platforms can dramatically increase your efficiency. Many ADHD annotators report that the physical aspect of using keyboard commands instead of clicking through menus helps maintain engagement and increases work speed by 30-50%. Create a visual reference card with the most useful shortcuts for each platform you use.</p>
+        </div>
+
+        <!-- Success Stories -->
+        <div class="section" id="success">
+            <h2 class="section-title">
+                <span class="emoji">🎉</span>
+                <span class="title-text">Success Stories and Next Steps</span>
+            </h2>
+
+            <h3 class="section-subtitle">Paths to Growth in Data Annotation</h3>
+            <p>Many successful data annotators have leveraged their experience to create career advancement opportunities:</p>
+
+            <ol class="numbered-list">
+                <li><strong>Specialization:</strong> Becoming an expert in a specific type of annotation (medical imagery, legal text, etc.)</li>
+                <li><strong>Team Leadership:</strong> Moving into quality assurance or team management roles</li>
+                <li><strong>Tool Development:</strong> Contributing to the creation of better annotation tools</li>
+                <li><strong>Training:</strong> Developing training materials for new annotators</li>
+                <li><strong>AI Career Transition:</strong> Using annotation experience as a stepping stone to ML/AI careers</li>
+            </ol>
+
+            <div class="success-card">
+                <div class="card-title">
+                    <div class="card-icon">🚀</div>
+                    Realistic Growth Path
+                </div>
+                <p><em>"I started with data annotation to learn about AI while earning some extra money. After about a year of inconsistent annotation work, I used that experience to understand how AI models are trained.</em></p>
+                <br>
+                <p><em>I then took some free online courses in machine learning and was able to leverage my hands-on annotation experience to land an entry-level role at a tech company. The annotation work itself wasn't a career, but it was a useful stepping stone that taught me valuable skills."</em></p>
+                <br>
+                <p><strong>Key Message:</strong> Data annotation is better viewed as a learning opportunity and source of supplemental income rather than a career destination.</p>
+            </div>
+
+            <div class="checklist">
+                <h4 class="checklist-title">🎯 Realistic Getting Started Checklist</h4>
+                <ul class="checklist-list">
+                    <li class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Set realistic expectations - this is supplemental income, not a career</span>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Research 2-3 annotation platforms and read recent user reviews</span>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Test your ability to do detail-oriented work for extended periods</span>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Set up a distraction-free workspace</span>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Create accounts and complete assessments (expect some rejections)</span>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Plan for inconsistent work availability</span>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Set modest earning goals for your first 90 days ($50-200/month is realistic)</span>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Keep detailed records of time spent vs. money earned</span>
+                    </li>
+                </ul>
+            </div>
+
+            <h3 class="section-subtitle">Weekly Implementation Plan</h3>
+
+            <div class="progress-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-number">1</div>
+                    <div class="timeline-content">
+                        <h4>Week 1: Foundation</h4>
+                        <p>Sign up for 2-3 platforms and complete their onboarding</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">2</div>
+                    <div class="timeline-content">
+                        <h4>Week 2: Exploration</h4>
+                        <p>Try different types of annotation tasks to find your strengths</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">3</div>
+                    <div class="timeline-content">
+                        <h4>Week 3: Optimization</h4>
+                        <p>Focus on improving speed while maintaining quality</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">4</div>
+                    <div class="timeline-content">
+                        <h4>Week 4: Specialization</h4>
+                        <p>Begin specializing in your preferred annotation type</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="card-title">
+                    <div class="card-icon">🤝</div>
+                    Finding Your Annotation Community
+                </div>
+                <p>Connect with other annotators through:</p>
+                <ul class="styled-list">
+                    <li>Reddit communities like r/WorkOnline and r/UHRSwork</li>
+                    <li>Platform-specific forums and social media groups</li>
+                    <li>Discord servers focused on remote work and data annotation</li>
+                    <li>ADHD-focused professional groups where you can discuss annotation strategies</li>
+                </ul>
+                <p><strong>Having a community is especially valuable for ADHD annotators,</strong> as it provides accountability, troubleshooting help, and motivation.</p>
+            </div>
+
+            <div class="highlight-card">
+                <div class="card-title">
+                    <div class="card-icon">✨</div>
+                    Setting Realistic Expectations
+                </div>
+                <p>Data annotation can be a useful way to earn some extra money while learning about AI, especially if you have periods of good focus. However, it's important to have realistic expectations.</p>
+                <br>
+                <p><strong>Best suited for:</strong> People who want flexible supplemental income, are curious about AI, and don't need consistent earnings. <strong>Not ideal for:</strong> Those seeking stable primary income or who struggle with detailed, sustained attention tasks.</p>
+            </div>
+
+            <hr style="border: 1px solid var(--border-subtle); margin: 3rem 0;">
+
+            <div class="success-card">
+                <div class="card-title">
+                    <div class="card-icon">🚀</div>
+                    Ready to Try It Out?
+                </div>
+                <p>If you decide to explore data annotation, approach it as a learning experience and potential source of pocket money. <strong>Start with realistic expectations, don't quit your day job, and view any earnings as a bonus.</strong></p>
+                <br>
+                <p>Your ADHD traits may help with pattern recognition and creativity, but be honest about whether you can handle the sustained attention and detailed work this field requires.</p>
+            </div>
+
+            <div style="background: rgba(255, 255, 255, 0.02); border-radius: 12px; padding: 2rem; margin-top: 2rem; border: 1px solid var(--border-subtle);">
+                <p><strong>About This Guide:</strong> This guide provides realistic expectations about data annotation work for individuals with ADHD. The information is based on current market research, user experiences, and honest assessment of both opportunities and challenges in this field.</p>
+                <br>
+                <p><strong>Disclaimer:</strong> Earnings and experiences vary widely. This should not be considered financial advice. Always research platforms thoroughly and never rely on annotation work as your primary income source.</p>
+                <br>
+                <p><strong>Last Updated:</strong> June 2025</p>
+            </div>
+        </div>
     </div>
-    
-    <h3>Quality Control Measures</h3>
-    <p>Implementing self-quality checks not only improves your work but also provides structure beneficial for ADHD:</p>
-    
-    <h4>Self-Review Process:</h4>
-    <div class="checklist">
-        <h4>Quality Assurance Checklist:</h4>
-        <ul>
-            <li>Complete initial annotation batch</li>
-            <li>Take a short break (5-10 minutes)</li>
-            <li>Review work with fresh eyes</li>
-            <li>Compare against project guidelines</li>
-            <li>Check for consistent application of rules</li>
-            <li>Verify edge cases and unusual instances</li>
-            <li>Submit final version only after review</li>
-        </ul>
-    </div>
-    
-    <h4>Performance Tracking:</h4>
-    <ul>
-        <li>Keep a spreadsheet of your accuracy rates</li>
-        <li>Note which types of errors you commonly make</li>
-        <li>Document strategies that improve your accuracy</li>
-        <li>Track your speed improvements over time</li>
-    </ul>
-    
-    <div class="adhd-strategy">
-        <h3>The "Calibration Session" Technique:</h3>
-        <p>Many successful ADHD annotators use a "calibration session" at the start of each work period:</p>
-        <ol>
-            <li>Begin with 5-10 minutes of very simple, quick annotation tasks</li>
-            <li>Gradually transition to more complex tasks as your focus builds</li>
-            <li>Use this ramping-up period to "calibrate" your brain to annotation mode</li>
-            <li>Track which types of "starter tasks" most effectively help you transition into deep work</li>
-        </ol>
-        <p>This technique leverages the ADHD brain's need for warm-up and transition time, rather than expecting immediate deep focus.</p>
-    </div>
-    
-    <h2 id="security-privacy">Security and Privacy Considerations</h2>
-    
-    <p>Data annotation often involves working with sensitive information. Protecting yourself and the data is both an ethical obligation and a professional requirement.</p>
-    
-    <h3>Data Handling Best Practices</h3>
-    
-    <ol>
-        <li><strong>Maintaining Data Confidentiality:</strong>
-            <ul>
-                <li>Never share or discuss project details outside of work</li>
-                <li>Log out of platforms when not actively working</li>
-                <li>Use secure, private internet connections</li>
-                <li>Never download or store annotation data locally unless explicitly authorized</li>
-            </ul>
-        </li>
-        <li><strong>Following Platform-Specific Guidelines:</strong>
-            <ul>
-                <li>Complete all required security training</li>
-                <li>Adhere to non-disclosure agreements</li>
-                <li>Report potential security issues immediately</li>
-                <li>Update security software and browsers regularly</li>
-            </ul>
-        </li>
-    </ol>
-    
-    <div class="warning-box">
-        <h3>Security Reality Check:</h3>
-        <p>Many annotation platforms will terminate your contract immediately for security violations, even if unintentional. The ADHD tendency toward impulsivity can create risk here. Consider creating physical reminders about security protocols (like a note on your monitor) and establishing strict personal routines for secure data handling.</p>
-    </div>
-    
-    <h3>Protecting Your Personal Information</h3>
-    
-    <ul>
-        <li>Use unique, strong passwords for each annotation platform</li>
-        <li>Enable two-factor authentication when available</li>
-        <li>Be cautious about sharing personal details in platform profiles</li>
-        <li>Research platform reputation and payment security before signing up</li>
-        <li>Maintain separate email accounts for work and personal use</li>
-    </ul>
-    
-    <h2 id="success-stories">Success Stories and Next Steps</h2>
-    
-    <h3>Paths to Growth in Data Annotation</h3>
-    <p>Many successful data annotators have leveraged their experience to create career advancement opportunities:</p>
-    
-    <ol>
-        <li><strong>Specialization:</strong> Becoming an expert in a specific type of annotation (medical imagery, legal text, etc.)</li>
-        <li><strong>Team Leadership:</strong> Moving into quality assurance or team management roles</li>
-        <li><strong>Tool Development:</strong> Contributing to the creation of better annotation tools</li>
-        <li><strong>Training:</strong> Developing training materials for new annotators</li>
-        <li><strong>AI Career Transition:</strong> Using annotation experience as a stepping stone to ML/AI careers</li>
-    </ol>
-    
-    <div class="success-story">
-        <h3>From Annotator to AI Specialist:</h3>
-        <p>"I started annotating data because it worked well with my ADHD brain—the structured tasks with clear endpoints kept me engaged. After a year, I got interested in how my annotations were actually being used in machine learning models. I started learning basic ML concepts through free online courses, and my hands-on annotation experience gave me a huge advantage in understanding how AI systems learn. Two years later, I'm now working as an AI training specialist, helping design annotation guidelines and training junior annotators. My ADHD is still an asset—I can spot problems in annotation schemes that others miss."</p>
-    </div>
-    
-    <h3>Your Action Plan</h3>
-    <div class="checklist">
-        <h4>Getting Started Checklist:</h4>
-        <ul>
-            <li>Research and select 2-3 annotation platforms that match your interests</li>
-            <li>Create accounts and complete onboarding materials</li>
-            <li>Set up a dedicated workspace with minimal distractions</li>
-            <li>Establish a simple task tracking system</li>
-            <li>Try different annotation types to find your strengths</li>
-            <li>Connect with annotation communities for support and tips</li>
-            <li>Set realistic earning goals for your first 30 days</li>
-            <li>Schedule regular review sessions to assess your progress</li>
-        </ul>
-    </div>
-    
-    <h3>Weekly Implementation Plan</h3>
-    <ol>
-        <li><strong>Week 1:</strong> Sign up for 2-3 platforms and complete their onboarding</li>
-        <li><strong>Week 2:</strong> Try different types of annotation tasks to find your strengths</li>
-        <li><strong>Week 3:</strong> Focus on improving speed while maintaining quality</li>
-        <li><strong>Week 4:</strong> Begin specializing in your preferred annotation type</li>
-    </ol>
-    
-    <div class="tip-box">
-        <h3>Finding Your Annotation Community:</h3>
-        <p>Connect with other annotators through:</p>
-        <ul>
-            <li>Reddit communities like r/WorkOnline and r/UHRSwork</li>
-            <li>Platform-specific forums and social media groups</li>
-            <li>Discord servers focused on remote work and data annotation</li>
-            <li>ADHD-focused professional groups where you can discuss annotation strategies</li>
-        </ul>
-        <p>Having a community is especially valuable for ADHD annotators, as it provides accountability, troubleshooting help, and motivation.</p>
-    </div>
-    
-    <p>Remember, data annotation work can be particularly rewarding for ADHD minds—offering that perfect balance of structure and variety that keeps you engaged while building valuable skills for the AI-driven future. Your unique cognitive style, when properly channeled, can become your greatest asset in this growing field.</p>
-    
-    <hr>
-    
-    <p><strong>Ready to dive deeper?</strong> Connect with other data annotators, join forums related to your chosen platforms, and continue building your skills. Your ADHD brain's unique ability to hyperfocus, notice patterns, and think creatively can make you an exceptional annotator—turn what some might see as a challenge into your competitive advantage!</p>
-    
-    <div class="footer">
-        <p><strong>About This Guide:</strong> This guide was created specifically for individuals with ADHD who are interested in exploring data annotation as a flexible, rewarding work opportunity. The strategies, tools, and resources are based on real experiences of ADHD data annotators and current industry knowledge.</p>
-        <p><strong>Last Updated:</strong> April 14, 2025</p>
-    </div>
+
+    <script>
+        // Scroll progress bar
+        window.addEventListener('scroll', () => {
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.querySelector('.scroll-progress-bar').style.width = scrolled + '%';
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
