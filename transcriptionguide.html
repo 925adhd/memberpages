@@ -41,6 +41,7 @@
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            font-size: 16px;
         }
 
         /* Background Effects */
@@ -72,20 +73,20 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 100%;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem;
         }
 
         /* Header */
         .hero-header {
             text-align: center;
-            padding: 3rem 0 4rem;
+            padding: 2rem 1rem 3rem;
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
-            border-radius: 24px;
+            border-radius: 20px;
             border: 1px solid var(--border-subtle);
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             position: relative;
             overflow: hidden;
         }
@@ -108,7 +109,7 @@
         }
 
         .main-title {
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(1.5rem, 6vw, 2.5rem);
             font-weight: 700;
             background: var(--gradient-adhd);
             background-size: 200% 200%;
@@ -126,9 +127,9 @@
         }
 
         .subtitle {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             color: var(--text-secondary);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .date-badge {
@@ -141,47 +142,56 @@
             border: 1px solid rgba(79, 70, 229, 0.3);
         }
 
-        /* Table of Contents */
+        /* Mobile-optimized navigation */
         .toc-container {
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
             border-radius: 16px;
             border: 1px solid var(--border-subtle);
-            padding: 2rem;
-            margin-bottom: 3rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .toc-title {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 600;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             color: var(--accent-teal);
         }
 
-        .toc-list {
-            list-style: none;
+        .toc-grid {
             display: grid;
             gap: 0.75rem;
+            grid-template-columns: 1fr;
         }
 
         .toc-item {
             background: rgba(255, 255, 255, 0.02);
-            border-radius: 8px;
+            border-radius: 12px;
             border: 1px solid var(--border-subtle);
             transition: all 0.3s ease;
+            min-height: 60px;
         }
 
-        .toc-item:hover {
+        .toc-item:hover, .toc-item:active {
             background: rgba(255, 255, 255, 0.05);
             border-color: var(--accent-teal);
+            transform: translateY(-1px);
         }
 
         .toc-link {
-            display: block;
+            display: flex;
+            align-items: center;
             padding: 1rem;
             color: var(--text-primary);
             text-decoration: none;
             font-weight: 500;
+            gap: 0.75rem;
+        }
+
+        .toc-emoji {
+            font-size: 1.5rem;
+            flex-shrink: 0;
         }
 
         /* Section Styling */
@@ -190,8 +200,8 @@
             backdrop-filter: blur(20px);
             border-radius: 16px;
             border: 1px solid var(--border-subtle);
-            padding: 2.5rem;
-            margin-bottom: 2rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
             transition: all 0.3s ease;
         }
 
@@ -200,17 +210,18 @@
         }
 
         .section-title {
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: 600;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
             gap: 0.75rem;
+            flex-wrap: wrap;
         }
 
         .section-title .emoji {
-            font-size: 2.2rem;
-            filter: none;
+            font-size: 1.8rem;
+            flex-shrink: 0;
         }
 
         .section-title .title-text {
@@ -218,70 +229,59 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            flex: 1;
+            min-width: 200px;
         }
 
         .section-subtitle {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            margin: 2rem 0 1rem;
+            margin: 1.5rem 0 1rem;
             color: var(--accent-emerald);
         }
 
         .subsection-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            margin: 1.5rem 0 1rem;
+            margin: 1.25rem 0 0.75rem;
             color: var(--accent-purple);
         }
 
         /* Content Cards */
+        .highlight-card, .success-card, .warning-card, .tip-card, .adhd-card {
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            backdrop-filter: blur(10px);
+        }
+
         .highlight-card {
             background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(16, 185, 129, 0.1));
             border: 1px solid rgba(79, 70, 229, 0.2);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            backdrop-filter: blur(10px);
         }
 
         .success-card {
             background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1));
             border: 1px solid rgba(16, 185, 129, 0.3);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            backdrop-filter: blur(10px);
         }
 
         .warning-card {
             background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(239, 68, 68, 0.1));
             border: 1px solid rgba(245, 158, 11, 0.3);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            backdrop-filter: blur(10px);
         }
 
         .tip-card {
             background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(139, 92, 246, 0.1));
             border: 1px solid rgba(6, 182, 212, 0.3);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            backdrop-filter: blur(10px);
         }
 
         .adhd-card {
             background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(79, 70, 229, 0.1));
             border: 1px solid rgba(139, 92, 246, 0.3);
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            backdrop-filter: blur(10px);
         }
 
         .card-title {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 1rem;
             display: flex;
@@ -297,6 +297,7 @@
             align-items: center;
             justify-content: center;
             font-size: 14px;
+            flex-shrink: 0;
         }
 
         .highlight-card .card-icon { background: var(--accent-blue); }
@@ -305,34 +306,73 @@
         .tip-card .card-icon { background: var(--accent-teal); }
         .adhd-card .card-icon { background: var(--accent-purple); }
 
-        /* Tables */
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 12px;
-            overflow: hidden;
+        /* Mobile-optimized data cards (replacing tables) */
+        .data-grid {
+            display: grid;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .data-card {
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 1.25rem;
+            transition: all 0.3s ease;
         }
 
-        .data-table th {
-            background: rgba(79, 70, 229, 0.2);
-            color: var(--text-primary);
+        .data-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent-teal);
+            transform: translateY(-1px);
+        }
+
+        .data-card-header {
             font-weight: 600;
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border-subtle);
+            font-size: 1.1rem;
+            color: var(--accent-blue);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .data-table td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--border-subtle);
-            vertical-align: top;
+        .data-card-content {
+            display: grid;
+            gap: 0.5rem;
         }
 
-        .data-table tr:hover {
-            background: rgba(255, 255, 255, 0.02);
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .data-row:last-child {
+            border-bottom: none;
+        }
+
+        .data-label {
+            font-weight: 500;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+            margin-right: 1rem;
+        }
+
+        .data-value {
+            color: var(--text-primary);
+            text-align: right;
+            font-weight: 500;
+        }
+
+        .data-note {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         /* Lists */
@@ -394,15 +434,15 @@
         /* Progress indicators */
         .progress-timeline {
             display: grid;
-            gap: 1.5rem;
-            margin: 2rem 0;
+            gap: 1rem;
+            margin: 1.5rem 0;
         }
 
         .timeline-item {
             display: flex;
             align-items: flex-start;
             gap: 1rem;
-            padding: 1.5rem;
+            padding: 1.25rem;
             background: rgba(255, 255, 255, 0.02);
             border-radius: 12px;
             border: 1px solid var(--border-subtle);
@@ -411,7 +451,7 @@
         .timeline-number {
             background: var(--accent-blue);
             color: white;
-            width: 32px;
+            min-width: 32px;
             height: 32px;
             border-radius: 50%;
             display: flex;
@@ -419,11 +459,17 @@
             justify-content: center;
             font-weight: bold;
             flex-shrink: 0;
+            font-size: 0.9rem;
+        }
+
+        .timeline-content {
+            flex: 1;
         }
 
         .timeline-content h4 {
             margin: 0 0 0.5rem;
             color: var(--accent-teal);
+            font-size: 1rem;
         }
 
         /* Status indicators */
@@ -433,6 +479,7 @@
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 500;
+            white-space: nowrap;
         }
 
         .status-declining {
@@ -453,35 +500,25 @@
             border: 1px solid rgba(139, 92, 246, 0.3);
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-
-            .section {
-                padding: 1.5rem;
-            }
-
-            .hero-header {
-                padding: 2rem 1rem 3rem;
-            }
-
-            .main-title {
-                font-size: 2rem;
-            }
-
-            .data-table {
-                font-size: 0.9rem;
-            }
-
-            .data-table th,
-            .data-table td {
-                padding: 0.75rem 0.5rem;
-            }
+        .status-high {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--accent-emerald);
+            border: 1px solid rgba(16, 185, 129, 0.3);
         }
 
-        /* Focus indicators for ADHD */
+        .status-medium {
+            background: rgba(6, 182, 212, 0.2);
+            color: var(--accent-teal);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+        }
+
+        .status-low {
+            background: rgba(244, 63, 94, 0.2);
+            color: var(--accent-rose);
+            border: 1px solid rgba(244, 63, 94, 0.3);
+        }
+
+        /* Focus helpers for ADHD */
         .focus-helper {
             position: fixed;
             top: 20px;
@@ -516,6 +553,150 @@
             width: 0%;
             transition: width 0.3s ease;
         }
+
+        /* Quick access floating button */
+        .quick-nav {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent-blue);
+            border: none;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(79, 70, 229, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .quick-nav:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(79, 70, 229, 0.5);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0.75rem;
+            }
+
+            .section {
+                padding: 1.25rem;
+                margin-bottom: 1.25rem;
+                border-radius: 12px;
+            }
+
+            .hero-header {
+                padding: 1.5rem 1rem 2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .main-title {
+                font-size: clamp(1.25rem, 5vw, 2rem);
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .section-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .card-title {
+                font-size: 1.1rem;
+            }
+
+            .toc-container {
+                padding: 1.25rem;
+            }
+
+            .highlight-card, .success-card, .warning-card, .tip-card, .adhd-card {
+                padding: 1.25rem;
+            }
+
+            .data-card {
+                padding: 1rem;
+            }
+
+            .data-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.25rem;
+            }
+
+            .data-value {
+                text-align: left;
+            }
+
+            .focus-helper {
+                top: 10px;
+                right: 10px;
+            }
+
+            .quick-nav {
+                bottom: 15px;
+                right: 15px;
+                width: 50px;
+                height: 50px;
+                font-size: 18px;
+            }
+
+            .timeline-item {
+                padding: 1rem;
+            }
+        }
+
+        /* Ultra-small screens */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0.5rem;
+            }
+
+            .section {
+                padding: 1rem;
+            }
+
+            .hero-header {
+                padding: 1rem 0.75rem 1.5rem;
+            }
+
+            .toc-container, .highlight-card, .success-card, .warning-card, .tip-card, .adhd-card {
+                padding: 1rem;
+            }
+        }
+
+        /* High contrast mode for accessibility */
+        @media (prefers-contrast: high) {
+            :root {
+                --border-subtle: rgba(255, 255, 255, 0.3);
+                --card-bg: rgba(255, 255, 255, 0.1);
+                --glass-bg: rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        /* Reduced motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+            .bg-gradient,
+            .hero-header::before,
+            .main-title,
+            .focus-helper {
+                animation: none;
+            }
+            
+            .toc-item:hover,
+            .data-card:hover,
+            .quick-nav:hover {
+                transform: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -547,16 +728,56 @@
         <!-- Table of Contents -->
         <div class="toc-container">
             <h2 class="toc-title">📋 Quick Navigation</h2>
-            <ol class="toc-list">
-                <li class="toc-item"><a href="#introduction" class="toc-link">🎯 Current State of Transcription for ADHD Minds</a></li>
-                <li class="toc-item"><a href="#platforms" class="toc-link">💰 Realistic Platform Comparison & Earnings</a></li>
-                <li class="toc-item"><a href="#ai-reality" class="toc-link">🤖 AI Impact: The Real Story</a></li>
-                <li class="toc-item"><a href="#adhd-strategies" class="toc-link">⚡ ADHD-Specific Strategies</a></li>
-                <li class="toc-item"><a href="#skills" class="toc-link">🔧 Essential Skills & Setup</a></li>
-                <li class="toc-item"><a href="#specializations" class="toc-link">🎓 Remaining Specialization Opportunities</a></li>
-                <li class="toc-item"><a href="#future-proof" class="toc-link">🚀 Future-Proofing Your Skills</a></li>
-                <li class="toc-item"><a href="#getting-started" class="toc-link">📝 Getting Started Realistically</a></li>
-            </ol>
+            <div class="toc-grid">
+                <div class="toc-item">
+                    <a href="#introduction" class="toc-link">
+                        <span class="toc-emoji">🎯</span>
+                        <span>Current State of Transcription for ADHD Minds</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#platforms" class="toc-link">
+                        <span class="toc-emoji">💰</span>
+                        <span>Realistic Platform Comparison & Earnings</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#ai-reality" class="toc-link">
+                        <span class="toc-emoji">🤖</span>
+                        <span>AI Impact: The Real Story</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#adhd-strategies" class="toc-link">
+                        <span class="toc-emoji">⚡</span>
+                        <span>ADHD-Specific Strategies</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#skills" class="toc-link">
+                        <span class="toc-emoji">🔧</span>
+                        <span>Essential Skills & Setup</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#specializations" class="toc-link">
+                        <span class="toc-emoji">🎓</span>
+                        <span>Remaining Specialization Opportunities</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#future-proof" class="toc-link">
+                        <span class="toc-emoji">🚀</span>
+                        <span>Future-Proofing Your Skills</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#getting-started" class="toc-link">
+                        <span class="toc-emoji">📝</span>
+                        <span>Getting Started Realistically</span>
+                    </a>
+                </div>
+            </div>
         </div>
 
         <!-- Introduction Section -->
@@ -610,54 +831,122 @@
             
             <p>Here's the honest truth about current transcription platform earnings and availability:</p>
 
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Platform</th>
-                        <th>Current Status</th>
-                        <th>Realistic Monthly Earnings</th>
-                        <th>ADHD Compatibility</th>
-                        <th>Reality Check</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Rev</strong></td>
-                        <td><span class="status-competitive">Waitlist/High Competition</span></td>
-                        <td>$245/month average</td>
-                        <td>Medium - Clean interface but low pay</td>
-                        <td>72,000+ freelancers competing for work</td>
-                    </tr>
-                    <tr>
-                        <td><strong>GoTranscript</strong></td>
-                        <td><span class="status-competitive">Regular openings</span></td>
-                        <td>$150/month average ($1,215 top earners)</td>
-                        <td>Medium - Straightforward but repetitive</td>
-                        <td>$0.60 per audio minute, requires 95% accuracy</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Scribie</strong></td>
-                        <td><span class="status-limited">Hiring Paused (2024-2025)</span></td>
-                        <td>$400/month beginners when available</td>
-                        <td>High - Short files, but currently unavailable</td>
-                        <td>Transitioning to AI platform, uncertain future</td>
-                    </tr>
-                    <tr>
-                        <td><strong>TranscribeMe</strong></td>
-                        <td><span class="status-competitive">Limited openings</span></td>
-                        <td>$250/month average</td>
-                        <td>High - Very short files (2-4 minutes)</td>
-                        <td>$15-22 per audio hour, competitive entry</td>
-                    </tr>
-                    <tr>
-                        <td><strong>3Play Media</strong></td>
-                        <td><span class="status-limited">Specialized roles</span></td>
-                        <td>Variable (AI editing focus)</td>
-                        <td>Medium - Editing AI transcripts</td>
-                        <td>Mostly editing AI-generated transcripts now</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="data-grid">
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🎵 Rev
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Current Status:</span>
+                            <span class="data-value"><span class="status-competitive">Waitlist/High Competition</span></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Monthly Earnings:</span>
+                            <span class="data-value">$245/month average</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-medium">Medium</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Clean interface but low pay. 72,000+ freelancers competing for work.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        📝 GoTranscript
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Current Status:</span>
+                            <span class="data-value"><span class="status-competitive">Regular openings</span></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Monthly Earnings:</span>
+                            <span class="data-value">$150/month average ($1,215 top earners)</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-medium">Medium</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Straightforward but repetitive. $0.60 per audio minute, requires 95% accuracy.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        ✏️ Scribie
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Current Status:</span>
+                            <span class="data-value"><span class="status-limited">Hiring Paused (2024-2025)</span></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Monthly Earnings:</span>
+                            <span class="data-value">$400/month beginners when available</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-high">High</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Short files suit ADHD attention span, but currently unavailable. Transitioning to AI platform.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🎧 TranscribeMe
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Current Status:</span>
+                            <span class="data-value"><span class="status-competitive">Limited openings</span></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Monthly Earnings:</span>
+                            <span class="data-value">$250/month average</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-high">High</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Very short files (2-4 minutes) perfect for ADHD focus. $15-22 per audio hour, competitive entry.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        📺 3Play Media
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Current Status:</span>
+                            <span class="data-value"><span class="status-limited">Specialized roles</span></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Monthly Earnings:</span>
+                            <span class="data-value">Variable (AI editing focus)</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-medium">Medium</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Mostly editing AI-generated transcripts now. Different skillset than traditional transcription.
+                    </div>
+                </div>
+            </div>
 
             <div class="warning-card">
                 <div class="card-title">
@@ -696,42 +985,99 @@
 
             <h3 class="section-subtitle">Emerging Human Roles</h3>
 
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>New Role Type</th>
-                        <th>Description</th>
-                        <th>Skills Needed</th>
-                        <th>ADHD Compatibility</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>AI Editor</strong></td>
-                        <td>Correcting and refining AI transcripts</td>
-                        <td>Pattern recognition, attention to detail</td>
-                        <td>High - Can leverage ADHD pattern spotting</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Quality Assurance</strong></td>
-                        <td>Reviewing AI output for accuracy standards</td>
-                        <td>Domain knowledge, quality standards</td>
-                        <td>Medium - Requires sustained attention</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Specialized Transcription</strong></td>
-                        <td>Handling complex audio AI cannot process</td>
-                        <td>Subject matter expertise, persistence</td>
-                        <td>High - Challenging content can trigger hyperfocus</td>
-                    </tr>
-                    <tr>
-                        <td><strong>AI Training Support</strong></td>
-                        <td>Providing feedback to improve AI systems</td>
-                        <td>Understanding of transcription standards</td>
-                        <td>Medium - Analytical tasks that some ADHD minds enjoy</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="data-grid">
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🔧 AI Editor
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Description:</span>
+                            <span class="data-value">Correcting and refining AI transcripts</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Skills Needed:</span>
+                            <span class="data-value">Pattern recognition, attention to detail</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-high">High</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Can leverage ADHD pattern spotting abilities to catch AI errors others miss.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🎯 Quality Assurance
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Description:</span>
+                            <span class="data-value">Reviewing AI output for accuracy standards</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Skills Needed:</span>
+                            <span class="data-value">Domain knowledge, quality standards</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-medium">Medium</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Requires sustained attention, which can be challenging for some ADHD minds.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🎓 Specialized Transcription
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Description:</span>
+                            <span class="data-value">Handling complex audio AI cannot process</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Skills Needed:</span>
+                            <span class="data-value">Subject matter expertise, persistence</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-high">High</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Challenging content can trigger productive hyperfocus states in ADHD minds.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🤖 AI Training Support
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Description:</span>
+                            <span class="data-value">Providing feedback to improve AI systems</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Skills Needed:</span>
+                            <span class="data-value">Understanding of transcription standards</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-medium">Medium</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Analytical tasks that some ADHD minds find engaging and intellectually stimulating.
+                    </div>
+                </div>
+            </div>
 
             <div class="tip-card">
                 <div class="card-title">
@@ -808,42 +1154,99 @@
 
             <h3 class="section-subtitle">Typing Speed Reality</h3>
 
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Typing Speed</th>
-                        <th>Transcription Impact</th>
-                        <th>Realistic Earnings</th>
-                        <th>ADHD Considerations</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Under 40 WPM</td>
-                        <td>Very difficult to earn minimum wage</td>
-                        <td>Under $100/month</td>
-                        <td>May be too frustrating, consider skill building first</td>
-                    </tr>
-                    <tr>
-                        <td>40-60 WPM</td>
-                        <td>Entry-level viability</td>
-                        <td>$150-250/month</td>
-                        <td>Workable but requires patience</td>
-                    </tr>
-                    <tr>
-                        <td>60-80 WPM</td>
-                        <td>Competitive for available work</td>
-                        <td>$250-400/month</td>
-                        <td>Good balance of speed and accuracy achievable</td>
-                    </tr>
-                    <tr>
-                        <td>80+ WPM</td>
-                        <td>Optimal for specialized opportunities</td>
-                        <td>$400+/month potential</td>
-                        <td>Can help overcome ADHD attention challenges</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="data-grid">
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🐌 Under 40 WPM
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Transcription Impact:</span>
+                            <span class="data-value">Very difficult to earn minimum wage</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Realistic Earnings:</span>
+                            <span class="data-value">Under $100/month</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Considerations:</span>
+                            <span class="data-value">May be too frustrating</span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Consider skill building first before starting transcription work.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🚶 40-60 WPM
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Transcription Impact:</span>
+                            <span class="data-value">Entry-level viability</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Realistic Earnings:</span>
+                            <span class="data-value">$150-250/month</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Considerations:</span>
+                            <span class="data-value">Workable but requires patience</span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Good starting point for ADHD minds who don't get frustrated easily.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🏃 60-80 WPM
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Transcription Impact:</span>
+                            <span class="data-value">Competitive for available work</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Realistic Earnings:</span>
+                            <span class="data-value">$250-400/month</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Considerations:</span>
+                            <span class="data-value">Good balance achievable</span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Sweet spot for ADHD transcriptionists - fast enough to stay motivated.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🚀 80+ WPM
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Transcription Impact:</span>
+                            <span class="data-value">Optimal for specialized opportunities</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Realistic Earnings:</span>
+                            <span class="data-value">$400+/month potential</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Considerations:</span>
+                            <span class="data-value">Can help overcome attention challenges</span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Speed helps maintain flow state and prevents frustration with slow progress.
+                    </div>
+                </div>
+            </div>
 
             <div class="tip-card">
                 <div class="card-title">
@@ -897,42 +1300,99 @@
 
             <h3 class="section-subtitle">Remaining Niche Opportunities</h3>
 
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Specialization</th>
-                        <th>Current Viability</th>
-                        <th>Training Investment</th>
-                        <th>ADHD Compatibility</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Legal Depositions</strong></td>
-                        <td>Still valuable for complex cases</td>
-                        <td>3-6 months</td>
-                        <td>High - Engaging content, clear structure</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Academic Research</strong></td>
-                        <td>Moderate demand for specialized topics</td>
-                        <td>Background knowledge helpful</td>
-                        <td>Very High - Intellectually stimulating</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Multi-language</strong></td>
-                        <td>Higher demand for human skills</td>
-                        <td>Existing language skills</td>
-                        <td>High - Variety and complexity</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Technical/Engineering</strong></td>
-                        <td>AI struggles with technical jargon</td>
-                        <td>Industry knowledge required</td>
-                        <td>High - Complex problem-solving</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="data-grid">
+                <div class="data-card">
+                    <div class="data-card-header">
+                        ⚖️ Legal Depositions
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Current Viability:</span>
+                            <span class="data-value">Still valuable for complex cases</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Training Investment:</span>
+                            <span class="data-value">3-6 months</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-high">High</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Engaging content with clear structure - good for ADHD minds who like variety.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        📚 Academic Research
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Current Viability:</span>
+                            <span class="data-value">Moderate demand for specialized topics</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Training Investment:</span>
+                            <span class="data-value">Background knowledge helpful</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-high">Very High</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Intellectually stimulating content can trigger hyperfocus in ADHD minds.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🌍 Multi-language
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Current Viability:</span>
+                            <span class="data-value">Higher demand for human skills</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Training Investment:</span>
+                            <span class="data-value">Existing language skills</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-high">High</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Variety and complexity keep ADHD minds engaged and interested.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🔧 Technical/Engineering
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Current Viability:</span>
+                            <span class="data-value">AI struggles with technical jargon</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Training Investment:</span>
+                            <span class="data-value">Industry knowledge required</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-high">High</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Complex problem-solving appeals to many ADHD minds who enjoy challenges.
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Future-Proofing -->
@@ -1024,9 +1484,9 @@
                 <p>Focus on building skills that will remain valuable: AI collaboration, quality assurance, and specialized domain knowledge.</p>
             </div>
 
-            <hr style="border: 1px solid var(--border-subtle); margin: 3rem 0;">
+            <hr style="border: 1px solid var(--border-subtle); margin: 2rem 0;">
 
-            <div style="background: rgba(255, 255, 255, 0.02); border-radius: 12px; padding: 2rem; margin-top: 2rem; border: 1px solid var(--border-subtle);">
+            <div style="background: rgba(255, 255, 255, 0.02); border-radius: 12px; padding: 1.5rem; margin-top: 2rem; border: 1px solid var(--border-subtle);">
                 <p><strong>About This Guide:</strong> This guide provides realistic expectations about transcription work for individuals with ADHD in the current AI-impacted marketplace. Information is based on 2024-2025 industry data and honest assessment of earning potential.</p>
                 <br>
                 <p><strong>Disclaimer:</strong> The transcription industry is rapidly evolving. Earnings vary widely and many traditional roles are being automated. This should not be considered career advice - transcription is best treated as supplemental income.</p>
@@ -1035,6 +1495,11 @@
             </div>
         </div>
     </div>
+
+    <!-- Quick Navigation Button -->
+    <button class="quick-nav" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Back to top">
+        ↑
+    </button>
 
     <script>
         // Scroll progress bar
@@ -1056,6 +1521,24 @@
                 }
             });
         });
+
+        // Enhanced touch targets for mobile
+        document.querySelectorAll('.toc-item, .data-card').forEach(element => {
+            element.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.98)';
+            });
+            
+            element.addEventListener('touchend', function() {
+                this.style.transform = '';
+            });
+        });
+
+        // Prevent horizontal scrolling
+        document.body.addEventListener('touchmove', function(e) {
+            if (e.touches.length > 1) {
+                e.preventDefault();
+            }
+        }, { passive: false });
     </script>
 </body>
 </html>
