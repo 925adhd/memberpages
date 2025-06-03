@@ -76,6 +76,7 @@
             max-width: 100%;
             margin: 0 auto;
             padding: 1rem;
+            margin-top: 4rem;
         }
 
         /* Header */
@@ -465,33 +466,16 @@
             border: 1px solid rgba(6, 182, 212, 0.3);
         }
 
-        /* Focus helpers for ADHD */
-        .focus-helper {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 12px;
-            height: 12px;
-            background: var(--accent-emerald);
-            border-radius: 50%;
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
-            animation: focusPulse 2s infinite;
-            z-index: 1000;
-        }
-
-        @keyframes focusPulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.2); }
-        }
-
         .scroll-progress {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.1);
+            height: 12px;
+            background: rgba(0, 0, 0, 0.7);
             z-index: 1000;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.15);
         }
 
         .scroll-progress-bar {
@@ -499,6 +483,190 @@
             background: var(--gradient-adhd);
             width: 0%;
             transition: width 0.3s ease;
+            position: relative;
+            box-shadow: 0 0 40px rgba(79, 70, 229, 1), 0 0 80px rgba(16, 185, 129, 0.6);
+            animation: progressGlow 2s ease-in-out infinite alternate;
+        }
+
+        .scroll-progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 30px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8));
+            animation: progressShine 3s ease-in-out infinite;
+        }
+
+        @keyframes progressGlow {
+            0% { 
+                box-shadow: 0 0 30px rgba(79, 70, 229, 0.8), 0 0 60px rgba(16, 185, 129, 0.4);
+            }
+            100% { 
+                box-shadow: 0 0 50px rgba(79, 70, 229, 1.2), 0 0 100px rgba(16, 185, 129, 0.8);
+            }
+        }
+
+        @keyframes progressShine {
+            0%, 100% { transform: translateX(-30px); opacity: 0; }
+            50% { transform: translateX(0); opacity: 1; }
+        }
+
+        .progress-indicator {
+            position: fixed;
+            top: 10px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: var(--text-primary);
+            padding: 0.4rem 0.8rem;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 999;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .section-progress {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .progress-circle {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .progress-circle.active {
+            background: var(--accent-emerald);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+
+        .progress-circle.completed {
+            background: var(--accent-blue);
+        }
+
+        /* Voice Reader Controls */
+        .voice-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .voice-btn {
+            background: var(--accent-teal);
+            border: none;
+            border-radius: 6px;
+            color: white;
+            padding: 0.35rem 0.7rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-weight: 500;
+            min-width: 85px;
+            justify-content: center;
+        }
+
+        .voice-btn:hover {
+            background: var(--accent-blue);
+            transform: translateY(-1px);
+        }
+
+        .voice-btn:disabled {
+            background: rgba(255, 255, 255, 0.1);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .voice-btn.playing {
+            background: var(--accent-emerald);
+            animation: playingPulse 1.5s infinite;
+        }
+
+        .voice-btn.paused {
+            background: var(--accent-amber);
+            animation: pausedPulse 2s infinite;
+        }
+
+        .voice-btn.stopped {
+            background: var(--accent-rose);
+        }
+
+        @keyframes playingPulse {
+            0%, 100% { box-shadow: 0 0 5px rgba(16, 185, 129, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.8); }
+        }
+
+        @keyframes pausedPulse {
+            0%, 100% { box-shadow: 0 0 5px rgba(245, 158, 11, 0.5); }
+            50% { box-shadow: 0 0 15px rgba(245, 158, 11, 0.8); }
+        }
+
+        .voice-speed-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .voice-selector {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .voice-select {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            color: var(--text-primary);
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+            min-width: 140px;
+            max-width: 180px;
+        }
+
+        .voice-select option {
+            background: var(--secondary-bg);
+            color: var(--text-primary);
+        }
+
+        .speed-slider {
+            width: 80px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .speed-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: var(--accent-teal);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .speed-slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            background: var(--accent-teal);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
         }
 
         /* Quick access floating button */
@@ -528,6 +696,33 @@
         @media (max-width: 768px) {
             .container {
                 padding: 0.75rem;
+                margin-top: 3.5rem;
+            }
+
+            .progress-indicator {
+                top: 10px;
+                right: 10px;
+                padding: 0.3rem 0.6rem;
+                font-size: 0.75rem;
+            }
+
+            .progress-circle {
+                width: 6px;
+                height: 6px;
+            }
+
+            .voice-controls {
+                margin-bottom: 0.75rem;
+            }
+
+            .voice-btn {
+                font-size: 0.75rem;
+                padding: 0.3rem 0.6rem;
+                min-width: 75px;
+            }
+
+            .speed-slider {
+                width: 60px;
             }
 
             .section {
@@ -583,11 +778,6 @@
                 text-align: left;
             }
 
-            .focus-helper {
-                top: 10px;
-                right: 10px;
-            }
-
             .quick-nav {
                 bottom: 15px;
                 right: 15px;
@@ -601,6 +791,37 @@
         @media (max-width: 480px) {
             .container {
                 padding: 0.5rem;
+                margin-top: 3rem;
+            }
+
+            .progress-indicator {
+                right: 5px;
+                top: 8px;
+                padding: 0.25rem 0.5rem;
+                font-size: 0.7rem;
+            }
+
+            .section-progress {
+                gap: 0.3rem;
+            }
+
+            .progress-circle {
+                width: 5px;
+                height: 5px;
+            }
+
+            .voice-controls {
+                gap: 0.5rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .voice-selector, .voice-speed-control {
+                justify-content: center;
+            }
+
+            .voice-select {
+                min-width: 120px;
+                max-width: 160px;
             }
 
             .section {
@@ -629,8 +850,7 @@
         @media (prefers-reduced-motion: reduce) {
             .bg-gradient,
             .hero-header::before,
-            .main-title,
-            .focus-helper {
+            .main-title {
                 animation: none;
             }
             
@@ -644,9 +864,22 @@
 </head>
 <body>
     <div class="bg-gradient"></div>
-    <div class="focus-helper"></div>
     <div class="scroll-progress">
         <div class="scroll-progress-bar"></div>
+    </div>
+    
+    <div class="progress-indicator">
+        <div class="section-progress">
+            <span id="current-section">Reality Check</span>
+            <div class="progress-circle completed"></div>
+            <div class="progress-circle active"></div>
+            <div class="progress-circle"></div>
+            <div class="progress-circle"></div>
+            <div class="progress-circle"></div>
+            <div class="progress-circle"></div>
+            <div class="progress-circle"></div>
+            <div class="progress-circle"></div>
+        </div>
     </div>
 
     <div class="container">
@@ -659,13 +892,34 @@
 
         <!-- Critical Warning -->
         <div class="warning-card">
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="critical-warning">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
+                </button>
+                <div class="voice-selector">
+                    <span>Voice:</span>
+                    <select class="voice-select" id="voice-select" onchange="updateSelectedVoice(this.value)">
+                        <option value="">Loading voices...</option>
+                    </select>
+                </div>
+                <div class="voice-speed-control">
+                    <span>Speed:</span>
+                    <input type="range" class="speed-slider" min="0.5" max="2" step="0.1" value="1.2" onchange="updateSpeechRate(this.value)">
+                    <span id="speed-display">1.2x</span>
+                </div>
+            </div>
             <div class="card-title">
                 <div class="card-icon">⚠️</div>
                 Critical Reality Check
             </div>
-            <p><strong>The influencer earnings gap is massive.</strong> While top creators make millions, <strong>48% of all influencers earn less than $15,000 annually</strong> and only 15% make over $100,000.</p>
-            <br>
-            <p>This guide provides honest expectations about current opportunities, realistic earnings for ADHD minds, and sustainable strategies that won't exacerbate ADHD symptoms or lead to burnout.</p>
+            <div id="critical-warning">
+                <p><strong>The influencer earnings gap is massive.</strong> While top creators make millions, <strong>48% of all influencers earn less than $15,000 annually</strong> and only 15% make over $100,000.</p>
+                <br>
+                <p>This guide provides honest expectations about current opportunities, realistic earnings for ADHD minds, and sustainable strategies that won't exacerbate ADHD symptoms or lead to burnout.</p>
+            </div>
         </div>
 
         <!-- Table of Contents -->
@@ -730,20 +984,41 @@
                 <span class="title-text">Earnings Reality: What You Actually Need to Know</span>
             </h2>
             
-            <p>Before diving into strategies, let's establish realistic expectations based on current industry data:</p>
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="reality-intro">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
+                </button>
+            </div>
+
+            <div id="reality-intro">
+                <p>Before diving into strategies, let's establish realistic expectations based on current industry data:</p>
+            </div>
 
             <div class="highlight-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="income-stats">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">📊</div>
                     2025 Influencer Income Statistics
                 </div>
-                <ul class="styled-list">
-                    <li><strong>48% of influencers earn under $15,000 annually</strong> (below US median income)</li>
-                    <li><strong>Only 15% earn over $100,000 annually</strong></li>
-                    <li><strong>Most brand deals are only a few hundred dollars</strong></li>
-                    <li><strong>Only 3% of US influencers charge over $1,000 per post</strong></li>
-                    <li><strong>Average annual income for social media influencers: $57,928</strong></li>
-                </ul>
+                <div id="income-stats">
+                    <ul class="styled-list">
+                        <li><strong>48% of influencers earn under $15,000 annually</strong> (below US median income)</li>
+                        <li><strong>Only 15% earn over $100,000 annually</strong></li>
+                        <li><strong>Most brand deals are only a few hundred dollars</strong></li>
+                        <li><strong>Only 3% of US influencers charge over $1,000 per post</strong></li>
+                        <li><strong>Average annual income for social media influencers: $57,928</strong></li>
+                    </ul>
+                </div>
             </div>
 
             <h3 class="section-subtitle">Realistic Earnings by Follower Count</h3>
@@ -843,13 +1118,23 @@
             </div>
 
             <div class="warning-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="earnings-disclaimer">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">⚠️</div>
                     Important Earnings Disclaimer
                 </div>
-                <p><strong>These are maximum potential earnings.</strong> Most influencers don't post sponsored content daily, and many deals fall through. A more realistic expectation for consistent monthly earnings is <strong>20-40% of the maximum potential</strong> shown above.</p>
-                <br>
-                <p><strong>For ADHD minds:</strong> Inconsistent posting due to motivation fluctuations can reduce earnings by an additional 30-50%.</p>
+                <div id="earnings-disclaimer">
+                    <p><strong>These are maximum potential earnings.</strong> Most influencers don't post sponsored content daily, and many deals fall through. A more realistic expectation for consistent monthly earnings is <strong>20-40% of the maximum potential</strong> shown above.</p>
+                    <br>
+                    <p><strong>For ADHD minds:</strong> Inconsistent posting due to motivation fluctuations can reduce earnings by an additional 30-50%.</p>
+                </div>
             </div>
         </div>
 
@@ -860,37 +1145,68 @@
                 <span class="title-text">ADHD & Social Media: The Hidden Challenges</span>
             </h2>
 
-            <p>Research shows social media can both benefit and harm ADHD brains. Understanding these dynamics is crucial for sustainable success.</p>
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="adhd-intro">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
+                </button>
+            </div>
+
+            <div id="adhd-intro">
+                <p>Research shows social media can both benefit and harm ADHD brains. Understanding these dynamics is crucial for sustainable success.</p>
+            </div>
 
             <div class="adhd-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="adhd-advantages">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">⚡</div>
                     ADHD Advantages in Social Media
                 </div>
-                <ul class="styled-list">
-                    <li><strong>Hyperfocus Superpower:</strong> Can create incredible content during focus periods</li>
-                    <li><strong>Authentic Perspective:</strong> ADHD experiences resonate with neurodivergent audiences</li>
-                    <li><strong>Creative Flexibility:</strong> Jumping between interests can create diverse content</li>
-                    <li><strong>Pattern Recognition:</strong> Can spot trends and viral content opportunities</li>
-                    <li><strong>High Energy:</strong> Natural enthusiasm can be magnetic to audiences</li>
-                </ul>
+                <div id="adhd-advantages">
+                    <ul class="styled-list">
+                        <li><strong>Hyperfocus Superpower:</strong> Can create incredible content during focus periods</li>
+                        <li><strong>Authentic Perspective:</strong> ADHD experiences resonate with neurodivergent audiences</li>
+                        <li><strong>Creative Flexibility:</strong> Jumping between interests can create diverse content</li>
+                        <li><strong>Pattern Recognition:</strong> Can spot trends and viral content opportunities</li>
+                        <li><strong>High Energy:</strong> Natural enthusiasm can be magnetic to audiences</li>
+                    </ul>
+                </div>
             </div>
 
             <h3 class="section-subtitle">The Dark Side: ADHD-Specific Risks</h3>
 
             <div class="warning-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="adhd-risks">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">🚨</div>
                     Research-Backed Concerns
                 </div>
-                <ul class="styled-list">
-                    <li><strong>Increased Addiction Risk:</strong> ADHD brains are more susceptible to problematic social media use</li>
-                    <li><strong>Dopamine Dysregulation:</strong> Constant notifications can worsen ADHD symptoms</li>
-                    <li><strong>Time Blindness:</strong> Can spend hours scrolling without realizing</li>
-                    <li><strong>Rejection Sensitivity:</strong> Negative comments hit ADHD minds harder</li>
-                    <li><strong>Comparison Trap:</strong> Can trigger depression and anxiety</li>
-                    <li><strong>Sleep Disruption:</strong> Blue light and stimulation worsen ADHD sleep issues</li>
-                </ul>
+                <div id="adhd-risks">
+                    <ul class="styled-list">
+                        <li><strong>Increased Addiction Risk:</strong> ADHD brains are more susceptible to problematic social media use</li>
+                        <li><strong>Dopamine Dysregulation:</strong> Constant notifications can worsen ADHD symptoms</li>
+                        <li><strong>Time Blindness:</strong> Can spend hours scrolling without realizing</li>
+                        <li><strong>Rejection Sensitivity:</strong> Negative comments hit ADHD minds harder</li>
+                        <li><strong>Comparison Trap:</strong> Can trigger depression and anxiety</li>
+                        <li><strong>Sleep Disruption:</strong> Blue light and stimulation worsen ADHD sleep issues</li>
+                    </ul>
+                </div>
             </div>
 
             <h3 class="section-subtitle">Platform-Specific ADHD Analysis</h3>
@@ -985,53 +1301,94 @@
                 <span class="title-text">Platform Requirements & Realistic Expectations</span>
             </h2>
 
-            <p>Each platform has different monetization thresholds and earning potential. Here's what you actually need to start earning:</p>
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="platform-intro">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
+                </button>
+            </div>
+
+            <div id="platform-intro">
+                <p>Each platform has different monetization thresholds and earning potential. Here's what you actually need to start earning:</p>
+            </div>
 
             <h3 class="section-subtitle">Instagram Monetization Requirements</h3>
 
             <div class="highlight-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="instagram-breakdown">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">📸</div>
                     Instagram Monetization Breakdown
                 </div>
-                <ul class="styled-list">
-                    <li><strong>Creator Fund:</strong> 10,000 followers + business/creator account</li>
-                    <li><strong>Badges (Live):</strong> 10,000 followers + professional account</li>
-                    <li><strong>Subscriptions:</strong> 10,000 followers + business account</li>
-                    <li><strong>Brand Partnerships:</strong> No minimum, but 1,000+ recommended</li>
-                    <li><strong>Affiliate Links:</strong> No minimum followers required</li>
-                </ul>
-                <br>
-                <p><strong>ADHD Reality:</strong> Focus on affiliate marketing and brand partnerships first - no follower requirements and more flexible timing.</p>
+                <div id="instagram-breakdown">
+                    <ul class="styled-list">
+                        <li><strong>Creator Fund:</strong> 10,000 followers + business/creator account</li>
+                        <li><strong>Badges (Live):</strong> 10,000 followers + professional account</li>
+                        <li><strong>Subscriptions:</strong> 10,000 followers + business account</li>
+                        <li><strong>Brand Partnerships:</strong> No minimum, but 1,000+ recommended</li>
+                        <li><strong>Affiliate Links:</strong> No minimum followers required</li>
+                    </ul>
+                    <br>
+                    <p><strong>ADHD Reality:</strong> Focus on affiliate marketing and brand partnerships first - no follower requirements and more flexible timing.</p>
+                </div>
             </div>
 
             <h3 class="section-subtitle">YouTube Partner Program Requirements</h3>
 
             <div class="tip-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="youtube-breakdown">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">📺</div>
                     YouTube Monetization (Updated 2025)
                 </div>
-                <ul class="styled-list">
-                    <li><strong>Standard Path:</strong> 1,000 subscribers + 4,000 watch hours (12 months)</li>
-                    <li><strong>Shorts Path:</strong> 1,000 subscribers + 10 million Shorts views (90 days)</li>
-                    <li><strong>Channel Memberships:</strong> 1,000 subscribers + 18+ years old</li>
-                    <li><strong>Super Chat/Thanks:</strong> Must be in eligible country</li>
-                </ul>
-                <br>
-                <p><strong>ADHD Advantage:</strong> YouTube values consistency over daily posting. Weekly uploads are sufficient.</p>
+                <div id="youtube-breakdown">
+                    <ul class="styled-list">
+                        <li><strong>Standard Path:</strong> 1,000 subscribers + 4,000 watch hours (12 months)</li>
+                        <li><strong>Shorts Path:</strong> 1,000 subscribers + 10 million Shorts views (90 days)</li>
+                        <li><strong>Channel Memberships:</strong> 1,000 subscribers + 18+ years old</li>
+                        <li><strong>Super Chat/Thanks:</strong> Must be in eligible country</li>
+                    </ul>
+                    <br>
+                    <p><strong>ADHD Advantage:</strong> YouTube values consistency over daily posting. Weekly uploads are sufficient.</p>
+                </div>
             </div>
 
             <h3 class="section-subtitle">TikTok Creator Fund Reality</h3>
 
             <div class="warning-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="tiktok-reality">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">⚠️</div>
                     TikTok Earnings Reality
                 </div>
-                <p><strong>Creator Fund pays $0.02-$0.04 per 1,000 views.</strong> This means you need <strong>1 million views to earn $20-40</strong>. Most TikTok income comes from brand partnerships, not the Creator Fund.</p>
-                <br>
-                <p><strong>ADHD Challenge:</strong> TikTok's algorithm requires daily posting for maximum reach, which can be overwhelming for ADHD brains.</p>
+                <div id="tiktok-reality">
+                    <p><strong>Creator Fund pays $0.02-$0.04 per 1,000 views.</strong> This means you need <strong>1 million views to earn $20-40</strong>. Most TikTok income comes from brand partnerships, not the Creator Fund.</p>
+                    <br>
+                    <p><strong>ADHD Challenge:</strong> TikTok's algorithm requires daily posting for maximum reach, which can be overwhelming for ADHD brains.</p>
+                </div>
             </div>
 
             <h3 class="section-subtitle">Platform Comparison for ADHD Creators</h3>
@@ -1157,33 +1514,53 @@
             <h3 class="section-subtitle">The Energy-Matching System</h3>
 
             <div class="adhd-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="energy-matching">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">🎯</div>
                     Match Tasks to Your Current State
                 </div>
-                <ul class="styled-list">
-                    <li><strong>Hyperfocus State:</strong> Create multiple pieces of content, batch filming, write captions</li>
-                    <li><strong>High Energy:</strong> Film dynamic content, engage with community, brainstorm ideas</li>
-                    <li><strong>Medium Energy:</strong> Edit videos, respond to comments, research trends</li>
-                    <li><strong>Low Energy:</strong> Schedule content, organize files, consume content for inspiration</li>
-                    <li><strong>No Energy:</strong> Take a break - don't force content creation when exhausted</li>
-                </ul>
+                <div id="energy-matching">
+                    <ul class="styled-list">
+                        <li><strong>Hyperfocus State:</strong> Create multiple pieces of content, batch filming, write captions</li>
+                        <li><strong>High Energy:</strong> Film dynamic content, engage with community, brainstorm ideas</li>
+                        <li><strong>Medium Energy:</strong> Edit videos, respond to comments, research trends</li>
+                        <li><strong>Low Energy:</strong> Schedule content, organize files, consume content for inspiration</li>
+                        <li><strong>No Energy:</strong> Take a break - don't force content creation when exhausted</li>
+                    </ul>
+                </div>
             </div>
 
             <h3 class="section-subtitle">Content Batching for ADHD Brains</h3>
 
             <div class="tip-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="content-batching">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">⏰</div>
                     The ADHD Content Batching Method
                 </div>
-                <ol class="numbered-list">
-                    <li><strong>Idea Capture:</strong> Keep a running list in your phone of content ideas when they strike</li>
-                    <li><strong>Monthly Planning:</strong> Choose 1-2 content themes per month to avoid decision fatigue</li>
-                    <li><strong>Batch Filming:</strong> Film 5-10 videos in one hyperfocus session</li>
-                    <li><strong>Batch Editing:</strong> Edit all videos in one session (or outsource this)</li>
-                    <li><strong>Batch Scheduling:</strong> Use tools to schedule posts weeks in advance</li>
-                </ol>
+                <div id="content-batching">
+                    <ol class="numbered-list">
+                        <li><strong>Idea Capture:</strong> Keep a running list in your phone of content ideas when they strike</li>
+                        <li><strong>Monthly Planning:</strong> Choose 1-2 content themes per month to avoid decision fatigue</li>
+                        <li><strong>Batch Filming:</strong> Film 5-10 videos in one hyperfocus session</li>
+                        <li><strong>Batch Editing:</strong> Edit all videos in one session (or outsource this)</li>
+                        <li><strong>Batch Scheduling:</strong> Use tools to schedule posts weeks in advance</li>
+                    </ol>
+                </div>
             </div>
 
             <h3 class="section-subtitle">Managing ADHD-Specific Challenges</h3>
@@ -1278,52 +1655,93 @@
                 <span class="title-text">Building Sustainable Growth (Without Burnout)</span>
             </h2>
 
-            <p>Traditional influencer advice often leads to ADHD burnout. Here's how to grow sustainably:</p>
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="sustainable-intro">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
+                </button>
+            </div>
+
+            <div id="sustainable-intro">
+                <p>Traditional influencer advice often leads to ADHD burnout. Here's how to grow sustainably:</p>
+            </div>
 
             <div class="success-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="safe-growth">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">🛡️</div>
                     The ADHD-Safe Growth Strategy
                 </div>
-                <ul class="styled-list">
-                    <li><strong>Quality Over Quantity:</strong> 1 great post per week beats 7 mediocre ones</li>
-                    <li><strong>Authentic Vulnerability:</strong> Share your ADHD journey - it resonates deeply</li>
-                    <li><strong>Community Over Numbers:</strong> 500 engaged followers beat 5,000 passive ones</li>
-                    <li><strong>Seasonal Content:</strong> Allow for natural interest cycles</li>
-                    <li><strong>Collaboration Focus:</strong> Partner with others to reduce individual pressure</li>
-                </ul>
+                <div id="safe-growth">
+                    <ul class="styled-list">
+                        <li><strong>Quality Over Quantity:</strong> 1 great post per week beats 7 mediocre ones</li>
+                        <li><strong>Authentic Vulnerability:</strong> Share your ADHD journey - it resonates deeply</li>
+                        <li><strong>Community Over Numbers:</strong> 500 engaged followers beat 5,000 passive ones</li>
+                        <li><strong>Seasonal Content:</strong> Allow for natural interest cycles</li>
+                        <li><strong>Collaboration Focus:</strong> Partner with others to reduce individual pressure</li>
+                    </ul>
+                </div>
             </div>
 
             <h3 class="section-subtitle">The 4-Phase ADHD Content Cycle</h3>
 
             <div class="highlight-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="content-cycle">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">🔄</div>
                     Work WITH Your ADHD, Not Against It
                 </div>
-                <p><strong>Phase 1: Inspiration (1-2 weeks)</strong> - Consume content, gather ideas, plan themes</p>
-                <p><strong>Phase 2: Creation (1 week)</strong> - Batch create during hyperfocus periods</p>
-                <p><strong>Phase 3: Publishing (2-3 weeks)</strong> - Schedule and engage while content goes live</p>
-                <p><strong>Phase 4: Rest (1 week)</strong> - Intentional break to prevent burnout</p>
-                <br>
-                <p><strong>This 4-6 week cycle respects ADHD energy patterns while maintaining audience engagement.</strong></p>
+                <div id="content-cycle">
+                    <p><strong>Phase 1: Inspiration (1-2 weeks)</strong> - Consume content, gather ideas, plan themes</p>
+                    <p><strong>Phase 2: Creation (1 week)</strong> - Batch create during hyperfocus periods</p>
+                    <p><strong>Phase 3: Publishing (2-3 weeks)</strong> - Schedule and engage while content goes live</p>
+                    <p><strong>Phase 4: Rest (1 week)</strong> - Intentional break to prevent burnout</p>
+                    <br>
+                    <p><strong>This 4-6 week cycle respects ADHD energy patterns while maintaining audience engagement.</strong></p>
+                </div>
             </div>
 
             <h3 class="section-subtitle">Burnout Prevention Strategies</h3>
 
             <div class="warning-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="burnout-warning">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">🚨</div>
                     Early Burnout Warning Signs
                 </div>
-                <ul class="styled-list">
-                    <li><strong>Dreading content creation</strong> instead of enjoying it</li>
-                    <li><strong>Checking metrics obsessively</strong> multiple times per day</li>
-                    <li><strong>Comparing yourself</strong> to other creators constantly</li>
-                    <li><strong>Sleep disruption</strong> from social media use</li>
-                    <li><strong>Declining mental health</strong> or increased anxiety</li>
-                    <li><strong>Neglecting other life areas</strong> for content creation</li>
-                </ul>
+                <div id="burnout-warning">
+                    <ul class="styled-list">
+                        <li><strong>Dreading content creation</strong> instead of enjoying it</li>
+                        <li><strong>Checking metrics obsessively</strong> multiple times per day</li>
+                        <li><strong>Comparing yourself</strong> to other creators constantly</li>
+                        <li><strong>Sleep disruption</strong> from social media use</li>
+                        <li><strong>Declining mental health</strong> or increased anxiety</li>
+                        <li><strong>Neglecting other life areas</strong> for content creation</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -1334,54 +1752,95 @@
                 <span class="title-text">Diversified Income Streams for ADHD Minds</span>
             </h2>
 
-            <p>Don't rely on one income source. Here are ADHD-friendly monetization strategies ranked by difficulty and sustainability:</p>
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="monetization-intro">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
+                </button>
+            </div>
+
+            <div id="monetization-intro">
+                <p>Don't rely on one income source. Here are ADHD-friendly monetization strategies ranked by difficulty and sustainability:</p>
+            </div>
 
             <h3 class="section-subtitle">Beginner-Friendly Income Streams</h3>
 
             <div class="tip-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="beginner-streams">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">🎯</div>
                     Start Here: Low Barrier Entry
                 </div>
-                <ol class="numbered-list">
-                    <li><strong>Affiliate Marketing:</strong> Share products you genuinely use (0 followers needed)</li>
-                    <li><strong>Digital Templates:</strong> Create once, sell repeatedly (Canva templates, planners)</li>
-                    <li><strong>Micro-Sponsorships:</strong> Small brand partnerships for nano-influencers</li>
-                    <li><strong>Community Management:</strong> Use your social media skills for other brands</li>
-                    <li><strong>Content Creation Services:</strong> Create content for other businesses</li>
-                </ol>
+                <div id="beginner-streams">
+                    <ol class="numbered-list">
+                        <li><strong>Affiliate Marketing:</strong> Share products you genuinely use (0 followers needed)</li>
+                        <li><strong>Digital Templates:</strong> Create once, sell repeatedly (Canva templates, planners)</li>
+                        <li><strong>Micro-Sponsorships:</strong> Small brand partnerships for nano-influencers</li>
+                        <li><strong>Community Management:</strong> Use your social media skills for other brands</li>
+                        <li><strong>Content Creation Services:</strong> Create content for other businesses</li>
+                    </ol>
+                </div>
             </div>
 
             <h3 class="section-subtitle">Intermediate Income Streams</h3>
 
             <div class="highlight-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="intermediate-streams">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">📈</div>
                     Growing Your Income (1k-10k followers)
                 </div>
-                <ul class="styled-list">
-                    <li><strong>Sponsored Posts:</strong> Partner with brands that align with your values</li>
-                    <li><strong>Online Courses:</strong> Teach what you know (ADHD-friendly: record once, sell many times)</li>
-                    <li><strong>Coaching/Consulting:</strong> One-on-one help for your audience</li>
-                    <li><strong>Physical Products:</strong> Print-on-demand merchandise with your designs</li>
-                    <li><strong>Membership Communities:</strong> Recurring revenue from dedicated fans</li>
-                </ul>
+                <div id="intermediate-streams">
+                    <ul class="styled-list">
+                        <li><strong>Sponsored Posts:</strong> Partner with brands that align with your values</li>
+                        <li><strong>Online Courses:</strong> Teach what you know (ADHD-friendly: record once, sell many times)</li>
+                        <li><strong>Coaching/Consulting:</strong> One-on-one help for your audience</li>
+                        <li><strong>Physical Products:</strong> Print-on-demand merchandise with your designs</li>
+                        <li><strong>Membership Communities:</strong> Recurring revenue from dedicated fans</li>
+                    </ul>
+                </div>
             </div>
 
             <h3 class="section-subtitle">Advanced Income Streams</h3>
 
             <div class="success-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="advanced-streams">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">🚀</div>
                     Scaling Up (10k+ followers)
                 </div>
-                <ul class="styled-list">
-                    <li><strong>Brand Ambassadorships:</strong> Long-term partnerships with steady income</li>
-                    <li><strong>Platform Ad Revenue:</strong> YouTube Partner Program, Instagram bonuses</li>
-                    <li><strong>Speaking Engagements:</strong> Share your expertise at events</li>
-                    <li><strong>Book/E-book Deals:</strong> Publishing opportunities from your platform</li>
-                    <li><strong>Investment Partnerships:</strong> Equity deals with companies you believe in</li>
-                </ul>
+                <div id="advanced-streams">
+                    <ul class="styled-list">
+                        <li><strong>Brand Ambassadorships:</strong> Long-term partnerships with steady income</li>
+                        <li><strong>Platform Ad Revenue:</strong> YouTube Partner Program, Instagram bonuses</li>
+                        <li><strong>Speaking Engagements:</strong> Share your expertise at events</li>
+                        <li><strong>Book/E-book Deals:</strong> Publishing opportunities from your platform</li>
+                        <li><strong>Investment Partnerships:</strong> Equity deals with companies you believe in</li>
+                    </ul>
+                </div>
             </div>
 
             <h3 class="section-subtitle">Income Stream Risk Assessment for ADHD</h3>
@@ -1495,53 +1954,83 @@
             <h3 class="section-subtitle">The Shiny Object Syndrome</h3>
 
             <div class="warning-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="adhd-traps">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">⚠️</div>
                     Common ADHD Traps in Social Media
                 </div>
-                <ul class="styled-list">
-                    <li><strong>Platform Hopping:</strong> Jumping to every new platform instead of mastering one</li>
-                    <li><strong>Trend Chasing:</strong> Constantly changing content to follow trends</li>
-                    <li><strong>Perfectionism Paralysis:</strong> Never posting because content isn't "perfect"</li>
-                    <li><strong>Comparison Spiral:</strong> Obsessing over other creators' success</li>
-                    <li><strong>Overcommitting:</strong> Saying yes to every opportunity and burning out</li>
-                </ul>
+                <div id="adhd-traps">
+                    <ul class="styled-list">
+                        <li><strong>Platform Hopping:</strong> Jumping to every new platform instead of mastering one</li>
+                        <li><strong>Trend Chasing:</strong> Constantly changing content to follow trends</li>
+                        <li><strong>Perfectionism Paralysis:</strong> Never posting because content isn't "perfect"</li>
+                        <li><strong>Comparison Spiral:</strong> Obsessing over other creators' success</li>
+                        <li><strong>Overcommitting:</strong> Saying yes to every opportunity and burning out</li>
+                    </ul>
+                </div>
             </div>
 
             <h3 class="section-subtitle">The "Hustle Culture" Trap</h3>
 
             <div class="adhd-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="hustle-trap">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">🛑</div>
                     Why "Hustle Harder" Destroys ADHD Brains
                 </div>
-                <p>Traditional influencer advice promotes:</p>
-                <ul class="styled-list">
-                    <li><strong>Daily posting</strong> (leads to ADHD burnout)</li>
-                    <li><strong>Constant engagement</strong> (triggers dopamine addiction)</li>
-                    <li><strong>"Sleep when you're dead"</strong> (worsens ADHD symptoms)</li>
-                    <li><strong>"Fake it till you make it"</strong> (conflicts with ADHD authenticity)</li>
-                </ul>
-                <br>
-                <p><strong>Instead:</strong> Build a sustainable practice that supports your mental health while growing your audience.</p>
+                <div id="hustle-trap">
+                    <p>Traditional influencer advice promotes:</p>
+                    <ul class="styled-list">
+                        <li><strong>Daily posting</strong> (leads to ADHD burnout)</li>
+                        <li><strong>Constant engagement</strong> (triggers dopamine addiction)</li>
+                        <li><strong>"Sleep when you're dead"</strong> (worsens ADHD symptoms)</li>
+                        <li><strong>"Fake it till you make it"</strong> (conflicts with ADHD authenticity)</li>
+                    </ul>
+                    <br>
+                    <p><strong>Instead:</strong> Build a sustainable practice that supports your mental health while growing your audience.</p>
+                </div>
             </div>
 
             <h3 class="section-subtitle">Red Flags: When to Step Back</h3>
 
             <div class="warning-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="red-flags">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">🚨</div>
                     Immediate Action Required
                 </div>
-                <p><strong>Stop and reassess if you experience:</strong></p>
-                <ul class="styled-list">
-                    <li><strong>Sleep disruption</strong> from late-night scrolling or content creation</li>
-                    <li><strong>Anxiety spikes</strong> when checking engagement metrics</li>
-                    <li><strong>Depression</strong> from comparing yourself to others</li>
-                    <li><strong>Neglecting relationships</strong> for content creation</li>
-                    <li><strong>Physical symptoms</strong> like headaches, eye strain, or carpal tunnel</li>
-                    <li><strong>Loss of interest</strong> in activities you previously enjoyed</li>
-                </ul>
+                <div id="red-flags">
+                    <p><strong>Stop and reassess if you experience:</strong></p>
+                    <ul class="styled-list">
+                        <li><strong>Sleep disruption</strong> from late-night scrolling or content creation</li>
+                        <li><strong>Anxiety spikes</strong> when checking engagement metrics</li>
+                        <li><strong>Depression</strong> from comparing yourself to others</li>
+                        <li><strong>Neglecting relationships</strong> for content creation</li>
+                        <li><strong>Physical symptoms</strong> like headaches, eye strain, or carpal tunnel</li>
+                        <li><strong>Loss of interest</strong> in activities you previously enjoyed</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -1553,57 +2042,87 @@
             </h2>
 
             <div class="highlight-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="realistic-expectations">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">✨</div>
                     Setting Realistic Expectations
                 </div>
-                <p><strong>Social media monetization is best viewed as a long-term project</strong> that can provide supplemental income while building valuable skills and connections.</p>
-                <br>
-                <p><strong>Timeline Reality:</strong> Expect 6-12 months to earn your first $100, 1-2 years to earn $1,000/month consistently.</p>
-                <p><strong>Best for:</strong> ADHD individuals who enjoy creative expression, have specific expertise to share, and can commit to sustainable practices.</p>
-                <p><strong>Not ideal for:</strong> Those seeking quick money, people who struggle with comparison or rejection sensitivity, or anyone expecting immediate results.</p>
+                <div id="realistic-expectations">
+                    <p><strong>Social media monetization is best viewed as a long-term project</strong> that can provide supplemental income while building valuable skills and connections.</p>
+                    <br>
+                    <p><strong>Timeline Reality:</strong> Expect 6-12 months to earn your first $100, 1-2 years to earn $1,000/month consistently.</p>
+                    <p><strong>Best for:</strong> ADHD individuals who enjoy creative expression, have specific expertise to share, and can commit to sustainable practices.</p>
+                    <p><strong>Not ideal for:</strong> Those seeking quick money, people who struggle with comparison or rejection sensitivity, or anyone expecting immediate results.</p>
+                </div>
             </div>
 
             <div class="adhd-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="starter-plan">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">📋</div>
                     The ADHD-Friendly 90-Day Starter Plan
                 </div>
-                <p><strong>Month 1: Foundation</strong></p>
-                <ol class="numbered-list">
-                    <li>Choose ONE platform that matches your natural content style</li>
-                    <li>Create a content calendar with realistic posting schedule (2-3x/week max)</li>
-                    <li>Set up basic analytics and scheduling tools</li>
-                    <li>Create 10 pieces of content to get started</li>
-                </ol>
-                <br>
-                <p><strong>Month 2: Consistency</strong></p>
-                <ol class="numbered-list" style="counter-reset: step-counter 4;">
-                    <li>Stick to your posting schedule (this is the hardest part for ADHD)</li>
-                    <li>Engage authentically with your audience</li>
-                    <li>Track what content performs best</li>
-                    <li>Apply for 3-5 affiliate programs in your niche</li>
-                </ol>
-                <br>
-                <p><strong>Month 3: Optimization</strong></p>
-                <ol class="numbered-list" style="counter-reset: step-counter 8;">
-                    <li>Double down on content types that perform well</li>
-                    <li>Reach out to 5 small brands for potential partnerships</li>
-                    <li>Create your first digital product (template, guide, etc.)</li>
-                    <li>Assess and adjust your strategy based on what you've learned</li>
-                </ol>
+                <div id="starter-plan">
+                    <p><strong>Month 1: Foundation</strong></p>
+                    <ol class="numbered-list">
+                        <li>Choose ONE platform that matches your natural content style</li>
+                        <li>Create a content calendar with realistic posting schedule (2-3x/week max)</li>
+                        <li>Set up basic analytics and scheduling tools</li>
+                        <li>Create 10 pieces of content to get started</li>
+                    </ol>
+                    <br>
+                    <p><strong>Month 2: Consistency</strong></p>
+                    <ol class="numbered-list" style="counter-reset: step-counter 4;">
+                        <li>Stick to your posting schedule (this is the hardest part for ADHD)</li>
+                        <li>Engage authentically with your audience</li>
+                        <li>Track what content performs best</li>
+                        <li>Apply for 3-5 affiliate programs in your niche</li>
+                    </ol>
+                    <br>
+                    <p><strong>Month 3: Optimization</strong></p>
+                    <ol class="numbered-list" style="counter-reset: step-counter 8;">
+                        <li>Double down on content types that perform well</li>
+                        <li>Reach out to 5 small brands for potential partnerships</li>
+                        <li>Create your first digital product (template, guide, etc.)</li>
+                        <li>Assess and adjust your strategy based on what you've learned</li>
+                    </ol>
+                </div>
             </div>
 
             <div class="success-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="ready-start">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">🎉</div>
                     Ready to Start Your Journey?
                 </div>
-                <p>Remember: <strong>Your ADHD traits can be superpowers in the creator economy.</strong> Your authenticity, creativity, and unique perspective are exactly what audiences are looking for.</p>
-                <br>
-                <p>Focus on building genuine connections, sharing your authentic story, and creating value for others. The monetization will follow naturally as you grow.</p>
-                <br>
-                <p><strong>Most importantly:</strong> Protect your mental health. No amount of followers or income is worth your wellbeing.</p>
+                <div id="ready-start">
+                    <p>Remember: <strong>Your ADHD traits can be superpowers in the creator economy.</strong> Your authenticity, creativity, and unique perspective are exactly what audiences are looking for.</p>
+                    <br>
+                    <p>Focus on building genuine connections, sharing your authentic story, and creating value for others. The monetization will follow naturally as you grow.</p>
+                    <br>
+                    <p><strong>Most importantly:</strong> Protect your mental health. No amount of followers or income is worth your wellbeing.</p>
+                </div>
             </div>
 
             <hr style="border: 1px solid var(--border-subtle); margin: 3rem 0;">
@@ -1626,13 +2145,326 @@
     </button>
 
     <script>
-        // Scroll progress bar
-        window.addEventListener('scroll', () => {
-            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-            document.querySelector('.scroll-progress-bar').style.width = scrolled + '%';
+        // Simplified Speech synthesis with toggle functionality
+        let currentSpeech = null;
+        let speechRate = 1.2;
+        let selectedVoice = null;
+        let availableVoices = [];
+        let currentButton = null;
+        let isPlaying = false;
+        let isPaused = false;
+
+        // Simple toggle speech function
+        function toggleSpeech(button) {
+            const targetId = button.getAttribute('data-target');
+            const targetElement = document.getElementById(targetId);
+            
+            if (!targetElement) return;
+
+            // If different content is selected, stop current and start new
+            if (currentButton && currentButton !== button) {
+                stopSpeech();
+                setTimeout(() => startSpeech(button, targetElement), 100);
+                return;
+            }
+
+            // If same button clicked, toggle play/pause
+            if (currentButton === button) {
+                if (isPlaying && !isPaused) {
+                    // Currently playing - pause it
+                    pauseSpeech();
+                } else if (isPaused) {
+                    // Currently paused - resume it
+                    resumeSpeech();
+                } else {
+                    // Stopped - start playing
+                    startSpeech(button, targetElement);
+                }
+            } else {
+                // New content - start playing
+                startSpeech(button, targetElement);
+            }
+        }
+
+        function startSpeech(button, targetElement) {
+            // Stop any existing speech
+            stopSpeech();
+
+            const textContent = extractTextContent(targetElement);
+            if (!textContent.trim()) return;
+
+            // Create new speech
+            currentSpeech = new SpeechSynthesisUtterance(textContent);
+            currentSpeech.rate = speechRate;
+            currentSpeech.pitch = 1;
+            currentSpeech.volume = 0.8;
+
+            if (selectedVoice) {
+                currentSpeech.voice = selectedVoice;
+            }
+
+            // Update state
+            currentButton = button;
+            isPlaying = true;
+            isPaused = false;
+
+            // Update UI
+            updateButtonStates();
+
+            // Speech event handlers
+            currentSpeech.onend = () => {
+                isPlaying = false;
+                isPaused = false;
+                currentButton = null;
+                updateButtonStates();
+            };
+
+            currentSpeech.onerror = (event) => {
+                console.error('Speech synthesis error:', event);
+                isPlaying = false;
+                isPaused = false;
+                currentButton = null;
+                updateButtonStates();
+            };
+
+            // Start speaking
+            try {
+                speechSynthesis.speak(currentSpeech);
+            } catch (error) {
+                console.error('Failed to start speech:', error);
+                isPlaying = false;
+                isPaused = false;
+                currentButton = null;
+                updateButtonStates();
+            }
+        }
+
+        function pauseSpeech() {
+            if (isPlaying && !isPaused) {
+                speechSynthesis.pause();
+                isPaused = true;
+                updateButtonStates();
+            }
+        }
+
+        function resumeSpeech() {
+            if (isPaused) {
+                speechSynthesis.resume();
+                isPaused = false;
+                updateButtonStates();
+            }
+        }
+
+        function stopSpeech() {
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+            }
+            isPlaying = false;
+            isPaused = false;
+            currentButton = null;
+            updateButtonStates();
+        }
+
+        function updateButtonStates() {
+            // Reset all speech buttons to default state
+            document.querySelectorAll('.voice-btn[data-target]').forEach(btn => {
+                btn.className = 'voice-btn';
+                btn.innerHTML = '<span>🔊</span> Play';
+            });
+
+            // Update current button state
+            if (currentButton) {
+                if (isPlaying && !isPaused) {
+                    currentButton.className = 'voice-btn playing';
+                    currentButton.innerHTML = '<span>⏸️</span> Pause';
+                } else if (isPaused) {
+                    currentButton.className = 'voice-btn paused';
+                    currentButton.innerHTML = '<span>▶️</span> Resume';
+                }
+            }
+        }
+
+        function extractTextContent(element) {
+            const clone = element.cloneNode(true);
+            const voiceControls = clone.querySelectorAll('.voice-controls');
+            voiceControls.forEach(control => control.remove());
+            return clone.textContent || clone.innerText || '';
+        }
+
+        function updateSelectedVoice(voiceIndex) {
+            if (voiceIndex === '') {
+                selectedVoice = null;
+            } else {
+                selectedVoice = availableVoices[parseInt(voiceIndex)];
+            }
+            
+            // If currently speaking, restart with new voice
+            if (isPlaying && currentButton) {
+                const targetId = currentButton.getAttribute('data-target');
+                const targetElement = document.getElementById(targetId);
+                
+                stopSpeech();
+                setTimeout(() => {
+                    if (targetElement) {
+                        startSpeech(currentButton, targetElement);
+                    }
+                }, 100);
+            }
+        }
+
+        function updateSpeechRate(rate) {
+            speechRate = parseFloat(rate);
+            document.getElementById('speed-display').textContent = rate + 'x';
+            
+            // If currently speaking, restart with new rate
+            if (isPlaying && currentButton) {
+                const targetId = currentButton.getAttribute('data-target');
+                const targetElement = document.getElementById(targetId);
+                
+                stopSpeech();
+                setTimeout(() => {
+                    if (targetElement) {
+                        startSpeech(currentButton, targetElement);
+                    }
+                }, 100);
+            }
+        }
+
+        // Load available voices
+        function loadVoices() {
+            availableVoices = speechSynthesis.getVoices();
+            const voiceSelect = document.getElementById('voice-select');
+            
+            if (availableVoices.length > 0) {
+                voiceSelect.innerHTML = '';
+                
+                const defaultOption = document.createElement('option');
+                defaultOption.value = '';
+                defaultOption.textContent = 'System Default';
+                voiceSelect.appendChild(defaultOption);
+                
+                availableVoices.forEach((voice, index) => {
+                    const option = document.createElement('option');
+                    option.value = index;
+                    option.textContent = voice.name + (voice.lang ? ` (${voice.lang})` : '');
+                    voiceSelect.appendChild(option);
+                });
+                
+                // Try to select a good default English voice
+                const preferredVoice = availableVoices.findIndex(voice => 
+                    voice.lang.startsWith('en') && voice.default
+                );
+                
+                if (preferredVoice !== -1) {
+                    voiceSelect.value = preferredVoice;
+                    selectedVoice = availableVoices[preferredVoice];
+                }
+            }
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'SELECT' && e.target.tagName !== 'TEXTAREA') {
+                switch(e.key) {
+                    case ' ': // Spacebar
+                        e.preventDefault();
+                        if (currentButton) {
+                            toggleSpeech(currentButton);
+                        }
+                        break;
+                    case 'Escape': // Stop
+                        e.preventDefault();
+                        stopSpeech();
+                        break;
+                }
+            }
         });
 
-        // Smooth scrolling for navigation links
+        // Section tracking and progress
+        const sections = ['reality-check', 'adhd-challenges', 'platform-breakdown', 'adhd-strategies', 'sustainable-growth', 'monetization-streams', 'avoiding-pitfalls', 'getting-started'];
+        let currentSectionIndex = 0;
+
+        function updateProgress() {
+            const scrolled = window.scrollY;
+            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrolled / totalHeight) * 100;
+            
+            document.querySelector('.scroll-progress-bar').style.width = scrollPercent + '%';
+            updateSectionProgress();
+        }
+
+        function updateSectionProgress() {
+            const scrollPosition = window.scrollY + 200;
+            
+            sections.forEach((sectionId, index) => {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    const sectionTop = section.offsetTop;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                        currentSectionIndex = index;
+                        updateProgressIndicator();
+                    }
+                }
+            });
+        }
+
+        function updateProgressIndicator() {
+            const sectionNames = [
+                'Reality Check',
+                'ADHD Challenges',
+                'Platform Breakdown', 
+                'ADHD Strategies',
+                'Sustainable Growth',
+                'Monetization',
+                'Avoiding Pitfalls',
+                'Getting Started'
+            ];
+            
+            document.getElementById('current-section').textContent = sectionNames[currentSectionIndex] || 'Reality Check';
+            
+            const circles = document.querySelectorAll('.progress-circle');
+            circles.forEach((circle, index) => {
+                circle.className = 'progress-circle';
+                if (index < currentSectionIndex) {
+                    circle.classList.add('completed');
+                } else if (index === currentSectionIndex) {
+                    circle.classList.add('active');
+                }
+            });
+        }
+
+        // Initialize
+        window.addEventListener('scroll', updateProgress);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+            
+            if ('speechSynthesis' in window) {
+                loadVoices();
+                if (speechSynthesis.onvoiceschanged !== undefined) {
+                    speechSynthesis.onvoiceschanged = loadVoices;
+                }
+                setTimeout(loadVoices, 100);
+            } else {
+                document.querySelectorAll('.voice-btn').forEach(btn => {
+                    btn.disabled = true;
+                    btn.textContent = 'Speech not supported';
+                });
+            }
+        });
+
+        // Cleanup
+        window.addEventListener('beforeunload', function() {
+            stopSpeech();
+        });
+
+        window.addEventListener('pagehide', function() {
+            stopSpeech();
+        });
+
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1642,6 +2474,7 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
+                    setTimeout(() => updateProgress(), 1000);
                 }
             });
         });
