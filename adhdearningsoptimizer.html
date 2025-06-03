@@ -104,8 +104,6 @@
             padding: 25px;
             text-align: center;
             box-shadow: var(--shadow-soft);
-            max-width: 1200px;
-            margin: 20px auto;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
@@ -131,33 +129,6 @@
             color: var(--accent-blue);
             margin-bottom: 15px;
         }
-        
-        .earnings-display {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .earning-stat {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-subtle);
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-weight: 600;
-            box-shadow: var(--shadow-soft);
-            transition: all 0.3s ease;
-        }
-
-        .earning-stat:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-medium);
-        }
-        
-        .earning-stat.today { color: var(--accent-emerald); }
-        .earning-stat.week { color: var(--accent-blue); }
-        .earning-stat.target { color: var(--accent-rose); }
         
         .schedule-container {
             padding: 20px;
@@ -293,47 +264,6 @@
             color: var(--accent-emerald);
         }
         
-        .earnings-input {
-            margin-top: 20px;
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        .earnings-input input {
-            padding: 10px 15px;
-            border: 1px solid var(--border-subtle);
-            border-radius: 12px;
-            font-size: 0.9rem;
-            width: 120px;
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            color: var(--text-primary);
-        }
-
-        .earnings-input input::placeholder {
-            color: var(--text-muted);
-        }
-        
-        .earnings-input button {
-            background: var(--gradient-success);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-            font-size: 0.9rem;
-            box-shadow: var(--shadow-soft);
-        }
-        
-        .earnings-input button:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-medium);
-        }
-        
         .high-value { border-left: 4px solid var(--accent-rose); }
         .medium-value { border-left: 4px solid var(--accent-amber); }
         .low-value { border-left: 4px solid var(--accent-emerald); }
@@ -342,20 +272,10 @@
         @media (max-width: 768px) {
             .header {
                 padding: 20px;
-                margin: 15px auto;
             }
 
             .header h1 {
                 font-size: 1.5rem;
-            }
-
-            .earnings-display {
-                gap: 10px;
-            }
-            
-            .earning-stat {
-                padding: 8px 15px;
-                font-size: 0.9rem;
             }
             
             .time-block {
@@ -369,15 +289,6 @@
             .time-header {
                 flex-direction: column;
                 align-items: flex-start;
-            }
-
-            .earnings-input {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .earnings-input input {
-                width: 100%;
             }
 
             .platform-links {
@@ -407,6 +318,16 @@
             0% { transform: translateX(-100%) translateY(-100%) rotate(30deg); }
             100% { transform: translateX(100%) translateY(100%) rotate(30deg); }
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0; transform: scale(0.9); }
+        }
     </style>
 </head>
 <body>
@@ -415,17 +336,11 @@
     <div class="floating-orb orb-2"></div>
     <div class="floating-orb orb-3"></div>
 
-    <div class="header">
-        <h1>💰 Hourly Optimizer 🎯</h1>
-        <div class="current-time" id="currentTime">Loading...</div>
-        <div class="earnings-display">
-            <div class="earning-stat today">Today: $<span id="todayEarnings">0.00</span></div>
-            <div class="earning-stat week">Week: $<span id="weekEarnings">0.00</span></div>
-            <div class="earning-stat target">Target: $<span id="dailyTarget">35.00</span></div>
-        </div>
-    </div>
-
     <div class="schedule-container" id="scheduleContainer">
+        <div class="header">
+            <h1>💰 Hourly Optimizer 🎯</h1>
+            <div class="current-time" id="currentTime">Loading...</div>
+        </div>
         <!-- Schedule blocks will be populated by JavaScript -->
     </div>
 
@@ -585,32 +500,162 @@
             }
         ];
 
-        // State
-        let earnings = {
-            today: 0,
-            week: 0
-        };
-
-        // Initialize earnings from memory if available
-        if (window.todayEarnings && !isNaN(parseFloat(window.todayEarnings))) {
-            earnings.today = parseFloat(window.todayEarnings);
-        }
-        if (window.weekEarnings && !isNaN(parseFloat(window.weekEarnings))) {
-            earnings.week = parseFloat(window.weekEarnings);
-        }
-
         // Initialize
         function init() {
             try {
                 updateTime();
                 renderSchedule();
-                updateEarningsDisplay();
+                checkTimeAndScroll();
                 
                 setInterval(updateTime, 1000);
                 setInterval(renderSchedule, 60000); // Update schedule highlighting every minute
             } catch (error) {
                 console.error('Initialization error:', error);
             }
+        }
+
+        function checkTimeAndScroll() {
+            const now = new Date();
+            const currentMinutes = now.getHours() * 60 + now.getMinutes();
+            const scheduleStart = 7 * 60; // 7:00 AM
+            const scheduleEnd = 22 * 60 + 30; // 10:30 PM
+
+            if (currentMinutes < scheduleStart || currentMinutes > scheduleEnd) {
+                showAnytimeTasksPopup();
+            } else {
+                // Find current time block and scroll to it
+                setTimeout(() => {
+                    const currentBlock = document.querySelector('.time-block.current');
+                    if (currentBlock) {
+                        currentBlock.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'center' 
+                        });
+                    }
+                }, 500); // Small delay to ensure rendering is complete
+            }
+        }
+
+        function showAnytimeTasksPopup() {
+            const popup = document.createElement('div');
+            popup.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(10px);
+                z-index: 10000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+                animation: fadeIn 0.3s ease-out;
+            `;
+
+            popup.innerHTML = `
+                <div style="
+                    background: var(--glass-bg);
+                    backdrop-filter: blur(20px);
+                    border: 1px solid var(--border-subtle);
+                    border-radius: 20px;
+                    padding: 30px;
+                    max-width: 600px;
+                    width: 100%;
+                    max-height: 80vh;
+                    overflow-y: auto;
+                    box-shadow: var(--shadow-strong);
+                ">
+                    <h2 style="color: var(--accent-blue); margin-bottom: 20px; text-align: center;">
+                        🌙 Anytime Tasks Available! ⭐
+                    </h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 25px; text-align: center;">
+                        Outside scheduled hours? Perfect time for these flexible earning opportunities:
+                    </p>
+                    
+                    <div style="display: grid; gap: 15px;">
+                        <div style="background: var(--card-bg); padding: 15px; border-radius: 12px; border-left: 4px solid var(--accent-emerald);">
+                            <h4 style="color: var(--accent-emerald); margin-bottom: 8px;">🎮 Mobile Gaming ($2-5/day)</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 10px;">Play games while watching TV or relaxing</p>
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                <a href="https://mistplay.com" target="_blank" style="background: var(--gradient-primary); color: white; padding: 4px 10px; border-radius: 15px; text-decoration: none; font-size: 0.75rem;">Mistplay</a>
+                                <a href="https://rewardedplay.com" target="_blank" style="background: var(--gradient-primary); color: white; padding: 4px 10px; border-radius: 15px; text-decoration: none; font-size: 0.75rem;">Rewarded Play</a>
+                            </div>
+                        </div>
+
+                        <div style="background: var(--card-bg); padding: 15px; border-radius: 12px; border-left: 4px solid var(--accent-blue);">
+                            <h4 style="color: var(--accent-blue); margin-bottom: 8px;">📱 Quick Surveys ($3-8/hour)</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 10px;">Short surveys perfect for odd hours</p>
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                <a href="https://qmee.com" target="_blank" style="background: var(--gradient-primary); color: white; padding: 4px 10px; border-radius: 15px; text-decoration: none; font-size: 0.75rem;">Qmee</a>
+                                <a href="https://attapoll.app" target="_blank" style="background: var(--gradient-primary); color: white; padding: 4px 10px; border-radius: 15px; text-decoration: none; font-size: 0.75rem;">AttaPoll</a>
+                                <a href="https://surveytime.app" target="_blank" style="background: var(--gradient-primary); color: white; padding: 4px 10px; border-radius: 15px; text-decoration: none; font-size: 0.75rem;">Surveytime</a>
+                            </div>
+                        </div>
+
+                        <div style="background: var(--card-bg); padding: 15px; border-radius: 12px; border-left: 4px solid var(--accent-amber);">
+                            <h4 style="color: var(--accent-amber); margin-bottom: 8px;">🛒 Cashback Shopping ($1-10/purchase)</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 10px;">Earn while doing regular online shopping</p>
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                <a href="https://rakuten.com" target="_blank" style="background: var(--gradient-primary); color: white; padding: 4px 10px; border-radius: 15px; text-decoration: none; font-size: 0.75rem;">Rakuten</a>
+                                <a href="https://honey.com" target="_blank" style="background: var(--gradient-primary); color: white; padding: 4px 10px; border-radius: 15px; text-decoration: none; font-size: 0.75rem;">Honey</a>
+                                <a href="https://ibotta.com" target="_blank" style="background: var(--gradient-primary); color: white; padding: 4px 10px; border-radius: 15px; text-decoration: none; font-size: 0.75rem;">Ibotta</a>
+                            </div>
+                        </div>
+
+                        <div style="background: var(--card-bg); padding: 15px; border-radius: 12px; border-left: 4px solid var(--accent-teal);">
+                            <h4 style="color: var(--accent-teal); margin-bottom: 8px;">📺 Watch & Earn ($1-3/hour)</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 10px;">Passive earning while binge-watching</p>
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                <a href="https://swagbucks.com" target="_blank" style="background: var(--gradient-primary); color: white; padding: 4px 10px; border-radius: 15px; text-decoration: none; font-size: 0.75rem;">Swagbucks TV</a>
+                                <a href="https://inboxdollars.com" target="_blank" style="background: var(--gradient-primary); color: white; padding: 4px 10px; border-radius: 15px; text-decoration: none; font-size: 0.75rem;">InboxDollars</a>
+                            </div>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1)); border: 1px solid rgba(16, 185, 129, 0.2); padding: 15px; border-radius: 12px; margin-top: 10px;">
+                            <p style="color: var(--accent-emerald); font-weight: 600; text-align: center; margin-bottom: 5px;">💡 Night Owl Tip</p>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; text-align: center;">Less competition on surveys during off-hours - often higher acceptance rates!</p>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 25px;">
+                        <button onclick="closeAnytimePopup()" style="
+                            background: var(--gradient-success);
+                            color: white;
+                            border: none;
+                            padding: 12px 30px;
+                            border-radius: 20px;
+                            cursor: pointer;
+                            font-weight: 600;
+                            font-size: 1rem;
+                            box-shadow: var(--shadow-soft);
+                            transition: all 0.3s;
+                        " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                            🚀 Let's Go Earn!
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(popup);
+
+            // Close popup function
+            window.closeAnytimePopup = function() {
+                popup.style.animation = 'fadeOut 0.3s ease-out';
+                setTimeout(() => {
+                    if (document.body.contains(popup)) {
+                        document.body.removeChild(popup);
+                    }
+                }, 300);
+            };
+
+            // Close on background click
+            popup.addEventListener('click', (e) => {
+                if (e.target === popup) {
+                    closeAnytimePopup();
+                }
+            });
         }
 
         function updateTime() {
@@ -648,7 +693,10 @@
                 const now = new Date();
                 const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
-                container.innerHTML = schedule.map((block, index) => {
+                // Keep the header and add schedule blocks after it
+                const headerHtml = container.querySelector('.header').outerHTML;
+                
+                const scheduleHtml = schedule.map((block, index) => {
                     const [start, end] = block.time.split(' - ');
                     const startMinutes = parseTimeString(start);
                     const endMinutes = parseTimeString(end);
@@ -683,97 +731,18 @@
                             <div class="boost">
                                 <strong>✨ ${block.boost}</strong>
                             </div>
-                            <div class="earnings-input">
-                                <input type="number" step="0.01" placeholder="$0.00" id="earnings-${index}">
-                                <button onclick="addEarnings(${index})">💰 Add Earnings</button>
-                            </div>
                         </div>
                     `;
                 }).join('');
+
+                container.innerHTML = headerHtml + scheduleHtml;
             } catch (error) {
                 console.error('Schedule render error:', error);
             }
         }
 
-        function addEarnings(blockIndex) {
-            try {
-                const input = document.getElementById(`earnings-${blockIndex}`);
-                const amount = parseFloat(input.value);
-                
-                if (amount && amount > 0 && !isNaN(amount)) {
-                    earnings.today += amount;
-                    earnings.week += amount;
-                    
-                    // Store in memory
-                    window.todayEarnings = earnings.today.toFixed(2);
-                    window.weekEarnings = earnings.week.toFixed(2);
-                    
-                    updateEarningsDisplay();
-                    input.value = '';
-                    
-                    showCelebration(amount);
-                }
-            } catch (error) {
-                console.error('Add earnings error:', error);
-            }
-        }
-
-        function updateEarningsDisplay() {
-            try {
-                document.getElementById('todayEarnings').textContent = earnings.today.toFixed(2);
-                document.getElementById('weekEarnings').textContent = earnings.week.toFixed(2);
-            } catch (error) {
-                console.error('Earnings display error:', error);
-            }
-        }
-
-        function showCelebration(amount) {
-            try {
-                const celebration = document.createElement('div');
-                celebration.style.cssText = `
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    background: var(--gradient-success);
-                    color: white;
-                    padding: 25px 45px;
-                    border-radius: 50px;
-                    font-size: 1.8rem;
-                    font-weight: 700;
-                    z-index: 10000;
-                    animation: celebrationPop 2s ease-out forwards;
-                    box-shadow: var(--shadow-strong);
-                    border: 1px solid rgba(255, 255, 255, 0.2);
-                    backdrop-filter: blur(10px);
-                `;
-                celebration.textContent = `+$${amount.toFixed(2)} 🎉`;
-                
-                document.body.appendChild(celebration);
-                
-                setTimeout(() => {
-                    if (document.body.contains(celebration)) {
-                        document.body.removeChild(celebration);
-                    }
-                }, 2000);
-            } catch (error) {
-                console.error('Celebration error:', error);
-            }
-        }
-
         // Event listeners
         document.addEventListener('DOMContentLoaded', init);
-
-        // Add CSS animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes celebrationPop {
-                0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-                50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
-                100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>
