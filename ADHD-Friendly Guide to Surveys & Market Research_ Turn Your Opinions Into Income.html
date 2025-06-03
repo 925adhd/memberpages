@@ -76,6 +76,7 @@
             max-width: 100%;
             margin: 0 auto;
             padding: 1rem;
+            margin-top: 4rem;
         }
 
         /* Header */
@@ -478,33 +479,16 @@
             font-size: 1rem;
         }
 
-        /* Focus helpers for ADHD */
-        .focus-helper {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 12px;
-            height: 12px;
-            background: var(--accent-emerald);
-            border-radius: 50%;
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
-            animation: focusPulse 2s infinite;
-            z-index: 1000;
-        }
-
-        @keyframes focusPulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.2); }
-        }
-
         .scroll-progress {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.1);
+            height: 12px;
+            background: rgba(0, 0, 0, 0.7);
             z-index: 1000;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.15);
         }
 
         .scroll-progress-bar {
@@ -512,6 +496,190 @@
             background: var(--gradient-adhd);
             width: 0%;
             transition: width 0.3s ease;
+            position: relative;
+            box-shadow: 0 0 40px rgba(79, 70, 229, 1), 0 0 80px rgba(16, 185, 129, 0.6);
+            animation: progressGlow 2s ease-in-out infinite alternate;
+        }
+
+        .scroll-progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 30px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8));
+            animation: progressShine 3s ease-in-out infinite;
+        }
+
+        @keyframes progressGlow {
+            0% { 
+                box-shadow: 0 0 30px rgba(79, 70, 229, 0.8), 0 0 60px rgba(16, 185, 129, 0.4);
+            }
+            100% { 
+                box-shadow: 0 0 50px rgba(79, 70, 229, 1.2), 0 0 100px rgba(16, 185, 129, 0.8);
+            }
+        }
+
+        @keyframes progressShine {
+            0%, 100% { transform: translateX(-30px); opacity: 0; }
+            50% { transform: translateX(0); opacity: 1; }
+        }
+
+        .progress-indicator {
+            position: fixed;
+            top: 10px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: var(--text-primary);
+            padding: 0.4rem 0.8rem;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 999;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .section-progress {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .progress-circle {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .progress-circle.active {
+            background: var(--accent-emerald);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+
+        .progress-circle.completed {
+            background: var(--accent-blue);
+        }
+
+        /* Voice Reader Controls */
+        .voice-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .voice-btn {
+            background: var(--accent-teal);
+            border: none;
+            border-radius: 6px;
+            color: white;
+            padding: 0.35rem 0.7rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-weight: 500;
+            min-width: 85px;
+            justify-content: center;
+        }
+
+        .voice-btn:hover {
+            background: var(--accent-blue);
+            transform: translateY(-1px);
+        }
+
+        .voice-btn:disabled {
+            background: rgba(255, 255, 255, 0.1);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .voice-btn.playing {
+            background: var(--accent-emerald);
+            animation: playingPulse 1.5s infinite;
+        }
+
+        .voice-btn.paused {
+            background: var(--accent-amber);
+            animation: pausedPulse 2s infinite;
+        }
+
+        .voice-btn.stopped {
+            background: var(--accent-rose);
+        }
+
+        @keyframes playingPulse {
+            0%, 100% { box-shadow: 0 0 5px rgba(16, 185, 129, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.8); }
+        }
+
+        @keyframes pausedPulse {
+            0%, 100% { box-shadow: 0 0 5px rgba(245, 158, 11, 0.5); }
+            50% { box-shadow: 0 0 15px rgba(245, 158, 11, 0.8); }
+        }
+
+        .voice-speed-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .voice-selector {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .voice-select {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            color: var(--text-primary);
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+            min-width: 140px;
+            max-width: 180px;
+        }
+
+        .voice-select option {
+            background: var(--secondary-bg);
+            color: var(--text-primary);
+        }
+
+        .speed-slider {
+            width: 80px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .speed-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: var(--accent-teal);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .speed-slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            background: var(--accent-teal);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
         }
 
         /* Quick access floating button */
@@ -541,6 +709,33 @@
         @media (max-width: 768px) {
             .container {
                 padding: 0.75rem;
+                margin-top: 3.5rem;
+            }
+
+            .progress-indicator {
+                top: 10px;
+                right: 10px;
+                padding: 0.3rem 0.6rem;
+                font-size: 0.75rem;
+            }
+
+            .progress-circle {
+                width: 6px;
+                height: 6px;
+            }
+
+            .voice-controls {
+                margin-bottom: 0.75rem;
+            }
+
+            .voice-btn {
+                font-size: 0.75rem;
+                padding: 0.3rem 0.6rem;
+                min-width: 75px;
+            }
+
+            .speed-slider {
+                width: 60px;
             }
 
             .section {
@@ -596,11 +791,6 @@
                 text-align: left;
             }
 
-            .focus-helper {
-                top: 10px;
-                right: 10px;
-            }
-
             .quick-nav {
                 bottom: 15px;
                 right: 15px;
@@ -618,6 +808,37 @@
         @media (max-width: 480px) {
             .container {
                 padding: 0.5rem;
+                margin-top: 3rem;
+            }
+
+            .progress-indicator {
+                right: 5px;
+                top: 8px;
+                padding: 0.25rem 0.5rem;
+                font-size: 0.7rem;
+            }
+
+            .section-progress {
+                gap: 0.3rem;
+            }
+
+            .progress-circle {
+                width: 5px;
+                height: 5px;
+            }
+
+            .voice-controls {
+                gap: 0.5rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .voice-selector, .voice-speed-control {
+                justify-content: center;
+            }
+
+            .voice-select {
+                min-width: 120px;
+                max-width: 160px;
             }
 
             .section {
@@ -646,8 +867,7 @@
         @media (prefers-reduced-motion: reduce) {
             .bg-gradient,
             .hero-header::before,
-            .main-title,
-            .focus-helper {
+            .main-title {
                 animation: none;
             }
             
@@ -661,9 +881,22 @@
 </head>
 <body>
     <div class="bg-gradient"></div>
-    <div class="focus-helper"></div>
     <div class="scroll-progress">
         <div class="scroll-progress-bar"></div>
+    </div>
+    
+    <div class="progress-indicator">
+        <div class="section-progress">
+            <span id="current-section">Introduction</span>
+            <div class="progress-circle completed"></div>
+            <div class="progress-circle active"></div>
+            <div class="progress-circle"></div>
+            <div class="progress-circle"></div>
+            <div class="progress-circle"></div>
+            <div class="progress-circle"></div>
+            <div class="progress-circle"></div>
+            <div class="progress-circle"></div>
+        </div>
     </div>
 
     <div class="container">
@@ -676,13 +909,34 @@
 
         <!-- Intro Highlight -->
         <div class="highlight-card">
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="intro-highlight">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
+                </button>
+                <div class="voice-selector">
+                    <span>Voice:</span>
+                    <select class="voice-select" id="voice-select" onchange="updateSelectedVoice(this.value)">
+                        <option value="">Loading voices...</option>
+                    </select>
+                </div>
+                <div class="voice-speed-control">
+                    <span>Speed:</span>
+                    <input type="range" class="speed-slider" min="0.5" max="2" step="0.1" value="1.2" onchange="updateSpeechRate(this.value)">
+                    <span id="speed-display">1.2x</span>
+                </div>
+            </div>
             <div class="card-title">
                 <div class="card-icon">🧠</div>
                 Welcome to Realistic Survey Work!
             </div>
-            <p>This guide is designed for people with ADHD considering survey and market research work. <strong>Survey work can be a legitimate way to earn modest supplemental income</strong> - typically $20-200 per month with consistent effort.</p>
-            <br>
-            <p>We'll give you honest expectations about earnings, time investment, and strategies that work specifically for ADHD brains.</p>
+            <div id="intro-highlight">
+                <p>This guide is designed for people with ADHD considering survey and market research work. <strong>Survey work can be a legitimate way to earn modest supplemental income</strong> - typically $20-200 per month with consistent effort.</p>
+                <br>
+                <p>We'll give you honest expectations about earnings, time investment, and strategies that work specifically for ADHD brains.</p>
+            </div>
         </div>
 
         <!-- Table of Contents -->
@@ -747,28 +1001,49 @@
                 <span class="title-text">Why Survey Work Can Work for ADHD Minds</span>
             </h2>
             
-            <p>Survey work offers some advantages that can align with ADHD traits, though it's important to have realistic expectations about both the benefits and challenges.</p>
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="intro-content">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
+                </button>
+            </div>
+            
+            <div id="intro-content">
+                <p>Survey work offers some advantages that can align with ADHD traits, though it's important to have realistic expectations about both the benefits and challenges.</p>
+            </div>
 
             <div class="adhd-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="adhd-advantages">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">⚡</div>
                     Potential ADHD Advantages
                 </div>
-                <ul class="styled-list">
-                    <li><strong>Short Tasks:</strong> Most surveys take 5-20 minutes, which can fit ADHD attention spans</li>
-                    <li><strong>Variety:</strong> Different topics and formats can provide the novelty ADHD brains crave</li>
-                    <li><strong>Flexible Timing:</strong> Work when your focus is good, stop when it's not</li>
-                    <li><strong>Immediate Feedback:</strong> Quick completion and payment can provide dopamine rewards</li>
-                </ul>
-                <br>
-                <p><strong>Real Challenges for ADHD:</strong></p>
-                <ul class="styled-list">
-                    <li><strong>Repetitive Questions:</strong> Many surveys have similar, boring questions</li>
-                    <li><strong>Screener Frustration:</strong> Getting disqualified after 5 minutes of questions</li>
-                    <li><strong>Low Pay:</strong> Most surveys pay $3-6/hour, which can be demotivating</li>
-                    <li><strong>Inconsistent Availability:</strong> Good surveys are often hard to find</li>
-                    <li><strong>Attention to Detail:</strong> Careless answers can get you banned from platforms</li>
-                </ul>
+                <div id="adhd-advantages">
+                    <ul class="styled-list">
+                        <li><strong>Short Tasks:</strong> Most surveys take 5-20 minutes, which can fit ADHD attention spans</li>
+                        <li><strong>Variety:</strong> Different topics and formats can provide the novelty ADHD brains crave</li>
+                        <li><strong>Flexible Timing:</strong> Work when your focus is good, stop when it's not</li>
+                        <li><strong>Immediate Feedback:</strong> Quick completion and payment can provide dopamine rewards</li>
+                    </ul>
+                    <br>
+                    <p><strong>Real Challenges for ADHD:</strong></p>
+                    <ul class="styled-list">
+                        <li><strong>Repetitive Questions:</strong> Many surveys have similar, boring questions</li>
+                        <li><strong>Screener Frustration:</strong> Getting disqualified after 5 minutes of questions</li>
+                        <li><strong>Low Pay:</strong> Most surveys pay $3-6/hour, which can be demotivating</li>
+                        <li><strong>Inconsistent Availability:</strong> Good surveys are often hard to find</li>
+                        <li><strong>Attention to Detail:</strong> Careless answers can get you banned from platforms</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -779,7 +1054,18 @@
                 <span class="title-text">Realistic Platform Comparison</span>
             </h2>
             
-            <p>Not all survey platforms are equal. Here's an honest assessment based on current user experiences and pay rates:</p>
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="platform-intro">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
+                </button>
+            </div>
+            
+            <div id="platform-intro">
+                <p>Not all survey platforms are equal. Here's an honest assessment based on current user experiences and pay rates:</p>
+            </div>
 
             <div class="data-grid">
                 <div class="data-card">
@@ -922,13 +1208,23 @@
             </div>
 
             <div class="warning-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="platform-reality">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">⚠️</div>
                     Platform Reality Check
                 </div>
-                <p><strong>High-paying platforms like Respondent.io are extremely competitive.</strong> One user reported being selected for only 5 studies out of 50 applications. These aren't regular survey work - they're more like occasional lottery wins.</p>
-                <br>
-                <p><strong>Recommendation:</strong> Focus on 2-3 reliable platforms (like Prolific + Survey Junkie + one other) rather than chasing the highest-paying but hardest-to-access opportunities.</p>
+                <div id="platform-reality">
+                    <p><strong>High-paying platforms like Respondent.io are extremely competitive.</strong> One user reported being selected for only 5 studies out of 50 applications. These aren't regular survey work - they're more like occasional lottery wins.</p>
+                    <br>
+                    <p><strong>Recommendation:</strong> Focus on 2-3 reliable platforms (like Prolific + Survey Junkie + one other) rather than chasing the highest-paying but hardest-to-access opportunities.</p>
+                </div>
             </div>
         </div>
 
@@ -940,15 +1236,25 @@
             </h2>
 
             <div class="highlight-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="realistic-earnings">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">📊</div>
                     Realistic Monthly Earnings
                 </div>
-                <p><strong>Conservative estimate:</strong> $20-50/month with casual participation (2-3 hours/week)</p>
-                <p><strong>Active effort:</strong> $50-150/month with dedicated time (5-10 hours/week)</p>
-                <p><strong>Aggressive approach:</strong> $100-200/month with strategic focus (10-15 hours/week)</p>
-                <br>
-                <p><em>These figures assume a mix of regular surveys and occasional higher-paying opportunities.</em></p>
+                <div id="realistic-earnings">
+                    <p><strong>Conservative estimate:</strong> $20-50/month with casual participation (2-3 hours/week)</p>
+                    <p><strong>Active effort:</strong> $50-150/month with dedicated time (5-10 hours/week)</p>
+                    <p><strong>Aggressive approach:</strong> $100-200/month with strategic focus (10-15 hours/week)</p>
+                    <br>
+                    <p><em>These figures assume a mix of regular surveys and occasional higher-paying opportunities.</em></p>
+                </div>
             </div>
 
             <h3 class="section-subtitle">Survey Value Assessment</h3>
@@ -1036,23 +1342,43 @@
             </div>
 
             <div class="tip-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="pay-calculator">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">💡</div>
                     Quick Pay Rate Calculator
                 </div>
-                <p><strong>Formula:</strong> (Payment ÷ Estimated minutes) × 60 = Hourly rate</p>
-                <p><strong>Example:</strong> ($2 ÷ 15 minutes) × 60 = $8/hour ✅</p>
-                <p><strong>Example:</strong> ($1 ÷ 25 minutes) × 60 = $2.40/hour ❌</p>
+                <div id="pay-calculator">
+                    <p><strong>Formula:</strong> (Payment ÷ Estimated minutes) × 60 = Hourly rate</p>
+                    <p><strong>Example:</strong> ($2 ÷ 15 minutes) × 60 = $8/hour ✅</p>
+                    <p><strong>Example:</strong> ($1 ÷ 25 minutes) × 60 = $2.40/hour ❌</p>
+                </div>
             </div>
 
             <div class="success-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="success-story">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">📈</div>
                     Realistic Success Story
                 </div>
-                <p><em>"I've been doing surveys consistently for about 8 months. I stick to Prolific and Survey Junkie mostly, with occasional dscout missions. On average, I make about $80-120 per month spending roughly 6-8 hours per week.</em></p>
-                <br>
-                <p><em>It's not life-changing money, but it covers my streaming subscriptions and gives me a little extra for coffee. The key is being selective about which surveys I take and not getting frustrated by the low-paying ones."</em></p>
+                <div id="success-story">
+                    <p><em>"I've been doing surveys consistently for about 8 months. I stick to Prolific and Survey Junkie mostly, with occasional dscout missions. On average, I make about $80-120 per month spending roughly 6-8 hours per week.</em></p>
+                    <br>
+                    <p><em>It's not life-changing money, but it covers my streaming subscriptions and gives me a little extra for coffee. The key is being selective about which surveys I take and not getting frustrated by the low-paying ones."</em></p>
+                </div>
             </div>
         </div>
 
@@ -1066,17 +1392,27 @@
             <h3 class="section-subtitle">Working With Your ADHD Brain</h3>
 
             <div class="adhd-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="energy-approach">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">🎯</div>
                     The "Energy-Based" Approach
                 </div>
-                <p>Instead of rigid schedules, match survey types to your current energy level:</p>
-                <ul class="styled-list">
-                    <li><strong>High Energy/Focus:</strong> Tackle longer, higher-paying surveys (Prolific, UserTesting)</li>
-                    <li><strong>Medium Energy:</strong> Do standard surveys with moderate pay (Survey Junkie)</li>
-                    <li><strong>Low Energy:</strong> Quick, mindless surveys while doing other activities</li>
-                    <li><strong>No Energy:</strong> Skip surveys entirely - don't force it</li>
-                </ul>
+                <div id="energy-approach">
+                    <p>Instead of rigid schedules, match survey types to your current energy level:</p>
+                    <ul class="styled-list">
+                        <li><strong>High Energy/Focus:</strong> Tackle longer, higher-paying surveys (Prolific, UserTesting)</li>
+                        <li><strong>Medium Energy:</strong> Do standard surveys with moderate pay (Survey Junkie)</li>
+                        <li><strong>Low Energy:</strong> Quick, mindless surveys while doing other activities</li>
+                        <li><strong>No Energy:</strong> Skip surveys entirely - don't force it</li>
+                    </ul>
+                </div>
             </div>
 
             <h3 class="section-subtitle">Managing Common ADHD Challenges</h3>
@@ -1123,34 +1459,54 @@
             <h3 class="section-subtitle">Environment Setup</h3>
 
             <div class="tip-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="environment-setup">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">🏠</div>
                     ADHD-Friendly Survey Environment
                 </div>
-                <ul class="styled-list">
-                    <li><strong>Minimize Distractions:</strong> Close unnecessary tabs, put phone on silent</li>
-                    <li><strong>Comfort Items:</strong> Have fidget tools, snacks, and drinks ready</li>
-                    <li><strong>Background Options:</strong> Some ADHD people focus better with music/TV, others need silence</li>
-                    <li><strong>Standing Option:</strong> Consider a standing desk setup for restless energy</li>
-                    <li><strong>Multiple Devices:</strong> Use tablet/phone for some surveys to change position</li>
-                </ul>
+                <div id="environment-setup">
+                    <ul class="styled-list">
+                        <li><strong>Minimize Distractions:</strong> Close unnecessary tabs, put phone on silent</li>
+                        <li><strong>Comfort Items:</strong> Have fidget tools, snacks, and drinks ready</li>
+                        <li><strong>Background Options:</strong> Some ADHD people focus better with music/TV, others need silence</li>
+                        <li><strong>Standing Option:</strong> Consider a standing desk setup for restless energy</li>
+                        <li><strong>Multiple Devices:</strong> Use tablet/phone for some surveys to change position</li>
+                    </ul>
+                </div>
             </div>
 
             <h3 class="section-subtitle">The Modified Pomodoro for Surveys</h3>
 
             <div class="adhd-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="survey-sessions">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">⏰</div>
                     ADHD Survey Sessions
                 </div>
-                <ol class="numbered-list">
-                    <li><strong>Start Small:</strong> 15-minute survey session (2-3 short surveys)</li>
-                    <li><strong>Movement Break:</strong> 3-5 minutes of physical movement</li>
-                    <li><strong>Second Round:</strong> Another 15-minute session if you're still focused</li>
-                    <li><strong>Longer Break:</strong> 10-15 minutes doing something enjoyable</li>
-                    <li><strong>Optional Third Round:</strong> Only if energy is still good</li>
-                </ol>
-                <p><strong>Key:</strong> Stop before you get frustrated or tired. Better to have productive short sessions than forced long ones.</p>
+                <div id="survey-sessions">
+                    <ol class="numbered-list">
+                        <li><strong>Start Small:</strong> 15-minute survey session (2-3 short surveys)</li>
+                        <li><strong>Movement Break:</strong> 3-5 minutes of physical movement</li>
+                        <li><strong>Second Round:</strong> Another 15-minute session if you're still focused</li>
+                        <li><strong>Longer Break:</strong> 10-15 minutes doing something enjoyable</li>
+                        <li><strong>Optional Third Round:</strong> Only if energy is still good</li>
+                    </ol>
+                    <p><strong>Key:</strong> Stop before you get frustrated or tired. Better to have productive short sessions than forced long ones.</p>
+                </div>
             </div>
         </div>
 
@@ -1246,13 +1602,23 @@
             </div>
 
             <div class="warning-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="time-investment">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">⚠️</div>
                     Realistic Time Investment
                 </div>
-                <p><strong>Don't expect instant results.</strong> Building up good survey opportunities takes time. Many new users get discouraged in the first month when earnings are low.</p>
-                <br>
-                <p><strong>Timeline:</strong> Month 1: $20-40 (learning), Month 2-3: $40-80 (improving), Month 4+: $60-120+ (optimized approach)</p>
+                <div id="time-investment">
+                    <p><strong>Don't expect instant results.</strong> Building up good survey opportunities takes time. Many new users get discouraged in the first month when earnings are low.</p>
+                    <br>
+                    <p><strong>Timeline:</strong> Month 1: $20-40 (learning), Month 2-3: $40-80 (improving), Month 4+: $60-120+ (optimized approach)</p>
+                </div>
             </div>
         </div>
 
@@ -1264,36 +1630,66 @@
             </h2>
 
             <div class="success-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="user-experience">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">💬</div>
                     ADHD User: Finding the Right Platforms
                 </div>
-                <p><em>"Prolific works great for my ADHD because the studies are actually interesting - I love trying to figure out what they're researching. It feels like a puzzle rather than boring questions about laundry detergent.</em></p>
-                <br>
-                <p><em>Survey Junkie is my fallback for when I need mindless tasks. I can do those while watching Netflix. But I had to learn to avoid the super long ones when my focus is already shot."</em></p>
+                <div id="user-experience">
+                    <p><em>"Prolific works great for my ADHD because the studies are actually interesting - I love trying to figure out what they're researching. It feels like a puzzle rather than boring questions about laundry detergent.</em></p>
+                    <br>
+                    <p><em>Survey Junkie is my fallback for when I need mindless tasks. I can do those while watching Netflix. But I had to learn to avoid the super long ones when my focus is already shot."</em></p>
+                </div>
             </div>
 
             <div class="warning-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="common-mistakes">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">⚠️</div>
                     Common Mistakes to Avoid
                 </div>
-                <ul class="styled-list">
-                    <li><strong>Chasing High-Pay Platforms:</strong> Spending hours applying to Respondent.io instead of doing available surveys</li>
-                    <li><strong>Profile Inconsistency:</strong> Forgetting to update profile changes (like quitting vaping) and getting disqualified</li>
-                    <li><strong>Burnout from Low Pay:</strong> Accepting too many $0.50 surveys and getting frustrated</li>
-                    <li><strong>Hyperfocus Traps:</strong> Spending 3 hours on surveys earning $5 total</li>
-                </ul>
+                <div id="common-mistakes">
+                    <ul class="styled-list">
+                        <li><strong>Chasing High-Pay Platforms:</strong> Spending hours applying to Respondent.io instead of doing available surveys</li>
+                        <li><strong>Profile Inconsistency:</strong> Forgetting to update profile changes (like quitting vaping) and getting disqualified</li>
+                        <li><strong>Burnout from Low Pay:</strong> Accepting too many $0.50 surveys and getting frustrated</li>
+                        <li><strong>Hyperfocus Traps:</strong> Spending 3 hours on surveys earning $5 total</li>
+                    </ul>
+                </div>
             </div>
 
             <div class="tip-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="profile-optimization">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">🎯</div>
                     Profile Optimization Reality
                 </div>
-                <p><strong>Keep profiles honest and updated.</strong> Many ADHD users forget to update important changes that affect survey eligibility.</p>
-                <br>
-                <p><strong>Monthly Profile Check:</strong> Set a calendar reminder to review and update your demographics, employment, and lifestyle information across all platforms.</p>
+                <div id="profile-optimization">
+                    <p><strong>Keep profiles honest and updated.</strong> Many ADHD users forget to update important changes that affect survey eligibility.</p>
+                    <br>
+                    <p><strong>Monthly Profile Check:</strong> Set a calendar reminder to review and update your demographics, employment, and lifestyle information across all platforms.</p>
+                </div>
             </div>
         </div>
 
@@ -1305,62 +1701,92 @@
             </h2>
 
             <div class="highlight-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="realistic-expectations">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">✨</div>
                     Setting Realistic Expectations
                 </div>
-                <p>Survey work is best viewed as a way to earn modest supplemental income while contributing to research. <strong>It's not a path to significant money, but it can be a decent fit for some ADHD brains.</strong></p>
-                <br>
-                <p><strong>Best for:</strong> People who enjoy giving opinions, need flexible timing, and are satisfied with modest earnings.</p>
-                <p><strong>Not ideal for:</strong> Those needing substantial income or who get frustrated by repetitive, low-paying tasks.</p>
+                <div id="realistic-expectations">
+                    <p>Survey work is best viewed as a way to earn modest supplemental income while contributing to research. <strong>It's not a path to significant money, but it can be a decent fit for some ADHD brains.</strong></p>
+                    <br>
+                    <p><strong>Best for:</strong> People who enjoy giving opinions, need flexible timing, and are satisfied with modest earnings.</p>
+                    <p><strong>Not ideal for:</strong> Those needing substantial income or who get frustrated by repetitive, low-paying tasks.</p>
+                </div>
             </div>
 
             <div class="adhd-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="getting-started-plan">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">📋</div>
                     ADHD-Friendly Getting Started Plan
                 </div>
-                <ol class="numbered-list">
-                    <li><strong>Week 1:</strong> Sign up for Prolific (if accepted) and Survey Junkie. Complete profiles carefully.</li>
-                    <li><strong>Week 2:</strong> Try different survey types to see what feels manageable for your ADHD brain.</li>
-                    <li><strong>Week 3:</strong> Add one more platform (Swagbucks or UserTesting) based on your preferences.</li>
-                    <li><strong>Week 4:</strong> Establish a routine that works with your energy patterns.</li>
-                    <li><strong>Month 2:</strong> Optimize based on what you've learned about your survey preferences and ADHD needs.</li>
-                </ol>
+                <div id="getting-started-plan">
+                    <ol class="numbered-list">
+                        <li><strong>Week 1:</strong> Sign up for Prolific (if accepted) and Survey Junkie. Complete profiles carefully.</li>
+                        <li><strong>Week 2:</strong> Try different survey types to see what feels manageable for your ADHD brain.</li>
+                        <li><strong>Week 3:</strong> Add one more platform (Swagbucks or UserTesting) based on your preferences.</li>
+                        <li><strong>Week 4:</strong> Establish a routine that works with your energy patterns.</li>
+                        <li><strong>Month 2:</strong> Optimize based on what you've learned about your survey preferences and ADHD needs.</li>
+                    </ol>
+                </div>
             </div>
 
             <div class="tip-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="first-month-goals">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">💰</div>
                     First Month Goals (Be Realistic!)
                 </div>
-                <ul class="styled-list">
-                    <li><strong>Week 1:</strong> $5-10 (learning platforms, getting qualified)</li>
-                    <li><strong>Week 2:</strong> $10-20 (finding your rhythm)</li>
-                    <li><strong>Week 3:</strong> $15-25 (getting more efficient)</li>
-                    <li><strong>Week 4:</strong> $20-30 (developing consistency)</li>
-                </ul>
-                <p><strong>Total Month 1 Goal:</strong> $50-85 with 3-5 hours per week investment</p>
+                <div id="first-month-goals">
+                    <ul class="styled-list">
+                        <li><strong>Week 1:</strong> $5-10 (learning platforms, getting qualified)</li>
+                        <li><strong>Week 2:</strong> $10-20 (finding your rhythm)</li>
+                        <li><strong>Week 3:</strong> $15-25 (getting more efficient)</li>
+                        <li><strong>Week 4:</strong> $20-30 (developing consistency)</li>
+                    </ul>
+                    <p><strong>Total Month 1 Goal:</strong> $50-85 with 3-5 hours per week investment</p>
+                </div>
             </div>
 
             <div class="success-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="ready-to-start">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
                 <div class="card-title">
                     <div class="card-icon">🎉</div>
                     Ready to Start?
                 </div>
-                <p>Remember: survey work is a marathon, not a sprint. <strong>Start small, be consistent when possible, and don't put pressure on yourself to earn huge amounts.</strong></p>
-                <br>
-                <p>Your ADHD traits of curiosity and ability to hyperfocus can be assets, but be honest about the challenges of sustained attention and low pay rates.</p>
-            </div>
-
-            <hr style="border: 1px solid var(--border-subtle); margin: 2rem 0;">
-
-            <div style="background: rgba(255, 255, 255, 0.02); border-radius: 12px; padding: 1.5rem; margin-top: 2rem; border: 1px solid var(--border-subtle);">
-                <p><strong>About This Guide:</strong> This guide provides realistic expectations about survey and market research work for individuals with ADHD. Information is based on current platform research, user experiences, and honest assessment of earning potential.</p>
-                <br>
-                <p><strong>Disclaimer:</strong> Earnings vary widely based on demographics, time investment, and platform availability. This should not be considered financial advice. Survey work is best treated as supplemental income only.</p>
-                <br>
-                <p><strong>Last Updated:</strong> June 2025</p>
+                <div id="ready-to-start">
+                    <p>Remember: survey work is a marathon, not a sprint. <strong>Start small, be consistent when possible, and don't put pressure on yourself to earn huge amounts.</strong></p>
+                    <br>
+                    <p>Your ADHD traits of curiosity and ability to hyperfocus can be assets, but be honest about the challenges of sustained attention and low pay rates.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -1371,13 +1797,326 @@
     </button>
 
     <script>
-        // Scroll progress bar
-        window.addEventListener('scroll', () => {
-            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-            document.querySelector('.scroll-progress-bar').style.width = scrolled + '%';
+        // Simplified Speech synthesis with toggle functionality
+        let currentSpeech = null;
+        let speechRate = 1.2;
+        let selectedVoice = null;
+        let availableVoices = [];
+        let currentButton = null;
+        let isPlaying = false;
+        let isPaused = false;
+
+        // Simple toggle speech function
+        function toggleSpeech(button) {
+            const targetId = button.getAttribute('data-target');
+            const targetElement = document.getElementById(targetId);
+            
+            if (!targetElement) return;
+
+            // If different content is selected, stop current and start new
+            if (currentButton && currentButton !== button) {
+                stopSpeech();
+                setTimeout(() => startSpeech(button, targetElement), 100);
+                return;
+            }
+
+            // If same button clicked, toggle play/pause
+            if (currentButton === button) {
+                if (isPlaying && !isPaused) {
+                    // Currently playing - pause it
+                    pauseSpeech();
+                } else if (isPaused) {
+                    // Currently paused - resume it
+                    resumeSpeech();
+                } else {
+                    // Stopped - start playing
+                    startSpeech(button, targetElement);
+                }
+            } else {
+                // New content - start playing
+                startSpeech(button, targetElement);
+            }
+        }
+
+        function startSpeech(button, targetElement) {
+            // Stop any existing speech
+            stopSpeech();
+
+            const textContent = extractTextContent(targetElement);
+            if (!textContent.trim()) return;
+
+            // Create new speech
+            currentSpeech = new SpeechSynthesisUtterance(textContent);
+            currentSpeech.rate = speechRate;
+            currentSpeech.pitch = 1;
+            currentSpeech.volume = 0.8;
+
+            if (selectedVoice) {
+                currentSpeech.voice = selectedVoice;
+            }
+
+            // Update state
+            currentButton = button;
+            isPlaying = true;
+            isPaused = false;
+
+            // Update UI
+            updateButtonStates();
+
+            // Speech event handlers
+            currentSpeech.onend = () => {
+                isPlaying = false;
+                isPaused = false;
+                currentButton = null;
+                updateButtonStates();
+            };
+
+            currentSpeech.onerror = (event) => {
+                console.error('Speech synthesis error:', event);
+                isPlaying = false;
+                isPaused = false;
+                currentButton = null;
+                updateButtonStates();
+            };
+
+            // Start speaking
+            try {
+                speechSynthesis.speak(currentSpeech);
+            } catch (error) {
+                console.error('Failed to start speech:', error);
+                isPlaying = false;
+                isPaused = false;
+                currentButton = null;
+                updateButtonStates();
+            }
+        }
+
+        function pauseSpeech() {
+            if (isPlaying && !isPaused) {
+                speechSynthesis.pause();
+                isPaused = true;
+                updateButtonStates();
+            }
+        }
+
+        function resumeSpeech() {
+            if (isPaused) {
+                speechSynthesis.resume();
+                isPaused = false;
+                updateButtonStates();
+            }
+        }
+
+        function stopSpeech() {
+            if (currentSpeech) {
+                speechSynthesis.cancel();
+            }
+            isPlaying = false;
+            isPaused = false;
+            currentButton = null;
+            updateButtonStates();
+        }
+
+        function updateButtonStates() {
+            // Reset all speech buttons to default state
+            document.querySelectorAll('.voice-btn[data-target]').forEach(btn => {
+                btn.className = 'voice-btn';
+                btn.innerHTML = '<span>🔊</span> Play';
+            });
+
+            // Update current button state
+            if (currentButton) {
+                if (isPlaying && !isPaused) {
+                    currentButton.className = 'voice-btn playing';
+                    currentButton.innerHTML = '<span>⏸️</span> Pause';
+                } else if (isPaused) {
+                    currentButton.className = 'voice-btn paused';
+                    currentButton.innerHTML = '<span>▶️</span> Resume';
+                }
+            }
+        }
+
+        function extractTextContent(element) {
+            const clone = element.cloneNode(true);
+            const voiceControls = clone.querySelectorAll('.voice-controls');
+            voiceControls.forEach(control => control.remove());
+            return clone.textContent || clone.innerText || '';
+        }
+
+        function updateSelectedVoice(voiceIndex) {
+            if (voiceIndex === '') {
+                selectedVoice = null;
+            } else {
+                selectedVoice = availableVoices[parseInt(voiceIndex)];
+            }
+            
+            // If currently speaking, restart with new voice
+            if (isPlaying && currentButton) {
+                const targetId = currentButton.getAttribute('data-target');
+                const targetElement = document.getElementById(targetId);
+                
+                stopSpeech();
+                setTimeout(() => {
+                    if (targetElement) {
+                        startSpeech(currentButton, targetElement);
+                    }
+                }, 100);
+            }
+        }
+
+        function updateSpeechRate(rate) {
+            speechRate = parseFloat(rate);
+            document.getElementById('speed-display').textContent = rate + 'x';
+            
+            // If currently speaking, restart with new rate
+            if (isPlaying && currentButton) {
+                const targetId = currentButton.getAttribute('data-target');
+                const targetElement = document.getElementById(targetId);
+                
+                stopSpeech();
+                setTimeout(() => {
+                    if (targetElement) {
+                        startSpeech(currentButton, targetElement);
+                    }
+                }, 100);
+            }
+        }
+
+        // Load available voices
+        function loadVoices() {
+            availableVoices = speechSynthesis.getVoices();
+            const voiceSelect = document.getElementById('voice-select');
+            
+            if (availableVoices.length > 0) {
+                voiceSelect.innerHTML = '';
+                
+                const defaultOption = document.createElement('option');
+                defaultOption.value = '';
+                defaultOption.textContent = 'System Default';
+                voiceSelect.appendChild(defaultOption);
+                
+                availableVoices.forEach((voice, index) => {
+                    const option = document.createElement('option');
+                    option.value = index;
+                    option.textContent = voice.name + (voice.lang ? ` (${voice.lang})` : '');
+                    voiceSelect.appendChild(option);
+                });
+                
+                // Try to select a good default English voice
+                const preferredVoice = availableVoices.findIndex(voice => 
+                    voice.lang.startsWith('en') && voice.default
+                );
+                
+                if (preferredVoice !== -1) {
+                    voiceSelect.value = preferredVoice;
+                    selectedVoice = availableVoices[preferredVoice];
+                }
+            }
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'SELECT' && e.target.tagName !== 'TEXTAREA') {
+                switch(e.key) {
+                    case ' ': // Spacebar
+                        e.preventDefault();
+                        if (currentButton) {
+                            toggleSpeech(currentButton);
+                        }
+                        break;
+                    case 'Escape': // Stop
+                        e.preventDefault();
+                        stopSpeech();
+                        break;
+                }
+            }
         });
 
-        // Smooth scrolling for navigation links
+        // Section tracking and progress
+        const sections = ['introduction', 'platforms', 'earnings', 'adhd-strategies', 'focus-techniques', 'time-management', 'real-experiences', 'getting-started'];
+        let currentSectionIndex = 0;
+
+        function updateProgress() {
+            const scrolled = window.scrollY;
+            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrolled / totalHeight) * 100;
+            
+            document.querySelector('.scroll-progress-bar').style.width = scrollPercent + '%';
+            updateSectionProgress();
+        }
+
+        function updateSectionProgress() {
+            const scrollPosition = window.scrollY + 200;
+            
+            sections.forEach((sectionId, index) => {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    const sectionTop = section.offsetTop;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                        currentSectionIndex = index;
+                        updateProgressIndicator();
+                    }
+                }
+            });
+        }
+
+        function updateProgressIndicator() {
+            const sectionNames = [
+                'Introduction',
+                'Platform Comparison',
+                'Earnings',
+                'ADHD Strategies',
+                'Focus Techniques',
+                'Time Management',
+                'Real Experiences',
+                'Getting Started'
+            ];
+            
+            document.getElementById('current-section').textContent = sectionNames[currentSectionIndex] || 'Introduction';
+            
+            const circles = document.querySelectorAll('.progress-circle');
+            circles.forEach((circle, index) => {
+                circle.className = 'progress-circle';
+                if (index < currentSectionIndex) {
+                    circle.classList.add('completed');
+                } else if (index === currentSectionIndex) {
+                    circle.classList.add('active');
+                }
+            });
+        }
+
+        // Initialize
+        window.addEventListener('scroll', updateProgress);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+            
+            if ('speechSynthesis' in window) {
+                loadVoices();
+                if (speechSynthesis.onvoiceschanged !== undefined) {
+                    speechSynthesis.onvoiceschanged = loadVoices;
+                }
+                setTimeout(loadVoices, 100);
+            } else {
+                document.querySelectorAll('.voice-btn').forEach(btn => {
+                    btn.disabled = true;
+                    btn.textContent = 'Speech not supported';
+                });
+            }
+        });
+
+        // Cleanup
+        window.addEventListener('beforeunload', function() {
+            stopSpeech();
+        });
+
+        window.addEventListener('pagehide', function() {
+            stopSpeech();
+        });
+
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1387,27 +2126,10 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
+                    setTimeout(() => updateProgress(), 1000);
                 }
             });
         });
-
-        // Enhanced touch targets for mobile
-        document.querySelectorAll('.toc-item, .data-card').forEach(element => {
-            element.addEventListener('touchstart', function() {
-                this.style.transform = 'scale(0.98)';
-            });
-            
-            element.addEventListener('touchend', function() {
-                this.style.transform = '';
-            });
-        });
-
-        // Prevent horizontal scrolling
-        document.body.addEventListener('touchmove', function(e) {
-            if (e.touches.length > 1) {
-                e.preventDefault();
-            }
-        }, { passive: false });
     </script>
 </body>
 </html>
