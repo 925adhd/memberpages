@@ -123,83 +123,6 @@
       z-index: 1;
     }
 
-    .header {
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border-subtle);
-      border-radius: 20px;
-      padding: 2.5rem;
-      text-align: center;
-      box-shadow: var(--shadow-soft);
-      margin-bottom: 2rem;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
-      animation: slideUp 0.8s ease-out;
-    }
-
-    .header::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
-      animation: shimmer 4s infinite;
-      pointer-events: none;
-    }
-
-    @keyframes shimmer {
-      0% { transform: translateX(-100%) translateY(-100%) rotate(30deg); }
-      100% { transform: translateX(100%) translateY(100%) rotate(30deg); }
-    }
-
-    @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .header:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-medium);
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      background: var(--gradient-adhd);
-      background-size: 200% 200%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: textGradient 4s ease-in-out infinite;
-      font-weight: 700;
-      letter-spacing: -1px;
-      margin-bottom: 0.5rem;
-      position: relative;
-      z-index: 2;
-    }
-
-    @keyframes textGradient {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-
-    .subtitle {
-      color: var(--text-secondary);
-      font-size: 1.1rem;
-      font-weight: 400;
-      position: relative;
-      z-index: 2;
-    }
-
     .loading {
       background: var(--glass-bg);
       backdrop-filter: blur(20px);
@@ -564,11 +487,6 @@
 
     @media (max-width: 768px) {
       .container { padding: 1rem; }
-      .header { 
-        padding: 2rem;
-        margin-bottom: 1.5rem;
-      }
-      h1 { font-size: 2rem; }
       .post-content { padding: 1.5rem; }
       .post-title { font-size: 1.2rem; }
       .post-image, .post-image-placeholder { height: 160px; }
@@ -586,11 +504,6 @@
   <div class="floating-orb orb-3"></div>
 
   <div class="container">
-    <div class="header">
-      <h1></h1>
-      <p class="subtitle">Latest insights and strategies for ADHD minds</p>
-    </div>
-    
     <div id="blog-posts">
       <div class="loading">
         <div class="spinner"></div>
