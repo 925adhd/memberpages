@@ -555,15 +555,6 @@
             }
         }
 
-        // Initialize - expand first card by default
-        document.addEventListener('DOMContentLoaded', function() {
-            const firstCard = document.querySelector('.tool-card');
-            if (firstCard) {
-                firstCard.classList.add('expanded');
-                firstCard.classList.remove('collapsible');
-            }
-        });
-
         // Add touch feedback
         document.querySelectorAll('.tool-header').forEach(header => {
             header.addEventListener('touchstart', function() {
