@@ -76,6 +76,7 @@
             max-width: 100%;
             margin: 0 auto;
             padding: 1rem;
+            margin-top: 4rem;
         }
 
         /* Header */
@@ -519,10 +520,11 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
-            background: rgba(0, 0, 0, 0.3);
+            height: 12px;
+            background: rgba(0, 0, 0, 0.7);
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.15);
         }
 
         .scroll-progress-bar {
@@ -531,7 +533,33 @@
             width: 0%;
             transition: width 0.3s ease;
             position: relative;
-            box-shadow: 0 0 20px rgba(79, 70, 229, 0.5);
+            box-shadow: 0 0 40px rgba(79, 70, 229, 1), 0 0 80px rgba(16, 185, 129, 0.6);
+            animation: progressGlow 2s ease-in-out infinite alternate;
+        }
+
+        .scroll-progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 30px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8));
+            animation: progressShine 3s ease-in-out infinite;
+        }
+
+        @keyframes progressGlow {
+            0% { 
+                box-shadow: 0 0 30px rgba(79, 70, 229, 0.8), 0 0 60px rgba(16, 185, 129, 0.4);
+            }
+            100% { 
+                box-shadow: 0 0 50px rgba(79, 70, 229, 1.2), 0 0 100px rgba(16, 185, 129, 0.8);
+            }
+        }
+
+        @keyframes progressShine {
+            0%, 100% { transform: translateX(-30px); opacity: 0; }
+            50% { transform: translateX(0); opacity: 1; }
         }
 
         .progress-indicator {
@@ -751,13 +779,14 @@
         @media (max-width: 768px) {
             .container {
                 padding: 0.75rem;
+                margin-top: 3.5rem;
             }
 
             .progress-indicator {
-                top: 12px;
+                top: 10px;
                 right: 10px;
-                padding: 0.4rem 0.8rem;
-                font-size: 0.8rem;
+                padding: 0.3rem 0.6rem;
+                font-size: 0.75rem;
             }
 
             .progress-circle {
@@ -766,13 +795,13 @@
             }
 
             .voice-controls {
-                margin-bottom: 1rem;
+                margin-bottom: 0.75rem;
             }
 
             .voice-btn {
-                font-size: 0.8rem;
-                padding: 0.4rem 0.8rem;
-                min-width: 100px;
+                font-size: 0.75rem;
+                padding: 0.3rem 0.6rem;
+                min-width: 75px;
             }
 
             .speed-slider {
@@ -853,6 +882,7 @@
         @media (max-width: 480px) {
             .container {
                 padding: 0.5rem;
+                margin-top: 3rem;
             }
 
             .progress-indicator {
@@ -951,8 +981,8 @@
         <!-- Hero Header -->
         <div class="hero-header">
             <h1 class="main-title">ADHD-Friendly Guide to Data Annotation</h1>
-            <p class="subtitle">Realistic Expectations for Supplemental Income</p>
-            <div class="date-badge">✨ Created: April 14, 2025</div>
+            <p class="subtitle">Turn Your Focus into Realistic Supplemental Income</p>
+            <div class="date-badge">✨ Updated: June 2025</div>
         </div>
 
         <!-- Intro Highlight -->
@@ -961,8 +991,8 @@
                 <button class="voice-btn" onclick="toggleSpeech(this)" data-target="intro-text">
                     <span>🔊</span> Play
                 </button>
-                <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
-                    <span>🔄</span> Restart
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
                 </button>
                 <div class="voice-selector">
                     <span>Voice:</span>
@@ -972,8 +1002,8 @@
                 </div>
                 <div class="voice-speed-control">
                     <span>Speed:</span>
-                    <input type="range" class="speed-slider" min="0.5" max="2" step="0.1" value="1.4" onchange="updateSpeechRate(this.value)">
-                    <span id="speed-display">1.4x</span>
+                    <input type="range" class="speed-slider" min="0.5" max="2" step="0.1" value="1.2" onchange="updateSpeechRate(this.value)">
+                    <span id="speed-display">1.2x</span>
                 </div>
             </div>
             <div class="card-title">
@@ -1053,8 +1083,8 @@
                 <button class="voice-btn" onclick="toggleSpeech(this)" data-target="intro-section-content">
                     <span>🔊</span> Play
                 </button>
-                <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
-                    <span>🔄</span> Restart
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
                 </button>
             </div>
             
@@ -1075,8 +1105,8 @@
                     <button class="voice-btn" onclick="toggleSpeech(this)" data-target="adhd-benefits">
                         <span>🔊</span> Play
                     </button>
-                    <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
-                        <span>🔄</span> Restart
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
                     </button>
                 </div>
                 <div class="card-title">
@@ -1105,8 +1135,8 @@
                 <button class="voice-btn" onclick="toggleSpeech(this)" data-target="understanding-content">
                     <span>🔊</span> Play
                 </button>
-                <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
-                    <span>🔄</span> Restart
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
                 </button>
             </div>
             
@@ -1243,8 +1273,8 @@
                     <button class="voice-btn" onclick="toggleSpeech(this)" data-target="annotation-fit">
                         <span>🔊</span> Play
                     </button>
-                    <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
-                        <span>🔄</span> Restart
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
                     </button>
                 </div>
                 <div class="card-title">
@@ -1310,8 +1340,8 @@
                 <button class="voice-btn" onclick="toggleSpeech(this)" data-target="getting-started-intro">
                     <span>🔊</span> Play
                 </button>
-                <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
-                    <span>🔄</span> Restart
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
                 </button>
             </div>
 
@@ -1490,8 +1520,8 @@
                     <button class="voice-btn" onclick="toggleSpeech(this)" data-target="reality-check">
                         <span>🔊</span> Play
                     </button>
-                    <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
-                        <span>🔄</span> Restart
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
                     </button>
                 </div>
                 <div class="card-title">
@@ -1512,34 +1542,13 @@
                 </div>
             </div>
 
-            <div class="tip-card">
-                <div class="card-title">
-                    <div class="card-icon">💡</div>
-                    Platform Selection Strategy
-                </div>
-                <p>Start with 2-3 platforms simultaneously to increase your chances of consistent work. However, be prepared that even with multiple platforms, work may be sporadic.</p>
-                <br>
-                <p>Avoid signing up for too many at once, as managing multiple platform interfaces and guidelines can create overwhelm.</p>
-            </div>
-
-            <h3 class="section-subtitle">Technical Requirements</h3>
-
-            <ul class="styled-list">
-                <li>Reliable internet connection</li>
-                <li>Modern computer with updated browser</li>
-                <li>Basic understanding of annotation tools</li>
-                <li>Ability to follow detailed guidelines</li>
-                <li>Comfort with basic technology applications</li>
-                <li>Screen with good resolution (especially for image annotation)</li>
-            </ul>
-
             <div class="adhd-card">
                 <div class="voice-controls">
                     <button class="voice-btn" onclick="toggleSpeech(this)" data-target="onboarding-strategy">
                         <span>🔊</span> Play
                     </button>
-                    <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
-                        <span>🔄</span> Restart
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
                     </button>
                 </div>
                 <div class="card-title">
@@ -1570,8 +1579,8 @@
                 <button class="voice-btn" onclick="toggleSpeech(this)" data-target="earning-intro">
                     <span>🔊</span> Play
                 </button>
-                <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
-                    <span>🔄</span> Restart
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
                 </button>
             </div>
 
@@ -1666,8 +1675,8 @@
                     <button class="voice-btn" onclick="toggleSpeech(this)" data-target="success-story">
                         <span>🔊</span> Play
                     </button>
-                    <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
-                        <span>🔄</span> Restart
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
                     </button>
                 </div>
                 <div class="card-title">
@@ -1721,8 +1730,8 @@
                     <button class="voice-btn" onclick="toggleSpeech(this)" data-target="income-strategy">
                         <span>🔊</span> Play
                     </button>
-                    <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
-                        <span>🔄</span> Restart
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
                     </button>
                 </div>
                 <div class="card-title">
@@ -1753,8 +1762,8 @@
                 <button class="voice-btn" onclick="toggleSpeech(this)" data-target="strategies-content">
                     <span>🔊</span> Play
                 </button>
-                <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
-                    <span>🔄</span> Restart
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
                 </button>
             </div>
 
@@ -1767,8 +1776,8 @@
                     <button class="voice-btn" onclick="toggleSpeech(this)" data-target="adhd-strengths">
                         <span>🔊</span> Play
                     </button>
-                    <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
-                        <span>🔄</span> Restart
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
                     </button>
                 </div>
                 <div class="card-title">
@@ -1795,25 +1804,13 @@
                 <li><strong>Task Batching:</strong> Group similar annotation tasks together to minimize context switching</li>
             </ol>
 
-            <h3 class="section-subtitle">Digital Assistance Tools</h3>
-
-            <ul class="styled-list">
-                <li><strong>AI as a "Second Brain":</strong> Use AI tools for task management</li>
-                <li><strong>Voice-to-Text:</strong> Implement Otter.ai for note transcription</li>
-                <li><strong>Task Tracking Apps:</strong> Leverage organizational apps designed for ADHD</li>
-                <li><strong>Browser Extensions:</strong> Use focus tools that block distracting websites during work periods</li>
-                <li><strong>Time Trackers:</strong> Implement apps that visualize how you're spending your annotation time</li>
-            </ul>
-
-            <h3 class="section-subtitle">Environment Optimization</h3>
-
             <div class="tip-card">
                 <div class="voice-controls">
                     <button class="voice-btn" onclick="toggleSpeech(this)" data-target="workspace-tips">
                         <span>🔊</span> Play
                     </button>
-                    <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
-                        <span>🔄</span> Restart
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
                     </button>
                 </div>
                 <div class="card-title">
@@ -1830,26 +1827,6 @@
                     </ul>
                 </div>
             </div>
-
-            <div class="success-card">
-                <div class="voice-controls">
-                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="environment-story">
-                        <span>🔊</span> Play
-                    </button>
-                    <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
-                        <span>🔄</span> Restart
-                    </button>
-                </div>
-                <div class="card-title">
-                    <div class="card-icon">🎯</div>
-                    Environment Transformation Success Story
-                </div>
-                <div id="environment-story">
-                    <p><em>"I struggled with consistent annotation work until I completely redesigned my workspace. Now I have a dedicated annotation station with dual monitors, noise-cancelling headphones, and all my fidget tools within reach.</em></p>
-                    <br>
-                    <p><em>I also created a visual 'task map' on my wall that helps me see exactly what I need to accomplish each day. My productivity has more than doubled, and I actually look forward to sitting down at my annotation desk."</em></p>
-                </div>
-            </div>
         </div>
 
         <!-- Workflow Optimization -->
@@ -1863,8 +1840,8 @@
                 <button class="voice-btn" onclick="toggleSpeech(this)" data-target="workflow-intro">
                     <span>🔊</span> Play
                 </button>
-                <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
-                    <span>🔄</span> Restart
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
                 </button>
             </div>
 
@@ -1901,71 +1878,13 @@
                 </div>
             </div>
 
-            <div class="tip-card">
-                <div class="voice-controls">
-                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="shortcut-mastery">
-                        <span>🔊</span> Play
-                    </button>
-                    <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
-                        <span>🔄</span> Restart
-                    </button>
-                </div>
-                <div class="card-title">
-                    <div class="card-icon">⌨️</div>
-                    Keyboard Shortcut Mastery
-                </div>
-                <div id="shortcut-mastery">
-                    <p>Learning keyboard shortcuts for your annotation platforms can dramatically increase your efficiency. <strong>Many ADHD annotators report that the physical aspect of using keyboard commands instead of clicking through menus helps maintain engagement and increases work speed by 30-50%.</strong></p>
-                    <br>
-                    <p>Create a visual reference card with the most useful shortcuts for each platform you use.</p>
-                </div>
-            </div>
-
-            <h3 class="section-subtitle">Quality Control Measures</h3>
-
-            <p>Implementing self-quality checks not only improves your work but also provides structure beneficial for ADHD:</p>
-
-            <div class="checklist">
-                <h4 class="checklist-title">Quality Assurance Checklist</h4>
-                <ul class="checklist-list">
-                    <li class="checklist-item">
-                        <div class="checkbox"></div>
-                        <span>Complete initial annotation batch</span>
-                    </li>
-                    <li class="checklist-item">
-                        <div class="checkbox"></div>
-                        <span>Take a short break (5-10 minutes)</span>
-                    </li>
-                    <li class="checklist-item">
-                        <div class="checkbox"></div>
-                        <span>Review work with fresh eyes</span>
-                    </li>
-                    <li class="checklist-item">
-                        <div class="checkbox"></div>
-                        <span>Compare against project guidelines</span>
-                    </li>
-                    <li class="checklist-item">
-                        <div class="checkbox"></div>
-                        <span>Check for consistent application of rules</span>
-                    </li>
-                    <li class="checklist-item">
-                        <div class="checkbox"></div>
-                        <span>Verify edge cases and unusual instances</span>
-                    </li>
-                    <li class="checklist-item">
-                        <div class="checkbox"></div>
-                        <span>Submit final version only after review</span>
-                    </li>
-                </ul>
-            </div>
-
             <div class="adhd-card">
                 <div class="voice-controls">
                     <button class="voice-btn" onclick="toggleSpeech(this)" data-target="calibration-technique">
                         <span>🔊</span> Play
                     </button>
-                    <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
-                        <span>🔄</span> Restart
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
                     </button>
                 </div>
                 <div class="card-title">
@@ -1996,8 +1915,8 @@
                 <button class="voice-btn" onclick="toggleSpeech(this)" data-target="security-intro">
                     <span>🔊</span> Play
                 </button>
-                <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
-                    <span>🔄</span> Restart
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
                 </button>
             </div>
 
@@ -2005,42 +1924,13 @@
                 <p>Data annotation often involves working with sensitive information. Protecting yourself and the data is both an ethical obligation and a professional requirement.</p>
             </div>
 
-            <h3 class="section-subtitle">Data Handling Best Practices</h3>
-
-            <div class="progress-timeline">
-                <div class="timeline-item">
-                    <div class="timeline-number">1</div>
-                    <div class="timeline-content">
-                        <h4>Maintaining Data Confidentiality</h4>
-                        <ul class="styled-list">
-                            <li>Never share or discuss project details outside of work</li>
-                            <li>Log out of platforms when not actively working</li>
-                            <li>Use secure, private internet connections</li>
-                            <li>Never download or store annotation data locally unless explicitly authorized</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-number">2</div>
-                    <div class="timeline-content">
-                        <h4>Following Platform-Specific Guidelines</h4>
-                        <ul class="styled-list">
-                            <li>Complete all required security training</li>
-                            <li>Adhere to non-disclosure agreements</li>
-                            <li>Report potential security issues immediately</li>
-                            <li>Update security software and browsers regularly</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
             <div class="warning-card">
                 <div class="voice-controls">
                     <button class="voice-btn" onclick="toggleSpeech(this)" data-target="security-warning">
                         <span>🔊</span> Play
                     </button>
-                    <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
-                        <span>🔄</span> Restart
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
                     </button>
                 </div>
                 <div class="card-title">
@@ -2054,14 +1944,15 @@
                 </div>
             </div>
 
-            <h3 class="section-subtitle">Protecting Your Personal Information</h3>
+            <h3 class="section-subtitle">Data Handling Best Practices</h3>
 
             <ul class="styled-list">
+                <li>Never share or discuss project details outside of work</li>
+                <li>Log out of platforms when not actively working</li>
+                <li>Use secure, private internet connections</li>
+                <li>Never download or store annotation data locally unless explicitly authorized</li>
                 <li>Use unique, strong passwords for each annotation platform</li>
                 <li>Enable two-factor authentication when available</li>
-                <li>Be cautious about sharing personal details in platform profiles</li>
-                <li>Research platform reputation and payment security before signing up</li>
-                <li>Maintain separate email accounts for work and personal use</li>
             </ul>
         </div>
 
@@ -2072,36 +1963,13 @@
                 <span class="title-text">Success Stories and Next Steps</span>
             </h2>
 
-            <h3 class="section-subtitle">Paths to Growth in Data Annotation</h3>
-            
-            <div class="voice-controls">
-                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="growth-paths">
-                    <span>🔊</span> Play
-                </button>
-                <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
-                    <span>🔄</span> Restart
-                </button>
-            </div>
-            
-            <div id="growth-paths">
-                <p>Many successful data annotators have leveraged their experience to create career advancement opportunities:</p>
-
-                <ol class="numbered-list">
-                    <li><strong>Specialization:</strong> Becoming an expert in a specific type of annotation (medical imagery, legal text, etc.)</li>
-                    <li><strong>Team Leadership:</strong> Moving into quality assurance or team management roles</li>
-                    <li><strong>Tool Development:</strong> Contributing to the creation of better annotation tools</li>
-                    <li><strong>Training:</strong> Developing training materials for new annotators</li>
-                    <li><strong>AI Career Transition:</strong> Using annotation experience as a stepping stone to ML/AI careers</li>
-                </ol>
-            </div>
-
             <div class="success-card">
                 <div class="voice-controls">
                     <button class="voice-btn" onclick="toggleSpeech(this)" data-target="realistic-growth">
                         <span>🔊</span> Play
                     </button>
-                    <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
-                        <span>🔄</span> Restart
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
                     </button>
                 </div>
                 <div class="card-title">
@@ -2155,71 +2023,13 @@
                 </ul>
             </div>
 
-            <h3 class="section-subtitle">Weekly Implementation Plan</h3>
-
-            <div class="progress-timeline">
-                <div class="timeline-item">
-                    <div class="timeline-number">1</div>
-                    <div class="timeline-content">
-                        <h4>Week 1: Foundation</h4>
-                        <p>Sign up for 2-3 platforms and complete their onboarding</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-number">2</div>
-                    <div class="timeline-content">
-                        <h4>Week 2: Exploration</h4>
-                        <p>Try different types of annotation tasks to find your strengths</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-number">3</div>
-                    <div class="timeline-content">
-                        <h4>Week 3: Optimization</h4>
-                        <p>Focus on improving speed while maintaining quality</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-number">4</div>
-                    <div class="timeline-content">
-                        <h4>Week 4: Specialization</h4>
-                        <p>Begin specializing in your preferred annotation type</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tip-card">
-                <div class="voice-controls">
-                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="community-tips">
-                        <span>🔊</span> Play
-                    </button>
-                    <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
-                        <span>🔄</span> Restart
-                    </button>
-                </div>
-                <div class="card-title">
-                    <div class="card-icon">🤝</div>
-                    Finding Your Annotation Community
-                </div>
-                <div id="community-tips">
-                    <p>Connect with other annotators through:</p>
-                    <ul class="styled-list">
-                        <li>Reddit communities like r/WorkOnline and r/UHRSwork</li>
-                        <li>Platform-specific forums and social media groups</li>
-                        <li>Discord servers focused on remote work and data annotation</li>
-                        <li>ADHD-focused professional groups where you can discuss annotation strategies</li>
-                    </ul>
-                    <p><strong>Having a community is especially valuable for ADHD annotators,</strong> as it provides accountability, troubleshooting help, and motivation.</p>
-                </div>
-            </div>
-
             <div class="highlight-card">
                 <div class="voice-controls">
                     <button class="voice-btn" onclick="toggleSpeech(this)" data-target="final-expectations">
                         <span>🔊</span> Play
                     </button>
-                    <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
-                        <span>🔄</span> Restart
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
                     </button>
                 </div>
                 <div class="card-title">
@@ -2233,15 +2043,13 @@
                 </div>
             </div>
 
-            <hr style="border: 1px solid var(--border-subtle); margin: 2rem 0;">
-
             <div class="success-card">
                 <div class="voice-controls">
                     <button class="voice-btn" onclick="toggleSpeech(this)" data-target="ready-to-try">
                         <span>🔊</span> Play
                     </button>
-                    <button class="voice-btn restart-btn" onclick="restartSpeech()" style="background: var(--accent-purple);">
-                        <span>🔄</span> Restart
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
                     </button>
                 </div>
                 <div class="card-title">
@@ -2265,7 +2073,7 @@
     <script>
         // Simplified Speech synthesis with toggle functionality
         let currentSpeech = null;
-        let speechRate = 1.4;
+        let speechRate = 1.2;
         let selectedVoice = null;
         let availableVoices = [];
         let currentButton = null;
@@ -2281,7 +2089,7 @@
 
             // If different content is selected, stop current and start new
             if (currentButton && currentButton !== button) {
-                stopCurrentSpeech();
+                stopSpeech();
                 setTimeout(() => startSpeech(button, targetElement), 100);
                 return;
             }
@@ -2306,7 +2114,7 @@
 
         function startSpeech(button, targetElement) {
             // Stop any existing speech
-            stopCurrentSpeech();
+            stopSpeech();
 
             const textContent = extractTextContent(targetElement);
             if (!textContent.trim()) return;
@@ -2373,7 +2181,7 @@
             }
         }
 
-        function stopCurrentSpeech() {
+        function stopSpeech() {
             if (currentSpeech) {
                 speechSynthesis.cancel();
             }
@@ -2381,20 +2189,6 @@
             isPaused = false;
             currentButton = null;
             updateButtonStates();
-        }
-
-        function restartSpeech() {
-            if (currentButton) {
-                const targetId = currentButton.getAttribute('data-target');
-                const targetElement = document.getElementById(targetId);
-                
-                stopCurrentSpeech();
-                setTimeout(() => {
-                    if (targetElement) {
-                        startSpeech(currentButton, targetElement);
-                    }
-                }, 100);
-            }
         }
 
         function updateButtonStates() {
@@ -2435,7 +2229,7 @@
                 const targetId = currentButton.getAttribute('data-target');
                 const targetElement = document.getElementById(targetId);
                 
-                stopCurrentSpeech();
+                stopSpeech();
                 setTimeout(() => {
                     if (targetElement) {
                         startSpeech(currentButton, targetElement);
@@ -2453,7 +2247,7 @@
                 const targetId = currentButton.getAttribute('data-target');
                 const targetElement = document.getElementById(targetId);
                 
-                stopCurrentSpeech();
+                stopSpeech();
                 setTimeout(() => {
                     if (targetElement) {
                         startSpeech(currentButton, targetElement);
@@ -2506,13 +2300,7 @@
                         break;
                     case 'Escape': // Stop
                         e.preventDefault();
-                        stopCurrentSpeech();
-                        break;
-                    case 'r': // R key to restart
-                        if (e.ctrlKey || e.metaKey) {
-                            e.preventDefault();
-                            restartSpeech();
-                        }
+                        stopSpeech();
                         break;
                 }
             }
@@ -2595,11 +2383,11 @@
 
         // Cleanup
         window.addEventListener('beforeunload', function() {
-            stopCurrentSpeech();
+            stopSpeech();
         });
 
         window.addEventListener('pagehide', function() {
-            stopCurrentSpeech();
+            stopSpeech();
         });
 
         // Smooth scrolling
