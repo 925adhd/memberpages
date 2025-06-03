@@ -2,411 +2,396 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-bg: #0a0e1a;
-            --secondary-bg: #1a1f2e;
-            --card-bg: rgba(255, 255, 255, 0.02);
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --text-primary: #ffffff;
-            --text-secondary: #a0a8b8;
-            --text-muted: #6b7280;
-            --accent-blue: #4f46e5;
+            --primary-bg: #0f172a;
+            --card-bg: #1e293b;
+            --glass-bg: rgba(30, 41, 59, 0.8);
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --accent-blue: #3b82f6;
             --accent-teal: #06b6d4;
             --accent-emerald: #10b981;
             --accent-amber: #f59e0b;
             --accent-rose: #f43f5e;
             --accent-purple: #8b5cf6;
-            --border-subtle: rgba(255, 255, 255, 0.1);
-            --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.15);
-            --shadow-medium: 0 8px 40px rgba(0, 0, 0, 0.25);
-            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-success: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
-            --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
-            --gradient-purple: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+            --border: #334155;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--primary-bg);
             color: var(--text-primary);
             line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Background Effects */
-        .bg-gradient {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(ellipse at top, rgba(79, 70, 229, 0.15) 0%, transparent 50%),
-                        radial-gradient(ellipse at bottom right, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
-            z-index: -2;
-        }
-
-        .floating-orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(40px);
-            opacity: 0.3;
-            z-index: -1;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        .orb-1 {
-            width: 300px;
-            height: 300px;
-            background: var(--accent-blue);
-            top: -150px;
-            right: -150px;
-            animation-delay: -5s;
-        }
-
-        .orb-2 {
-            width: 200px;
-            height: 200px;
-            background: var(--accent-teal);
-            bottom: -100px;
-            left: -100px;
-            animation-delay: -10s;
-        }
-
-        .orb-3 {
-            width: 250px;
-            height: 250px;
-            background: var(--accent-purple);
-            top: 40%;
-            left: -125px;
-            animation-delay: -15s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-30px, -30px) scale(1.1); }
-            66% { transform: translate(30px, -20px) scale(0.9); }
+            padding: 16px;
+            font-size: 16px;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 100%;
             margin: 0 auto;
-            padding: 20px;
         }
 
+        /* Header */
         .header {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-subtle);
-            border-radius: 20px;
-            padding: 40px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px 20px;
             text-align: center;
-            box-shadow: var(--shadow-soft);
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            animation: shimmer 3s infinite;
-            pointer-events: none;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(30deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(30deg); }
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
         }
 
         .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
+            font-size: 1.75rem;
             font-weight: 700;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
+            gap: 8px;
         }
 
         .header h1 .emoji {
-            font-size: 2.5rem;
+            font-size: 1.75rem;
         }
 
-        .header h1 .text {
-            background: var(--gradient-primary);
+        .header h1 .gradient-text {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .header p {
-            font-size: 1.2rem;
             color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
 
+        /* Tool Cards */
         .tools-grid {
-            display: grid;
-            gap: 25px;
-            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
 
         .tool-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-subtle);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: var(--shadow-soft);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border);
             overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .tool-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-medium);
-            border-color: rgba(255, 255, 255, 0.2);
+        .tool-card:active {
+            transform: scale(0.98);
         }
 
         .tool-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tool-meta {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
+            gap: 12px;
+            margin-bottom: 12px;
         }
 
         .tool-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 15px;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            font-weight: bold;
+            font-size: 1.5rem;
+            flex-shrink: 0;
         }
 
-        .opera-icon { background: var(--gradient-warning); }
-        .extension-icon { background: var(--gradient-success); }
-        .mobile-icon { background: var(--gradient-purple); }
-        .security-icon { background: var(--gradient-primary); }
-        .organization-icon { background: linear-gradient(135deg, #06b6d4 0%, #10b981 100%); }
-        .hardware-icon { background: linear-gradient(135deg, #f59e0b 0%, #8b5cf6 100%); }
-
-        .tool-title {
-            flex: 1;
+        .category-badge {
+            background: var(--glass-bg);
+            color: var(--accent-blue);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid var(--border);
         }
+
+        .opera-icon { background: linear-gradient(135deg, var(--accent-amber), var(--accent-rose)); }
+        .extension-icon { background: linear-gradient(135deg, var(--accent-emerald), var(--accent-teal)); }
+        .mobile-icon { background: linear-gradient(135deg, var(--accent-purple), var(--accent-rose)); }
+        .security-icon { background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); }
+        .organization-icon { background: linear-gradient(135deg, var(--accent-teal), var(--accent-emerald)); }
+        .hardware-icon { background: linear-gradient(135deg, var(--accent-amber), var(--accent-purple)); }
 
         .tool-title h2 {
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            margin-bottom: 5px;
+            font-size: 1.25rem;
             font-weight: 600;
+            margin-bottom: 4px;
         }
 
         .tool-subtitle {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.875rem;
         }
 
         .tool-content {
-            color: var(--text-secondary);
-            line-height: 1.7;
+            padding: 20px;
         }
 
+        .tool-content p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        /* Feature Lists */
         .feature-list {
             list-style: none;
-            margin: 20px 0;
+            margin: 16px 0;
+            display: grid;
+            gap: 12px;
         }
 
         .feature-list li {
-            padding: 8px 0;
-            position: relative;
-            padding-left: 25px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .feature-list li::before {
             content: '✨';
-            position: absolute;
-            left: 0;
-            color: var(--accent-emerald);
+            font-size: 1rem;
+            flex-shrink: 0;
+            margin-top: 2px;
         }
 
+        .feature-list li strong {
+            color: var(--text-primary);
+        }
+
+        /* Pro Tips */
         .pro-tip {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1));
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
             border-radius: 12px;
-            padding: 20px;
-            margin: 20px 0;
-            backdrop-filter: blur(10px);
+            padding: 16px;
+            margin: 16px 0;
         }
 
         .pro-tip-header {
             color: var(--accent-emerald);
             font-weight: 600;
-            font-size: 1rem;
-            margin-bottom: 10px;
+            font-size: 0.875rem;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
+        .pro-tip p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin: 0;
+        }
+
+        /* Buttons */
         .link-button {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: var(--gradient-primary);
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
             color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
+            padding: 12px 20px;
+            border-radius: 12px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            box-shadow: var(--shadow-soft);
-            margin: 10px 10px 10px 0;
+            font-size: 0.875rem;
+            margin: 8px 8px 8px 0;
+            min-height: 44px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: var(--shadow);
         }
 
-        .link-button:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-medium);
+        .link-button:hover,
+        .link-button:active {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-lg);
         }
 
-        .category-badge {
-            background: var(--card-bg);
-            color: var(--accent-blue);
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            border: 1px solid var(--border-subtle);
-            display: inline-block;
-            margin-bottom: 15px;
+        .link-button:active {
+            transform: translateY(0);
         }
 
-        @media (max-width: 768px) {
+        /* Collapsible Cards for Better Mobile UX */
+        .tool-card.collapsible .tool-content {
+            display: none;
+        }
+
+        .tool-card.expanded .tool-content {
+            display: block;
+        }
+
+        .tool-header {
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }
+
+        .tool-header::after {
+            content: '▼';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            transition: transform 0.2s;
+        }
+
+        .tool-card.expanded .tool-header::after {
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        /* Responsive Design */
+        @media (min-width: 640px) {
+            body {
+                padding: 24px;
+            }
+            
             .container {
-                padding: 15px;
+                max-width: 640px;
             }
-
+            
             .header {
-                padding: 30px 20px;
+                padding: 32px;
             }
-
+            
             .header h1 {
                 font-size: 2rem;
             }
-
-            .tool-card {
-                padding: 25px 20px;
+            
+            .tools-grid {
+                gap: 20px;
             }
+        }
 
-            .tool-header {
-                flex-direction: column;
-                text-align: center;
-                gap: 10px;
+        @media (min-width: 768px) {
+            .container {
+                max-width: 768px;
             }
+            
+            .feature-list {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
 
-            .tool-icon {
-                width: 50px;
-                height: 50px;
-                font-size: 1.5rem;
-            }
+        /* Focus states for accessibility */
+        .tool-header:focus,
+        .link-button:focus {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 2px;
+        }
 
-            .link-button {
-                font-size: 0.8rem;
-                padding: 8px 16px;
-            }
+        /* Animation for smooth interactions */
+        .tool-content {
+            transition: all 0.3s ease;
+        }
+
+        /* Loading optimization */
+        .tool-card {
+            contain: layout;
         }
     </style>
 </head>
 <body>
-    <div class="bg-gradient"></div>
-    <div class="floating-orb orb-1"></div>
-    <div class="floating-orb orb-2"></div>
-    <div class="floating-orb orb-3"></div>
-
     <div class="container">
         <div class="header">
-            <h1><span class="emoji">🛠️</span> <span class="text">Essential Gig Work Arsenal</span></h1>
-            <p>Master tools, browsers, and strategies that can optimize your online work experience and efficiency</p>
+            <h1><span class="emoji">🛠️</span> <span class="gradient-text">Essential Gig Work Arsenal</span></h1>
+            <p>Master tools and strategies that optimize your online work experience</p>
         </div>
 
         <div class="tools-grid">
             <!-- Opera Browser -->
-            <div class="tool-card">
-                <div class="category-badge">🌐 Browser Power</div>
-                <div class="tool-header">
-                    <div class="tool-icon opera-icon">🎭</div>
-                    <div class="tool-title">
-                        <h2>Opera Browser</h2>
-                        <div class="tool-subtitle">Your Secret Weapon for Gig Work</div>
+            <div class="tool-card collapsible" data-category="browser">
+                <div class="tool-header" onclick="toggleCard(this)">
+                    <div class="category-badge">🌐 Browser</div>
+                    <div class="tool-meta">
+                        <div class="tool-icon opera-icon">🎭</div>
+                        <div class="tool-title">
+                            <h2>Opera Browser</h2>
+                            <div class="tool-subtitle">Secret Weapon for Gig Work</div>
+                        </div>
                     </div>
                 </div>
                 <div class="tool-content">
-                    <p>Opera isn't just another browser - it's a productivity powerhouse designed for online earners. Plus, it's Chromium-based, so all Chrome extensions work perfectly! Here's why it's essential:</p>
+                    <p>Opera is a productivity powerhouse for online earners. Chromium-based, so all Chrome extensions work perfectly!</p>
                     
                     <ul class="feature-list">
-                        <li><strong>Built-in VPN:</strong> Access geo-restricted surveys and tasks from different countries</li>
-                        <li><strong>Ad Blocker:</strong> Save time and data with faster page loads</li>
-                        <li><strong>Workspaces:</strong> Organize different gig platforms in separate workspaces</li>
-                        <li><strong>Sidebar Messengers:</strong> Keep WhatsApp, Telegram, Discord open while working</li>
-                        <li><strong>Crypto Wallet:</strong> Built-in Web3 wallet for crypto earning opportunities</li>
-                        <li><strong>Chrome Extension Compatible:</strong> Use all your favorite Chrome extensions</li>
-                        <li><strong>Flow Sync:</strong> Seamlessly continue work between devices</li>
+                        <li><strong>Built-in VPN:</strong> Access geo-restricted opportunities</li>
+                        <li><strong>Ad Blocker:</strong> Faster page loads, save data</li>
+                        <li><strong>Workspaces:</strong> Organize platforms separately</li>
+                        <li><strong>Sidebar Apps:</strong> Keep messengers open while working</li>
+                        <li><strong>Crypto Wallet:</strong> Built-in Web3 wallet</li>
+                        <li><strong>Flow Sync:</strong> Continue work across devices</li>
                     </ul>
 
                     <div class="pro-tip">
-                        <div class="pro-tip-header">🎯 Pro Setup Strategy</div>
-                        <p>Create separate workspaces: "Surveys" (Prolific, Swagbucks), "Freelance" (Upwork, Fiverr), "Research" (UserTesting, Respondent), and "Passive" (mobile app monitoring). Use the VPN to access international opportunities!</p>
+                        <div class="pro-tip-header">🎯 Pro Setup</div>
+                        <p>Create workspaces: "Surveys", "Freelance", "Research", "Passive". Use VPN for international opportunities!</p>
                     </div>
 
                     <a href="https://opera.com" target="_blank" class="link-button">
-                        📥 Download Opera Free
+                        📥 Download Free
                     </a>
                 </div>
             </div>
 
-            <!-- Browser Extensions -->
-            <div class="tool-card">
-                <div class="category-badge">🔌 Extensions</div>
-                <div class="tool-header">
-                    <div class="tool-icon extension-icon">⚡</div>
-                    <div class="tool-title">
-                        <h2>Power Extensions</h2>
-                        <div class="tool-subtitle">Automate & Optimize Everything</div>
+            <!-- Extensions -->
+            <div class="tool-card collapsible">
+                <div class="tool-header" onclick="toggleCard(this)">
+                    <div class="category-badge">🔌 Extensions</div>
+                    <div class="tool-meta">
+                        <div class="tool-icon extension-icon">⚡</div>
+                        <div class="tool-title">
+                            <h2>Power Extensions</h2>
+                            <div class="tool-subtitle">Automate & Optimize</div>
+                        </div>
                     </div>
                 </div>
                 <div class="tool-content">
-                    <p>These browser extensions work perfectly with Opera (and other Chromium browsers) to transform your efficiency:</p>
+                    <p>Essential browser extensions that work with Opera and other Chromium browsers:</p>
                     
                     <ul class="feature-list">
-                        <li><strong>Honey:</strong> Auto-find coupon codes and cashback opportunities</li>
-                        <li><strong>Rakuten:</strong> Automatic cashback on purchases (1-10% back)</li>
-                        <li><strong>LastPass:</strong> Auto-fill forms and login to platforms instantly</li>
-                        <li><strong>Grammarly:</strong> Perfect your survey responses and freelance work</li>
-                        <li><strong>MightyText:</strong> Respond to SMS verification without picking up phone</li>
-                        <li><strong>Tampermonkey:</strong> Custom scripts for survey automation (advanced users)</li>
+                        <li><strong>Honey:</strong> Auto-find coupons and cashback</li>
+                        <li><strong>Rakuten:</strong> 1-10% automatic cashback</li>
+                        <li><strong>LastPass:</strong> Auto-fill forms instantly</li>
+                        <li><strong>Grammarly:</strong> Perfect your responses</li>
+                        <li><strong>MightyText:</strong> SMS without phone</li>
+                        <li><strong>Tampermonkey:</strong> Custom automation scripts</li>
                     </ul>
 
                     <div class="pro-tip">
-                        <div class="pro-tip-header">💡 Time-Saving Hack</div>
-                        <p>Set up auto-fill templates for common survey demographics. Create shortcuts for your age, income range, location, etc. This alone can save 2-3 minutes per survey!</p>
+                        <div class="pro-tip-header">💡 Time Saver</div>
+                        <p>Set up auto-fill templates for demographics. Save 2-3 minutes per survey!</p>
                     </div>
 
                     <a href="https://chrome.google.com/webstore" target="_blank" class="link-button">
@@ -416,97 +401,102 @@
             </div>
 
             <!-- Mobile Arsenal -->
-            <div class="tool-card">
-                <div class="category-badge">📱 Mobile Power</div>
-                <div class="tool-header">
-                    <div class="tool-icon mobile-icon">📲</div>
-                    <div class="tool-title">
-                        <h2>Mobile Arsenal</h2>
-                        <div class="tool-subtitle">Earn Everywhere, Anytime</div>
+            <div class="tool-card collapsible">
+                <div class="tool-header" onclick="toggleCard(this)">
+                    <div class="category-badge">📱 Mobile</div>
+                    <div class="tool-meta">
+                        <div class="tool-icon mobile-icon">📲</div>
+                        <div class="tool-title">
+                            <h2>Mobile Arsenal</h2>
+                            <div class="tool-subtitle">Earn Everywhere</div>
+                        </div>
                     </div>
                 </div>
                 <div class="tool-content">
-                    <p>Your phone is an earning machine with the right setup. I personally keep multiple phones and a tablet, each dedicated to different platforms that work best on them:</p>
+                    <p>Your phone is an earning machine with the right setup:</p>
                     
                     <ul class="feature-list">
-                        <li><strong>Device Specialization:</strong> Dedicate specific devices to platforms that run best on them</li>
-                        <li><strong>Multiple Browsers:</strong> Chrome, Firefox, Opera for different platforms</li>
-                        <li><strong>VPN Apps:</strong> Surfshark, NordVPN for geo-arbitrage</li>
-                        <li><strong>Screen Recording:</strong> Built-in recorder for UserTesting tasks</li>
-                        <li><strong>Note Apps:</strong> Quick capture of opportunities and progress</li>
-                        <li><strong>Time Tracking:</strong> RescueTime or Toggl for productivity analysis</li>
-                        <li><strong>Cloud Storage:</strong> Google Drive for instant file access across devices</li>
+                        <li><strong>Device Specialization:</strong> Dedicate devices to platforms</li>
+                        <li><strong>Multiple Browsers:</strong> Chrome, Firefox, Opera</li>
+                        <li><strong>VPN Apps:</strong> Surfshark, NordVPN</li>
+                        <li><strong>Screen Recording:</strong> Built-in for testing tasks</li>
+                        <li><strong>Note Apps:</strong> Quick capture opportunities</li>
+                        <li><strong>Cloud Storage:</strong> Instant file access</li>
                     </ul>
 
                     <div class="pro-tip">
-                        <div class="pro-tip-header">🚀 Multi-Device Strategy</div>
-                        <p>Keep 3-4 survey apps always logged in across different devices. When you have 5 minutes (waiting, commuting, breaks), you can instantly take advantage of opportunities. Having dedicated devices means no interruptions from personal notifications and optimized performance for each platform!</p>
+                        <div class="pro-tip-header">🚀 Multi-Device</div>
+                        <p>Keep 3-4 survey apps logged in across devices. Instant access during breaks!</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Security & Privacy -->
-            <div class="tool-card">
-                <div class="category-badge">🔒 Security</div>
-                <div class="tool-header">
-                    <div class="tool-icon security-icon">🛡️</div>
-                    <div class="tool-title">
-                        <h2>Security Essentials</h2>
-                        <div class="tool-subtitle">Protect Your Digital Assets</div>
+            <!-- Security -->
+            <div class="tool-card collapsible">
+                <div class="tool-header" onclick="toggleCard(this)">
+                    <div class="category-badge">🔒 Security</div>
+                    <div class="tool-meta">
+                        <div class="tool-icon security-icon">🛡️</div>
+                        <div class="tool-title">
+                            <h2>Security Essentials</h2>
+                            <div class="tool-subtitle">Protect Your Assets</div>
+                        </div>
                     </div>
                 </div>
                 <div class="tool-content">
                     <p>Protect your earnings and personal information:</p>
                     
                     <ul class="feature-list">
-                        <li><strong>2FA Everything:</strong> Google Authenticator on all accounts</li>
-                        <li><strong>Separate Email:</strong> Dedicated email for gig work only</li>
-                        <li><strong>VPN Always:</strong> Protect your real location and data</li>
-                        <li><strong>Antivirus:</strong> Malwarebytes for threat protection</li>
-                        <li><strong>Virtual Cards:</strong> Privacy.com for secure payments</li>
-                        <li><strong>Backup Everything:</strong> Regular data backups to cloud</li>
+                        <li><strong>2FA Everything:</strong> Google Authenticator</li>
+                        <li><strong>Separate Email:</strong> Dedicated gig work email</li>
+                        <li><strong>VPN Always:</strong> Protect location and data</li>
+                        <li><strong>Antivirus:</strong> Malwarebytes protection</li>
+                        <li><strong>Secure Email:</strong> Proton Mail for privacy</li>
+                        <li><strong>Backup Data:</strong> Regular cloud backups</li>
                     </ul>
 
                     <div class="pro-tip">
-                        <div class="pro-tip-header">⚠️ Critical Warning</div>
-                        <p>Never use your main email or real address unless required. Create a "work persona" with separate everything. One security breach can compromise months of work and personal data!</p>
+                        <div class="pro-tip-header">⚠️ Critical</div>
+                        <p>Create a "work persona" with separate everything. One breach can compromise months of work!</p>
                     </div>
 
-                    <a href="https://privacy.com" target="_blank" class="link-button">
-                        💳 Get Virtual Cards
+                    <a href="https://proton.me/mail" target="_blank" class="link-button">
+                        📧 Get Proton Mail
                     </a>
                 </div>
             </div>
 
-            <!-- Organization Tools -->
-            <div class="tool-card">
-                <div class="category-badge">📊 Organization</div>
-                <div class="tool-header">
-                    <div class="tool-icon organization-icon">📋</div>
-                    <div class="tool-title">
-                        <h2>Organization System</h2>
-                        <div class="tool-subtitle">Track, Plan, Optimize</div>
+            <!-- Organization -->
+            <div class="tool-card collapsible">
+                <div class="tool-header" onclick="toggleCard(this)">
+                    <div class="category-badge">📊 Organization</div>
+                    <div class="tool-meta">
+                        <div class="tool-icon organization-icon">📋</div>
+                        <div class="tool-title">
+                            <h2>Organization System</h2>
+                            <div class="tool-subtitle">Track & Optimize</div>
+                        </div>
                     </div>
                 </div>
                 <div class="tool-content">
                     <p>Successful gig workers are organized workers:</p>
                     
                     <ul class="feature-list">
-                        <li><strong>Notion/Airtable:</strong> Central dashboard for all platforms and activities</li>
-                        <li><strong>Google Sheets:</strong> Track daily activities, tasks, and progress</li>
-                        <li><strong>Calendar App:</strong> Schedule high-value tasks during peak hours</li>
-                        <li><strong>Bookmark Manager:</strong> Organize platform links by priority</li>
-                        <li><strong>Password Manager:</strong> Secure storage for all accounts</li>
-                        <li><strong>Tax Software:</strong> QuickBooks Self-Employed for tracking business expenses</li>
+                        <li><strong>Notion/Airtable:</strong> Central dashboard</li>
+                        <li><strong>Google Sheets:</strong> Track daily progress</li>
+                        <li><strong>Calendar:</strong> Schedule peak hours</li>
+                        <li><strong>Bookmarks:</strong> Organize by priority</li>
+                        <li><strong>Password Manager:</strong> Secure storage</li>
+                        <li><strong>Tax Software:</strong> Track expenses</li>
                     </ul>
 
                     <div class="pro-tip">
                         <div class="pro-tip-header">📈 Success Metric</div>
-                        <p>Track your efficiency and time spent on each platform weekly. Drop low-performers, focus on the ones that work best for you. Most people never analyze their data - that's your competitive advantage!</p>
+                        <p>Track efficiency weekly. Drop low-performers, focus on what works. Data analysis is your competitive advantage!</p>
                     </div>
 
                     <a href="https://notion.so" target="_blank" class="link-button">
-                        📝 Try Notion Free
+                        📝 Try Notion
                     </a>
                     <a href="https://airtable.com" target="_blank" class="link-button">
                         🗃️ Try Airtable
@@ -514,35 +504,76 @@
                 </div>
             </div>
 
-            <!-- Hardware Setup -->
-            <div class="tool-card">
-                <div class="category-badge">💻 Hardware</div>
-                <div class="tool-header">
-                    <div class="tool-icon hardware-icon">⚙️</div>
-                    <div class="tool-title">
-                        <h2>Hardware Optimization</h2>
-                        <div class="tool-subtitle">Invest in Speed & Comfort</div>
+            <!-- Hardware -->
+            <div class="tool-card collapsible">
+                <div class="tool-header" onclick="toggleCard(this)">
+                    <div class="category-badge">💻 Hardware</div>
+                    <div class="tool-meta">
+                        <div class="tool-icon hardware-icon">⚙️</div>
+                        <div class="tool-title">
+                            <h2>Hardware Setup</h2>
+                            <div class="tool-subtitle">Invest in Speed</div>
+                        </div>
                     </div>
                 </div>
                 <div class="tool-content">
-                    <p>Your setup directly impacts your earning potential:</p>
+                    <p>Your setup directly impacts earning potential:</p>
                     
                     <ul class="feature-list">
-                        <li><strong>Dual Monitors:</strong> Monitor surveys while researching other opportunities</li>
-                        <li><strong>Good Headphones:</strong> Clear audio for transcription/testing tasks</li>
-                        <li><strong>Fast Internet:</strong> Minimum 25Mbps for video tasks</li>
-                        <li><strong>Ergonomic Setup:</strong> Reduce fatigue during long sessions</li>
-                        <li><strong>Backup Internet:</strong> Mobile hotspot for guaranteed uptime</li>
-                        <li><strong>Quality Webcam:</strong> Better video tasks = higher pay</li>
+                        <li><strong>Dual Monitors:</strong> Monitor + research simultaneously</li>
+                        <li><strong>Good Headphones:</strong> Clear audio for tasks</li>
+                        <li><strong>Fast Internet:</strong> 25Mbps+ for video tasks</li>
+                        <li><strong>Ergonomic Setup:</strong> Reduce fatigue</li>
+                        <li><strong>Backup Internet:</strong> Mobile hotspot</li>
+                        <li><strong>Quality Webcam:</strong> Better video = higher pay</li>
                     </ul>
 
                     <div class="pro-tip">
-                        <div class="pro-tip-header">💡 Investment Strategy</div>
-                        <p>A second monitor dramatically improves workflow efficiency through better multitasking. Consider the long-term productivity benefits when evaluating any hardware purchases!</p>
+                        <div class="pro-tip-header">💡 Investment</div>
+                        <p>Second monitor dramatically improves multitasking efficiency. Consider long-term productivity benefits!</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        function toggleCard(header) {
+            const card = header.closest('.tool-card');
+            const isExpanded = card.classList.contains('expanded');
+            
+            // Close all cards first (optional - remove these lines for accordion behavior)
+            document.querySelectorAll('.tool-card').forEach(c => {
+                c.classList.remove('expanded');
+                c.classList.add('collapsible');
+            });
+            
+            // Toggle current card
+            if (!isExpanded) {
+                card.classList.add('expanded');
+                card.classList.remove('collapsible');
+            }
+        }
+
+        // Initialize - expand first card by default
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstCard = document.querySelector('.tool-card');
+            if (firstCard) {
+                firstCard.classList.add('expanded');
+                firstCard.classList.remove('collapsible');
+            }
+        });
+
+        // Add touch feedback
+        document.querySelectorAll('.tool-header').forEach(header => {
+            header.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.98)';
+            });
+            
+            header.addEventListener('touchend', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
 </body>
 </html>
