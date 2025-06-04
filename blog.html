@@ -372,21 +372,6 @@
       50% { opacity: 0.7; transform: scale(1.2); }
     }
 
-    .adhd-boost {
-      background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(16, 185, 129, 0.1));
-      border: 1px solid rgba(79, 70, 229, 0.2);
-      border-radius: 12px;
-      padding: 1rem;
-      margin-top: 1rem;
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      backdrop-filter: blur(10px);
-    }
-
-    .adhd-boost strong {
-      color: var(--accent-teal);
-    }
-
     /* Show More Button Styles */
     .show-more-container {
       display: flex;
@@ -554,17 +539,6 @@
       return null;
     }
 
-    function getAdhdTip() {
-      const tips = [
-        "🧠 Brain Hack: Read this during your peak focus time for better retention",
-        "⚡ Energy Boost: Take notes while reading to increase engagement",
-        "🎯 Focus Tip: Set a 10-minute timer for focused reading",
-        "💡 Memory Aid: Highlight key insights that resonate with you",
-        "🔄 Processing Hack: Discuss these ideas with someone after reading"
-      ];
-      return tips[Math.floor(Math.random() * tips.length)];
-    }
-
     function getAdhdIcon() {
       const icons = ['🧠', '⚡', '🎯', '💡', '🔥', '✨', '🌟', '🚀'];
       return icons[Math.floor(Math.random() * icons.length)];
@@ -612,9 +586,6 @@
             <a href="${post.link}" target="_blank" rel="noopener noreferrer" class="read-more">
               Read Full Article
             </a>
-            <div class="adhd-boost">
-              <strong>✨ ${getAdhdTip()}</strong>
-            </div>
           </div>
         </div>
       `;
