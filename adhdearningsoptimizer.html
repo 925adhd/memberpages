@@ -269,6 +269,161 @@
         .low-value { border-left: 4px solid var(--accent-emerald); }
         .break-time { border-left: 4px solid var(--accent-blue); }
         
+        /* Mobile Optimized Popup Styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 10000;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 10px;
+            animation: fadeIn 0.3s ease-out;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .popup-content {
+            background: var(--glass-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 20px;
+            width: 100%;
+            max-width: 600px;
+            min-height: min-content;
+            max-height: none;
+            box-shadow: var(--shadow-strong);
+            margin: auto;
+            position: relative;
+        }
+
+        .popup-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .popup-header h2 {
+            color: var(--accent-blue);
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .popup-header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .popup-tasks {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .popup-task {
+            background: var(--card-bg);
+            padding: 16px;
+            border-radius: 12px;
+            border-left: 4px solid;
+        }
+
+        .popup-task h4 {
+            margin-bottom: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .popup-task p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .popup-task-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .popup-task-link {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            min-height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .popup-task-link:hover,
+        .popup-task-link:active {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .popup-tip {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1));
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .popup-tip .tip-title {
+            color: var(--accent-emerald);
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .popup-tip .tip-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .popup-actions {
+            text-align: center;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .popup-close-btn {
+            background: var(--gradient-success);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s;
+            min-height: 48px;
+            min-width: 120px;
+        }
+
+        .popup-close-btn:hover,
+        .popup-close-btn:active {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
         @media (max-width: 768px) {
             .header {
                 padding: 20px;
@@ -298,6 +453,59 @@
             .platform-link {
                 font-size: 0.75rem;
                 padding: 5px 10px;
+            }
+
+            /* Mobile Popup Adjustments */
+            .popup-overlay {
+                padding: 5px;
+                align-items: flex-start;
+            }
+
+            .popup-content {
+                padding: 16px;
+                border-radius: 16px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+
+            .popup-header h2 {
+                font-size: 1.3rem;
+            }
+
+            .popup-header p {
+                font-size: 0.9rem;
+            }
+
+            .popup-task {
+                padding: 14px;
+            }
+
+            .popup-task h4 {
+                font-size: 0.95rem;
+            }
+
+            .popup-task p {
+                font-size: 0.85rem;
+            }
+
+            .popup-task-link {
+                padding: 10px 14px;
+                font-size: 0.8rem;
+                min-height: 40px;
+            }
+
+            .popup-tip .tip-title {
+                font-size: 0.95rem;
+            }
+
+            .popup-tip .tip-text {
+                font-size: 0.85rem;
+            }
+
+            .popup-close-btn {
+                padding: 12px 24px;
+                font-size: 0.95rem;
+                min-height: 44px;
             }
         }
 
@@ -537,101 +745,66 @@
         }
 
         function showAnytimeTasksPopup() {
+            // Prevent body scroll when popup is open
+            document.body.style.overflow = 'hidden';
+
             const popup = document.createElement('div');
-            popup.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(0, 0, 0, 0.8);
-                backdrop-filter: blur(10px);
-                z-index: 10000;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 20px;
-                animation: fadeIn 0.3s ease-out;
-            `;
+            popup.className = 'popup-overlay';
 
             popup.innerHTML = `
-                <div style="
-                    background: var(--glass-bg);
-                    backdrop-filter: blur(20px);
-                    border: 1px solid var(--border-subtle);
-                    border-radius: 20px;
-                    padding: 30px;
-                    max-width: 600px;
-                    width: 100%;
-                    max-height: 80vh;
-                    overflow-y: auto;
-                    box-shadow: var(--shadow-strong);
-                ">
-                    <h2 style="color: var(--accent-blue); margin-bottom: 20px; text-align: center;">
-                        🌙 Anytime Tasks Available! ⭐
-                    </h2>
-                    <p style="color: var(--text-secondary); margin-bottom: 25px; text-align: center;">
-                        Outside scheduled hours? Perfect time for these flexible earning opportunities:
-                    </p>
+                <div class="popup-content">
+                    <div class="popup-header">
+                        <h2>🌙 Anytime Tasks Available! ⭐</h2>
+                        <p>Outside scheduled hours? Perfect time for these flexible earning opportunities:</p>
+                    </div>
                     
-                    <div style="display: grid; gap: 15px;">
-                        <div style="background: var(--card-bg); padding: 15px; border-radius: 12px; border-left: 4px solid var(--accent-emerald);">
-                            <h4 style="color: var(--accent-emerald); margin-bottom: 8px;">🎮 Mobile Gaming ($2-5/day)</h4>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 10px;">Play games while watching TV or relaxing</p>
-                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                                <a href="https://mistplay.com" target="_blank" style="background: var(--gradient-primary); color: white; padding: 4px 10px; border-radius: 15px; text-decoration: none; font-size: 0.75rem;">Mistplay</a>
-                                <a href="https://rewardedplay.com" target="_blank" style="background: var(--gradient-primary); color: white; padding: 4px 10px; border-radius: 15px; text-decoration: none; font-size: 0.75rem;">Rewarded Play</a>
+                    <div class="popup-tasks">
+                        <div class="popup-task" style="border-left-color: var(--accent-emerald);">
+                            <h4 style="color: var(--accent-emerald);">🎮 Mobile Gaming ($2-5/day)</h4>
+                            <p>Play games while watching TV or relaxing</p>
+                            <div class="popup-task-links">
+                                <a href="https://mistplay.com" target="_blank" class="popup-task-link">Mistplay</a>
+                                <a href="https://rewardedplay.com" target="_blank" class="popup-task-link">Rewarded Play</a>
                             </div>
                         </div>
 
-                        <div style="background: var(--card-bg); padding: 15px; border-radius: 12px; border-left: 4px solid var(--accent-blue);">
-                            <h4 style="color: var(--accent-blue); margin-bottom: 8px;">📱 Quick Surveys ($3-8/hour)</h4>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 10px;">Short surveys perfect for odd hours</p>
-                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                                <a href="https://qmee.com" target="_blank" style="background: var(--gradient-primary); color: white; padding: 4px 10px; border-radius: 15px; text-decoration: none; font-size: 0.75rem;">Qmee</a>
-                                <a href="https://attapoll.app" target="_blank" style="background: var(--gradient-primary); color: white; padding: 4px 10px; border-radius: 15px; text-decoration: none; font-size: 0.75rem;">AttaPoll</a>
-                                <a href="https://surveytime.app" target="_blank" style="background: var(--gradient-primary); color: white; padding: 4px 10px; border-radius: 15px; text-decoration: none; font-size: 0.75rem;">Surveytime</a>
+                        <div class="popup-task" style="border-left-color: var(--accent-blue);">
+                            <h4 style="color: var(--accent-blue);">📱 Quick Surveys ($3-8/hour)</h4>
+                            <p>Short surveys perfect for odd hours</p>
+                            <div class="popup-task-links">
+                                <a href="https://qmee.com" target="_blank" class="popup-task-link">Qmee</a>
+                                <a href="https://attapoll.app" target="_blank" class="popup-task-link">AttaPoll</a>
+                                <a href="https://surveytime.app" target="_blank" class="popup-task-link">Surveytime</a>
                             </div>
                         </div>
 
-                        <div style="background: var(--card-bg); padding: 15px; border-radius: 12px; border-left: 4px solid var(--accent-amber);">
-                            <h4 style="color: var(--accent-amber); margin-bottom: 8px;">🛒 Cashback Shopping ($1-10/purchase)</h4>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 10px;">Earn while doing regular online shopping</p>
-                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                                <a href="https://rakuten.com" target="_blank" style="background: var(--gradient-primary); color: white; padding: 4px 10px; border-radius: 15px; text-decoration: none; font-size: 0.75rem;">Rakuten</a>
-                                <a href="https://honey.com" target="_blank" style="background: var(--gradient-primary); color: white; padding: 4px 10px; border-radius: 15px; text-decoration: none; font-size: 0.75rem;">Honey</a>
-                                <a href="https://ibotta.com" target="_blank" style="background: var(--gradient-primary); color: white; padding: 4px 10px; border-radius: 15px; text-decoration: none; font-size: 0.75rem;">Ibotta</a>
+                        <div class="popup-task" style="border-left-color: var(--accent-amber);">
+                            <h4 style="color: var(--accent-amber);">🛒 Cashback Shopping ($1-10/purchase)</h4>
+                            <p>Earn while doing regular online shopping</p>
+                            <div class="popup-task-links">
+                                <a href="https://rakuten.com" target="_blank" class="popup-task-link">Rakuten</a>
+                                <a href="https://honey.com" target="_blank" class="popup-task-link">Honey</a>
+                                <a href="https://ibotta.com" target="_blank" class="popup-task-link">Ibotta</a>
                             </div>
                         </div>
 
-                        <div style="background: var(--card-bg); padding: 15px; border-radius: 12px; border-left: 4px solid var(--accent-teal);">
-                            <h4 style="color: var(--accent-teal); margin-bottom: 8px;">📺 Watch & Earn ($1-3/hour)</h4>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 10px;">Passive earning while binge-watching</p>
-                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                                <a href="https://swagbucks.com" target="_blank" style="background: var(--gradient-primary); color: white; padding: 4px 10px; border-radius: 15px; text-decoration: none; font-size: 0.75rem;">Swagbucks TV</a>
-                                <a href="https://inboxdollars.com" target="_blank" style="background: var(--gradient-primary); color: white; padding: 4px 10px; border-radius: 15px; text-decoration: none; font-size: 0.75rem;">InboxDollars</a>
+                        <div class="popup-task" style="border-left-color: var(--accent-teal);">
+                            <h4 style="color: var(--accent-teal);">📺 Watch & Earn ($1-3/hour)</h4>
+                            <p>Passive earning while binge-watching</p>
+                            <div class="popup-task-links">
+                                <a href="https://swagbucks.com" target="_blank" class="popup-task-link">Swagbucks TV</a>
+                                <a href="https://inboxdollars.com" target="_blank" class="popup-task-link">InboxDollars</a>
                             </div>
-                        </div>
-
-                        <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1)); border: 1px solid rgba(16, 185, 129, 0.2); padding: 15px; border-radius: 12px; margin-top: 10px;">
-                            <p style="color: var(--accent-emerald); font-weight: 600; text-align: center; margin-bottom: 5px;">💡 Night Owl Tip</p>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem; text-align: center;">Less competition on surveys during off-hours - often higher acceptance rates!</p>
                         </div>
                     </div>
 
-                    <div style="text-align: center; margin-top: 25px;">
-                        <button onclick="closeAnytimePopup()" style="
-                            background: var(--gradient-success);
-                            color: white;
-                            border: none;
-                            padding: 12px 30px;
-                            border-radius: 20px;
-                            cursor: pointer;
-                            font-weight: 600;
-                            font-size: 1rem;
-                            box-shadow: var(--shadow-soft);
-                            transition: all 0.3s;
-                        " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div class="popup-tip">
+                        <div class="tip-title">💡 Night Owl Tip</div>
+                        <div class="tip-text">Less competition on surveys during off-hours - often higher acceptance rates!</div>
+                    </div>
+
+                    <div class="popup-actions">
+                        <button class="popup-close-btn" onclick="closeAnytimePopup()">
                             🚀 Let's Go Earn!
                         </button>
                     </div>
@@ -643,6 +816,7 @@
             // Close popup function
             window.closeAnytimePopup = function() {
                 popup.style.animation = 'fadeOut 0.3s ease-out';
+                document.body.style.overflow = ''; // Restore body scroll
                 setTimeout(() => {
                     if (document.body.contains(popup)) {
                         document.body.removeChild(popup);
@@ -650,10 +824,18 @@
                 }, 300);
             };
 
-            // Close on background click
+            // Close on background click (but not on content click)
             popup.addEventListener('click', (e) => {
                 if (e.target === popup) {
                     closeAnytimePopup();
+                }
+            });
+
+            // Close on escape key
+            document.addEventListener('keydown', function escapeHandler(e) {
+                if (e.key === 'Escape') {
+                    closeAnytimePopup();
+                    document.removeEventListener('keydown', escapeHandler);
                 }
             });
         }
