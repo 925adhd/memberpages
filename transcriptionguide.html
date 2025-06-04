@@ -281,6 +281,17 @@
             border: 1px solid rgba(139, 92, 246, 0.3);
         }
 
+        .transition-card {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(6, 182, 212, 0.08));
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            padding: 1.25rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+            text-align: center;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
         .card-title {
             font-size: 1.2rem;
             font-weight: 600;
@@ -336,6 +347,18 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+        }
+
+        .platform-link {
+            color: var(--accent-teal);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .platform-link:hover {
+            border-bottom-color: var(--accent-teal);
+            color: var(--accent-blue);
         }
 
         .data-card-content {
@@ -927,7 +950,7 @@
     
     <div class="progress-indicator">
         <div class="section-progress">
-            <span id="current-section">Introduction</span>
+            <span id="current-section">Overview</span>
             <div class="progress-circle completed"></div>
             <div class="progress-circle active"></div>
             <div class="progress-circle"></div>
@@ -984,15 +1007,15 @@
             <h2 class="toc-title">📋 Quick Navigation</h2>
             <div class="toc-grid">
                 <div class="toc-item">
-                    <a href="#introduction" class="toc-link">
+                    <a href="#overview" class="toc-link">
                         <span class="toc-emoji">🎯</span>
-                        <span>Current State of Transcription for ADHD Minds</span>
+                        <span>Overview: ADHD & Transcription Today</span>
                     </a>
                 </div>
                 <div class="toc-item">
-                    <a href="#platforms" class="toc-link">
+                    <a href="#earnings" class="toc-link">
                         <span class="toc-emoji">💰</span>
-                        <span>Realistic Platform Comparison & Earnings</span>
+                        <span>Realistic Earnings & Platform Analysis</span>
                     </a>
                 </div>
                 <div class="toc-item">
@@ -1002,15 +1025,15 @@
                     </a>
                 </div>
                 <div class="toc-item">
-                    <a href="#adhd-strategies" class="toc-link">
-                        <span class="toc-emoji">⚡</span>
-                        <span>ADHD-Specific Strategies</span>
-                    </a>
-                </div>
-                <div class="toc-item">
                     <a href="#skills" class="toc-link">
                         <span class="toc-emoji">🔧</span>
                         <span>Essential Skills & Setup</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#adhd-strategies" class="toc-link">
+                        <span class="toc-emoji">⚡</span>
+                        <span>ADHD-Specific Success Strategies</span>
                     </a>
                 </div>
                 <div class="toc-item">
@@ -1028,21 +1051,21 @@
                 <div class="toc-item">
                     <a href="#getting-started" class="toc-link">
                         <span class="toc-emoji">📝</span>
-                        <span>Getting Started Realistically</span>
+                        <span>Getting Started Action Plan</span>
                     </a>
                 </div>
             </div>
         </div>
 
-        <!-- Introduction Section -->
-        <div class="section" id="introduction">
+        <!-- Overview Section -->
+        <div class="section" id="overview">
             <h2 class="section-title">
                 <span class="emoji">🎯</span>
-                <span class="title-text">Current State of Transcription for ADHD Minds</span>
+                <span class="title-text">Overview: ADHD & Transcription Today</span>
             </h2>
             
             <div class="voice-controls">
-                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="intro-content">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="overview-content">
                     <span>🔊</span> Play
                 </button>
                 <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
@@ -1050,13 +1073,13 @@
                 </button>
             </div>
             
-            <div id="intro-content">
-                <p>Transcription work can still offer some advantages for ADHD brains, but the landscape has changed dramatically. Here's what you need to know:</p>
+            <div id="overview-content">
+                <p>Transcription work can still offer some advantages for ADHD brains, but the landscape has changed dramatically. Here's what you need to know about the current state of this industry:</p>
             </div>
 
             <div class="adhd-card">
                 <div class="voice-controls">
-                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="adhd-traits">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="adhd-compatibility">
                         <span>🔊</span> Play
                     </button>
                     <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
@@ -1065,23 +1088,25 @@
                 </div>
                 <div class="card-title">
                     <div class="card-icon">⚡</div>
-                    Why Some ADHD Traits Still Work for Transcription
+                    ADHD Brain & Transcription: The Good and Challenging
                 </div>
-                <div id="adhd-traits">
+                <div id="adhd-compatibility">
+                    <p><strong>ADHD Advantages in Transcription:</strong></p>
                     <ul class="styled-list">
                         <li><strong>Flexible Timing:</strong> Work when your focus is naturally strongest</li>
-                        <li><strong>Clear Tasks:</strong> Audio files have defined start and end points</li>
-                        <li><strong>Variety:</strong> Different content can maintain interest</li>
-                        <li><strong>Detail Focus:</strong> When hyperfocused, ADHD minds can excel at accuracy</li>
+                        <li><strong>Clear Task Boundaries:</strong> Audio files have defined start and end points</li>
+                        <li><strong>Variety:</strong> Different content can maintain interest and prevent boredom</li>
+                        <li><strong>Detail Hyperfocus:</strong> When engaged, ADHD minds can excel at accuracy</li>
+                        <li><strong>Pattern Recognition:</strong> Spotting speaker changes and contextual clues</li>
                     </ul>
                     <br>
-                    <p><strong>Current Challenges for ADHD Brains:</strong></p>
+                    <p><strong>Current ADHD Challenges:</strong></p>
                     <ul class="styled-list">
-                        <li><strong>Low Pay:</strong> Most platforms now pay $150-400/month, which can be demotivating</li>
-                        <li><strong>Competition:</strong> Many platforms have waitlists or have paused hiring</li>
-                        <li><strong>AI Competition:</strong> Increasingly competing with automated transcription</li>
-                        <li><strong>Audio Quality:</strong> Poor audio requires sustained attention that can be challenging</li>
-                        <li><strong>Repetitive Work:</strong> Much remaining work is editing AI transcripts, which can be boring</li>
+                        <li><strong>Low Motivation:</strong> $150-400/month earnings can be demotivating</li>
+                        <li><strong>Competition Stress:</strong> Waitlists and hiring freezes create uncertainty</li>
+                        <li><strong>AI Repetition:</strong> Much work now involves editing AI transcripts (can be boring)</li>
+                        <li><strong>Audio Quality Issues:</strong> Poor audio requires sustained attention that's challenging</li>
+                        <li><strong>Time Estimation:</strong> ADHD time blindness makes it hard to estimate earnings</li>
                     </ul>
                 </div>
             </div>
@@ -1100,22 +1125,56 @@
                     Industry Status 2025
                 </div>
                 <div id="industry-status">
-                    <p>The Bureau of Labor Statistics projects a <strong>4.7% decline</strong> in medical transcription jobs by 2033. Many traditional transcription roles are being replaced by AI-assisted workflows.</p>
+                    <p>The Bureau of Labor Statistics projects a <strong>4.7% decline</strong> in medical transcription jobs by 2033. Many traditional transcription roles are being replaced by AI-assisted workflows where humans edit rather than create transcripts from scratch.</p>
                     <br>
-                    <p><strong>What this means:</strong> Transcription is transitioning from a potential career to mostly supplemental income, with emphasis on specialized skills and AI collaboration.</p>
+                    <p><strong>What this means for ADHD workers:</strong> Transcription is transitioning from a potential career to mostly supplemental income, with emphasis on specialized skills and AI collaboration rather than pure typing speed.</p>
+                </div>
+            </div>
+
+            <div class="warning-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="expectations-setting">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
+                <div class="card-title">
+                    <div class="card-icon">⚠️</div>
+                    Setting Realistic Expectations
+                </div>
+                <div id="expectations-setting">
+                    <p><strong>Transcription today is best suited for:</strong></p>
+                    <ul class="styled-list">
+                        <li>People seeking flexible supplemental income ($150-400/month)</li>
+                        <li>Those interested in learning AI collaboration skills</li>
+                        <li>ADHD minds who find audio processing engaging</li>
+                        <li>Workers building toward related fields (content writing, virtual assistance)</li>
+                    </ul>
+                    <p><strong>Not ideal for:</strong></p>
+                    <ul class="styled-list">
+                        <li>Those needing substantial or primary income</li>
+                        <li>People who find repetitive audio work frustrating</li>
+                        <li>Workers expecting pre-2020 earning levels</li>
+                    </ul>
                 </div>
             </div>
         </div>
 
-        <!-- Platform Comparison -->
-        <div class="section" id="platforms">
+        <div class="transition-card">
+            <p>💰 <strong>Now let's look at the realistic earning potential across different platforms...</strong></p>
+        </div>
+
+        <!-- Earnings & Platform Comparison -->
+        <div class="section" id="earnings">
             <h2 class="section-title">
                 <span class="emoji">💰</span>
-                <span class="title-text">Realistic Platform Comparison & Earnings</span>
+                <span class="title-text">Realistic Earnings & Platform Analysis</span>
             </h2>
             
             <div class="voice-controls">
-                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="platform-intro">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="earnings-intro">
                     <span>🔊</span> Play
                 </button>
                 <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
@@ -1123,14 +1182,14 @@
                 </button>
             </div>
             
-            <div id="platform-intro">
-                <p>Here's the honest truth about current transcription platform earnings and availability:</p>
+            <div id="earnings-intro">
+                <p>Here's the honest truth about current transcription platform earnings and availability. These numbers reflect 2024-2025 realities, not outdated marketing claims:</p>
             </div>
 
             <div class="data-grid">
                 <div class="data-card">
                     <div class="data-card-header">
-                        🎵 Rev
+                        🎵 <a href="https://www.rev.com/freelancers" class="platform-link" target="_blank" rel="noopener noreferrer">Rev</a>
                     </div>
                     <div class="data-card-content">
                         <div class="data-row">
@@ -1142,18 +1201,22 @@
                             <span class="data-value">$245/month average</span>
                         </div>
                         <div class="data-row">
+                            <span class="data-label">Pay Rate:</span>
+                            <span class="data-value">$0.30-0.75 per audio minute</span>
+                        </div>
+                        <div class="data-row">
                             <span class="data-label">ADHD Compatibility:</span>
-                            <span class="data-value"><span class="status-medium">Medium</span></span>
+                            <span class="data-value"><span class="status-medium">3/5</span></span>
                         </div>
                     </div>
                     <div class="data-note">
-                        Clean interface but low pay. 72,000+ freelancers competing for work.
+                        Clean interface but low pay. 72,000+ freelancers competing for limited work.
                     </div>
                 </div>
 
                 <div class="data-card">
                     <div class="data-card-header">
-                        📝 GoTranscript
+                        📝 <a href="https://gotranscript.com/transcription-jobs" class="platform-link" target="_blank" rel="noopener noreferrer">GoTranscript</a>
                     </div>
                     <div class="data-card-content">
                         <div class="data-row">
@@ -1162,21 +1225,25 @@
                         </div>
                         <div class="data-row">
                             <span class="data-label">Monthly Earnings:</span>
-                            <span class="data-value">$150/month average ($1,215 top earners)</span>
+                            <span class="data-value">$150/month average</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Pay Rate:</span>
+                            <span class="data-value">$0.60 per audio minute</span>
                         </div>
                         <div class="data-row">
                             <span class="data-label">ADHD Compatibility:</span>
-                            <span class="data-value"><span class="status-medium">Medium</span></span>
+                            <span class="data-value"><span class="status-medium">3/5</span></span>
                         </div>
                     </div>
                     <div class="data-note">
-                        Straightforward but repetitive. $0.60 per audio minute, requires 95% accuracy.
+                        Most accessible platform but repetitive work. Requires 95% accuracy to maintain access.
                     </div>
                 </div>
 
                 <div class="data-card">
                     <div class="data-card-header">
-                        ✏️ Scribie
+                        ✏️ <a href="https://scribie.com/freelance-transcription" class="platform-link" target="_blank" rel="noopener noreferrer">Scribie</a>
                     </div>
                     <div class="data-card-content">
                         <div class="data-row">
@@ -1185,21 +1252,25 @@
                         </div>
                         <div class="data-row">
                             <span class="data-label">Monthly Earnings:</span>
-                            <span class="data-value">$400/month beginners when available</span>
+                            <span class="data-value">$400/month when available</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Pay Rate:</span>
+                            <span class="data-value">$5-25 per audio hour</span>
                         </div>
                         <div class="data-row">
                             <span class="data-label">ADHD Compatibility:</span>
-                            <span class="data-value"><span class="status-high">High</span></span>
+                            <span class="data-value"><span class="status-high">5/5</span></span>
                         </div>
                     </div>
                     <div class="data-note">
-                        Short files suit ADHD attention span, but currently unavailable. Transitioning to AI platform.
+                        Short files ideal for ADHD attention span, but currently unavailable. Transitioning to AI-focused model.
                     </div>
                 </div>
 
                 <div class="data-card">
                     <div class="data-card-header">
-                        🎧 TranscribeMe
+                        🎧 <a href="https://www.transcribeme.com/jobs/" class="platform-link" target="_blank" rel="noopener noreferrer">TranscribeMe</a>
                     </div>
                     <div class="data-card-content">
                         <div class="data-row">
@@ -1211,35 +1282,70 @@
                             <span class="data-value">$250/month average</span>
                         </div>
                         <div class="data-row">
+                            <span class="data-label">Pay Rate:</span>
+                            <span class="data-value">$15-22 per audio hour</span>
+                        </div>
+                        <div class="data-row">
                             <span class="data-label">ADHD Compatibility:</span>
-                            <span class="data-value"><span class="status-high">High</span></span>
+                            <span class="data-value"><span class="status-high">5/5</span></span>
                         </div>
                     </div>
                     <div class="data-note">
-                        Very short files (2-4 minutes) perfect for ADHD focus. $15-22 per audio hour, competitive entry.
+                        Very short files (2-4 minutes) perfect for ADHD focus bursts. Competitive entry process.
                     </div>
                 </div>
 
                 <div class="data-card">
                     <div class="data-card-header">
-                        📺 3Play Media
+                        📺 <a href="https://www.3playmedia.com/careers/" class="platform-link" target="_blank" rel="noopener noreferrer">3Play Media</a>
                     </div>
                     <div class="data-card-content">
                         <div class="data-row">
                             <span class="data-label">Current Status:</span>
-                            <span class="data-value"><span class="status-limited">Specialized roles</span></span>
+                            <span class="data-value"><span class="status-limited">Specialized roles only</span></span>
                         </div>
                         <div class="data-row">
                             <span class="data-label">Monthly Earnings:</span>
                             <span class="data-value">Variable (AI editing focus)</span>
                         </div>
                         <div class="data-row">
+                            <span class="data-label">Pay Rate:</span>
+                            <span class="data-value">Project-based</span>
+                        </div>
+                        <div class="data-row">
                             <span class="data-label">ADHD Compatibility:</span>
-                            <span class="data-value"><span class="status-medium">Medium</span></span>
+                            <span class="data-value"><span class="status-medium">3/5</span></span>
                         </div>
                     </div>
                     <div class="data-note">
                         Mostly editing AI-generated transcripts now. Different skillset than traditional transcription.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🏥 <a href="https://www.mmodal.com/career" class="platform-link" target="_blank" rel="noopener noreferrer">M*Modal (Medical)</a>
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Current Status:</span>
+                            <span class="data-value"><span class="status-declining">Downsizing</span></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Monthly Earnings:</span>
+                            <span class="data-value">$400-800 (experienced only)</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Training Required:</span>
+                            <span class="data-value">6-12 months certification</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-low">2/5</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        High training investment for declining field. Most positions being automated.
                     </div>
                 </div>
             </div>
@@ -1258,11 +1364,44 @@
                     Earnings Reality Check
                 </div>
                 <div id="earnings-reality">
-                    <p><strong>Most transcriptionists now earn $150-400 per month,</strong> not the $1,600-2,400 sometimes advertised. The field has become highly competitive with many platforms having waitlists or hiring freezes.</p>
+                    <p><strong>Most transcriptionists now earn $150-400 per month,</strong> not the $1,600-2,400 sometimes advertised in outdated guides. The field has become highly competitive with many platforms having waitlists, hiring freezes, or focusing on AI editing roles.</p>
                     <br>
-                    <p><strong>Competition factors:</strong> AI tools, large freelancer pools, and declining demand for human-only transcription have significantly impacted earning potential.</p>
+                    <p><strong>Competition factors affecting ADHD workers:</strong></p>
+                    <ul class="styled-list">
+                        <li>AI tools reducing demand for human-only transcription</li>
+                        <li>Large freelancer pools competing for fewer available jobs</li>
+                        <li>Platform algorithm changes affecting work distribution</li>
+                        <li>Quality requirements that can be challenging during ADHD "off" days</li>
+                    </ul>
                 </div>
             </div>
+
+            <div class="tip-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="realistic-timeline">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
+                <div class="card-title">
+                    <div class="card-icon">📈</div>
+                    Realistic Earning Timeline
+                </div>
+                <div id="realistic-timeline">
+                    <p><strong>Month 1:</strong> $20-50 (learning platforms, building speed)</p>
+                    <p><strong>Months 2-3:</strong> $100-200 (improving accuracy, accessing more work)</p>
+                    <p><strong>Months 4-6:</strong> $150-350 (if work remains available)</p>
+                    <p><strong>Months 6+:</strong> $200-400 (experienced workers, good platforms)</p>
+                    <br>
+                    <p><strong>ADHD Consideration:</strong> Progress may be non-linear due to focus fluctuations and motivation challenges with lower pay rates.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="transition-card">
+            <p>🤖 <strong>Understanding AI's impact is crucial for setting realistic expectations and planning your approach...</strong></p>
         </div>
 
         <!-- AI Impact -->
@@ -1282,10 +1421,10 @@
             </div>
 
             <div id="ai-intro">
-                <p>AI has fundamentally changed transcription work. Rather than eliminating all human roles, it has shifted what transcriptionists do:</p>
+                <p>AI has fundamentally changed transcription work. Rather than eliminating all human roles, it has shifted what transcriptionists do and how the work is structured:</p>
             </div>
 
-            <h3 class="section-subtitle">Current AI Capabilities</h3>
+            <h3 class="section-subtitle">Current AI Capabilities & Limitations</h3>
 
             <div class="highlight-card">
                 <div class="voice-controls">
@@ -1298,409 +1437,43 @@
                 </div>
                 <div class="card-title">
                     <div class="card-icon">📊</div>
-                    AI Transcription Stats 2025
+                    AI Transcription Performance 2025
                 </div>
                 <div id="ai-stats">
+                    <p><strong>What AI does well:</strong></p>
                     <ul class="styled-list">
-                        <li><strong>90% accuracy</strong> for clear audio with standard accents</li>
+                        <li><strong>90%+ accuracy</strong> for clear audio with standard accents</li>
                         <li><strong>5-minute turnaround</strong> for 30-minute audio files</li>
                         <li><strong>52 languages</strong> supported by advanced systems</li>
-                        <li><strong>35% more documentation</strong> generated for virtual visits</li>
+                        <li><strong>Consistent performance</strong> regardless of content complexity</li>
                     </ul>
-                </div>
-            </div>
-
-            <h3 class="section-subtitle">Emerging Human Roles</h3>
-
-            <div class="data-grid">
-                <div class="data-card">
-                    <div class="data-card-header">
-                        🔧 AI Editor
-                    </div>
-                    <div class="data-card-content">
-                        <div class="data-row">
-                            <span class="data-label">Description:</span>
-                            <span class="data-value">Correcting and refining AI transcripts</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Skills Needed:</span>
-                            <span class="data-value">Pattern recognition, attention to detail</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">ADHD Compatibility:</span>
-                            <span class="data-value"><span class="status-high">High</span></span>
-                        </div>
-                    </div>
-                    <div class="data-note">
-                        Can leverage ADHD pattern spotting abilities to catch AI errors others miss.
-                    </div>
-                </div>
-
-                <div class="data-card">
-                    <div class="data-card-header">
-                        🎯 Quality Assurance
-                    </div>
-                    <div class="data-card-content">
-                        <div class="data-row">
-                            <span class="data-label">Description:</span>
-                            <span class="data-value">Reviewing AI output for accuracy standards</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Skills Needed:</span>
-                            <span class="data-value">Domain knowledge, quality standards</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">ADHD Compatibility:</span>
-                            <span class="data-value"><span class="status-medium">Medium</span></span>
-                        </div>
-                    </div>
-                    <div class="data-note">
-                        Requires sustained attention, which can be challenging for some ADHD minds.
-                    </div>
-                </div>
-
-                <div class="data-card">
-                    <div class="data-card-header">
-                        🎓 Specialized Transcription
-                    </div>
-                    <div class="data-card-content">
-                        <div class="data-row">
-                            <span class="data-label">Description:</span>
-                            <span class="data-value">Handling complex audio AI cannot process</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Skills Needed:</span>
-                            <span class="data-value">Subject matter expertise, persistence</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">ADHD Compatibility:</span>
-                            <span class="data-value"><span class="status-high">High</span></span>
-                        </div>
-                    </div>
-                    <div class="data-note">
-                        Challenging content can trigger productive hyperfocus states in ADHD minds.
-                    </div>
-                </div>
-
-                <div class="data-card">
-                    <div class="data-card-header">
-                        🤖 AI Training Support
-                    </div>
-                    <div class="data-card-content">
-                        <div class="data-row">
-                            <span class="data-label">Description:</span>
-                            <span class="data-value">Providing feedback to improve AI systems</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Skills Needed:</span>
-                            <span class="data-value">Understanding of transcription standards</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">ADHD Compatibility:</span>
-                            <span class="data-value"><span class="status-medium">Medium</span></span>
-                        </div>
-                    </div>
-                    <div class="data-note">
-                        Analytical tasks that some ADHD minds find engaging and intellectually stimulating.
-                    </div>
-                </div>
-            </div>
-
-            <div class="tip-card">
-                <div class="voice-controls">
-                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="adhd-advantage">
-                        <span>🔊</span> Play
-                    </button>
-                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
-                        <span>⏹️</span> Stop
-                    </button>
-                </div>
-                <div class="card-title">
-                    <div class="card-icon">💡</div>
-                    ADHD Advantage in AI Era
-                </div>
-                <div id="adhd-advantage">
-                    <p>Many ADHD transcriptionists report being particularly good at <strong>spotting AI errors</strong> that others miss. The pattern recognition and detail hyperfocus that can come with ADHD are valuable for identifying where AI gets confused or makes contextual mistakes.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- ADHD Strategies -->
-        <div class="section" id="adhd-strategies">
-            <h2 class="section-title">
-                <span class="emoji">⚡</span>
-                <span class="title-text">ADHD-Specific Strategies</span>
-            </h2>
-
-            <h3 class="section-subtitle">Working With Your ADHD Brain</h3>
-
-            <div class="adhd-card">
-                <div class="voice-controls">
-                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="energy-matching">
-                        <span>🔊</span> Play
-                    </button>
-                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
-                        <span>⏹️</span> Stop
-                    </button>
-                </div>
-                <div class="card-title">
-                    <div class="card-icon">🎯</div>
-                    The "Energy-Matching" System
-                </div>
-                <div id="energy-matching">
-                    <p>Match transcription tasks to your current energy and focus level:</p>
-                    <ul class="styled-list">
-                        <li><strong>High Energy:</strong> Tackle difficult audio, medical transcription, or complex editing</li>
-                        <li><strong>Medium Energy:</strong> Standard transcription tasks, routine AI editing</li>
-                        <li><strong>Low Energy:</strong> Simple proofreading, very clear audio files</li>
-                        <li><strong>No Energy:</strong> Skip transcription entirely - don't force it when exhausted</li>
-                    </ul>
-                </div>
-            </div>
-
-            <h3 class="section-subtitle">Managing ADHD Challenges in Transcription</h3>
-
-            <div class="progress-timeline">
-                <div class="timeline-item">
-                    <div class="timeline-number">1</div>
-                    <div class="timeline-content">
-                        <h4>Perfectionism Traps</h4>
-                        <p><strong>Challenge:</strong> Getting stuck on unclear audio sections. <strong>Strategy:</strong> Set 2-minute limit per unclear section, flag for review, move on.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-number">2</div>
-                    <div class="timeline-content">
-                        <h4>Time Blindness</h4>
-                        <p><strong>Challenge:</strong> Underestimating how long files will take. <strong>Strategy:</strong> Track actual time vs. estimates, add 50% buffer to time estimates.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-number">3</div>
-                    <div class="timeline-content">
-                        <h4>Motivation Fluctuations</h4>
-                        <p><strong>Challenge:</strong> Inconsistent productivity affecting earnings. <strong>Strategy:</strong> Have backup tasks for low-motivation periods, visual progress tracking.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-number">4</div>
-                    <div class="timeline-content">
-                        <h4>Sustained Attention</h4>
-                        <p><strong>Challenge:</strong> Long audio files overwhelming. <strong>Strategy:</strong> Break files into 10-15 minute segments, use Pomodoro technique.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Skills Section -->
-        <div class="section" id="skills">
-            <h2 class="section-title">
-                <span class="emoji">🔧</span>
-                <span class="title-text">Essential Skills & Setup</span>
-            </h2>
-
-            <h3 class="section-subtitle">Typing Speed Reality</h3>
-
-            <div class="data-grid">
-                <div class="data-card">
-                    <div class="data-card-header">
-                        🐌 Under 40 WPM
-                    </div>
-                    <div class="data-card-content">
-                        <div class="data-row">
-                            <span class="data-label">Transcription Impact:</span>
-                            <span class="data-value">Very difficult to earn minimum wage</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Realistic Earnings:</span>
-                            <span class="data-value">Under $100/month</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">ADHD Considerations:</span>
-                            <span class="data-value">May be too frustrating</span>
-                        </div>
-                    </div>
-                    <div class="data-note">
-                        Consider skill building first before starting transcription work.
-                    </div>
-                </div>
-
-                <div class="data-card">
-                    <div class="data-card-header">
-                        🚶 40-60 WPM
-                    </div>
-                    <div class="data-card-content">
-                        <div class="data-row">
-                            <span class="data-label">Transcription Impact:</span>
-                            <span class="data-value">Entry-level viability</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Realistic Earnings:</span>
-                            <span class="data-value">$150-250/month</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">ADHD Considerations:</span>
-                            <span class="data-value">Workable but requires patience</span>
-                        </div>
-                    </div>
-                    <div class="data-note">
-                        Good starting point for ADHD minds who don't get frustrated easily.
-                    </div>
-                </div>
-
-                <div class="data-card">
-                    <div class="data-card-header">
-                        🏃 60-80 WPM
-                    </div>
-                    <div class="data-card-content">
-                        <div class="data-row">
-                            <span class="data-label">Transcription Impact:</span>
-                            <span class="data-value">Competitive for available work</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Realistic Earnings:</span>
-                            <span class="data-value">$250-400/month</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">ADHD Considerations:</span>
-                            <span class="data-value">Good balance achievable</span>
-                        </div>
-                    </div>
-                    <div class="data-note">
-                        Sweet spot for ADHD transcriptionists - fast enough to stay motivated.
-                    </div>
-                </div>
-
-                <div class="data-card">
-                    <div class="data-card-header">
-                        🚀 80+ WPM
-                    </div>
-                    <div class="data-card-content">
-                        <div class="data-row">
-                            <span class="data-label">Transcription Impact:</span>
-                            <span class="data-value">Optimal for specialized opportunities</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Realistic Earnings:</span>
-                            <span class="data-value">$400+/month potential</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">ADHD Considerations:</span>
-                            <span class="data-value">Can help overcome attention challenges</span>
-                        </div>
-                    </div>
-                    <div class="data-note">
-                        Speed helps maintain flow state and prevents frustration with slow progress.
-                    </div>
-                </div>
-            </div>
-
-            <div class="tip-card">
-                <div class="voice-controls">
-                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="typing-practice">
-                        <span>🔊</span> Play
-                    </button>
-                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
-                        <span>⏹️</span> Stop
-                    </button>
-                </div>
-                <div class="card-title">
-                    <div class="card-icon">⌨️</div>
-                    ADHD-Friendly Typing Practice
-                </div>
-                <div id="typing-practice">
-                    <p>Traditional typing tutors can be boring for ADHD minds. Try these engaging alternatives:</p>
-                    <ul class="styled-list">
-                        <li><strong>TypeRacer:</strong> Competitive racing format with immediate feedback</li>
-                        <li><strong>Nitro Type:</strong> Car racing theme that gamifies practice</li>
-                        <li><strong>Keybr:</strong> Adapts to your weak spots automatically</li>
-                        <li><strong>10FastFingers:</strong> Quick tests that provide dopamine hits</li>
-                    </ul>
-                </div>
-            </div>
-
-            <h3 class="section-subtitle">Equipment Essentials (Budget-Friendly)</h3>
-
-            <div class="highlight-card">
-                <div class="voice-controls">
-                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="equipment-setup">
-                        <span>🔊</span> Play
-                    </button>
-                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
-                        <span>⏹️</span> Stop
-                    </button>
-                </div>
-                <div class="card-title">
-                    <div class="card-icon">🎧</div>
-                    Realistic Equipment Setup
-                </div>
-                <div id="equipment-setup">
-                    <p><strong>Don't over-invest initially.</strong> Start with basics and upgrade only if you're earning consistently:</p>
-                    <ul class="styled-list">
-                        <li><strong>Good Headphones:</strong> $30-60 range (Sony, Audio-Technica budget models)</li>
-                        <li><strong>Transcription Software:</strong> Start with free Express Scribe or oTranscribe</li>
-                        <li><strong>Text Expander:</strong> $0-5/month for common medical terms/phrases</li>
-                        <li><strong>Foot Pedal:</strong> Only after confirming you'll continue ($40-60)</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Specializations -->
-        <div class="section" id="specializations">
-            <h2 class="section-title">
-                <span class="emoji">🎓</span>
-                <span class="title-text">Remaining Specialization Opportunities</span>
-            </h2>
-
-            <div class="voice-controls">
-                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="specialization-intro">
-                    <span>🔊</span> Play
-                </button>
-                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
-                    <span>⏹️</span> Stop
-                </button>
-            </div>
-
-            <div id="specialization-intro">
-                <p>While general transcription is declining, some specialized areas still offer opportunities:</p>
-            </div>
-
-            <div class="warning-card">
-                <div class="voice-controls">
-                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="medical-reality">
-                        <span>🔊</span> Play
-                    </button>
-                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
-                        <span>⏹️</span> Stop
-                    </button>
-                </div>
-                <div class="card-title">
-                    <div class="card-icon">⚠️</div>
-                    Medical Transcription Reality Check
-                </div>
-                <div id="medical-reality">
-                    <p><strong>Medical transcription is at "imminent risk" of automation.</strong> Many hospitals already use voice recognition software extensively. While opportunities exist, they often require significant training investment (6-12 months) for a declining field.</p>
                     <br>
-                    <p><strong>Consider carefully:</strong> Medical transcription training programs may not provide good ROI given AI adoption in healthcare.</p>
+                    <p><strong>Where AI still struggles:</strong></p>
+                    <ul class="styled-list">
+                        <li>Multiple speakers with overlapping speech</li>
+                        <li>Heavy accents or technical jargon</li>
+                        <li>Poor audio quality or background noise</li>
+                        <li>Context-dependent homophones and specialized terminology</li>
+                        <li>Emotional nuance and speaker identification</li>
+                    </ul>
                 </div>
             </div>
 
-            <h3 class="section-subtitle">Remaining Niche Opportunities</h3>
+            <h3 class="section-subtitle">Emerging Human Roles in AI-Assisted Transcription</h3>
 
             <div class="data-grid">
                 <div class="data-card">
                     <div class="data-card-header">
-                        ⚖️ Legal Depositions
+                        🔧 AI Editor/Corrector
                     </div>
                     <div class="data-card-content">
                         <div class="data-row">
-                            <span class="data-label">Current Viability:</span>
-                            <span class="data-value">Still valuable for complex cases</span>
+                            <span class="data-label">Description:</span>
+                            <span class="data-value">Correcting and refining AI-generated transcripts</span>
                         </div>
                         <div class="data-row">
-                            <span class="data-label">Training Investment:</span>
-                            <span class="data-value">3-6 months</span>
+                            <span class="data-label">Skills Needed:</span>
+                            <span class="data-value">Pattern recognition, attention to detail, context understanding</span>
                         </div>
                         <div class="data-row">
                             <span class="data-label">ADHD Compatibility:</span>
@@ -1708,13 +1481,13 @@
                         </div>
                     </div>
                     <div class="data-note">
-                        Engaging content with clear structure - good for ADHD minds who like variety.
+                        Engaging content with clear structure - good for ADHD minds who enjoy variety and intellectual challenge.
                     </div>
                 </div>
 
                 <div class="data-card">
                     <div class="data-card-header">
-                        📚 Academic Research
+                        📚 Academic Research Transcription
                     </div>
                     <div class="data-card-content">
                         <div class="data-row">
@@ -1723,7 +1496,11 @@
                         </div>
                         <div class="data-row">
                             <span class="data-label">Training Investment:</span>
-                            <span class="data-value">Background knowledge helpful</span>
+                            <span class="data-value">Subject knowledge helpful</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Pay Range:</span>
+                            <span class="data-value">$18-35 per audio hour</span>
                         </div>
                         <div class="data-row">
                             <span class="data-label">ADHD Compatibility:</span>
@@ -1731,22 +1508,26 @@
                         </div>
                     </div>
                     <div class="data-note">
-                        Intellectually stimulating content can trigger hyperfocus in ADHD minds.
+                        Intellectually stimulating content can trigger productive hyperfocus in ADHD minds.
                     </div>
                 </div>
 
                 <div class="data-card">
                     <div class="data-card-header">
-                        🌍 Multi-language
+                        🌍 Multi-language & Dialect Transcription
                     </div>
                     <div class="data-card-content">
                         <div class="data-row">
                             <span class="data-label">Current Viability:</span>
-                            <span class="data-value">Higher demand for human skills</span>
+                            <span class="data-value">Higher demand - AI struggles with dialects</span>
                         </div>
                         <div class="data-row">
                             <span class="data-label">Training Investment:</span>
-                            <span class="data-value">Existing language skills</span>
+                            <span class="data-value">Existing language skills required</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Pay Range:</span>
+                            <span class="data-value">$20-40 per audio hour</span>
                         </div>
                         <div class="data-row">
                             <span class="data-label">ADHD Compatibility:</span>
@@ -1754,13 +1535,13 @@
                         </div>
                     </div>
                     <div class="data-note">
-                        Variety and complexity keep ADHD minds engaged and interested.
+                        Variety and cultural complexity keep ADHD minds engaged and interested.
                     </div>
                 </div>
 
                 <div class="data-card">
                     <div class="data-card-header">
-                        🔧 Technical/Engineering
+                        🔧 Technical/Engineering Transcription
                     </div>
                     <div class="data-card-content">
                         <div class="data-row">
@@ -1769,7 +1550,11 @@
                         </div>
                         <div class="data-row">
                             <span class="data-label">Training Investment:</span>
-                            <span class="data-value">Industry knowledge required</span>
+                            <span class="data-value">Industry knowledge/background helpful</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Pay Range:</span>
+                            <span class="data-value">$22-50 per audio hour</span>
                         </div>
                         <div class="data-row">
                             <span class="data-label">ADHD Compatibility:</span>
@@ -1777,10 +1562,66 @@
                         </div>
                     </div>
                     <div class="data-note">
-                        Complex problem-solving appeals to many ADHD minds who enjoy challenges.
+                        Complex problem-solving and technical details appeal to many ADHD minds who enjoy challenges.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🎬 Entertainment & Media Transcription
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Current Viability:</span>
+                            <span class="data-value">Growing for streaming content</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Training Investment:</span>
+                            <span class="data-value">Understanding of timing and formatting</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Pay Range:</span>
+                            <span class="data-value">$15-30 per audio hour</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-high">High</span></span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Entertaining content with varied speakers and scenarios can maintain ADHD interest.
                     </div>
                 </div>
             </div>
+
+            <div class="tip-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="specialization-strategy">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
+                <div class="card-title">
+                    <div class="card-icon">🎯</div>
+                    Specialization Strategy for ADHD Minds
+                </div>
+                <div id="specialization-strategy">
+                    <p><strong>Choose specializations based on your existing interests and strengths:</strong></p>
+                    <ul class="styled-list">
+                        <li><strong>If you have legal interest:</strong> Legal transcription offers structure and variety</li>
+                        <li><strong>If you're multilingual:</strong> Language skills are increasingly valuable as AI struggles with dialects</li>
+                        <li><strong>If you have technical background:</strong> Engineering/tech transcription pays well and is intellectually engaging</li>
+                        <li><strong>If you enjoy pop culture:</strong> Entertainment transcription can be more engaging than dry content</li>
+                    </ul>
+                    <p><strong>Avoid:</strong> Medical transcription unless you already have healthcare background - the training investment isn't justified by current job prospects.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="transition-card">
+            <p>🚀 <strong>The transcription field is changing rapidly. Let's explore how to future-proof your skills...</strong></p>
         </div>
 
         <!-- Future-Proofing -->
@@ -1789,6 +1630,19 @@
                 <span class="emoji">🚀</span>
                 <span class="title-text">Future-Proofing Your Skills</span>
             </h2>
+
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="future-intro">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
+                </button>
+            </div>
+
+            <div id="future-intro">
+                <p>Rather than viewing transcription as a long-term career, consider it a stepping stone to AI-collaborative roles and related fields that leverage the skills you're building:</p>
+            </div>
 
             <div class="success-card">
                 <div class="voice-controls">
@@ -1801,16 +1655,18 @@
                 </div>
                 <div class="card-title">
                     <div class="card-icon">🎯</div>
-                    Transitional Approach
+                    Transitional Skills Approach
                 </div>
                 <div id="transitional-approach">
-                    <p>Instead of viewing transcription as a long-term career, consider it a stepping stone to AI-collaborative roles:</p>
+                    <p><strong>Use transcription experience to build toward:</strong></p>
                     <ul class="styled-list">
-                        <li><strong>Learn AI Editing:</strong> Focus on correcting AI transcripts rather than starting from scratch</li>
-                        <li><strong>Develop QA Skills:</strong> Become expert at identifying common AI errors</li>
-                        <li><strong>Build Domain Knowledge:</strong> Specialize in areas where context matters</li>
-                        <li><strong>Consider Adjacent Fields:</strong> Content writing, proofreading, virtual assistance</li>
+                        <li><strong>AI Editing & QA:</strong> Focus on correcting AI transcripts rather than starting from scratch</li>
+                        <li><strong>Content Writing:</strong> Strong listening and typing skills transfer well to content creation</li>
+                        <li><strong>Virtual Assistance:</strong> Audio processing and attention to detail are valuable VA skills</li>
+                        <li><strong>Quality Assurance:</strong> Become expert at identifying common AI errors and inconsistencies</li>
+                        <li><strong>Proofreading & Editing:</strong> Develop eye for language accuracy and consistency</li>
                     </ul>
+                    <p><strong>Key Insight:</strong> The skills you build in transcription - attention to detail, language processing, working with audio - are transferable to many growing fields.</p>
                 </div>
             </div>
 
@@ -1830,22 +1686,142 @@
                     ADHD Advantages in AI-Human Collaboration
                 </div>
                 <div id="ai-collaboration">
+                    <p><strong>Your ADHD brain brings unique value to AI collaborative work:</strong></p>
                     <ul class="styled-list">
-                        <li><strong>Pattern Recognition:</strong> ADHD brains often excel at spotting inconsistencies</li>
-                        <li><strong>Hyperfocus on Details:</strong> When engaged, can catch errors others miss</li>
-                        <li><strong>Contextual Thinking:</strong> Understanding when AI misses nuance or context</li>
-                        <li><strong>Creative Problem-Solving:</strong> Finding solutions when AI gets confused</li>
+                        <li><strong>Pattern Recognition:</strong> ADHD brains often excel at spotting inconsistencies and anomalies</li>
+                        <li><strong>Hyperfocus on Details:</strong> When engaged, can catch subtle errors others miss</li>
+                        <li><strong>Contextual Thinking:</strong> Understanding when AI misses nuance, sarcasm, or implied meaning</li>
+                        <li><strong>Creative Problem-Solving:</strong> Finding innovative solutions when AI gets confused or stuck</li>
+                        <li><strong>Non-Linear Processing:</strong> Ability to make connections across different parts of content</li>
                     </ul>
+                    <br>
+                    <p><strong>Market Reality:</strong> These human cognitive skills become more valuable as AI handles routine work, leaving complex problem-solving to humans.</p>
                 </div>
             </div>
+
+            <div class="highlight-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="adjacent-opportunities">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
+                <div class="card-title">
+                    <div class="card-icon">🔄</div>
+                    Adjacent Career Opportunities
+                </div>
+                <div id="adjacent-opportunities">
+                    <p><strong>Fields where transcription skills transfer well:</strong></p>
+                    <ul class="styled-list">
+                        <li><strong>Content Creation:</strong> Podcast show notes, video descriptions, blog writing</li>
+                        <li><strong>Social Media Management:</strong> Creating captions, content planning, community management</li>
+                        <li><strong>Virtual Assistance:</strong> Email management, scheduling, client communication</li>
+                        <li><strong>Online Tutoring:</strong> Teaching English, writing skills, or specialized subjects</li>
+                        <li><strong>Quality Assurance:</strong> Testing websites, apps, or content for accuracy and usability</li>
+                        <li><strong>Research Assistance:</strong> Academic, market, or journalistic research support</li>
+                    </ul>
+                    <p><strong>Advantage:</strong> Many of these fields offer better earning potential and more growth than traditional transcription.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="skill-building">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
+                <div class="card-title">
+                    <div class="card-icon">📈</div>
+                    ADHD-Friendly Skill Building Plan
+                </div>
+                <div id="skill-building">
+                    <p><strong>While doing transcription work, gradually build complementary skills:</strong></p>
+                    <ul class="styled-list">
+                        <li><strong>Month 1-3:</strong> Focus on transcription basics, track what you enjoy most</li>
+                        <li><strong>Month 4-6:</strong> Start learning basic content writing or editing skills</li>
+                        <li><strong>Month 7-9:</strong> Explore AI collaboration tools and techniques</li>
+                        <li><strong>Month 10-12:</strong> Begin transitioning to higher-paying adjacent work</li>
+                    </ul>
+                    <p><strong>Key Strategy:</strong> Use transcription income to fund skill development courses or certifications in more promising fields.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="transition-card">
+            <p>📝 <strong>Ready to get started? Here's your realistic action plan...</strong></p>
         </div>
 
         <!-- Getting Started -->
         <div class="section" id="getting-started">
             <h2 class="section-title">
                 <span class="emoji">📝</span>
-                <span class="title-text">Getting Started Realistically</span>
+                <span class="title-text">Getting Started Action Plan</span>
             </h2>
+
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="getting-started-intro">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
+                </button>
+            </div>
+
+            <div id="getting-started-intro">
+                <p>Ready to explore transcription work? Here's a realistic, ADHD-friendly roadmap that sets appropriate expectations and helps you succeed:</p>
+            </div>
+
+            <h3 class="section-subtitle">30-60-90 Day Realistic Timeline</h3>
+
+            <div class="progress-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-number">30</div>
+                    <div class="timeline-content">
+                        <h4>Days 1-30: Assessment & Foundation</h4>
+                        <p><strong>Goal: $20-75 earned while learning</strong></p>
+                        <ul class="styled-list">
+                            <li>Test typing speed and audio processing abilities</li>
+                            <li>Apply to 2-3 beginner-friendly platforms (expect rejections)</li>
+                            <li>Complete platform training and initial assessments</li>
+                            <li>Start with shortest, clearest files available</li>
+                            <li>Track time spent vs. money earned religiously</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">60</div>
+                    <div class="timeline-content">
+                        <h4>Days 31-60: Skill Building & Efficiency</h4>
+                        <p><strong>Goal: $100-200 earned with improving workflow</strong></p>
+                        <ul class="styled-list">
+                            <li>Identify which content types work best with your ADHD brain</li>
+                            <li>Implement energy-matching workflow system</li>
+                            <li>Apply to additional platforms if first choices aren't working</li>
+                            <li>Start tracking patterns in your focus and productivity</li>
+                            <li>Consider whether this work suits your needs and goals</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">90</div>
+                    <div class="timeline-content">
+                        <h4>Days 61-90: Decision Point & Optimization</h4>
+                        <p><strong>Goal: $150-350 earned OR decision to pivot</strong></p>
+                        <ul class="styled-list">
+                            <li>Evaluate whether transcription is sustainable for you</li>
+                            <li>If continuing: explore specialization opportunities</li>
+                            <li>If pivoting: use skills gained to transition to related work</li>
+                            <li>Set realistic long-term expectations based on your experience</li>
+                            <li>Plan next steps: scale, maintain, or transition</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
             <div class="highlight-card">
                 <div class="voice-controls">
@@ -1861,16 +1837,35 @@
                     Setting Realistic Expectations
                 </div>
                 <div id="realistic-expectations">
-                    <p>Transcription work today is best viewed as <strong>supplemental income</strong> while learning skills for the AI-collaborative future. Most people earn $150-400/month with consistent effort.</p>
+                    <p><strong>Transcription work today is best viewed as:</strong></p>
+                    <ul class="styled-list">
+                        <li><strong>Supplemental income:</strong> $150-400/month for most consistent workers</li>
+                        <li><strong>Skill building opportunity:</strong> Developing AI collaboration and language processing abilities</li>
+                        <li><strong>Stepping stone:</strong> Gateway to content writing, virtual assistance, or related fields</li>
+                        <li><strong>Flexible work option:</strong> Income when traditional employment is challenging</li>
+                    </ul>
                     <br>
-                    <p><strong>Best for:</strong> People who need flexible income, enjoy language work, and are interested in learning AI collaboration skills.</p>
-                    <p><strong>Not ideal for:</strong> Those seeking substantial income or who find repetitive audio work frustrating.</p>
+                    <p><strong>Best for ADHD minds who:</strong></p>
+                    <ul class="styled-list">
+                        <li>Need flexible income that accommodates focus fluctuations</li>
+                        <li>Enjoy language work and audio processing</li>
+                        <li>Are interested in learning AI collaboration skills</li>
+                        <li>Want to build toward content creation or VA work</li>
+                    </ul>
+                    <br>
+                    <p><strong>Not ideal for those who:</strong></p>
+                    <ul class="styled-list">
+                        <li>Need substantial or primary income immediately</li>
+                        <li>Find repetitive audio work frustrating or overwhelming</li>
+                        <li>Expect pre-2020 earning levels ($1000+/month)</li>
+                        <li>Struggle significantly with sustained auditory attention</li>
+                    </ul>
                 </div>
             </div>
 
             <div class="adhd-card">
                 <div class="voice-controls">
-                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="action-plan">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="action-checklist">
                         <span>🔊</span> Play
                     </button>
                     <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
@@ -1879,22 +1874,27 @@
                 </div>
                 <div class="card-title">
                     <div class="card-icon">📋</div>
-                    ADHD-Friendly Action Plan
+                    ADHD-Friendly Getting Started Checklist
                 </div>
-                <div id="action-plan">
+                <div id="action-checklist">
                     <ol class="numbered-list">
-                        <li><strong>Skill Assessment:</strong> Test your typing speed and audio processing abilities first</li>
-                        <li><strong>Platform Research:</strong> Apply to 2-3 platforms, expect waitlists or rejections</li>
-                        <li><strong>Start Small:</strong> Begin with shortest available files to build confidence</li>
-                        <li><strong>Track Everything:</strong> Monitor time spent vs. earnings to assess viability</li>
-                        <li><strong>Plan Transition:</strong> Use transcription experience to build toward AI-collaborative roles</li>
+                        <li><strong>Honest Self-Assessment:</strong> Test typing speed, audio processing comfort, and sustained attention capacity</li>
+                        <li><strong>Equipment Check:</strong> Invest minimally initially - good headphones and free transcription software</li>
+                        <li><strong>Platform Research:</strong> Choose 2-3 ADHD-friendly platforms (TranscribeMe, GoTranscript, Rev)</li>
+                        <li><strong>Workspace Setup:</strong> Create distraction-free environment optimized for your sensory needs</li>
+                        <li><strong>Realistic Goal Setting:</strong> Start with 5-10 hours per week, modest earning expectations</li>
+                        <li><strong>Tracking System:</strong> Monitor time vs. earnings, energy levels, and work satisfaction</li>
+                        <li><strong>Support Network:</strong> Connect with other transcriptionists or ADHD freelancers online</li>
+                        <li><strong>Exit Strategy:</strong> Plan what skills you'll build and where you might transition</li>
+                        <li><strong>Health Boundaries:</strong> Set limits to prevent burnout and protect mental health</li>
+                        <li><strong>Regular Reviews:</strong> Assess monthly whether this work remains viable and enjoyable</li>
                     </ol>
                 </div>
             </div>
 
             <div class="warning-card">
                 <div class="voice-controls">
-                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="first-month">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="first-month-reality">
                         <span>🔊</span> Play
                     </button>
                     <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
@@ -1905,10 +1905,19 @@
                     <div class="card-icon">⚠️</div>
                     First Month Reality Check
                 </div>
-                <div id="first-month">
-                    <p><strong>Expect to earn very little initially</strong> while learning platforms and building speed. Many new transcriptionists earn under $50 in their first month.</p>
+                <div id="first-month-reality">
+                    <p><strong>Expect to earn very little initially</strong> while learning platforms, building speed, and developing accuracy. Many new transcriptionists earn under $50 in their first month.</p>
                     <br>
-                    <p><strong>Timeline:</strong> Month 1: $20-50 (learning), Month 2-3: $100-200 (improving), Month 4+: $150-400 (if work is available)</p>
+                    <p><strong>Common first-month challenges for ADHD minds:</strong></p>
+                    <ul class="styled-list">
+                        <li>Frustration with slow initial progress</li>
+                        <li>Difficulty estimating time requirements</li>
+                        <li>Platform rejections or waitlists</li>
+                        <li>Audio quality that's more challenging than expected</li>
+                        <li>Lower motivation due to modest pay rates</li>
+                    </ul>
+                    <br>
+                    <p><strong>Success Mindset:</strong> Focus on skill building and learning rather than immediate earnings. Treat the first month as paid training rather than income generation.</p>
                 </div>
             </div>
 
@@ -1923,12 +1932,46 @@
                 </div>
                 <div class="card-title">
                     <div class="card-icon">🎉</div>
-                    Ready to Try?
+                    Ready to Explore Transcription?
                 </div>
                 <div id="ready-to-try">
-                    <p>If you decide to explore transcription, <strong>approach it as a learning experience</strong> and potential stepping stone rather than a career destination. Your ADHD traits of attention to detail and pattern recognition can be assets in this AI-transitioning field.</p>
+                    <p>If you decide to try transcription work, <strong>approach it as a learning experience</strong> and potential stepping stone rather than a long-term career destination. Your ADHD traits of attention to detail, pattern recognition, and ability to hyperfocus can be genuine assets in this evolving field.</p>
                     <br>
-                    <p>Focus on building skills that will remain valuable: AI collaboration, quality assurance, and specialized domain knowledge.</p>
+                    <p><strong>Remember:</strong> Success looks different for everyone. Some ADHD minds thrive with transcription work, while others find it doesn't suit their cognitive style. Give yourself permission to experiment, learn, and pivot as needed.</p>
+                    <br>
+                    <p><strong>Key Takeaway:</strong> Focus on building transferable skills - AI collaboration, quality assurance, content creation, and attention to detail - that will serve you well regardless of where the transcription industry goes.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="next-resources">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
+                <div class="card-title">
+                    <div class="card-icon">📚</div>
+                    Continue Your Learning Journey
+                </div>
+                <div id="next-resources">
+                    <p><strong>If transcription sparks interest in adjacent fields:</strong></p>
+                    <ul class="styled-list">
+                        <li>Explore content writing courses and communities</li>
+                        <li>Learn about virtual assistance and remote work skills</li>
+                        <li>Investigate AI collaboration tools and techniques</li>
+                        <li>Consider quality assurance roles in tech or content</li>
+                    </ul>
+                    <br>
+                    <p><strong>For continued ADHD career development:</strong></p>
+                    <ul class="styled-list">
+                        <li>Connect with ADHD entrepreneurship and freelancing communities</li>
+                        <li>Explore careers that leverage ADHD cognitive strengths</li>
+                        <li>Build portfolios showcasing your unique thinking style</li>
+                        <li>Consider remote work arrangements that accommodate ADHD needs</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -2176,13 +2219,13 @@
         });
 
         // Section tracking and progress
-        const sections = ['introduction', 'platforms', 'ai-reality', 'adhd-strategies', 'skills', 'specializations', 'future-proof', 'getting-started'];
+        const sections = ['overview', 'earnings', 'ai-reality', 'skills', 'adhd-strategies', 'specializations', 'future-proof', 'getting-started'];
         let currentSectionIndex = 0;
 
         function updateProgress() {
             const scrolled = window.scrollY;
             const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrolled / totalHeight) * 100;
+            const scrollPercent = Math.min((scrolled / totalHeight) * 100, 100);
             
             document.querySelector('.scroll-progress-bar').style.width = scrollPercent + '%';
             updateSectionProgress();
@@ -2207,17 +2250,17 @@
 
         function updateProgressIndicator() {
             const sectionNames = [
-                'Introduction',
-                'Platform Comparison',
+                'Overview',
+                'Earnings Reality',
                 'AI Impact',
-                'ADHD Strategies',
                 'Skills & Setup',
+                'ADHD Strategies',
                 'Specializations',
                 'Future-Proofing',
                 'Getting Started'
             ];
             
-            document.getElementById('current-section').textContent = sectionNames[currentSectionIndex] || 'Introduction';
+            document.getElementById('current-section').textContent = sectionNames[currentSectionIndex] || 'Overview';
             
             const circles = document.querySelectorAll('.progress-circle');
             circles.forEach((circle, index) => {
@@ -2259,7 +2302,7 @@
             stopSpeech();
         });
 
-        // Smooth scrolling
+        // Smooth scrolling with proper progress tracking
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -2269,10 +2312,614 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
-                    setTimeout(() => updateProgress(), 1000);
+                    // Update progress after smooth scroll completes
+                    setTimeout(() => {
+                        updateProgress();
+                    }, 1000);
                 }
             });
         });
     </script>
 </body>
 </html>
+                        <div class="data-row">
+                            <span class="data-label">Current Demand:</span>
+                            <span class="data-value">Growing rapidly</span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Can leverage ADHD pattern spotting abilities to catch AI errors others miss.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🎯 Quality Assurance Specialist
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Description:</span>
+                            <span class="data-value">Reviewing AI output for accuracy standards and client requirements</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Skills Needed:</span>
+                            <span class="data-value">Domain knowledge, quality standards, consistency checking</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-medium">Medium</span></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Current Demand:</span>
+                            <span class="data-value">Moderate</span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Requires sustained attention, which can be challenging during ADHD low-focus periods.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🎓 Specialized Complex Transcription
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Description:</span>
+                            <span class="data-value">Handling audio too complex for current AI systems</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Skills Needed:</span>
+                            <span class="data-value">Subject matter expertise, persistence with difficult audio</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-high">High</span></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Current Demand:</span>
+                            <span class="data-value">Limited but well-paying</span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Challenging content can trigger productive hyperfocus states in ADHD minds.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🤖 AI Training & Feedback
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Description:</span>
+                            <span class="data-value">Providing feedback to improve AI transcription systems</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Skills Needed:</span>
+                            <span class="data-value">Understanding of transcription standards, analytical thinking</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-medium">Medium-High</span></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Current Demand:</span>
+                            <span class="data-value">Emerging field</span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Analytical and problem-solving tasks that many ADHD minds find engaging.
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="adhd-ai-advantage">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
+                <div class="card-title">
+                    <div class="card-icon">💡</div>
+                    ADHD Advantage in the AI Era
+                </div>
+                <div id="adhd-ai-advantage">
+                    <p>Many ADHD transcriptionists report being particularly good at <strong>spotting AI errors</strong> that others miss. The pattern recognition, creative thinking, and detail hyperfocus that can come with ADHD are valuable for identifying where AI gets confused or makes contextual mistakes.</p>
+                    <br>
+                    <p><strong>Specific ADHD strengths in AI collaboration:</strong></p>
+                    <ul class="styled-list">
+                        <li>Noticing when AI misses context or sarcasm</li>
+                        <li>Catching inconsistent speaker labeling</li>
+                        <li>Identifying when AI incorrectly assumes accents or dialects</li>
+                        <li>Spotting logical gaps in AI interpretation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="transition-card">
+            <p>🔧 <strong>Before diving into ADHD strategies, let's ensure you have the essential skills and setup...</strong></p>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="section" id="skills">
+            <h2 class="section-title">
+                <span class="emoji">🔧</span>
+                <span class="title-text">Essential Skills & Setup</span>
+            </h2>
+
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="skills-intro">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
+                </button>
+            </div>
+
+            <div id="skills-intro">
+                <p>Success in transcription requires specific skills and equipment. Here's what you actually need versus what's optional, with realistic expectations for different skill levels:</p>
+            </div>
+
+            <h3 class="section-subtitle">Typing Speed Reality Check</h3>
+
+            <div class="data-grid">
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🐌 Under 40 WPM
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Transcription Viability:</span>
+                            <span class="data-value">Very difficult to earn minimum wage</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Realistic Monthly:</span>
+                            <span class="data-value">Under $100</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Factor:</span>
+                            <span class="data-value">May be too frustrating, affecting motivation</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Recommendation:</span>
+                            <span class="data-value">Focus on skill building first</span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Consider typing practice apps before starting transcription work.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🚶 40-60 WPM
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Transcription Viability:</span>
+                            <span class="data-value">Entry-level, slower progress</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Realistic Monthly:</span>
+                            <span class="data-value">$150-250</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Factor:</span>
+                            <span class="data-value">Workable but requires patience</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Recommendation:</span>
+                            <span class="data-value">Good starting point for patient ADHD minds</span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Focus on accuracy over speed initially - quality matters more.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🏃 60-80 WPM
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Transcription Viability:</span>
+                            <span class="data-value">Competitive for available work</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Realistic Monthly:</span>
+                            <span class="data-value">$250-400</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Factor:</span>
+                            <span class="data-value">Good balance of speed and maintainable focus</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Recommendation:</span>
+                            <span class="data-value">Sweet spot for most ADHD transcriptionists</span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Fast enough to stay motivated, not so fast as to sacrifice accuracy.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🚀 80+ WPM
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Transcription Viability:</span>
+                            <span class="data-value">Optimal for specialized opportunities</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Realistic Monthly:</span>
+                            <span class="data-value">$400+ potential</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Factor:</span>
+                            <span class="data-value">Can help overcome attention challenges</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Recommendation:</span>
+                            <span class="data-value">Leverage for complex or rush projects</span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        High speed helps maintain flow state and prevents frustration with slow progress.
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="typing-practice">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
+                <div class="card-title">
+                    <div class="card-icon">⌨️</div>
+                    ADHD-Friendly Typing Practice
+                </div>
+                <div id="typing-practice">
+                    <p>Traditional typing tutors can be boring for ADHD minds. Try these engaging alternatives:</p>
+                    <ul class="styled-list">
+                        <li><strong><a href="https://play.typeracer.com/" class="platform-link" target="_blank" rel="noopener noreferrer">TypeRacer</a>:</strong> Competitive racing format with immediate feedback and variety</li>
+                        <li><strong><a href="https://www.nitrotype.com/" class="platform-link" target="_blank" rel="noopener noreferrer">Nitro Type</a>:</strong> Car racing theme that gamifies practice sessions</li>
+                        <li><strong><a href="https://www.keybr.com/" class="platform-link" target="_blank" rel="noopener noreferrer">Keybr</a>:</strong> Adapts to your weak spots automatically, prevents boredom</li>
+                        <li><strong><a href="https://10fastfingers.com/" class="platform-link" target="_blank" rel="noopener noreferrer">10FastFingers</a>:</strong> Quick tests that provide dopamine hits from improvement</li>
+                    </ul>
+                    <p><strong>ADHD Tip:</strong> Practice in short, 10-15 minute sessions rather than long grinding sessions.</p>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">Equipment Essentials (Budget-Friendly)</h3>
+
+            <div class="highlight-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="equipment-setup">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
+                <div class="card-title">
+                    <div class="card-icon">🎧</div>
+                    Realistic Equipment Setup
+                </div>
+                <div id="equipment-setup">
+                    <p><strong>Don't over-invest initially</strong> - given the lower earning potential, start with basics and upgrade only if you're earning consistently:</p>
+                    <br>
+                    <p><strong>Essential (Start Here):</strong></p>
+                    <ul class="styled-list">
+                        <li><strong>Good Headphones:</strong> $30-60 range (Sony MDR-7506, Audio-Technica ATH-M40x)</li>
+                        <li><strong>Transcription Software:</strong> Start with free <a href="https://www.nch.com.au/scribe/" class="platform-link" target="_blank" rel="noopener noreferrer">Express Scribe</a> or <a href="https://otranscribe.com/" class="platform-link" target="_blank" rel="noopener noreferrer">oTranscribe</a></li>
+                        <li><strong>Text Expander:</strong> $0-5/month for common phrases and terminology</li>
+                    </ul>
+                    <br>
+                    <p><strong>Optional (After Proving Viability):</strong></p>
+                    <ul class="styled-list">
+                        <li><strong>Foot Pedal:</strong> $40-60 (only after confirming you'll continue)</li>
+                        <li><strong>Ergonomic Keyboard:</strong> $50-100 (if planning longer sessions)</li>
+                        <li><strong>Premium Transcription Software:</strong> $20-40/month (specialized features)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="warning-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="audio-processing">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
+                <div class="card-title">
+                    <div class="card-icon">👂</div>
+                    Audio Processing Considerations for ADHD
+                </div>
+                <div id="audio-processing">
+                    <p><strong>ADHD brains may struggle with:</strong></p>
+                    <ul class="styled-list">
+                        <li><strong>Auditory processing delays:</strong> May need to replay sections frequently</li>
+                        <li><strong>Background noise sensitivity:</strong> Poor audio quality can be overwhelming</li>
+                        <li><strong>Focus fatigue:</strong> Sustained audio attention can be exhausting</li>
+                        <li><strong>Multi-speaker confusion:</strong> Tracking multiple voices simultaneously</li>
+                    </ul>
+                    <p><strong>Adaptive strategies:</strong> Start with high-quality, single-speaker audio to assess your comfort level before taking on challenging files.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="transition-card">
+            <p>⚡ <strong>Now let's explore specific strategies for maximizing your ADHD strengths in transcription work...</strong></p>
+        </div>
+
+        <!-- ADHD Strategies -->
+        <div class="section" id="adhd-strategies">
+            <h2 class="section-title">
+                <span class="emoji">⚡</span>
+                <span class="title-text">ADHD-Specific Success Strategies</span>
+            </h2>
+
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="strategies-intro">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
+                </button>
+            </div>
+
+            <div id="strategies-intro">
+                <p>Success in transcription requires working with your ADHD brain rather than against it. These strategies are specifically designed for ADHD cognitive patterns and challenges:</p>
+            </div>
+
+            <h3 class="section-subtitle">The "Energy-Matching" Workflow System</h3>
+
+            <div class="adhd-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="energy-matching">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
+                <div class="card-title">
+                    <div class="card-icon">🎯</div>
+                    Match Tasks to Your Current State
+                </div>
+                <div id="energy-matching">
+                    <p>Instead of forcing yourself through any available work, match transcription tasks to your current energy and focus level:</p>
+                    <br>
+                    <p><strong>High Energy/Focus Days:</strong></p>
+                    <ul class="styled-list">
+                        <li>Tackle difficult audio with multiple speakers</li>
+                        <li>Handle technical or specialized content</li>
+                        <li>Take on longer files (30+ minutes)</li>
+                        <li>Work on higher-paying, complex projects</li>
+                    </ul>
+                    <br>
+                    <p><strong>Medium Energy Days:</strong></p>
+                    <ul class="styled-list">
+                        <li>Standard single-speaker transcription</li>
+                        <li>Routine AI editing tasks</li>
+                        <li>Files in the 10-20 minute range</li>
+                        <li>Familiar content types you've done before</li>
+                    </ul>
+                    <br>
+                    <p><strong>Low Energy Days:</strong></p>
+                    <ul class="styled-list">
+                        <li>Simple proofreading of existing transcripts</li>
+                        <li>Very clear, high-quality audio files</li>
+                        <li>Short files under 10 minutes</li>
+                        <li>Platform training or guideline review</li>
+                    </ul>
+                    <br>
+                    <p><strong>No Energy Days:</strong></p>
+                    <ul class="styled-list">
+                        <li>Skip transcription entirely - don't force it</li>
+                        <li>Use time for skill development or platform research</li>
+                        <li>Rest and recharge rather than producing poor-quality work</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">Managing ADHD-Specific Challenges</h3>
+
+            <div class="progress-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-number">1</div>
+                    <div class="timeline-content">
+                        <h4>Perfectionism Traps</h4>
+                        <p><strong>Challenge:</strong> Getting stuck replaying unclear audio sections endlessly.</p>
+                        <p><strong>Strategy:</strong> Set 2-minute limit per unclear section. Flag for review, add timestamps, move on. Most platforms prefer completed work with notes over perfect but incomplete work.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">2</div>
+                    <div class="timeline-content">
+                        <h4>Time Blindness</h4>
+                        <p><strong>Challenge:</strong> Drastically underestimating how long files will take.</p>
+                        <p><strong>Strategy:</strong> Track actual time vs. estimates for 10-20 files. Add 50% buffer to all future estimates. Use timers and break reminders.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">3</div>
+                    <div class="timeline-content">
+                        <h4>Motivation Fluctuations</h4>
+                        <p><strong>Challenge:</strong> Inconsistent productivity affecting overall earnings.</p>
+                        <p><strong>Strategy:</strong> Create backup task lists for low-motivation periods. Visual progress tracking. Small rewards for completing batches.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">4</div>
+                    <div class="timeline-content">
+                        <h4>Sustained Attention Fatigue</h4>
+                        <p><strong>Challenge:</strong> Long audio files becoming overwhelming and accuracy dropping.</p>
+                        <p><strong>Strategy:</strong> Break long files into 10-15 minute segments. Use Pomodoro technique. Switch between transcription and editing tasks.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">5</div>
+                    <div class="timeline-content">
+                        <h4>Hyperfocus Management</h4>
+                        <p><strong>Challenge:</strong> Getting absorbed for hours without breaks, leading to burnout.</p>
+                        <p><strong>Strategy:</strong> Set alarms for hydration and stretch breaks. Quality-check work every hour. Ride hyperfocus but protect your health.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="workspace-adhd">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
+                <div class="card-title">
+                    <div class="card-icon">🏠</div>
+                    ADHD-Optimized Workspace
+                </div>
+                <div id="workspace-adhd">
+                    <p><strong>Sensory Considerations:</strong></p>
+                    <ul class="styled-list">
+                        <li><strong>Lighting:</strong> Avoid harsh overhead lights; use warm, adjustable desk lighting</li>
+                        <li><strong>Noise Control:</strong> Noise-cancelling headphones even when not transcribing</li>
+                        <li><strong>Fidget Tools:</strong> Stress ball, fidget cube, or pen clicking for restless energy</li>
+                        <li><strong>Temperature:</strong> Keep workspace slightly cool to maintain alertness</li>
+                    </ul>
+                    <br>
+                    <p><strong>Organization Systems:</strong></p>
+                    <ul class="styled-list">
+                        <li><strong>Visual Tracking:</strong> Color-coded folders for different platforms or clients</li>
+                        <li><strong>Progress Displays:</strong> Visible charts or checklists showing daily/weekly goals</li>
+                        <li><strong>Distraction Blocking:</strong> Website blockers during work sessions</li>
+                        <li><strong>Emergency Kit:</strong> Water, healthy snacks, phone charger within arm's reach</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="adhd-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="flow-state">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
+                <div class="card-title">
+                    <div class="card-icon">🌊</div>
+                    Achieving Transcription Flow State
+                </div>
+                <div id="flow-state">
+                    <p><strong>Pre-Work Ritual (5-10 minutes):</strong></p>
+                    <ul class="styled-list">
+                        <li>Same workspace setup routine</li>
+                        <li>Specific music or background sounds</li>
+                        <li>Brief review of platform guidelines</li>
+                        <li>Clear desk of all distractions</li>
+                    </ul>
+                    <br>
+                    <p><strong>Maintaining Flow:</strong></p>
+                    <ul class="styled-list">
+                        <li>Start with easier files to build momentum</li>
+                        <li>Keep water and snacks within reach</li>
+                        <li>Use consistent keyboard shortcuts</li>
+                        <li>Take micro-breaks between files (2-3 minutes)</li>
+                    </ul>
+                    <br>
+                    <p><strong>When Flow Breaks:</strong></p>
+                    <ul class="styled-list">
+                        <li>Don't force it - take a real break</li>
+                        <li>Switch to different type of work (admin, research)</li>
+                        <li>Save difficult files for high-energy periods</li>
+                        <li>Know when to stop for the day</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="transition-card">
+            <p>🎓 <strong>Let's explore specialization opportunities that can provide better income in this changing field...</strong></p>
+        </div>
+
+        <!-- Specializations -->
+        <div class="section" id="specializations">
+            <h2 class="section-title">
+                <span class="emoji">🎓</span>
+                <span class="title-text">Remaining Specialization Opportunities</span>
+            </h2>
+
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="specialization-intro">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
+                </button>
+            </div>
+
+            <div id="specialization-intro">
+                <p>While general transcription opportunities are declining, some specialized areas still offer better prospects and higher pay for those willing to invest in specific skills:</p>
+            </div>
+
+            <div class="warning-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="medical-reality">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
+                <div class="card-title">
+                    <div class="card-icon">⚠️</div>
+                    Medical Transcription Reality Check
+                </div>
+                <div id="medical-reality">
+                    <p><strong>Medical transcription is declining rapidly.</strong> Many hospitals and clinics now use voice recognition software extensively. While some opportunities exist, they often require significant training investment (6-12 months of study) for a field that's actively being automated.</p>
+                    <br>
+                    <p><strong>Consider carefully:</strong> Medical transcription training programs may not provide good return on investment given the rapid AI adoption in healthcare. Many programs still advertise outdated earning potential.</p>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">Viable Niche Specializations</h3>
+
+            <div class="data-grid">
+                <div class="data-card">
+                    <div class="data-card-header">
+                        ⚖️ Legal Depositions & Court Reporting
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Current Viability:</span>
+                            <span class="data-value">Still valuable for complex legal cases</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Training Investment:</span>
+                            <span class="data-value">3-6 months for legal terminology</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Pay Range:</span>
+                            <span class="data-value">$25-45 per audio hour</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Compatibility:</span>
+                            <span class="data-value"><span class="status-high">High</span></span>
+                        </div>
