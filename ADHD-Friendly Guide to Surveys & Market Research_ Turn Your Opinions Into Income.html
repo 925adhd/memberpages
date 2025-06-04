@@ -281,6 +281,17 @@
             border: 1px solid rgba(139, 92, 246, 0.3);
         }
 
+        .transition-card {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(6, 182, 212, 0.08));
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            padding: 1.25rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+            text-align: center;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
         .card-title {
             font-size: 1.2rem;
             font-weight: 600;
@@ -336,6 +347,18 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+        }
+
+        .platform-link {
+            color: var(--accent-teal);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .platform-link:hover {
+            border-bottom-color: var(--accent-teal);
+            color: var(--accent-blue);
         }
 
         .data-card-content {
@@ -887,7 +910,7 @@
     
     <div class="progress-indicator">
         <div class="section-progress">
-            <span id="current-section">Introduction</span>
+            <span id="current-section">Overview</span>
             <div class="progress-circle completed"></div>
             <div class="progress-circle active"></div>
             <div class="progress-circle"></div>
@@ -944,21 +967,21 @@
             <h2 class="toc-title">📋 Quick Navigation</h2>
             <div class="toc-grid">
                 <div class="toc-item">
-                    <a href="#introduction" class="toc-link">
+                    <a href="#overview" class="toc-link">
                         <span class="toc-emoji">🎯</span>
-                        <span>Why Survey Work Can Work for ADHD Minds</span>
-                    </a>
-                </div>
-                <div class="toc-item">
-                    <a href="#platforms" class="toc-link">
-                        <span class="toc-emoji">🔍</span>
-                        <span>Realistic Platform Comparison</span>
+                        <span>Overview: Is Survey Work Right for You?</span>
                     </a>
                 </div>
                 <div class="toc-item">
                     <a href="#earnings" class="toc-link">
                         <span class="toc-emoji">💰</span>
-                        <span>Honest Earnings Expectations</span>
+                        <span>Realistic Earnings Expectations</span>
+                    </a>
+                </div>
+                <div class="toc-item">
+                    <a href="#platforms" class="toc-link">
+                        <span class="toc-emoji">🔍</span>
+                        <span>Platform Comparison & Links</span>
                     </a>
                 </div>
                 <div class="toc-item">
@@ -988,21 +1011,21 @@
                 <div class="toc-item">
                     <a href="#getting-started" class="toc-link">
                         <span class="toc-emoji">🚀</span>
-                        <span>Getting Started Checklist</span>
+                        <span>Getting Started Action Plan</span>
                     </a>
                 </div>
             </div>
         </div>
 
-        <!-- Introduction Section -->
-        <div class="section" id="introduction">
+        <!-- Overview Section -->
+        <div class="section" id="overview">
             <h2 class="section-title">
                 <span class="emoji">🎯</span>
-                <span class="title-text">Why Survey Work Can Work for ADHD Minds</span>
+                <span class="title-text">Overview: Is Survey Work Right for You?</span>
             </h2>
             
             <div class="voice-controls">
-                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="intro-content">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="overview-content">
                     <span>🔊</span> Play
                 </button>
                 <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
@@ -1010,13 +1033,13 @@
                 </button>
             </div>
             
-            <div id="intro-content">
+            <div id="overview-content">
                 <p>Survey work offers some advantages that can align with ADHD traits, though it's important to have realistic expectations about both the benefits and challenges.</p>
             </div>
 
             <div class="adhd-card">
                 <div class="voice-controls">
-                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="adhd-advantages">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="adhd-assessment">
                         <span>🔊</span> Play
                     </button>
                     <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
@@ -1025,33 +1048,248 @@
                 </div>
                 <div class="card-title">
                     <div class="card-icon">⚡</div>
-                    Potential ADHD Advantages
+                    ADHD Compatibility Quick Assessment
                 </div>
-                <div id="adhd-advantages">
+                <div id="adhd-assessment">
+                    <p><strong>Survey work may work well for you if:</strong></p>
                     <ul class="styled-list">
-                        <li><strong>Short Tasks:</strong> Most surveys take 5-20 minutes, which can fit ADHD attention spans</li>
-                        <li><strong>Variety:</strong> Different topics and formats can provide the novelty ADHD brains crave</li>
-                        <li><strong>Flexible Timing:</strong> Work when your focus is good, stop when it's not</li>
-                        <li><strong>Immediate Feedback:</strong> Quick completion and payment can provide dopamine rewards</li>
+                        <li>You enjoy giving opinions and sharing thoughts on products</li>
+                        <li>You can maintain focus for 5-20 minute tasks</li>
+                        <li>You're motivated by small, frequent rewards</li>
+                        <li>You need flexible work that fits around energy fluctuations</li>
+                        <li>You're satisfied with modest supplemental income ($20-200/month)</li>
                     </ul>
                     <br>
-                    <p><strong>Real Challenges for ADHD:</strong></p>
+                    <p><strong>This might NOT be ideal if:</strong></p>
                     <ul class="styled-list">
-                        <li><strong>Repetitive Questions:</strong> Many surveys have similar, boring questions</li>
-                        <li><strong>Screener Frustration:</strong> Getting disqualified after 5 minutes of questions</li>
-                        <li><strong>Low Pay:</strong> Most surveys pay $3-6/hour, which can be demotivating</li>
-                        <li><strong>Inconsistent Availability:</strong> Good surveys are often hard to find</li>
-                        <li><strong>Attention to Detail:</strong> Careless answers can get you banned from platforms</li>
+                        <li>You get frustrated by repetitive or boring questions</li>
+                        <li>You need consistent, predictable income</li>
+                        <li>You struggle with attention to detail (can lead to account bans)</li>
+                        <li>You have severe rejection sensitivity (survey disqualifications are common)</li>
+                        <li>You're looking for substantial income</li>
                     </ul>
                 </div>
             </div>
+
+            <div class="highlight-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="advantages-challenges">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
+                <div class="card-title">
+                    <div class="card-icon">⚖️</div>
+                    Potential ADHD Advantages & Real Challenges
+                </div>
+                <div id="advantages-challenges">
+                    <p><strong>Potential Advantages:</strong></p>
+                    <ul class="styled-list">
+                        <li><strong>Short Tasks:</strong> Most surveys take 5-20 minutes, fitting ADHD attention spans</li>
+                        <li><strong>Variety:</strong> Different topics and formats provide novelty</li>
+                        <li><strong>Flexible Timing:</strong> Work when focus is good, stop when it's not</li>
+                        <li><strong>Immediate Feedback:</strong> Quick completion provides dopamine rewards</li>
+                    </ul>
+                    <br>
+                    <p><strong>Real Challenges:</strong></p>
+                    <ul class="styled-list">
+                        <li><strong>Repetitive Questions:</strong> Many surveys have similar, boring questions</li>
+                        <li><strong>Screener Frustration:</strong> Getting disqualified after answering questions</li>
+                        <li><strong>Low Pay:</strong> Most surveys pay $3-6/hour, which can be demotivating</li>
+                        <li><strong>Inconsistent Availability:</strong> Good surveys are often hard to find</li>
+                        <li><strong>Detail Requirements:</strong> Careless answers can result in account bans</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="transition-card">
+            <p>💰 <strong>Understanding realistic earnings is crucial before investing time. Let's look at what you can actually expect to make...</strong></p>
+        </div>
+
+        <!-- Earnings Section -->
+        <div class="section" id="earnings">
+            <h2 class="section-title">
+                <span class="emoji">💰</span>
+                <span class="title-text">Realistic Earnings Expectations</span>
+            </h2>
+
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="earnings-intro">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
+                </button>
+            </div>
+
+            <div id="earnings-intro">
+                <p>Setting realistic income expectations is crucial for ADHD success. Unrealistic goals can lead to frustration and abandonment of potentially helpful supplemental income.</p>
+            </div>
+
+            <div class="highlight-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="realistic-earnings">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
+                <div class="card-title">
+                    <div class="card-icon">📊</div>
+                    Realistic Monthly Earnings
+                </div>
+                <div id="realistic-earnings">
+                    <p><strong>Conservative approach:</strong> $20-50/month with casual participation (2-3 hours/week)</p>
+                    <p><strong>Active effort:</strong> $50-150/month with dedicated time (5-10 hours/week)</p>
+                    <p><strong>Aggressive approach:</strong> $100-200/month with strategic focus (10-15 hours/week)</p>
+                    <br>
+                    <p><em>These figures assume a mix of regular surveys and occasional higher-paying opportunities.</em></p>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">Survey Value Assessment Framework</h3>
+
+            <div class="data-grid">
+                <div class="data-card">
+                    <div class="data-card-header">
+                        ⭐ Excellent Value Surveys
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Hourly Rate:</span>
+                            <span class="data-value">$8+/hour</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">When to Accept:</span>
+                            <span class="data-value">Always take these</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Example Sources:</span>
+                            <span class="data-value">Prolific academic studies, UserTesting</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        👍 Good Value Surveys
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Hourly Rate:</span>
+                            <span class="data-value">$5-8/hour</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">When to Accept:</span>
+                            <span class="data-value">During high-focus periods</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Example Sources:</span>
+                            <span class="data-value">Longer, well-paying surveys on major platforms</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        ✅ Acceptable Value Surveys
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Hourly Rate:</span>
+                            <span class="data-value">$3-5/hour</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">When to Accept:</span>
+                            <span class="data-value">When you need easy background tasks</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Example Use:</span>
+                            <span class="data-value">Quick surveys while watching TV</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🔄 Last Resort Surveys
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Hourly Rate:</span>
+                            <span class="data-value">Under $3/hour</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">When to Accept:</span>
+                            <span class="data-value">Only when nothing better available</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Strategy:</span>
+                            <span class="data-value">Qualification surveys that unlock better opportunities</span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Some low-paying screeners can qualify you for higher-paying surveys later.
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="pay-calculator">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
+                <div class="card-title">
+                    <div class="card-icon">💡</div>
+                    ADHD-Friendly Pay Rate Calculator
+                </div>
+                <div id="pay-calculator">
+                    <p><strong>Quick Formula:</strong> (Payment ÷ Estimated minutes) × 60 = Hourly rate</p>
+                    <p><strong>Good Example:</strong> ($2 ÷ 15 minutes) × 60 = $8/hour ✅</p>
+                    <p><strong>Poor Example:</strong> ($1 ÷ 25 minutes) × 60 = $2.40/hour ❌</p>
+                    <br>
+                    <p><strong>ADHD Tip:</strong> Calculate this BEFORE starting surveys to avoid hyperfocus on low-paying tasks.</p>
+                </div>
+            </div>
+
+            <div class="success-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="success-story">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
+                <div class="card-title">
+                    <div class="card-icon">📈</div>
+                    Realistic ADHD Success Story
+                </div>
+                <div id="success-story">
+                    <p><em>"I've been doing surveys consistently for about 8 months. I stick to Prolific and Survey Junkie mostly, with occasional dscout missions. On average, I make about $80-120 per month spending roughly 6-8 hours per week.</em></p>
+                    <br>
+                    <p><em>It's not life-changing money, but it covers my streaming subscriptions and gives me a little extra for coffee. The key is being selective about which surveys I take and not getting frustrated by the low-paying ones. My ADHD actually helps me spot patterns in survey types that pay better."</em></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="transition-card">
+            <p>🔍 <strong>Now that you understand realistic earnings, let's explore the best platforms and where to sign up...</strong></p>
         </div>
 
         <!-- Platform Comparison -->
         <div class="section" id="platforms">
             <h2 class="section-title">
                 <span class="emoji">🔍</span>
-                <span class="title-text">Realistic Platform Comparison</span>
+                <span class="title-text">Platform Comparison & Links</span>
             </h2>
             
             <div class="voice-controls">
@@ -1064,18 +1302,18 @@
             </div>
             
             <div id="platform-intro">
-                <p>Not all survey platforms are equal. Here's an honest assessment based on current user experiences and pay rates:</p>
+                <p>Not all survey platforms are equal. Here's an honest assessment based on current user experiences, pay rates, and ADHD compatibility:</p>
             </div>
 
             <div class="data-grid">
                 <div class="data-card">
                     <div class="data-card-header">
-                        🎓 Prolific
+                        🎓 <a href="https://prolific.co/" class="platform-link" target="_blank" rel="noopener noreferrer">Prolific</a>
                     </div>
                     <div class="data-card-content">
                         <div class="data-row">
                             <span class="data-label">Best For:</span>
-                            <span class="data-value">Academic research</span>
+                            <span class="data-value">Academic research studies</span>
                         </div>
                         <div class="data-row">
                             <span class="data-label">Realistic Pay:</span>
@@ -1085,20 +1323,24 @@
                             <span class="data-label">ADHD Rating:</span>
                             <span class="data-value"><span class="star-rating">★★★★★</span></span>
                         </div>
+                        <div class="data-row">
+                            <span class="data-label">Entry:</span>
+                            <span class="data-value">Waitlist common</span>
+                        </div>
                     </div>
                     <div class="data-note">
-                        High quality but limited availability, often has a waiting list for new users.
+                        High quality studies with interesting content, but limited availability. Often has a waiting list for new users.
                     </div>
                 </div>
 
                 <div class="data-card">
                     <div class="data-card-header">
-                        📊 Survey Junkie
+                        📊 <a href="https://www.surveyjunkie.com/" class="platform-link" target="_blank" rel="noopener noreferrer">Survey Junkie</a>
                     </div>
                     <div class="data-card-content">
                         <div class="data-row">
                             <span class="data-label">Best For:</span>
-                            <span class="data-value">Consistent availability</span>
+                            <span class="data-value">Consistent survey availability</span>
                         </div>
                         <div class="data-row">
                             <span class="data-label">Realistic Pay:</span>
@@ -1108,20 +1350,24 @@
                             <span class="data-label">ADHD Rating:</span>
                             <span class="data-value"><span class="star-rating">★★★☆☆</span></span>
                         </div>
+                        <div class="data-row">
+                            <span class="data-label">Entry:</span>
+                            <span class="data-value">Usually accepts new users</span>
+                        </div>
                     </div>
                     <div class="data-note">
-                        Reliable but low pay, can be repetitive which may not engage ADHD minds.
+                        Reliable platform but low pay. Can be repetitive which may not engage ADHD minds effectively.
                     </div>
                 </div>
 
                 <div class="data-card">
                     <div class="data-card-header">
-                        🏆 Swagbucks
+                        🏆 <a href="https://www.swagbucks.com/" class="platform-link" target="_blank" rel="noopener noreferrer">Swagbucks</a>
                     </div>
                     <div class="data-card-content">
                         <div class="data-row">
                             <span class="data-label">Best For:</span>
-                            <span class="data-value">Variety of activities</span>
+                            <span class="data-value">Variety of earning activities</span>
                         </div>
                         <div class="data-row">
                             <span class="data-label">Realistic Pay:</span>
@@ -1131,15 +1377,19 @@
                             <span class="data-label">ADHD Rating:</span>
                             <span class="data-value"><span class="star-rating">★★★☆☆</span></span>
                         </div>
+                        <div class="data-row">
+                            <span class="data-label">Entry:</span>
+                            <span class="data-value">Open registration</span>
+                        </div>
                     </div>
                     <div class="data-note">
-                        Multiple earning options but interface is cluttered, which can overwhelm ADHD users.
+                        Multiple earning options provide variety, but interface can be cluttered and overwhelming for ADHD users.
                     </div>
                 </div>
 
                 <div class="data-card">
                     <div class="data-card-header">
-                        💼 Respondent.io
+                        💼 <a href="https://www.respondent.io/" class="platform-link" target="_blank" rel="noopener noreferrer">Respondent.io</a>
                     </div>
                     <div class="data-card-content">
                         <div class="data-row">
@@ -1154,20 +1404,24 @@
                             <span class="data-label">ADHD Rating:</span>
                             <span class="data-value"><span class="star-rating">★★☆☆☆</span></span>
                         </div>
+                        <div class="data-row">
+                            <span class="data-label">Entry:</span>
+                            <span class="data-value">Extremely competitive</span>
+                        </div>
                     </div>
                     <div class="data-note">
-                        Very competitive - 1 in 20+ acceptance rate. Can be frustrating for ADHD rejection sensitivity.
+                        Very high pay but 1 in 20+ acceptance rate. Can be frustrating for ADHD rejection sensitivity.
                     </div>
                 </div>
 
                 <div class="data-card">
                     <div class="data-card-header">
-                        💻 UserTesting
+                        💻 <a href="https://www.usertesting.com/" class="platform-link" target="_blank" rel="noopener noreferrer">UserTesting</a>
                     </div>
                     <div class="data-card-content">
                         <div class="data-row">
                             <span class="data-label">Best For:</span>
-                            <span class="data-value">Website feedback</span>
+                            <span class="data-value">Website & app feedback</span>
                         </div>
                         <div class="data-row">
                             <span class="data-label">Realistic Pay:</span>
@@ -1177,6 +1431,10 @@
                             <span class="data-label">ADHD Rating:</span>
                             <span class="data-value"><span class="star-rating">★★★★☆</span></span>
                         </div>
+                        <div class="data-row">
+                            <span class="data-label">Entry:</span>
+                            <span class="data-value">Application process required</span>
+                        </div>
                     </div>
                     <div class="data-note">
                         Good pay and engaging tasks, but tests fill up quickly requiring fast response times.
@@ -1185,7 +1443,7 @@
 
                 <div class="data-card">
                     <div class="data-card-header">
-                        📱 dscout
+                        📱 <a href="https://dscout.com/" class="platform-link" target="_blank" rel="noopener noreferrer">dscout</a>
                     </div>
                     <div class="data-card-content">
                         <div class="data-row">
@@ -1200,9 +1458,67 @@
                             <span class="data-label">ADHD Rating:</span>
                             <span class="data-value"><span class="star-rating">★★★☆☆</span></span>
                         </div>
+                        <div class="data-row">
+                            <span class="data-label">Entry:</span>
+                            <span class="data-value">Open but competitive</span>
+                        </div>
                     </div>
                     <div class="data-note">
-                        Engaging but unpaid screeners, inconsistent work availability can be frustrating.
+                        Engaging content variety but unpaid screeners and inconsistent work availability can be frustrating.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🎪 <a href="https://www.inboxdollars.com/" class="platform-link" target="_blank" rel="noopener noreferrer">InboxDollars</a>
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Best For:</span>
+                            <span class="data-value">Multiple earning activities</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Realistic Pay:</span>
+                            <span class="data-value">$0.25-$2/survey ($2-5/hour)</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Rating:</span>
+                            <span class="data-value"><span class="star-rating">★★☆☆☆</span></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Entry:</span>
+                            <span class="data-value">Open registration</span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Low pay and cluttered interface. Often frustrating for ADHD users due to many low-value activities.
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="data-card-header">
+                        🏅 <a href="https://www.mypoints.com/" class="platform-link" target="_blank" rel="noopener noreferrer">MyPoints</a>
+                    </div>
+                    <div class="data-card-content">
+                        <div class="data-row">
+                            <span class="data-label">Best For:</span>
+                            <span class="data-value">Rewards & shopping cashback</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Realistic Pay:</span>
+                            <span class="data-value">$0.30-$1.50/survey ($2-4/hour)</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">ADHD Rating:</span>
+                            <span class="data-value"><span class="star-rating">★★☆☆☆</span></span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Entry:</span>
+                            <span class="data-value">Open registration</span>
+                        </div>
+                    </div>
+                    <div class="data-note">
+                        Similar to Swagbucks but generally lower pay. Better for shopping rewards than survey income.
                     </div>
                 </div>
             </div>
@@ -1223,166 +1539,13 @@
                 <div id="platform-reality">
                     <p><strong>High-paying platforms like Respondent.io are extremely competitive.</strong> One user reported being selected for only 5 studies out of 50 applications. These aren't regular survey work - they're more like occasional lottery wins.</p>
                     <br>
-                    <p><strong>Recommendation:</strong> Focus on 2-3 reliable platforms (like Prolific + Survey Junkie + one other) rather than chasing the highest-paying but hardest-to-access opportunities.</p>
+                    <p><strong>ADHD-Friendly Recommendation:</strong> Focus on 2-3 reliable platforms (like Prolific + Survey Junkie + one other) rather than chasing the highest-paying but hardest-to-access opportunities.</p>
                 </div>
             </div>
         </div>
 
-        <!-- Earnings Section -->
-        <div class="section" id="earnings">
-            <h2 class="section-title">
-                <span class="emoji">💰</span>
-                <span class="title-text">Honest Earnings Expectations</span>
-            </h2>
-
-            <div class="highlight-card">
-                <div class="voice-controls">
-                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="realistic-earnings">
-                        <span>🔊</span> Play
-                    </button>
-                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
-                        <span>⏹️</span> Stop
-                    </button>
-                </div>
-                <div class="card-title">
-                    <div class="card-icon">📊</div>
-                    Realistic Monthly Earnings
-                </div>
-                <div id="realistic-earnings">
-                    <p><strong>Conservative estimate:</strong> $20-50/month with casual participation (2-3 hours/week)</p>
-                    <p><strong>Active effort:</strong> $50-150/month with dedicated time (5-10 hours/week)</p>
-                    <p><strong>Aggressive approach:</strong> $100-200/month with strategic focus (10-15 hours/week)</p>
-                    <br>
-                    <p><em>These figures assume a mix of regular surveys and occasional higher-paying opportunities.</em></p>
-                </div>
-            </div>
-
-            <h3 class="section-subtitle">Survey Value Assessment</h3>
-
-            <div class="data-grid">
-                <div class="data-card">
-                    <div class="data-card-header">
-                        ⭐ Excellent Value
-                    </div>
-                    <div class="data-card-content">
-                        <div class="data-row">
-                            <span class="data-label">Hourly Rate:</span>
-                            <span class="data-value">$8+/hour</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">When to Accept:</span>
-                            <span class="data-value">Always take these</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Example:</span>
-                            <span class="data-value">Prolific academic studies, UserTesting</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="data-card">
-                    <div class="data-card-header">
-                        👍 Good Value
-                    </div>
-                    <div class="data-card-content">
-                        <div class="data-row">
-                            <span class="data-label">Hourly Rate:</span>
-                            <span class="data-value">$5-8/hour</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">When to Accept:</span>
-                            <span class="data-value">During high-focus periods</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Example:</span>
-                            <span class="data-value">Longer, well-paying surveys</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="data-card">
-                    <div class="data-card-header">
-                        ✅ Acceptable Value
-                    </div>
-                    <div class="data-card-content">
-                        <div class="data-row">
-                            <span class="data-label">Hourly Rate:</span>
-                            <span class="data-value">$3-5/hour</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">When to Accept:</span>
-                            <span class="data-value">When you need easy tasks</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Example:</span>
-                            <span class="data-value">Quick surveys while watching TV</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="data-card">
-                    <div class="data-card-header">
-                        🔄 Save for Last
-                    </div>
-                    <div class="data-card-content">
-                        <div class="data-row">
-                            <span class="data-label">Hourly Rate:</span>
-                            <span class="data-value">Under $3/hour</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">When to Accept:</span>
-                            <span class="data-value">When nothing better available</span>
-                        </div>
-                        <div class="data-row">
-                            <span class="data-label">Example:</span>
-                            <span class="data-value">Easy screeners, qualification surveys</span>
-                        </div>
-                    </div>
-                    <div class="data-note">
-                        Some screeners pay small amounts but can qualify you for better surveys later.
-                    </div>
-                </div>
-            </div>
-
-            <div class="tip-card">
-                <div class="voice-controls">
-                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="pay-calculator">
-                        <span>🔊</span> Play
-                    </button>
-                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
-                        <span>⏹️</span> Stop
-                    </button>
-                </div>
-                <div class="card-title">
-                    <div class="card-icon">💡</div>
-                    Quick Pay Rate Calculator
-                </div>
-                <div id="pay-calculator">
-                    <p><strong>Formula:</strong> (Payment ÷ Estimated minutes) × 60 = Hourly rate</p>
-                    <p><strong>Example:</strong> ($2 ÷ 15 minutes) × 60 = $8/hour ✅</p>
-                    <p><strong>Example:</strong> ($1 ÷ 25 minutes) × 60 = $2.40/hour ❌</p>
-                </div>
-            </div>
-
-            <div class="success-card">
-                <div class="voice-controls">
-                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="success-story">
-                        <span>🔊</span> Play
-                    </button>
-                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
-                        <span>⏹️</span> Stop
-                    </button>
-                </div>
-                <div class="card-title">
-                    <div class="card-icon">📈</div>
-                    Realistic Success Story
-                </div>
-                <div id="success-story">
-                    <p><em>"I've been doing surveys consistently for about 8 months. I stick to Prolific and Survey Junkie mostly, with occasional dscout missions. On average, I make about $80-120 per month spending roughly 6-8 hours per week.</em></p>
-                    <br>
-                    <p><em>It's not life-changing money, but it covers my streaming subscriptions and gives me a little extra for coffee. The key is being selective about which surveys I take and not getting frustrated by the low-paying ones."</em></p>
-                </div>
-            </div>
+        <div class="transition-card">
+            <p>⚡ <strong>Knowing the platforms is just the start. Let's develop ADHD-specific strategies for success...</strong></p>
         </div>
 
         <!-- ADHD Strategies -->
@@ -1391,6 +1554,19 @@
                 <span class="emoji">⚡</span>
                 <span class="title-text">ADHD-Specific Success Strategies</span>
             </h2>
+
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="strategies-intro">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
+                </button>
+            </div>
+
+            <div id="strategies-intro">
+                <p>Success in survey work for ADHD minds isn't about forcing neurotypical strategies - it's about working WITH your brain's natural patterns and tendencies.</p>
+            </div>
 
             <h3 class="section-subtitle">Working With Your ADHD Brain</h3>
 
@@ -1405,16 +1581,17 @@
                 </div>
                 <div class="card-title">
                     <div class="card-icon">🎯</div>
-                    The "Energy-Based" Approach
+                    The "Energy-Based" Survey Approach
                 </div>
                 <div id="energy-approach">
-                    <p>Instead of rigid schedules, match survey types to your current energy level:</p>
+                    <p>Instead of rigid schedules, match survey types to your current energy and focus level:</p>
                     <ul class="styled-list">
-                        <li><strong>High Energy/Focus:</strong> Tackle longer, higher-paying surveys (Prolific, UserTesting)</li>
+                        <li><strong>High Energy/Focus:</strong> Tackle longer, higher-paying surveys (Prolific studies, UserTesting)</li>
                         <li><strong>Medium Energy:</strong> Do standard surveys with moderate pay (Survey Junkie)</li>
-                        <li><strong>Low Energy:</strong> Quick, mindless surveys while doing other activities</li>
-                        <li><strong>No Energy:</strong> Skip surveys entirely - don't force it</li>
+                        <li><strong>Low Energy:</strong> Quick, mindless surveys while doing other activities (Swagbucks)</li>
+                        <li><strong>No Energy:</strong> Skip surveys entirely - don't force it when exhausted</li>
                     </ul>
+                    <p><strong>ADHD Insight:</strong> Your energy patterns are data, not character flaws. Use them strategically.</p>
                 </div>
             </div>
 
@@ -1425,31 +1602,35 @@
                     <div class="timeline-number">1</div>
                     <div class="timeline-content">
                         <h4>Hyperfocus Management</h4>
-                        <p><strong>Pro:</strong> Can complete many surveys in one sitting. <strong>Con:</strong> May accept low-paying surveys without thinking. <strong>Strategy:</strong> Set a timer and minimum pay rate before starting.</p>
+                        <p><strong>Pro:</strong> Can complete many surveys in one sitting. <strong>Con:</strong> May accept low-paying surveys without thinking. <strong>Strategy:</strong> Set a timer and minimum pay rate before starting any session.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-number">2</div>
                     <div class="timeline-content">
-                        <h4>Rejection Sensitivity</h4>
-                        <p>Getting screened out of surveys can feel like personal rejection. <strong>Strategy:</strong> Remember it's about demographics, not you. Platforms often give small consolation rewards.</p>
+                        <h4>Rejection Sensitivity Dysphoria</h4>
+                        <p>Getting screened out of surveys can feel like personal rejection. <strong>Strategy:</strong> Remember it's about demographics, not you personally. Most platforms offer small consolation rewards for completed screeners.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-number">3</div>
                     <div class="timeline-content">
                         <h4>Inconsistent Motivation</h4>
-                        <p>Some days surveys feel impossible. <strong>Strategy:</strong> Have a "minimum viable" goal like checking platforms for 5 minutes, no pressure to complete anything.</p>
+                        <p>Some days surveys feel impossible to complete. <strong>Strategy:</strong> Have a "minimum viable" goal like checking platforms for 5 minutes with no pressure to complete anything.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-number">4</div>
                     <div class="timeline-content">
-                        <h4>Detail Oversight</h4>
-                        <p>ADHD can lead to careless answers that get you banned. <strong>Strategy:</strong> Read attention check questions carefully, slow down on multi-part questions.</p>
+                        <h4>Detail Oversight Issues</h4>
+                        <p>ADHD can lead to careless answers that get you banned. <strong>Strategy:</strong> Read attention check questions carefully, slow down on multi-part questions, take breaks between long surveys.</p>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="transition-card">
+            <p>🎯 <strong>With strategies in place, let's develop specific techniques to maintain focus during survey work...</strong></p>
         </div>
 
         <!-- Focus Techniques -->
@@ -1458,6 +1639,19 @@
                 <span class="emoji">🎯</span>
                 <span class="title-text">Focus Maintenance Techniques</span>
             </h2>
+
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="focus-intro">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
+                </button>
+            </div>
+
+            <div id="focus-intro">
+                <p>Maintaining focus during surveys requires specific techniques tailored to ADHD attention patterns. These methods help you stay engaged without burnout.</p>
+            </div>
 
             <h3 class="section-subtitle">Environment Setup</h3>
 
@@ -1472,15 +1666,15 @@
                 </div>
                 <div class="card-title">
                     <div class="card-icon">🏠</div>
-                    ADHD-Friendly Survey Environment
+                    ADHD-Optimized Survey Environment
                 </div>
                 <div id="environment-setup">
                     <ul class="styled-list">
-                        <li><strong>Minimize Distractions:</strong> Close unnecessary tabs, put phone on silent</li>
-                        <li><strong>Comfort Items:</strong> Have fidget tools, snacks, and drinks ready</li>
-                        <li><strong>Background Options:</strong> Some ADHD people focus better with music/TV, others need silence</li>
-                        <li><strong>Standing Option:</strong> Consider a standing desk setup for restless energy</li>
-                        <li><strong>Multiple Devices:</strong> Use tablet/phone for some surveys to change position</li>
+                        <li><strong>Minimize Distractions:</strong> Close unnecessary tabs, put phone on silent, use website blockers if needed</li>
+                        <li><strong>Comfort Items:</strong> Have fidget tools, snacks, and drinks ready before starting</li>
+                        <li><strong>Background Options:</strong> Some ADHD people focus better with music/TV, others need complete silence</li>
+                        <li><strong>Position Changes:</strong> Consider a standing desk setup or comfortable chair for restless energy</li>
+                        <li><strong>Multiple Devices:</strong> Use tablet/phone for some surveys to change physical position</li>
                     </ul>
                 </div>
             </div>
@@ -1498,19 +1692,47 @@
                 </div>
                 <div class="card-title">
                     <div class="card-icon">⏰</div>
-                    ADHD Survey Sessions
+                    ADHD-Friendly Survey Sessions
                 </div>
                 <div id="survey-sessions">
                     <ol class="numbered-list">
                         <li><strong>Start Small:</strong> 15-minute survey session (2-3 short surveys)</li>
-                        <li><strong>Movement Break:</strong> 3-5 minutes of physical movement</li>
+                        <li><strong>Movement Break:</strong> 3-5 minutes of physical movement or stretching</li>
                         <li><strong>Second Round:</strong> Another 15-minute session if you're still focused</li>
                         <li><strong>Longer Break:</strong> 10-15 minutes doing something enjoyable</li>
-                        <li><strong>Optional Third Round:</strong> Only if energy is still good</li>
+                        <li><strong>Optional Third Round:</strong> Only if energy and motivation are still good</li>
                     </ol>
-                    <p><strong>Key:</strong> Stop before you get frustrated or tired. Better to have productive short sessions than forced long ones.</p>
+                    <p><strong>Key Rule:</strong> Stop before you get frustrated or tired. Better to have productive short sessions than forced long ones that lead to burnout.</p>
                 </div>
             </div>
+
+            <div class="tip-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="focus-helpers">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
+                <div class="card-title">
+                    <div class="card-icon">🎧</div>
+                    Focus Enhancement Tools
+                </div>
+                <div id="focus-helpers">
+                    <ul class="styled-list">
+                        <li><strong>Brain.fm or Focus@Will:</strong> Science-based focus music</li>
+                        <li><strong>Forest App:</strong> Gamifies focus time with virtual tree growing</li>
+                        <li><strong>Noise Apps:</strong> White noise, rain sounds, or coffee shop ambiance</li>
+                        <li><strong>Blue Light Filters:</strong> f.lux or built-in screen filters to reduce eye strain</li>
+                        <li><strong>Posture Reminders:</strong> Apps that remind you to sit up straight or take breaks</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="transition-card">
+            <p>⏰ <strong>Focus techniques are great, but sustainable survey work requires smart time management...</strong></p>
         </div>
 
         <!-- Time Management -->
@@ -1520,12 +1742,25 @@
                 <span class="title-text">Time Management Framework</span>
             </h2>
 
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="time-intro">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
+                </button>
+            </div>
+
+            <div id="time-intro">
+                <p>Effective time management for ADHD survey work means working with your natural rhythms rather than against them.</p>
+            </div>
+
             <h3 class="section-subtitle">Weekly Survey Strategy</h3>
 
             <div class="data-grid">
                 <div class="data-card">
                     <div class="data-card-header">
-                        ⭐ High-value surveys (Prolific)
+                        ⭐ High-value surveys (Prolific, UserTesting)
                     </div>
                     <div class="data-card-content">
                         <div class="data-row">
@@ -1554,7 +1789,7 @@
                         </div>
                         <div class="data-row">
                             <span class="data-label">Best Time:</span>
-                            <span class="data-value">Medium energy times</span>
+                            <span class="data-value">Medium energy periods</span>
                         </div>
                         <div class="data-row">
                             <span class="data-label">Expected Earnings:</span>
@@ -1565,7 +1800,7 @@
 
                 <div class="data-card">
                     <div class="data-card-header">
-                        ⚡ Quick hits (Swagbucks)
+                        ⚡ Quick tasks (Swagbucks)
                     </div>
                     <div class="data-card-content">
                         <div class="data-row">
@@ -1585,7 +1820,7 @@
 
                 <div class="data-card">
                     <div class="data-card-header">
-                        🔍 Platform checking
+                        🔍 Platform monitoring
                     </div>
                     <div class="data-card-content">
                         <div class="data-row">
@@ -1594,7 +1829,7 @@
                         </div>
                         <div class="data-row">
                             <span class="data-label">Best Time:</span>
-                            <span class="data-value">Set routine times</span>
+                            <span class="data-value">Set routine times (morning, lunch, evening)</span>
                         </div>
                         <div class="data-row">
                             <span class="data-label">Expected Earnings:</span>
@@ -1615,14 +1850,44 @@
                 </div>
                 <div class="card-title">
                     <div class="card-icon">⚠️</div>
-                    Realistic Time Investment
+                    Realistic Time Investment Expectations
                 </div>
                 <div id="time-investment">
-                    <p><strong>Don't expect instant results.</strong> Building up good survey opportunities takes time. Many new users get discouraged in the first month when earnings are low.</p>
+                    <p><strong>Don't expect instant results.</strong> Building up good survey opportunities and developing efficient habits takes time. Many new users get discouraged in the first month when earnings are low.</p>
                     <br>
-                    <p><strong>Timeline:</strong> Month 1: $20-40 (learning), Month 2-3: $40-80 (improving), Month 4+: $60-120+ (optimized approach)</p>
+                    <p><strong>Realistic Timeline:</strong> Month 1: $20-40 (learning platforms), Month 2-3: $40-80 (improving efficiency), Month 4+: $60-120+ (optimized approach)</p>
                 </div>
             </div>
+
+            <div class="adhd-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="time-tracking">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
+                <div class="card-title">
+                    <div class="card-icon">📊</div>
+                    ADHD-Friendly Time Tracking
+                </div>
+                <div id="time-tracking">
+                    <p><strong>Track what matters for ADHD success:</strong></p>
+                    <ul class="styled-list">
+                        <li><strong>Energy Levels:</strong> Rate your focus 1-10 at the start of each session</li>
+                        <li><strong>Time vs. Earnings:</strong> Calculate hourly rates to stay motivated</li>
+                        <li><strong>Platform Performance:</strong> Which platforms give you the best results?</li>
+                        <li><strong>Optimal Times:</strong> When are you most productive with surveys?</li>
+                        <li><strong>Session Length:</strong> What duration works best for your attention span?</li>
+                    </ul>
+                    <p><strong>Simple Method:</strong> Use your phone's notes app or a basic spreadsheet - don't overcomplicate it!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="transition-card">
+            <p>📝 <strong>Theory is helpful, but real experiences from other ADHD survey workers provide the best insights...</strong></p>
         </div>
 
         <!-- Real Experiences -->
@@ -1631,6 +1896,19 @@
                 <span class="emoji">📝</span>
                 <span class="title-text">Real-World Experiences</span>
             </h2>
+
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="experiences-intro">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
+                </button>
+            </div>
+
+            <div id="experiences-intro">
+                <p>Learning from other ADHD survey workers' experiences can help you avoid common pitfalls and find strategies that actually work.</p>
+            </div>
 
             <div class="success-card">
                 <div class="voice-controls">
@@ -1643,12 +1921,12 @@
                 </div>
                 <div class="card-title">
                     <div class="card-icon">💬</div>
-                    ADHD User: Finding the Right Platforms
+                    ADHD User: Finding the Right Platform Fit
                 </div>
                 <div id="user-experience">
                     <p><em>"Prolific works great for my ADHD because the studies are actually interesting - I love trying to figure out what they're researching. It feels like a puzzle rather than boring questions about laundry detergent.</em></p>
                     <br>
-                    <p><em>Survey Junkie is my fallback for when I need mindless tasks. I can do those while watching Netflix. But I had to learn to avoid the super long ones when my focus is already shot."</em></p>
+                    <p><em>Survey Junkie is my fallback for when I need mindless tasks. I can do those while watching Netflix. But I had to learn to avoid the super long ones when my focus is already shot. The key was realizing that my brain doesn't work the same every day."</em></p>
                 </div>
             </div>
 
@@ -1663,14 +1941,15 @@
                 </div>
                 <div class="card-title">
                     <div class="card-icon">⚠️</div>
-                    Common Mistakes to Avoid
+                    Common ADHD Survey Mistakes to Avoid
                 </div>
                 <div id="common-mistakes">
                     <ul class="styled-list">
                         <li><strong>Chasing High-Pay Platforms:</strong> Spending hours applying to Respondent.io instead of doing available surveys</li>
-                        <li><strong>Profile Inconsistency:</strong> Forgetting to update profile changes (like quitting vaping) and getting disqualified</li>
+                        <li><strong>Profile Inconsistency:</strong> Forgetting to update demographic changes and getting disqualified</li>
                         <li><strong>Burnout from Low Pay:</strong> Accepting too many $0.50 surveys and getting frustrated</li>
                         <li><strong>Hyperfocus Traps:</strong> Spending 3 hours on surveys earning $5 total</li>
+                        <li><strong>Perfectionism Paralysis:</strong> Overthinking answers and taking too long per survey</li>
                     </ul>
                 </div>
             </div>
@@ -1686,26 +1965,66 @@
                 </div>
                 <div class="card-title">
                     <div class="card-icon">🎯</div>
-                    Profile Optimization Reality
+                    Profile Optimization for ADHD Minds
                 </div>
                 <div id="profile-optimization">
-                    <p><strong>Keep profiles honest and updated.</strong> Many ADHD users forget to update important changes that affect survey eligibility.</p>
+                    <p><strong>Keep profiles honest and updated.</strong> Many ADHD users forget to update important changes that affect survey eligibility (new job, moved, lifestyle changes).</p>
                     <br>
-                    <p><strong>Monthly Profile Check:</strong> Set a calendar reminder to review and update your demographics, employment, and lifestyle information across all platforms.</p>
+                    <p><strong>ADHD Strategy:</strong> Set a monthly calendar reminder to review and update your demographics, employment, and lifestyle information across all platforms. Write down the specific date you updated each platform.</p>
                 </div>
             </div>
+
+            <div class="adhd-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="adhd-insights">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
+                <div class="card-title">
+                    <div class="card-icon">💡</div>
+                    ADHD-Specific Insights from Experienced Users
+                </div>
+                <div id="adhd-insights">
+                    <ul class="styled-list">
+                        <li><strong>Pattern Recognition Advantage:</strong> Many ADHD users excel at spotting survey patterns and identifying which types pay better</li>
+                        <li><strong>Rejection Sensitivity Management:</strong> Treating survey disqualifications as "not a match" rather than personal rejection</li>
+                        <li><strong>Hyperfocus Channel:</strong> Some users save interesting surveys for hyperfocus periods and mundane ones for low-energy times</li>
+                        <li><strong>Variety Seeking:</strong> Successful ADHD survey workers typically use 3-4 platforms to prevent boredom</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="transition-card">
+            <p>🚀 <strong>Ready to get started? Let's create your personalized action plan...</strong></p>
         </div>
 
         <!-- Getting Started -->
         <div class="section" id="getting-started">
             <h2 class="section-title">
                 <span class="emoji">🚀</span>
-                <span class="title-text">Getting Started Realistically</span>
+                <span class="title-text">Getting Started Action Plan</span>
             </h2>
+
+            <div class="voice-controls">
+                <button class="voice-btn" onclick="toggleSpeech(this)" data-target="getting-started-intro">
+                    <span>🔊</span> Play
+                </button>
+                <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                    <span>⏹️</span> Stop
+                </button>
+            </div>
+
+            <div id="getting-started-intro">
+                <p>Starting survey work with ADHD requires a thoughtful, realistic approach that sets you up for sustainable success rather than quick burnout.</p>
+            </div>
 
             <div class="highlight-card">
                 <div class="voice-controls">
-                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="realistic-expectations">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="realistic-expectations-final">
                         <span>🔊</span> Play
                     </button>
                     <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
@@ -1714,13 +2033,13 @@
                 </div>
                 <div class="card-title">
                     <div class="card-icon">✨</div>
-                    Setting Realistic Expectations
+                    Final Reality Check
                 </div>
-                <div id="realistic-expectations">
+                <div id="realistic-expectations-final">
                     <p>Survey work is best viewed as a way to earn modest supplemental income while contributing to research. <strong>It's not a path to significant money, but it can be a decent fit for some ADHD brains.</strong></p>
                     <br>
-                    <p><strong>Best for:</strong> People who enjoy giving opinions, need flexible timing, and are satisfied with modest earnings.</p>
-                    <p><strong>Not ideal for:</strong> Those needing substantial income or who get frustrated by repetitive, low-paying tasks.</p>
+                    <p><strong>Best suited for:</strong> People who enjoy giving opinions, need flexible timing, can handle low pay rates, and are satisfied with modest earnings.</p>
+                    <p><strong>Not ideal for:</strong> Those needing substantial income, who get frustrated by repetitive tasks, or who have severe attention regulation issues.</p>
                 </div>
             </div>
 
@@ -1735,15 +2054,15 @@
                 </div>
                 <div class="card-title">
                     <div class="card-icon">📋</div>
-                    ADHD-Friendly Getting Started Plan
+                    Your 4-Week ADHD-Friendly Launch Plan
                 </div>
                 <div id="getting-started-plan">
                     <ol class="numbered-list">
-                        <li><strong>Week 1:</strong> Sign up for Prolific (if accepted) and Survey Junkie. Complete profiles carefully.</li>
-                        <li><strong>Week 2:</strong> Try different survey types to see what feels manageable for your ADHD brain.</li>
-                        <li><strong>Week 3:</strong> Add one more platform (Swagbucks or UserTesting) based on your preferences.</li>
-                        <li><strong>Week 4:</strong> Establish a routine that works with your energy patterns.</li>
-                        <li><strong>Month 2:</strong> Optimize based on what you've learned about your survey preferences and ADHD needs.</li>
+                        <li><strong>Week 1:</strong> Sign up for 2 platforms - start with Prolific (if accepted) and Survey Junkie. Complete profiles carefully when your focus is good.</li>
+                        <li><strong>Week 2:</strong> Try different survey types to discover what feels manageable for your ADHD brain. Track your energy levels and earnings.</li>
+                        <li><strong>Week 3:</strong> Add one more platform (UserTesting or Swagbucks) based on your Week 2 preferences and performance.</li>
+                        <li><strong>Week 4:</strong> Establish a routine that works with your natural energy patterns. Set realistic ongoing goals.</li>
+                        <li><strong>Month 2:</strong> Optimize based on what you've learned about your survey preferences, ADHD needs, and earnings patterns.</li>
                     </ol>
                 </div>
             </div>
@@ -1759,16 +2078,36 @@
                 </div>
                 <div class="card-title">
                     <div class="card-icon">💰</div>
-                    First Month Goals (Be Realistic!)
+                    Realistic First Month Goals
                 </div>
                 <div id="first-month-goals">
                     <ul class="styled-list">
                         <li><strong>Week 1:</strong> $5-10 (learning platforms, getting qualified)</li>
-                        <li><strong>Week 2:</strong> $10-20 (finding your rhythm)</li>
+                        <li><strong>Week 2:</strong> $10-20 (finding your rhythm and preferences)</li>
                         <li><strong>Week 3:</strong> $15-25 (getting more efficient)</li>
                         <li><strong>Week 4:</strong> $20-30 (developing consistency)</li>
                     </ul>
                     <p><strong>Total Month 1 Goal:</strong> $50-85 with 3-5 hours per week investment</p>
+                </div>
+            </div>
+
+            <div class="warning-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="month-one-challenges">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
+                <div class="card-title">
+                    <div class="card-icon">⚠️</div>
+                    Month One Reality Check
+                </div>
+                <div id="month-one-challenges">
+                    <p><strong>Expect frustrations in your first month:</strong> Many surveys will disqualify you, you'll accidentally accept low-paying tasks, and you might get overwhelmed by platform interfaces.</p>
+                    <br>
+                    <p><strong>ADHD-Specific Challenge:</strong> Don't let early rejections or low earnings trigger rejection sensitivity. This is normal and gets better with experience.</p>
                 </div>
             </div>
 
@@ -1783,12 +2122,38 @@
                 </div>
                 <div class="card-title">
                     <div class="card-icon">🎉</div>
-                    Ready to Start?
+                    Ready to Begin Your Survey Journey?
                 </div>
                 <div id="ready-to-start">
                     <p>Remember: survey work is a marathon, not a sprint. <strong>Start small, be consistent when possible, and don't put pressure on yourself to earn huge amounts.</strong></p>
                     <br>
-                    <p>Your ADHD traits of curiosity and ability to hyperfocus can be assets, but be honest about the challenges of sustained attention and low pay rates.</p>
+                    <p>Your ADHD traits of curiosity, pattern recognition, and ability to hyperfocus can be genuine assets in survey work. But be honest about the challenges of sustained attention, low pay rates, and repetitive tasks.</p>
+                    <br>
+                    <p><strong>Final Advice:</strong> Give yourself permission to stop if it's not working for your brain. There are many other ways to earn supplemental income that might be better fits for your specific ADHD profile.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="toggleSpeech(this)" data-target="next-steps">
+                        <span>🔊</span> Play
+                    </button>
+                    <button class="voice-btn stop-btn" onclick="stopSpeech()" style="background: var(--accent-rose);">
+                        <span>⏹️</span> Stop
+                    </button>
+                </div>
+                <div class="card-title">
+                    <div class="card-icon">🔗</div>
+                    Quick Start Links
+                </div>
+                <div id="next-steps">
+                    <p><strong>Recommended starting platforms:</strong></p>
+                    <ul class="styled-list">
+                        <li><strong>First choice:</strong> <a href="https://prolific.co/" class="platform-link" target="_blank" rel="noopener noreferrer">Prolific</a> (if accepting new users)</li>
+                        <li><strong>Reliable backup:</strong> <a href="https://www.surveyjunkie.com/" class="platform-link" target="_blank" rel="noopener noreferrer">Survey Junkie</a></li>
+                        <li><strong>Third option:</strong> <a href="https://www.usertesting.com/" class="platform-link" target="_blank" rel="noopener noreferrer">UserTesting</a> or <a href="https://www.swagbucks.com/" class="platform-link" target="_blank" rel="noopener noreferrer">Swagbucks</a></li>
+                    </ul>
+                    <p><strong>Remember:</strong> Focus on 2-3 platforms maximum to start. You can always expand later once you've mastered the basics.</p>
                 </div>
             </div>
         </div>
@@ -2035,14 +2400,14 @@
             }
         });
 
-        // Section tracking and progress
-        const sections = ['introduction', 'platforms', 'earnings', 'adhd-strategies', 'focus-techniques', 'time-management', 'real-experiences', 'getting-started'];
+        // Section tracking and progress - FIXED VERSION
+        const sections = ['overview', 'earnings', 'platforms', 'adhd-strategies', 'focus-techniques', 'time-management', 'real-experiences', 'getting-started'];
         let currentSectionIndex = 0;
 
         function updateProgress() {
             const scrolled = window.scrollY;
             const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrolled / totalHeight) * 100;
+            const scrollPercent = Math.min((scrolled / totalHeight) * 100, 100);
             
             document.querySelector('.scroll-progress-bar').style.width = scrollPercent + '%';
             updateSectionProgress();
@@ -2067,9 +2432,9 @@
 
         function updateProgressIndicator() {
             const sectionNames = [
-                'Introduction',
-                'Platform Comparison',
+                'Overview',
                 'Earnings',
+                'Platforms', 
                 'ADHD Strategies',
                 'Focus Techniques',
                 'Time Management',
@@ -2077,7 +2442,7 @@
                 'Getting Started'
             ];
             
-            document.getElementById('current-section').textContent = sectionNames[currentSectionIndex] || 'Introduction';
+            document.getElementById('current-section').textContent = sectionNames[currentSectionIndex] || 'Overview';
             
             const circles = document.querySelectorAll('.progress-circle');
             circles.forEach((circle, index) => {
@@ -2119,7 +2484,7 @@
             stopSpeech();
         });
 
-        // Smooth scrolling
+        // Smooth scrolling with proper progress tracking - FIXED VERSION
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -2129,7 +2494,10 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
-                    setTimeout(() => updateProgress(), 1000);
+                    // Update progress after smooth scroll completes
+                    setTimeout(() => {
+                        updateProgress();
+                    }, 1000);
                 }
             });
         });
