@@ -4,39 +4,39 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <title>MindShift - Brain-Based Help</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Crimson+Text:ital@0;1&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary-bg: #0a0e1a;
       --secondary-bg: #1a1f2e;
-      --card-bg: rgba(255, 255, 255, 0.02);
-      --glass-bg: rgba(255, 255, 255, 0.05);
+      --card-bg: rgba(255, 255, 255, 0.04);
+      --glass-bg: rgba(255, 255, 255, 0.08);
       --text-primary: #ffffff;
-      --text-secondary: #a0a8b8;
-      --text-muted: #6b7280;
+      --text-secondary: #c1c9d6;
+      --text-muted: #8892a6;
       --accent-blue: #4f46e5;
       --accent-teal: #06b6d4;
       --accent-emerald: #10b981;
       --accent-amber: #f59e0b;
       --accent-rose: #f43f5e;
       --accent-purple: #8b5cf6;
-      --border-subtle: rgba(255, 255, 255, 0.1);
+      --border-subtle: rgba(255, 255, 255, 0.12);
       --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.15);
-      --shadow-medium: 0 8px 40px rgba(0, 0, 0, 0.25);
-      --shadow-strong: 0 16px 64px rgba(0, 0, 0, 0.35);
-      --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.25);
+      --shadow-strong: 0 20px 60px rgba(0, 0, 0, 0.4);
+      --gradient-primary: linear-gradient(135deg, #4f46e5 0%, #06b6d4 50%, #10b981 100%);
       --gradient-success: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
       --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
-      --gradient-info: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 100%);
-      --focus-ring: rgba(79, 70, 229, 0.5);
+      --gradient-info: linear-gradient(135deg, #06b6d4 0%, #4f46e5 100%);
+      --focus-ring: rgba(6, 182, 212, 0.5);
       
-      /* ADHD-friendly brain category colors */
+      /* ADHD-friendly brain category colors - updated to blue-teal-emerald palette */
       --executive-function: linear-gradient(135deg, #4f46e5, #3b38d8);
       --emotional-regulation: linear-gradient(135deg, #06b6d4, #0891b2);
-      --focus-attention: linear-gradient(135deg, #8b5cf6, #7c3aed);
+      --focus-attention: linear-gradient(135deg, #8b5cf6, #4f46e5);
       --energy-motivation: linear-gradient(135deg, #10b981, #059669);
       --anxiety-overwhelm: linear-gradient(135deg, #f59e0b, #d97706);
-      --dopamine-reward: linear-gradient(135deg, #ec4899, #be185d);
+      --dopamine-reward: linear-gradient(135deg, #06b6d4, #0891b2);
     }
     
     * {
@@ -71,23 +71,30 @@
       vertical-align: middle;
     }
 
-    /* Background Effects */
+    /* Enhanced Background Effects */
     .bg-gradient {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background: radial-gradient(ellipse at top, rgba(79, 70, 229, 0.15) 0%, transparent 50%),
-                  radial-gradient(ellipse at bottom right, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+      background: radial-gradient(ellipse at top left, rgba(79, 70, 229, 0.12) 0%, transparent 50%),
+                  radial-gradient(ellipse at bottom right, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
+                  radial-gradient(ellipse at center, rgba(16, 185, 129, 0.06) 0%, transparent 70%);
       z-index: -2;
+      animation: bgShift 25s ease-in-out infinite;
+    }
+
+    @keyframes bgShift {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.1); }
     }
 
     .floating-orb {
       position: fixed;
       border-radius: 50%;
-      filter: blur(40px);
-      opacity: 0.3;
+      filter: blur(60px);
+      opacity: 0.12;
       z-index: -1;
       animation: float 20s infinite ease-in-out;
     }
@@ -95,7 +102,7 @@
     .orb-1 {
       width: 300px;
       height: 300px;
-      background: var(--accent-blue);
+      background: linear-gradient(45deg, var(--accent-blue), var(--accent-teal));
       top: -150px;
       right: -150px;
       animation-delay: -5s;
@@ -104,7 +111,7 @@
     .orb-2 {
       width: 200px;
       height: 200px;
-      background: var(--accent-teal);
+      background: linear-gradient(45deg, var(--accent-teal), var(--accent-emerald));
       bottom: -100px;
       left: -100px;
       animation-delay: -10s;
@@ -113,7 +120,7 @@
     .orb-3 {
       width: 250px;
       height: 250px;
-      background: var(--accent-emerald);
+      background: linear-gradient(45deg, var(--accent-emerald), var(--accent-blue));
       top: 40%;
       right: -125px;
       animation-delay: -15s;
@@ -122,25 +129,25 @@
     .orb-4 {
       width: 180px;
       height: 180px;
-      background: var(--accent-purple);
+      background: linear-gradient(45deg, var(--accent-blue), var(--accent-teal));
       top: 20%;
       left: -90px;
       animation-delay: -8s;
     }
 
     @keyframes float {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(-30px, -30px) scale(1.1); }
-      66% { transform: translate(30px, -20px) scale(0.9); }
+      0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      33% { transform: translate(-40px, -40px) scale(1.1) rotate(120deg); }
+      66% { transform: translate(40px, -30px) scale(0.9) rotate(240deg); }
     }
     
     .app-container {
       max-width: 100%;
       margin: 0;
       background: var(--glass-bg);
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(25px);
       border: 1px solid var(--border-subtle);
-      border-radius: 20px;
+      border-radius: 24px;
       box-shadow: var(--shadow-strong);
       overflow: hidden;
       position: relative;
@@ -149,7 +156,7 @@
     .header {
       background: var(--gradient-primary);
       color: white;
-      padding: 2rem 1rem 1.5rem;
+      padding: 3rem 1rem 2rem;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -162,8 +169,8 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-      animation: shimmer 3s infinite;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.15), transparent);
+      animation: shimmer 4s infinite;
       pointer-events: none;
     }
 
@@ -178,19 +185,20 @@
     }
     
     .app-title {
-      font-size: 3rem;
-      font-weight: 800;
+      font-size: 3.5rem;
+      font-weight: 900;
       margin-bottom: 0.5rem;
       text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      letter-spacing: -0.02em;
-      background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+      line-height: 1.1;
     }
     
     .app-subtitle {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       font-weight: 500;
       opacity: 0.95;
       max-width: 600px;
@@ -198,6 +206,7 @@
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       font-family: 'Crimson Text', serif;
       font-style: italic;
+      line-height: 1.4;
     }
     
     .evidence-badge {
@@ -205,7 +214,7 @@
       align-items: center;
       gap: 0.75rem;
       background: rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(15px);
       padding: 0.75rem 1.5rem;
       border-radius: 25px;
       font-size: 1rem;
@@ -227,9 +236,9 @@
     
     .intro-text {
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 3rem;
       color: var(--text-secondary);
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       max-width: 100%;
       margin-left: auto;
       margin-right: auto;
@@ -241,18 +250,18 @@
     .mood-categories {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 1rem;
-      margin-bottom: 2rem;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
     }
     
     .mood-category {
       background: var(--glass-bg);
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(25px);
       border: 1px solid var(--border-subtle);
       border-radius: 24px;
-      padding: 2rem;
+      padding: 2.5rem;
       cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
       box-shadow: var(--shadow-soft);
@@ -266,27 +275,27 @@
       left: 0;
       right: 0;
       height: 4px;
-      transition: all 0.3s ease;
+      transition: all 0.4s ease;
     }
     
     .mood-category:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: var(--shadow-medium);
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: var(--shadow-strong);
       border-color: rgba(255, 255, 255, 0.2);
     }
     
     .mood-category:active {
-      transform: translateY(-4px) scale(0.98);
+      transform: translateY(-8px) scale(0.98);
     }
     
     .mood-category.selected {
-      border-color: var(--accent-blue);
-      background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%);
-      transform: translateY(-4px);
-      box-shadow: 0 16px 32px rgba(79, 70, 229, 0.3);
+      border-color: var(--accent-teal);
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(79, 70, 229, 0.05) 100%);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(6, 182, 212, 0.3);
     }
     
-    /* Category-specific styling */
+    /* Category-specific styling - updated colors */
     .executive-function::before { background: var(--executive-function); }
     .emotional-regulation::before { background: var(--emotional-regulation); }
     .focus-attention::before { background: var(--focus-attention); }
@@ -294,17 +303,17 @@
     .anxiety-overwhelm::before { background: var(--anxiety-overwhelm); }
     .dopamine-reward::before { background: var(--dopamine-reward); }
     
-    .executive-function:hover::before { height: 100%; opacity: 0.1; }
-    .emotional-regulation:hover::before { height: 100%; opacity: 0.1; }
-    .focus-attention:hover::before { height: 100%; opacity: 0.1; }
-    .energy-motivation:hover::before { height: 100%; opacity: 0.1; }
-    .anxiety-overwhelm:hover::before { height: 100%; opacity: 0.1; }
-    .dopamine-reward:hover::before { height: 100%; opacity: 0.1; }
+    .executive-function:hover::before { height: 100%; opacity: 0.08; }
+    .emotional-regulation:hover::before { height: 100%; opacity: 0.08; }
+    .focus-attention:hover::before { height: 100%; opacity: 0.08; }
+    .energy-motivation:hover::before { height: 100%; opacity: 0.08; }
+    .anxiety-overwhelm:hover::before { height: 100%; opacity: 0.08; }
+    .dopamine-reward:hover::before { height: 100%; opacity: 0.08; }
     
     .category-header {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 1.5rem;
       margin-bottom: 1rem;
     }
     
@@ -312,27 +321,27 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 3rem;
-      transition: all 0.3s ease;
+      font-size: 3.5rem;
+      transition: all 0.4s ease;
       font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', 'Android Emoji', 'EmojiSymbols', 'EmojiOne Mozilla', 'Twemoji Mozilla', 'Segoe UI Symbol', 'Noto Emoji';
       line-height: 1;
       flex-shrink: 0;
     }
     
     .mood-category:hover .category-icon {
-      transform: scale(1.2);
+      transform: scale(1.2) rotate(5deg);
     }
     
     .category-title {
-      font-size: 1.5rem;
-      font-weight: 700;
+      font-size: 1.6rem;
+      font-weight: 800;
       color: var(--text-primary);
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.5rem;
     }
     
     .category-description {
       color: var(--text-secondary);
-      font-size: 1rem;
+      font-size: 1.05rem;
       line-height: 1.6;
       font-weight: 500;
     }
@@ -341,13 +350,13 @@
       margin-top: 3rem;
       padding: 3rem;
       background: var(--glass-bg);
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(25px);
       border: 1px solid var(--border-subtle);
       border-radius: 28px;
       display: none;
       position: relative;
       overflow: hidden;
-      box-shadow: var(--shadow-soft);
+      box-shadow: var(--shadow-medium);
     }
     
     .response-section::before {
@@ -378,29 +387,36 @@
     
     .response-header {
       text-align: center;
-      margin-bottom: 2.5rem;
+      margin-bottom: 3rem;
     }
     
     .response-title {
-      font-size: 2.2rem;
-      font-weight: 800;
+      font-size: 2.5rem;
+      font-weight: 900;
       background: var(--gradient-primary);
+      background-size: 200% 200%;
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      margin-bottom: 0.75rem;
-      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      letter-spacing: -0.03em;
+      animation: titleGlow 4s ease-in-out infinite;
+    }
+
+    @keyframes titleGlow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
     
     .response-subtitle {
       color: var(--text-secondary);
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       font-weight: 500;
       font-style: italic;
     }
     
     .strategy-card {
-      padding: 2.5rem 0;
+      padding: 3rem 0;
       margin-bottom: 2rem;
       border-bottom: 1px solid var(--border-subtle);
       transition: all 0.3s ease;
@@ -419,28 +435,35 @@
     .strategy-header {
       display: flex;
       align-items: flex-start;
-      gap: 1.5rem;
-      margin-bottom: 1.5rem;
+      gap: 2rem;
+      margin-bottom: 2rem;
     }
     
     .strategy-number {
       flex-shrink: 0;
-      width: 48px;
-      height: 48px;
+      width: 56px;
+      height: 56px;
       background: var(--gradient-primary);
       color: white;
-      border-radius: 16px;
+      border-radius: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 800;
-      font-size: 1.2rem;
+      font-weight: 900;
+      font-size: 1.4rem;
       box-shadow: var(--shadow-soft);
-      transition: all 0.3s ease;
+      transition: all 0.4s ease;
+      background-size: 200% 200%;
+      animation: gradientShift 4s ease-in-out infinite;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
     
     .strategy-card:hover .strategy-number {
-      transform: scale(1.1) rotate(5deg);
+      transform: scale(1.15) rotate(10deg);
       box-shadow: var(--shadow-medium);
     }
     
@@ -449,49 +472,49 @@
     }
     
     .strategy-title {
-      font-size: 1.4rem;
-      font-weight: 700;
+      font-size: 1.6rem;
+      font-weight: 800;
       color: var(--text-primary);
-      margin-bottom: 0.75rem;
+      margin-bottom: 1rem;
     }
     
     .strategy-description {
       color: var(--text-secondary);
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
       line-height: 1.7;
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       font-weight: 500;
     }
     
     .strategy-steps {
-      margin-bottom: 1.5rem;
-      padding-top: 1rem;
+      margin-bottom: 2rem;
+      padding-top: 1.5rem;
       border-top: 2px solid var(--border-subtle);
     }
     
     .strategy-steps h4 {
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 700;
-      color: var(--accent-blue);
-      margin-bottom: 1rem;
+      color: var(--accent-teal);
+      margin-bottom: 1.5rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.75rem;
     }
     
     .strategy-steps h4::before {
       content: '✓';
       background: var(--accent-emerald);
       color: white;
-      width: 20px;
-      height: 20px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       font-weight: 900;
       font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', 'Android Emoji', 'EmojiSymbols', 'EmojiOne Mozilla', 'Twemoji Mozilla', 'Segoe UI Symbol', 'Noto Emoji';
       line-height: 1;
@@ -505,13 +528,14 @@
     }
     
     .strategy-steps li {
-      margin-bottom: 1rem;
-      padding-left: 3rem;
+      margin-bottom: 1.2rem;
+      padding-left: 3.5rem;
       position: relative;
       color: var(--text-primary);
       font-weight: 500;
       line-height: 1.6;
       counter-increment: step-counter;
+      font-size: 1.05rem;
     }
     
     .strategy-steps li::before {
@@ -519,8 +543,8 @@
       position: absolute;
       left: 0;
       top: 0;
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       background: var(--gradient-primary);
       color: white;
       border-radius: 50%;
@@ -528,40 +552,41 @@
       align-items: center;
       justify-content: center;
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 1rem;
       box-shadow: var(--shadow-soft);
     }
     
     .evidence-note {
-      padding-top: 1rem;
-      margin-top: 1rem;
-      border-top: 2px solid rgba(139, 92, 246, 0.3);
-      font-size: 0.95rem;
+      padding-top: 1.5rem;
+      margin-top: 1.5rem;
+      border-top: 2px solid rgba(6, 182, 212, 0.3);
+      font-size: 1rem;
       color: var(--text-secondary);
       font-style: italic;
+      line-height: 1.6;
     }
     
     .evidence-note strong {
-      color: var(--accent-purple);
+      color: var(--accent-teal);
       font-weight: 700;
       font-style: normal;
     }
     
     .action-buttons {
       display: flex;
-      gap: 1.5rem;
+      gap: 2rem;
       justify-content: center;
       margin-top: 3rem;
       flex-wrap: wrap;
     }
     
     .btn {
-      padding: 1rem 2rem;
-      border-radius: 16px;
-      font-weight: 600;
-      font-size: 1rem;
+      padding: 1.2rem 2.5rem;
+      border-radius: 18px;
+      font-weight: 700;
+      font-size: 1.1rem;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       border: none;
       text-decoration: none;
       display: inline-flex;
@@ -569,9 +594,9 @@
       gap: 0.75rem;
       position: relative;
       overflow: hidden;
-      min-width: 180px;
+      min-width: 200px;
       justify-content: center;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(15px);
     }
     
     .btn .emoji {
@@ -596,14 +621,17 @@
     
     .btn-primary {
       background: var(--gradient-primary);
+      background-size: 200% 200%;
+      animation: gradientShift 4s ease-in-out infinite;
       color: white;
       box-shadow: var(--shadow-soft);
       border: 1px solid rgba(255, 255, 255, 0.2);
     }
     
     .btn-primary:hover {
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: var(--shadow-medium);
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: var(--shadow-strong);
+      filter: brightness(1.1);
     }
     
     .btn-secondary {
@@ -615,39 +643,42 @@
     
     .btn-secondary:hover {
       background: var(--card-bg);
-      transform: translateY(-3px) scale(1.05);
+      transform: translateY(-4px) scale(1.05);
       box-shadow: var(--shadow-medium);
       border-color: rgba(255, 255, 255, 0.3);
     }
     
     .timer-section {
-      margin-top: 2rem;
-      padding: 2rem;
+      margin-top: 3rem;
+      padding: 3rem;
       background: var(--glass-bg);
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(25px);
       border: 1px solid var(--border-subtle);
-      border-radius: 20px;
+      border-radius: 24px;
       text-align: center;
       border-left: 4px solid var(--accent-emerald);
+      box-shadow: var(--shadow-soft);
     }
     
     .timer-display {
-      font-size: 3rem;
-      font-weight: 800;
+      font-size: 3.5rem;
+      font-weight: 900;
       background: var(--gradient-success);
+      background-size: 200% 200%;
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
-      margin: 1rem 0;
+      margin: 1.5rem 0;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      animation: gradientShift 4s ease-in-out infinite;
     }
     
     .progress-bar {
       width: 100%;
-      height: 12px;
+      height: 16px;
       background: var(--card-bg);
-      border-radius: 8px;
+      border-radius: 10px;
       overflow: hidden;
       margin: 2rem 0;
       box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -657,7 +688,7 @@
     .progress-fill {
       height: 100%;
       background: var(--gradient-success);
-      border-radius: 8px;
+      border-radius: 10px;
       transition: width 0.3s ease;
       width: 0%;
       box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
@@ -665,23 +696,23 @@
     
     .professional-footer {
       background: var(--glass-bg);
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(25px);
       padding: 3rem 2rem;
       text-align: center;
       border-top: 1px solid var(--border-subtle);
     }
     
     .disclaimer {
-      font-size: 0.9rem;
+      font-size: 1rem;
       color: var(--text-secondary);
       max-width: 600px;
-      margin: 0 auto 1.5rem;
+      margin: 0 auto 2rem;
       line-height: 1.7;
       font-weight: 500;
     }
     
     .professional-credits {
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
       font-weight: 600;
     }
@@ -724,70 +755,90 @@
     /* Mobile-first responsive design optimized for embedded apps */
     @media (max-width: 480px) {
       .app-container {
-        border-radius: 12px;
+        border-radius: 16px;
         margin: 0;
       }
       
       .header {
-        padding: 1.5rem 0.75rem 1rem;
+        padding: 2rem 1rem 1.5rem;
       }
       
       .app-title {
-        font-size: 2rem;
+        font-size: 2.5rem;
       }
       
       .app-subtitle {
-        font-size: 1rem;
+        font-size: 1.1rem;
       }
       
       .main-content {
-        padding: 1rem 0.75rem;
+        padding: 1.5rem 1rem;
       }
       
       .mood-categories {
         grid-template-columns: repeat(2, 1fr);
-        gap: 0.75rem;
+        gap: 1rem;
       }
       
       .mood-category {
-        padding: 1rem;
-        min-height: 120px;
+        padding: 1.5rem;
+        min-height: 140px;
       }
       
       .category-header {
         flex-direction: column;
         text-align: center;
-        gap: 0.5rem;
+        gap: 0.75rem;
       }
       
       .category-icon {
-        font-size: 2rem;
+        font-size: 2.5rem;
       }
       
       .category-title {
-        font-size: 1rem;
+        font-size: 1.1rem;
         margin-bottom: 0.25rem;
       }
       
       .category-description {
-        font-size: 0.8rem;
+        font-size: 0.9rem;
         line-height: 1.4;
       }
       
       .response-section {
-        padding: 1rem 0.75rem;
+        padding: 1.5rem 1rem;
       }
       
       .strategy-card {
-        padding: 1rem;
+        padding: 1.5rem 0;
+      }
+      
+      .strategy-header {
+        gap: 1rem;
+      }
+      
+      .strategy-number {
+        width: 48px;
+        height: 48px;
+        font-size: 1.2rem;
       }
       
       .timer-display {
-        font-size: 2rem;
+        font-size: 2.5rem;
       }
       
       .professional-footer {
-        padding: 1.5rem 0.75rem;
+        padding: 2rem 1rem;
+      }
+      
+      .action-buttons {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .btn {
+        width: 100%;
+        min-width: auto;
       }
     }
     
@@ -795,7 +846,7 @@
     @media (min-width: 481px) and (max-width: 768px) {
       .mood-categories {
         grid-template-columns: repeat(2, 1fr);
-        gap: 1.25rem;
+        gap: 1.5rem;
       }
       
       .action-buttons {
@@ -805,39 +856,51 @@
       
       .btn {
         flex: 1;
-        min-width: 140px;
-        max-width: 200px;
+        min-width: 160px;
+        max-width: 220px;
       }
     }
     
     /* Tablet and larger */
     @media (min-width: 769px) {
       .app-container {
-        max-width: 700px;
+        max-width: 800px;
         margin: 0 auto;
-        border-radius: 24px;
+        border-radius: 28px;
       }
       
       .mood-categories {
         grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
+        gap: 2rem;
       }
       
       .main-content {
-        padding: 2rem;
+        padding: 3rem;
       }
       
       .response-section {
-        padding: 2rem;
+        padding: 3rem;
       }
       
       .action-buttons {
         flex-direction: row;
-        gap: 1.5rem;
+        gap: 2rem;
       }
       
       .btn {
-        max-width: 220px;
+        max-width: 250px;
+      }
+    }
+
+    /* Large screens */
+    @media (min-width: 1200px) {
+      .app-container {
+        max-width: 900px;
+      }
+      
+      .mood-categories {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
       }
     }
   </style>
@@ -1413,10 +1476,10 @@
       progressFill.style.width = `${progress}%`;
     }
 
-    // Simple confetti effect for timer completion
+    // Enhanced confetti effect for timer completion
     function confetti() {
-      const emojis = ['🎉', '✨', '🌟', '💫', '🎊', '🏆'];
-      for (let i = 0; i < 20; i++) {
+      const emojis = ['🎉', '✨', '🌟', '💫', '🎊', '🏆', '💪', '🧠'];
+      for (let i = 0; i < 25; i++) {
         setTimeout(() => {
           const emoji = document.createElement('div');
           emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
@@ -1424,7 +1487,7 @@
             position: fixed;
             top: 50%;
             left: 50%;
-            font-size: 2rem;
+            font-size: 2.5rem;
             pointer-events: none;
             z-index: 1000;
             animation: confetti-fall 3s ease-out forwards;
@@ -1434,7 +1497,7 @@
           document.body.appendChild(emoji);
           
           setTimeout(() => emoji.remove(), 3000);
-        }, i * 100);
+        }, i * 80);
       }
       
       // Add confetti animation
@@ -1444,7 +1507,7 @@
         style.textContent = `
           @keyframes confetti-fall {
             to {
-              transform: translate(${Math.random() * 400 - 200}px, ${Math.random() * 400 + 200}px) rotate(720deg);
+              transform: translate(${Math.random() * 500 - 250}px, ${Math.random() * 500 + 300}px) rotate(720deg);
               opacity: 0;
             }
           }
@@ -1463,12 +1526,14 @@
     // Initialize timer display
     updateTimerDisplay();
 
-    // Add some delightful micro-interactions
+    // Add delightful micro-interactions
     document.addEventListener('DOMContentLoaded', () => {
-      // Add hover sound effects (visual feedback)
+      // Add hover effects
       categories.forEach(category => {
         category.addEventListener('mouseenter', () => {
-          category.style.transform = 'translateY(-8px) scale(1.02)';
+          if (!category.classList.contains('selected')) {
+            category.style.transform = 'translateY(-12px) scale(1.02)';
+          }
         });
         
         category.addEventListener('mouseleave', () => {
