@@ -510,6 +510,55 @@
       font-weight: 600;
     }
 
+    /* Testimonials */
+    .testimonials {
+      padding: 80px 0;
+      background: var(--glass-bg);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-top: 50px;
+    }
+
+    .testimonial-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 25px;
+      transition: all 0.3s ease;
+      position: relative;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .testimonial-card::before {
+      content: '"';
+      font-size: 3rem;
+      color: var(--accent-secondary);
+      position: absolute;
+      top: -5px;
+      left: 15px;
+      font-family: serif;
+      opacity: 0.7;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-bright);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .testimonial-card p {
+      font-style: italic;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-size: 1.05rem;
+      padding-left: 20px;
+    }
+
     /* Final CTA */
     .final-cta {
       padding: 80px 0;
@@ -584,6 +633,30 @@
         padding: 15px 30px;
         font-size: 1rem;
       }
+
+      .carousel-container {
+        max-width: 95%;
+        margin: 30px auto 0;
+      }
+
+      .carousel {
+        padding: 15px;
+      }
+
+      .app-screenshot {
+        max-height: 400px;
+      }
+
+      .carousel-controls {
+        padding: 0 10px;
+        margin-top: 20px;
+      }
+
+      .carousel-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.3rem;
+      }
     }
 
     @media (max-width: 480px) {
@@ -610,6 +683,33 @@
       .container {
         padding: 0 15px;
       }
+
+      .app-preview {
+        padding: 60px 0;
+      }
+
+      .carousel-container {
+        margin: 20px auto 0;
+      }
+
+      .carousel {
+        padding: 10px;
+      }
+
+      .app-screenshot {
+        max-height: 350px;
+      }
+
+      .carousel-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1.2rem;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+      }
     }
   </style>
 </head>
@@ -624,7 +724,7 @@
     <div class="container">
       <div class="header-content">
         <div class="logo">925 ADHD</div>
-        <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" class="cta-header">Get Started →</a>
+        <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" class="cta-header">Get The App →</a>
       </div>
     </div>
   </header>
@@ -635,14 +735,14 @@
       <div class="hero-content">
         <h1>The Complete ADHD Freelancer Toolkit</h1>
         <p class="hero-subtitle">
-          7 powerful productivity tools + thriving Discord community designed specifically for ADHD brains who work remotely
+          A complete ADHD productivity app with 7 built-in tools + exclusive access to our private Discord community of fellow ADHD freelancers
         </p>
         <span class="hero-emphasis">"Finally, tools that work WITH my ADHD, not against it"</span>
         
         <div class="price-hero">
           <div class="price-amount">$9.25</div>
           <div class="price-period">per month</div>
-          <div class="price-features">Complete app access • Discord community • 7 productivity tools • Regular updates & new features • Cancel anytime</div>
+          <div class="price-features">Complete app with 7 tools • Private Discord invite • Regular updates & new features • Cancel anytime</div>
         </div>
         
         <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" class="cta-primary">
@@ -652,11 +752,49 @@
     </div>
   </section>
 
+  <!-- App Preview Carousel -->
+  <section class="app-preview">
+    <div class="container">
+      <h2 class="section-title">See The App In Action</h2>
+      <p class="section-subtitle">Take a look inside the 925 ADHD app and see how the tools work</p>
+      
+      <div class="carousel-container">
+        <div class="carousel">
+          <div class="carousel-track" id="carouselTrack">
+            <div class="carousel-slide active">
+              <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205130.png" alt="925 ADHD App Dashboard" class="app-screenshot">
+            </div>
+            <div class="carousel-slide">
+              <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205151.png" alt="ADHD Productivity Tools" class="app-screenshot">
+            </div>
+            <div class="carousel-slide">
+              <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205202.png" alt="ADHD Focus Features" class="app-screenshot">
+            </div>
+            <div class="carousel-slide">
+              <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/blob-1a1729e.png" alt="ADHD Community Access" class="app-screenshot">
+            </div>
+          </div>
+        </div>
+        
+        <div class="carousel-controls">
+          <button class="carousel-btn prev" onclick="moveSlide(-1)">‹</button>
+          <div class="carousel-dots">
+            <span class="dot active" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+          </div>
+          <button class="carousel-btn next" onclick="moveSlide(1)">›</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Features Section -->
   <section class="features">
     <div class="container">
-      <h2 class="section-title">7 Game-Changing Tools</h2>
-      <p class="section-subtitle">Every tool is specifically designed for how ADHD brains actually work - not generic productivity advice</p>
+      <h2 class="section-title">7 Powerful Tools Built Into The App</h2>
+      <p class="section-subtitle">Every tool is built directly into your 925 ADHD app - no switching between different platforms or losing track of where things are</p>
       
       <div class="features-grid">
         <div class="feature-card">
@@ -751,26 +889,51 @@
   <!-- Community Section -->
   <section class="community">
     <div class="container">
-      <h2 class="section-title">Plus: Thriving Discord Community</h2>
-      <p class="section-subtitle">Connect with fellow ADHD freelancers who actually understand your struggles and celebrate your wins</p>
+      <h2 class="section-title">Plus: Private Discord Community Access</h2>
+      <p class="section-subtitle">Your app subscription includes an invite to our exclusive Discord server where ADHD freelancers connect, share wins, and support each other</p>
       
       <div class="community-grid">
         <div class="community-card">
           <span class="community-icon">#️⃣</span>
-          <h3 class="community-title">40+ Active Channels</h3>
-          <p class="community-desc">From platform recommendations to accountability partnerships - find your people and share what actually works</p>
+          <h3 class="community-title">40+ Private Channels</h3>
+          <p class="community-desc">From platform recommendations to accountability partnerships - find your people and share what actually works in our members-only Discord</p>
         </div>
 
         <div class="community-card">
           <span class="community-icon">🐧</span>
           <h3 class="community-title">Pebble Swap</h3>
-          <p class="community-desc">Exchange fidget toys, noise-canceling gear, and productivity gadgets that boost dopamine and focus</p>
+          <p class="community-desc">Exchange fidget toys, noise-canceling gear, and productivity gadgets that boost dopamine and focus with other members</p>
         </div>
 
         <div class="community-card">
           <span class="community-icon">🔄</span>
           <h3 class="community-title">Daily Accountability</h3>
-          <p class="community-desc">Body-doubling sessions and check-ins that help you stay on track without judgment or shame</p>
+          <p class="community-desc">Body-doubling sessions and check-ins that help you stay on track without judgment or shame - all happening in Discord</p>
+        </div>
+      </div>
+      
+      <div style="text-align: center; margin-top: 40px;">
+        <div style="background: var(--glass-bg); border: 1px solid var(--border-bright); border-radius: 12px; padding: 20px; max-width: 500px; margin: 0 auto;">
+          <span style="font-size: 1.2rem; margin-bottom: 10px; display: block;">🔐</span>
+          <p style="color: var(--text-secondary); font-size: 0.95rem;">Discord invite sent automatically through your app once you subscribe. Private community, no public access.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="container">
+      <h2 class="section-title">What Our Members Say</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p>"This is the first time I've found a resource that actually *gets* how my brain works. I didn't know where to start before 925 ADHD."</p>
+        </div>
+        <div class="testimonial-card">
+          <p>"I've never stuck with anything this long. The dopamine hits from finishing tiny tasks actually help me stay focused."</p>
+        </div>
+        <div class="testimonial-card">
+          <p>"Your guides explained it in a way I could follow, and now I've landed my first gig! Thank you for making this so ADHD-friendly."</p>
         </div>
       </div>
     </div>
@@ -786,7 +949,7 @@
         <p class="cta-subtitle">Join hundreds of successful ADHD freelancers who've transformed their work life with our constantly expanding toolkit</p>
         
         <div class="urgency-text">
-          ⚡ Start today and get immediate access to all 7 tools + Discord community + future updates at no extra cost
+          ⚡ Subscribe today and get immediate access to the app with all 7 tools + Discord invite sent automatically
         </div>
         
         <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" class="cta-primary">
@@ -806,5 +969,70 @@
       <p>&copy; 2024 925 ADHD. Built by ADHD brains, for ADHD brains.</p>
     </div>
   </footer>
+
+  <script>
+    let currentSlideIndex = 0;
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.dot');
+    const track = document.getElementById('carouselTrack');
+    const totalSlides = slides.length;
+
+    function updateCarousel() {
+      track.style.transform = `translateX(-${currentSlideIndex * 25}%)`;
+      
+      // Update dots
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlideIndex);
+      });
+    }
+
+    function moveSlide(direction) {
+      currentSlideIndex += direction;
+      
+      if (currentSlideIndex >= totalSlides) {
+        currentSlideIndex = 0;
+      } else if (currentSlideIndex < 0) {
+        currentSlideIndex = totalSlides - 1;
+      }
+      
+      updateCarousel();
+    }
+
+    function currentSlide(slideIndex) {
+      currentSlideIndex = slideIndex - 1;
+      updateCarousel();
+    }
+
+    // Auto-advance carousel every 5 seconds
+    setInterval(() => {
+      moveSlide(1);
+    }, 5000);
+
+    // Touch/swipe support for mobile
+    let startX = 0;
+    let endX = 0;
+
+    track.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    });
+
+    track.addEventListener('touchend', (e) => {
+      endX = e.changedTouches[0].clientX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const difference = startX - endX;
+      
+      if (Math.abs(difference) > swipeThreshold) {
+        if (difference > 0) {
+          moveSlide(1); // Swipe left, go to next
+        } else {
+          moveSlide(-1); // Swipe right, go to previous
+        }
+      }
+    }
+  </script>
 </body>
 </html>
