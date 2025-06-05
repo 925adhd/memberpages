@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>925 ADHD - The Complete ADHD Freelancer Toolkit</title>
+  <title>925 ADHD - The Complete ADHD Freelancer App</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -125,25 +125,9 @@
 
     .header-content {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
       padding: 15px 0;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 800;
-      background: var(--gradient-adhd);
-      background-size: 200% 200%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: textGradient 4s ease-in-out infinite;
-    }
-
-    @keyframes textGradient {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
     }
 
     .cta-header {
@@ -186,6 +170,11 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       animation: textGradient 4s ease-in-out infinite;
+    }
+
+    @keyframes textGradient {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
 
     .hero-subtitle {
@@ -250,6 +239,274 @@
     .cta-primary:hover {
       transform: translateY(-3px);
       box-shadow: var(--shadow-strong);
+    }
+
+    .app-link-button {
+      background: var(--gradient-success);
+      color: white;
+      padding: 16px 35px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.05rem;
+      display: inline-block;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-medium);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .app-link-button:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .web-app-explainer {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 30px;
+      margin: 40px 0;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .web-app-explainer h3 {
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--text-primary);
+    }
+
+    .web-app-explainer > p {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 25px;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .explainer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .explainer-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      padding: 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .explainer-item:hover {
+      border-color: var(--border-bright);
+      transform: translateY(-2px);
+    }
+
+    .explainer-icon {
+      font-size: 1.8rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .explainer-content {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .explainer-content strong {
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .explainer-content span {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    /* Installation Guide */
+    .installation {
+      padding: 80px 0;
+      background: var(--secondary-bg);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .install-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin: 50px 0 40px;
+    }
+
+    .install-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 30px;
+      transition: all 0.3s ease;
+      text-align: center;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .install-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-bright);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .install-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .install-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 25px;
+      color: var(--text-primary);
+    }
+
+    .install-steps {
+      text-align: left;
+    }
+
+    .install-step {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+      padding: 12px;
+      background: var(--card-bg);
+      border-radius: 8px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .step-number {
+      background: var(--gradient-primary);
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .step-text {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .install-benefits {
+      background: var(--glass-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 30px;
+      margin-top: 40px;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .benefit-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px;
+      background: var(--card-bg);
+      border-radius: 8px;
+      border: 1px solid var(--border-subtle);
+      transition: all 0.3s ease;
+    }
+
+    .benefit-item:hover {
+      border-color: var(--border-bright);
+      transform: translateY(-2px);
+    }
+
+    .benefit-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .benefit-text {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.3;
+    }
+
+    /* App Preview Section */
+    .app-preview {
+      padding: 60px 0;
+      background: var(--glass-bg);
+    }
+
+    .screenshots-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin: 40px 0;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .screenshot-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 15px;
+      transition: all 0.3s ease;
+      text-align: center;
+      flex: 0 1 200px;
+      max-width: 250px;
+    }
+
+    .screenshot-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-bright);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .screenshot-card img {
+      width: 100%;
+      max-width: 180px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .screenshot-title {
+      margin-top: 15px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .screenshot-desc {
+      margin-top: 5px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
     }
 
     /* Features Grid */
@@ -474,42 +731,6 @@
       line-height: 1.5;
     }
 
-    /* Social Proof */
-    .social-proof {
-      padding: 60px 0;
-      text-align: center;
-    }
-
-    .testimonial {
-      background: var(--glass-bg);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 30px;
-      margin: 30px auto;
-      max-width: 600px;
-      font-style: italic;
-      font-size: 1.1rem;
-      line-height: 1.6;
-      position: relative;
-    }
-
-    .testimonial::before {
-      content: '"';
-      font-size: 4rem;
-      color: var(--accent-secondary);
-      position: absolute;
-      top: -10px;
-      left: 20px;
-      font-family: serif;
-    }
-
-    .testimonial-author {
-      margin-top: 20px;
-      font-style: normal;
-      color: var(--accent-secondary);
-      font-weight: 600;
-    }
-
     /* Testimonials */
     .testimonials {
       padding: 80px 0;
@@ -599,16 +820,16 @@
       font-weight: 500;
     }
 
-    /* Footer */
-    .footer {
-      padding: 40px 0;
-      text-align: center;
-      border-top: 1px solid var(--border-subtle);
-      color: var(--text-muted);
-    }
-
     /* Mobile Optimizations */
     @media (max-width: 768px) {
+      .container {
+        padding: 0 15px;
+      }
+
+      .hero {
+        padding: 50px 0 40px;
+      }
+
       .hero h1 {
         font-size: 2.5rem;
       }
@@ -619,6 +840,10 @@
       
       .features-grid {
         grid-template-columns: 1fr;
+      }
+
+      .features, .roadmap, .community, .testimonials, .final-cta, .installation {
+        padding: 60px 0;
       }
       
       .price-amount {
@@ -634,83 +859,161 @@
         font-size: 1rem;
       }
 
-      .carousel-container {
-        max-width: 95%;
-        margin: 30px auto 0;
+      .app-link-button {
+        padding: 14px 28px;
+        font-size: 1rem;
       }
 
-      .carousel {
-        padding: 15px;
+      .explainer-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 15px;
       }
 
-      .app-screenshot {
-        max-width: 250px;
-        height: 350px;
+      .web-app-explainer {
+        padding: 25px 20px;
       }
 
-      .carousel-controls {
-        padding: 0 10px;
-        margin-top: 20px;
+      .screenshots-grid {
+        justify-content: center;
+        gap: 15px;
       }
 
-      .carousel-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 1.3rem;
+      .screenshot-card {
+        flex: 0 1 150px;
+        max-width: 180px;
+        padding: 12px;
+      }
+
+      .screenshot-card img {
+        max-width: 140px;
+      }
+
+      .screenshot-title {
+        font-size: 0.85rem;
+      }
+
+      .screenshot-desc {
+        font-size: 0.75rem;
       }
     }
 
     @media (max-width: 480px) {
+      .container {
+        padding: 0 12px;
+      }
+
       .hero {
-        padding: 60px 0 40px;
+        padding: 40px 0 30px;
       }
       
       .hero h1 {
         font-size: 2rem;
+        line-height: 1.2;
+      }
+
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+
+      .hero-emphasis {
+        font-size: 1rem;
+      }
+
+      .price-hero {
+        padding: 20px;
+        margin: 25px auto 35px;
+      }
+
+      .price-amount {
+        font-size: 1.8rem;
       }
       
-      .features {
-        padding: 60px 0;
+      .features, .roadmap, .community, .testimonials, .final-cta, .app-preview, .installation {
+        padding: 50px 0;
       }
       
-      .community {
-        padding: 60px 0;
-      }
-      
-      .final-cta {
-        padding: 60px 0;
-      }
-      
-      .container {
-        padding: 0 15px;
+      .section-title {
+        font-size: 1.8rem;
       }
 
-      .app-preview {
-        padding: 60px 0;
+      .section-subtitle {
+        font-size: 1rem;
+        margin-bottom: 40px;
       }
 
-      .carousel-container {
-        margin: 20px auto 0;
+      .cta-primary {
+        padding: 14px 25px;
+        font-size: 0.95rem;
       }
 
-      .carousel {
-        padding: 10px;
+      .app-link-button {
+        padding: 13px 25px;
+        font-size: 0.95rem;
       }
 
-      .app-screenshot {
-        max-width: 200px;
-        height: 300px;
+      .explainer-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
       }
 
-      .carousel-btn {
-        width: 35px;
-        height: 35px;
+      .web-app-explainer {
+        padding: 20px 15px;
+        margin: 30px 0;
+      }
+
+      .web-app-explainer h3 {
         font-size: 1.2rem;
       }
 
-      .dot {
-        width: 10px;
-        height: 10px;
+      .explainer-item {
+        padding: 15px;
+      }
+
+      .cta-header {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+      }
+
+      .screenshots-grid {
+        justify-content: center;
+        gap: 12px;
+        margin: 30px 0;
+      }
+
+      .screenshot-card {
+        flex: 0 1 120px;
+        max-width: 140px;
+        padding: 10px;
+      }
+
+      .screenshot-card img {
+        max-width: 120px;
+      }
+
+      .screenshot-title {
+        font-size: 0.8rem;
+        margin-top: 10px;
+      }
+
+      .screenshot-desc {
+        font-size: 0.7rem;
+      }
+
+      .feature-card {
+        padding: 25px 20px;
+      }
+
+      .cta-box {
+        padding: 40px 25px;
+      }
+
+      .cta-title {
+        font-size: 1.7rem;
+      }
+
+      .urgency-text {
+        padding: 12px;
+        font-size: 0.85rem;
       }
     }
   </style>
@@ -725,8 +1028,7 @@
   <header class="header">
     <div class="container">
       <div class="header-content">
-        <div class="logo">925 ADHD</div>
-        <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" class="cta-header">Get The App →</a>
+        <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-header">Get The App →</a>
       </div>
     </div>
   </header>
@@ -735,9 +1037,9 @@
   <section class="hero">
     <div class="container">
       <div class="hero-content">
-        <h1>The Complete ADHD Freelancer Toolkit</h1>
+        <h1>The Complete ADHD Freelancer App</h1>
         <p class="hero-subtitle">
-          A complete ADHD productivity app with 7 built-in tools + exclusive access to our private Discord community of fellow ADHD freelancers
+          7 specialized tools designed for ADHD brains + exclusive access to our private Discord community of successful ADHD freelancers
         </p>
         <span class="hero-emphasis">"Finally, tools that work WITH my ADHD, not against it"</span>
         
@@ -747,46 +1049,172 @@
           <div class="price-features">Complete app with 7 tools • Private Discord invite • Regular updates & new features • Cancel anytime</div>
         </div>
         
-        <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" class="cta-primary">
+        <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-primary">
           🚀 Start Your ADHD Success Journey
         </a>
       </div>
     </div>
   </section>
 
-  <!-- App Preview Carousel -->
+  <!-- Installation Guide Section -->
+  <section class="installation">
+    <div class="container">
+      <h2 class="section-title">Install The Web App On Your Phone</h2>
+      <p class="section-subtitle">925 ADHD is a Progressive Web App (PWA) - it works just like a native app but with extra benefits!</p>
+      
+      <div class="web-app-explainer">
+        <h3>What's a Web App?</h3>
+        <p>A web app works exactly like a regular app but runs through your browser. Here's why that's actually better:</p>
+        
+        <div class="explainer-grid">
+          <div class="explainer-item">
+            <span class="explainer-icon">⚡</span>
+            <div class="explainer-content">
+              <strong>Always Up-to-Date</strong>
+              <span>No app store updates to remember - new features appear automatically</span>
+            </div>
+          </div>
+          <div class="explainer-item">
+            <span class="explainer-icon">💾</span>
+            <div class="explainer-content">
+              <strong>Saves Phone Storage</strong>
+              <span>Uses almost no storage space compared to downloaded apps</span>
+            </div>
+          </div>
+          <div class="explainer-item">
+            <span class="explainer-icon">🔒</span>
+            <div class="explainer-content">
+              <strong>More Secure</strong>
+              <span>Runs in your browser's security sandbox - safer than many native apps</span>
+            </div>
+          </div>
+          <div class="explainer-item">
+            <span class="explainer-icon">📱</span>
+            <div class="explainer-content">
+              <strong>Works Like a Real App</strong>
+              <span>Full screen, home screen icon, works offline - feels completely native</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div style="text-align: center; margin: 30px 0 40px;">
+        <a href="https://925adhd.glide.page" target="_blank" rel="noopener noreferrer" class="app-link-button">
+          📱 Open The 925 ADHD Web App
+        </a>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 10px;">
+          Click above to access the app, then follow the installation steps below
+        </p>
+      </div>
+      
+      <div class="install-grid">
+        <div class="install-card">
+          <span class="install-icon">📱</span>
+          <h3 class="install-title">iPhone Users</h3>
+          <div class="install-steps">
+            <div class="install-step">
+              <span class="step-number">1</span>
+              <span class="step-text">Open <strong>925adhd.glide.page</strong> in Safari</span>
+            </div>
+            <div class="install-step">
+              <span class="step-number">2</span>
+              <span class="step-text">Tap the Share button <span style="font-size: 1.2rem;">⬆️</span></span>
+            </div>
+            <div class="install-step">
+              <span class="step-number">3</span>
+              <span class="step-text">Select "Add to Home Screen"</span>
+            </div>
+            <div class="install-step">
+              <span class="step-number">4</span>
+              <span class="step-text">Tap "Add" - now it's on your home screen!</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="install-card">
+          <span class="install-icon">🤖</span>
+          <h3 class="install-title">Android Users</h3>
+          <div class="install-steps">
+            <div class="install-step">
+              <span class="step-number">1</span>
+              <span class="step-text">Open <strong>925adhd.glide.page</strong> in Chrome</span>
+            </div>
+            <div class="install-step">
+              <span class="step-number">2</span>
+              <span class="step-text">Tap the menu (3 dots) <span style="font-size: 1.2rem;">⋮</span></span>
+            </div>
+            <div class="install-step">
+              <span class="step-number">3</span>
+              <span class="step-text">Select "Add to Home screen"</span>
+            </div>
+            <div class="install-step">
+              <span class="step-number">4</span>
+              <span class="step-text">Tap "Add" - now it's on your home screen!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="install-benefits">
+        <h3 style="text-align: center; margin-bottom: 25px; color: var(--text-primary);">Why Install The App?</h3>
+        <div class="benefits-grid">
+          <div class="benefit-item">
+            <span class="benefit-icon">⚡</span>
+            <span class="benefit-text">Instant access from your home screen</span>
+          </div>
+          <div class="benefit-item">
+            <span class="benefit-icon">📲</span>
+            <span class="benefit-text">No browser tabs to lose or forget</span>
+          </div>
+          <div class="benefit-item">
+            <span class="benefit-icon">🔕</span>
+            <span class="benefit-text">Distraction-free, full-screen experience</span>
+          </div>
+          <div class="benefit-item">
+            <span class="benefit-icon">🚀</span>
+            <span class="benefit-text">Faster loading and better performance</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- App Preview Section -->
   <section class="app-preview">
     <div class="container">
       <h2 class="section-title">See The App In Action</h2>
       <p class="section-subtitle">Take a look inside the 925 ADHD app and see how the tools work</p>
       
-      <div class="carousel-container">
-        <div class="carousel">
-          <div class="carousel-track" id="carouselTrack">
-            <div class="carousel-slide active">
-              <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205130.png" alt="925 ADHD App Dashboard" class="app-screenshot">
-            </div>
-            <div class="carousel-slide">
-              <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205151.png" alt="ADHD Productivity Tools" class="app-screenshot">
-            </div>
-            <div class="carousel-slide">
-              <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205202.png" alt="ADHD Focus Features" class="app-screenshot">
-            </div>
-            <div class="carousel-slide">
-              <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/blob-1a1729e.png" alt="ADHD Community Access" class="app-screenshot">
-            </div>
-          </div>
+      <div class="screenshots-grid">
+        <div class="screenshot-card">
+          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205130.png" alt="925 ADHD Guides Tab">
+          <div class="screenshot-title">Guides Tab</div>
+          <div class="screenshot-desc">Complete freelancing guides built specifically for ADHD brains</div>
         </div>
-        
-        <div class="carousel-controls">
-          <button class="carousel-btn prev" onclick="moveSlide(-1)">‹</button>
-          <div class="carousel-dots">
-            <span class="dot active" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-            <span class="dot" onclick="currentSlide(3)"></span>
-            <span class="dot" onclick="currentSlide(4)"></span>
-          </div>
-          <button class="carousel-btn next" onclick="moveSlide(1)">›</button>
+        <div class="screenshot-card">
+          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205151.png" alt="ADHD Productivity Tools">
+          <div class="screenshot-title">Productivity Tools</div>
+          <div class="screenshot-desc">Built-in tools designed specifically for ADHD brains</div>
+        </div>
+        <div class="screenshot-card">
+          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205202.png" alt="ADHD Motivational Home Page">
+          <div class="screenshot-title">Motivational Home</div>
+          <div class="screenshot-desc">Daily motivation and mindset content to keep you going</div>
+        </div>
+        <div class="screenshot-card">
+          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205121.png" alt="Discord Invite">
+          <div class="screenshot-title">Discord Invite</div>
+          <div class="screenshot-desc">Automatic invitation to our private ADHD freelancer community</div>
+        </div>
+        <div class="screenshot-card">
+          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Your%20paragraph%20text-3be1a9e.png" alt="Apps and Platforms Tab">
+          <div class="screenshot-title">Apps & Platforms</div>
+          <div class="screenshot-desc">Discover which platforms and apps actually make money for ADHD freelancers</div>
+        </div>
+        <div class="screenshot-card">
+          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/blob-1a1729e.png" alt="ADHD Resources Sidebar">
+          <div class="screenshot-title">Resources Sidebar</div>
+          <div class="screenshot-desc">Blog, Power Playlist for ADHD, ADHD hacks, FAQ + more resources updated regularly</div>
         </div>
       </div>
     </div>
@@ -855,33 +1283,33 @@
   <section class="roadmap">
     <div class="container">
       <div class="roadmap-content">
-        <h2 class="section-title">Constantly Growing Toolkit</h2>
+        <h2 class="section-title">Constantly Evolving Platform</h2>
         <p class="section-subtitle">Your subscription gets better every month with new tools, features, and community additions</p>
         
         <div class="roadmap-grid">
           <div class="roadmap-card">
             <span class="roadmap-icon">🚀</span>
             <h3 class="roadmap-title">Regular Updates</h3>
-            <p class="roadmap-desc">New features and improvements shipped monthly based on community feedback and ADHD research</p>
+            <p class="roadmap-desc">New features and improvements shipped regularly based on community feedback and ADHD research</p>
           </div>
 
           <div class="roadmap-card">
             <span class="roadmap-icon">🔧</span>
             <h3 class="roadmap-title">New Tools Coming</h3>
-            <p class="roadmap-desc">Sleep optimizer, social battery tracker, hyperfocus timer, and more ADHD-specific tools in development</p>
+            <p class="roadmap-desc">Additional productivity and wellness tools specifically designed for ADHD brains are actively in development</p>
           </div>
 
           <div class="roadmap-card">
             <span class="roadmap-icon">💡</span>
             <h3 class="roadmap-title">Community-Driven</h3>
-            <p class="roadmap-desc">Your ideas shape our roadmap. Request features and vote on what gets built next</p>
+            <p class="roadmap-desc">Your ideas shape our roadmap. Request features and vote on what gets built next in our Discord community</p>
           </div>
         </div>
 
         <div class="value-callout">
-          <span class="value-icon">📈</span>
+          <span class="value-icon">🧠</span>
           <div class="value-text">
-            <strong>Growing Value:</strong> Same price, expanding toolkit. Early members get access to everything we build at no extra cost.
+            <strong>Living Platform:</strong> We're actively building and improving based on what our ADHD community actually needs.
           </div>
         </div>
       </div>
@@ -896,7 +1324,7 @@
       
       <div class="community-grid">
         <div class="community-card">
-          <span class="community-icon">#️⃣</span>
+          <span class="community-icon">💬</span>
           <h3 class="community-title">40+ Private Channels</h3>
           <p class="community-desc">From platform recommendations to accountability partnerships - find your people and share what actually works in our members-only Discord</p>
         </div>
@@ -908,7 +1336,7 @@
         </div>
 
         <div class="community-card">
-          <span class="community-icon">🔄</span>
+          <span class="community-icon">🤝</span>
           <h3 class="community-title">Daily Accountability</h3>
           <p class="community-desc">Body-doubling sessions and check-ins that help you stay on track without judgment or shame - all happening in Discord</p>
         </div>
@@ -932,29 +1360,27 @@
           <p>"This is the first time I've found a resource that actually *gets* how my brain works. I didn't know where to start before 925 ADHD."</p>
         </div>
         <div class="testimonial-card">
-          <p>"I've never stuck with anything this long. The dopamine hits from finishing tiny tasks actually help me stay focused."</p>
+          <p>"I've never stuck with anything this long. The dopamine hits from finishing tiny tasks actually help me stay focused on bigger goals."</p>
         </div>
         <div class="testimonial-card">
-          <p>"Your guides explained it in a way I could follow, and now I've landed my first gig! Thank you for making this so ADHD-friendly."</p>
+          <p>"Your guides explained freelancing in a way I could follow, and now I've landed my first consistent gig! Thank you for making this so ADHD-friendly."</p>
         </div>
       </div>
     </div>
   </section>
-
-
 
   <!-- Final CTA -->
   <section class="final-cta">
     <div class="container">
       <div class="cta-box">
         <h2 class="cta-title">Ready to Turn Your ADHD Into Your Superpower?</h2>
-        <p class="cta-subtitle">Join hundreds of successful ADHD freelancers who've transformed their work life with our constantly expanding toolkit</p>
+        <p class="cta-subtitle">Join hundreds of successful ADHD freelancers who've transformed their work life with our constantly expanding app and supportive community</p>
         
         <div class="urgency-text">
           ⚡ Subscribe today and get immediate access to the app with all 7 tools + Discord invite sent automatically
         </div>
         
-        <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" class="cta-primary">
+        <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-primary">
           🎯 Get Full Access for $9.25/month
         </a>
         
@@ -964,77 +1390,5 @@
       </div>
     </div>
   </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2024 925 ADHD. Built by ADHD brains, for ADHD brains.</p>
-    </div>
-  </footer>
-
-  <script>
-    let currentSlideIndex = 0;
-    const slides = document.querySelectorAll('.carousel-slide');
-    const dots = document.querySelectorAll('.dot');
-    const track = document.getElementById('carouselTrack');
-    const totalSlides = slides.length;
-
-    function updateCarousel() {
-      track.style.transform = `translateX(-${currentSlideIndex * 25}%)`;
-      
-      // Update dots
-      dots.forEach((dot, index) => {
-        dot.classList.toggle('active', index === currentSlideIndex);
-      });
-    }
-
-    function moveSlide(direction) {
-      currentSlideIndex += direction;
-      
-      if (currentSlideIndex >= totalSlides) {
-        currentSlideIndex = 0;
-      } else if (currentSlideIndex < 0) {
-        currentSlideIndex = totalSlides - 1;
-      }
-      
-      updateCarousel();
-    }
-
-    function currentSlide(slideIndex) {
-      currentSlideIndex = slideIndex - 1;
-      updateCarousel();
-    }
-
-    // Auto-advance carousel every 5 seconds
-    setInterval(() => {
-      moveSlide(1);
-    }, 5000);
-
-    // Touch/swipe support for mobile
-    let startX = 0;
-    let endX = 0;
-
-    track.addEventListener('touchstart', (e) => {
-      startX = e.touches[0].clientX;
-    });
-
-    track.addEventListener('touchend', (e) => {
-      endX = e.changedTouches[0].clientX;
-      handleSwipe();
-    });
-
-    function handleSwipe() {
-      const swipeThreshold = 50;
-      const difference = startX - endX;
-      
-      if (Math.abs(difference) > swipeThreshold) {
-        if (difference > 0) {
-          moveSlide(1); // Swipe left, go to next
-        } else {
-          moveSlide(-1); // Swipe right, go to previous
-        }
-      }
-    }
-  </script>
 </body>
 </html>
