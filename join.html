@@ -126,9 +126,31 @@
 
     .header-content {
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
       align-items: center;
       padding: 15px 0;
+    }
+
+    .home-button {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      color: var(--text-primary);
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .home-button:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-bright);
+      background: var(--glass-bg);
     }
 
     .cta-header {
@@ -494,6 +516,168 @@
       height: auto;
       border-radius: 8px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .screenshot-card img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Image Modal/Lightbox */
+    .image-modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(10px);
+    }
+
+    .modal-content {
+      position: relative;
+      margin: auto;
+      padding: 20px;
+      width: 90%;
+      max-width: 800px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-image {
+      max-width: 100%;
+      max-height: 80vh;
+      border-radius: 12px;
+      box-shadow: var(--shadow-strong);
+      object-fit: contain;
+    }
+
+    .modal-caption {
+      background: var(--glass-bg);
+      color: var(--text-primary);
+      padding: 15px 20px;
+      margin-top: 15px;
+      border-radius: 8px;
+      text-align: center;
+      border: 1px solid var(--border-subtle);
+      backdrop-filter: blur(20px);
+    }
+
+    .modal-caption h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: var(--text-primary);
+    }
+
+    .modal-caption p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: var(--text-primary);
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 1001;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .close:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: scale(1.1);
+    }
+
+    .nav-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: var(--text-primary);
+      border: none;
+      font-size: 24px;
+      padding: 15px 20px;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      z-index: 1001;
+    }
+
+    .nav-button:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .prev {
+      left: 20px;
+    }
+
+    .next {
+      right: 20px;
+    }
+
+    .modal-counter {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.7);
+      color: var(--text-primary);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      backdrop-filter: blur(10px);
+    }
+
+    @media (max-width: 768px) {
+      .modal-content {
+        padding: 10px;
+      }
+      
+      .close {
+        top: 10px;
+        right: 15px;
+        font-size: 30px;
+        width: 40px;
+        height: 40px;
+      }
+      
+      .nav-button {
+        font-size: 20px;
+        padding: 12px 15px;
+      }
+      
+      .prev {
+        left: 10px;
+      }
+      
+      .next {
+        right: 10px;
+      }
+      
+      .modal-caption {
+        padding: 12px 15px;
+        margin-top: 10px;
+      }
     }
 
     .screenshot-title {
@@ -903,6 +1087,20 @@
         padding: 0 12px;
       }
 
+      .header-content {
+        gap: 10px;
+      }
+
+      .home-button {
+        padding: 8px 14px;
+        font-size: 0.8rem;
+      }
+
+      .cta-header {
+        padding: 8px 14px;
+        font-size: 0.8rem;
+      }
+
       .hero {
         padding: 40px 0 30px;
       }
@@ -975,6 +1173,11 @@
         font-size: 0.85rem;
       }
 
+      .home-button {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+      }
+
       .screenshots-grid {
         justify-content: center;
         gap: 12px;
@@ -1029,6 +1232,9 @@
   <header class="header">
     <div class="container">
       <div class="header-content">
+        <a href="https://925adhd.com" class="home-button">
+          ← Back to Home
+        </a>
         <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-header">Get The App →</a>
       </div>
     </div>
@@ -1188,32 +1394,50 @@
       
       <div class="screenshots-grid">
         <div class="screenshot-card">
-          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205130.png" alt="925 ADHD Guides Tab">
+          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205130.png" 
+               alt="925 ADHD Guides Tab" 
+               data-title="Guides Tab" 
+               data-desc="Complete freelancing guides built specifically for ADHD brains">
           <div class="screenshot-title">Guides Tab</div>
           <div class="screenshot-desc">Complete freelancing guides built specifically for ADHD brains</div>
         </div>
         <div class="screenshot-card">
-          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205151.png" alt="ADHD Productivity Tools">
+          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205151.png" 
+               alt="ADHD Productivity Tools" 
+               data-title="Productivity Tools" 
+               data-desc="Built-in tools designed specifically for ADHD brains">
           <div class="screenshot-title">Productivity Tools</div>
           <div class="screenshot-desc">Built-in tools designed specifically for ADHD brains</div>
         </div>
         <div class="screenshot-card">
-          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205202.png" alt="ADHD Motivational Home Page">
+          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205202.png" 
+               alt="ADHD Motivational Home Page" 
+               data-title="Motivational Home" 
+               data-desc="Daily motivation and mindset content to keep you going">
           <div class="screenshot-title">Motivational Home</div>
           <div class="screenshot-desc">Daily motivation and mindset content to keep you going</div>
         </div>
         <div class="screenshot-card">
-          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205121.png" alt="Discord Invite">
+          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205121.png" 
+               alt="Discord Invite" 
+               data-title="Discord Invite" 
+               data-desc="Automatic invitation to our private ADHD freelancer community">
           <div class="screenshot-title">Discord Invite</div>
           <div class="screenshot-desc">Automatic invitation to our private ADHD freelancer community</div>
         </div>
         <div class="screenshot-card">
-          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Your%20paragraph%20text-3be1a9e.png" alt="Apps and Platforms Tab">
+          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Your%20paragraph%20text-3be1a9e.png" 
+               alt="Apps and Platforms Tab" 
+               data-title="Apps & Platforms" 
+               data-desc="Discover which platforms and apps actually make money for ADHD freelancers">
           <div class="screenshot-title">Apps & Platforms</div>
           <div class="screenshot-desc">Discover which platforms and apps actually make money for ADHD freelancers</div>
         </div>
         <div class="screenshot-card">
-          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/blob-1a1729e.png" alt="ADHD Resources Sidebar">
+          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/blob-1a1729e.png" 
+               alt="ADHD Resources Sidebar" 
+               data-title="Resources Sidebar" 
+               data-desc="Blog, Power Playlist for ADHD, ADHD hacks, FAQ + more resources updated regularly">
           <div class="screenshot-title">Resources Sidebar</div>
           <div class="screenshot-desc">Blog, Power Playlist for ADHD, ADHD hacks, FAQ + more resources updated regularly</div>
         </div>
@@ -1391,5 +1615,133 @@
       </div>
     </div>
   </section>
+
+  <!-- Image Modal -->
+  <div id="imageModal" class="image-modal">
+    <span class="close">&times;</span>
+    <button class="nav-button prev">&#10094;</button>
+    <button class="nav-button next">&#10095;</button>
+    <div class="modal-content">
+      <img class="modal-image" id="modalImage" src="" alt="">
+      <div class="modal-caption" id="modalCaption">
+        <h4 id="modalTitle"></h4>
+        <p id="modalDesc"></p>
+      </div>
+    </div>
+    <div class="modal-counter">
+      <span id="modalCounter"></span>
+    </div>
+  </div>
+
+  <script>
+    // Image Modal Functionality
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalCounter = document.getElementById('modalCounter');
+    const closeBtn = document.querySelector('.close');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+    
+    const images = document.querySelectorAll('.screenshot-card img');
+    let currentImageIndex = 0;
+    
+    // Convert NodeList to Array for easier manipulation
+    const imageArray = Array.from(images);
+    
+    // Open modal when image is clicked
+    images.forEach((img, index) => {
+      img.addEventListener('click', () => {
+        currentImageIndex = index;
+        openModal();
+      });
+    });
+    
+    function openModal() {
+      const currentImg = imageArray[currentImageIndex];
+      modal.style.display = 'block';
+      modalImg.src = currentImg.src;
+      modalImg.alt = currentImg.alt;
+      modalTitle.textContent = currentImg.dataset.title;
+      modalDesc.textContent = currentImg.dataset.desc;
+      modalCounter.textContent = `${currentImageIndex + 1} of ${imageArray.length}`;
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+    
+    function closeModal() {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto'; // Restore scrolling
+    }
+    
+    function showPrevImage() {
+      currentImageIndex = currentImageIndex === 0 ? imageArray.length - 1 : currentImageIndex - 1;
+      openModal();
+    }
+    
+    function showNextImage() {
+      currentImageIndex = currentImageIndex === imageArray.length - 1 ? 0 : currentImageIndex + 1;
+      openModal();
+    }
+    
+    // Close modal when X is clicked
+    closeBtn.addEventListener('click', closeModal);
+    
+    // Navigation buttons
+    prevBtn.addEventListener('click', showPrevImage);
+    nextBtn.addEventListener('click', showNextImage);
+    
+    // Close modal when clicking outside the image
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (modal.style.display === 'block') {
+        switch(e.key) {
+          case 'Escape':
+            closeModal();
+            break;
+          case 'ArrowLeft':
+            showPrevImage();
+            break;
+          case 'ArrowRight':
+            showNextImage();
+            break;
+        }
+      }
+    });
+    
+    // Touch/swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    modal.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+    
+    modal.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+    
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = touchStartX - touchEndX;
+      
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+          // Swiped left - show next image
+          showNextImage();
+        } else {
+          // Swiped right - show previous image
+          showPrevImage();
+        }
+      }
+    }
+  </script>
 </body>
 </html>
