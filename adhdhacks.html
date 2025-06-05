@@ -9,7 +9,7 @@
     :root {
       --primary-bg: #0a0e1a;
       --secondary-bg: #1a1f2e;
-      --card-bg: rgba(255, 255, 255, 0.03);
+      --card-bg: rgba(255, 255, 255, 0.04);
       --glass-bg: rgba(255, 255, 255, 0.08);
       --text-primary: #ffffff;
       --text-secondary: #c1c9d6;
@@ -21,13 +21,13 @@
       --accent-rose: #f43f5e;
       --accent-purple: #8b5cf6;
       --border-subtle: rgba(255, 255, 255, 0.12);
-      --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.2);
-      --shadow-medium: 0 8px 40px rgba(0, 0, 0, 0.3);
+      --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.15);
+      --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.25);
       --shadow-strong: 0 20px 60px rgba(0, 0, 0, 0.4);
-      --gradient-primary: linear-gradient(135deg, #4f46e5 0%, #8b5cf6 100%);
-      --gradient-hacks: linear-gradient(135deg, #4f46e5 0%, #8b5cf6 100%);
-      --gradient-bg: radial-gradient(ellipse at top left, rgba(79, 70, 229, 0.12) 0%, transparent 60%),
-                     radial-gradient(ellipse at bottom right, rgba(139, 92, 246, 0.08) 0%, transparent 60%);
+      --gradient-primary: linear-gradient(135deg, #4f46e5 0%, #8b5cf6 50%, #ec4899 100%);
+      --gradient-bg: radial-gradient(ellipse at top left, rgba(79, 70, 229, 0.15) 0%, transparent 50%),
+                     radial-gradient(ellipse at bottom right, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                     radial-gradient(ellipse at center, rgba(236, 72, 153, 0.05) 0%, transparent 70%);
     }
 
     * {
@@ -55,12 +55,12 @@
       bottom: 0;
       background: var(--gradient-bg);
       z-index: -2;
-      animation: bgShift 20s ease-in-out infinite;
+      animation: bgShift 25s ease-in-out infinite;
     }
 
     @keyframes bgShift {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.8; }
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.1); }
     }
 
     .floating-orbs {
@@ -76,42 +76,42 @@
     .orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(40px);
-      opacity: 0.1;
-      animation: float 15s ease-in-out infinite;
+      filter: blur(60px);
+      opacity: 0.12;
+      animation: float 20s ease-in-out infinite;
     }
 
     .orb:nth-child(1) {
-      width: 200px;
-      height: 200px;
-      background: var(--accent-blue);
-      top: 10%;
-      left: 10%;
+      width: 300px;
+      height: 300px;
+      background: linear-gradient(45deg, var(--accent-blue), var(--accent-purple));
+      top: 5%;
+      left: 5%;
       animation-delay: 0s;
     }
 
     .orb:nth-child(2) {
-      width: 150px;
-      height: 150px;
-      background: var(--accent-purple);
-      top: 60%;
-      right: 20%;
-      animation-delay: 5s;
+      width: 200px;
+      height: 200px;
+      background: linear-gradient(45deg, var(--accent-purple), var(--accent-rose));
+      top: 70%;
+      right: 10%;
+      animation-delay: 7s;
     }
 
     .orb:nth-child(3) {
-      width: 180px;
-      height: 180px;
-      background: var(--accent-blue);
-      bottom: 20%;
-      left: 30%;
-      animation-delay: 10s;
+      width: 250px;
+      height: 250px;
+      background: linear-gradient(45deg, var(--accent-emerald), var(--accent-blue));
+      bottom: 10%;
+      left: 20%;
+      animation-delay: 14s;
     }
 
     @keyframes float {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      33% { transform: translateY(-30px) rotate(120deg); }
-      66% { transform: translateY(15px) rotate(240deg); }
+      0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+      33% { transform: translateY(-40px) rotate(120deg) scale(1.1); }
+      66% { transform: translateY(20px) rotate(240deg) scale(0.9); }
     }
 
     .container {
@@ -126,21 +126,22 @@
     .header {
       text-align: center;
       margin-bottom: 3rem;
-      padding: 2rem 0;
+      padding: 3rem 0 2rem;
       position: relative;
     }
 
     .main-title {
-      font-size: clamp(2.5rem, 6vw, 4rem);
-      font-weight: 800;
-      background: var(--gradient-hacks);
-      background-size: 200% 200%;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900;
+      background: var(--gradient-primary);
+      background-size: 400% 400%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       margin-bottom: 1rem;
-      animation: titleGlow 3s ease-in-out infinite;
-      letter-spacing: -0.02em;
+      animation: titleGlow 4s ease-in-out infinite;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
     }
 
     @keyframes titleGlow {
@@ -149,15 +150,16 @@
     }
 
     .subtitle {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       color: var(--text-secondary);
       font-weight: 500;
       margin-bottom: 2rem;
       opacity: 0;
       animation: fadeInUp 1s ease-out 0.5s forwards;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
     }
-
-
 
     @keyframes fadeInUp {
       from {
@@ -170,59 +172,76 @@
       }
     }
 
-
-
     /* Enhanced Controls */
     .controls {
       background: var(--glass-bg);
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(25px);
       border: 1px solid var(--border-subtle);
-      border-radius: 20px;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
+      border-radius: 24px;
+      padding: 2rem;
+      margin-bottom: 3rem;
       box-shadow: var(--shadow-soft);
-      transition: all 0.3s ease;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .controls::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--gradient-primary);
+      opacity: 0.02;
+      transition: opacity 0.3s ease;
     }
 
     .controls:hover {
-      transform: translateY(-2px);
+      transform: translateY(-4px);
       box-shadow: var(--shadow-medium);
+      border-color: rgba(79, 70, 229, 0.3);
+    }
+
+    .controls:hover::before {
+      opacity: 0.05;
     }
 
     .filter-section {
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
     }
 
     .filter-label {
-      color: var(--text-secondary);
-      font-size: 0.85rem;
+      color: var(--text-primary);
+      font-size: 0.9rem;
       font-weight: 700;
-      margin-bottom: 0.8rem;
+      margin-bottom: 1rem;
       display: block;
       text-transform: uppercase;
-      letter-spacing: 0.8px;
+      letter-spacing: 1px;
     }
 
     .filter-buttons {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 0.8rem;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
     }
 
     .filter-btn {
       background: var(--card-bg);
       border: 2px solid var(--border-subtle);
       color: var(--text-secondary);
-      padding: 0.9rem 1.2rem;
-      border-radius: 14px;
+      padding: 1rem 1.5rem;
+      border-radius: 16px;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       font-weight: 700;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(15px);
       position: relative;
       overflow: hidden;
-      font-size: 0.9rem;
-      min-height: 48px;
+      font-size: 0.95rem;
+      min-height: 56px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -236,9 +255,9 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: var(--gradient-hacks);
+      background: var(--gradient-primary);
       opacity: 0;
-      transition: all 0.3s ease;
+      transition: all 0.4s ease;
       z-index: 1;
     }
 
@@ -267,35 +286,36 @@
     .filter-btn.active {
       border-color: transparent;
       transform: translateY(-2px);
+      box-shadow: var(--shadow-medium);
     }
 
     .sort-section {
       border-top: 1px solid var(--border-subtle);
-      padding-top: 1.5rem;
+      padding-top: 2rem;
     }
 
     .sort-label {
-      color: var(--text-secondary);
-      font-size: 0.85rem;
+      color: var(--text-primary);
+      font-size: 0.9rem;
       font-weight: 700;
-      margin-bottom: 0.8rem;
+      margin-bottom: 1rem;
       display: block;
       text-transform: uppercase;
-      letter-spacing: 0.8px;
+      letter-spacing: 1px;
     }
 
     .sort-select {
       background: var(--card-bg);
       border: 2px solid var(--border-subtle);
       color: var(--text-primary);
-      padding: 0.9rem 1.2rem;
-      border-radius: 14px;
-      backdrop-filter: blur(10px);
+      padding: 1rem 1.5rem;
+      border-radius: 16px;
+      backdrop-filter: blur(15px);
       cursor: pointer;
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       width: 100%;
-      min-height: 48px;
+      min-height: 56px;
       transition: all 0.3s ease;
       outline: none;
     }
@@ -308,19 +328,19 @@
     /* Enhanced Hack Grid */
     .hack-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 2.5rem;
       animation: fadeIn 0.8s ease-out;
     }
 
     .hack-card {
       background: var(--glass-bg);
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(25px);
       border: 1px solid var(--border-subtle);
-      border-radius: 20px;
-      padding: 2rem;
+      border-radius: 24px;
+      padding: 2.5rem;
       box-shadow: var(--shadow-soft);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
       animation: slideInUp 0.8s ease-out both;
@@ -335,33 +355,30 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: var(--gradient-hacks);
+      background: var(--gradient-primary);
       opacity: 0;
       transition: opacity 0.4s ease;
       z-index: 1;
     }
 
     .hack-card:hover::before {
-      opacity: 0.05;
+      opacity: 0.08;
     }
 
     .hack-card:hover {
-      transform: translateY(-8px) scale(1.02);
+      transform: translateY(-12px) scale(1.02);
       box-shadow: var(--shadow-strong);
       border-color: rgba(79, 70, 229, 0.4);
     }
 
     .hack-card.productivity { 
       border-left: 4px solid var(--accent-blue);
-      background: linear-gradient(135deg, var(--glass-bg) 0%, rgba(79, 70, 229, 0.02) 100%);
     }
     .hack-card.focus { 
       border-left: 4px solid var(--accent-purple);
-      background: linear-gradient(135deg, var(--glass-bg) 0%, rgba(139, 92, 246, 0.02) 100%);
     }
     .hack-card.energy { 
       border-left: 4px solid var(--accent-emerald);
-      background: linear-gradient(135deg, var(--glass-bg) 0%, rgba(16, 185, 129, 0.02) 100%);
     }
 
     .hack-content {
@@ -370,16 +387,16 @@
     }
 
     .hack-title {
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       font-weight: 800;
       color: var(--text-primary);
       line-height: 1.3;
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
       transition: all 0.3s ease;
     }
 
     .hack-card:hover .hack-title {
-      background: var(--gradient-hacks);
+      background: var(--gradient-primary);
       background-size: 200% 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -388,18 +405,18 @@
 
     .hack-meta {
       display: flex;
-      gap: 0.8rem;
+      gap: 1rem;
       align-items: center;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.5rem;
       flex-wrap: wrap;
     }
 
     .hack-category {
       background: var(--card-bg);
       color: var(--text-secondary);
-      padding: 0.4rem 0.9rem;
+      padding: 0.5rem 1rem;
       border-radius: 12px;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       font-weight: 700;
       border: 1px solid var(--border-subtle);
       backdrop-filter: blur(10px);
@@ -409,37 +426,37 @@
     }
 
     .hack-category.productivity { 
-      background: rgba(79, 70, 229, 0.2);
+      background: rgba(79, 70, 229, 0.15);
       color: var(--accent-blue);
-      border-color: rgba(79, 70, 229, 0.4);
+      border-color: rgba(79, 70, 229, 0.3);
     }
 
     .hack-category.focus { 
-      background: rgba(139, 92, 246, 0.2);
+      background: rgba(139, 92, 246, 0.15);
       color: var(--accent-purple);
-      border-color: rgba(139, 92, 246, 0.4);
+      border-color: rgba(139, 92, 246, 0.3);
     }
 
     .hack-category.energy { 
-      background: rgba(16, 185, 129, 0.2);
+      background: rgba(16, 185, 129, 0.15);
       color: var(--accent-emerald);
-      border-color: rgba(16, 185, 129, 0.4);
+      border-color: rgba(16, 185, 129, 0.3);
     }
 
     .hack-description {
       color: var(--text-secondary);
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
-      line-height: 1.6;
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+      line-height: 1.7;
       font-weight: 500;
     }
 
     .featured-image {
       width: 100%;
-      height: 160px;
+      height: 180px;
       object-fit: cover;
-      border-radius: 16px;
-      margin-bottom: 1.2rem;
+      border-radius: 18px;
+      margin-bottom: 1.5rem;
       transition: all 0.4s ease;
       border: 1px solid var(--border-subtle);
     }
@@ -451,24 +468,26 @@
     }
 
     .try-hack {
-      background: var(--gradient-hacks);
+      background: var(--gradient-primary);
       color: white;
-      padding: 0.9rem 1.8rem;
-      border-radius: 14px;
+      padding: 1rem 2rem;
+      border-radius: 16px;
       text-decoration: none;
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 1rem;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 0.5rem;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow: var(--shadow-soft);
       border: none;
       cursor: pointer;
-      min-height: 44px;
+      min-height: 52px;
       background-size: 200% 200%;
-      animation: gradientShift 3s ease-in-out infinite;
+      animation: gradientShift 4s ease-in-out infinite;
       text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      width: 100%;
     }
 
     @keyframes gradientShift {
@@ -477,25 +496,25 @@
     }
 
     .try-hack:hover {
-      transform: translateY(-3px) scale(1.05);
+      transform: translateY(-4px) scale(1.05);
       box-shadow: var(--shadow-strong);
-      filter: brightness(1.1);
+      filter: brightness(1.15);
     }
 
-    /* Enhanced Modal */
+    /* Enhanced Modal - Fixed Centering */
     .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.9);
-      backdrop-filter: blur(15px);
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(20px);
       z-index: 10000;
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       justify-content: center;
-      padding: 1rem;
+      padding: 2rem;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       animation: fadeIn 0.4s ease;
@@ -503,22 +522,24 @@
 
     .modal-content {
       background: var(--glass-bg);
-      backdrop-filter: blur(25px);
+      backdrop-filter: blur(30px);
       border: 1px solid var(--border-subtle);
-      border-radius: 24px;
-      padding: 2rem;
-      max-width: 550px;
+      border-radius: 28px;
+      padding: 3rem;
+      max-width: 600px;
       width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
       box-shadow: var(--shadow-strong);
       position: relative;
-      margin: 2rem auto;
-      animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      margin: auto;
     }
 
     @keyframes slideUp {
       from {
         opacity: 0;
-        transform: translateY(40px) scale(0.95);
+        transform: translateY(60px) scale(0.9);
       }
       to {
         opacity: 1;
@@ -528,22 +549,23 @@
 
     .modal-close {
       position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
+      top: 2rem;
+      right: 2rem;
       background: var(--card-bg);
       border: 1px solid var(--border-subtle);
       color: var(--text-primary);
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       cursor: pointer;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: all 0.3s ease;
       z-index: 1;
-      font-weight: 600;
+      font-weight: 400;
+      backdrop-filter: blur(10px);
     }
 
     .modal-close:hover {
@@ -555,75 +577,83 @@
 
     .modal-title {
       color: var(--text-primary);
-      font-size: 1.6rem;
-      margin-bottom: 1.5rem;
-      background: var(--gradient-hacks);
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      background: var(--gradient-primary);
       background-size: 200% 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      font-weight: 800;
-      padding-right: 3rem;
-      line-height: 1.3;
-      animation: titleGlow 3s ease-in-out infinite;
+      font-weight: 900;
+      padding-right: 4rem;
+      line-height: 1.2;
+      animation: titleGlow 4s ease-in-out infinite;
     }
 
-    .modal-section {
+    .modal-steps {
       background: var(--card-bg);
       border: 1px solid var(--border-subtle);
-      padding: 1.5rem;
-      border-radius: 16px;
-      margin-bottom: 1.2rem;
-      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 20px;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(15px);
       transition: all 0.3s ease;
     }
 
-    .modal-section:hover {
+    .modal-steps:hover {
       transform: translateY(-2px);
       box-shadow: var(--shadow-soft);
     }
 
-    .modal-section h3 {
+    .modal-steps h3 {
       color: var(--accent-emerald);
-      margin-bottom: 1rem;
-      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
       font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
-    .modal-section ol,
-    .modal-section ul {
+    .step-list {
       color: var(--text-secondary);
-      line-height: 1.7;
-      padding-left: 1.2rem;
-      font-size: 0.95rem;
+      line-height: 1.8;
+      padding-left: 1.5rem;
+      font-size: 1rem;
     }
 
-    .modal-section li {
-      margin-bottom: 0.6rem;
+    .step-list li {
+      margin-bottom: 0.8rem;
       font-weight: 500;
     }
 
+    .step-list strong {
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+
     .modal-button {
-      background: var(--gradient-hacks);
+      background: var(--gradient-primary);
       color: white;
-      padding: 1rem 2rem;
+      padding: 1.2rem 2.5rem;
       border: none;
-      border-radius: 16px;
+      border-radius: 18px;
       font-weight: 700;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       width: 100%;
-      font-size: 1rem;
-      min-height: 52px;
+      font-size: 1.1rem;
+      min-height: 60px;
       background-size: 200% 200%;
-      animation: gradientShift 3s ease-in-out infinite;
+      animation: gradientShift 4s ease-in-out infinite;
       text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      box-shadow: var(--shadow-soft);
     }
 
     .modal-button:hover {
-      transform: translateY(-3px) scale(1.02);
+      transform: translateY(-4px) scale(1.02);
       box-shadow: var(--shadow-strong);
-      filter: brightness(1.1);
+      filter: brightness(1.15);
     }
 
     /* Mobile Optimizations */
@@ -634,69 +664,68 @@
 
       .header {
         margin-bottom: 2rem;
-        padding: 1rem 0;
+        padding: 2rem 0 1rem;
       }
 
       .main-title {
         font-size: clamp(2rem, 8vw, 3rem);
-        margin-bottom: 0.8rem;
+        margin-bottom: 1rem;
       }
 
       .subtitle {
-        font-size: 1rem;
+        font-size: 1.1rem;
         margin-bottom: 1.5rem;
+      }
+
+      .controls {
+        padding: 1.5rem;
+        border-radius: 20px;
       }
 
       .hack-grid {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 2rem;
       }
 
       .hack-card { 
-        padding: 1.5rem;
-        border-radius: 16px;
+        padding: 2rem;
+        border-radius: 20px;
       }
       
       .hack-title { 
-        font-size: 1.2rem;
-        margin-bottom: 0.8rem;
-      }
-
-      .featured-image { 
-        height: 140px;
-        border-radius: 12px;
+        font-size: 1.3rem;
         margin-bottom: 1rem;
       }
 
-      .try-hack {
-        width: 100%;
-        justify-content: center;
-        padding: 0.8rem 1.5rem;
-      }
-
-      .modal-content {
-        margin: 0;
-        padding: 1.5rem;
-        border-radius: 0;
-        min-height: 100vh;
-        max-width: none;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
+      .featured-image { 
+        height: 160px;
+        border-radius: 16px;
+        margin-bottom: 1.2rem;
       }
 
       .modal-overlay {
-        padding: 0;
-        align-items: stretch;
+        padding: 1rem;
+        align-items: center;
+      }
+
+      .modal-content {
+        padding: 2rem;
+        border-radius: 24px;
+        max-height: 85vh;
+        margin: 0;
       }
 
       .modal-close {
-        top: 1rem;
-        right: 1rem;
-        width: 44px;
-        height: 44px;
-        font-size: 1.3rem;
-        z-index: 100;
+        top: 1.5rem;
+        right: 1.5rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
+
+      .modal-title {
+        font-size: 1.6rem;
+        padding-right: 3rem;
       }
 
       .filter-buttons {
@@ -710,16 +739,25 @@
       }
 
       .controls {
-        padding: 1rem;
+        padding: 1.2rem;
       }
 
       .filter-buttons {
         grid-template-columns: 1fr;
-        gap: 0.6rem;
+        gap: 0.8rem;
       }
 
       .hack-card {
-        padding: 1.2rem;
+        padding: 1.5rem;
+      }
+
+      .modal-content {
+        padding: 1.5rem;
+        max-height: 90vh;
+      }
+
+      .modal-steps {
+        padding: 1.5rem;
       }
     }
 
@@ -744,6 +782,22 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
 </head>
 <body>
@@ -758,7 +812,6 @@
     <header class="header">
       <h1 class="main-title">925 ADHD Hacks</h1>
       <p class="subtitle">Life-changing strategies for the neurodivergent mind ✨</p>
-      
     </header>
 
     <div class="controls">
@@ -787,43 +840,80 @@
   </div>
 
   <script>
-    // ADHD Hacks data
+    // ADHD Hacks data with streamlined content structure
     const adhdHacks = [
       {
         title: "The Ultimate 5-Minute Rule",
         description: "Beat procrastination by committing to just 5 minutes of work. Your brain won't resist such a tiny commitment, but often you'll keep going once you start!",
         category: "Productivity",
-        image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/A%20sleek%20modern%20stopwatch%20showing%20_5_00_%20on%20a%20c.jpg/:/rs=h:175,m"
+        image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/A%20sleek%20modern%20stopwatch%20showing%20_5_00_%20on%20a%20c.jpg/:/rs=h:175,m",
+        steps: [
+          "Pick ONE small task that's been bothering you",
+          "Set a timer for exactly 5 minutes",
+          "Start immediately - no preparation needed",
+          "Stop when the timer rings (or keep going if you're in flow!)"
+        ]
       },
       {
         title: "Staying Organized with a Magnetic Board",
         description: "Use a visual board to keep important tasks and reminders visible. Perfect for the ADHD brain that needs constant visual cues.",
         category: "Focus",
-        image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/A%20large%20stylish%20magnetic%20board%20or%20refrigerator.jpg/:/rs=h:175,m"
+        image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/A%20large%20stylish%20magnetic%20board%20or%20refrigerator.jpg/:/rs=h:175,m",
+        steps: [
+          "Get a magnetic board or use your fridge door",
+          "Use colorful sticky notes - one task per note",
+          "Place the board where you'll see it daily",
+          "Move completed tasks to a 'DONE' section for satisfaction"
+        ]
       },
       {
         title: "Boost Productivity with the Power of Comfy Shoes",
         description: "Wearing shoes at home tricks your brain into work mode. It's a simple psychological switch that signals productivity time.",
         category: "Energy",
-        image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Clean%20white%20sneakers%20or%20comfortable%20work%20shoes.jpg/:/rs=h:175,m"
+        image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Clean%20white%20sneakers%20or%20comfortable%20work%20shoes.jpg/:/rs=h:175,m",
+        steps: [
+          "Put on comfortable but real shoes (not slippers)",
+          "Keep them on during your entire work session",
+          "Notice how much more 'ready to work' you feel",
+          "Take them off when you're done to signal rest time"
+        ]
       },
       {
         title: "Make Cleaning a Breeze with Dawn Powerwash",
         description: "Use this spray to make cleaning feel satisfying and effortless. The instant results provide the dopamine hit ADHD brains crave.",
         category: "Energy",
-        image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/A%20clean%2C%20sparkling%20kitchen%20sink%20or%20counter%20wit.jpg/:/rs=h:175,m"
+        image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/A%20clean%2C%20sparkling%20kitchen%20sink%20or%20counter%20wit.jpg/:/rs=h:175,m",
+        steps: [
+          "Spray Dawn Powerwash directly on the mess",
+          "Wait 30 seconds for the magic to happen",
+          "Rinse with warm water",
+          "Watch everything slide off effortlessly!"
+        ]
       },
       {
         title: "The Two-Minute Task Sweep",
         description: "Quickly tackle small tasks before they pile up and overwhelm you. If it takes less than 2 minutes, do it now!",
         category: "Productivity",
-        image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/A%20collection%20of%20productivity%20tools%20arranged%20ae.jpg/:/rs=h:175,m"
+        image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/A%20collection%20of%20productivity%20tools%20arranged%20ae.jpg/:/rs=h:175,m",
+        steps: [
+          "Set a 2-minute timer",
+          "Grab any quick task: file a paper, send a text, put away a cup",
+          "Work fast without overthinking",
+          "Stop when the timer goes off",
+          "Repeat 2-3 times throughout your day"
+        ]
       },
       {
         title: "Mel Robbins' 5-4-3-2-1 Rule",
         description: "Beat hesitation and jumpstart action with this powerful countdown technique. Perfect for overcoming ADHD paralysis.",
         category: "Focus",
-        image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/A%20sleek%20modern%20stopwatch%20showing%20_5_00_%20on%20a%20c.jpg/:/rs=h:175,m"
+        image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/A%20sleek%20modern%20stopwatch%20showing%20_5_00_%20on%20a%20c.jpg/:/rs=h:175,m",
+        steps: [
+          "Notice yourself hesitating or procrastinating",
+          "Count backwards out loud: '5... 4... 3... 2... 1...'",
+          "Move immediately when you hit '1' - don't think!",
+          "This interrupts overthinking and activates your brain's control center"
+        ]
       }
     ];
 
@@ -866,9 +956,9 @@
       
       if (filteredHacks.length === 0) {
         grid.innerHTML = `
-          <div style="text-align: center; grid-column: 1 / -1; padding: 3rem;">
-            <h3 style="color: var(--text-secondary); font-size: 1.2rem; margin-bottom: 1rem;">🔍 No hacks found</h3>
-            <p style="color: var(--text-muted);">Try adjusting your search or filters</p>
+          <div style="text-align: center; grid-column: 1 / -1; padding: 4rem;">
+            <h3 style="color: var(--text-secondary); font-size: 1.3rem; margin-bottom: 1rem;">🔍 No hacks found</h3>
+            <p style="color: var(--text-muted);">Try adjusting your filters to see more results</p>
           </div>
         `;
         return;
@@ -905,21 +995,21 @@
       const modalOverlay = document.createElement('div');
       modalOverlay.className = 'modal-overlay';
       
-      const hackContent = getHackContent(hack);
-      
       modalOverlay.innerHTML = `
         <div class="modal-content">
           <button class="modal-close" onclick="closeModal()">&times;</button>
           
           <h2 class="modal-title">${hack.title}</h2>
           
-          <div class="modal-section">
+          <div class="modal-steps">
             <h3>🎯 How to do it:</h3>
-            ${hackContent.steps}
+            <ol class="step-list">
+              ${hack.steps.map(step => `<li><strong>${step}</strong></li>`).join('')}
+            </ol>
           </div>
           
           <button class="modal-button" onclick="closeModal()">
-            Got It! 🚀
+            Got It! Let's Do This 🚀
           </button>
         </div>
       `;
@@ -950,84 +1040,6 @@
         modal.remove();
         document.body.style.overflow = '';
       }
-    }
-
-    function getHackContent(hack) {
-      const contents = {
-        "The Ultimate 5-Minute Rule": {
-          steps: `
-            <ol>
-              <li><strong>Pick ONE small task</strong></li>
-              <li><strong>Set timer for 5 minutes</strong></li>
-              <li><strong>Start immediately</strong> - no prep needed</li>
-              <li><strong>Stop when timer rings</strong> (or keep going!)</li>
-            </ol>
-          `
-        },
-        "Boost Productivity with the Power of Comfy Shoes": {
-          steps: `
-            <ul>
-              <li><strong>Put on real shoes</strong> (not slippers)</li>
-              <li><strong>Keep them on while working</strong></li>
-              <li><strong>Notice how ready you feel</strong></li>
-            </ul>
-          `
-        },
-        "Staying Organized with a Magnetic Board": {
-          steps: `
-            <ul>
-              <li><strong>Get magnetic board</strong> or use your fridge</li>
-              <li><strong>Use colorful sticky notes</strong> - one task per note</li>
-              <li><strong>Place where you'll see it</strong></li>
-              <li><strong>Move completed tasks to "DONE"</strong></li>
-            </ul>
-          `
-        },
-        "Make Cleaning a Breeze with Dawn Powerwash": {
-          steps: `
-            <ul>
-              <li><strong>Spray Dawn Powerwash on mess</strong></li>
-              <li><strong>Wait 30 seconds</strong></li>
-              <li><strong>Rinse with water</strong></li>
-              <li><strong>Watch it slide off like magic!</strong></li>
-            </ul>
-          `
-        },
-        "The Two-Minute Task Sweep": {
-          steps: `
-            <ol>
-              <li><strong>Set 2-minute timer</strong></li>
-              <li><strong>Grab any quick task</strong> - put away cup, send text, file paper</li>
-              <li><strong>Work fast, don't overthink</strong></li>
-              <li><strong>Stop when timer goes off</strong></li>
-              <li><strong>Repeat 2-3 times daily</strong></li>
-            </ol>
-          `
-        },
-        "Mel Robbins' 5-4-3-2-1 Rule": {
-          steps: `
-            <ol>
-              <li><strong>Notice yourself hesitating</strong></li>
-              <li><strong>Count backwards: "5... 4... 3... 2... 1..."</strong></li>
-              <li><strong>Move immediately on "1"</strong></li>
-              <li><strong>Don't think, just GO</strong></li>
-            </ol>
-            <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.9rem; padding: 1rem; background: var(--card-bg); border-radius: 8px;">
-              <strong>Why it works:</strong> Interrupts overthinking and activates your brain's control center.
-            </p>
-          `
-        }
-      };
-
-      return contents[hack.title] || {
-        steps: `
-          <ul>
-            <li><strong>Start small</strong></li>
-            <li><strong>Try it once</strong></li>
-            <li><strong>Adjust as needed</strong></li>
-          </ul>
-        `
-      };
     }
 
     // Event listeners
@@ -1063,7 +1075,7 @@
       lastTouchEnd = now;
     }, false);
 
-    // Add keyboard navigation for accessibility
+    // Keyboard navigation for accessibility
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && e.target.classList.contains('hack-card')) {
         e.target.querySelector('.try-hack').click();
