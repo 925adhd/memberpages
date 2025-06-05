@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>ADHD Gig Tracker</title>
+  <title>Earnings Tracker</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital@0;1&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -131,23 +131,6 @@
       overflow: hidden;
     }
     
-    .container::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
-      animation: shimmer 6s infinite;
-      pointer-events: none;
-    }
-    
-    @keyframes shimmer {
-      0% { transform: translateX(-100%) translateY(-100%) rotate(30deg); }
-      100% { transform: translateX(100%) translateY(100%) rotate(30deg); }
-    }
-    
     .title {
       text-align: center;
       color: var(--text-primary);
@@ -179,18 +162,6 @@
       box-shadow: var(--shadow-soft);
       position: relative;
       overflow: hidden;
-    }
-    
-    .stats-box::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-      animation: shimmer 4s infinite;
-      pointer-events: none;
     }
     
     .stats-title {
@@ -329,18 +300,6 @@
       overflow: hidden;
     }
     
-    .total-box::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-      animation: shimmer 5s infinite;
-      pointer-events: none;
-    }
-    
     .total-box.complete {
       background: var(--gradient-success);
     }
@@ -397,23 +356,6 @@
       user-select: none;
       position: relative;
       overflow: hidden;
-    }
-    
-    .platform-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-      transform: translateX(-100%);
-      transition: transform 0.6s;
-      pointer-events: none;
-    }
-    
-    .platform-btn:hover::before {
-      transform: translateX(100%);
     }
     
     .platform-btn:active {
@@ -490,6 +432,7 @@
     .manual-input-row {
       display: flex;
       gap: 10px;
+      width: 100%;
     }
     
     .manual-input {
@@ -505,6 +448,7 @@
       backdrop-filter: blur(10px);
       color: var(--text-primary);
       transition: all 0.3s ease;
+      box-sizing: border-box;
     }
     
     .manual-input::placeholder {
@@ -531,6 +475,7 @@
       user-select: none;
       transition: all 0.3s ease;
       box-shadow: var(--shadow-soft);
+      flex-shrink: 0;
     }
     
     .manual-btn:hover {
@@ -607,7 +552,7 @@
     /* Action Buttons */
     .action-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 10px;
     }
     
@@ -642,12 +587,6 @@
       border-color: var(--accent-amber);
     }
     
-    .reset-btn {
-      background: linear-gradient(135deg, var(--accent-rose), rgba(244, 63, 94, 0.8));
-      color: white;
-      border-color: var(--accent-rose);
-    }
-    
     .export-btn {
       background: var(--gradient-info);
       color: white;
@@ -658,16 +597,6 @@
       opacity: 0.5;
       cursor: not-allowed;
       transform: none;
-    }
-    
-    .clear-btn {
-      background: linear-gradient(135deg, var(--accent-rose), rgba(244, 63, 94, 0.8));
-      color: white;
-      padding: 8px 12px;
-      font-size: 10px;
-      min-height: 36px;
-      border-radius: 8px;
-      border-color: var(--accent-rose);
     }
     
     /* Notification */
@@ -771,6 +700,23 @@
         border-radius: 12px;
       }
       
+      .manual-input-row {
+        gap: 8px;
+      }
+      
+      .manual-input {
+        font-size: 14px;
+        padding: 14px;
+        min-height: 52px;
+      }
+      
+      .manual-btn {
+        padding: 14px 16px;
+        min-height: 52px;
+        min-width: 70px;
+        font-size: 13px;
+      }
+      
       .action-grid {
         gap: 8px;
       }
@@ -828,6 +774,16 @@
       .quick-btn {
         font-size: 12px;
       }
+      
+      .manual-input-row {
+        gap: 6px;
+      }
+      
+      .manual-btn {
+        min-width: 60px;
+        padding: 12px;
+        font-size: 12px;
+      }
     }
 
     /* Focus styles for accessibility */
@@ -854,8 +810,8 @@
     </div>
     
     <!-- Header -->
-    <h1 class="title">🧠 ADHD Gig Tracker</h1>
-    <p class="subtitle">Simple earnings tracking for neurodivergent minds</p>
+    <h1 class="title">💰 Earnings Tracker</h1>
+    <p class="subtitle">Simple earnings tracking for gig workers</p>
     
     <!-- Today's Stats -->
     <div class="stats-box">
@@ -938,10 +894,10 @@
     <!-- Quick Add -->
     <div class="section-title">⚡ Quick Add</div>
     <div class="quick-grid" id="quickGrid">
-      <button class="quick-btn">$2.50</button>
+      <button class="quick-btn">$0.25</button>
+      <button class="quick-btn">$2.00</button>
       <button class="quick-btn">$5.00</button>
       <button class="quick-btn">$10.00</button>
-      <button class="quick-btn">$15.00</button>
     </div>
     
     <!-- Manual Entry -->
@@ -957,7 +913,6 @@
     <div class="history-section">
       <div class="history-header">
         <div class="section-title" style="margin: 0;">📜 Today's Earnings</div>
-        <button class="manual-btn clear-btn">Clear</button>
       </div>
       <div class="history-list" id="historyList">
         <div style="text-align: center; color: var(--text-muted); padding: 20px;">
@@ -969,7 +924,6 @@
     <!-- Action Buttons -->
     <div class="action-grid">
       <button id="undoBtn" class="action-btn undo-btn" disabled>↩ Undo</button>
-      <button class="action-btn reset-btn">🔄 Reset</button>
       <button class="action-btn export-btn">📊 Export</button>
     </div>
   </div>
@@ -984,14 +938,14 @@
     
     // Platform data
     const platforms = {
-      'DoorDash': [3.50, 7.50, 12.00, 18.00],
-      'Uber': [4.00, 8.50, 15.00, 25.00],
-      'Surveys': [0.10, 0.50, 1.25, 3.00],
-      'Fiverr': [5.00, 15.00, 25.00, 50.00],
-      'Instacart': [8.00, 15.00, 25.00, 35.00],
-      'Upwork': [10.00, 25.00, 50.00, 100.00],
-      'Micro Work': [0.10, 0.25, 0.75, 2.00],
-      'Other': [2.50, 5.00, 10.00, 15.00]
+      'DoorDash': [2.00, 5.00, 8.00, 15.00],
+      'Uber': [2.00, 5.00, 10.00, 15.00],
+      'Surveys': [0.10, 0.25, 0.50, 2.00],
+      'Fiverr': [5.00, 10.00, 25.00, 50.00],
+      'Instacart': [5.00, 10.00, 15.00, 25.00],
+      'Upwork': [5.00, 15.00, 30.00, 75.00],
+      'Micro Work': [0.10, 0.25, 0.50, 1.00],
+      'Other': [0.50, 2.00, 5.00, 10.00]
     };
     
     // DOM elements
@@ -1158,10 +1112,10 @@
     // Reset quick buttons
     function resetQuickButtons() {
       elements.quickGrid.innerHTML = 
-        '<button class="quick-btn" onclick="addEarning(2.50, \'Quick Add\')">$2.50</button>' +
+        '<button class="quick-btn" onclick="addEarning(0.25, \'Quick Add\')">$0.25</button>' +
+        '<button class="quick-btn" onclick="addEarning(2.00, \'Quick Add\')">$2.00</button>' +
         '<button class="quick-btn" onclick="addEarning(5.00, \'Quick Add\')">$5.00</button>' +
-        '<button class="quick-btn" onclick="addEarning(10.00, \'Quick Add\')">$10.00</button>' +
-        '<button class="quick-btn" onclick="addEarning(15.00, \'Quick Add\')">$15.00</button>';
+        '<button class="quick-btn" onclick="addEarning(10.00, \'Quick Add\')">$10.00</button>';
     }
     
     // Manual amount validation
@@ -1230,35 +1184,12 @@
       }
     }
     
-    // Clear history
-    function clearHistory() {
-      if (confirm('Clear all earnings for today? This cannot be undone.')) {
-        history = [];
-        updateUI();
-        showNotification('History cleared! 🧹');
-      }
-    }
-    
-    // Reset all
-    function resetAll() {
-      if (confirm('Reset everything? This will clear all earnings and reset your goal.')) {
-        totalEarnings = 0;
-        taskCount = 0;
-        history = [];
-        dailyGoal = 50;
-        currentPlatform = '';
-        resetQuickButtons();
-        updateUI();
-        showNotification('Everything reset! Fresh start! 🌅', 'milestone');
-      }
-    }
-    
     // Export data
     function exportData() {
       const today = new Date().toLocaleDateString();
       const avgPerTask = taskCount > 0 ? (totalEarnings / taskCount).toFixed(2) : '0.00';
       
-      const textData = '🧠 ADHD Gig Tracker Report - ' + today + '\n\n' +
+      const textData = '💰 Earnings Tracker Report - ' + today + '\n\n' +
         '💰 SUMMARY:\n' +
         '• Total Earned: $' + totalEarnings.toFixed(2) + '\n' +
         '• Daily Goal: $' + dailyGoal.toFixed(2) + ' (' + Math.round((totalEarnings / dailyGoal) * 100) + '% complete)\n' +
@@ -1269,7 +1200,7 @@
           history.map(entry => '• ' + entry.time + ' - ' + entry.platform + ': $' + entry.amount.toFixed(2)).join('\n') 
           : '• No earnings recorded yet'
         ) + '\n\n' +
-        '---\nGenerated by ADHD Gig Tracker 🎯';
+        '---\nGenerated by Earnings Tracker 🎯';
       
       // Copy to clipboard
       if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -1324,9 +1255,7 @@
       
       // Action buttons
       elements.undoBtn.addEventListener('click', undoLast);
-      document.querySelector('.reset-btn').addEventListener('click', resetAll);
       document.querySelector('.export-btn').addEventListener('click', exportData);
-      document.querySelector('.clear-btn').addEventListener('click', clearHistory);
       
       // Default quick buttons
       resetQuickButtons();
