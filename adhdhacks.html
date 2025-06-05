@@ -453,17 +453,32 @@
 
     .featured-image {
       width: 100%;
-      height: 180px;
+      height: 200px;
       object-fit: cover;
+      object-position: center;
       border-radius: 18px;
       margin-bottom: 1.5rem;
       transition: all 0.4s ease;
       border: 1px solid var(--border-subtle);
+      background: var(--card-bg);
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+      image-rendering: optimize-quality;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+
+    /* High DPI display support */
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      .featured-image {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: optimize-quality;
+      }
     }
 
     .hack-card:hover .featured-image {
-      transform: scale(1.05);
-      border-color: rgba(79, 70, 229, 0.4);
+      transform: scale(1.03);
+      border-color: rgba(6, 182, 212, 0.4);
       box-shadow: var(--shadow-medium);
     }
 
@@ -656,6 +671,17 @@
       filter: brightness(1.15);
     }
 
+    /* Large screen optimizations */
+    @media (min-width: 1200px) {
+      .featured-image {
+        height: 220px;
+      }
+      
+      .hack-grid {
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      }
+    }
+
     /* Mobile Optimizations */
     @media (max-width: 768px) {
       .container { 
@@ -698,7 +724,7 @@
       }
 
       .featured-image { 
-        height: 160px;
+        height: 180px;
         border-radius: 16px;
         margin-bottom: 1.2rem;
       }
@@ -749,6 +775,11 @@
 
       .hack-card {
         padding: 1.5rem;
+      }
+
+      .featured-image {
+        height: 160px;
+        border-radius: 14px;
       }
 
       .modal-content {
@@ -846,7 +877,7 @@
         title: "Staying Organized with a Magnetic Board",
         description: "Use a visual board to keep important tasks and reminders visible. Perfect for the ADHD brain that needs constant visual cues.",
         category: "Focus",
-        image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/A%20large%20stylish%20magnetic%20board%20or%20refrigerator.jpg/:/rs=h:175,m",
+        image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/A%20large%20stylish%20magnetic%20board%20or%20refrigerator.jpg/:/rs=w:600,h:400,cg:true,m",
         steps: [
           "Get a magnetic board or use your fridge door",
           "Use colorful sticky notes - one task per note",
@@ -858,7 +889,7 @@
         title: "Boost Productivity with the Power of Comfy Shoes",
         description: "Wearing shoes at home tricks your brain into work mode. It's a simple psychological switch that signals productivity time.",
         category: "Energy",
-        image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Clean%20white%20sneakers%20or%20comfortable%20work%20shoes.jpg/:/rs=h:175,m",
+        image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Clean%20white%20sneakers%20or%20comfortable%20work%20shoes.jpg/:/rs=w:600,h:400,cg:true,m",
         steps: [
           "Put on comfortable but real shoes (not slippers)",
           "Keep them on during your entire work session",
@@ -870,7 +901,7 @@
         title: "Make Cleaning a Breeze with Dawn Powerwash",
         description: "Use this spray to make cleaning feel satisfying and effortless. The instant results provide the dopamine hit ADHD brains crave.",
         category: "Energy",
-        image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/A%20clean%2C%20sparkling%20kitchen%20sink%20or%20counter%20wit.jpg/:/rs=h:175,m",
+        image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/A%20clean%2C%20sparkling%20kitchen%20sink%20or%20counter%20wit.jpg/:/rs=w:600,h:400,cg:true,m",
         steps: [
           "Spray Dawn Powerwash directly on the mess",
           "Wait 30 seconds for the magic to happen",
@@ -882,7 +913,7 @@
         title: "The Two-Minute Task Sweep",
         description: "Quickly tackle small tasks before they pile up and overwhelm you. If it takes less than 2 minutes, do it now!",
         category: "Productivity",
-        image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/A%20collection%20of%20productivity%20tools%20arranged%20ae.jpg/:/rs=h:175,m",
+        image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/A%20collection%20of%20productivity%20tools%20arranged%20ae.jpg/:/rs=w:600,h:400,cg:true,m",
         steps: [
           "Set a 2-minute timer",
           "Grab any quick task: file a paper, send a text, put away a cup",
@@ -895,7 +926,7 @@
         title: "Mel Robbins' 5-4-3-2-1 Rule",
         description: "Beat hesitation and jumpstart action with this powerful countdown technique. Perfect for overcoming ADHD paralysis.",
         category: "Focus",
-        image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/A%20sleek%20modern%20stopwatch%20showing%20_5_00_%20on%20a%20c.jpg/:/rs=h:175,m",
+        image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/A%20sleek%20modern%20stopwatch%20showing%20_5_00_%20on%20a%20c.jpg/:/rs=w:600,h:400,cg:true,m",
         steps: [
           "Notice yourself hesitating or procrastinating",
           "Count backwards out loud: '5... 4... 3... 2... 1...'",
@@ -959,7 +990,7 @@
         return `
           <div class="hack-card ${categoryClass}" style="--i: ${index}">
             <div class="hack-content">
-              <img src="${hack.image}" alt="${hack.title}" class="featured-image" onerror="this.style.display='none'" loading="lazy">
+              <img src="${hack.image}" alt="${hack.title}" class="featured-image" onerror="this.style.display='none'" loading="lazy" decoding="async">
               <h3 class="hack-title">${hack.title}</h3>
               <div class="hack-meta">
                 <span class="hack-category ${categoryClass}">${emoji} ${hack.category}</span>
