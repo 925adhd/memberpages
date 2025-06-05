@@ -4,27 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>925 ADHD Hacks</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary-bg: #0a0e1a;
       --secondary-bg: #1a1f2e;
-      --card-bg: rgba(255, 255, 255, 0.02);
-      --glass-bg: rgba(255, 255, 255, 0.05);
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --glass-bg: rgba(255, 255, 255, 0.08);
       --text-primary: #ffffff;
-      --text-secondary: #a0a8b8;
-      --text-muted: #6b7280;
+      --text-secondary: #c1c9d6;
+      --text-muted: #8892a6;
       --accent-blue: #4f46e5;
       --accent-teal: #06b6d4;
       --accent-emerald: #10b981;
       --accent-amber: #f59e0b;
       --accent-rose: #f43f5e;
-      --border-subtle: rgba(255, 255, 255, 0.1);
-      --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.15);
-      --shadow-medium: 0 8px 40px rgba(0, 0, 0, 0.25);
-      --shadow-strong: 0 16px 64px rgba(0, 0, 0, 0.35);
+      --accent-purple: #8b5cf6;
+      --border-subtle: rgba(255, 255, 255, 0.12);
+      --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.2);
+      --shadow-medium: 0 8px 40px rgba(0, 0, 0, 0.3);
+      --shadow-strong: 0 20px 60px rgba(0, 0, 0, 0.4);
       --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      --gradient-hacks: linear-gradient(135deg, #4f46e5 0%, #06b6d4 50%, #10b981 100%);
+      --gradient-hacks: linear-gradient(135deg, #4f46e5 0%, #8b5cf6 25%, #06b6d4 50%, #10b981 75%, #f59e0b 100%);
+      --gradient-bg: radial-gradient(ellipse at top left, rgba(79, 70, 229, 0.12) 0%, transparent 60%),
+                     radial-gradient(ellipse at bottom right, rgba(6, 182, 212, 0.08) 0%, transparent 60%),
+                     radial-gradient(ellipse at center, rgba(139, 92, 246, 0.05) 0%, transparent 70%);
     }
 
     * {
@@ -43,16 +47,72 @@
       -webkit-overflow-scrolling: touch;
     }
 
-    /* Background Effects */
+    /* Enhanced Background Effects */
     .bg-gradient {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background: radial-gradient(ellipse at top left, rgba(79, 70, 229, 0.08) 0%, transparent 50%),
-                  radial-gradient(ellipse at bottom right, rgba(6, 182, 212, 0.05) 0%, transparent 50%);
+      background: var(--gradient-bg);
       z-index: -2;
+      animation: bgShift 20s ease-in-out infinite;
+    }
+
+    @keyframes bgShift {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+
+    .floating-orbs {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(40px);
+      opacity: 0.1;
+      animation: float 15s ease-in-out infinite;
+    }
+
+    .orb:nth-child(1) {
+      width: 200px;
+      height: 200px;
+      background: var(--accent-blue);
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .orb:nth-child(2) {
+      width: 150px;
+      height: 150px;
+      background: var(--accent-teal);
+      top: 60%;
+      right: 20%;
+      animation-delay: 5s;
+    }
+
+    .orb:nth-child(3) {
+      width: 180px;
+      height: 180px;
+      background: var(--accent-purple);
+      bottom: 20%;
+      left: 30%;
+      animation-delay: 10s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      33% { transform: translateY(-30px) rotate(120deg); }
+      66% { transform: translateY(15px) rotate(240deg); }
     }
 
     .container {
@@ -63,51 +123,107 @@
       z-index: 1;
     }
 
-    /* Streamlined Controls */
+    /* Enhanced Header */
+    .header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding: 2rem 0;
+      position: relative;
+    }
+
+    .main-title {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      background: var(--gradient-hacks);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      animation: titleGlow 3s ease-in-out infinite;
+      letter-spacing: -0.02em;
+    }
+
+    @keyframes titleGlow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeInUp 1s ease-out 0.5s forwards;
+    }
+
+
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+
+
+    /* Enhanced Controls */
     .controls {
       background: var(--glass-bg);
       backdrop-filter: blur(20px);
       border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 1rem;
-      margin-bottom: 1.5rem;
+      border-radius: 20px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
       box-shadow: var(--shadow-soft);
+      transition: all 0.3s ease;
+    }
+
+    .controls:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-medium);
     }
 
     .filter-section {
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
 
     .filter-label {
       color: var(--text-secondary);
-      font-size: 0.8rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
       display: block;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.8px;
     }
 
     .filter-buttons {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0.6rem;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 0.8rem;
     }
 
     .filter-btn {
       background: var(--card-bg);
-      border: 1px solid var(--border-subtle);
+      border: 2px solid var(--border-subtle);
       color: var(--text-secondary);
-      padding: 0.7rem 1rem;
-      border-radius: 12px;
+      padding: 0.9rem 1.2rem;
+      border-radius: 14px;
       cursor: pointer;
-      transition: all 0.2s ease;
-      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-weight: 700;
       backdrop-filter: blur(10px);
       position: relative;
       overflow: hidden;
-      font-size: 0.85rem;
-      min-height: 42px;
+      font-size: 0.9rem;
+      min-height: 48px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -123,19 +239,18 @@
       bottom: 0;
       background: var(--gradient-hacks);
       opacity: 0;
-      transition: opacity 0.2s ease;
+      transition: all 0.3s ease;
+      z-index: 1;
     }
 
     .filter-btn span {
       position: relative;
-      z-index: 1;
+      z-index: 2;
+      transition: all 0.3s ease;
     }
 
-    .filter-btn:hover,
-    .filter-btn.active {
-      color: white;
-      border-color: transparent;
-      transform: translateY(-1px);
+    .filter-btn:hover {
+      transform: translateY(-3px) scale(1.02);
       box-shadow: var(--shadow-medium);
     }
 
@@ -144,69 +259,74 @@
       opacity: 1;
     }
 
+    .filter-btn:hover span,
+    .filter-btn.active span {
+      color: white;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+
+    .filter-btn.active {
+      border-color: transparent;
+      transform: translateY(-2px);
+    }
+
     .sort-section {
       border-top: 1px solid var(--border-subtle);
-      padding-top: 1rem;
+      padding-top: 1.5rem;
     }
 
     .sort-label {
       color: var(--text-secondary);
-      font-size: 0.8rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
       display: block;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.8px;
     }
 
     .sort-select {
       background: var(--card-bg);
-      border: 1px solid var(--border-subtle);
+      border: 2px solid var(--border-subtle);
       color: var(--text-primary);
-      padding: 0.7rem 1rem;
-      border-radius: 12px;
+      padding: 0.9rem 1.2rem;
+      border-radius: 14px;
       backdrop-filter: blur(10px);
       cursor: pointer;
-      font-weight: 500;
-      font-size: 0.85rem;
+      font-weight: 600;
+      font-size: 0.9rem;
       width: 100%;
-      min-height: 42px;
+      min-height: 48px;
+      transition: all 0.3s ease;
+      outline: none;
     }
 
+    .sort-select:focus {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 20px rgba(79, 70, 229, 0.3);
+    }
+
+    /* Enhanced Hack Grid */
     .hack-grid {
       display: grid;
-      gap: 1.5rem;
-      animation: fadeIn 0.6s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      animation: fadeIn 0.8s ease-out;
     }
 
     .hack-card {
       background: var(--glass-bg);
       backdrop-filter: blur(20px);
       border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 1.5rem;
+      border-radius: 20px;
+      padding: 2rem;
       box-shadow: var(--shadow-soft);
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
       animation: slideInUp 0.8s ease-out both;
       animation-delay: calc(var(--i) * 0.1s);
-    }
-
-    @keyframes slideInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px) scale(0.98);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+      cursor: pointer;
     }
 
     .hack-card::before {
@@ -218,23 +338,32 @@
       bottom: 0;
       background: var(--gradient-hacks);
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.4s ease;
       z-index: 1;
     }
 
     .hack-card:hover::before {
-      opacity: 0.03;
+      opacity: 0.05;
     }
 
     .hack-card:hover {
-      transform: translateY(-3px) scale(1.01);
+      transform: translateY(-8px) scale(1.02);
       box-shadow: var(--shadow-strong);
-      border-color: rgba(79, 70, 229, 0.3);
+      border-color: rgba(79, 70, 229, 0.4);
     }
 
-    .hack-card.productivity { border-left: 3px solid var(--accent-blue); }
-    .hack-card.focus { border-left: 3px solid var(--accent-teal); }
-    .hack-card.energy { border-left: 3px solid var(--accent-rose); }
+    .hack-card.productivity { 
+      border-left: 4px solid var(--accent-blue);
+      background: linear-gradient(135deg, var(--glass-bg) 0%, rgba(79, 70, 229, 0.02) 100%);
+    }
+    .hack-card.focus { 
+      border-left: 4px solid var(--accent-teal);
+      background: linear-gradient(135deg, var(--glass-bg) 0%, rgba(6, 182, 212, 0.02) 100%);
+    }
+    .hack-card.energy { 
+      border-left: 4px solid var(--accent-rose);
+      background: linear-gradient(135deg, var(--glass-bg) 0%, rgba(244, 63, 94, 0.02) 100%);
+    }
 
     .hack-content {
       position: relative;
@@ -242,105 +371,127 @@
     }
 
     .hack-title {
-      font-size: 1.2rem;
-      font-weight: 700;
+      font-size: 1.4rem;
+      font-weight: 800;
       color: var(--text-primary);
       line-height: 1.3;
-      margin-bottom: 0.8rem;
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .hack-card:hover .hack-title {
+      background: var(--gradient-hacks);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .hack-meta {
       display: flex;
-      gap: 0.6rem;
+      gap: 0.8rem;
       align-items: center;
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
       flex-wrap: wrap;
     }
 
     .hack-category {
       background: var(--card-bg);
       color: var(--text-secondary);
-      padding: 0.3rem 0.7rem;
-      border-radius: 10px;
-      font-size: 0.75rem;
-      font-weight: 600;
+      padding: 0.4rem 0.9rem;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 700;
       border: 1px solid var(--border-subtle);
       backdrop-filter: blur(10px);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
     }
 
     .hack-category.productivity { 
-      background: rgba(79, 70, 229, 0.15);
+      background: rgba(79, 70, 229, 0.2);
       color: var(--accent-blue);
-      border-color: rgba(79, 70, 229, 0.3);
+      border-color: rgba(79, 70, 229, 0.4);
     }
 
     .hack-category.focus { 
-      background: rgba(6, 182, 212, 0.15);
+      background: rgba(6, 182, 212, 0.2);
       color: var(--accent-teal);
-      border-color: rgba(6, 182, 212, 0.3);
+      border-color: rgba(6, 182, 212, 0.4);
     }
 
     .hack-category.energy { 
-      background: rgba(244, 63, 94, 0.15);
+      background: rgba(244, 63, 94, 0.2);
       color: var(--accent-rose);
-      border-color: rgba(244, 63, 94, 0.3);
+      border-color: rgba(244, 63, 94, 0.4);
     }
 
     .hack-description {
       color: var(--text-secondary);
-      font-size: 0.95rem;
-      margin-bottom: 1.2rem;
-      line-height: 1.5;
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
       font-weight: 500;
+    }
+
+    .featured-image {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 16px;
+      margin-bottom: 1.2rem;
+      transition: all 0.4s ease;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .hack-card:hover .featured-image {
+      transform: scale(1.05);
+      border-color: rgba(79, 70, 229, 0.4);
+      box-shadow: var(--shadow-medium);
     }
 
     .try-hack {
       background: var(--gradient-hacks);
       color: white;
-      padding: 0.7rem 1.5rem;
-      border-radius: 12px;
+      padding: 0.9rem 1.8rem;
+      border-radius: 14px;
       text-decoration: none;
-      font-weight: 600;
-      font-size: 0.85rem;
+      font-weight: 700;
+      font-size: 0.9rem;
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      transition: all 0.3s ease;
+      gap: 0.5rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow: var(--shadow-soft);
       border: none;
       cursor: pointer;
-      min-height: 40px;
+      min-height: 44px;
+      background-size: 200% 200%;
+      animation: gradientShift 3s ease-in-out infinite;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
 
     .try-hack:hover {
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: var(--shadow-medium);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: var(--shadow-strong);
+      filter: brightness(1.1);
     }
 
-    .featured-image {
-      width: 100%;
-      height: 140px;
-      object-fit: cover;
-      border-radius: 12px;
-      margin-bottom: 1rem;
-      transition: all 0.3s ease;
-      border: 1px solid var(--border-subtle);
-    }
-
-    .hack-card:hover .featured-image {
-      transform: scale(1.02);
-      border-color: rgba(79, 70, 229, 0.3);
-    }
-
-    /* Modal Styles */
+    /* Enhanced Modal */
     .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(15px);
       z-index: 10000;
       display: flex;
       align-items: flex-start;
@@ -348,281 +499,285 @@
       padding: 1rem;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
-      animation: fadeIn 0.3s ease;
+      animation: fadeIn 0.4s ease;
     }
 
     .modal-content {
       background: var(--glass-bg);
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(25px);
       border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 1.5rem;
-      max-width: 500px;
+      border-radius: 24px;
+      padding: 2rem;
+      max-width: 550px;
       width: 100%;
       box-shadow: var(--shadow-strong);
       position: relative;
-      margin: 1rem auto;
-      animation: slideUp 0.3s ease;
+      margin: 2rem auto;
+      animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     @keyframes slideUp {
       from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(40px) scale(0.95);
       }
       to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
       }
     }
 
     .modal-close {
       position: absolute;
-      top: 1rem;
-      right: 1rem;
+      top: 1.5rem;
+      right: 1.5rem;
       background: var(--card-bg);
       border: 1px solid var(--border-subtle);
       color: var(--text-primary);
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       cursor: pointer;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
       z-index: 1;
+      font-weight: 600;
     }
 
     .modal-close:hover {
       background: var(--accent-rose);
       color: white;
-      transform: scale(1.1);
+      transform: scale(1.1) rotate(90deg);
+      box-shadow: var(--shadow-medium);
     }
 
     .modal-title {
       color: var(--text-primary);
-      font-size: 1.3rem;
-      margin-bottom: 1rem;
+      font-size: 1.6rem;
+      margin-bottom: 1.5rem;
       background: var(--gradient-hacks);
       background-size: 200% 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      font-weight: 700;
-      padding-right: 2.5rem;
+      font-weight: 800;
+      padding-right: 3rem;
       line-height: 1.3;
+      animation: titleGlow 3s ease-in-out infinite;
     }
 
     .modal-section {
       background: var(--card-bg);
       border: 1px solid var(--border-subtle);
-      padding: 1.2rem;
-      border-radius: 12px;
-      margin-bottom: 1rem;
+      padding: 1.5rem;
+      border-radius: 16px;
+      margin-bottom: 1.2rem;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .modal-section:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-soft);
     }
 
     .modal-section h3 {
       color: var(--accent-emerald);
-      margin-bottom: 0.8rem;
-      font-size: 1rem;
-      font-weight: 600;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      font-weight: 700;
     }
 
     .modal-section ol,
     .modal-section ul {
       color: var(--text-secondary);
-      line-height: 1.6;
-      padding-left: 1rem;
-      font-size: 0.9rem;
+      line-height: 1.7;
+      padding-left: 1.2rem;
+      font-size: 0.95rem;
     }
 
     .modal-section li {
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.6rem;
+      font-weight: 500;
     }
 
     .modal-button {
       background: var(--gradient-hacks);
       color: white;
-      padding: 0.8rem 1.5rem;
+      padding: 1rem 2rem;
       border: none;
-      border-radius: 12px;
-      font-weight: 600;
+      border-radius: 16px;
+      font-weight: 700;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       width: 100%;
-      font-size: 0.95rem;
-      min-height: 44px;
+      font-size: 1rem;
+      min-height: 52px;
+      background-size: 200% 200%;
+      animation: gradientShift 3s ease-in-out infinite;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
     }
 
     .modal-button:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-medium);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: var(--shadow-strong);
+      filter: brightness(1.1);
     }
 
     /* Mobile Optimizations */
     @media (max-width: 768px) {
       .container { 
-        padding: 0.75rem; 
+        padding: 1rem; 
       }
 
-      /* Compact Controls */
-      .controls { 
-        padding: 0.8rem;
-        border-radius: 12px;
-        margin-bottom: 1.2rem;
+      .header {
+        margin-bottom: 2rem;
+        padding: 1rem 0;
       }
 
-      .filter-section {
+      .main-title {
+        font-size: clamp(2rem, 8vw, 3rem);
         margin-bottom: 0.8rem;
       }
 
-      .filter-label,
-      .sort-label {
-        font-size: 0.75rem;
-        margin-bottom: 0.4rem;
+      .subtitle {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
       }
 
-      .filter-buttons {
-        gap: 0.5rem;
-      }
-
-      .filter-btn {
-        padding: 0.6rem 0.8rem;
-        font-size: 0.8rem;
-        border-radius: 10px;
-        min-height: 38px;
-      }
-
-      .sort-section {
-        padding-top: 0.8rem;
-      }
-
-      .sort-select {
-        padding: 0.6rem 0.8rem;
-        font-size: 0.8rem;
-        border-radius: 10px;
-        min-height: 38px;
+      .hack-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
       }
 
       .hack-card { 
-        padding: 1.2rem;
-        border-radius: 12px;
+        padding: 1.5rem;
+        border-radius: 16px;
       }
       
       .hack-title { 
-        font-size: 1.1rem;
-        line-height: 1.3;
-        margin-bottom: 0.6rem;
-      }
-
-      .featured-image { 
-        height: 120px;
-        border-radius: 10px;
+        font-size: 1.2rem;
         margin-bottom: 0.8rem;
       }
 
-      .hack-description {
-        font-size: 0.9rem;
-        line-height: 1.5;
+      .featured-image { 
+        height: 140px;
+        border-radius: 12px;
         margin-bottom: 1rem;
       }
 
       .try-hack {
-        padding: 0.6rem 1.2rem;
-        font-size: 0.8rem;
-        border-radius: 10px;
         width: 100%;
         justify-content: center;
-        min-height: 38px;
+        padding: 0.8rem 1.5rem;
       }
 
       .modal-content {
-        margin: 0.5rem auto;
-        padding: 1.2rem;
-        border-radius: 12px;
+        margin: 0;
+        padding: 1.5rem;
+        border-radius: 0;
+        min-height: 100vh;
+        max-width: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+      }
+
+      .modal-overlay {
+        padding: 0;
+        align-items: stretch;
       }
 
       .modal-close {
-        top: 0.8rem;
-        right: 0.8rem;
-        width: 32px;
-        height: 32px;
-        font-size: 1rem;
-      }
-
-      .modal-title {
-        font-size: 1.2rem;
-        padding-right: 2rem;
-      }
-
-      .modal-section {
-        padding: 1rem;
-        border-radius: 10px;
-        margin-bottom: 0.8rem;
-      }
-
-      .modal-button {
-        padding: 0.8rem 1.2rem;
-        font-size: 0.9rem;
-        border-radius: 10px;
-        min-height: 42px;
-      }
-    }
-
-    /* Extra small mobile devices */
-    @media (max-width: 480px) {
-      .container {
-        padding: 0.5rem;
-      }
-
-      .controls {
-        padding: 0.6rem;
+        top: 1rem;
+        right: 1rem;
+        width: 44px;
+        height: 44px;
+        font-size: 1.3rem;
+        z-index: 100;
       }
 
       .filter-buttons {
         grid-template-columns: 1fr 1fr;
-        gap: 0.4rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0.75rem;
       }
 
-      .filter-btn {
-        padding: 0.5rem 0.6rem;
-        font-size: 0.75rem;
-        min-height: 36px;
+      .controls {
+        padding: 1rem;
+      }
+
+      .filter-buttons {
+        grid-template-columns: 1fr;
+        gap: 0.6rem;
       }
 
       .hack-card {
-        padding: 1rem;
+        padding: 1.2rem;
       }
+    }
 
-      .modal-content {
-        padding: 1rem;
-        margin: 0.25rem auto;
-      }
+    /* Loading Animation */
+    .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 200px;
+    }
+
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid var(--border-subtle);
+      border-top: 3px solid var(--accent-blue);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
   </style>
 </head>
 <body>
   <div class="bg-gradient"></div>
+  <div class="floating-orbs">
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+  </div>
 
   <div class="container">
+    <header class="header">
+      <h1 class="main-title">925 ADHD Hacks</h1>
+      <p class="subtitle">Life-changing strategies for the neurodivergent mind ✨</p>
+      
+    </header>
+
     <div class="controls">
       <div class="filter-section">
-        <label class="filter-label">Filter Hacks</label>
+        <label class="filter-label">🎯 Filter by Category</label>
         <div class="filter-buttons">
-          <button class="filter-btn active" data-filter="all"><span>All</span></button>
-          <button class="filter-btn" data-filter="productivity"><span>Productivity</span></button>
-          <button class="filter-btn" data-filter="focus"><span>Focus</span></button>
-          <button class="filter-btn" data-filter="energy"><span>Energy</span></button>
+          <button class="filter-btn active" data-filter="all"><span>All Hacks</span></button>
+          <button class="filter-btn" data-filter="productivity"><span>💼 Productivity</span></button>
+          <button class="filter-btn" data-filter="focus"><span>🎯 Focus</span></button>
+          <button class="filter-btn" data-filter="energy"><span>⚡ Energy</span></button>
         </div>
       </div>
       
       <div class="sort-section">
-        <label class="sort-label">Sort By</label>
+        <label class="sort-label">📊 Sort Options</label>
         <select class="sort-select" id="sortSelect">
-          <option value="title">Alphabetical</option>
-          <option value="category">By Category</option>
+          <option value="title">📝 Alphabetical Order</option>
+          <option value="category">🏷️ Group by Category</option>
         </select>
       </div>
     </div>
@@ -637,37 +792,37 @@
     const adhdHacks = [
       {
         title: "The Ultimate 5-Minute Rule",
-        description: "Beat procrastination by committing to just 5 minutes of work.",
+        description: "Beat procrastination by committing to just 5 minutes of work. Your brain won't resist such a tiny commitment, but often you'll keep going once you start!",
         category: "Productivity",
         image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/A%20sleek%20modern%20stopwatch%20showing%20_5_00_%20on%20a%20c.jpg/:/rs=h:175,m"
       },
       {
         title: "Staying Organized with a Magnetic Board",
-        description: "Use a visual board to keep important tasks and reminders visible.",
+        description: "Use a visual board to keep important tasks and reminders visible. Perfect for the ADHD brain that needs constant visual cues.",
         category: "Focus",
         image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/A%20large%20stylish%20magnetic%20board%20or%20refrigerator.jpg/:/rs=h:175,m"
       },
       {
         title: "Boost Productivity with the Power of Comfy Shoes",
-        description: "Wearing shoes at home tricks your brain into work mode.",
+        description: "Wearing shoes at home tricks your brain into work mode. It's a simple psychological switch that signals productivity time.",
         category: "Energy",
         image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Clean%20white%20sneakers%20or%20comfortable%20work%20shoes.jpg/:/rs=h:175,m"
       },
       {
         title: "Make Cleaning a Breeze with Dawn Powerwash",
-        description: "Use this spray to make cleaning feel satisfying and effortless.",
+        description: "Use this spray to make cleaning feel satisfying and effortless. The instant results provide the dopamine hit ADHD brains crave.",
         category: "Energy",
         image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/A%20clean%2C%20sparkling%20kitchen%20sink%20or%20counter%20wit.jpg/:/rs=h:175,m"
       },
       {
         title: "The Two-Minute Task Sweep",
-        description: "Quickly tackle small tasks before they pile up and overwhelm you.",
+        description: "Quickly tackle small tasks before they pile up and overwhelm you. If it takes less than 2 minutes, do it now!",
         category: "Productivity",
         image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/A%20collection%20of%20productivity%20tools%20arranged%20ae.jpg/:/rs=h:175,m"
       },
       {
         title: "Mel Robbins' 5-4-3-2-1 Rule",
-        description: "Beat hesitation and jumpstart action with this powerful countdown technique.",
+        description: "Beat hesitation and jumpstart action with this powerful countdown technique. Perfect for overcoming ADHD paralysis.",
         category: "Focus",
         image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/A%20sleek%20modern%20stopwatch%20showing%20_5_00_%20on%20a%20c.jpg/:/rs=h:175,m"
       }
@@ -710,8 +865,19 @@
     function renderHacks() {
       const grid = document.getElementById('hackGrid');
       
+      if (filteredHacks.length === 0) {
+        grid.innerHTML = `
+          <div style="text-align: center; grid-column: 1 / -1; padding: 3rem;">
+            <h3 style="color: var(--text-secondary); font-size: 1.2rem; margin-bottom: 1rem;">🔍 No hacks found</h3>
+            <p style="color: var(--text-muted);">Try adjusting your search or filters</p>
+          </div>
+        `;
+        return;
+      }
+      
       const hacksHtml = filteredHacks.map((hack, index) => {
         const categoryClass = getCategoryClass(hack.category);
+        const emoji = hack.category === 'Productivity' ? '💼' : hack.category === 'Focus' ? '🎯' : '⚡';
         
         return `
           <div class="hack-card ${categoryClass}" style="--i: ${index}">
@@ -719,7 +885,7 @@
               <img src="${hack.image}" alt="${hack.title}" class="featured-image" onerror="this.style.display='none'" loading="lazy">
               <h3 class="hack-title">${hack.title}</h3>
               <div class="hack-meta">
-                <span class="hack-category ${categoryClass}">${hack.category}</span>
+                <span class="hack-category ${categoryClass}">${emoji} ${hack.category}</span>
               </div>
               <div class="hack-description">${hack.description}</div>
               <button class="try-hack" onclick="openHackModal(${index})">
@@ -746,13 +912,7 @@
         <div class="modal-content">
           <button class="modal-close" onclick="closeModal()">&times;</button>
           
-          <h2 class="modal-title">🧠 ${hack.title}</h2>
-          
-          <div class="modal-section">
-            <strong style="color: var(--accent-blue); font-size: 1.1rem;">
-              ${hackContent.quickStart}
-            </strong>
-          </div>
+          <h2 class="modal-title">${hack.title}</h2>
           
           <div class="modal-section">
             <h3>🎯 How to do it:</h3>
@@ -760,7 +920,7 @@
           </div>
           
           <button class="modal-button" onclick="closeModal()">
-            Got It! Let's Try 🚀
+            Got It! 🚀
           </button>
         </div>
       `;
@@ -796,84 +956,76 @@
     function getHackContent(hack) {
       const contents = {
         "The Ultimate 5-Minute Rule": {
-          quickStart: "⏱️ Beat procrastination with just 5 minutes!",
           steps: `
             <ol>
-              <li>Pick ONE tiny task</li>
-              <li>Set timer for 5 minutes</li>
-              <li>Start immediately</li>
-              <li>Stop when timer rings (or keep going!)</li>
+              <li><strong>Pick ONE small task</strong></li>
+              <li><strong>Set timer for 5 minutes</strong></li>
+              <li><strong>Start immediately</strong> - no prep needed</li>
+              <li><strong>Stop when timer rings</strong> (or keep going!)</li>
             </ol>
           `
         },
         "Boost Productivity with the Power of Comfy Shoes": {
-          quickStart: "👟 Trick your brain into work mode!",
           steps: `
             <ul>
-              <li>Put on real shoes (not slippers)</li>
-              <li>Keep them on while working</li>
-              <li>Notice how ready and focused you feel!</li>
+              <li><strong>Put on real shoes</strong> (not slippers)</li>
+              <li><strong>Keep them on while working</strong></li>
+              <li><strong>Notice how ready you feel</strong></li>
             </ul>
           `
         },
         "Staying Organized with a Magnetic Board": {
-          quickStart: "🧲 Never forget important stuff again!",
           steps: `
             <ul>
-              <li>Get magnetic board or use fridge</li>
-              <li>Write tasks on sticky notes</li>
-              <li>Use different colors for different things</li>
-              <li>Move completed ones to "DONE" pile</li>
+              <li><strong>Get magnetic board</strong> or use your fridge</li>
+              <li><strong>Use colorful sticky notes</strong> - one task per note</li>
+              <li><strong>Place where you'll see it</strong></li>
+              <li><strong>Move completed tasks to "DONE"</strong></li>
             </ul>
           `
         },
         "Make Cleaning a Breeze with Dawn Powerwash": {
-          quickStart: "🚿 Make cleaning actually satisfying!",
           steps: `
             <ul>
-              <li>Spray Dawn Powerwash on mess</li>
-              <li>Wait 30 seconds</li>
-              <li>Rinse with water</li>
-              <li>Watch it all slide off like magic!</li>
+              <li><strong>Spray Dawn Powerwash on mess</strong></li>
+              <li><strong>Wait 30 seconds</strong></li>
+              <li><strong>Rinse with water</strong></li>
+              <li><strong>Watch it slide off like magic!</strong></li>
             </ul>
           `
         },
         "The Two-Minute Task Sweep": {
-          quickStart: "⚡ Clear your mental clutter in 2 minutes!",
           steps: `
             <ol>
-              <li>Set a 2-minute timer</li>
-              <li>Look around and grab any task you can finish quickly</li>
-              <li>Put away that cup, send that text, file that paper</li>
-              <li>Stop when timer goes off - you're done!</li>
-              <li>Do this 2-3 times per day</li>
+              <li><strong>Set 2-minute timer</strong></li>
+              <li><strong>Grab any quick task</strong> - put away cup, send text, file paper</li>
+              <li><strong>Work fast, don't overthink</strong></li>
+              <li><strong>Stop when timer goes off</strong></li>
+              <li><strong>Repeat 2-3 times daily</strong></li>
             </ol>
           `
         },
         "Mel Robbins' 5-4-3-2-1 Rule": {
-          quickStart: "🚀 Override hesitation and launch into action!",
           steps: `
             <ol>
-              <li>When you feel yourself hesitating, start counting backwards</li>
-              <li>Say out loud: "5... 4... 3... 2... 1..."</li>
-              <li>The MOMENT you hit 1, physically move and start the task</li>
-              <li>Don't think, don't wait - just GO!</li>
-              <li>Use this for getting out of bed, starting work, making calls, etc.</li>
+              <li><strong>Notice yourself hesitating</strong></li>
+              <li><strong>Count backwards: "5... 4... 3... 2... 1..."</strong></li>
+              <li><strong>Move immediately on "1"</strong></li>
+              <li><strong>Don't think, just GO</strong></li>
             </ol>
-            <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.85rem;">
-              <strong>Why it works:</strong> The countdown interrupts your brain's pattern of overthinking and activates your prefrontal cortex to take control.
+            <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.9rem; padding: 1rem; background: var(--card-bg); border-radius: 8px;">
+              <strong>Why it works:</strong> Interrupts overthinking and activates your brain's control center.
             </p>
           `
         }
       };
 
       return contents[hack.title] || {
-        quickStart: "💡 Try this simple ADHD hack!",
         steps: `
           <ul>
-            <li>Start small</li>
-            <li>Try it once</li>
-            <li>See how it feels</li>
+            <li><strong>Start small</strong></li>
+            <li><strong>Try it once</strong></li>
+            <li><strong>Adjust as needed</strong></li>
           </ul>
         `
       };
@@ -902,7 +1054,7 @@
       });
     });
 
-    // Prevent zoom on double tap for better mobile experience
+    // Enhanced mobile experience
     let lastTouchEnd = 0;
     document.addEventListener('touchend', function (event) {
       const now = (new Date()).getTime();
@@ -911,6 +1063,13 @@
       }
       lastTouchEnd = now;
     }, false);
+
+    // Add keyboard navigation for accessibility
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && e.target.classList.contains('hack-card')) {
+        e.target.querySelector('.try-hack').click();
+      }
+    });
   </script>
 </body>
 </html>
