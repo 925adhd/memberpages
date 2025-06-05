@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Breathwork Studio - Professional Breathing Exercises</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital@0;1&display=swap" rel="stylesheet">
     <style>
@@ -34,6 +34,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -43,6 +44,9 @@
             line-height: 1.6;
             overflow-x: hidden;
             min-height: 100vh;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            touch-action: manipulation;
         }
 
         /* Background Effects */
@@ -106,18 +110,18 @@
             flex-direction: column;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem;
             position: relative;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 3rem;
-            padding: 3rem 2rem;
+            margin-bottom: 2rem;
+            padding: 2rem 1.5rem;
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
             border: 1px solid var(--border-subtle);
-            border-radius: 24px;
+            border-radius: 20px;
             box-shadow: var(--shadow-soft);
             position: relative;
             overflow: hidden;
@@ -131,11 +135,11 @@
             right: 0;
             height: 4px;
             background: var(--gradient-primary);
-            border-radius: 24px 24px 0 0;
+            border-radius: 20px 20px 0 0;
         }
 
         .logo {
-            font-size: 2rem;
+            font-size: 1.75rem;
             font-weight: 700;
             background: var(--gradient-primary);
             background-clip: text;
@@ -145,10 +149,11 @@
         }
 
         .tagline {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--text-secondary);
             font-style: italic;
             font-family: 'Crimson Text', serif;
+            line-height: 1.4;
         }
 
         /* Glass Card Component */
@@ -156,7 +161,7 @@
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
             border: 1px solid var(--border-subtle);
-            border-radius: 24px;
+            border-radius: 20px;
             box-shadow: var(--shadow-soft);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -170,17 +175,21 @@
         /* Exercise Selection Grid */
         .exercises-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .exercise-card {
-            padding: 2rem;
+            padding: 2rem 1.5rem;
             text-align: center;
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .exercise-card::before {
@@ -191,7 +200,7 @@
             right: 0;
             height: 4px;
             background: var(--exercise-gradient);
-            border-radius: 24px 24px 0 0;
+            border-radius: 20px 20px 0 0;
         }
 
         .exercise-card[data-type="calm"]::before { background: var(--gradient-calm); }
@@ -199,26 +208,33 @@
         .exercise-card[data-type="energy"]::before { background: var(--gradient-energy); }
         .exercise-card[data-type="sleep"]::before { background: var(--gradient-sleep); }
 
+        .exercise-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         .exercise-icon {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             margin: 0 auto 1.5rem;
             background: var(--exercise-gradient);
-            border-radius: 20px;
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 1.75rem;
             box-shadow: var(--shadow-soft);
             transition: transform 0.3s ease;
         }
 
-        .exercise-card:hover .exercise-icon {
-            transform: scale(1.1);
+        .exercise-card:active .exercise-icon {
+            transform: scale(0.95);
         }
 
         .exercise-title {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
@@ -233,13 +249,14 @@
             color: var(--text-muted);
             font-size: 0.9rem;
             line-height: 1.5;
+            margin-bottom: 1.5rem;
+            flex: 1;
         }
 
         .exercise-stats {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin-top: 1.5rem;
+            gap: 2rem;
             padding-top: 1.5rem;
             border-top: 1px solid var(--border-subtle);
         }
@@ -265,32 +282,27 @@
         .session-setup {
             display: none;
             text-align: center;
-            padding: 3rem 2rem;
+            padding: 2rem 1.5rem;
         }
 
         .setup-title {
-            font-size: 2rem;
+            font-size: 1.75rem;
             font-weight: 600;
             margin-bottom: 1rem;
         }
 
         .setup-description {
             color: var(--text-secondary);
-            margin-bottom: 3rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-bottom: 2.5rem;
             line-height: 1.6;
+            font-size: 1rem;
         }
 
         .setup-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            display: flex;
+            flex-direction: column;
             gap: 2rem;
-            margin-bottom: 3rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-bottom: 2.5rem;
         }
 
         .option-group {
@@ -301,24 +313,34 @@
             font-weight: 500;
             margin-bottom: 1rem;
             color: var(--text-primary);
+            font-size: 1.1rem;
         }
 
         .option-buttons {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 0.75rem;
         }
 
         .option-btn {
             background: var(--card-bg);
-            border: 1px solid var(--border-subtle);
+            border: 2px solid var(--border-subtle);
             color: var(--text-secondary);
-            padding: 0.75rem 1rem;
+            padding: 1rem;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 500;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .option-btn:active {
+            transform: scale(0.95);
         }
 
         .option-btn:hover {
@@ -340,26 +362,33 @@
             margin: 2rem 0;
         }
 
+        .toggle-label {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
         .switch {
             position: relative;
-            width: 50px;
-            height: 24px;
+            width: 56px;
+            height: 32px;
             background: var(--card-bg);
-            border-radius: 24px;
+            border-radius: 32px;
             cursor: pointer;
             transition: background 0.3s ease;
+            border: 2px solid var(--border-subtle);
         }
 
         .switch.active {
             background: var(--accent-blue);
+            border-color: var(--accent-blue);
         }
 
         .switch-handle {
             position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 20px;
-            height: 20px;
+            top: 3px;
+            left: 3px;
+            width: 22px;
+            height: 22px;
             background: white;
             border-radius: 50%;
             transition: transform 0.3s ease;
@@ -367,7 +396,7 @@
         }
 
         .switch.active .switch-handle {
-            transform: translateX(26px);
+            transform: translateX(24px);
         }
 
         /* Breathing Session */
@@ -378,11 +407,11 @@
             justify-content: center;
             min-height: 80vh;
             text-align: center;
-            padding: 2rem;
+            padding: 1rem;
         }
 
         .session-header {
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         .session-title {
@@ -393,14 +422,14 @@
 
         .session-progress {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 1rem;
         }
 
         .breathing-visualizer {
             position: relative;
-            width: 280px;
-            height: 280px;
-            margin: 0 auto 3rem;
+            width: min(80vw, 300px);
+            height: min(80vw, 300px);
+            margin: 0 auto 2rem;
         }
 
         .breath-circle {
@@ -408,8 +437,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 200px;
-            height: 200px;
+            width: min(60vw, 200px);
+            height: min(60vw, 200px);
             border-radius: 50%;
             background: var(--gradient-primary);
             box-shadow: 0 0 60px rgba(79, 70, 229, 0.3);
@@ -426,9 +455,9 @@
             opacity: 0;
         }
 
-        .ring-1 { width: 240px; height: 240px; }
-        .ring-2 { width: 260px; height: 260px; }
-        .ring-3 { width: 280px; height: 280px; }
+        .ring-1 { width: min(70vw, 240px); height: min(70vw, 240px); }
+        .ring-2 { width: min(75vw, 260px); height: min(75vw, 260px); }
+        .ring-3 { width: min(80vw, 280px); height: min(80vw, 280px); }
 
         .breath-instruction {
             position: absolute;
@@ -437,32 +466,44 @@
             transform: translate(-50%, -50%);
             color: white;
             font-weight: 600;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
             z-index: 10;
+            text-align: center;
+            max-width: 80%;
         }
 
         .breath-count {
             display: block;
-            font-size: 2rem;
+            font-size: 1.8rem;
             margin-top: 0.5rem;
+            font-weight: 700;
         }
 
         .session-controls {
             display: flex;
             gap: 1rem;
             margin-top: 2rem;
+            width: 100%;
+            max-width: 300px;
         }
 
         .control-btn {
             background: var(--glass-bg);
-            border: 1px solid var(--border-subtle);
+            border: 2px solid var(--border-subtle);
             color: var(--text-primary);
-            padding: 0.75rem 1.5rem;
+            padding: 1rem 1.5rem;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 500;
+            flex: 1;
+            min-height: 48px;
+            font-size: 1rem;
+        }
+
+        .control-btn:active {
+            transform: scale(0.95);
         }
 
         .control-btn:hover {
@@ -479,24 +520,24 @@
         .session-complete {
             display: none;
             text-align: center;
-            padding: 3rem 2rem;
+            padding: 2rem 1.5rem;
         }
 
         .completion-icon {
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             margin: 0 auto 2rem;
             background: var(--gradient-primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
+            font-size: 2.5rem;
             box-shadow: var(--shadow-soft);
         }
 
         .completion-title {
-            font-size: 2rem;
+            font-size: 1.75rem;
             font-weight: 600;
             margin-bottom: 1rem;
         }
@@ -504,20 +545,15 @@
         .completion-message {
             color: var(--text-secondary);
             margin-bottom: 2rem;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
             line-height: 1.6;
+            font-size: 1rem;
         }
 
         .session-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
         }
 
         .session-stat {
@@ -526,40 +562,48 @@
             background: var(--card-bg);
             border-radius: 16px;
             border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         .session-stat-value {
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: 600;
             color: var(--accent-blue);
-            margin-bottom: 0.5rem;
         }
 
         .session-stat-label {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
         /* Action Buttons */
         .action-buttons {
             display: flex;
+            flex-direction: column;
             gap: 1rem;
-            justify-content: center;
             margin-top: 2rem;
-            flex-wrap: wrap;
+            width: 100%;
         }
 
         .btn {
             background: var(--gradient-primary);
             color: white;
             border: none;
-            padding: 1rem 2rem;
+            padding: 1.25rem 2rem;
             border-radius: 12px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 1rem;
+            font-size: 1.1rem;
             box-shadow: var(--shadow-soft);
+            min-height: 56px;
+            width: 100%;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
         }
 
         .btn:hover {
@@ -569,7 +613,7 @@
 
         .btn.secondary {
             background: var(--glass-bg);
-            border: 1px solid var(--border-subtle);
+            border: 2px solid var(--border-subtle);
             color: var(--text-primary);
         }
 
@@ -577,39 +621,86 @@
             background: var(--card-bg);
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
+        /* Large Screen Adjustments */
+        @media (min-width: 768px) {
             .app-container {
-                padding: 1rem;
+                padding: 2rem;
+            }
+
+            .header {
+                padding: 3rem 2rem;
+                margin-bottom: 3rem;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1.1rem;
             }
 
             .exercises-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;
+                margin-bottom: 3rem;
             }
 
             .exercise-card {
-                padding: 1.5rem;
+                padding: 2rem;
+                min-height: 320px;
             }
 
-            .breathing-visualizer {
-                width: 240px;
-                height: 240px;
+            .exercise-icon {
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
             }
 
-            .breath-circle {
-                width: 160px;
-                height: 160px;
+            .exercise-title {
+                font-size: 1.5rem;
+            }
+
+            .setup-options {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 2rem;
+                max-width: 800px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .setup-title {
+                font-size: 2rem;
+            }
+
+            .session-stats {
+                grid-template-columns: repeat(3, 1fr);
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .session-stat {
+                flex-direction: column;
+                gap: 0.5rem;
             }
 
             .action-buttons {
-                flex-direction: column;
-                align-items: center;
+                flex-direction: row;
+                justify-content: center;
+                max-width: 400px;
+                margin-left: auto;
+                margin-right: auto;
             }
 
             .btn {
-                width: 100%;
-                max-width: 300px;
+                width: auto;
+                min-width: 160px;
+            }
+
+            .session-controls {
+                max-width: 400px;
             }
         }
 
@@ -687,8 +778,29 @@
         .btn:focus,
         .option-btn:focus,
         .control-btn:focus {
-            outline: 2px solid var(--accent-blue);
-            outline-offset: 2px;
+            outline: 3px solid var(--accent-blue);
+            outline-offset: 3px;
+        }
+
+        /* Safe area handling for devices with notches */
+        @supports (padding: max(0px)) {
+            .app-container {
+                padding-left: max(1rem, env(safe-area-inset-left));
+                padding-right: max(1rem, env(safe-area-inset-right));
+                padding-top: max(1rem, env(safe-area-inset-top));
+                padding-bottom: max(1rem, env(safe-area-inset-bottom));
+            }
+        }
+
+        /* Prevent zoom on input focus on iOS */
+        @media screen and (-webkit-min-device-pixel-ratio: 0) {
+            select, textarea, input[type="text"], input[type="password"], 
+            input[type="datetime"], input[type="datetime-local"], 
+            input[type="date"], input[type="month"], input[type="time"], 
+            input[type="week"], input[type="number"], input[type="email"], 
+            input[type="url"] {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
@@ -709,10 +821,12 @@
         <section id="exerciseSelection" class="fade-in">
             <div class="exercises-grid">
                 <div class="glass-card exercise-card" data-type="calm" tabindex="0" role="button" aria-label="Calming breath exercise">
-                    <div class="exercise-icon" style="background: var(--gradient-calm);">🌊</div>
-                    <h3 class="exercise-title">Calming Breath</h3>
-                    <p class="exercise-subtitle">4:2:6:2 Breathing</p>
-                    <p class="exercise-description">Extended exhale breathing to activate your parasympathetic nervous system and reduce anxiety naturally.</p>
+                    <div class="exercise-content">
+                        <div class="exercise-icon" style="background: var(--gradient-calm);">🌊</div>
+                        <h3 class="exercise-title">Calming Breath</h3>
+                        <p class="exercise-subtitle">4:2:6:2 Breathing</p>
+                        <p class="exercise-description">Extended exhale breathing to activate your parasympathetic nervous system and reduce anxiety naturally.</p>
+                    </div>
                     <div class="exercise-stats">
                         <div class="stat">
                             <div class="stat-value">5-10</div>
@@ -726,10 +840,12 @@
                 </div>
 
                 <div class="glass-card exercise-card" data-type="focus" tabindex="0" role="button" aria-label="Focus breath exercise">
-                    <div class="exercise-icon" style="background: var(--gradient-focus);">🧠</div>
-                    <h3 class="exercise-title">Box Breathing</h3>
-                    <p class="exercise-subtitle">4:4:4:4 Breathing</p>
-                    <p class="exercise-description">Military-grade breathing technique used by Navy SEALs to enhance concentration and mental clarity.</p>
+                    <div class="exercise-content">
+                        <div class="exercise-icon" style="background: var(--gradient-focus);">🧠</div>
+                        <h3 class="exercise-title">Box Breathing</h3>
+                        <p class="exercise-subtitle">4:4:4:4 Breathing</p>
+                        <p class="exercise-description">Military-grade breathing technique used by Navy SEALs to enhance concentration and mental clarity.</p>
+                    </div>
                     <div class="exercise-stats">
                         <div class="stat">
                             <div class="stat-value">5-15</div>
@@ -743,10 +859,12 @@
                 </div>
 
                 <div class="glass-card exercise-card" data-type="energy" tabindex="0" role="button" aria-label="Energizing breath exercise">
-                    <div class="exercise-icon" style="background: var(--gradient-energy);">⚡</div>
-                    <h3 class="exercise-title">Energizing Breath</h3>
-                    <p class="exercise-subtitle">Bellows Breathing</p>
-                    <p class="exercise-description">Dynamic breathing technique to increase alertness, energy, and mental sharpness naturally.</p>
+                    <div class="exercise-content">
+                        <div class="exercise-icon" style="background: var(--gradient-energy);">⚡</div>
+                        <h3 class="exercise-title">Energizing Breath</h3>
+                        <p class="exercise-subtitle">Bellows Breathing</p>
+                        <p class="exercise-description">Dynamic breathing technique to increase alertness, energy, and mental sharpness naturally.</p>
+                    </div>
                     <div class="exercise-stats">
                         <div class="stat">
                             <div class="stat-value">3-7</div>
@@ -760,10 +878,12 @@
                 </div>
 
                 <div class="glass-card exercise-card" data-type="sleep" tabindex="0" role="button" aria-label="Sleep breath exercise">
-                    <div class="exercise-icon" style="background: var(--gradient-sleep);">🌙</div>
-                    <h3 class="exercise-title">Sleep Breath</h3>
-                    <p class="exercise-subtitle">4:7:8 Breathing</p>
-                    <p class="exercise-description">Dr. Andrew Weil's scientifically-backed technique to fall asleep faster and improve sleep quality.</p>
+                    <div class="exercise-content">
+                        <div class="exercise-icon" style="background: var(--gradient-sleep);">🌙</div>
+                        <h3 class="exercise-title">Sleep Breath</h3>
+                        <p class="exercise-subtitle">4:7:8 Breathing</p>
+                        <p class="exercise-description">Dr. Andrew Weil's scientifically-backed technique to fall asleep faster and improve sleep quality.</p>
+                    </div>
                     <div class="exercise-stats">
                         <div class="stat">
                             <div class="stat-value">4-8</div>
@@ -816,7 +936,7 @@
             </div>
 
             <div class="toggle-switch">
-                <span>Audio Guidance</span>
+                <span class="toggle-label">Audio Guidance</span>
                 <div class="switch active" id="audioToggle">
                     <div class="switch-handle"></div>
                 </div>
@@ -909,6 +1029,19 @@
             init() {
                 this.bindEvents();
                 this.initializeAudio();
+                this.preventZoom();
+            }
+
+            preventZoom() {
+                // Prevent double-tap zoom on mobile
+                let lastTouchEnd = 0;
+                document.addEventListener('touchend', function (event) {
+                    const now = (new Date()).getTime();
+                    if (now - lastTouchEnd <= 300) {
+                        event.preventDefault();
+                    }
+                    lastTouchEnd = now;
+                }, false);
             }
 
             bindEvents() {
