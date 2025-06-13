@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>925 ADHD - The Complete ADHD Freelancer App</title>
-  <meta name="description" content="7 specialized tools designed for ADHD brains + exclusive access to our private Discord community of successful ADHD freelancers. Progressive Web App for instant access.">
+  <title>ADHD-Friendly Freelancing Tools - 925 ADHD</title>
+  <meta name="description" content="Finally, freelancing tools built specifically for ADHD brains. Get organized, stay focused, and earn income from platforms that actually work with your neurodivergent mind.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -119,7 +119,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(15, 20, 25, 0.9);
+      background: rgba(15, 20, 25, 0.95);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border-subtle);
     }
@@ -156,11 +156,11 @@
     .cta-header {
       background: var(--gradient-primary);
       color: white;
-      padding: 10px 20px;
+      padding: 12px 24px;
       border-radius: 25px;
       text-decoration: none;
-      font-weight: 600;
-      font-size: 0.9rem;
+      font-weight: 700;
+      font-size: 1rem;
       transition: all 0.3s ease;
       box-shadow: var(--shadow-soft);
     }
@@ -172,18 +172,30 @@
 
     /* Hero Section */
     .hero {
-      padding: 80px 0 60px;
+      padding: 60px 0 40px;
       text-align: center;
       position: relative;
     }
 
     .hero-content {
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
     }
 
+    .hero-badge {
+      background: var(--gradient-success);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 25px;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
     .hero h1 {
-      font-size: 3.5rem;
+      font-size: 3.2rem;
       font-weight: 800;
       line-height: 1.1;
       margin-bottom: 20px;
@@ -200,34 +212,83 @@
       50% { background-position: 100% 50%; }
     }
 
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     .hero-subtitle {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       color: var(--text-secondary);
       margin-bottom: 30px;
       line-height: 1.5;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
     }
 
-    .hero-emphasis {
-      font-size: 1.1rem;
+    .founder-story {
+      background: var(--glass-bg);
+      border: 1px solid var(--accent-secondary);
+      border-radius: 12px;
+      padding: 25px;
+      margin: 30px auto;
+      max-width: 600px;
+      animation: fadeInUp 0.8s ease-out 0.4s both;
+      text-align: left;
+    }
+
+    .founder-story h3 {
       color: var(--accent-secondary);
-      font-style: italic;
-      margin-bottom: 40px;
-      display: block;
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .founder-story p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .founder-story .highlight {
+      color: var(--accent-success);
+      font-weight: 600;
     }
 
     .price-hero {
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border-bright);
-      border-radius: 16px;
-      padding: 25px;
-      margin: 30px auto 40px;
-      max-width: 400px;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(79, 70, 229, 0.15));
+      border: 2px solid var(--accent-primary);
+      border-radius: 20px;
+      padding: 35px;
+      margin: 40px auto;
+      max-width: 500px;
       box-shadow: var(--shadow-medium);
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 0.8s ease-out 0.6s both;
+    }
+
+    .price-badge {
+      background: var(--accent-warning);
+      color: white;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      position: absolute;
+      top: -10px;
+      right: 20px;
     }
 
     .price-amount {
-      font-size: 2.5rem;
+      font-size: 3rem;
       font-weight: 800;
       color: var(--accent-success);
       margin-bottom: 5px;
@@ -235,28 +296,45 @@
 
     .price-period {
       color: var(--text-secondary);
-      font-size: 1rem;
-      margin-bottom: 15px;
+      font-size: 1.1rem;
+      margin-bottom: 20px;
     }
 
     .price-features {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
+      font-size: 1rem;
+      color: var(--text-primary);
+      line-height: 1.8;
+      text-align: left;
+    }
+
+    .price-features li {
+      margin-bottom: 8px;
+      position: relative;
+      padding-left: 25px;
+    }
+
+    .price-features li::before {
+      content: '✅';
+      position: absolute;
+      left: 0;
+      top: 0;
     }
 
     .cta-primary {
       background: var(--gradient-primary);
       color: white;
-      padding: 18px 40px;
-      border-radius: 12px;
+      padding: 20px 50px;
+      border-radius: 15px;
       text-decoration: none;
-      font-weight: 700;
-      font-size: 1.1rem;
+      font-weight: 800;
+      font-size: 1.2rem;
       display: inline-block;
       transition: all 0.3s ease;
       box-shadow: var(--shadow-medium);
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 2px solid rgba(255,255,255,0.2);
+      animation: fadeInUp 0.8s ease-out 0.8s both;
+      position: relative;
+      overflow: hidden;
     }
 
     .cta-primary:hover {
@@ -264,439 +342,112 @@
       box-shadow: var(--shadow-strong);
     }
 
-    .app-link-button {
-      background: var(--gradient-success);
-      color: white;
-      padding: 16px 35px;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 1.05rem;
-      display: inline-block;
-      transition: all 0.3s ease;
-      box-shadow: var(--shadow-medium);
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-
-    .app-link-button:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-strong);
-    }
-
-    .web-app-explainer {
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 30px;
-      margin: 40px 0;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .web-app-explainer h3 {
-      text-align: center;
-      font-size: 1.4rem;
-      font-weight: 600;
-      margin-bottom: 15px;
-      color: var(--text-primary);
-    }
-
-    .web-app-explainer > p {
-      text-align: center;
+    .guarantee {
+      margin-top: 25px;
       color: var(--text-secondary);
-      margin-bottom: 25px;
-      font-size: 1rem;
-      line-height: 1.5;
-    }
-
-    .explainer-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
-    .explainer-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 15px;
-      padding: 20px;
-      background: var(--card-bg);
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      transition: all 0.3s ease;
-    }
-
-    .explainer-item:hover {
-      border-color: var(--border-bright);
-      transform: translateY(-2px);
-    }
-
-    .explainer-icon {
-      font-size: 1.8rem;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
-    .explainer-content {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .explainer-content strong {
-      color: var(--text-primary);
       font-size: 0.95rem;
+      animation: fadeInUp 0.8s ease-out 1s both;
+    }
+
+    .guarantee-highlight {
+      background: var(--glass-bg);
+      border: 1px solid var(--accent-success);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 15px auto;
+      max-width: 400px;
+      color: var(--accent-success);
       font-weight: 600;
     }
 
-    .explainer-content span {
-      color: var(--text-secondary);
-      font-size: 0.85rem;
-      line-height: 1.4;
-    }
-
-    /* Installation Guide */
-    .installation {
+    /* Problem/Solution Section */
+    .problem-solution {
       padding: 80px 0;
       background: var(--secondary-bg);
       border-top: 1px solid var(--border-subtle);
-      border-bottom: 1px solid var(--border-subtle);
     }
 
-    .install-grid {
+    .problem-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      margin: 50px 0 40px;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 50px;
     }
 
-    .install-card {
+    .problem-card, .solution-card {
       background: var(--glass-bg);
-      backdrop-filter: blur(20px);
       border: 1px solid var(--border-subtle);
       border-radius: 16px;
       padding: 30px;
       transition: all 0.3s ease;
-      text-align: center;
-      box-shadow: var(--shadow-soft);
     }
 
-    .install-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--border-bright);
+    .problem-card {
+      border-color: var(--accent-danger);
+    }
+
+    .solution-card {
+      border-color: var(--accent-success);
+    }
+
+    .problem-card:hover, .solution-card:hover {
+      transform: translateY(-5px);
       box-shadow: var(--shadow-medium);
     }
 
-    .install-icon {
-      font-size: 3rem;
-      margin-bottom: 20px;
-      display: block;
-    }
-
-    .install-title {
-      font-size: 1.3rem;
-      font-weight: 600;
-      margin-bottom: 25px;
-      color: var(--text-primary);
-    }
-
-    .install-steps {
-      text-align: left;
-    }
-
-    .install-step {
+    .card-header {
       display: flex;
       align-items: center;
       gap: 15px;
-      margin-bottom: 15px;
-      padding: 12px;
-      background: var(--card-bg);
-      border-radius: 8px;
-      border: 1px solid var(--border-subtle);
+      margin-bottom: 20px;
     }
 
-    .step-number {
-      background: var(--gradient-primary);
-      color: white;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
+    .card-icon {
+      font-size: 2rem;
+    }
+
+    .card-title {
+      font-size: 1.3rem;
       font-weight: 600;
-      flex-shrink: 0;
     }
 
-    .step-text {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      line-height: 1.4;
+    .problem-card .card-title {
+      color: var(--accent-danger);
     }
 
-    .install-benefits {
-      background: var(--glass-bg);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 30px;
-      margin-top: 40px;
+    .solution-card .card-title {
+      color: var(--accent-success);
     }
 
-    .benefits-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
+    .card-list {
+      list-style: none;
+      padding: 0;
     }
 
-    .benefit-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 15px;
-      background: var(--card-bg);
-      border-radius: 8px;
-      border: 1px solid var(--border-subtle);
-      transition: all 0.3s ease;
-    }
-
-    .benefit-item:hover {
-      border-color: var(--border-bright);
-      transform: translateY(-2px);
-    }
-
-    .benefit-icon {
-      font-size: 1.5rem;
-      flex-shrink: 0;
-    }
-
-    .benefit-text {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      line-height: 1.3;
-    }
-
-    /* App Preview Section */
-    .app-preview {
-      padding: 60px 0;
-      background: var(--glass-bg);
-    }
-
-    .screenshots-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      margin: 40px 0;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .screenshot-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      padding: 15px;
-      transition: all 0.3s ease;
-      text-align: center;
-      flex: 0 1 200px;
-      max-width: 250px;
-    }
-
-    .screenshot-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--border-bright);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .screenshot-card img {
-      width: 100%;
-      max-width: 180px;
-      height: auto;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .screenshot-card img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    /* Image Modal/Lightbox */
-    .image-modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
-      backdrop-filter: blur(10px);
-    }
-
-    .modal-content {
+    .card-list li {
+      padding: 8px 0;
+      padding-left: 25px;
       position: relative;
-      margin: auto;
-      padding: 20px;
-      width: 90%;
-      max-width: 800px;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-image {
-      max-width: 100%;
-      max-height: 80vh;
-      border-radius: 12px;
-      box-shadow: var(--shadow-strong);
-      object-fit: contain;
-    }
-
-    .modal-caption {
-      background: var(--glass-bg);
-      color: var(--text-primary);
-      padding: 15px 20px;
-      margin-top: 15px;
-      border-radius: 8px;
-      text-align: center;
-      border: 1px solid var(--border-subtle);
-      backdrop-filter: blur(20px);
-    }
-
-    .modal-caption h4 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 5px;
-      color: var(--text-primary);
-    }
-
-    .modal-caption p {
-      font-size: 0.9rem;
       color: var(--text-secondary);
-      margin: 0;
+      line-height: 1.5;
     }
 
-    .close {
+    .problem-card .card-list li::before {
+      content: '❌';
       position: absolute;
-      top: 20px;
-      right: 30px;
-      color: var(--text-primary);
-      font-size: 40px;
-      font-weight: bold;
-      cursor: pointer;
-      z-index: 1001;
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.5);
-      border-radius: 50%;
-      transition: all 0.3s ease;
+      left: 0;
     }
 
-    .close:hover {
-      background: rgba(255, 255, 255, 0.1);
-      transform: scale(1.1);
-    }
-
-    .nav-button {
+    .solution-card .card-list li::before {
+      content: '✅';
       position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.5);
-      color: var(--text-primary);
-      border: none;
-      font-size: 24px;
-      padding: 15px 20px;
-      cursor: pointer;
-      border-radius: 50%;
-      transition: all 0.3s ease;
-      z-index: 1001;
+      left: 0;
     }
 
-    .nav-button:hover {
-      background: rgba(255, 255, 255, 0.1);
-      transform: translateY(-50%) scale(1.1);
-    }
-
-    .prev {
-      left: 20px;
-    }
-
-    .next {
-      right: 20px;
-    }
-
-    .modal-counter {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.7);
-      color: var(--text-primary);
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      backdrop-filter: blur(10px);
-    }
-
-    @media (max-width: 768px) {
-      .modal-content {
-        padding: 10px;
-      }
-      
-      .close {
-        top: 10px;
-        right: 15px;
-        font-size: 30px;
-        width: 40px;
-        height: 40px;
-      }
-      
-      .nav-button {
-        font-size: 20px;
-        padding: 12px 15px;
-      }
-      
-      .prev {
-        left: 10px;
-      }
-      
-      .next {
-        right: 10px;
-      }
-      
-      .modal-caption {
-        padding: 12px 15px;
-        margin-top: 10px;
-      }
-    }
-
-    .screenshot-title {
-      margin-top: 15px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .screenshot-desc {
-      margin-top: 5px;
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      line-height: 1.4;
-    }
-
-    /* Features Grid */
-    .features {
+    /* App Preview */
+    .app-preview {
       padding: 80px 0;
+      background: var(--glass-bg);
     }
 
     .section-title {
@@ -709,34 +460,33 @@
 
     .section-subtitle {
       text-align: center;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       color: var(--text-secondary);
       margin-bottom: 60px;
-      max-width: 600px;
+      max-width: 700px;
       margin-left: auto;
       margin-right: auto;
     }
 
-    .features-grid {
+    .tools-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 25px;
-      margin-bottom: 60px;
+      margin-top: 50px;
     }
 
-    .feature-card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
+    .tool-card {
+      background: var(--card-bg);
       border: 1px solid var(--border-subtle);
       border-radius: 16px;
-      padding: 30px;
+      padding: 25px;
       transition: all 0.3s ease;
+      text-align: center;
       position: relative;
       overflow: hidden;
-      box-shadow: var(--shadow-soft);
     }
 
-    .feature-card::before {
+    .tool-card::before {
       content: '';
       position: absolute;
       top: 0;
@@ -748,199 +498,58 @@
       transition: transform 0.3s ease;
     }
 
-    .feature-card:hover {
+    .tool-card:hover {
       transform: translateY(-5px);
       border-color: var(--border-bright);
       box-shadow: var(--shadow-medium);
     }
 
-    .feature-card:hover::before {
+    .tool-card:hover::before {
       transform: scaleX(1);
     }
 
-    .feature-icon {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      display: block;
-    }
-
-    .feature-title {
-      font-size: 1.3rem;
-      font-weight: 600;
-      margin-bottom: 12px;
-      color: var(--text-primary);
-    }
-
-    .feature-desc {
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    .feature-badge {
-      background: var(--gradient-success);
-      color: white;
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      display: inline-block;
-    }
-
-    /* Roadmap Section */
-    .roadmap {
-      padding: 80px 0;
-      background: var(--secondary-bg);
-      border-top: 1px solid var(--border-subtle);
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    .roadmap-content {
-      text-align: center;
-    }
-
-    .roadmap-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-      margin: 50px 0 40px;
-    }
-
-    .roadmap-card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 25px;
-      transition: all 0.3s ease;
-      text-align: center;
-    }
-
-    .roadmap-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--border-bright);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .roadmap-icon {
+    .tool-icon {
       font-size: 2.5rem;
       margin-bottom: 15px;
       display: block;
     }
 
-    .roadmap-title {
+    .tool-title {
       font-size: 1.2rem;
       font-weight: 600;
       margin-bottom: 10px;
       color: var(--text-primary);
     }
 
-    .roadmap-desc {
+    .tool-desc {
       color: var(--text-secondary);
       line-height: 1.5;
       font-size: 0.95rem;
     }
 
-    .value-callout {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1));
-      border: 1px solid var(--accent-success);
-      border-radius: 12px;
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 15px;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .value-icon {
-      font-size: 1.5rem;
-      flex-shrink: 0;
-    }
-
-    .value-text {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      line-height: 1.4;
-    }
-
-    .value-text strong {
-      color: var(--accent-success);
-    }
-
-    /* Community Section */
-    .community {
+    /* Real User Stories */
+    .user-stories {
       padding: 80px 0;
-      background: var(--glass-bg);
-      border-top: 1px solid var(--border-subtle);
-      border-bottom: 1px solid var(--border-subtle);
+      background: var(--secondary-bg);
     }
 
-    .community-grid {
+    .story-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 30px;
       margin-top: 50px;
     }
 
-    .community-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 25px;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-
-    .community-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--border-bright);
-    }
-
-    .community-icon {
-      font-size: 3rem;
-      margin-bottom: 20px;
-      display: block;
-    }
-
-    .community-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-
-    .community-desc {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      line-height: 1.5;
-    }
-
-    /* Testimonials */
-    .testimonials {
-      padding: 80px 0;
+    .story-card {
       background: var(--glass-bg);
-    }
-
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
-      margin-top: 50px;
-    }
-
-    .testimonial-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(20px);
       border: 1px solid var(--border-subtle);
       border-radius: 16px;
       padding: 25px;
       transition: all 0.3s ease;
       position: relative;
-      box-shadow: var(--shadow-soft);
     }
 
-    .testimonial-card::before {
+    .story-card::before {
       content: '"';
       font-size: 3rem;
       color: var(--accent-secondary);
@@ -951,58 +560,115 @@
       opacity: 0.7;
     }
 
-    .testimonial-card:hover {
+    .story-card:hover {
       transform: translateY(-3px);
       border-color: var(--border-bright);
       box-shadow: var(--shadow-medium);
     }
 
-    .testimonial-card p {
+    .story-text {
       font-style: italic;
       color: var(--text-secondary);
       line-height: 1.6;
-      font-size: 1.05rem;
+      font-size: 1rem;
       padding-left: 20px;
+      margin-bottom: 15px;
+    }
+
+    .story-author {
+      padding-left: 20px;
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* Honest Expectations */
+    .expectations {
+      padding: 80px 0;
+      background: var(--glass-bg);
+    }
+
+    .expectation-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-top: 50px;
+    }
+
+    .expectation-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .expectation-icon {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .expectation-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+    }
+
+    .expectation-desc {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.5;
     }
 
     /* Final CTA */
     .final-cta {
       padding: 80px 0;
       text-align: center;
-      background: var(--glass-bg);
+      background: var(--secondary-bg);
     }
 
     .cta-box {
       background: var(--card-bg);
-      border: 1px solid var(--border-bright);
+      border: 2px solid var(--accent-primary);
       border-radius: 20px;
-      padding: 50px 30px;
-      max-width: 600px;
+      padding: 50px 40px;
+      max-width: 700px;
       margin: 0 auto;
-      box-shadow: var(--shadow-medium);
+      box-shadow: var(--shadow-strong);
     }
 
     .cta-title {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 700;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
 
     .cta-subtitle {
       color: var(--text-secondary);
-      margin-bottom: 30px;
+      margin-bottom: 35px;
       font-size: 1.1rem;
+      line-height: 1.6;
     }
 
-    .urgency-text {
-      background: var(--glass-bg);
-      border: 1px solid var(--accent-warning);
-      border-radius: 10px;
-      padding: 15px;
-      margin: 25px 0;
-      color: var(--accent-warning);
-      font-size: 0.9rem;
-      font-weight: 500;
+    .final-cta-button {
+      background: var(--gradient-primary);
+      color: white;
+      padding: 22px 50px;
+      border-radius: 15px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.2rem;
+      display: inline-block;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-medium);
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+
+    .final-cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-strong);
     }
 
     /* Mobile Optimizations */
@@ -1012,215 +678,37 @@
       }
 
       .hero {
-        padding: 50px 0 40px;
+        padding: 40px 0 30px;
       }
 
       .hero h1 {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
       }
-      
+
       .hero-subtitle {
         font-size: 1.1rem;
       }
-      
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
 
-      .features, .roadmap, .community, .testimonials, .final-cta, .installation {
-        padding: 60px 0;
-      }
-      
-      .price-amount {
-        font-size: 2rem;
-      }
-      
       .section-title {
         font-size: 2rem;
       }
-      
-      .cta-primary {
-        padding: 15px 30px;
-        font-size: 1rem;
-      }
-
-      .app-link-button {
-        padding: 14px 28px;
-        font-size: 1rem;
-      }
-
-      .explainer-grid {
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 15px;
-      }
-
-      .web-app-explainer {
-        padding: 25px 20px;
-      }
-
-      .screenshots-grid {
-        justify-content: center;
-        gap: 15px;
-      }
-
-      .screenshot-card {
-        flex: 0 1 150px;
-        max-width: 180px;
-        padding: 12px;
-      }
-
-      .screenshot-card img {
-        max-width: 140px;
-      }
-
-      .screenshot-title {
-        font-size: 0.85rem;
-      }
-
-      .screenshot-desc {
-        font-size: 0.75rem;
-      }
-    }
-
-    /* Footer responsive styles */
-    @media (max-width: 768px) {
-      footer a {
-        display: inline-block;
-        margin: 5px 10px !important;
-        font-size: 0.85rem !important;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        padding: 0 12px;
-      }
-
-      .header-content {
-        gap: 10px;
-      }
-
-      footer a {
-        display: block !important;
-        margin: 8px 0 !important;
-        padding: 8px 0;
-        font-size: 0.9rem !important;
-      }
-
-      .home-button {
-        padding: 8px 14px;
-        font-size: 0.8rem;
-      }
-
-      .cta-header {
-        padding: 8px 14px;
-        font-size: 0.8rem;
-      }
-
-      .hero {
-        padding: 40px 0 30px;
-      }
-      
-      .hero h1 {
-        font-size: 2rem;
-        line-height: 1.2;
-      }
-
-      .hero-subtitle {
-        font-size: 1rem;
-      }
-
-      .hero-emphasis {
-        font-size: 1rem;
-      }
-
-      .price-hero {
-        padding: 20px;
-        margin: 25px auto 35px;
-      }
 
       .price-amount {
-        font-size: 1.8rem;
-      }
-      
-      .features, .roadmap, .community, .testimonials, .final-cta, .app-preview, .installation {
-        padding: 50px 0;
-      }
-      
-      .section-title {
-        font-size: 1.8rem;
+        font-size: 2.5rem;
       }
 
-      .section-subtitle {
-        font-size: 1rem;
-        margin-bottom: 40px;
+      .cta-primary, .final-cta-button {
+        padding: 18px 40px;
+        font-size: 1.1rem;
       }
 
-      .cta-primary {
-        padding: 14px 25px;
-        font-size: 0.95rem;
-      }
-
-      .app-link-button {
-        padding: 13px 25px;
-        font-size: 0.95rem;
-      }
-
-      .explainer-grid {
+      .problem-grid {
         grid-template-columns: 1fr;
-        gap: 12px;
+        gap: 30px;
       }
 
-      .web-app-explainer {
-        padding: 20px 15px;
-        margin: 30px 0;
-      }
-
-      .web-app-explainer h3 {
-        font-size: 1.2rem;
-      }
-
-      .explainer-item {
-        padding: 15px;
-      }
-
-      .cta-header {
-        padding: 8px 16px;
-        font-size: 0.85rem;
-      }
-
-      .home-button {
-        padding: 8px 16px;
-        font-size: 0.85rem;
-      }
-
-      .screenshots-grid {
-        justify-content: center;
-        gap: 12px;
-        margin: 30px 0;
-      }
-
-      .screenshot-card {
-        flex: 0 1 120px;
-        max-width: 140px;
-        padding: 10px;
-      }
-
-      .screenshot-card img {
-        max-width: 120px;
-      }
-
-      .screenshot-title {
-        font-size: 0.8rem;
-        margin-top: 10px;
-      }
-
-      .screenshot-desc {
-        font-size: 0.7rem;
-      }
-
-      .feature-card {
-        padding: 25px 20px;
+      .tools-grid, .story-grid, .expectation-cards {
+        grid-template-columns: 1fr;
       }
 
       .cta-box {
@@ -1228,12 +716,30 @@
       }
 
       .cta-title {
-        font-size: 1.7rem;
+        font-size: 1.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 1.8rem;
       }
 
-      .urgency-text {
-        padding: 12px;
-        font-size: 0.85rem;
+      .price-hero {
+        padding: 25px 20px;
+      }
+
+      .price-amount {
+        font-size: 2rem;
+      }
+
+      .cta-primary, .final-cta-button {
+        padding: 16px 30px;
+        font-size: 1rem;
+      }
+
+      .section-title {
+        font-size: 1.7rem;
       }
     }
   </style>
@@ -1260,356 +766,272 @@
   <section class="hero">
     <div class="container">
       <div class="hero-content">
-        <h1>The Complete 925 ADHD Freelancer App</h1>
-        <p class="hero-subtitle">
-          Earn from home with real platforms that fit your ADHD brain.
-        </p>
-        <p class="hero-subtitle">
-          Get 7 ADHD-optimized tools + access to our private Discord of real freelancers making remote work actually work.
-        </p>
+        <div class="hero-badge">🧠 Built by Someone with ADHD, for People with ADHD</div>
         
-        <span class="hero-emphasis">🧠 "Finally, tools that work WITH my ADHD, not against it."</span>
+        <h1>Finally, Freelancing Tools That Work With Your ADHD Brain</h1>
+        
+        <p class="hero-subtitle">
+          Stop fighting your neurodivergent mind. Get the exact tools, platforms, and strategies I've built and tested while earning income from home with ADHD.
+        </p>
+
+        <div class="founder-story">
+          <h3>🧠 Built by Someone with ADHD</h3>
+          <p>I created these tools while researching and testing platforms myself. <span class="highlight">The platforms work</span> when you have the right organization and focus systems in place.</p>
+          <p>That's what this app gives you: <strong>all the platforms I've found and tested, plus the ADHD-friendly tools that keep me organized and productive.</strong></p>
+          <p>No more endless searching the web for legitimate platforms—I've done the research for you.</p>
+        </div>
         
         <div class="price-hero">
-          <div class="price-amount">💸 $9.25</div>
-          <div class="price-period">per month</div>
-          <div class="price-features">• Step-by-step earning paths<br>• $10–$30/hr platforms<br>• Discord job leads<br>• Regular updates<br>• Cancel anytime</div>
+          <div class="price-badge">Early Access</div>
+          <div class="price-amount">$9.25</div>
+          <div class="price-period">per month • Cancel anytime</div>
+          <ul class="price-features">
+            <li><strong>7 ADHD-optimized productivity tools</strong></li>
+            <li><strong>Platform guides</strong> I've personally tested</li>
+            <li><strong>Private Discord community</strong> (growing daily)</li>
+            <li><strong>Regular updates</strong> as I discover new platforms</li>
+            <li><strong>Honest reviews</strong> of what actually works</li>
+            <li><strong>Templates & systems</strong> that keep you organized</li>
+            <li><strong>Cancel anytime</strong> - no long-term commitment</li>
+          </ul>
         </div>
         
         <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-primary">
-          🚀 Start Earning with ADHD-Friendly Tools
+          🚀 Get Access to ADHD-Friendly Tools
         </a>
+
+        <div class="guarantee">
+          <div class="guarantee-highlight">
+            🛡️ 30-Day Money-Back Guarantee
+          </div>
+          Try it risk-free • Cancel anytime • Built by someone who gets it
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- App Preview Section -->
+  <!-- Problem/Solution -->
+  <section class="problem-solution">
+    <div class="container">
+      <div class="problem-grid">
+        <div class="problem-card">
+          <div class="card-header">
+            <span class="card-icon">😵‍💫</span>
+            <h3 class="card-title">The ADHD Freelancing Struggle</h3>
+          </div>
+          <ul class="card-list">
+            <li>Getting overwhelmed by too many platform options</li>
+            <li>Starting projects but never finishing them</li>
+            <li>Losing track of deadlines and opportunities</li>
+            <li>Fighting your brain instead of working with it</li>
+            <li>Inconsistent income due to inconsistent effort</li>
+            <li>Feeling like freelancing "isn't for you"</li>
+          </ul>
+        </div>
+
+        <div class="solution-card">
+          <div class="card-header">
+            <span class="card-icon">🎯</span>
+            <h3 class="card-title">The ADHD-Friendly Solution</h3>
+          </div>
+          <ul class="card-list">
+            <li>Curated platform recommendations I've personally tested</li>
+            <li>Task breakdown tools that prevent overwhelm</li>
+            <li>Automated reminders and deadline tracking</li>
+            <li>Energy-based scheduling that matches your natural rhythms</li>
+            <li>Quick reset tools for when your brain gets stuck</li>
+            <li>A community that actually understands your challenges</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- App Tools -->
   <section class="app-preview">
     <div class="container">
-      <h2 class="section-title">See The App In Action</h2>
-      <p class="section-subtitle">Take a look inside the 925 ADHD app and see how the tools work</p>
+      <h2 class="section-title">7 Tools Built Into Your App</h2>
+      <p class="section-subtitle">Each tool is designed specifically for how ADHD brains actually work—not how we wish they worked</p>
       
-      <div class="screenshots-grid">
-        <div class="screenshot-card">
-          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205130.png" 
-               alt="925 ADHD Guides Tab" 
-               data-title="Guides Tab" 
-               data-desc="Complete freelancing guides built specifically for ADHD brains">
-          <div class="screenshot-title">Guides Tab</div>
-          <div class="screenshot-desc">Complete freelancing guides built specifically for ADHD brains</div>
+      <div class="tools-grid">
+        <div class="tool-card">
+          <span class="tool-icon">⚡</span>
+          <h3 class="tool-title">Hourly Optimizer</h3>
+          <p class="tool-desc">Match tasks to your natural energy cycles. Work with your hyperfocus periods instead of fighting them.</p>
         </div>
-        <div class="screenshot-card">
-          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205151.png" 
-               alt="ADHD Productivity Tools" 
-               data-title="Productivity Tools" 
-               data-desc="Built-in tools designed specifically for ADHD brains">
-          <div class="screenshot-title">Productivity Tools</div>
-          <div class="screenshot-desc">Built-in tools designed specifically for ADHD brains</div>
+
+        <div class="tool-card">
+          <span class="tool-icon">📅</span>
+          <h3 class="tool-title">ADHD Daily Planner</h3>
+          <p class="tool-desc">Realistic scheduling with built-in breaks, dopamine rewards, and room for the unexpected.</p>
         </div>
-        <div class="screenshot-card">
-          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205202.png" 
-               alt="ADHD Motivational Home Page" 
-               data-title="Motivational Home" 
-               data-desc="Daily motivation and mindset content to keep you going">
-          <div class="screenshot-title">Motivational Home</div>
-          <div class="screenshot-desc">Daily motivation and mindset content to keep you going</div>
+
+        <div class="tool-card">
+          <span class="tool-icon">🧘</span>
+          <h3 class="tool-title">Breathwork Studio</h3>
+          <p class="tool-desc">Quick resets when overwhelm hits. 30-second breathing exercises to longer focus sessions.</p>
         </div>
-        <div class="screenshot-card">
-          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205121.png" 
-               alt="Discord Invite" 
-               data-title="Discord Invite" 
-               data-desc="Automatic invitation to our private ADHD freelancer community">
-          <div class="screenshot-title">Discord Invite</div>
-          <div class="screenshot-desc">Automatic invitation to our private ADHD freelancer community</div>
+
+        <div class="tool-card">
+          <span class="tool-icon">🧠</span>
+          <h3 class="tool-title">MindShift Tool</h3>
+          <p class="tool-desc">Flip negative thought spirals into productive action. Cognitive tools built for neurodivergent minds.</p>
         </div>
-        <div class="screenshot-card">
-          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Your%20paragraph%20text-3be1a9e.png" 
-               alt="Apps and Platforms Tab" 
-               data-title="Apps & Platforms" 
-               data-desc="Discover which platforms and apps actually make money for ADHD freelancers">
-          <div class="screenshot-title">Apps & Platforms</div>
-          <div class="screenshot-desc">Discover which platforms and apps actually make money for ADHD freelancers</div>
+
+        <div class="tool-card">
+          <span class="tool-icon">💰</span>
+          <h3 class="tool-title">Income Tracker</h3>
+          <p class="tool-desc">Visual tracking that celebrates small wins and helps identify your most profitable patterns.</p>
         </div>
-        <div class="screenshot-card">
-          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/blob-1a1729e.png" 
-               alt="ADHD Resources Sidebar" 
-               data-title="Resources Sidebar" 
-               data-desc="Blog, Power Playlist for ADHD, ADHD hacks, FAQ + more resources updated regularly">
-          <div class="screenshot-title">Resources Sidebar</div>
-          <div class="screenshot-desc">Blog, Power Playlist for ADHD, ADHD hacks, FAQ + more resources updated regularly</div>
+
+        <div class="tool-card">
+          <span class="tool-icon">🧮</span>
+          <h3 class="tool-title">Freelance Calculator</h3>
+          <p class="tool-desc">Plan finances around irregular ADHD income patterns. Budget for hyperfocus and downtime periods.</p>
+        </div>
+
+        <div class="tool-card">
+          <span class="tool-icon">🛠️</span>
+          <h3 class="tool-title">Platform Arsenal</h3>
+          <p class="tool-desc">Honest reviews and guides for gig platforms I've personally tested. Know what works before you waste time.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Features Section -->
-  <section class="features">
+  <!-- Real User Stories -->
+  <section class="user-stories">
     <div class="container">
-      <h2 class="section-title">7 Powerful Tools Built Into The App</h2>
-      <p class="section-subtitle">Every tool is built directly into your 925 ADHD app - no switching between different platforms or losing track of where things are</p>
+      <h2 class="section-title">What Early Users Are Saying</h2>
+      <p class="section-subtitle">Real feedback from people who understand the ADHD struggle</p>
       
-      <div class="features-grid">
-        <div class="feature-card">
-          <span class="feature-icon">⚡</span>
-          <h3 class="feature-title">Hourly Optimizer</h3>
-          <p class="feature-desc">Match your tasks to your natural energy cycles. No more fighting your brain - work WITH your ADHD patterns for maximum productivity.</p>
-          <span class="feature-badge">Included</span>
+      <div class="story-grid">
+        <div class="story-card">
+          <div class="story-text">
+            The platform guides saved me hours of research. Having someone with ADHD test these first and tell me what's actually worth my time is invaluable.
+          </div>
+          <div class="story-author">— Erica, Community Member</div>
         </div>
 
-        <div class="feature-card">
-          <span class="feature-icon">📅</span>
-          <h3 class="feature-title">Daily Schedule</h3>
-          <p class="feature-desc">ADHD-friendly planning with built-in dopamine rewards, realistic time blocks, and mandatory breaks that actually prevent burnout.</p>
-          <span class="feature-badge">Included</span>
+        <div class="story-card">
+          <div class="story-text">
+            Finally, a curated list of platforms that actually work! I was drowning in all the options online. This cut through the noise and showed me exactly where to focus my energy.
+          </div>
+          <div class="story-author">— Garrett, Early Member</div>
         </div>
 
-        <div class="feature-card">
-          <span class="feature-icon">💰</span>
-          <h3 class="feature-title">Earnings Tracker</h3>
-          <p class="feature-desc">Visual income tracking that celebrates every win and helps you identify your most profitable patterns without overwhelm.</p>
-          <span class="feature-badge">Included</span>
-        </div>
-
-        <div class="feature-card">
-          <span class="feature-icon">🧘</span>
-          <h3 class="feature-title">Breathwork Studio</h3>
-          <p class="feature-desc">Quick breathwork sessions from 30-second resets to longer focus builders - all designed specifically for neurodivergent nervous systems.</p>
-          <span class="feature-badge">Included</span>
-        </div>
-
-        <div class="feature-card">
-          <span class="feature-icon">🧠</span>
-          <h3 class="feature-title">MindShift</h3>
-          <p class="feature-desc">Cognitive reframing tools that help you flip ADHD thought spirals into productive action. Turn overwhelm into opportunity.</p>
-          <span class="feature-badge">Included</span>
-        </div>
-
-        <div class="feature-card">
-          <span class="feature-icon">🧮</span>
-          <h3 class="feature-title">Freelance Calculator</h3>
-          <p class="feature-desc">Visual financial planning that accounts for ADHD realities - irregular income, hyperfocus periods, and necessary downtime.</p>
-          <span class="feature-badge">Included</span>
-        </div>
-
-        <div class="feature-card">
-          <span class="feature-icon">🛠️</span>
-          <h3 class="feature-title">Gig Work Arsenal</h3>
-          <p class="feature-desc">Complete platform guides, task templates, and proven strategies to thrive in the gig economy while managing ADHD challenges.</p>
-          <span class="feature-badge">Included</span>
+        <div class="story-card">
+          <div class="story-text">
+            Having everything organized in one place is a game-changer for my ADHD brain. No more bookmarking random articles or forgetting which platforms I wanted to try.
+          </div>
+          <div class="story-author">— Kara, Beta User</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Installation Guide Section - MOVED HERE -->
-  <section class="installation">
+  <!-- Honest Expectations -->
+  <section class="expectations">
     <div class="container">
-      <h2 class="section-title">Install The Web App On Your Phone</h2>
-      <p class="section-subtitle">925 ADHD is a Progressive Web App (PWA) - it works just like a native app but with extra benefits!</p>
+      <h2 class="section-title">Let's Be Honest About Expectations</h2>
+      <p class="section-subtitle">No false promises—just real talk about what this can and can't do for you</p>
       
-      <div class="web-app-explainer">
-        <h3>What's a Web App?</h3>
-        <p>A web app works exactly like a regular app but runs through your browser. Here's why that's actually better:</p>
+      <div class="expectation-cards">
+        <div class="expectation-card">
+          <span class="expectation-icon">⏰</span>
+          <h3 class="expectation-title">Time Investment Required</h3>
+          <p class="expectation-desc">These tools help you stay organized, but you still need to put in the work. The more time you dedicate, the more potential for earnings.</p>
+        </div>
+
+        <div class="expectation-card">
+          <span class="expectation-icon">📊</span>
+          <h3 class="expectation-title">Results Vary Wildly</h3>
+          <p class="expectation-desc">Gig platform earnings depend on your skills, time commitment, market demand, and which platforms you choose. No guarantees on specific amounts.</p>
+        </div>
+
+        <div class="expectation-card">
+          <span class="expectation-icon">🧠</span>
+          <h3 class="expectation-title">ADHD-Specific Help</h3>
+          <p class="expectation-desc">What this DOES provide: organization systems, focus tools, and strategies that work with ADHD brains instead of against them.</p>
+        </div>
+
+        <div class="expectation-card">
+          <span class="expectation-icon">🤝</span>
+          <h3 class="expectation-title">Growing Community</h3>
+          <p class="expectation-desc">You're joining early, so the Discord community is small but growing. You'll help shape what we build next based on real needs.</p>
+        </div>
+
+        <div class="expectation-card">
+          <span class="expectation-icon">🔄</span>
+          <h3 class="expectation-title">Ongoing Development</h3>
+          <p class="expectation-desc">I'm actively testing new platforms and adding features. Your subscription helps fund continued development and new discoveries.</p>
+        </div>
+
+        <div class="expectation-card">
+          <span class="expectation-icon">🛡️</span>
+          <h3 class="expectation-title">Risk-Free Trial</h3>
+          <p class="expectation-desc">30-day money-back guarantee. If the tools don't help your ADHD brain stay organized and focused, get a full refund.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- App Screenshots -->
+  <section class="app-preview" style="background: var(--secondary-bg);">
+    <div class="container">
+      <h2 class="section-title">See Inside The App</h2>
+      <p class="section-subtitle">Get a preview of the organized, ADHD-friendly platform guides you'll access</p>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 40px 0; max-width: 800px; margin-left: auto; margin-right: auto;">
+        <div style="background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 15px; text-align: center; transition: all 0.3s ease;">
+          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205130.png" alt="ADHD Guides" style="width: 100%; max-width: 150px; height: auto; border-radius: 8px; margin-bottom: 10px;">
+          <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px;">Platform Guides</div>
+          <div style="font-size: 0.8rem; color: var(--text-secondary);">Organized by category & earnings</div>
+        </div>
         
-        <div class="explainer-grid">
-          <div class="explainer-item">
-            <span class="explainer-icon">⚡</span>
-            <div class="explainer-content">
-              <strong>Always Up-to-Date</strong>
-              <span>No app store updates to remember - new features appear automatically</span>
-            </div>
-          </div>
-          <div class="explainer-item">
-            <span class="explainer-icon">💾</span>
-            <div class="explainer-content">
-              <strong>Saves Phone Storage</strong>
-              <span>Uses almost no storage space compared to downloaded apps</span>
-            </div>
-          </div>
-          <div class="explainer-item">
-            <span class="explainer-icon">🔒</span>
-            <div class="explainer-content">
-              <strong>More Secure</strong>
-              <span>Runs in your browser's security sandbox - safer than many native apps</span>
-            </div>
-          </div>
-          <div class="explainer-item">
-            <span class="explainer-icon">📱</span>
-            <div class="explainer-content">
-              <strong>Works Like a Real App</strong>
-              <span>Full screen, home screen icon, works offline - feels completely native</span>
-            </div>
-          </div>
+        <div style="background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 15px; text-align: center; transition: all 0.3s ease;">
+          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205151.png" alt="ADHD Tools" style="width: 100%; max-width: 150px; height: auto; border-radius: 8px; margin-bottom: 10px;">
+          <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px;">ADHD Tools</div>
+          <div style="font-size: 0.8rem; color: var(--text-secondary);">Focus & productivity aids</div>
+        </div>
+        
+        <div style="background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 15px; text-align: center; transition: all 0.3s ease;">
+          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205121.png" alt="Discord Access" style="width: 100%; max-width: 150px; height: auto; border-radius: 8px; margin-bottom: 10px;">
+          <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px;">Discord Community</div>
+          <div style="font-size: 0.8rem; color: var(--text-secondary);">Real-time support & tips</div>
+        </div>
+        
+        <div style="background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 15px; text-align: center; transition: all 0.3s ease;">
+          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Your%20paragraph%20text-3be1a9e.png" alt="Platform Reviews" style="width: 100%; max-width: 150px; height: auto; border-radius: 8px; margin-bottom: 10px;">
+          <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px;">Honest Reviews</div>
+          <div style="font-size: 0.8rem; color: var(--text-secondary);">Which platforms actually work</div>
         </div>
       </div>
-      
-      <div style="text-align: center; margin: 30px 0 40px;">
-        <a href="https://925adhd.glide.page" target="_blank" rel="noopener noreferrer" class="app-link-button">
-          📱 Open The 925 ADHD Web App
-        </a>
-        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 10px;">
-          Click above to access the app, then follow the installation steps below
+
+      <!-- Platform Preview Teaser -->
+      <div style="background: var(--glass-bg); border: 1px solid var(--accent-secondary); border-radius: 16px; padding: 30px; margin: 40px auto; max-width: 600px;">
+        <h3 style="text-align: center; color: var(--accent-secondary); margin-bottom: 20px;">🔍 What's Inside: Platform Categories</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+          <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center;">
+            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px;">📝 AI Training & Data</div>
+            <div style="color: var(--accent-success); font-size: 0.9rem;">$3-$14/hr range</div>
+          </div>
+          <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center;">
+            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px;">🎯 Surveys & Research</div>
+            <div style="color: var(--accent-success); font-size: 0.9rem;">$1-$150/hr range</div>
+          </div>
+          <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center;">
+            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px;">✍️ Content Writing</div>
+            <div style="color: var(--accent-success); font-size: 0.9rem;">$15-$500+ per piece</div>
+          </div>
+          <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center;">
+            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px;">🎨 Creative & Design</div>
+            <div style="color: var(--accent-success); font-size: 0.9rem;">$25-$200+/hr</div>
+          </div>
+        </div>
+        <p style="text-align: center; margin-top: 20px; color: var(--text-secondary); font-size: 0.9rem;">
+          <strong>Plus 6 more categories</strong> with detailed platform reviews, signup tips, and ADHD-specific strategies for each
         </p>
-      </div>
-      
-      <div class="install-grid">
-        <div class="install-card">
-          <span class="install-icon">📱</span>
-          <h3 class="install-title">iPhone Users</h3>
-          <div class="install-steps">
-            <div class="install-step">
-              <span class="step-number">1</span>
-              <span class="step-text">Open <strong>925adhd.glide.page</strong> in Safari</span>
-            </div>
-            <div class="install-step">
-              <span class="step-number">2</span>
-              <span class="step-text">Tap the Share button <span style="font-size: 1.2rem;">⬆️</span></span>
-            </div>
-            <div class="install-step">
-              <span class="step-number">3</span>
-              <span class="step-text">Select "Add to Home Screen"</span>
-            </div>
-            <div class="install-step">
-              <span class="step-number">4</span>
-              <span class="step-text">Tap "Add" - now it's on your home screen!</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="install-card">
-          <span class="install-icon">🤖</span>
-          <h3 class="install-title">Android Users</h3>
-          <div class="install-steps">
-            <div class="install-step">
-              <span class="step-number">1</span>
-              <span class="step-text">Open <strong>925adhd.glide.page</strong> in Chrome</span>
-            </div>
-            <div class="install-step">
-              <span class="step-number">2</span>
-              <span class="step-text">Tap the menu (3 dots) <span style="font-size: 1.2rem;">⋮</span></span>
-            </div>
-            <div class="install-step">
-              <span class="step-number">3</span>
-              <span class="step-text">Select "Add to Home screen"</span>
-            </div>
-            <div class="install-step">
-              <span class="step-number">4</span>
-              <span class="step-text">Tap "Add" - now it's on your home screen!</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="install-benefits">
-        <h3 style="text-align: center; margin-bottom: 25px; color: var(--text-primary);">Why Install The App?</h3>
-        <div class="benefits-grid">
-          <div class="benefit-item">
-            <span class="benefit-icon">⚡</span>
-            <span class="benefit-text">Instant access from your home screen</span>
-          </div>
-          <div class="benefit-item">
-            <span class="benefit-icon">📲</span>
-            <span class="benefit-text">No browser tabs to lose or forget</span>
-          </div>
-          <div class="benefit-item">
-            <span class="benefit-icon">🔕</span>
-            <span class="benefit-text">Distraction-free, full-screen experience</span>
-          </div>
-          <div class="benefit-item">
-            <span class="benefit-icon">🚀</span>
-            <span class="benefit-text">Faster loading and better performance</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Roadmap Section -->
-  <section class="roadmap">
-    <div class="container">
-      <div class="roadmap-content">
-        <h2 class="section-title">Constantly Evolving Platform</h2>
-        <p class="section-subtitle">Your subscription gets better every month with new tools, features, and community additions</p>
-        
-        <div class="roadmap-grid">
-          <div class="roadmap-card">
-            <span class="roadmap-icon">🚀</span>
-            <h3 class="roadmap-title">Regular Updates</h3>
-            <p class="roadmap-desc">New features and improvements shipped regularly based on community feedback and ADHD research</p>
-          </div>
-
-          <div class="roadmap-card">
-            <span class="roadmap-icon">🔧</span>
-            <h3 class="roadmap-title">New Tools Coming</h3>
-            <p class="roadmap-desc">Additional productivity and wellness tools specifically designed for ADHD brains are actively in development</p>
-          </div>
-
-          <div class="roadmap-card">
-            <span class="roadmap-icon">💡</span>
-            <h3 class="roadmap-title">Community-Driven</h3>
-            <p class="roadmap-desc">Your ideas shape our roadmap. Request features and vote on what gets built next in our Discord community</p>
-          </div>
-        </div>
-
-        <div class="value-callout">
-          <span class="value-icon">🧠</span>
-          <div class="value-text">
-            <strong>Living Platform:</strong> We're actively building and improving based on what our ADHD community actually needs.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Community Section -->
-  <section class="community">
-    <div class="container">
-      <h2 class="section-title">Plus: Private Discord Community Access</h2>
-      <p class="section-subtitle">Your app subscription includes an invite to our exclusive Discord server where ADHD freelancers connect, share wins, and support each other</p>
-      
-      <div class="community-grid">
-        <div class="community-card">
-          <span class="community-icon">💬</span>
-          <h3 class="community-title">40+ Private Channels</h3>
-          <p class="community-desc">From platform recommendations to accountability partnerships - find your people and share what actually works in our members-only Discord</p>
-        </div>
-
-        <div class="community-card">
-          <span class="community-icon">🐧</span>
-          <h3 class="community-title">Pebble Swap</h3>
-          <p class="community-desc">Exchange fidget toys, noise-canceling gear, and productivity gadgets that boost dopamine and focus with other members</p>
-        </div>
-
-        <div class="community-card">
-          <span class="community-icon">🤝</span>
-          <h3 class="community-title">Daily Accountability</h3>
-          <p class="community-desc">Body-doubling sessions and check-ins that help you stay on track without judgment or shame - all happening in Discord</p>
-        </div>
-      </div>
-      
-      <div style="text-align: center; margin-top: 40px;">
-        <div style="background: var(--glass-bg); border: 1px solid var(--border-bright); border-radius: 12px; padding: 20px; max-width: 500px; margin: 0 auto;">
-          <span style="font-size: 1.2rem; margin-bottom: 10px; display: block;">🔐</span>
-          <p style="color: var(--text-secondary); font-size: 0.95rem;">Discord invite sent automatically through your app once you subscribe. Private community, no public access.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials -->
-  <section class="testimonials">
-    <div class="container">
-      <h2 class="section-title">What Our Members Say</h2>
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <p>"This is the first time I've found a resource that actually *gets* how my brain works. I didn't know where to start before 925 ADHD."</p>
-        </div>
-        <div class="testimonial-card">
-          <p>"I've never stuck with anything this long. The dopamine hits from finishing tiny tasks actually help me stay focused on bigger goals."</p>
-        </div>
-        <div class="testimonial-card">
-          <p>"Your guides explained freelancing in a way I could follow, and now I've landed my first consistent gig! Thank you for making this so ADHD-friendly."</p>
-        </div>
       </div>
     </div>
   </section>
@@ -1618,151 +1040,24 @@
   <section class="final-cta">
     <div class="container">
       <div class="cta-box">
-        <h2 class="cta-title">Ready to Turn Your ADHD Into Your Superpower?</h2>
-        <p class="cta-subtitle">Join hundreds of successful ADHD freelancers who've transformed their work life with our constantly expanding app and supportive community</p>
+        <h2 class="cta-title">Ready to Work WITH Your ADHD Brain?</h2>
+        <p class="cta-subtitle">
+          Join a growing community of people who understand the neurodivergent freelancing journey. Get tools that actually make sense for how your brain works.
+        </p>
         
-        <div class="urgency-text">
-          ⚡ Subscribe today and get immediate access to the app with all 7 tools + Discord invite sent automatically
-        </div>
-        
-        <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-primary">
-          🎯 Get Full Access for $9.25/month
+        <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="final-cta-button">
+          🧠 Get ADHD-Friendly Tools - $9.25/month
         </a>
         
-        <p style="margin-top: 20px; color: var(--text-muted); font-size: 0.9rem;">
-          Cancel anytime • No contracts • Instant access
+        <p style="margin-top: 25px; color: var(--text-muted); font-size: 1rem;">
+          ✅ 30-day money-back guarantee<br>
+          ✅ Cancel anytime, no contracts<br>
+          ✅ Access to all 7 tools + Discord<br>
+          ✅ Regular updates as I discover new platforms
         </p>
       </div>
     </div>
   </section>
-
-  <!-- Image Modal -->
-  <div id="imageModal" class="image-modal">
-    <span class="close">&times;</span>
-    <button class="nav-button prev">&#10094;</button>
-    <button class="nav-button next">&#10095;</button>
-    <div class="modal-content">
-      <img class="modal-image" id="modalImage" src="" alt="">
-      <div class="modal-caption" id="modalCaption">
-        <h4 id="modalTitle"></h4>
-        <p id="modalDesc"></p>
-      </div>
-    </div>
-    <div class="modal-counter">
-      <span id="modalCounter"></span>
-    </div>
-  </div>
-
-  <script>
-    // Image Modal Functionality
-    const modal = document.getElementById('imageModal');
-    const modalImg = document.getElementById('modalImage');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalDesc = document.getElementById('modalDesc');
-    const modalCounter = document.getElementById('modalCounter');
-    const closeBtn = document.querySelector('.close');
-    const prevBtn = document.querySelector('.prev');
-    const nextBtn = document.querySelector('.next');
-    
-    const images = document.querySelectorAll('.screenshot-card img');
-    let currentImageIndex = 0;
-    
-    // Convert NodeList to Array for easier manipulation
-    const imageArray = Array.from(images);
-    
-    // Open modal when image is clicked
-    images.forEach((img, index) => {
-      img.addEventListener('click', () => {
-        currentImageIndex = index;
-        openModal();
-      });
-    });
-    
-    function openModal() {
-      const currentImg = imageArray[currentImageIndex];
-      modal.style.display = 'block';
-      modalImg.src = currentImg.src;
-      modalImg.alt = currentImg.alt;
-      modalTitle.textContent = currentImg.dataset.title;
-      modalDesc.textContent = currentImg.dataset.desc;
-      modalCounter.textContent = `${currentImageIndex + 1} of ${imageArray.length}`;
-      document.body.style.overflow = 'hidden'; // Prevent background scrolling
-    }
-    
-    function closeModal() {
-      modal.style.display = 'none';
-      document.body.style.overflow = 'auto'; // Restore scrolling
-    }
-    
-    function showPrevImage() {
-      currentImageIndex = currentImageIndex === 0 ? imageArray.length - 1 : currentImageIndex - 1;
-      openModal();
-    }
-    
-    function showNextImage() {
-      currentImageIndex = currentImageIndex === imageArray.length - 1 ? 0 : currentImageIndex + 1;
-      openModal();
-    }
-    
-    // Close modal when X is clicked
-    closeBtn.addEventListener('click', closeModal);
-    
-    // Navigation buttons
-    prevBtn.addEventListener('click', showPrevImage);
-    nextBtn.addEventListener('click', showNextImage);
-    
-    // Close modal when clicking outside the image
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        closeModal();
-      }
-    });
-    
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (modal.style.display === 'block') {
-        switch(e.key) {
-          case 'Escape':
-            closeModal();
-            break;
-          case 'ArrowLeft':
-            showPrevImage();
-            break;
-          case 'ArrowRight':
-            showNextImage();
-            break;
-        }
-      }
-    });
-    
-    // Touch/swipe support for mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
-    
-    modal.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    });
-    
-    modal.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-    });
-    
-    function handleSwipe() {
-      const swipeThreshold = 50;
-      const diff = touchStartX - touchEndX;
-      
-      if (Math.abs(diff) > swipeThreshold) {
-        if (diff > 0) {
-          // Swiped left - show next image
-          showNextImage();
-        } else {
-          // Swiped right - show previous image
-          showPrevImage();
-        }
-      }
-    }
-  </script>
 
   <!-- Footer -->
   <footer style="background: var(--secondary-bg); padding: 40px 0 30px; border-top: 1px solid var(--border-subtle);">
