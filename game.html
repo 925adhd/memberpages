@@ -84,7 +84,41 @@ startLoop(){const loop=ct=>{if(this.state==='game-over')return;if(this.paused){t
 startTimer(){setInterval(()=>{if(this.state!=='game-over'&&!this.paused){this.time++;this.ui.tm.textContent=this.time}},1000)}
 }
 function togglePause(){if(!window.gg||window.gg.state==='game-over')return;window.gg.paused=!window.gg.paused;const pauseScreen=document.getElementById('pauseScreen'),pauseBtn=document.getElementById('pb'),winScreen=document.getElementById('winScreen');winScreen.style.display='none';if(window.gg.paused){pauseScreen.style.display='flex';pauseBtn.textContent='▶️';pauseBtn.style.background='rgba(0,100,0,.8)';pauseBtn.style.borderColor='#0f0';pauseBtn.style.color='#0f0'}else{pauseScreen.style.display='none';pauseBtn.textContent='⏸️';pauseBtn.style.background='rgba(0,50,100,.8)';pauseBtn.style.borderColor='#08f';pauseBtn.style.color='#08f'}}
-function restart(){document.getElementById('gos').style.display='none';document.getElementById('pauseScreen').style.display='none';document.getElementById('winScreen').style.display='none';if(window.gg){if(window.gg.af)cancelAnimationFrame(window.gg.af);window.gg.stopJoystickMovement()}document.querySelectorAll('.dist').forEach(el=>el.remove());const g=document.getElementById('g');g.classList.remove('game-over','resting','hyperactive','distracted','disguise');window.gg=new G()}
+function restart(){
+// Hide all screens
+document.getElementById('gos').style.display='none';
+document.getElementById('pauseScreen').style.display='none';
+document.getElementById('winScreen').style.display='none';
+
+// Clean up existing game instance
+if(window.gg){
+if(window.gg.af)cancelAnimationFrame(window.gg.af);
+window.gg.stopJoystickMovement();
+// Clear any existing intervals
+if(window.gg.moveInterval)clearInterval(window.gg.moveInterval);
+// Remove chaos event listeners
+if(window.gg.cch && window.gg.cch.length > 0){
+window.gg.cch.forEach(h=>{
+window.gg.ui.cm2.removeEventListener('click',h);
+window.gg.ui.cm2.removeEventListener('touchend',h);
+});
+}
+}
+
+// Remove all items from the game area
+document.querySelectorAll('.dist').forEach(el=>el.remove());
+
+// Reset GIR visual state
+const g=document.getElementById('g');
+g.classList.remove('game-over','resting','hyperactive','distracted','disguise');
+g.style.animation='';
+
+// Hide chaos mode screen
+document.getElementById('cm2').style.display='none';
+
+// Create fresh game instance
+window.gg=new G();
+}
 window.addEventListener('load',()=>{window.gg=new G()});
 </script>
 </body>
@@ -213,7 +247,7 @@ body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0
 .gir-eyes::before,.gir-eyes::after{width:4px;height:4px}
 .meter{width:100px;height:12px}
 .tl{top:5px;right:5px;padding:8px;font-size:10px;max-width:140px;background:rgba(0,20,0,.9)}
-.mc{bottom:25vh;padding:8px;max-width:300px;width:95%}
+.mc{bottom:35vh;padding:8px;max-width:300px;width:95%}
 .top-controls{margin-bottom:6px}
 .center-controls{gap:4px}
 .jc{width:65px;height:65px}
@@ -240,7 +274,7 @@ body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0
 .gir-eyes::before,.gir-eyes::after{width:3px;height:3px}
 .meter{width:80px;height:10px}
 .tl{font-size:9px;padding:6px;max-width:120px;background:rgba(0,20,0,.9)}
-.mc{bottom:20vh;padding:6px;max-width:280px;width:98%}
+.mc{bottom:30vh;padding:6px;max-width:280px;width:98%}
 .top-controls{margin-bottom:5px}
 .center-controls{gap:3px}
 .jc{width:60px;height:60px}
