@@ -641,26 +641,31 @@
       }
     }
 
-    // Fetch and initialize posts
     fetch(rssToJsonUrl)
-      .then(response => response.json())
-      .then(data => {
-        const container = document.getElementById('blog-posts');
-        
-        if (!data.items || data.items.length === 0) {
-          container.innerHTML = '<div class="error-message">No posts found. Check back soon for fresh ADHD insights!</div>';
-          return;
-        }
+  .then(response => {
+    if (!response.ok) throw new Error('Network response not OK');
+    return response.json();
+  })
+  .then(data => {
+    const container = document.getElementById('blog-posts');
+    
+    // Most JSON feed spec uses 'items', but your feed might use 'list' or 'entries'
+    const items = data.items || data.list || data.entries;
+    if (!items || items.length === 0) {
+      container.innerHTML = '<div class="error-message">No posts found. Check back soon!</div>';
+      return;
+    }
 
-        allPosts = data.items;
-        currentlyShown = Math.min(postsPerLoad, allPosts.length);
-        renderPosts();
-      })
-      .catch(error => {
-        console.error('Error fetching RSS feed:', error);
-        document.getElementById('blog-posts').innerHTML = 
-          '<div class="error-message">Unable to load posts right now. Your ADHD brain deserves better - try refreshing!</div>';
-      });
+    allPosts = items;
+    currentlyShown = Math.min(postsPerLoad, allPosts.length);
+    renderPosts();
+  })
+  .catch(error => {
+    console.error('Error loading JSON feed:', error);
+    document.getElementById('blog-posts').innerHTML =
+      '<div class="error-message">Unable to load posts right now. Try refreshing!</div>';
+  });
+
   </script>
 </body>
 </html>
