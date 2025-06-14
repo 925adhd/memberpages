@@ -115,6 +115,16 @@ body{font-family:'Comic Sans MS',cursive;background:linear-gradient(45deg,#0a0a0
 .win-btn{background:#0f0;color:#000;border:none;padding:12px 25px;font-size:16px;border-radius:8px;cursor:pointer;margin-top:15px;font-family:inherit;font-weight:bold}
 .win-btn:hover{background:#4f4;transform:scale(1.05)}
 
+/* Mission item visual enhancement */
+.dist.mission-item{
+  animation: pulse 1.5s infinite, float 2s ease-in-out infinite, mission-glow 2s infinite;
+  border: 2px solid #FFD700;
+}
+@keyframes mission-glow{
+  0%,100%{box-shadow:0 0 20px rgba(255,215,0,.8)}
+  50%{box-shadow:0 0 40px rgba(255,215,0,1),0 0 60px rgba(255,215,0,.6)}
+}
+
 /* Mobile optimizations */
 @media (max-width:768px){
 body{padding-bottom:40px}
@@ -204,7 +214,7 @@ body{padding-bottom:35px}
 </div>
 <div class="pause-section">
 <h4>🎯 Mission</h4>
-<p>Collect items matching your current mission! Wrong items cause big energy penalties.</p>
+<p>Collect items matching your current mission! Mission items glow gold. Wrong items cause big energy penalties.</p>
 </div>
 <div class="pause-section">
 <h4>🌪️ Chaos System</h4>
@@ -228,6 +238,7 @@ body{padding-bottom:35px}
 <div>• Rest when energy is low to avoid game over</div>
 <div>• Use dog mode when chaos gets too high</div>
 <div>• Watch your mission indicator - it shows what to collect!</div>
+<div>• Mission items have a golden glow and spawn more frequently!</div>
 </div>
 </div>
 </div>
@@ -324,6 +335,7 @@ this.tasks=this.levelTasks[this.level];
 this.cm=false;this.ctimer=0;this.mct=10;this.cch=[];this.disguised=false;this.lst=0;
 this.quotes={g:["DOOM SONG!",'What button?','WHEEE!'],t:['TACOS!','MORE TACOS!'],p:['PIGGY!','RUBBER!'],c:['CHAOS!','POTATOES!'],tired:['*yawn*','sleepy...'],rest:['*snoring*','tacos...']};
 this.lut=0;this.af=null;this.joystickActive=false;this.moveInterval=null;this.isMobile=('ontouchstart' in window);this.uiVisible=true;this.paused=false;
+this.missionItemBoost=0.65; // 65% chance to spawn mission items
 this.init()}
 init(){this.loadHS();this.updateBounds();this.updateGirSize();setTimeout(()=>{this.posG()},100);this.setupEvents();this.createStars();this.updateTasks();this.startLoop();this.startSpawn();this.startTimer();this.updateUI()}
 loadHS(){this.hs=window.ghs||0;this.ui.hs.textContent=this.hs}
@@ -345,8 +357,25 @@ toggleDisguise(){if(this.state==='game-over'||this.paused)return;this.disguised=
 sayQuote(cat='g'){const now=Date.now();if(now-this.lst<500)return;this.lst=now;const qs=this.quotes[cat]||this.quotes.g,q=qs[Math.floor(Math.random()*qs.length)];this.showSpeech(q)}
 modStats(changes){for(const[stat,change]of Object.entries(changes)){if(this.stats.hasOwnProperty(stat.charAt(0))){this.stats[stat.charAt(0)]=Math.max(0,Math.min(100,this.stats[stat.charAt(0)]+change))}}if(this.stats.e<=0&&this.state!=='game-over'&&this.state!=='resting'){this.stats.e=0;this.gameOver()}}
 gameOver(){this.state='game-over';this.g.classList.add('game-over');this.stopJoystickMovement();if(this.af)cancelAnimationFrame(this.af);this.ui.fs.textContent=this.score;const nhs=this.saveHS();if(nhs)this.ui.hsm.innerHTML='<div class="nhs">🎉 NEW HIGH SCORE! 🎉</div>';else this.ui.hsm.innerHTML=`<div>High Score: ${this.hs}</div>`;this.ui.gos.style.display='flex'}
-startSpawn(){const spawn=()=>{if(this.dists.length<this.max&&this.state==='active'&&!this.paused){const types=['taco','shiny','rubber','waffles'],type=types[Math.floor(Math.random()*types.length)];this.createDist(type)}const baseRate=[3000,2500,2000][this.level]||3000;const chaosMod=this.stats.c/100*2000;const nextSpawn=baseRate-chaosMod+Math.random()*2000;setTimeout(spawn,Math.max(1000,nextSpawn))};setTimeout(spawn,2000)}
-createDist(type){const d=document.createElement('div');d.className=`dist ${type}`;const girWidth=this.size.w,girHeight=this.size.h;const m=60;let x,y,attempts=0,maxAttempts=10;do{x=m+Math.random()*(this.bounds.w-120-m);y=m+Math.random()*(this.bounds.h-120-m);attempts++;const girLeft=this.pos.x,girTop=this.pos.y;const girRight=girLeft+girWidth,girBottom=girTop+girHeight;const itemRight=x+40,itemBottom=y+40;const notOnGir=(x>girRight||itemRight<girLeft||y>girBottom||itemBottom<girTop);if(notOnGir||attempts>=maxAttempts)break;}while(true);d.style.left=x+'px';d.style.top=y+'px';this.gc.appendChild(d);const cs=window.getComputedStyle(d);const dd={element:d,type:type,x:x,y:y,w:parseInt(cs.width),h:parseInt(cs.height)};this.dists.push(dd);setTimeout(()=>{this.removeDist(dd)},12000+Math.random()*8000)}
+startSpawn(){const spawn=()=>{if(this.dists.length<this.max&&this.state==='active'&&!this.paused){const types=['taco','shiny','rubber','waffles'];
+// IMPROVED SPAWN LOGIC: Favor mission items
+let selectedType;
+const currentMission=this.tasks[this.ct];
+if(currentMission.type!=='any'&&Math.random()<this.missionItemBoost){
+// 65% chance to spawn the exact mission item
+selectedType=currentMission.type;
+}else{
+// 35% chance for random items (or 100% if mission is "any")
+selectedType=types[Math.floor(Math.random()*types.length)];
+}
+this.createDist(selectedType)}const baseRate=[3000,2500,2000][this.level]||3000;const chaosMod=this.stats.c/100*2000;const nextSpawn=baseRate-chaosMod+Math.random()*2000;setTimeout(spawn,Math.max(1000,nextSpawn))};setTimeout(spawn,2000)}
+createDist(type){const d=document.createElement('div');d.className=`dist ${type}`;
+// Add visual enhancement for mission items
+const currentMission=this.tasks[this.ct];
+if(currentMission.type===type||(currentMission.type==='any')){
+d.classList.add('mission-item');
+}
+const girWidth=this.size.w,girHeight=this.size.h;const m=60;let x,y,attempts=0,maxAttempts=10;do{x=m+Math.random()*(this.bounds.w-120-m);y=m+Math.random()*(this.bounds.h-120-m);attempts++;const girLeft=this.pos.x,girTop=this.pos.y;const girRight=girLeft+girWidth,girBottom=girTop+girHeight;const itemRight=x+40,itemBottom=y+40;const notOnGir=(x>girRight||itemRight<girLeft||y>girBottom||itemBottom<girTop);if(notOnGir||attempts>=maxAttempts)break;}while(true);d.style.left=x+'px';d.style.top=y+'px';this.gc.appendChild(d);const cs=window.getComputedStyle(d);const dd={element:d,type:type,x:x,y:y,w:parseInt(cs.width),h:parseInt(cs.height)};this.dists.push(dd);setTimeout(()=>{this.removeDist(dd)},12000+Math.random()*8000)}
 removeDist(dd){if(dd.element.parentNode)dd.element.remove();this.dists=this.dists.filter(d=>d!==dd)}
 interact(dd){if(this.state!=='active'||this.paused)return;this.removeDist(dd);const currentMission=this.tasks[this.ct];const isCorrectItem=currentMission.type==='any'||currentMission.type===dd.type;const ints={taco:{p:20,s:{c:25,e:15,d:-5},sp:'TACOS!',cc:.4,ds:{c:15,e:20,d:-10},dsp:'Dog tacos!',dcc:.1},shiny:{p:12,s:{c:10,e:-3,d:20},sp:'SHINY!',eff:'distracted',cc:0,ds:{c:3,e:5,d:5},dsp:'Shiny!',deff:null,dcc:0},rubber:{p:25,s:{c:20,e:10,d:10},sp:'PIGGY!',eff:'hyperactive',cc:.3,ds:{c:10,e:15,d:0},dsp:'*chews*',deff:null,dcc:.1},waffles:{p:18,s:{c:8,e:20,d:-8},sp:'Waffles!',cc:0,ds:{c:3,e:25,d:-15},dsp:'Good food!',dcc:0}};const int=ints[dd.type];if(!int)return;const isDisguised=this.disguised;if(!isCorrectItem){const energyPenalty=isDisguised?8:12;this.modStats({e:-energyPenalty,c:10,d:8});this.showFeedback(`Wrong! -${energyPenalty}`,'#f44');return}const stats=isDisguised?int.ds:int.s;const speech=isDisguised?int.dsp:int.sp;const effect=isDisguised?(int.deff||null):int.eff;const chaosChance=isDisguised?int.dcc:int.cc;const points=isDisguised?Math.floor(int.p*1.2):int.p;this.score+=points;this.ic++;this.modStats(stats);this.showSpeech(speech);this.showFeedback(`+${points}!`,isDisguised?'#08f':'#0f0');if(effect==='distracted'){this.g.classList.add('distracted');setTimeout(()=>this.g.classList.remove('distracted'),2500)}else if(effect==='hyperactive'){this.g.classList.add('hyperactive');setTimeout(()=>this.g.classList.remove('hyperactive'),3500)}if(Math.random()<chaosChance)setTimeout(()=>this.enterChaos(),1000);this.checkTask(dd.type)}
 checkTask(it){const ct=this.tasks[this.ct];let comp=ct.type==='any'||ct.type===it;if(comp){this.score+=ct.p;this.tc++;this.showFeedback(`+${ct.p}`,'#ff0');this.showSpeech('COMPLETE!');this.ct++;if(this.ct>=this.tasks.length){this.advanceLevel();return;}this.updateTasks();this.modStats({e:15,c:-5})}}
