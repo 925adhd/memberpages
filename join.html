@@ -1446,6 +1446,14 @@
   </div>
 
   <script>
+    let isZoomed = false;
+    let startScale = 1;
+    let currentScale = 1;
+    let startX = 0;
+    let startY = 0;
+    let currentX = 0;
+    let currentY = 0;
+
     function openModal(imageSrc, title, description) {
       const modal = document.getElementById('imageModal');
       const modalImg = document.getElementById('modalImg');
@@ -1456,6 +1464,14 @@
       modalImg.src = imageSrc;
       modalTitle.textContent = title;
       modalDesc.textContent = description;
+      
+      // Reset zoom
+      isZoomed = false;
+      currentScale = 1;
+      currentX = 0;
+      currentY = 0;
+      modalImg.style.transform = 'translate(0px, 0px) scale(1)';
+      modalImg.classList.remove('zoomed');
       
       // Prevent body scroll when modal is open
       document.body.style.overflow = 'hidden';
@@ -1468,6 +1484,81 @@
       // Restore body scroll
       document.body.style.overflow = 'auto';
     }
+
+    // Image zoom functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const modalImg = document.getElementById('modalImg');
+      
+      // Click to zoom
+      modalImg.addEventListener('click', function(e) {
+        e.stopPropagation();
+        
+        if (!isZoomed) {
+          // Zoom in to 2x
+          currentScale = 2;
+          isZoomed = true;
+          modalImg.classList.add('zoomed');
+        } else {
+          // Zoom out
+          currentScale = 1;
+          currentX = 0;
+          currentY = 0;
+          isZoomed = false;
+          modalImg.classList.remove('zoomed');
+        }
+        
+        modalImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${currentScale})`;
+      });
+
+      // Touch events for mobile
+      let initialDistance = 0;
+      let initialScale = 1;
+
+      modalImg.addEventListener('touchstart', function(e) {
+        if (e.touches.length === 2) {
+          e.preventDefault();
+          initialDistance = getDistance(e.touches[0], e.touches[1]);
+          initialScale = currentScale;
+        } else if (e.touches.length === 1 && isZoomed) {
+          e.preventDefault();
+          startX = e.touches[0].clientX - currentX;
+          startY = e.touches[0].clientY - currentY;
+        }
+      });
+
+      modalImg.addEventListener('touchmove', function(e) {
+        e.preventDefault();
+        
+        if (e.touches.length === 2) {
+          // Pinch zoom
+          const currentDistance = getDistance(e.touches[0], e.touches[1]);
+          const scale = (currentDistance / initialDistance) * initialScale;
+          currentScale = Math.min(Math.max(1, scale), 4); // Limit between 1x and 4x
+          
+          if (currentScale > 1) {
+            isZoomed = true;
+            modalImg.classList.add('zoomed');
+          } else {
+            isZoomed = false;
+            modalImg.classList.remove('zoomed');
+            currentX = 0;
+            currentY = 0;
+          }
+        } else if (e.touches.length === 1 && isZoomed) {
+          // Pan when zoomed
+          currentX = e.touches[0].clientX - startX;
+          currentY = e.touches[0].clientY - startY;
+        }
+        
+        modalImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${currentScale})`;
+      });
+
+      function getDistance(touch1, touch2) {
+        const dx = touch1.clientX - touch2.clientX;
+        const dy = touch1.clientY - touch2.clientY;
+        return Math.sqrt(dx * dx + dy * dy);
+      }
+    });
 
     // Close modal with Escape key
     document.addEventListener('keydown', function(event) {
