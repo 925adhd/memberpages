@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>925 ADHD - Freelancing Platforms That Actually Work for ADHD Brains</title>
+  <title>925 ADHD - All the ADHD-Friendly Freelance Tools You've Been Googling For</title>
   <meta name="description" content="Stop wasting time on platforms that don't pay. Get the exact freelancing platforms I've been paid from, plus ADHD-friendly tools to stay organized and focused.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
@@ -148,13 +148,13 @@
 
     /* Hero Section */
     .hero {
-      padding: 80px 0 60px;
+      padding: 60px 0 40px;
       text-align: center;
       position: relative;
     }
 
     .hero-content {
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
     }
 
@@ -171,10 +171,10 @@
     }
 
     .hero h1 {
-      font-size: 3.5rem;
+      font-size: 3.2rem;
       font-weight: 800;
       line-height: 1.1;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
       background: var(--gradient-adhd);
       background-size: 200% 200%;
       -webkit-background-clip: text;
@@ -200,18 +200,38 @@
     }
 
     .hero-subtitle {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       color: var(--text-secondary);
-      margin-bottom: 40px;
+      margin-bottom: 30px;
       line-height: 1.5;
       animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    /* Time Hook/Urgency Bar */
+    .urgency-bar {
+      background: linear-gradient(135deg, var(--accent-warning), #ff7c3c);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: inline-block;
+      margin: 20px 0;
+      animation: pulse 2s infinite;
+      box-shadow: var(--shadow-soft);
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
     }
 
     .value-props {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
-      margin: 40px 0;
+      margin: 30px 0;
       animation: fadeInUp 0.8s ease-out 0.4s both;
     }
 
@@ -246,17 +266,120 @@
       color: var(--text-secondary);
     }
 
+    /* Sneak Peek Section - NEW */
+    .sneak-peek {
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(16, 185, 129, 0.1));
+      border: 2px solid var(--accent-primary);
+      border-radius: 20px;
+      padding: 40px;
+      margin: 40px auto;
+      max-width: 800px;
+      animation: fadeInUp 0.8s ease-out 0.6s both;
+    }
+
+    .sneak-peek-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent-secondary);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .sneak-peek-subtitle {
+      color: var(--text-secondary);
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .preview-item {
+      background: var(--card-bg);
+      border: 1px solid var(--accent-success);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .preview-item:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .preview-checkmark {
+      color: var(--accent-success);
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .preview-title {
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .preview-desc {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    /* CTA Buttons - Enhanced */
+    .cta-primary {
+      background: var(--gradient-primary);
+      color: white;
+      padding: 22px 40px;
+      border-radius: 15px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.2rem;
+      display: inline-block;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-medium);
+      border: 2px solid rgba(255,255,255,0.2);
+      position: relative;
+      overflow: hidden;
+      margin: 20px 10px;
+    }
+
+    .cta-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .cta-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .cta-primary:hover::before {
+      left: 100%;
+    }
+
     .price-hero {
       background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(79, 70, 229, 0.15));
       border: 2px solid var(--accent-primary);
       border-radius: 20px;
       padding: 40px;
-      margin: 50px auto;
+      margin: 30px auto;
       max-width: 450px;
       box-shadow: var(--shadow-medium);
       position: relative;
       overflow: hidden;
-      animation: fadeInUp 0.8s ease-out 0.6s both;
+      animation: fadeInUp 0.8s ease-out 0.8s both;
     }
 
     .price-badge {
@@ -284,28 +407,6 @@
       margin-bottom: 25px;
     }
 
-    .cta-primary {
-      background: var(--gradient-primary);
-      color: white;
-      padding: 22px 50px;
-      border-radius: 15px;
-      text-decoration: none;
-      font-weight: 800;
-      font-size: 1.3rem;
-      display: inline-block;
-      transition: all 0.3s ease;
-      box-shadow: var(--shadow-medium);
-      border: 2px solid rgba(255,255,255,0.2);
-      animation: fadeInUp 0.8s ease-out 0.8s both;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cta-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-strong);
-    }
-
     .guarantee {
       margin-top: 25px;
       color: var(--text-secondary);
@@ -322,6 +423,48 @@
       max-width: 400px;
       color: var(--accent-success);
       font-weight: 600;
+    }
+
+    /* Free Download Section - NEW */
+    .free-download {
+      background: var(--glass-bg);
+      border: 2px solid var(--accent-warning);
+      border-radius: 16px;
+      padding: 30px;
+      margin: 40px auto;
+      max-width: 600px;
+      text-align: center;
+    }
+
+    .free-download-title {
+      color: var(--accent-warning);
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .free-download-desc {
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .download-button {
+      background: var(--accent-warning);
+      color: white;
+      padding: 15px 30px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      display: inline-block;
+      transition: all 0.3s ease;
+      margin: 10px;
+    }
+
+    .download-button:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-medium);
     }
 
     /* Proof Section */
@@ -394,6 +537,53 @@
     .proof-desc {
       color: var(--text-secondary);
       line-height: 1.5;
+    }
+
+    /* Real User Stories */
+    .user-stories {
+      padding: 80px 0;
+      background: var(--glass-bg);
+    }
+
+    .testimonial-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 25px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-bright);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .quote-mark {
+      position: absolute;
+      top: -5px;
+      left: 15px;
+      font-size: 3rem;
+      color: var(--accent-secondary);
+      font-family: serif;
+      opacity: 0.7;
+    }
+
+    .testimonial-text {
+      font-style: italic;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-size: 1rem;
+      padding-left: 20px;
+      margin-bottom: 15px;
+    }
+
+    .testimonial-author {
+      padding-left: 20px;
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 0.9rem;
     }
 
     /* What You Get Section */
@@ -513,25 +703,6 @@
       line-height: 1.6;
     }
 
-    .final-cta-button {
-      background: var(--gradient-primary);
-      color: white;
-      padding: 22px 50px;
-      border-radius: 15px;
-      text-decoration: none;
-      font-weight: 800;
-      font-size: 1.2rem;
-      display: inline-block;
-      transition: all 0.3s ease;
-      box-shadow: var(--shadow-medium);
-      border: 2px solid rgba(255,255,255,0.2);
-    }
-
-    .final-cta-button:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-strong);
-    }
-
     /* Modal */
     .modal {
       display: none;
@@ -624,15 +795,15 @@
       }
 
       .hero {
-        padding: 60px 0 40px;
+        padding: 50px 0 30px;
       }
 
       .hero h1 {
-        font-size: 2.5rem;
+        font-size: 2.3rem;
       }
 
       .hero-subtitle {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
       }
 
       .section-title {
@@ -643,12 +814,17 @@
         font-size: 3rem;
       }
 
-      .cta-primary, .final-cta-button {
-        padding: 20px 40px;
-        font-size: 1.2rem;
+      .cta-primary {
+        padding: 18px 30px;
+        font-size: 1.1rem;
+        margin: 10px 5px;
       }
 
       .value-props {
+        grid-template-columns: 1fr;
+      }
+
+      .preview-grid {
         grid-template-columns: 1fr;
       }
 
@@ -663,11 +839,19 @@
       .cta-title {
         font-size: 1.8rem;
       }
+
+      .sneak-peek {
+        padding: 30px 20px;
+      }
+
+      .sneak-peek-title {
+        font-size: 1.6rem;
+      }
     }
 
     @media (max-width: 480px) {
       .hero h1 {
-        font-size: 2rem;
+        font-size: 1.9rem;
       }
 
       .price-hero {
@@ -678,13 +862,17 @@
         font-size: 2.5rem;
       }
 
-      .cta-primary, .final-cta-button {
-        padding: 18px 30px;
-        font-size: 1.1rem;
+      .cta-primary {
+        padding: 16px 25px;
+        font-size: 1rem;
       }
 
       .section-title {
         font-size: 1.7rem;
+      }
+
+      .sneak-peek-title {
+        font-size: 1.4rem;
       }
     }
   </style>
@@ -701,7 +889,7 @@
         <a href="https://925adhd.com" style="display: flex; align-items: center;">
           <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/SmartSelect_20241218_055052_Gallery.png/:/rs=h:175,m" alt="925 ADHD Logo" style="height: 40px; width: auto; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
         </a>
-        <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-header">Get Access Now →</a>
+        <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-header">💸 Get the 925 ADHD App →</a>
       </div>
     </div>
   </header>
@@ -712,39 +900,113 @@
       <div class="hero-content">
         <div class="hero-badge">🧠 Built by Someone with ADHD</div>
         
-        <h1>Freelancing Platforms That Actually Work for ADHD Brains</h1>
+        <h1><span style="background: none !important; -webkit-background-clip: initial !important; -webkit-text-fill-color: initial !important; background-clip: initial !important; color: #ffffff !important;">📦</span> Freelance Platforms That Actually Pay — Tested & Verified</h1>
         
         <p class="hero-subtitle">
-          I've tested dozens of platforms so you don't have to. Here are the ones that actually pay, plus simple tools to help you stay organized and focused.
+          I've tested <strong>dozens of platforms and apps</strong> that claim to pay freelancers — survived the scams, duds, and time-wasters so you don't have to. Here are the ones that actually work, plus ADHD-friendly tools to keep you organized.
         </p>
+
+        <div class="urgency-bar">
+          🔥 Limited Early Access: Lock in the $9.25/month price before it increases
+        </div>
 
         <div class="value-props">
           <div class="value-prop">
+            <span class="value-prop-icon">🔍</span>
+            <div class="value-prop-title">Scams Filtered Out</div>
+            <div class="value-prop-desc">I've tested dozens of platforms so you don't waste time on scams, duds, or sites that don't pay</div>
+          </div>
+          <div class="value-prop">
             <span class="value-prop-icon">💰</span>
-            <div class="value-prop-title">Proven Platforms</div>
-            <div class="value-prop-desc">Only platforms I've personally been paid from with receipts to prove it</div>
+            <div class="value-prop-title">Proven Platforms Only</div>
+            <div class="value-prop-desc">Only platforms I've personally been paid from with receipts to prove it, or collectively deemed legit by the community</div>
           </div>
           <div class="value-prop">
             <span class="value-prop-icon">🧠</span>
-            <div class="value-prop-title">ADHD-Friendly Tools</div>
-            <div class="value-prop-desc">Organization and focus tools designed for how your brain actually works</div>
+            <div class="value-prop-title">ADHD-Friendly Organization</div>
+            <div class="value-prop-desc">Simple tools and guides designed for how your brain actually works</div>
           </div>
-          <div class="value-prop">
-            <span class="value-prop-icon">⚡</span>
-            <div class="value-prop-title">No More Research</div>
-            <div class="value-prop-desc">Skip the endless searching - I've done the testing and filtering for you</div>
+        </div>
+
+        <!-- NEW: Combined Sneak Peek Section -->
+        <div class="sneak-peek">
+          <h2 class="sneak-peek-title">👀 See Inside The App</h2>
+          <p class="sneak-peek-subtitle">Get a preview of the organized, ADHD-friendly platform guides and tools you'll access</p>
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin: 40px 0; max-width: 900px; margin-left: auto; margin-right: auto;">
+            <div style="background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; text-align: center; transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden;" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Your%20paragraph%20text-3be1a9e.png', 'Platforms & Apps', 'All the platforms and apps you can use to make money')" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--border-bright)'; this.style.boxShadow='var(--shadow-medium)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-subtle)'; this.style.boxShadow='none'">
+              <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Your%20paragraph%20text-3be1a9e.png" alt="Platform Reviews" style="width: 100%; max-width: 180px; height: auto; border-radius: 8px; margin-bottom: 15px; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 8px; font-size: 1.1rem;">Platforms & Apps</div>
+              <div style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4;">All the platforms and apps you can use to make money</div>
+            </div>
+            
+            <div style="background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; text-align: center; transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden;" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205130.png', 'Platform Guides', 'Step-by-step guides for beginners')" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--border-bright)'; this.style.boxShadow='var(--shadow-medium)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-subtle)'; this.style.boxShadow='none'">
+              <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205130.png" alt="ADHD Guides" style="width: 100%; max-width: 180px; height: auto; border-radius: 8px; margin-bottom: 15px; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 8px; font-size: 1.1rem;">Platform Guides</div>
+              <div style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4;">Step-by-step guides for beginners</div>
+            </div>
+            
+            <div style="background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; text-align: center; transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden;" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205121.png', 'Discord Community', 'Real-time support & tips')" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--border-bright)'; this.style.boxShadow='var(--shadow-medium)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-subtle)'; this.style.boxShadow='none'">
+              <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205121.png" alt="Discord Access" style="width: 100%; max-width: 180px; height: auto; border-radius: 8px; margin-bottom: 15px; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 8px; font-size: 1.1rem;">Discord Community</div>
+              <div style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4;">Real-time support & tips</div>
+            </div>
+            
+            <div style="background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; text-align: center; transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden;" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205151.png', 'ADHD Tools', 'Focus & productivity aids')" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--border-bright)'; this.style.boxShadow='var(--shadow-medium)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-subtle)'; this.style.boxShadow='none'">
+              <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205151.png" alt="ADHD Tools" style="width: 100%; max-width: 180px; height: auto; border-radius: 8px; margin-bottom: 15px; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 8px; font-size: 1.1rem;">ADHD Tools</div>
+              <div style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4;">Focus & productivity aids</div>
+            </div>
           </div>
+
+          <!-- Platform Categories Preview -->
+          <div style="background: var(--glass-bg); border: 1px solid var(--accent-secondary); border-radius: 16px; padding: 25px; margin: 30px 0;">
+            <h3 style="text-align: center; color: var(--accent-secondary); margin-bottom: 20px; font-size: 1.2rem;">🔍 What's Inside: Platform Categories</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+              <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
+                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">📝 AI Training & Data</div>
+                <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$3-$14/hr range</div>
+              </div>
+              <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
+                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">🎯 Surveys & Research</div>
+                <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$1-$150/hr range</div>
+              </div>
+              <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
+                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">✍️ Content Writing</div>
+                <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$15-$500+ per piece</div>
+              </div>
+              <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
+                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">🎨 Creative & Design</div>
+                <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$25-$200+/hr</div>
+              </div>
+            </div>
+            <p style="text-align: center; margin-top: 20px; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5;">
+              <strong>Plus 6 more categories</strong> with detailed platform reviews, signup tips, and ADHD-specific strategies for each
+            </p>
+          </div>
+          
+          <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-primary">
+            🚀 Get the 925 ADHD App
+          </a>
+        </div>
+
+        <!-- Free Download Teaser -->
+        <div class="free-download">
+          <h3 class="free-download-title">🎁 Free ADHD-Friendly Starter Pack</h3>
+          <p class="free-download-desc">Get basics and AI/data annotation guide — but the real organization, tools, and extra platforms are in the full app.</p>
+          <a href="https://925adhd.com/free" target="_blank" rel="noopener noreferrer" class="download-button">📥 Get Free Starter Pack</a>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 15px;">Want everything? Full app access is $9.25/month</p>
         </div>
         
         <div class="price-hero">
           <div class="price-badge">Early Access</div>
           <div class="price-amount">$9.25</div>
           <div class="price-period">per month • Cancel anytime</div>
+          
+          <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-primary">
+            🚀 Start Earning With ADHD Tools
+          </a>
         </div>
-        
-        <a href="#app-screenshots" class="cta-primary">
-          🚀 See What's Inside
-        </a>
 
         <div class="guarantee">
           <div class="guarantee-highlight">
@@ -759,8 +1021,8 @@
   <!-- Proof Section -->
   <section class="proof-section">
     <div class="container">
-      <h2 class="section-title">Real Payout Proof</h2>
-      <p class="section-subtitle">Here's actual evidence from platforms I've been paid from—because actions speak louder than promises.</p>
+      <h2 class="section-title">Real Payout Proof (Not Just Claims)</h2>
+      <p class="section-subtitle">Here's actual evidence from platforms I've been paid from — because I've waded through the scams so you don't have to.</p>
       
       <div class="proof-grid">
         <div class="proof-card">
@@ -778,70 +1040,53 @@
 
       <div style="background: var(--glass-bg); border: 1px solid var(--accent-secondary); border-radius: 12px; padding: 25px; margin: 40px auto 0; max-width: 600px; text-align: center;">
         <h3 style="color: var(--accent-secondary); margin-bottom: 15px; font-size: 1.2rem;">🛡️ Why This Matters</h3>
-        <p style="color: var(--text-secondary); line-height: 1.6;">Too many people sell courses about platforms they've never used. I'm sharing real proof because I've been exactly where you are - frustrated and tired of platforms that don't deliver.</p>
+        <p style="color: var(--text-secondary); line-height: 1.6;">Too many people sell lists of platforms they've never tried. I've personally tested dozens of sites and apps — been burned by the scams, frustrated by the duds, and found the gems. You get only the ones that actually pay.</p>
+      </div>
+
+      <!-- CTA after proof -->
+      <div style="text-align: center; margin-top: 40px;">
+        <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-primary">
+          🚀 Get the 925 ADHD App
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- App Screenshots Section -->
-  <section id="app-screenshots" class="app-screenshots" style="padding: 80px 0; background: var(--glass-bg);">
+  <!-- Real User Stories -->
+  <section class="user-stories">
     <div class="container">
-      <h2 class="section-title">See Inside The App</h2>
-      <p class="section-subtitle">Get a preview of the organized, ADHD-friendly platform guides and tools you'll access</p>
+      <h2 class="section-title">What Early Users Are Saying</h2>
+      <p class="section-subtitle">Real feedback from people who understand the ADHD struggle</p>
       
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin: 40px 0; max-width: 900px; margin-left: auto; margin-right: auto;">
-        <div style="background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; text-align: center; transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden;" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Your%20paragraph%20text-3be1a9e.png', 'Platforms & Apps', 'All the platforms and apps you can use to make money')" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--border-bright)'; this.style.boxShadow='var(--shadow-medium)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-subtle)'; this.style.boxShadow='none'">
-          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Your%20paragraph%20text-3be1a9e.png" alt="Platform Reviews" style="width: 100%; max-width: 180px; height: auto; border-radius: 8px; margin-bottom: 15px; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-          <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 8px; font-size: 1.1rem;">Platforms & Apps</div>
-          <div style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4;">All the platforms and apps you can use to make money</div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-top: 50px;">
+        <div class="testimonial-card">
+          <div class="quote-mark">"</div>
+          <div class="testimonial-text">
+            The platform guides saved me hours of research. Having someone with ADHD test these first and tell me what's actually worth my time is invaluable.
+          </div>
+          <div class="testimonial-author">— Erica, Community Member</div>
         </div>
-        
-        <div style="background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; text-align: center; transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden;" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205130.png', 'Platform Guides', 'Step-by-step guides for beginners')" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--border-bright)'; this.style.boxShadow='var(--shadow-medium)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-subtle)'; this.style.boxShadow='none'">
-          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205130.png" alt="ADHD Guides" style="width: 100%; max-width: 180px; height: auto; border-radius: 8px; margin-bottom: 15px; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-          <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 8px; font-size: 1.1rem;">Platform Guides</div>
-          <div style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4;">Step-by-step guides for beginners</div>
-        </div>
-        
-        <div style="background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; text-align: center; transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden;" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205121.png', 'Discord Community', 'Real-time support & tips')" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--border-bright)'; this.style.boxShadow='var(--shadow-medium)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-subtle)'; this.style.boxShadow='none'">
-          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205121.png" alt="Discord Access" style="width: 100%; max-width: 180px; height: auto; border-radius: 8px; margin-bottom: 15px; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-          <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 8px; font-size: 1.1rem;">Discord Community</div>
-          <div style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4;">Real-time support & tips</div>
-        </div>
-        
-        <div style="background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; text-align: center; transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden;" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205151.png', 'ADHD Tools', 'Focus & productivity aids')" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--border-bright)'; this.style.boxShadow='var(--shadow-medium)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-subtle)'; this.style.boxShadow='none'">
-          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205151.png" alt="ADHD Tools" style="width: 100%; max-width: 180px; height: auto; border-radius: 8px; margin-bottom: 15px; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-          <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 8px; font-size: 1.1rem;">ADHD Tools</div>
-          <div style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4;">Focus & productivity aids</div>
-        </div>
-      </div>
 
-      <!-- Platform Preview Teaser -->
-      <div style="background: var(--glass-bg); border: 1px solid var(--accent-secondary); border-radius: 16px; padding: 30px; margin: 40px auto; max-width: 700px;">
-        <h3 style="text-align: center; color: var(--accent-secondary); margin-bottom: 25px; font-size: 1.3rem;">🔍 What's Inside: Platform Categories</h3>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-          <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
-            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">📝 AI Training & Data</div>
-            <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$3-$14/hr range</div>
+        <div class="testimonial-card">
+          <div class="quote-mark">"</div>
+          <div class="testimonial-text">
+            Finally, a curated list of platforms that actually work! I was drowning in all the options online. This cut through the noise and showed me exactly where to focus my energy.
           </div>
-          <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
-            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">🎯 Surveys & Research</div>
-            <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$1-$150/hr range</div>
-          </div>
-          <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
-            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">✍️ Content Writing</div>
-            <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$15-$500+ per piece</div>
-          </div>
-          <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
-            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">🎨 Creative & Design</div>
-            <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$25-$200+/hr</div>
-          </div>
+          <div class="testimonial-author">— Garrett, Early Member</div>
         </div>
-        <p style="text-align: center; margin-top: 25px; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5;">
-          <strong>Plus 6 more categories</strong> with detailed platform reviews, signup tips, and ADHD-specific strategies for each
-        </p>
+
+        <div class="testimonial-card">
+          <div class="quote-mark">"</div>
+          <div class="testimonial-text">
+            Having everything organized in one place is a game-changer for my ADHD brain. No more bookmarking random articles or forgetting which platforms I wanted to try.
+          </div>
+          <div class="testimonial-author">— Kara, Beta User</div>
+        </div>
       </div>
     </div>
   </section>
+
+  <!-- App Screenshots Section - REMOVED, content moved to sneak peek -->
 
   <!-- What You Get -->
   <section class="what-you-get">
@@ -889,40 +1134,6 @@
     </div>
   </section>
 
-  <!-- Real User Stories -->
-  <section class="user-stories" style="padding: 80px 0; background: var(--glass-bg);">
-    <div class="container">
-      <h2 class="section-title">What Early Users Are Saying</h2>
-      <p class="section-subtitle">Real feedback from people who understand the ADHD struggle</p>
-      
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-top: 50px;">
-        <div style="background: var(--glass-bg); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 25px; transition: all 0.3s ease; position: relative;" onmouseover="this.style.transform='translateY(-3px)'; this.style.borderColor='var(--border-bright)'; this.style.boxShadow='var(--shadow-medium)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-subtle)'; this.style.boxShadow='none'">
-          <div style="position: absolute; top: -5px; left: 15px; font-size: 3rem; color: var(--accent-secondary); font-family: serif; opacity: 0.7;">"</div>
-          <div style="font-style: italic; color: var(--text-secondary); line-height: 1.6; font-size: 1rem; padding-left: 20px; margin-bottom: 15px;">
-            The platform guides saved me hours of research. Having someone with ADHD test these first and tell me what's actually worth my time is invaluable.
-          </div>
-          <div style="padding-left: 20px; color: var(--text-primary); font-weight: 600; font-size: 0.9rem;">— Erica, Community Member</div>
-        </div>
-
-        <div style="background: var(--glass-bg); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 25px; transition: all 0.3s ease; position: relative;" onmouseover="this.style.transform='translateY(-3px)'; this.style.borderColor='var(--border-bright)'; this.style.boxShadow='var(--shadow-medium)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-subtle)'; this.style.boxShadow='none'">
-          <div style="position: absolute; top: -5px; left: 15px; font-size: 3rem; color: var(--accent-secondary); font-family: serif; opacity: 0.7;">"</div>
-          <div style="font-style: italic; color: var(--text-secondary); line-height: 1.6; font-size: 1rem; padding-left: 20px; margin-bottom: 15px;">
-            Finally, a curated list of platforms that actually work! I was drowning in all the options online. This cut through the noise and showed me exactly where to focus my energy.
-          </div>
-          <div style="padding-left: 20px; color: var(--text-primary); font-weight: 600; font-size: 0.9rem;">— Garrett, Early Member</div>
-        </div>
-
-        <div style="background: var(--glass-bg); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 25px; transition: all 0.3s ease; position: relative;" onmouseover="this.style.transform='translateY(-3px)'; this.style.borderColor='var(--border-bright)'; this.style.boxShadow='var(--shadow-medium)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-subtle)'; this.style.boxShadow='none'">
-          <div style="position: absolute; top: -5px; left: 15px; font-size: 3rem; color: var(--accent-secondary); font-family: serif; opacity: 0.7;">"</div>
-          <div style="font-style: italic; color: var(--text-secondary); line-height: 1.6; font-size: 1rem; padding-left: 20px; margin-bottom: 15px;">
-            Having everything organized in one place is a game-changer for my ADHD brain. No more bookmarking random articles or forgetting which platforms I wanted to try.
-          </div>
-          <div style="padding-left: 20px; color: var(--text-primary); font-weight: 600; font-size: 0.9rem;">— Kara, Beta User</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Honest Expectations -->
   <section class="expectations">
     <div class="container">
@@ -961,12 +1172,12 @@
   <section class="final-cta">
     <div class="container">
       <div class="cta-box">
-        <h2 class="cta-title">Ready to Stop Wasting Time?</h2>
+        <h2 class="cta-title">Ready to Stop Researching and Start Earning?</h2>
         <p class="cta-subtitle">
           Join other ADHD freelancers who've found their focus and started earning from platforms that actually work.
         </p>
-        <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="final-cta-button">
-          🚀 Get Access Now - $9.25/month
+        <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-primary">
+          🚀 Get the 925 ADHD App - $9.25/month
         </a>
         <div style="margin-top: 20px; color: var(--text-secondary); font-size: 0.9rem;">
           30-day money-back guarantee • Cancel anytime
@@ -1084,56 +1295,3 @@
           e.preventDefault();
           initialDistance = getDistance(e.touches[0], e.touches[1]);
           initialScale = currentScale;
-        } else if (e.touches.length === 1 && isZoomed) {
-          e.preventDefault();
-          startX = e.touches[0].clientX - currentX;
-          startY = e.touches[0].clientY - currentY;
-        }
-      });
-
-      modalImg.addEventListener('touchmove', function(e) {
-        e.preventDefault();
-        
-        if (e.touches.length === 2) {
-          // Pinch zoom
-          const currentDistance = getDistance(e.touches[0], e.touches[1]);
-          const scale = (currentDistance / initialDistance) * initialScale;
-          currentScale = Math.min(Math.max(1, scale), 4); // Limit between 1x and 4x
-          
-          if (currentScale > 1) {
-            isZoomed = true;
-            modalImg.classList.add('zoomed');
-          } else {
-            isZoomed = false;
-            modalImg.classList.remove('zoomed');
-            currentX = 0;
-            currentY = 0;
-          }
-        } else if (e.touches.length === 1 && isZoomed) {
-          // Pan when zoomed
-          currentX = e.touches[0].clientX - startX;
-          currentY = e.touches[0].clientY - startY;
-        }
-        
-        modalImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${currentScale})`;
-      });
-
-      function getDistance(touch1, touch2) {
-        const dx = touch1.clientX - touch2.clientX;
-        const dy = touch1.clientY - touch2.clientY;
-        return Math.sqrt(dx * dx + dy * dy);
-      }
-    });
-
-    // Close modal with Escape key
-    document.addEventListener('keydown', function(event) {
-      if (event.key === 'Escape') {
-        closeModal();
-      }
-    });
-
-    // Add smooth scroll behavior for better UX
-    document.documentElement.style.scrollBehavior = 'smooth';
-  </script>
-</body>
-</html>
