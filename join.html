@@ -266,7 +266,515 @@
       color: var(--text-secondary);
     }
 
-    /* Sneak Peek Section - NEW */
+    /* Mobile Optimizations */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 15px;
+      }
+
+      .hero {
+        padding: 50px 0 30px;
+      }
+
+      .hero h1 {
+        font-size: 2.3rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .value-props {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 1.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-gradient"></div>
+  <div class="floating-orb orb-1"></div>
+  <div class="floating-orb orb-2"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="https://925adhd.com" style="display: flex; align-items: center;">
+          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/SmartSelect_20241218_055052_Gallery.png/:/rs=h:175,m" alt="925 ADHD Logo" style="height: 40px; width: auto; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        </a>
+        <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-header">💸 Get the 925 ADHD App →</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">🧠 Built by Someone with ADHD</div>
+        
+        <h1><span style="background: none !important; -webkit-background-clip: initial !important; -webkit-text-fill-color: initial !important; background-clip: initial !important; color: #ffffff !important;">📦</span> Freelance Platforms That Actually Pay — Tested & Verified</h1>
+        
+        <p class="hero-subtitle">
+          I've tested <strong>dozens of platforms</strong> — survived the scams and duds so you don't have to. All that scattered research was driving my ADHD brain crazy, <strong>so I put everything into one simple app.</strong>
+        </p>
+
+        <div class="urgency-bar">
+          🔥 Limited Early Access: Lock in the $9.25/month price before it increases
+        </div>
+
+        <div class="value-props">
+          <div class="value-prop">
+            <span class="value-prop-icon">🔍</span>
+            <div class="value-prop-title">No More Research Rabbit Holes</div>
+            <div class="value-prop-desc">Skip the endless Googling and forum diving — everything you need is organized in one ADHD-friendly app</div>
+          </div>
+          <div class="value-prop">
+            <span class="value-prop-icon">💰</span>
+            <div class="value-prop-title">Proven Platforms Only</div>
+            <div class="value-prop-desc">Only platforms I've personally been paid from with receipts to prove it, or collectively deemed legit by the community</div>
+            <a href="#proof-section" style="display: inline-block; margin-top: 8px; color: var(--accent-success); text-decoration: underline; font-size: 0.9rem; font-weight: 600; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-secondary)'" onmouseout="this.style.color='var(--accent-success)'">See the proof →</a>
+          </div>
+          <div class="value-prop">
+            <span class="value-prop-icon">🧠</span>
+            <div class="value-prop-title">Built for ADHD Brains</div>
+            <div class="value-prop-desc">Simple organization tools and step-by-step guides designed for how your brain actually works</div>
+          </div>
+        </div>
+
+        <!-- NEW: Combined Sneak Peek Section -->
+        <div class="sneak-peek">
+          <h2 class="sneak-peek-title">👀 See Inside The App</h2>
+          <p class="sneak-peek-subtitle">Get a preview of the organized, ADHD-friendly platform guides and tools you'll access</p>
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin: 40px 0; max-width: 900px; margin-left: auto; margin-right: auto;">
+            <div style="background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; text-align: center; transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden;" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Your%20paragraph%20text-3be1a9e.png', 'Platforms & Apps', 'All the platforms and apps you can use to make money')" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--border-bright)'; this.style.boxShadow='var(--shadow-medium)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-subtle)'; this.style.boxShadow='none'">
+              <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Your%20paragraph%20text-3be1a9e.png" alt="Platform Reviews" style="width: 100%; max-width: 180px; height: auto; border-radius: 8px; margin-bottom: 15px; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 8px; font-size: 1.1rem;">Platforms & Apps</div>
+              <div style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4;">All the platforms and apps you can use to make money</div>
+            </div>
+            
+            <div style="background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; text-align: center; transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden;" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205130.png', 'Platform Guides', 'Step-by-step guides for beginners')" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--border-bright)'; this.style.boxShadow='var(--shadow-medium)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-subtle)'; this.style.boxShadow='none'">
+              <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205130.png" alt="ADHD Guides" style="width: 100%; max-width: 180px; height: auto; border-radius: 8px; margin-bottom: 15px; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 8px; font-size: 1.1rem;">Platform Guides</div>
+              <div style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4;">Step-by-step guides for beginners</div>
+            </div>
+            
+            <div style="background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; text-align: center; transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden;" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205121.png', 'Discord Community', 'Real-time support & tips')" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--border-bright)'; this.style.boxShadow='var(--shadow-medium)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-subtle)'; this.style.boxShadow='none'">
+              <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205121.png" alt="Discord Access" style="width: 100%; max-width: 180px; height: auto; border-radius: 8px; margin-bottom: 15px; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 8px; font-size: 1.1rem;">Discord Community</div>
+              <div style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4;">Real-time support & tips</div>
+            </div>
+            
+            <div style="background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; text-align: center; transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden;" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205151.png', 'ADHD Tools', 'Focus & productivity aids')" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--border-bright)'; this.style.boxShadow='var(--shadow-medium)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-subtle)'; this.style.boxShadow='none'">
+              <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205151.png" alt="ADHD Tools" style="width: 100%; max-width: 180px; height: auto; border-radius: 8px; margin-bottom: 15px; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 8px; font-size: 1.1rem;">ADHD Tools</div>
+              <div style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4;">Focus & productivity aids</div>
+            </div>
+          </div>
+
+          <!-- Platform Categories Preview -->
+          <div style="background: var(--glass-bg); border: 1px solid var(--accent-secondary); border-radius: 16px; padding: 25px; margin: 30px 0;">
+            <h3 style="text-align: center; color: var(--accent-secondary); margin-bottom: 20px; font-size: 1.2rem;">🔍 What's Inside: Platform Categories</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+              <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
+                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">📝 AI Training & Data</div>
+                <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$3-$14/hr range</div>
+              </div>
+              <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
+                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">🎯 Surveys & Research</div>
+                <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$1-$150/hr range</div>
+              </div>
+              <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
+                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">✍️ Content Writing</div>
+                <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$15-$500+ per piece</div>
+              </div>
+              <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
+                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">🎨 Creative & Design</div>
+                <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$25-$200+/hr</div>
+              </div>
+            </div>
+            <p style="text-align: center; margin-top: 20px; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5;">
+              <strong>Plus 6 more categories</strong> with detailed platform reviews, signup tips, and ADHD-specific strategies for each
+            </p>
+          </div>
+          
+          <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-primary">
+            🚀 Get the 925 ADHD App
+          </a>
+        </div>
+
+        <!-- Free Download Teaser -->
+        <div class="free-download">
+          <h3 class="free-download-title">🎁 Free ADHD-Friendly Starter Pack</h3>
+          <p class="free-download-desc">Get basics and AI/data annotation guide — but the real organization, tools, and extra platforms are in the full app.</p>
+          <a href="https://925adhd.com/free" target="_blank" rel="noopener noreferrer" class="download-button">📥 Get Free Starter Pack</a>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 15px;">Want everything? Full app access is $9.25/month</p>
+        </div>
+        
+        <div class="price-hero">
+          <div class="price-badge">Early Access</div>
+          <div class="price-amount">$9.25</div>
+          <div class="price-period">per month • Cancel anytime</div>
+          
+          <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-primary">
+            🚀 Start Earning With ADHD Tools
+          </a>
+        </div>
+
+        <div class="guarantee">
+          <div class="guarantee-highlight">
+            🛡️ 30-Day Money-Back Guarantee
+          </div>
+          Try it risk-free • Cancel anytime • Built by someone who gets it
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proof Section -->
+  <section id="proof-section" class="proof-section">
+    <div class="container">
+      <h2 class="section-title">Real Payout Proof (Not Just Claims)</h2>
+      <p class="section-subtitle">Here's actual evidence from platforms I've been paid from — because I've waded through the scams so you don't have to.</p>
+      
+      <div class="proof-grid">
+        <div class="proof-card">
+          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/micro%20earners-a9849c1.png" alt="Quick Payout Proof" class="proof-img" onclick="openModal(this.src, 'Quick Payout Platforms', 'Real earnings from same-day payout platforms')">
+          <div class="proof-title">Quick Payout Platforms</div>
+          <div class="proof-desc">Perfect for ADHD brains that need immediate gratification. Get paid the same day you work.</div>
+        </div>
+
+        <div class="proof-card">
+          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/higher%20earners-5fa5cb1.png" alt="Higher Earning Proof" class="proof-img" onclick="openModal(this.src, 'Higher Earning Platforms', 'Real earnings from platforms with better pay rates')">
+          <div class="proof-title">Higher Earning Platforms</div>
+          <div class="proof-desc">For when you're in hyperfocus mode and ready to tackle bigger projects with better pay.</div>
+        </div>
+      </div>
+
+      <div style="background: var(--glass-bg); border: 1px solid var(--accent-secondary); border-radius: 12px; padding: 25px; margin: 40px auto 0; max-width: 600px; text-align: center;">
+        <h3 style="color: var(--accent-secondary); margin-bottom: 15px; font-size: 1.2rem;">🛡️ Why This Matters</h3>
+        <p style="color: var(--text-secondary); line-height: 1.6;">Too many people sell lists of platforms they've never tried. I've personally tested dozens of sites and apps — been burned by the scams, frustrated by the duds, and found the gems. You get only the ones that actually pay.</p>
+      </div>
+
+      <!-- CTA after proof -->
+      <div style="text-align: center; margin-top: 40px;">
+        <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-primary">
+          🚀 Get the 925 ADHD App
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Real User Stories -->
+  <section class="user-stories">
+    <div class="container">
+      <h2 class="section-title">What Early Users Are Saying</h2>
+      <p class="section-subtitle">Real feedback from people who understand the ADHD struggle</p>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-top: 50px;">
+        <div class="testimonial-card">
+          <div class="quote-mark">"</div>
+          <div class="testimonial-text">
+            The platform guides saved me hours of research. Having someone with ADHD test these first and tell me what's actually worth my time is invaluable.
+          </div>
+          <div class="testimonial-author">— Erica, Community Member</div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="quote-mark">"</div>
+          <div class="testimonial-text">
+            Finally, a curated list of platforms that actually work! I was drowning in all the options online. This cut through the noise and showed me exactly where to focus my energy.
+          </div>
+          <div class="testimonial-author">— Garrett, Early Member</div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="quote-mark">"</div>
+          <div class="testimonial-text">
+            Having everything organized in one place is a game-changer for my ADHD brain. No more bookmarking random articles or forgetting which platforms I wanted to try.
+          </div>
+          <div class="testimonial-author">— Kara, Beta User</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What You Get -->
+  <section class="what-you-get">
+    <div class="container">
+      <h2 class="section-title">What You Actually Get</h2>
+      <p class="section-subtitle">No fluff, no filler. Just the platforms and tools you need to start earning with your ADHD brain.</p>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <span class="feature-icon">📋</span>
+          <h3 class="feature-title">Curated Platform Directory</h3>
+          <p class="feature-desc">Only platforms I've personally tested and been paid from. No time wasted on scams or low-pay sites.</p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">📖</span>
+          <h3 class="feature-title">Beginner-Friendly Guides</h3>
+          <p class="feature-desc">Step-by-step instructions to get started on each platform, written for ADHD brains.</p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">🧠</span>
+          <h3 class="feature-title">ADHD Productivity Tools</h3>
+          <p class="feature-desc">7 web-based tools designed to help you stay organized, focused, and motivated.</p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">💬</span>
+          <h3 class="feature-title">Discord Community</h3>
+          <p class="feature-desc">Connect with others who understand the neurodivergent freelancing journey.</p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">🔄</span>
+          <h3 class="feature-title">Regular Updates</h3>
+          <p class="feature-desc">New platforms and opportunities added as I discover and test them.</p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">📊</span>
+          <h3 class="feature-title">Honest Platform Reviews</h3>
+          <p class="feature-desc">Real talk about what works, what doesn't, and what to expect from each platform.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Honest Expectations -->
+  <section class="expectations">
+    <div class="container">
+      <h2 class="section-title">Let's Be Honest About Expectations</h2>
+      <p class="section-subtitle">No false promises—just real talk about what this can and can't do for you</p>
+      
+      <div class="expectation-cards">
+        <div class="expectation-card">
+          <span class="expectation-icon">⏰</span>
+          <h3 class="expectation-title">You Still Need to Work</h3>
+          <p class="expectation-desc">These tools help you stay organized, but you still need to put in effort. More time invested = more potential earnings.</p>
+        </div>
+
+        <div class="expectation-card">
+          <span class="expectation-icon">📊</span>
+          <h3 class="expectation-title">Results Vary</h3>
+          <p class="expectation-desc">Earnings depend on your skills, time commitment, and market demand. No specific income guarantees.</p>
+        </div>
+
+        <div class="expectation-card">
+          <span class="expectation-icon">🧠</span>
+          <h3 class="expectation-title">ADHD-Optimized</h3>
+          <p class="expectation-desc">Tools and strategies designed to work with ADHD brains, not against them. Better organization = better results.</p>
+        </div>
+
+        <div class="expectation-card">
+          <span class="expectation-icon">🎯</span>
+          <h3 class="expectation-title">Focus on Quality</h3>
+          <p class="expectation-desc">Only verified platforms that actually pay. No wasted time on scams or platforms that don't deliver.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta">
+    <div class="container">
+      <div class="cta-box">
+        <h2 class="cta-title">Ready to Stop Researching and Start Earning?</h2>
+        <p class="cta-subtitle">
+          Join other ADHD freelancers who've found their focus and started earning from platforms that actually work.
+        </p>
+        <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-primary">
+          🚀 Get the 925 ADHD App - $9.25/month
+        </a>
+        <div style="margin-top: 20px; color: var(--text-secondary); font-size: 0.9rem;">
+          30-day money-back guarantee • Cancel anytime
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal for image viewing -->
+  <div id="imageModal" class="modal" onclick="closeModal()">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal()">&times;</span>
+      <img id="modalImg" class="modal-img" alt="Enlarged view">
+      <div class="modal-info">
+        <div id="modalTitle" class="modal-title"></div>
+        <div id="modalDesc" class="modal-desc"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer style="background: var(--secondary-bg); padding: 40px 0 30px; border-top: 1px solid var(--border-subtle);">
+    <div class="container">
+      <div style="text-align: center;">
+        <div style="margin-bottom: 20px;">
+          <a href="https://925adhd.com" style="color: var(--text-secondary); text-decoration: none; margin: 0 15px; font-size: 0.9rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-secondary)'" onmouseout="this.style.color='var(--text-secondary)'">Home</a>
+          <a href="https://925adhd.com/terms-of-service" style="color: var(--text-secondary); text-decoration: none; margin: 0 15px; font-size: 0.9rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-secondary)'" onmouseout="this.style.color='var(--text-secondary)'">Terms of Service</a>
+          <a href="https://925adhd.com/privacy-policy" style="color: var(--text-secondary); text-decoration: none; margin: 0 15px; font-size: 0.9rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-secondary)'" onmouseout="this.style.color='var(--text-secondary)'">Privacy Policy</a>
+          <a href="https://925adhd.com/disclaimer" style="color: var(--text-secondary); text-decoration: none; margin: 0 15px; font-size: 0.9rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-secondary)'" onmouseout="this.style.color='var(--text-secondary)'">Disclaimer</a>
+          <a href="https://925adhd.com/contact" style="color: var(--text-secondary); text-decoration: none; margin: 0 15px; font-size: 0.9rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-secondary)'" onmouseout="this.style.color='var(--text-secondary)'">Contact</a>
+        </div>
+        
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 10px;">
+          Copyright © 2025 925 ADHD LLC - All Rights Reserved.
+        </p>
+        
+        <p style="color: var(--accent-secondary); font-size: 0.9rem; margin: 0;">
+          💡 Designed with ADHD 🧠's in mind
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    let isZoomed = false;
+    let startScale = 1;
+    let currentScale = 1;
+    let startX = 0;
+    let startY = 0;
+    let currentX = 0;
+    let currentY = 0;
+
+    function openModal(imageSrc, title, description) {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImg');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalDesc = document.getElementById('modalDesc');
+      
+      modal.style.display = 'block';
+      modalImg.src = imageSrc;
+      modalTitle.textContent = title;
+      modalDesc.textContent = description;
+      
+      // Reset zoom
+      isZoomed = false;
+      currentScale = 1;
+      currentX = 0;
+      currentY = 0;
+      modalImg.style.transform = 'translate(0px, 0px) scale(1)';
+      modalImg.classList.remove('zoomed');
+      
+      // Prevent body scroll when modal is open
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('imageModal');
+      modal.style.display = 'none';
+      
+      // Restore body scroll
+      document.body.style.overflow = 'auto';
+    }
+
+    // Image zoom functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const modalImg = document.getElementById('modalImg');
+      
+      // Click to zoom
+      modalImg.addEventListener('click', function(e) {
+        e.stopPropagation();
+        
+        if (!isZoomed) {
+          // Zoom in to 2x
+          currentScale = 2;
+          isZoomed = true;
+          modalImg.classList.add('zoomed');
+        } else {
+          // Zoom out
+          currentScale = 1;
+          currentX = 0;
+          currentY = 0;
+          isZoomed = false;
+          modalImg.classList.remove('zoomed');
+        }
+        
+        modalImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${currentScale})`;
+      });
+
+      // Touch events for mobile
+      let initialDistance = 0;
+      let initialScale = 1;
+
+      modalImg.addEventListener('touchstart', function(e) {
+        if (e.touches.length === 2) {
+          e.preventDefault();
+          initialDistance = getDistance(e.touches[0], e.touches[1]);
+          initialScale = currentScale;
+        }
+      });
+
+      modalImg.addEventListener('touchmove', function(e) {
+        if (e.touches.length === 2) {
+          e.preventDefault();
+          const distance = getDistance(e.touches[0], e.touches[1]);
+          const scale = (distance / initialDistance) * initialScale;
+          currentScale = Math.min(Math.max(1, scale), 3);
+          modalImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${currentScale})`;
+        }
+      });
+
+      function getDistance(touch1, touch2) {
+        const dx = touch1.clientX - touch2.clientX;
+        const dy = touch1.clientY - touch2.clientY;
+        return Math.sqrt(dx * dx + dy * dy);
+      }
+
+      // Drag functionality for zoomed images
+      let isDragging = false;
+      let dragStartX = 0;
+      let dragStartY = 0;
+      let dragStartTranslateX = 0;
+      let dragStartTranslateY = 0;
+
+      modalImg.addEventListener('mousedown', function(e) {
+        if (currentScale > 1) {
+          isDragging = true;
+          dragStartX = e.clientX;
+          dragStartY = e.clientY;
+          dragStartTranslateX = currentX;
+          dragStartTranslateY = currentY;
+          modalImg.style.cursor = 'grabbing';
+          e.preventDefault();
+        }
+      });
+
+      document.addEventListener('mousemove', function(e) {
+        if (isDragging && currentScale > 1) {
+          const deltaX = e.clientX - dragStartX;
+          const deltaY = e.clientY - dragStartY;
+          currentX = dragStartTranslateX + deltaX;
+          currentY = dragStartTranslateY + deltaY;
+          modalImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${currentScale})`;
+        }
+      });
+
+      document.addEventListener('mouseup', function() {
+        if (isDragging) {
+          isDragging = false;
+          modalImg.style.cursor = currentScale > 1 ? 'grab' : 'zoom-in';
+        }
+      });
+
+      // Set initial cursor
+      modalImg.style.cursor = 'zoom-in';
+    });
+  </script>
+
+  <style>
+    /* Additional styles for modal */
     .sneak-peek {
       background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(16, 185, 129, 0.1));
       border: 2px solid var(--accent-primary);
@@ -425,7 +933,7 @@
       font-weight: 600;
     }
 
-    /* Free Download Section - NEW */
+    /* Free Download Section */
     .free-download {
       background: var(--glass-bg);
       border: 2px solid var(--accent-warning);
@@ -790,22 +1298,6 @@
 
     /* Mobile Optimizations */
     @media (max-width: 768px) {
-      .container {
-        padding: 0 15px;
-      }
-
-      .hero {
-        padding: 50px 0 30px;
-      }
-
-      .hero h1 {
-        font-size: 2.3rem;
-      }
-
-      .hero-subtitle {
-        font-size: 1.1rem;
-      }
-
       .section-title {
         font-size: 2rem;
       }
@@ -818,10 +1310,6 @@
         padding: 18px 30px;
         font-size: 1.1rem;
         margin: 10px 5px;
-      }
-
-      .value-props {
-        grid-template-columns: 1fr;
       }
 
       .preview-grid {
@@ -850,10 +1338,6 @@
     }
 
     @media (max-width: 480px) {
-      .hero h1 {
-        font-size: 1.9rem;
-      }
-
       .price-hero {
         padding: 30px 20px;
       }
@@ -876,423 +1360,3 @@
       }
     }
   </style>
-</head>
-<body>
-  <div class="bg-gradient"></div>
-  <div class="floating-orb orb-1"></div>
-  <div class="floating-orb orb-2"></div>
-
-  <!-- Header -->
-  <header class="header">
-    <div class="container">
-      <div class="header-content">
-        <a href="https://925adhd.com" style="display: flex; align-items: center;">
-          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/SmartSelect_20241218_055052_Gallery.png/:/rs=h:175,m" alt="925 ADHD Logo" style="height: 40px; width: auto; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-        </a>
-        <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-header">💸 Get the 925 ADHD App →</a>
-      </div>
-    </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-badge">🧠 Built by Someone with ADHD</div>
-        
-        <h1><span style="background: none !important; -webkit-background-clip: initial !important; -webkit-text-fill-color: initial !important; background-clip: initial !important; color: #ffffff !important;">📦</span> Freelance Platforms That Actually Pay — Tested & Verified</h1>
-        
-        <p class="hero-subtitle">
-          I've tested <strong>dozens of platforms and apps</strong> that claim to pay freelancers — survived the scams, duds, and time-wasters so you don't have to. Here are the ones that actually work, plus ADHD-friendly tools to keep you organized.
-        </p>
-
-        <div class="urgency-bar">
-          🔥 Limited Early Access: Lock in the $9.25/month price before it increases
-        </div>
-
-        <div class="value-props">
-          <div class="value-prop">
-            <span class="value-prop-icon">🔍</span>
-            <div class="value-prop-title">Scams Filtered Out</div>
-            <div class="value-prop-desc">I've tested dozens of platforms so you don't waste time on scams, duds, or sites that don't pay</div>
-          </div>
-          <div class="value-prop">
-            <span class="value-prop-icon">💰</span>
-            <div class="value-prop-title">Proven Platforms Only</div>
-            <div class="value-prop-desc">Only platforms I've personally been paid from with receipts to prove it, or collectively deemed legit by the community</div>
-            <a href="#proof-section" style="display: inline-block; margin-top: 8px; color: var(--accent-success); text-decoration: underline; font-size: 0.9rem; font-weight: 600; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-secondary)'" onmouseout="this.style.color='var(--accent-success)'">See the proof →</a>
-          </div>
-          <div class="value-prop">
-            <span class="value-prop-icon">🧠</span>
-            <div class="value-prop-title">ADHD-Friendly Organization</div>
-            <div class="value-prop-desc">Simple tools and guides designed for how your brain actually works</div>
-          </div>
-        </div>
-
-        <!-- NEW: Combined Sneak Peek Section -->
-        <div class="sneak-peek">
-          <h2 class="sneak-peek-title">👀 See Inside The App</h2>
-          <p class="sneak-peek-subtitle">Get a preview of the organized, ADHD-friendly platform guides and tools you'll access</p>
-          
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin: 40px 0; max-width: 900px; margin-left: auto; margin-right: auto;">
-            <div style="background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; text-align: center; transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden;" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Your%20paragraph%20text-3be1a9e.png', 'Platforms & Apps', 'All the platforms and apps you can use to make money')" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--border-bright)'; this.style.boxShadow='var(--shadow-medium)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-subtle)'; this.style.boxShadow='none'">
-              <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Your%20paragraph%20text-3be1a9e.png" alt="Platform Reviews" style="width: 100%; max-width: 180px; height: auto; border-radius: 8px; margin-bottom: 15px; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-              <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 8px; font-size: 1.1rem;">Platforms & Apps</div>
-              <div style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4;">All the platforms and apps you can use to make money</div>
-            </div>
-            
-            <div style="background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; text-align: center; transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden;" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205130.png', 'Platform Guides', 'Step-by-step guides for beginners')" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--border-bright)'; this.style.boxShadow='var(--shadow-medium)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-subtle)'; this.style.boxShadow='none'">
-              <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205130.png" alt="ADHD Guides" style="width: 100%; max-width: 180px; height: auto; border-radius: 8px; margin-bottom: 15px; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-              <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 8px; font-size: 1.1rem;">Platform Guides</div>
-              <div style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4;">Step-by-step guides for beginners</div>
-            </div>
-            
-            <div style="background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; text-align: center; transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden;" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205121.png', 'Discord Community', 'Real-time support & tips')" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--border-bright)'; this.style.boxShadow='var(--shadow-medium)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-subtle)'; this.style.boxShadow='none'">
-              <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205121.png" alt="Discord Access" style="width: 100%; max-width: 180px; height: auto; border-radius: 8px; margin-bottom: 15px; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-              <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 8px; font-size: 1.1rem;">Discord Community</div>
-              <div style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4;">Real-time support & tips</div>
-            </div>
-            
-            <div style="background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; text-align: center; transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden;" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205151.png', 'ADHD Tools', 'Focus & productivity aids')" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--border-bright)'; this.style.boxShadow='var(--shadow-medium)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-subtle)'; this.style.boxShadow='none'">
-              <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205151.png" alt="ADHD Tools" style="width: 100%; max-width: 180px; height: auto; border-radius: 8px; margin-bottom: 15px; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-              <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 8px; font-size: 1.1rem;">ADHD Tools</div>
-              <div style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4;">Focus & productivity aids</div>
-            </div>
-          </div>
-
-          <!-- Platform Categories Preview -->
-          <div style="background: var(--glass-bg); border: 1px solid var(--accent-secondary); border-radius: 16px; padding: 25px; margin: 30px 0;">
-            <h3 style="text-align: center; color: var(--accent-secondary); margin-bottom: 20px; font-size: 1.2rem;">🔍 What's Inside: Platform Categories</h3>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-              <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
-                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">📝 AI Training & Data</div>
-                <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$3-$14/hr range</div>
-              </div>
-              <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
-                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">🎯 Surveys & Research</div>
-                <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$1-$150/hr range</div>
-              </div>
-              <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
-                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">✍️ Content Writing</div>
-                <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$15-$500+ per piece</div>
-              </div>
-              <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
-                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">🎨 Creative & Design</div>
-                <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$25-$200+/hr</div>
-              </div>
-            </div>
-            <p style="text-align: center; margin-top: 20px; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5;">
-              <strong>Plus 6 more categories</strong> with detailed platform reviews, signup tips, and ADHD-specific strategies for each
-            </p>
-          </div>
-          
-          <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-primary">
-            🚀 Get the 925 ADHD App
-          </a>
-        </div>
-
-        <!-- Free Download Teaser -->
-        <div class="free-download">
-          <h3 class="free-download-title">🎁 Free ADHD-Friendly Starter Pack</h3>
-          <p class="free-download-desc">Get basics and AI/data annotation guide — but the real organization, tools, and extra platforms are in the full app.</p>
-          <a href="https://925adhd.com/free" target="_blank" rel="noopener noreferrer" class="download-button">📥 Get Free Starter Pack</a>
-          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 15px;">Want everything? Full app access is $9.25/month</p>
-        </div>
-        
-        <div class="price-hero">
-          <div class="price-badge">Early Access</div>
-          <div class="price-amount">$9.25</div>
-          <div class="price-period">per month • Cancel anytime</div>
-          
-          <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-primary">
-            🚀 Start Earning With ADHD Tools
-          </a>
-        </div>
-
-        <div class="guarantee">
-          <div class="guarantee-highlight">
-            🛡️ 30-Day Money-Back Guarantee
-          </div>
-          Try it risk-free • Cancel anytime • Built by someone who gets it
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Proof Section -->
-  <section id="proof-section" class="proof-section">
-    <div class="container">
-      <h2 class="section-title">Real Payout Proof (Not Just Claims)</h2>
-      <p class="section-subtitle">Here's actual evidence from platforms I've been paid from — because I've waded through the scams so you don't have to.</p>
-      
-      <div class="proof-grid">
-        <div class="proof-card">
-          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/micro%20earners-a9849c1.png" alt="Quick Payout Proof" class="proof-img" onclick="openModal(this.src, 'Quick Payout Platforms', 'Real earnings from same-day payout platforms')">
-          <div class="proof-title">Quick Payout Platforms</div>
-          <div class="proof-desc">Perfect for ADHD brains that need immediate gratification. Get paid the same day you work.</div>
-        </div>
-
-        <div class="proof-card">
-          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/higher%20earners-5fa5cb1.png" alt="Higher Earning Proof" class="proof-img" onclick="openModal(this.src, 'Higher Earning Platforms', 'Real earnings from platforms with better pay rates')">
-          <div class="proof-title">Higher Earning Platforms</div>
-          <div class="proof-desc">For when you're in hyperfocus mode and ready to tackle bigger projects with better pay.</div>
-        </div>
-      </div>
-
-      <div style="background: var(--glass-bg); border: 1px solid var(--accent-secondary); border-radius: 12px; padding: 25px; margin: 40px auto 0; max-width: 600px; text-align: center;">
-        <h3 style="color: var(--accent-secondary); margin-bottom: 15px; font-size: 1.2rem;">🛡️ Why This Matters</h3>
-        <p style="color: var(--text-secondary); line-height: 1.6;">Too many people sell lists of platforms they've never tried. I've personally tested dozens of sites and apps — been burned by the scams, frustrated by the duds, and found the gems. You get only the ones that actually pay.</p>
-      </div>
-
-      <!-- CTA after proof -->
-      <div style="text-align: center; margin-top: 40px;">
-        <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-primary">
-          🚀 Get the 925 ADHD App
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Real User Stories -->
-  <section class="user-stories">
-    <div class="container">
-      <h2 class="section-title">What Early Users Are Saying</h2>
-      <p class="section-subtitle">Real feedback from people who understand the ADHD struggle</p>
-      
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-top: 50px;">
-        <div class="testimonial-card">
-          <div class="quote-mark">"</div>
-          <div class="testimonial-text">
-            The platform guides saved me hours of research. Having someone with ADHD test these first and tell me what's actually worth my time is invaluable.
-          </div>
-          <div class="testimonial-author">— Erica, Community Member</div>
-        </div>
-
-        <div class="testimonial-card">
-          <div class="quote-mark">"</div>
-          <div class="testimonial-text">
-            Finally, a curated list of platforms that actually work! I was drowning in all the options online. This cut through the noise and showed me exactly where to focus my energy.
-          </div>
-          <div class="testimonial-author">— Garrett, Early Member</div>
-        </div>
-
-        <div class="testimonial-card">
-          <div class="quote-mark">"</div>
-          <div class="testimonial-text">
-            Having everything organized in one place is a game-changer for my ADHD brain. No more bookmarking random articles or forgetting which platforms I wanted to try.
-          </div>
-          <div class="testimonial-author">— Kara, Beta User</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- App Screenshots Section - REMOVED, content moved to sneak peek -->
-
-  <!-- What You Get -->
-  <section class="what-you-get">
-    <div class="container">
-      <h2 class="section-title">What You Actually Get</h2>
-      <p class="section-subtitle">No fluff, no filler. Just the platforms and tools you need to start earning with your ADHD brain.</p>
-      
-      <div class="features-grid">
-        <div class="feature-card">
-          <span class="feature-icon">📋</span>
-          <h3 class="feature-title">Curated Platform Directory</h3>
-          <p class="feature-desc">Only platforms I've personally tested and been paid from. No time wasted on scams or low-pay sites.</p>
-        </div>
-
-        <div class="feature-card">
-          <span class="feature-icon">📖</span>
-          <h3 class="feature-title">Beginner-Friendly Guides</h3>
-          <p class="feature-desc">Step-by-step instructions to get started on each platform, written for ADHD brains.</p>
-        </div>
-
-        <div class="feature-card">
-          <span class="feature-icon">🧠</span>
-          <h3 class="feature-title">ADHD Productivity Tools</h3>
-          <p class="feature-desc">7 web-based tools designed to help you stay organized, focused, and motivated.</p>
-        </div>
-
-        <div class="feature-card">
-          <span class="feature-icon">💬</span>
-          <h3 class="feature-title">Discord Community</h3>
-          <p class="feature-desc">Connect with others who understand the neurodivergent freelancing journey.</p>
-        </div>
-
-        <div class="feature-card">
-          <span class="feature-icon">🔄</span>
-          <h3 class="feature-title">Regular Updates</h3>
-          <p class="feature-desc">New platforms and opportunities added as I discover and test them.</p>
-        </div>
-
-        <div class="feature-card">
-          <span class="feature-icon">📊</span>
-          <h3 class="feature-title">Honest Platform Reviews</h3>
-          <p class="feature-desc">Real talk about what works, what doesn't, and what to expect from each platform.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Honest Expectations -->
-  <section class="expectations">
-    <div class="container">
-      <h2 class="section-title">Let's Be Honest About Expectations</h2>
-      <p class="section-subtitle">No false promises—just real talk about what this can and can't do for you</p>
-      
-      <div class="expectation-cards">
-        <div class="expectation-card">
-          <span class="expectation-icon">⏰</span>
-          <h3 class="expectation-title">You Still Need to Work</h3>
-          <p class="expectation-desc">These tools help you stay organized, but you still need to put in effort. More time invested = more potential earnings.</p>
-        </div>
-
-        <div class="expectation-card">
-          <span class="expectation-icon">📊</span>
-          <h3 class="expectation-title">Results Vary</h3>
-          <p class="expectation-desc">Earnings depend on your skills, time commitment, and market demand. No specific income guarantees.</p>
-        </div>
-
-        <div class="expectation-card">
-          <span class="expectation-icon">🧠</span>
-          <h3 class="expectation-title">ADHD-Optimized</h3>
-          <p class="expectation-desc">Tools and strategies designed to work with ADHD brains, not against them. Better organization = better results.</p>
-        </div>
-
-        <div class="expectation-card">
-          <span class="expectation-icon">🎯</span>
-          <h3 class="expectation-title">Focus on Quality</h3>
-          <p class="expectation-desc">Only verified platforms that actually pay. No wasted time on scams or platforms that don't deliver.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Final CTA -->
-  <section class="final-cta">
-    <div class="container">
-      <div class="cta-box">
-        <h2 class="cta-title">Ready to Stop Researching and Start Earning?</h2>
-        <p class="cta-subtitle">
-          Join other ADHD freelancers who've found their focus and started earning from platforms that actually work.
-        </p>
-        <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-primary">
-          🚀 Get the 925 ADHD App - $9.25/month
-        </a>
-        <div style="margin-top: 20px; color: var(--text-secondary); font-size: 0.9rem;">
-          30-day money-back guarantee • Cancel anytime
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Modal for image viewing -->
-  <div id="imageModal" class="modal" onclick="closeModal()">
-    <div class="modal-content">
-      <span class="modal-close" onclick="closeModal()">&times;</span>
-      <img id="modalImg" class="modal-img" alt="Enlarged view">
-      <div class="modal-info">
-        <div id="modalTitle" class="modal-title"></div>
-        <div id="modalDesc" class="modal-desc"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer style="background: var(--secondary-bg); padding: 40px 0 30px; border-top: 1px solid var(--border-subtle);">
-    <div class="container">
-      <div style="text-align: center;">
-        <div style="margin-bottom: 20px;">
-          <a href="https://925adhd.com" style="color: var(--text-secondary); text-decoration: none; margin: 0 15px; font-size: 0.9rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-secondary)'" onmouseout="this.style.color='var(--text-secondary)'">Home</a>
-          <a href="https://925adhd.com/terms-of-service" style="color: var(--text-secondary); text-decoration: none; margin: 0 15px; font-size: 0.9rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-secondary)'" onmouseout="this.style.color='var(--text-secondary)'">Terms of Service</a>
-          <a href="https://925adhd.com/privacy-policy" style="color: var(--text-secondary); text-decoration: none; margin: 0 15px; font-size: 0.9rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-secondary)'" onmouseout="this.style.color='var(--text-secondary)'">Privacy Policy</a>
-          <a href="https://925adhd.com/disclaimer" style="color: var(--text-secondary); text-decoration: none; margin: 0 15px; font-size: 0.9rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-secondary)'" onmouseout="this.style.color='var(--text-secondary)'">Disclaimer</a>
-          <a href="https://925adhd.com/contact" style="color: var(--text-secondary); text-decoration: none; margin: 0 15px; font-size: 0.9rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-secondary)'" onmouseout="this.style.color='var(--text-secondary)'">Contact</a>
-        </div>
-        
-        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 10px;">
-          Copyright © 2025 925 ADHD LLC - All Rights Reserved.
-        </p>
-        
-        <p style="color: var(--accent-secondary); font-size: 0.9rem; margin: 0;">
-          💡 Designed with ADHD 🧠's in mind
-        </p>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    let isZoomed = false;
-    let startScale = 1;
-    let currentScale = 1;
-    let startX = 0;
-    let startY = 0;
-    let currentX = 0;
-    let currentY = 0;
-
-    function openModal(imageSrc, title, description) {
-      const modal = document.getElementById('imageModal');
-      const modalImg = document.getElementById('modalImg');
-      const modalTitle = document.getElementById('modalTitle');
-      const modalDesc = document.getElementById('modalDesc');
-      
-      modal.style.display = 'block';
-      modalImg.src = imageSrc;
-      modalTitle.textContent = title;
-      modalDesc.textContent = description;
-      
-      // Reset zoom
-      isZoomed = false;
-      currentScale = 1;
-      currentX = 0;
-      currentY = 0;
-      modalImg.style.transform = 'translate(0px, 0px) scale(1)';
-      modalImg.classList.remove('zoomed');
-      
-      // Prevent body scroll when modal is open
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal() {
-      const modal = document.getElementById('imageModal');
-      modal.style.display = 'none';
-      
-      // Restore body scroll
-      document.body.style.overflow = 'auto';
-    }
-
-    // Image zoom functionality
-    document.addEventListener('DOMContentLoaded', function() {
-      const modalImg = document.getElementById('modalImg');
-      
-      // Click to zoom
-      modalImg.addEventListener('click', function(e) {
-        e.stopPropagation();
-        
-        if (!isZoomed) {
-          // Zoom in to 2x
-          currentScale = 2;
-          isZoomed = true;
-          modalImg.classList.add('zoomed');
-        } else {
-          // Zoom out
-          currentScale = 1;
-          currentX = 0;
-          currentY = 0;
-          isZoomed = false;
-          modalImg.classList.remove('zoomed');
-        }
-        
-        modalImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${currentScale})`;
-      });
-
-      // Touch events for mobile
-      let initialDistance = 0;
-      let initialScale = 1;
-
-      modalImg.addEventListener('touchstart', function(e) {
-        if (e.touches.length === 2) {
-          e.preventDefault();
-          initialDistance = getDistance(e.touches[0], e.touches[1]);
-          initialScale = currentScale;
