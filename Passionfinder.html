@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>925 ADHD Passion Finder</title>
+  <title>Passion Finder</title>
   <style>
     :root {
       --primary-bg: #0f1419;
@@ -205,9 +205,10 @@
       font-style: italic;
     }
 
+    /* Base mobile-first styles */
     label {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       margin: 15px 0;
       cursor: pointer;
       padding: 12px 16px;
@@ -215,6 +216,13 @@
       transition: all 0.3s ease;
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid transparent;
+      min-height: 50px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    label:active {
+      background: rgba(255, 255, 255, 0.08);
+      transform: scale(0.98);
     }
 
     label:hover {
@@ -265,6 +273,13 @@
       border: 2px solid rgba(255,255,255,0.2);
       position: relative;
       overflow: hidden;
+      min-height: 60px;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    button:active {
+      transform: scale(0.98);
     }
 
     button:hover {
@@ -382,72 +397,341 @@
       padding: 40px 20px;
     }
 
-    /* Mobile Responsive */
+    /* Mobile-First Optimizations */
     @media (max-width: 768px) {
       .container {
-        padding: 0 15px;
+        padding: 0 12px;
+      }
+
+      header {
+        padding: 1rem 0;
       }
 
       h1 {
-        font-size: 2.3rem;
+        font-size: 2.2rem;
+        line-height: 1.2;
       }
 
       .hero-subtitle {
-        font-size: 1.1rem;
-      }
-
-      .form-container {
-        padding: 25px;
-        margin: 20px auto;
-      }
-
-      .question {
-        padding: 20px;
-        margin-bottom: 20px;
-      }
-
-      .question h2 {
-        font-size: 1.3rem;
-      }
-
-      button {
-        padding: 18px 30px;
-        font-size: 1.1rem;
+        font-size: 1rem;
+        padding: 0 10px;
       }
 
       section {
-        padding: 40px 0;
+        padding: 30px 0;
+      }
+
+      .form-container {
+        padding: 20px;
+        margin: 15px auto;
+        border-radius: 16px;
+      }
+
+      .question {
+        padding: 20px 15px;
+        margin-bottom: 20px;
+        border-radius: 12px;
+      }
+
+      .question h2 {
+        font-size: 1.25rem;
+        line-height: 1.3;
+        margin-bottom: 15px;
+      }
+
+      .question h2::before {
+        font-size: 1rem;
+      }
+
+      .question-desc {
+        font-size: 0.85rem;
+        margin-bottom: 15px;
+        line-height: 1.4;
+      }
+
+      label {
+        padding: 14px 12px;
+        margin: 10px 0;
+        border-radius: 10px;
+        font-size: 0.95rem;
+        flex-wrap: wrap;
+        min-height: 50px;
+        align-items: center;
+      }
+
+      label span {
+        font-size: 0.95rem;
+        line-height: 1.3;
+      }
+
+      input[type="checkbox"],
+      input[type="radio"] {
+        margin-right: 10px;
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+      }
+
+      button {
+        padding: 18px 20px;
+        font-size: 1.1rem;
+        margin-top: 25px;
+        border-radius: 12px;
+        min-height: 60px;
+      }
+
+      .results {
+        margin-top: 30px;
+        padding: 20px;
+        border-radius: 12px;
+      }
+
+      .results h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+      }
+
+      .category-title {
+        font-size: 1.1rem;
+        margin-bottom: 12px;
       }
 
       .platform-grid {
         grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .platform-card {
+        padding: 18px;
+        border-radius: 10px;
+      }
+
+      .platform-name {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+      }
+
+      .platform-desc {
+        font-size: 0.9rem;
+        line-height: 1.4;
+        margin-bottom: 8px;
+      }
+
+      .earning-potential {
+        font-size: 0.85rem;
+        margin-top: 8px;
       }
     }
 
     @media (max-width: 480px) {
+      .container {
+        padding: 0 10px;
+      }
+
       h1 {
-        font-size: 1.9rem;
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+      }
+
+      .hero-subtitle {
+        font-size: 0.9rem;
+        line-height: 1.4;
       }
 
       .form-container {
-        padding: 20px;
+        padding: 15px;
+        margin: 10px auto;
+      }
+
+      .question {
+        padding: 15px 12px;
+        margin-bottom: 15px;
+      }
+
+      .question h2 {
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+      }
+
+      .question-desc {
+        font-size: 0.8rem;
+        margin-bottom: 12px;
+      }
+
+      label {
+        padding: 12px 10px;
+        margin: 8px 0;
+        min-height: 48px;
+      }
+
+      label span {
+        font-size: 0.9rem;
+      }
+
+      input[type="checkbox"],
+      input[type="radio"] {
+        width: 18px;
+        height: 18px;
+        margin-right: 8px;
+      }
+
+      button {
+        padding: 16px 18px;
+        font-size: 1rem;
+        margin-top: 20px;
+        min-height: 56px;
+      }
+
+      .results {
+        padding: 15px;
+        margin-top: 25px;
+      }
+
+      .results h3 {
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+      }
+
+      .category-title {
+        font-size: 1rem;
+        margin-bottom: 10px;
+      }
+
+      .platform-grid {
+        gap: 10px;
+      }
+
+      .platform-card {
+        padding: 15px;
+      }
+
+      .platform-name {
+        font-size: 1rem;
+        margin-bottom: 6px;
+      }
+
+      .platform-desc {
+        font-size: 0.85rem;
+        margin-bottom: 6px;
+      }
+
+      .earning-potential {
+        font-size: 0.8rem;
+        margin-top: 6px;
+      }
+
+      .no-matches {
+        padding: 30px 15px;
+      }
+
+      .no-matches h3 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+      }
+
+      .no-matches p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+    }
+
+    /* Touch-friendly improvements */
+    @media (hover: none) {
+      label:hover {
+        transform: none;
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      button:hover {
+        transform: none;
+      }
+
+      .platform-card:hover {
+        transform: none;
+      }
+    }
+
+    /* Landscape phone optimization */
+    @media (max-width: 896px) and (orientation: landscape) {
+      header {
+        padding: 0.8rem 0;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      .hero-subtitle {
+        font-size: 0.85rem;
+      }
+
+      section {
+        padding: 20px 0;
       }
 
       .question {
         padding: 15px;
+        margin-bottom: 15px;
       }
 
       .question h2 {
-        font-size: 1.2rem;
+        font-size: 1rem;
+        margin-bottom: 10px;
+      }
+
+      .question-desc {
+        font-size: 0.75rem;
+        margin-bottom: 10px;
       }
 
       label {
-        padding: 10px 12px;
+        padding: 10px;
+        margin: 6px 0;
+        min-height: 42px;
       }
 
       button {
-        padding: 16px 25px;
+        padding: 14px 16px;
+        font-size: 0.95rem;
+        min-height: 50px;
+      }
+    }
+
+    /* Very small screens */
+    @media (max-width: 320px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .form-container {
+        padding: 12px;
+      }
+
+      .question {
+        padding: 12px 10px;
+      }
+
+      .question h2 {
         font-size: 1rem;
+      }
+
+      label {
+        padding: 10px 8px;
+        margin: 6px 0;
+      }
+
+      label span {
+        font-size: 0.85rem;
+      }
+
+      button {
+        padding: 14px 16px;
+        font-size: 0.95rem;
+        min-height: 52px;
+      }
+
+      .platform-card {
+        padding: 12px;
       }
     }
   </style>
@@ -459,7 +743,7 @@
 
   <header>
     <div class="container">
-      <h1>🧠 <span class="gradient-text">925 ADHD Passion Finder</span></h1>
+      <h1>🧠 <span class="gradient-text">Passion Finder</span></h1>
       <p class="hero-subtitle">Find your dopamine-boosting, freedom-loving income path</p>
     </div>
   </header>
