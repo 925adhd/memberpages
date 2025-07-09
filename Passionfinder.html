@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>925 ADHD Passion Finder</title>
+  <style>
+    :root {
+      --primary-bg: #0f1419;
+      --secondary-bg: #1a1f2e;
+      --card-bg: rgba(255, 255, 255, 0.08);
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --text-primary: #ffffff;
+      --text-secondary: #a0a8b8;
+      --text-muted: #6b7280;
+      --accent-primary: #4f46e5;
+      --accent-secondary: #06b6d4;
+      --accent-success: #10b981;
+      --accent-warning: #f59e0b;
+      --accent-danger: #ef4444;
+      --border-subtle: rgba(255, 255, 255, 0.12);
+      --border-bright: rgba(255, 255, 255, 0.2);
+      --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.25);
+      --shadow-medium: 0 8px 40px rgba(0, 0, 0, 0.35);
+      --shadow-strong: 0 16px 64px rgba(0, 0, 0, 0.45);
+      --gradient-primary: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+      --gradient-success: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+      --gradient-adhd: linear-gradient(135deg, #4f46e5 0%, #06b6d4 50%, #10b981 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--primary-bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Background Effects */
+    .bg-gradient {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(ellipse at top, rgba(79, 70, 229, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom right, rgba(16, 185, 129, 0.08) 0%, transparent 50%);
+      z-index: -1;
+      animation: gradientShift 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes gradientShift {
+      0% { opacity: 1; }
+      50% { opacity: 0.8; }
+      100% { opacity: 1; }
+    }
+
+    .floating-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.12;
+      z-index: -1;
+      animation: float 25s infinite ease-in-out;
+    }
+
+    .orb-1 {
+      width: 300px;
+      height: 300px;
+      background: var(--accent-primary);
+      top: -150px;
+      right: -150px;
+    }
+
+    .orb-2 {
+      width: 250px;
+      height: 250px;
+      background: var(--accent-secondary);
+      bottom: -125px;
+      left: -125px;
+      animation-delay: -12s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(-30px, -20px) scale(1.05); }
+      66% { transform: translate(30px, -15px) scale(0.95); }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      background: rgba(15, 20, 25, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 1.5rem 0;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin: 0 0 10px 0;
+      color: var(--text-primary);
+    }
+
+    h1 .gradient-text {
+      background: var(--gradient-adhd);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: textGradient 4s ease-in-out infinite;
+    }
+
+    @keyframes textGradient {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .hero-subtitle {
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+      margin-bottom: 0;
+      line-height: 1.5;
+    }
+
+    /* Main Section */
+    section {
+      padding: 60px 0;
+      position: relative;
+    }
+
+    .form-container {
+      background: var(--glass-bg);
+      border: 2px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 800px;
+      margin: 0 auto;
+      box-shadow: var(--shadow-medium);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .form-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient-primary);
+    }
+
+    .question {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 30px;
+      transition: all 0.3s ease;
+    }
+
+    .question:hover {
+      border-color: var(--border-bright);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .question h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .question h2::before {
+      content: '🎯';
+      font-size: 1.2rem;
+    }
+
+    .question-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      margin: 15px 0;
+      cursor: pointer;
+      padding: 12px 16px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid transparent;
+    }
+
+    label:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--border-subtle);
+      transform: translateX(5px);
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+      margin-right: 12px;
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent-primary);
+      cursor: pointer;
+    }
+
+    label span {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    label:hover span {
+      color: var(--text-primary);
+    }
+
+    input:checked + span,
+    label:has(input:checked) span {
+      color: var(--accent-secondary);
+      font-weight: 600;
+    }
+
+    button {
+      background: var(--gradient-primary);
+      color: white;
+      padding: 22px 40px;
+      border: none;
+      font-size: 1.2rem;
+      font-weight: 800;
+      cursor: pointer;
+      border-radius: 15px;
+      margin-top: 30px;
+      width: 100%;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-medium);
+      border: 2px solid rgba(255,255,255,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-strong);
+    }
+
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    button:hover::before {
+      left: 100%;
+    }
+
+    .results {
+      margin-top: 40px;
+      padding: 30px;
+      background: var(--glass-bg);
+      border: 2px solid var(--accent-success);
+      border-radius: 16px;
+      box-shadow: var(--shadow-medium);
+      display: none;
+    }
+
+    .results.show {
+      display: block;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .results h3 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent-success);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .category-section {
+      margin-bottom: 30px;
+    }
+
+    .category-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--accent-secondary);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .platform-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 15px;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .platform-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent-secondary);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .platform-name {
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 5px;
+    }
+
+    .platform-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .earning-potential {
+      font-size: 0.8rem;
+      color: var(--accent-success);
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    .no-matches {
+      text-align: center;
+      color: var(--text-secondary);
+      font-style: italic;
+      padding: 40px 20px;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 15px;
+      }
+
+      h1 {
+        font-size: 2.3rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .form-container {
+        padding: 25px;
+        margin: 20px auto;
+      }
+
+      .question {
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+
+      .question h2 {
+        font-size: 1.3rem;
+      }
+
+      button {
+        padding: 18px 30px;
+        font-size: 1.1rem;
+      }
+
+      section {
+        padding: 40px 0;
+      }
+
+      .platform-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.9rem;
+      }
+
+      .form-container {
+        padding: 20px;
+      }
+
+      .question {
+        padding: 15px;
+      }
+
+      .question h2 {
+        font-size: 1.2rem;
+      }
+
+      label {
+        padding: 10px 12px;
+      }
+
+      button {
+        padding: 16px 25px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-gradient"></div>
+  <div class="floating-orb orb-1"></div>
+  <div class="floating-orb orb-2"></div>
+
+  <header>
+    <div class="container">
+      <h1>🧠 <span class="gradient-text">925 ADHD Passion Finder</span></h1>
+      <p class="hero-subtitle">Find your dopamine-boosting, freedom-loving income path</p>
+    </div>
+  </header>
+
+  <section>
+    <div class="container">
+      <div class="form-container">
+        <form id="passionForm">
+
+          <div class="question">
+            <h2>What's Your Current Energy & Motivation?</h2>
+            <p class="question-desc">Be honest about where you're at right now - no judgment!</p>
+            <label><input type="radio" name="energy" value="low"><span>🛋️ Low energy (just want something simple)</span></label>
+            <label><input type="radio" name="energy" value="medium"><span>🎯 Moderate energy (ready for some structure)</span></label>
+            <label><input type="radio" name="energy" value="high"><span>🚀 High energy (let's build something big!)</span></label>
+          </div>
+
+          <div class="question">
+            <h2>How Do You Like to Work?</h2>
+            <p class="question-desc">Pick what feels good for your brain</p>
+            <label><input type="checkbox" name="workStyle" value="flexible"><span>🌎 Flexible schedule (work when I want)</span></label>
+            <label><input type="checkbox" name="workStyle" value="social"><span>👥 Social interaction (talking to people)</span></label>
+            <label><input type="checkbox" name="workStyle" value="solo"><span>🎧 Solo work (just me and my focus)</span></label>
+            <label><input type="checkbox" name="workStyle" value="creative"><span>🎨 Creative expression (making things)</span></label>
+            <label><input type="checkbox" name="workStyle" value="analytical"><span>🧠 Problem solving (using my brain)</span></label>
+          </div>
+
+          <div class="question">
+            <h2>What Skills Feel Natural to You?</h2>
+            <p class="question-desc">Choose what you're already good at or enjoy doing</p>
+            <label><input type="checkbox" name="skills" value="communication"><span>💬 Talking/explaining things</span></label>
+            <label><input type="checkbox" name="skills" value="writing"><span>✍️ Writing (emails, posts, stories)</span></label>
+            <label><input type="checkbox" name="skills" value="listening"><span>👂 Good listener/helper</span></label>
+            <label><input type="checkbox" name="skills" value="opinions"><span>🗣️ Sharing opinions/reviews</span></label>
+            <label><input type="checkbox" name="skills" value="testing"><span>🔍 Finding bugs/testing things</span></label>
+            <label><input type="checkbox" name="skills" value="social-media"><span>📱 Social media savvy</span></label>
+            <label><input type="checkbox" name="skills" value="making"><span>🛠️ Making/crafting things</span></label>
+            <label><input type="checkbox" name="skills" value="tech"><span>💻 Tech/coding skills</span></label>
+            <label><input type="checkbox" name="skills" value="design"><span>🎨 Visual design</span></label>
+          </div>
+
+          <div class="question">
+            <h2>What's Your Main Goal Right Now?</h2>
+            <p class="question-desc">What would feel like a win for you?</p>
+            <label><input type="radio" name="goal" value="quick-cash"><span>💰 Quick side income ($50-200/month)</span></label>
+            <label><input type="radio" name="goal" value="steady-income"><span>📈 Build steady income ($200-1000/month)</span></label>
+            <label><input type="radio" name="goal" value="business"><span>🚀 Start a real business (scale up)</span></label>
+            <label><input type="radio" name="goal" value="portfolio"><span>🧩 Build skills/portfolio for future</span></label>
+            <label><input type="radio" name="goal" value="dopamine"><span>🎮 Just want something engaging & fun</span></label>
+          </div>
+
+          <button type="submit">🎯 Find My Perfect Matches</button>
+        </form>
+
+        <div class="results" id="results"></div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const platforms = {
+      quickStart: [
+        { name: "Swagbucks", desc: "Surveys, watching videos, shopping cashback", earning: "$20-50/month", skills: ["opinions"], workStyle: ["flexible", "solo"], energy: ["low"] },
+        { name: "UserTesting", desc: "Test websites and apps, give feedback", earning: "$10/test", skills: ["opinions", "testing"], workStyle: ["flexible", "solo"], energy: ["low", "medium"] },
+        { name: "Prolific", desc: "Academic research surveys (better pay)", earning: "$30-100/month", skills: ["opinions"], workStyle: ["flexible", "solo"], energy: ["low", "medium"] },
+        { name: "Amazon MTurk", desc: "Micro tasks, data entry, simple jobs", earning: "$50-200/month", skills: ["listening", "testing"], workStyle: ["flexible", "solo"], energy: ["low", "medium"] }
+      ],
+      
+      communication: [
+        { name: "Cambly", desc: "Casual English conversation (no teaching exp needed)", earning: "$10/hour", skills: ["communication"], workStyle: ["social", "flexible"], energy: ["medium", "high"] },
+        { name: "Rev", desc: "Transcription and captioning work", earning: "$15-20/hour", skills: ["listening", "writing"], workStyle: ["solo", "flexible"], energy: ["low", "medium"] },
+        { name: "Respondent", desc: "High-paying research interviews", earning: "$50-300/session", skills: ["communication", "opinions"], workStyle: ["social"], energy: ["medium", "high"] },
+        { name: "JustAnswer", desc: "Answer questions in your expertise area", earning: "$20-50/hour", skills: ["communication", "writing"], workStyle: ["flexible"], energy: ["medium"] }
+      ],
+
+      creative: [
+        { name: "Etsy", desc: "Sell handmade or digital products", earning: "$100-1000+/month", skills: ["making", "design"], workStyle: ["creative", "solo"], energy: ["medium", "high"] },
+        { name: "Fiverr", desc: "Freelance creative services", earning: "$100-2000+/month", skills: ["design", "writing", "tech"], workStyle: ["creative", "flexible"], energy: ["medium", "high"] },
+        { name: "Redbubble", desc: "Upload designs, earn passive income", earning: "$50-500/month", skills: ["design"], workStyle: ["creative", "solo"], energy: ["medium"] },
+        { name: "YouTube", desc: "Create videos about your interests", earning: "$100-10000+/month", skills: ["communication", "social-media"], workStyle: ["creative", "flexible"], energy: ["high"] }
+      ],
+
+      tech: [
+        { name: "Upwork", desc: "Freelance tech projects", earning: "$500-5000+/month", skills: ["tech", "writing"], workStyle: ["solo", "analytical"], energy: ["medium", "high"] },
+        { name: "Clickworker", desc: "AI training, data entry, web research", earning: "$100-400/month", skills: ["tech", "testing"], workStyle: ["solo", "flexible"], energy: ["low", "medium"] },
+        { name: "Appen", desc: "Search engine evaluation, AI training", earning: "$200-800/month", skills: ["tech", "testing"], workStyle: ["solo", "flexible"], energy: ["medium"] },
+        { name: "GitHub Sponsors", desc: "Get paid for open source contributions", earning: "$100-2000+/month", skills: ["tech"], workStyle: ["solo", "creative"], energy: ["high"] }
+      ],
+
+      social: [
+        { name: "TikTok Creator Fund", desc: "Get paid for viral content", earning: "$20-500+/month", skills: ["social-media"], workStyle: ["creative", "flexible"], energy: ["high"] },
+        { name: "Instagram Reels", desc: "Monetize your content", earning: "$50-1000+/month", skills: ["social-media", "design"], workStyle: ["creative", "flexible"], energy: ["medium", "high"] },
+        { name: "Twitch", desc: "Stream games or creative content", earning: "$100-5000+/month", skills: ["communication", "social-media"], workStyle: ["social", "creative"], energy: ["high"] },
+        { name: "Discord Communities", desc: "Moderate or manage communities", earning: "$200-1000/month", skills: ["communication", "social-media"], workStyle: ["social", "flexible"], energy: ["medium"] }
+      ]
+    };
+
+    document.getElementById("passionForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      
+      const energy = document.querySelector("input[name='energy']:checked")?.value;
+      const workStyle = [...document.querySelectorAll("input[name='workStyle']:checked")].map(i => i.value);
+      const skills = [...document.querySelectorAll("input[name='skills']:checked")].map(i => i.value);
+      const goal = document.querySelector("input[name='goal']:checked")?.value;
+
+      if (!energy || !goal) {
+        alert("Please answer the energy and goal questions to get matches!");
+        return;
+      }
+
+      const matches = findMatches(energy, workStyle, skills, goal);
+      displayResults(matches, goal);
+    });
+
+    function findMatches(energy, workStyle, skills, goal) {
+      const allPlatforms = Object.values(platforms).flat();
+      const scored = allPlatforms.map(platform => {
+        let score = 0;
+        
+        // Energy match (important)
+        if (platform.energy.includes(energy)) score += 3;
+        
+        // Work style matches
+        workStyle.forEach(style => {
+          if (platform.workStyle.includes(style)) score += 2;
+        });
+        
+        // Skills matches
+        skills.forEach(skill => {
+          if (platform.skills.includes(skill)) score += 2;
+        });
+        
+        // Goal-based scoring
+        if (goal === "quick-cash" && platform.earning.includes("$20") || platform.earning.includes("$10")) score += 2;
+        if (goal === "steady-income" && platform.earning.includes("$100")) score += 2;
+        if (goal === "business" && platform.earning.includes("$1000") || platform.earning.includes("$5000")) score += 3;
+        if (goal === "dopamine" && (platform.workStyle.includes("creative") || platform.workStyle.includes("social"))) score += 2;
+        
+        return { ...platform, score };
+      });
+
+      return scored.filter(p => p.score > 0).sort((a, b) => b.score - a.score).slice(0, 8);
+    }
+
+    function displayResults(matches, goal) {
+      const resultsDiv = document.getElementById("results");
+      
+      if (matches.length === 0) {
+        resultsDiv.innerHTML = `
+          <div class="no-matches">
+            <h3>🤔 No perfect matches yet!</h3>
+            <p>Try selecting more options above - the more you tell us, the better we can match you!</p>
+          </div>
+        `;
+      } else {
+        const goalTexts = {
+          "quick-cash": "💰 Quick Side Income Options",
+          "steady-income": "📈 Steady Income Builders", 
+          "business": "🚀 Business & Scale Opportunities",
+          "portfolio": "🧩 Skill Building Platforms",
+          "dopamine": "🎮 Fun & Engaging Options"
+        };
+
+        resultsDiv.innerHTML = `
+          <h3>🎉 Perfect Matches for You!</h3>
+          <div class="category-section">
+            <div class="category-title">${goalTexts[goal] || "💡 Your Top Recommendations"}</div>
+            <div class="platform-grid">
+              ${matches.map(platform => `
+                <div class="platform-card">
+                  <div class="platform-name">${platform.name}</div>
+                  <div class="platform-desc">${platform.desc}</div>
+                  <div class="earning-potential">${platform.earning}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+      
+      resultsDiv.classList.add("show");
+      resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+</body>
+</html>
