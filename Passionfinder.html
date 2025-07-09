@@ -141,10 +141,46 @@
       line-height: 1.5;
     }
 
+    /* Progress Bar */
+    .progress-container {
+      background: var(--glass-bg);
+      border-radius: 20px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 600px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: var(--secondary-bg);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--gradient-primary);
+      transition: width 0.5s ease;
+      border-radius: 10px;
+    }
+
+    .progress-text {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
     /* Main Section */
     section {
       padding: 60px 0;
       position: relative;
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
     }
 
     .form-container {
@@ -157,6 +193,7 @@
       box-shadow: var(--shadow-medium);
       position: relative;
       overflow: hidden;
+      width: 100%;
     }
 
     .form-container::before {
@@ -169,152 +206,14 @@
       background: var(--gradient-primary);
     }
 
-    .question {
-      background: var(--card-bg);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 30px;
-      margin-bottom: 30px;
-      transition: all 0.3s ease;
-    }
-
-    .question:hover {
-      border-color: var(--border-bright);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .question h2 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .question h2::before {
-      content: '🎯';
-      font-size: 1.2rem;
-    }
-
-    .question-desc {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-bottom: 20px;
-      font-style: italic;
-    }
-
-    /* Base mobile-first styles */
-    label {
-      display: flex;
-      align-items: flex-start;
-      margin: 15px 0;
-      cursor: pointer;
-      padding: 12px 16px;
-      border-radius: 12px;
-      transition: all 0.3s ease;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid transparent;
-      min-height: 50px;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    label:active {
-      background: rgba(255, 255, 255, 0.08);
-      transform: scale(0.98);
-    }
-
-    label:hover {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: var(--border-subtle);
-      transform: translateX(5px);
-    }
-
-    input[type="checkbox"],
-    input[type="radio"] {
-      margin-right: 12px;
-      width: 18px;
-      height: 18px;
-      accent-color: var(--accent-primary);
-      cursor: pointer;
-    }
-
-    label span {
-      color: var(--text-secondary);
-      font-size: 1rem;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-
-    label:hover span {
-      color: var(--text-primary);
-    }
-
-    input:checked + span,
-    label:has(input:checked) span {
-      color: var(--accent-secondary);
-      font-weight: 600;
-    }
-
-    button {
-      background: var(--gradient-primary);
-      color: white;
-      padding: 22px 40px;
-      border: none;
-      font-size: 1.2rem;
-      font-weight: 800;
-      cursor: pointer;
-      border-radius: 15px;
-      margin-top: 30px;
-      width: 100%;
-      transition: all 0.3s ease;
-      box-shadow: var(--shadow-medium);
-      border: 2px solid rgba(255,255,255,0.2);
-      position: relative;
-      overflow: hidden;
-      min-height: 60px;
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
-    }
-
-    button:active {
-      transform: scale(0.98);
-    }
-
-    button:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-strong);
-    }
-
-    button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: left 0.5s;
-    }
-
-    button:hover::before {
-      left: 100%;
-    }
-
-    .results {
-      margin-top: 40px;
-      padding: 30px;
-      background: var(--glass-bg);
-      border: 2px solid var(--accent-success);
-      border-radius: 16px;
-      box-shadow: var(--shadow-medium);
+    /* Question Pages */
+    .question-page {
       display: none;
+      animation: fadeInUp 0.6s ease-out;
     }
 
-    .results.show {
+    .question-page.active {
       display: block;
-      animation: fadeInUp 0.8s ease-out;
     }
 
     @keyframes fadeInUp {
@@ -328,39 +227,208 @@
       }
     }
 
+    .question {
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .question h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .question h2::before {
+      content: '🎯';
+      font-size: 2rem;
+    }
+
+    .question-desc {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+      font-style: italic;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .option-card {
+      background: var(--card-bg);
+      border: 2px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      position: relative;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .option-card:hover {
+      border-color: var(--accent-primary);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .option-card.selected {
+      border-color: var(--accent-secondary);
+      background: rgba(6, 182, 212, 0.1);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .option-card .emoji {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .option-card .title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .option-card .desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .option-card.selected .title {
+      color: var(--accent-secondary);
+    }
+
+    .option-card.selected .desc {
+      color: var(--text-secondary);
+    }
+
+    /* Navigation Buttons */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 40px;
+    }
+
+    .btn {
+      padding: 16px 32px;
+      border: none;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 54px;
+    }
+
+    .btn-primary {
+      background: var(--gradient-primary);
+      color: white;
+      box-shadow: var(--shadow-medium);
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn-secondary {
+      background: var(--card-bg);
+      color: var(--text-secondary);
+      border: 2px solid var(--border-subtle);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--border-bright);
+      color: var(--text-primary);
+      transform: translateY(-2px);
+    }
+
+    .btn-restart {
+      background: var(--accent-warning);
+      color: white;
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+
+    .btn-restart:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    /* Results Page */
+    .results-page {
+      display: none;
+    }
+
+    .results-page.active {
+      display: block;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
     .results h3 {
-      font-size: 1.8rem;
+      font-size: 2.5rem;
       font-weight: 700;
       color: var(--accent-success);
-      margin-bottom: 20px;
+      margin-bottom: 30px;
       text-align: center;
     }
 
     .category-section {
-      margin-bottom: 30px;
+      margin-bottom: 40px;
     }
 
     .category-title {
-      font-size: 1.3rem;
+      font-size: 1.5rem;
       font-weight: 600;
       color: var(--accent-secondary);
-      margin-bottom: 15px;
+      margin-bottom: 20px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      text-align: center;
+      justify-content: center;
     }
 
     .platform-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
     }
 
     .platform-card {
       background: var(--card-bg);
       border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      padding: 15px;
+      border-radius: 16px;
+      padding: 20px;
       transition: all 0.3s ease;
       text-align: center;
       position: relative;
@@ -375,32 +443,32 @@
     .platform-name {
       font-weight: 600;
       color: var(--text-primary);
-      margin-bottom: 5px;
-      font-size: 1.1rem;
+      margin-bottom: 8px;
+      font-size: 1.2rem;
     }
 
     .platform-desc {
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
       line-height: 1.4;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .earning-potential {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: var(--accent-success);
       font-weight: 600;
-      margin-bottom: 12px;
+      margin-bottom: 15px;
     }
 
     .platform-link {
       display: inline-block;
       background: var(--gradient-primary);
       color: white;
-      padding: 8px 16px;
-      border-radius: 20px;
+      padding: 10px 20px;
+      border-radius: 25px;
       text-decoration: none;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       font-weight: 600;
       transition: all 0.3s ease;
       border: 1px solid rgba(255,255,255,0.2);
@@ -412,15 +480,16 @@
       color: white;
     }
 
-    .platform-link:active {
-      transform: translateY(0);
-    }
-
     .no-matches {
       text-align: center;
       color: var(--text-secondary);
       font-style: italic;
-      padding: 40px 20px;
+      padding: 60px 20px;
+    }
+
+    .no-matches h3 {
+      color: var(--text-primary);
+      margin-bottom: 15px;
     }
 
     /* Mobile-First Optimizations */
@@ -445,115 +514,88 @@
 
       section {
         padding: 30px 0;
+        min-height: 60vh;
       }
 
       .form-container {
-        padding: 20px;
+        padding: 25px;
         margin: 15px auto;
         border-radius: 16px;
       }
 
-      .question {
-        padding: 20px 15px;
-        margin-bottom: 20px;
-        border-radius: 12px;
-      }
-
       .question h2 {
-        font-size: 1.25rem;
-        line-height: 1.3;
-        margin-bottom: 15px;
+        font-size: 1.6rem;
+        margin-bottom: 12px;
       }
 
       .question h2::before {
-        font-size: 1rem;
+        font-size: 1.5rem;
       }
 
       .question-desc {
-        font-size: 0.85rem;
-        margin-bottom: 15px;
-        line-height: 1.4;
+        font-size: 1rem;
+        margin-bottom: 30px;
       }
 
-      label {
-        padding: 14px 12px;
-        margin: 10px 0;
-        border-radius: 10px;
-        font-size: 0.95rem;
-        flex-wrap: wrap;
-        min-height: 50px;
-        align-items: center;
+      .options-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin-bottom: 30px;
       }
 
-      label span {
-        font-size: 0.95rem;
-        line-height: 1.3;
-      }
-
-      input[type="checkbox"],
-      input[type="radio"] {
-        margin-right: 10px;
-        width: 20px;
-        height: 20px;
-        flex-shrink: 0;
-      }
-
-      button {
-        padding: 18px 20px;
-        font-size: 1.1rem;
-        margin-top: 25px;
-        border-radius: 12px;
-        min-height: 60px;
-      }
-
-      .results {
-        margin-top: 30px;
+      .option-card {
         padding: 20px;
-        border-radius: 12px;
+        min-height: 100px;
       }
 
-      .results h3 {
-        font-size: 1.5rem;
-        margin-bottom: 15px;
+      .option-card .emoji {
+        font-size: 2rem;
+        margin-bottom: 10px;
       }
 
-      .category-title {
+      .option-card .title {
         font-size: 1.1rem;
-        margin-bottom: 12px;
+        margin-bottom: 6px;
+      }
+
+      .option-card .desc {
+        font-size: 0.9rem;
+      }
+
+      .nav-buttons {
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 30px;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 16px 24px;
+        font-size: 1rem;
       }
 
       .platform-grid {
         grid-template-columns: 1fr;
-        gap: 12px;
+        gap: 15px;
       }
 
       .platform-card {
         padding: 18px;
-        border-radius: 10px;
       }
 
-      .platform-name {
-        font-size: 1.1rem;
-        margin-bottom: 8px;
+      .results h3 {
+        font-size: 2rem;
+        margin-bottom: 25px;
       }
 
-      .platform-desc {
-        font-size: 0.9rem;
-        line-height: 1.4;
-        margin-bottom: 8px;
-      }
-
-      .earning-potential {
-        font-size: 0.85rem;
-        margin-top: 8px;
+      .category-title {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
       }
     }
 
     @media (max-width: 480px) {
-      .container {
-        padding: 0 10px;
-      }
-
       h1 {
         font-size: 1.8rem;
         margin-bottom: 8px;
@@ -565,199 +607,32 @@
       }
 
       .form-container {
-        padding: 15px;
+        padding: 20px;
         margin: 10px auto;
       }
 
-      .question {
-        padding: 15px 12px;
-        margin-bottom: 15px;
-      }
-
       .question h2 {
-        font-size: 1.1rem;
-        margin-bottom: 12px;
+        font-size: 1.4rem;
       }
 
       .question-desc {
-        font-size: 0.8rem;
-        margin-bottom: 12px;
+        font-size: 0.95rem;
+        margin-bottom: 25px;
       }
 
-      label {
-        padding: 12px 10px;
-        margin: 8px 0;
-        min-height: 48px;
+      .option-card {
+        padding: 18px;
+        min-height: 90px;
       }
 
-      label span {
-        font-size: 0.9rem;
-      }
-
-      input[type="checkbox"],
-      input[type="radio"] {
-        width: 18px;
-        height: 18px;
-        margin-right: 8px;
-      }
-
-      button {
-        padding: 16px 18px;
-        font-size: 1rem;
-        margin-top: 20px;
-        min-height: 56px;
-      }
-
-      .results {
-        padding: 15px;
-        margin-top: 25px;
-      }
-
-      .results h3 {
-        font-size: 1.3rem;
-        margin-bottom: 12px;
-      }
-
-      .category-title {
-        font-size: 1rem;
-        margin-bottom: 10px;
-      }
-
-      .platform-grid {
-        gap: 10px;
-      }
-
-      .platform-card {
-        padding: 15px;
-      }
-
-      .platform-name {
-        font-size: 1rem;
-        margin-bottom: 6px;
-      }
-
-      .platform-desc {
-        font-size: 0.85rem;
-        margin-bottom: 6px;
-      }
-
-      .earning-potential {
-        font-size: 0.8rem;
-        margin-top: 6px;
-      }
-
-      .no-matches {
-        padding: 30px 15px;
-      }
-
-      .no-matches h3 {
-        font-size: 1.2rem;
-        margin-bottom: 10px;
-      }
-
-      .no-matches p {
-        font-size: 0.9rem;
-        line-height: 1.4;
-      }
-    }
-
-    /* Touch-friendly improvements */
-    @media (hover: none) {
-      label:hover {
-        transform: none;
-        background: rgba(255, 255, 255, 0.02);
-      }
-
-      button:hover {
-        transform: none;
-      }
-
-      .platform-card:hover {
-        transform: none;
-      }
-    }
-
-    /* Landscape phone optimization */
-    @media (max-width: 896px) and (orientation: landscape) {
-      header {
-        padding: 0.8rem 0;
-      }
-
-      h1 {
-        font-size: 1.6rem;
-      }
-
-      .hero-subtitle {
-        font-size: 0.85rem;
-      }
-
-      section {
-        padding: 20px 0;
-      }
-
-      .question {
-        padding: 15px;
-        margin-bottom: 15px;
-      }
-
-      .question h2 {
-        font-size: 1rem;
-        margin-bottom: 10px;
-      }
-
-      .question-desc {
-        font-size: 0.75rem;
-        margin-bottom: 10px;
-      }
-
-      label {
-        padding: 10px;
-        margin: 6px 0;
-        min-height: 42px;
-      }
-
-      button {
-        padding: 14px 16px;
+      .btn {
+        padding: 14px 20px;
         font-size: 0.95rem;
         min-height: 50px;
       }
-    }
 
-    /* Very small screens */
-    @media (max-width: 320px) {
-      h1 {
-        font-size: 1.5rem;
-      }
-
-      .form-container {
-        padding: 12px;
-      }
-
-      .question {
-        padding: 12px 10px;
-      }
-
-      .question h2 {
-        font-size: 1rem;
-      }
-
-      label {
-        padding: 10px 8px;
-        margin: 6px 0;
-      }
-
-      label span {
-        font-size: 0.85rem;
-      }
-
-      button {
-        padding: 14px 16px;
-        font-size: 0.95rem;
-        min-height: 52px;
-      }
-
-      .platform-card {
-        padding: 12px;
+      .results h3 {
+        font-size: 1.7rem;
       }
     }
   </style>
@@ -774,57 +649,202 @@
     </div>
   </header>
 
+  <div class="container">
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-text" id="progressText">Question 1 of 4</div>
+    </div>
+  </div>
+
   <section>
     <div class="container">
       <div class="form-container">
-        <form id="passionForm">
-
+        
+        <!-- Question 1: Energy Level -->
+        <div class="question-page active" id="question1">
           <div class="question">
             <h2>What's Your Current Energy & Motivation?</h2>
             <p class="question-desc">Be honest about where you're at right now - no judgment!</p>
-            <label><input type="radio" name="energy" value="low"><span>🛋️ Low energy (just want something simple)</span></label>
-            <label><input type="radio" name="energy" value="medium"><span>🎯 Moderate energy (ready for some structure)</span></label>
-            <label><input type="radio" name="energy" value="high"><span>🚀 High energy (let's build something big!)</span></label>
-          </div>
+            
+            <div class="options-grid">
+              <div class="option-card" data-value="low">
+                <span class="emoji">🛋️</span>
+                <div class="title">Low Energy</div>
+                <div class="desc">Just want something simple and low-effort</div>
+              </div>
+              <div class="option-card" data-value="medium">
+                <span class="emoji">🎯</span>
+                <div class="title">Moderate Energy</div>
+                <div class="desc">Ready for some structure and routine</div>
+              </div>
+              <div class="option-card" data-value="high">
+                <span class="emoji">🚀</span>
+                <div class="title">High Energy</div>
+                <div class="desc">Let's build something big and exciting!</div>
+              </div>
+            </div>
 
+            <div class="nav-buttons">
+              <div></div>
+              <button class="btn btn-primary" id="next1" disabled>Next Question →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 2: Work Style -->
+        <div class="question-page" id="question2">
           <div class="question">
             <h2>How Do You Like to Work?</h2>
-            <p class="question-desc">Pick what feels good for your brain</p>
-            <label><input type="checkbox" name="workStyle" value="flexible"><span>🌎 Flexible schedule (work when I want)</span></label>
-            <label><input type="checkbox" name="workStyle" value="social"><span>👥 Social interaction (talking to people)</span></label>
-            <label><input type="checkbox" name="workStyle" value="solo"><span>🎧 Solo work (just me and my focus)</span></label>
-            <label><input type="checkbox" name="workStyle" value="creative"><span>🎨 Creative expression (making things)</span></label>
-            <label><input type="checkbox" name="workStyle" value="analytical"><span>🧠 Problem solving (using my brain)</span></label>
-          </div>
+            <p class="question-desc">Pick what feels good for your brain (select multiple)</p>
+            
+            <div class="options-grid">
+              <div class="option-card" data-value="flexible">
+                <span class="emoji">🌎</span>
+                <div class="title">Flexible Schedule</div>
+                <div class="desc">Work when I want, where I want</div>
+              </div>
+              <div class="option-card" data-value="social">
+                <span class="emoji">👥</span>
+                <div class="title">Social Interaction</div>
+                <div class="desc">I like talking to people</div>
+              </div>
+              <div class="option-card" data-value="solo">
+                <span class="emoji">🎧</span>
+                <div class="title">Solo Work</div>
+                <div class="desc">Just me and my focus zone</div>
+              </div>
+              <div class="option-card" data-value="creative">
+                <span class="emoji">🎨</span>
+                <div class="title">Creative Expression</div>
+                <div class="desc">Making and creating things</div>
+              </div>
+              <div class="option-card" data-value="analytical">
+                <span class="emoji">🧠</span>
+                <div class="title">Problem Solving</div>
+                <div class="desc">Using my brain to figure things out</div>
+              </div>
+            </div>
 
+            <div class="nav-buttons">
+              <button class="btn btn-secondary" id="back2">← Back</button>
+              <button class="btn btn-primary" id="next2">Next Question →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 3: Skills -->
+        <div class="question-page" id="question3">
           <div class="question">
             <h2>What Skills Feel Natural to You?</h2>
-            <p class="question-desc">Choose what you're already good at or enjoy doing</p>
-            <label><input type="checkbox" name="skills" value="communication"><span>💬 Talking/explaining things</span></label>
-            <label><input type="checkbox" name="skills" value="writing"><span>✍️ Writing (emails, posts, stories)</span></label>
-            <label><input type="checkbox" name="skills" value="listening"><span>👂 Good listener/helper</span></label>
-            <label><input type="checkbox" name="skills" value="opinions"><span>🗣️ Sharing opinions/reviews</span></label>
-            <label><input type="checkbox" name="skills" value="testing"><span>🔍 Finding bugs/testing things</span></label>
-            <label><input type="checkbox" name="skills" value="social-media"><span>📱 Social media savvy</span></label>
-            <label><input type="checkbox" name="skills" value="making"><span>🛠️ Making/crafting things</span></label>
-            <label><input type="checkbox" name="skills" value="tech"><span>💻 Tech/coding skills</span></label>
-            <label><input type="checkbox" name="skills" value="design"><span>🎨 Visual design</span></label>
-          </div>
+            <p class="question-desc">Choose what you're already good at or enjoy doing (select multiple)</p>
+            
+            <div class="options-grid">
+              <div class="option-card" data-value="communication">
+                <span class="emoji">💬</span>
+                <div class="title">Communication</div>
+                <div class="desc">Talking, explaining, teaching</div>
+              </div>
+              <div class="option-card" data-value="writing">
+                <span class="emoji">✍️</span>
+                <div class="title">Writing</div>
+                <div class="desc">Emails, posts, stories, content</div>
+              </div>
+              <div class="option-card" data-value="listening">
+                <span class="emoji">👂</span>
+                <div class="title">Good Listener</div>
+                <div class="desc">Helping others, being supportive</div>
+              </div>
+              <div class="option-card" data-value="opinions">
+                <span class="emoji">🗣️</span>
+                <div class="title">Sharing Opinions</div>
+                <div class="desc">Reviews, feedback, critiques</div>
+              </div>
+              <div class="option-card" data-value="testing">
+                <span class="emoji">🔍</span>
+                <div class="title">Testing & QA</div>
+                <div class="desc">Finding bugs, testing products</div>
+              </div>
+              <div class="option-card" data-value="social-media">
+                <span class="emoji">📱</span>
+                <div class="title">Social Media</div>
+                <div class="desc">Content creation, engagement</div>
+              </div>
+              <div class="option-card" data-value="making">
+                <span class="emoji">🛠️</span>
+                <div class="title">Making Things</div>
+                <div class="desc">Crafting, building, creating</div>
+              </div>
+              <div class="option-card" data-value="tech">
+                <span class="emoji">💻</span>
+                <div class="title">Tech Skills</div>
+                <div class="desc">Coding, digital tools, computers</div>
+              </div>
+              <div class="option-card" data-value="design">
+                <span class="emoji">🎨</span>
+                <div class="title">Visual Design</div>
+                <div class="desc">Graphics, aesthetics, layouts</div>
+              </div>
+            </div>
 
+            <div class="nav-buttons">
+              <button class="btn btn-secondary" id="back3">← Back</button>
+              <button class="btn btn-primary" id="next3">Next Question →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 4: Goals -->
+        <div class="question-page" id="question4">
           <div class="question">
             <h2>What's Your Main Goal Right Now?</h2>
             <p class="question-desc">What would feel like a win for you?</p>
-            <label><input type="radio" name="goal" value="quick-cash"><span>💰 Quick side income ($50-200/month)</span></label>
-            <label><input type="radio" name="goal" value="steady-income"><span>📈 Build steady income ($200-1000/month)</span></label>
-            <label><input type="radio" name="goal" value="business"><span>🚀 Start a real business (scale up)</span></label>
-            <label><input type="radio" name="goal" value="portfolio"><span>🧩 Build skills/portfolio for future</span></label>
-            <label><input type="radio" name="goal" value="dopamine"><span>🎮 Just want something engaging & fun</span></label>
+            
+            <div class="options-grid">
+              <div class="option-card" data-value="quick-cash">
+                <span class="emoji">💰</span>
+                <div class="title">Quick Side Income</div>
+                <div class="desc">$50-200/month to start</div>
+              </div>
+              <div class="option-card" data-value="steady-income">
+                <span class="emoji">📈</span>
+                <div class="title">Steady Income</div>
+                <div class="desc">$200-1000/month consistently</div>
+              </div>
+              <div class="option-card" data-value="business">
+                <span class="emoji">🚀</span>
+                <div class="title">Real Business</div>
+                <div class="desc">Scale up and build something big</div>
+              </div>
+              <div class="option-card" data-value="portfolio">
+                <span class="emoji">🧩</span>
+                <div class="title">Build Skills</div>
+                <div class="desc">Portfolio and experience for future</div>
+              </div>
+              <div class="option-card" data-value="dopamine">
+                <span class="emoji">🎮</span>
+                <div class="title">Fun & Engaging</div>
+                <div class="desc">Something enjoyable and stimulating</div>
+              </div>
+            </div>
+
+            <div class="nav-buttons">
+              <button class="btn btn-secondary" id="back4">← Back</button>
+              <button class="btn btn-primary" id="findMatches" disabled>🎯 Find My Matches</button>
+            </div>
           </div>
+        </div>
 
-          <button type="submit">🎯 Find My Perfect Matches</button>
-        </form>
+        <!-- Results Page -->
+        <div class="results-page" id="resultsPage">
+          <div id="resultsContent"></div>
+          <div class="nav-buttons">
+            <button class="btn btn-restart" id="restart">🔄 Start Over</button>
+            <div></div>
+          </div>
+        </div>
 
-        <div class="results" id="results"></div>
       </div>
     </div>
   </section>
@@ -1090,46 +1110,157 @@
       ]
     };
 
-    document.getElementById("passionForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      
-      const energy = document.querySelector("input[name='energy']:checked")?.value;
-      const workStyle = [...document.querySelectorAll("input[name='workStyle']:checked")].map(i => i.value);
-      const skills = [...document.querySelectorAll("input[name='skills']:checked")].map(i => i.value);
-      const goal = document.querySelector("input[name='goal']:checked")?.value;
+    // Application state
+    let currentQuestion = 1;
+    let answers = {
+      energy: null,
+      workStyle: [],
+      skills: [],
+      goal: null
+    };
 
-      if (!energy || !goal) {
-        alert("Please answer the energy and goal questions to get matches!");
-        return;
-      }
-
-      const matches = findMatches(energy, workStyle, skills, goal);
-      displayResults(matches, goal);
+    // Initialize the app
+    document.addEventListener('DOMContentLoaded', function() {
+      setupEventListeners();
+      updateProgress();
     });
 
-    function findMatches(energy, workStyle, skills, goal) {
+    function setupEventListeners() {
+      // Option card selections
+      document.querySelectorAll('.option-card').forEach(card => {
+        card.addEventListener('click', function() {
+          const value = this.dataset.value;
+          const questionNum = getCurrentQuestionNumber();
+          
+          if (questionNum === 1 || questionNum === 4) {
+            // Single selection for energy and goal
+            const siblings = this.parentElement.querySelectorAll('.option-card');
+            siblings.forEach(sibling => sibling.classList.remove('selected'));
+            this.classList.add('selected');
+            
+            if (questionNum === 1) {
+              answers.energy = value;
+              updateNextButton(1);
+            } else if (questionNum === 4) {
+              answers.goal = value;
+              updateNextButton(4);
+            }
+          } else {
+            // Multiple selection for workStyle and skills
+            this.classList.toggle('selected');
+            
+            if (questionNum === 2) {
+              if (this.classList.contains('selected')) {
+                if (!answers.workStyle.includes(value)) {
+                  answers.workStyle.push(value);
+                }
+              } else {
+                answers.workStyle = answers.workStyle.filter(item => item !== value);
+              }
+            } else if (questionNum === 3) {
+              if (this.classList.contains('selected')) {
+                if (!answers.skills.includes(value)) {
+                  answers.skills.push(value);
+                }
+              } else {
+                answers.skills = answers.skills.filter(item => item !== value);
+              }
+            }
+          }
+        });
+      });
+
+      // Navigation buttons
+      document.getElementById('next1').addEventListener('click', () => goToQuestion(2));
+      document.getElementById('next2').addEventListener('click', () => goToQuestion(3));
+      document.getElementById('next3').addEventListener('click', () => goToQuestion(4));
+      document.getElementById('findMatches').addEventListener('click', showResults);
+
+      document.getElementById('back2').addEventListener('click', () => goToQuestion(1));
+      document.getElementById('back3').addEventListener('click', () => goToQuestion(2));
+      document.getElementById('back4').addEventListener('click', () => goToQuestion(3));
+
+      document.getElementById('restart').addEventListener('click', restartQuiz);
+    }
+
+    function getCurrentQuestionNumber() {
+      if (document.getElementById('question1').classList.contains('active')) return 1;
+      if (document.getElementById('question2').classList.contains('active')) return 2;
+      if (document.getElementById('question3').classList.contains('active')) return 3;
+      if (document.getElementById('question4').classList.contains('active')) return 4;
+      return 1;
+    }
+
+    function goToQuestion(questionNum) {
+      // Hide all questions
+      document.querySelectorAll('.question-page').forEach(page => {
+        page.classList.remove('active');
+      });
+      
+      // Show target question
+      document.getElementById(`question${questionNum}`).classList.add('active');
+      
+      currentQuestion = questionNum;
+      updateProgress();
+      
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function updateProgress() {
+      const progress = (currentQuestion / 4) * 100;
+      document.getElementById('progressFill').style.width = `${progress}%`;
+      document.getElementById('progressText').textContent = `Question ${currentQuestion} of 4`;
+    }
+
+    function updateNextButton(questionNum) {
+      const button = document.getElementById(`next${questionNum}`) || document.getElementById('findMatches');
+      if (button) {
+        button.disabled = false;
+      }
+    }
+
+    function showResults() {
+      const matches = findMatches();
+      displayResults(matches);
+      
+      // Hide all questions and show results
+      document.querySelectorAll('.question-page').forEach(page => {
+        page.classList.remove('active');
+      });
+      document.getElementById('resultsPage').classList.add('active');
+      
+      // Update progress to complete
+      document.getElementById('progressFill').style.width = '100%';
+      document.getElementById('progressText').textContent = 'Complete!';
+      
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function findMatches() {
       const allPlatforms = Object.values(platforms).flat();
       const scored = allPlatforms.map(platform => {
         let score = 0;
         
         // Energy match (important)
-        if (platform.energy.includes(energy)) score += 3;
+        if (platform.energy.includes(answers.energy)) score += 3;
         
         // Work style matches
-        workStyle.forEach(style => {
+        answers.workStyle.forEach(style => {
           if (platform.workStyle.includes(style)) score += 2;
         });
         
         // Skills matches
-        skills.forEach(skill => {
+        answers.skills.forEach(skill => {
           if (platform.skills.includes(skill)) score += 2;
         });
         
         // Goal-based scoring
-        if (goal === "quick-cash" && platform.earning.includes("$20") || platform.earning.includes("$10")) score += 2;
-        if (goal === "steady-income" && platform.earning.includes("$100")) score += 2;
-        if (goal === "business" && platform.earning.includes("$1000") || platform.earning.includes("$5000")) score += 3;
-        if (goal === "dopamine" && (platform.workStyle.includes("creative") || platform.workStyle.includes("social"))) score += 2;
+        if (answers.goal === "quick-cash" && (platform.earning.includes("$20") || platform.earning.includes("$10"))) score += 2;
+        if (answers.goal === "steady-income" && platform.earning.includes("$100")) score += 2;
+        if (answers.goal === "business" && (platform.earning.includes("$1000") || platform.earning.includes("$5000"))) score += 3;
+        if (answers.goal === "dopamine" && (platform.workStyle.includes("creative") || platform.workStyle.includes("social"))) score += 2;
         
         return { ...platform, score };
       });
@@ -1137,14 +1268,14 @@
       return scored.filter(p => p.score > 0).sort((a, b) => b.score - a.score).slice(0, 8);
     }
 
-    function displayResults(matches, goal) {
-      const resultsDiv = document.getElementById("results");
+    function displayResults(matches) {
+      const resultsContent = document.getElementById('resultsContent');
       
       if (matches.length === 0) {
-        resultsDiv.innerHTML = `
+        resultsContent.innerHTML = `
           <div class="no-matches">
             <h3>🤔 No perfect matches yet!</h3>
-            <p>Try selecting more options above - the more you tell us, the better we can match you!</p>
+            <p>Try going back and selecting more options - the more you tell us, the better we can match you!</p>
           </div>
         `;
       } else {
@@ -1156,14 +1287,6 @@
           }
           groupedMatches[platform.category].push(platform);
         });
-
-        const goalTexts = {
-          "quick-cash": "💰 Quick Side Income Options",
-          "steady-income": "📈 Steady Income Builders", 
-          "business": "🚀 Business & Scale Opportunities",
-          "portfolio": "🧩 Skill Building Platforms",
-          "dopamine": "🎮 Fun & Engaging Options"
-        };
 
         let categoriesHTML = '';
         Object.keys(groupedMatches).forEach(category => {
@@ -1187,14 +1310,11 @@
           `;
         });
 
-        resultsDiv.innerHTML = `
+        resultsContent.innerHTML = `
           <h3>🎉 Perfect Matches for You!</h3>
           ${categoriesHTML}
         `;
       }
-      
-      resultsDiv.classList.add("show");
-      resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     function getCategoryIcon(category) {
@@ -1207,6 +1327,38 @@
         "Writing & Content": "✍️"
       };
       return icons[category] || "💡";
+    }
+
+    function restartQuiz() {
+      // Reset answers
+      answers = {
+        energy: null,
+        workStyle: [],
+        skills: [],
+        goal: null
+      };
+      
+      // Reset UI
+      document.querySelectorAll('.option-card').forEach(card => {
+        card.classList.remove('selected');
+      });
+      
+      document.querySelectorAll('.btn-primary').forEach(btn => {
+        if (btn.id !== 'next2' && btn.id !== 'next3') {
+          btn.disabled = true;
+        }
+      });
+      
+      // Go back to first question
+      currentQuestion = 1;
+      document.getElementById('resultsPage').classList.remove('active');
+      document.querySelectorAll('.question-page').forEach(page => {
+        page.classList.remove('active');
+      });
+      document.getElementById('question1').classList.add('active');
+      
+      updateProgress();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
 </body>
