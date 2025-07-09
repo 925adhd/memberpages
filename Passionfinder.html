@@ -363,6 +363,7 @@
       padding: 15px;
       transition: all 0.3s ease;
       text-align: center;
+      position: relative;
     }
 
     .platform-card:hover {
@@ -375,19 +376,44 @@
       font-weight: 600;
       color: var(--text-primary);
       margin-bottom: 5px;
+      font-size: 1.1rem;
     }
 
     .platform-desc {
       font-size: 0.85rem;
       color: var(--text-muted);
       line-height: 1.4;
+      margin-bottom: 10px;
     }
 
     .earning-potential {
       font-size: 0.8rem;
       color: var(--accent-success);
       font-weight: 600;
-      margin-top: 8px;
+      margin-bottom: 12px;
+    }
+
+    .platform-link {
+      display: inline-block;
+      background: var(--gradient-primary);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .platform-link:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-soft);
+      color: white;
+    }
+
+    .platform-link:active {
+      transform: translateY(0);
     }
 
     .no-matches {
@@ -806,38 +832,261 @@
   <script>
     const platforms = {
       quickStart: [
-        { name: "Swagbucks", desc: "Surveys, watching videos, shopping cashback", earning: "$20-50/month", skills: ["opinions"], workStyle: ["flexible", "solo"], energy: ["low"] },
-        { name: "UserTesting", desc: "Test websites and apps, give feedback", earning: "$10/test", skills: ["opinions", "testing"], workStyle: ["flexible", "solo"], energy: ["low", "medium"] },
-        { name: "Prolific", desc: "Academic research surveys (better pay)", earning: "$30-100/month", skills: ["opinions"], workStyle: ["flexible", "solo"], energy: ["low", "medium"] },
-        { name: "Amazon MTurk", desc: "Micro tasks, data entry, simple jobs", earning: "$50-200/month", skills: ["listening", "testing"], workStyle: ["flexible", "solo"], energy: ["low", "medium"] }
+        { 
+          name: "Swagbucks", 
+          desc: "Surveys, watching videos, shopping cashback", 
+          earning: "$20-50/month", 
+          skills: ["opinions"], 
+          workStyle: ["flexible", "solo"], 
+          energy: ["low"],
+          url: "https://www.swagbucks.com",
+          category: "Quick Money"
+        },
+        { 
+          name: "UserTesting", 
+          desc: "Test websites and apps, give feedback", 
+          earning: "$10/test", 
+          skills: ["opinions", "testing"], 
+          workStyle: ["flexible", "solo"], 
+          energy: ["low", "medium"],
+          url: "https://www.usertesting.com",
+          category: "Quick Money"
+        },
+        { 
+          name: "Prolific", 
+          desc: "Academic research surveys (better pay)", 
+          earning: "$30-100/month", 
+          skills: ["opinions"], 
+          workStyle: ["flexible", "solo"], 
+          energy: ["low", "medium"],
+          url: "https://prolific.co",
+          category: "Quick Money"
+        },
+        { 
+          name: "Amazon MTurk", 
+          desc: "Micro tasks, data entry, simple jobs", 
+          earning: "$50-200/month", 
+          skills: ["listening", "testing"], 
+          workStyle: ["flexible", "solo"], 
+          energy: ["low", "medium"],
+          url: "https://www.mturk.com",
+          category: "Quick Money"
+        }
       ],
       
       communication: [
-        { name: "Cambly", desc: "Casual English conversation (no teaching exp needed)", earning: "$10/hour", skills: ["communication"], workStyle: ["social", "flexible"], energy: ["medium", "high"] },
-        { name: "Rev", desc: "Transcription and captioning work", earning: "$15-20/hour", skills: ["listening", "writing"], workStyle: ["solo", "flexible"], energy: ["low", "medium"] },
-        { name: "Respondent", desc: "High-paying research interviews", earning: "$50-300/session", skills: ["communication", "opinions"], workStyle: ["social"], energy: ["medium", "high"] },
-        { name: "JustAnswer", desc: "Answer questions in your expertise area", earning: "$20-50/hour", skills: ["communication", "writing"], workStyle: ["flexible"], energy: ["medium"] }
+        { 
+          name: "Cambly", 
+          desc: "Casual English conversation (no teaching exp needed)", 
+          earning: "$10/hour", 
+          skills: ["communication"], 
+          workStyle: ["social", "flexible"], 
+          energy: ["medium", "high"],
+          url: "https://www.cambly.com",
+          category: "Communication & Teaching"
+        },
+        { 
+          name: "Rev", 
+          desc: "Transcription and captioning work", 
+          earning: "$15-20/hour", 
+          skills: ["listening", "writing"], 
+          workStyle: ["solo", "flexible"], 
+          energy: ["low", "medium"],
+          url: "https://www.rev.com",
+          category: "Communication & Teaching"
+        },
+        { 
+          name: "Respondent", 
+          desc: "High-paying research interviews", 
+          earning: "$50-300/session", 
+          skills: ["communication", "opinions"], 
+          workStyle: ["social"], 
+          energy: ["medium", "high"],
+          url: "https://www.respondent.io",
+          category: "Communication & Teaching"
+        },
+        { 
+          name: "Preply", 
+          desc: "Online tutoring in any subject", 
+          earning: "$10-40/hour", 
+          skills: ["communication", "writing"], 
+          workStyle: ["social", "flexible"], 
+          energy: ["medium", "high"],
+          url: "https://preply.com",
+          category: "Communication & Teaching"
+        }
       ],
 
       creative: [
-        { name: "Etsy", desc: "Sell handmade or digital products", earning: "$100-1000+/month", skills: ["making", "design"], workStyle: ["creative", "solo"], energy: ["medium", "high"] },
-        { name: "Fiverr", desc: "Freelance creative services", earning: "$100-2000+/month", skills: ["design", "writing", "tech"], workStyle: ["creative", "flexible"], energy: ["medium", "high"] },
-        { name: "Redbubble", desc: "Upload designs, earn passive income", earning: "$50-500/month", skills: ["design"], workStyle: ["creative", "solo"], energy: ["medium"] },
-        { name: "YouTube", desc: "Create videos about your interests", earning: "$100-10000+/month", skills: ["communication", "social-media"], workStyle: ["creative", "flexible"], energy: ["high"] }
+        { 
+          name: "Etsy", 
+          desc: "Sell handmade or digital products", 
+          earning: "$100-1000+/month", 
+          skills: ["making", "design"], 
+          workStyle: ["creative", "solo"], 
+          energy: ["medium", "high"],
+          url: "https://www.etsy.com",
+          category: "Creative & Design"
+        },
+        { 
+          name: "Fiverr", 
+          desc: "Freelance creative services", 
+          earning: "$100-2000+/month", 
+          skills: ["design", "writing", "tech"], 
+          workStyle: ["creative", "flexible"], 
+          energy: ["medium", "high"],
+          url: "https://www.fiverr.com",
+          category: "Creative & Design"
+        },
+        { 
+          name: "Redbubble", 
+          desc: "Upload designs, earn passive income", 
+          earning: "$50-500/month", 
+          skills: ["design"], 
+          workStyle: ["creative", "solo"], 
+          energy: ["medium"],
+          url: "https://www.redbubble.com",
+          category: "Creative & Design"
+        },
+        { 
+          name: "99designs", 
+          desc: "Design contests and freelance projects", 
+          earning: "$200-2000+/month", 
+          skills: ["design"], 
+          workStyle: ["creative", "solo"], 
+          energy: ["medium", "high"],
+          url: "https://99designs.com",
+          category: "Creative & Design"
+        }
       ],
 
       tech: [
-        { name: "Upwork", desc: "Freelance tech projects", earning: "$500-5000+/month", skills: ["tech", "writing"], workStyle: ["solo", "analytical"], energy: ["medium", "high"] },
-        { name: "Clickworker", desc: "AI training, data entry, web research", earning: "$100-400/month", skills: ["tech", "testing"], workStyle: ["solo", "flexible"], energy: ["low", "medium"] },
-        { name: "Appen", desc: "Search engine evaluation, AI training", earning: "$200-800/month", skills: ["tech", "testing"], workStyle: ["solo", "flexible"], energy: ["medium"] },
-        { name: "GitHub Sponsors", desc: "Get paid for open source contributions", earning: "$100-2000+/month", skills: ["tech"], workStyle: ["solo", "creative"], energy: ["high"] }
+        { 
+          name: "Upwork", 
+          desc: "Freelance tech projects", 
+          earning: "$500-5000+/month", 
+          skills: ["tech", "writing"], 
+          workStyle: ["solo", "analytical"], 
+          energy: ["medium", "high"],
+          url: "https://www.upwork.com",
+          category: "Tech & Development"
+        },
+        { 
+          name: "Clickworker", 
+          desc: "AI training, data entry, web research", 
+          earning: "$100-400/month", 
+          skills: ["tech", "testing"], 
+          workStyle: ["solo", "flexible"], 
+          energy: ["low", "medium"],
+          url: "https://www.clickworker.com",
+          category: "Tech & Development"
+        },
+        { 
+          name: "Appen", 
+          desc: "Search engine evaluation, AI training", 
+          earning: "$200-800/month", 
+          skills: ["tech", "testing"], 
+          workStyle: ["solo", "flexible"], 
+          energy: ["medium"],
+          url: "https://appen.com",
+          category: "Tech & Development"
+        },
+        { 
+          name: "Toptal", 
+          desc: "Elite freelance network for developers", 
+          earning: "$2000-10000+/month", 
+          skills: ["tech"], 
+          workStyle: ["solo", "analytical"], 
+          energy: ["high"],
+          url: "https://www.toptal.com",
+          category: "Tech & Development"
+        }
       ],
 
       social: [
-        { name: "TikTok Creator Fund", desc: "Get paid for viral content", earning: "$20-500+/month", skills: ["social-media"], workStyle: ["creative", "flexible"], energy: ["high"] },
-        { name: "Instagram Reels", desc: "Monetize your content", earning: "$50-1000+/month", skills: ["social-media", "design"], workStyle: ["creative", "flexible"], energy: ["medium", "high"] },
-        { name: "Twitch", desc: "Stream games or creative content", earning: "$100-5000+/month", skills: ["communication", "social-media"], workStyle: ["social", "creative"], energy: ["high"] },
-        { name: "Discord Communities", desc: "Moderate or manage communities", earning: "$200-1000/month", skills: ["communication", "social-media"], workStyle: ["social", "flexible"], energy: ["medium"] }
+        { 
+          name: "TikTok Creator Fund", 
+          desc: "Get paid for viral content", 
+          earning: "$20-500+/month", 
+          skills: ["social-media"], 
+          workStyle: ["creative", "flexible"], 
+          energy: ["high"],
+          url: "https://www.tiktok.com/creators",
+          category: "Social Media & Content"
+        },
+        { 
+          name: "YouTube Partner", 
+          desc: "Monetize your video content", 
+          earning: "$100-10000+/month", 
+          skills: ["communication", "social-media"], 
+          workStyle: ["creative", "flexible"], 
+          energy: ["high"],
+          url: "https://www.youtube.com/creators",
+          category: "Social Media & Content"
+        },
+        { 
+          name: "Twitch Affiliate", 
+          desc: "Stream games or creative content", 
+          earning: "$100-5000+/month", 
+          skills: ["communication", "social-media"], 
+          workStyle: ["social", "creative"], 
+          energy: ["high"],
+          url: "https://www.twitch.tv",
+          category: "Social Media & Content"
+        },
+        { 
+          name: "Instagram Reels", 
+          desc: "Monetize your content", 
+          earning: "$50-1000+/month", 
+          skills: ["social-media", "design"], 
+          workStyle: ["creative", "flexible"], 
+          energy: ["medium", "high"],
+          url: "https://creators.instagram.com",
+          category: "Social Media & Content"
+        }
+      ],
+
+      writing: [
+        { 
+          name: "Contently", 
+          desc: "Content marketing writing", 
+          earning: "$50-500/article", 
+          skills: ["writing"], 
+          workStyle: ["solo", "flexible"], 
+          energy: ["medium"],
+          url: "https://contently.com",
+          category: "Writing & Content"
+        },
+        { 
+          name: "Medium Partner", 
+          desc: "Get paid for your stories", 
+          earning: "$50-2000+/month", 
+          skills: ["writing"], 
+          workStyle: ["solo", "flexible"], 
+          energy: ["medium"],
+          url: "https://medium.com/creators",
+          category: "Writing & Content"
+        },
+        { 
+          name: "Substack", 
+          desc: "Newsletter monetization", 
+          earning: "$100-5000+/month", 
+          skills: ["writing"], 
+          workStyle: ["solo", "flexible"], 
+          energy: ["medium", "high"],
+          url: "https://substack.com",
+          category: "Writing & Content"
+        },
+        { 
+          name: "Textbroker", 
+          desc: "Freelance content writing", 
+          earning: "$100-1000/month", 
+          skills: ["writing"], 
+          workStyle: ["solo", "flexible"], 
+          energy: ["medium"],
+          url: "https://www.textbroker.com",
+          category: "Writing & Content"
+        }
       ]
     };
 
@@ -899,6 +1148,15 @@
           </div>
         `;
       } else {
+        // Group matches by category
+        const groupedMatches = {};
+        matches.forEach(platform => {
+          if (!groupedMatches[platform.category]) {
+            groupedMatches[platform.category] = [];
+          }
+          groupedMatches[platform.category].push(platform);
+        });
+
         const goalTexts = {
           "quick-cash": "💰 Quick Side Income Options",
           "steady-income": "📈 Steady Income Builders", 
@@ -907,25 +1165,48 @@
           "dopamine": "🎮 Fun & Engaging Options"
         };
 
+        let categoriesHTML = '';
+        Object.keys(groupedMatches).forEach(category => {
+          const categoryIcon = getCategoryIcon(category);
+          categoriesHTML += `
+            <div class="category-section">
+              <div class="category-title">${categoryIcon} ${category}</div>
+              <div class="platform-grid">
+                ${groupedMatches[category].map(platform => `
+                  <div class="platform-card">
+                    <div class="platform-name">${platform.name}</div>
+                    <div class="platform-desc">${platform.desc}</div>
+                    <div class="earning-potential">${platform.earning}</div>
+                    <a href="${platform.url}" target="_blank" rel="noopener noreferrer" class="platform-link">
+                      Start Here →
+                    </a>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `;
+        });
+
         resultsDiv.innerHTML = `
           <h3>🎉 Perfect Matches for You!</h3>
-          <div class="category-section">
-            <div class="category-title">${goalTexts[goal] || "💡 Your Top Recommendations"}</div>
-            <div class="platform-grid">
-              ${matches.map(platform => `
-                <div class="platform-card">
-                  <div class="platform-name">${platform.name}</div>
-                  <div class="platform-desc">${platform.desc}</div>
-                  <div class="earning-potential">${platform.earning}</div>
-                </div>
-              `).join('')}
-            </div>
-          </div>
+          ${categoriesHTML}
         `;
       }
       
       resultsDiv.classList.add("show");
       resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function getCategoryIcon(category) {
+      const icons = {
+        "Quick Money": "⚡",
+        "Communication & Teaching": "💬",
+        "Creative & Design": "🎨",
+        "Tech & Development": "💻",
+        "Social Media & Content": "📱",
+        "Writing & Content": "✍️"
+      };
+      return icons[category] || "💡";
     }
   </script>
 </body>
