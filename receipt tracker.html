@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Receipt Stacking Tracker</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
@@ -42,7 +42,6 @@
       color: var(--text-secondary);
     }
 
-    /* Responsive container for table */
     .table-wrapper {
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
@@ -55,7 +54,7 @@
       border-collapse: collapse;
       background: var(--card-bg);
       overflow: hidden;
-      min-width: 600px; /* ensures minimum width before scrolling */
+      min-width: 600px;
     }
 
     th,
@@ -100,10 +99,10 @@
       list-style: none;
     }
 
-    /* Remove default triangle */
     summary::-webkit-details-marker {
       display: none;
     }
+
     summary::marker {
       content: '';
     }
@@ -112,6 +111,59 @@
       text-align: center;
       font-size: 0.8rem;
       color: var(--text-muted);
+    }
+
+    /* MOBILE STYLES */
+    @media screen and (max-width: 480px) {
+      table {
+        min-width: auto;
+        border: none;
+      }
+
+      thead {
+        display: none; /* hide table headers */
+      }
+
+      tr {
+        display: block;
+        margin-bottom: 1.5rem;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 1rem;
+        background: var(--card-bg);
+      }
+
+      td {
+        display: block;
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+        border: none;
+        font-size: 0.9rem;
+      }
+
+      td input[type='checkbox'] {
+        position: static;
+        transform: scale(1.5);
+        margin: 0 0 0.5rem 0;
+        float: right;
+      }
+
+      td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 1rem;
+        width: 45%;
+        padding-left: 0;
+        font-weight: 600;
+        color: var(--accent);
+        text-align: left;
+      }
+
+      /* Hide Estimated column on mobile */
+      td[data-label="Estimated"] {
+        display: none;
+      }
     }
   </style>
 </head>
@@ -131,85 +183,85 @@
       </thead>
       <tbody>
         <tr>
-          <td>Ibotta</td>
-          <td>
+          <td data-label="App">Ibotta</td>
+          <td data-label="Action">
             Activate offers + upload receipt
-            <details><summary>Need help?</summary>Open Ibotta, tap offers, activate ones that match your receipt. Then scan/upload your receipt to redeem.</details>
+            <details><summary>Need help?</summary>Open Ibotta, tap offers, activate matching offers, then upload receipt.</details>
           </td>
-          <td>$0.10–$5.00</td>
-          <td><input type="checkbox" /></td>
+          <td data-label="Estimated">$0.10–$5.00</td>
+          <td data-label="Done"><input type="checkbox" /></td>
         </tr>
         <tr>
-          <td>Fetch Rewards</td>
-          <td>
+          <td data-label="App">Fetch Rewards</td>
+          <td data-label="Action">
             Upload receipt
-            <details><summary>Need help?</summary>Open Fetch, tap the scan icon, and snap a photo of your receipt. Almost any store works.</details>
+            <details><summary>Need help?</summary>Open Fetch, tap scan icon, snap a photo of your receipt.</details>
           </td>
-          <td>$0.01–$0.50</td>
-          <td><input type="checkbox" /></td>
+          <td data-label="Estimated">$0.01–$0.50</td>
+          <td data-label="Done"><input type="checkbox" /></td>
         </tr>
         <tr>
-          <td>Benjamin</td>
-          <td>
+          <td data-label="App">Benjamin</td>
+          <td data-label="Action">
             Upload + link card
-            <details><summary>Need help?</summary>Scan your receipt, and link your debit/credit card to earn extra automatic rewards.</details>
+            <details><summary>Need help?</summary>Scan receipt and link your card to earn extra rewards.</details>
           </td>
-          <td>$0.05–$0.25</td>
-          <td><input type="checkbox" /></td>
+          <td data-label="Estimated">$0.05–$0.25</td>
+          <td data-label="Done"><input type="checkbox" /></td>
         </tr>
         <tr>
-          <td>CoinOut</td>
-          <td>
+          <td data-label="App">CoinOut</td>
+          <td data-label="Action">
             Upload receipt
-            <details><summary>Need help?</summary>Open the app and take a clear pic of the whole receipt. No offers needed, random cash value.</details>
+            <details><summary>Need help?</summary>Take clear pic of receipt—no offers needed.</details>
           </td>
-          <td>$0.01–$0.10</td>
-          <td><input type="checkbox" /></td>
+          <td data-label="Estimated">$0.01–$0.10</td>
+          <td data-label="Done"><input type="checkbox" /></td>
         </tr>
         <tr>
-          <td>Receipt Hog</td>
-          <td>
+          <td data-label="App">Receipt Hog</td>
+          <td data-label="Action">
             Upload receipt
-            <details><summary>Need help?</summary>Use app camera to scan receipt and earn coins. Some give bonus spins or surveys.</details>
+            <details><summary>Need help?</summary>Use app camera to scan receipt and earn coins/bonus spins.</details>
           </td>
-          <td>$0.01–$0.05</td>
-          <td><input type="checkbox" /></td>
+          <td data-label="Estimated">$0.01–$0.05</td>
+          <td data-label="Done"><input type="checkbox" /></td>
         </tr>
         <tr>
-          <td>Amazon Panel</td>
-          <td>
+          <td data-label="App">Amazon Panel</td>
+          <td data-label="Action">
             Upload (invite only)
-            <details><summary>Need help?</summary>Upload 10 receipts per month to earn a $10 Amazon credit. You must be invited to join.</details>
+            <details><summary>Need help?</summary>Upload 10 receipts monthly to earn a $10 Amazon credit. Invite only.</details>
           </td>
-          <td>~$1 / 10 receipts</td>
-          <td><input type="checkbox" /></td>
+          <td data-label="Estimated">~$1 / 10 receipts</td>
+          <td data-label="Done"><input type="checkbox" /></td>
         </tr>
         <tr>
-          <td>Swagbucks</td>
-          <td>
+          <td data-label="App">Swagbucks</td>
+          <td data-label="Action">
             Activate + upload
-            <details><summary>Need help?</summary>Activate offers in the app or website, then upload a receipt that matches those items.</details>
+            <details><summary>Need help?</summary>Activate offers, then upload matching receipt.</details>
           </td>
-          <td>$0.10–$0.50</td>
-          <td><input type="checkbox" /></td>
+          <td data-label="Estimated">$0.10–$0.50</td>
+          <td data-label="Done"><input type="checkbox" /></td>
         </tr>
         <tr>
-          <td>InboxDollars</td>
-          <td>
+          <td data-label="App">InboxDollars</td>
+          <td data-label="Action">
             Activate + upload
-            <details><summary>Need help?</summary>Like Swagbucks: turn on offers first, then submit a matching receipt photo.</details>
+            <details><summary>Need help?</summary>Turn on offers, then submit matching receipt.</details>
           </td>
-          <td>$0.10–$0.50</td>
-          <td><input type="checkbox" /></td>
+          <td data-label="Estimated">$0.10–$0.50</td>
+          <td data-label="Done"><input type="checkbox" /></td>
         </tr>
         <tr>
-          <td>Shopkick</td>
-          <td>
+          <td data-label="App">Shopkick</td>
+          <td data-label="Action">
             Scan receipt (if listed)
-            <details><summary>Need help?</summary>Only certain items qualify. Check app first to see if your receipt includes eligible stuff.</details>
+            <details><summary>Need help?</summary>Only certain items qualify. Check app before scanning.</details>
           </td>
-          <td>$0.01–$0.10</td>
-          <td><input type="checkbox" /></td>
+          <td data-label="Estimated">$0.01–$0.10</td>
+          <td data-label="Done"><input type="checkbox" /></td>
         </tr>
       </tbody>
     </table>
