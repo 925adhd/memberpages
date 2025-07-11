@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Receipt Stacking Tracker</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary-bg: #0a0e1a;
@@ -15,154 +15,124 @@
       --accent: #10b981;
       --border: rgba(255, 255, 255, 0.1);
     }
-
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       font-family: 'Inter', sans-serif;
     }
-
     body {
       background: var(--primary-bg);
       color: var(--text-primary);
       padding: 1.5rem;
     }
-
     h1 {
       text-align: center;
       margin-bottom: 1rem;
       font-size: 1.6rem;
       color: var(--accent);
     }
-
     p {
       text-align: center;
       margin-bottom: 2rem;
       color: var(--text-secondary);
     }
-
-    .table-wrapper {
+    /* Responsive container for horizontal scrolling on small screens */
+    .table-container {
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
-      border-radius: 10px;
       margin-bottom: 2rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
     }
-
     table {
       width: 100%;
       border-collapse: collapse;
-      background: var(--card-bg);
-      overflow: hidden;
-      min-width: 600px;
+      min-width: 600px; /* ensure table won't be too narrow */
     }
-
-    th,
-    td {
+    th, td {
       padding: 1rem;
       text-align: left;
       border-bottom: 1px solid var(--border);
       vertical-align: top;
     }
-
     th {
       background-color: rgba(255, 255, 255, 0.05);
       color: var(--accent);
       font-size: 0.9rem;
+      white-space: nowrap;
     }
-
     td {
       font-size: 0.85rem;
       color: var(--text-secondary);
+      position: relative; /* for absolute positioning inside */
     }
-
     tr:last-child td {
       border-bottom: none;
     }
-
-    input[type='checkbox'] {
+    input[type="checkbox"] {
       transform: scale(1.3);
       margin-right: 0.5rem;
       cursor: pointer;
     }
-
-    details {
-      margin-top: 0.5rem;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    summary {
-      cursor: pointer;
-      color: var(--accent);
-      font-weight: 500;
-      list-style: none;
-    }
-
-    summary::-webkit-details-marker {
-      display: none;
-    }
-
-    summary::marker {
-      content: '';
-    }
-
     .footer {
       text-align: center;
       font-size: 0.8rem;
       color: var(--text-muted);
     }
 
-    /* MOBILE STYLES */
-    @media screen and (max-width: 480px) {
-      table {
-        min-width: auto;
-        border: none;
-      }
-
-      thead {
-        display: none; /* hide table headers */
-      }
-
-      tr {
-        display: block;
-        margin-bottom: 1.5rem;
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        padding: 1rem;
-        background: var(--card-bg);
-      }
-
-      td {
-        display: block;
-        text-align: right;
-        padding-left: 50%;
-        position: relative;
-        border: none;
-        font-size: 0.9rem;
-      }
-
-      td input[type='checkbox'] {
-        position: static;
-        transform: scale(1.5);
-        margin: 0 0 0.5rem 0;
-        float: right;
-      }
-
-      td::before {
-        content: attr(data-label);
-        position: absolute;
-        left: 1rem;
-        width: 45%;
-        padding-left: 0;
-        font-weight: 600;
-        color: var(--accent);
-        text-align: left;
-      }
-
-      /* Hide Estimated column on mobile */
-      td[data-label="Estimated"] {
-        display: none;
+    /* Details/summary styles for stable layout */
+    details {
+      position: relative;
+      display: inline-block;
+      margin-left: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      user-select: none;
+    }
+    summary {
+      cursor: pointer;
+      color: var(--accent);
+      font-weight: 600;
+      list-style: none;
+      outline: none;
+      user-select: none;
+      display: inline-block;
+    }
+    /* Remove default marker */
+    summary::-webkit-details-marker {
+      display: none;
+    }
+    summary::marker {
+      content: '';
+    }
+    /* Hide details content by default */
+    details > *:not(summary) {
+      display: none;
+    }
+    /* Show content absolutely positioned on open */
+    details[open] > *:not(summary) {
+      display: block;
+      position: absolute;
+      z-index: 10;
+      background: var(--primary-bg);
+      border: 1px solid var(--accent);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      width: 240px;
+      top: 1.8em;  /* below summary */
+      left: 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      color: var(--text-primary);
+      user-select: text;
+      white-space: normal;
+    }
+    /* Prevent the tooltip from being cut off on small screens */
+    @media (max-width: 400px) {
+      details[open] > *:not(summary) {
+        width: 180px;
+        font-size: 0.7rem;
       }
     }
   </style>
@@ -171,7 +141,7 @@
   <h1>Receipt Stacking Tracker</h1>
   <p>Upload each receipt to all the apps below for max earnings 💰</p>
 
-  <div class="table-wrapper">
+  <div class="table-container">
     <table>
       <thead>
         <tr>
@@ -183,85 +153,112 @@
       </thead>
       <tbody>
         <tr>
-          <td data-label="App">Ibotta</td>
-          <td data-label="Action">
+          <td>Ibotta</td>
+          <td>
             Activate offers + upload receipt
-            <details><summary>Need help?</summary>Open Ibotta, tap offers, activate matching offers, then upload receipt.</details>
+            <details>
+              <summary>Need help?</summary>
+              Open Ibotta, tap offers, activate matching offers, then upload receipt.
+            </details>
           </td>
-          <td data-label="Estimated">$0.10–$5.00</td>
-          <td data-label="Done"><input type="checkbox" /></td>
+          <td>$0.10–$5.00</td>
+          <td><input type="checkbox" aria-label="Ibotta done checkbox"></td>
         </tr>
         <tr>
-          <td data-label="App">Fetch Rewards</td>
-          <td data-label="Action">
+          <td>Fetch Rewards</td>
+          <td>
             Upload receipt
-            <details><summary>Need help?</summary>Open Fetch, tap scan icon, snap a photo of your receipt.</details>
+            <details>
+              <summary>Need help?</summary>
+              Scan your receipt barcode or upload your receipt image to earn points.
+            </details>
           </td>
-          <td data-label="Estimated">$0.01–$0.50</td>
-          <td data-label="Done"><input type="checkbox" /></td>
+          <td>$0.01–$0.50</td>
+          <td><input type="checkbox" aria-label="Fetch Rewards done checkbox"></td>
         </tr>
         <tr>
-          <td data-label="App">Benjamin</td>
-          <td data-label="Action">
+          <td>Benjamin</td>
+          <td>
             Upload + link card
-            <details><summary>Need help?</summary>Scan receipt and link your card to earn extra rewards.</details>
+            <details>
+              <summary>Need help?</summary>
+              Upload your receipt and link your credit/debit card for automatic cash back.
+            </details>
           </td>
-          <td data-label="Estimated">$0.05–$0.25</td>
-          <td data-label="Done"><input type="checkbox" /></td>
+          <td>$0.05–$0.25</td>
+          <td><input type="checkbox" aria-label="Benjamin done checkbox"></td>
         </tr>
         <tr>
-          <td data-label="App">CoinOut</td>
-          <td data-label="Action">
+          <td>CoinOut</td>
+          <td>
             Upload receipt
-            <details><summary>Need help?</summary>Take clear pic of receipt—no offers needed.</details>
+            <details>
+              <summary>Need help?</summary>
+              Snap a photo of your receipt or upload it to earn instant cash back.
+            </details>
           </td>
-          <td data-label="Estimated">$0.01–$0.10</td>
-          <td data-label="Done"><input type="checkbox" /></td>
+          <td>$0.01–$0.10</td>
+          <td><input type="checkbox" aria-label="CoinOut done checkbox"></td>
         </tr>
         <tr>
-          <td data-label="App">Receipt Hog</td>
-          <td data-label="Action">
+          <td>Receipt Hog</td>
+          <td>
             Upload receipt
-            <details><summary>Need help?</summary>Use app camera to scan receipt and earn coins/bonus spins.</details>
+            <details>
+              <summary>Need help?</summary>
+              Upload your receipts to earn coins, sweepstakes entries, and rewards.
+            </details>
           </td>
-          <td data-label="Estimated">$0.01–$0.05</td>
-          <td data-label="Done"><input type="checkbox" /></td>
+          <td>$0.01–$0.05</td>
+          <td><input type="checkbox" aria-label="Receipt Hog done checkbox"></td>
         </tr>
         <tr>
-          <td data-label="App">Amazon Panel</td>
-          <td data-label="Action">
+          <td>Amazon Panel</td>
+          <td>
             Upload (invite only)
-            <details><summary>Need help?</summary>Upload 10 receipts monthly to earn a $10 Amazon credit. Invite only.</details>
+            <details>
+              <summary>Need help?</summary>
+              Amazon invites you to upload receipts for extra rewards. Invite only.
+            </details>
           </td>
-          <td data-label="Estimated">~$1 / 10 receipts</td>
-          <td data-label="Done"><input type="checkbox" /></td>
+          <td>~$1 / 10 receipts</td>
+          <td><input type="checkbox" aria-label="Amazon Panel done checkbox"></td>
         </tr>
         <tr>
-          <td data-label="App">Swagbucks</td>
-          <td data-label="Action">
+          <td>Swagbucks</td>
+          <td>
             Activate + upload
-            <details><summary>Need help?</summary>Activate offers, then upload matching receipt.</details>
+            <details>
+              <summary>Need help?</summary>
+              Activate offers on Swagbucks, then upload your receipts for points.
+            </details>
           </td>
-          <td data-label="Estimated">$0.10–$0.50</td>
-          <td data-label="Done"><input type="checkbox" /></td>
+          <td>$0.10–$0.50</td>
+          <td><input type="checkbox" aria-label="Swagbucks done checkbox"></td>
         </tr>
         <tr>
-          <td data-label="App">InboxDollars</td>
-          <td data-label="Action">
+          <td>InboxDollars</td>
+          <td>
             Activate + upload
-            <details><summary>Need help?</summary>Turn on offers, then submit matching receipt.</details>
+            <details>
+              <summary>Need help?</summary>
+              Activate offers and upload receipts to earn cash rewards.
+            </details>
           </td>
-          <td data-label="Estimated">$0.10–$0.50</td>
-          <td data-label="Done"><input type="checkbox" /></td>
+          <td>$0.10–$0.50</td>
+          <td><input type="checkbox" aria-label="InboxDollars done checkbox"></td>
         </tr>
         <tr>
-          <td data-label="App">Shopkick</td>
-          <td data-label="Action">
+          <td>Shopkick</td>
+          <td>
             Scan receipt (if listed)
-            <details><summary>Need help?</summary>Only certain items qualify. Check app before scanning.</details>
+            <details>
+              <summary>Need help?</summary>
+              Scan your receipt barcode if eligible to earn points.
+            </details>
           </td>
-          <td data-label="Estimated">$0.01–$0.10</td>
-          <td data-label="Done"><input type="checkbox" /></td>
+          <td>$0.01–$0.10</td>
+          <td><input type="checkbox" aria-label="Shopkick done checkbox"></td>
         </tr>
       </tbody>
     </table>
