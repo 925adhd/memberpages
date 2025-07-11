@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Receipt Stacking Tracker</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --primary-bg: #0a0e1a;
@@ -15,58 +15,99 @@
       --accent: #10b981;
       --border: rgba(255, 255, 255, 0.1);
     }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       font-family: 'Inter', sans-serif;
     }
+
     body {
       background: var(--primary-bg);
       color: var(--text-primary);
       padding: 1.5rem;
     }
+
     h1 {
       text-align: center;
       margin-bottom: 1rem;
       font-size: 1.6rem;
       color: var(--accent);
     }
+
     p {
       text-align: center;
       margin-bottom: 2rem;
       color: var(--text-secondary);
     }
+
+    /* Responsive container for table */
+    .table-wrapper {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 2rem;
       background: var(--card-bg);
-      border-radius: 10px;
       overflow: hidden;
+      min-width: 600px; /* ensures minimum width before scrolling */
     }
-    th, td {
+
+    th,
+    td {
       padding: 1rem;
       text-align: left;
       border-bottom: 1px solid var(--border);
+      vertical-align: top;
     }
+
     th {
       background-color: rgba(255, 255, 255, 0.05);
       color: var(--accent);
       font-size: 0.9rem;
     }
+
     td {
       font-size: 0.85rem;
       color: var(--text-secondary);
     }
+
     tr:last-child td {
       border-bottom: none;
     }
-    input[type="checkbox"] {
+
+    input[type='checkbox'] {
       transform: scale(1.3);
       margin-right: 0.5rem;
       cursor: pointer;
     }
+
+    details {
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    summary {
+      cursor: pointer;
+      color: var(--accent);
+      font-weight: 500;
+      list-style: none;
+    }
+
+    /* Remove default triangle */
+    summary::-webkit-details-marker {
+      display: none;
+    }
+    summary::marker {
+      content: '';
+    }
+
     .footer {
       text-align: center;
       font-size: 0.8rem;
@@ -75,75 +116,104 @@
   </style>
 </head>
 <body>
-  <h1>📸 Receipt Stacking Tracker</h1>
+  <h1>Receipt Stacking Tracker</h1>
   <p>Upload each receipt to all the apps below for max earnings 💰</p>
 
-  <table>
-    <thead>
-      <tr>
-        <th>App</th>
-        <th>Action</th>
-        <th>Estimated</th>
-        <th>Done</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Ibotta</td>
-        <td>Select offers in app before shopping, then upload receipt</td>
-        <td>$0.10–$5.00</td>
-        <td><input type="checkbox"></td>
-      </tr>
-      <tr>
-        <td>Fetch Rewards</td>
-        <td>Open app and upload receipt — no prep needed</td>
-        <td>$0.01–$0.50</td>
-        <td><input type="checkbox"></td>
-      </tr>
-      <tr>
-        <td>Benjamin</td>
-        <td>Link your card (auto) or upload manually for cashback</td>
-        <td>$0.05–$0.25</td>
-        <td><input type="checkbox"></td>
-      </tr>
-      <tr>
-        <td>CoinOut</td>
-        <td>Just upload receipt — super simple</td>
-        <td>$0.01–$0.10</td>
-        <td><input type="checkbox"></td>
-      </tr>
-      <tr>
-        <td>Receipt Hog</td>
-        <td>Upload receipt to earn coins toward gift cards</td>
-        <td>$0.01–$0.05</td>
-        <td><input type="checkbox"></td>
-      </tr>
-      <tr>
-        <td>Amazon Panel</td>
-        <td>Upload 10 receipts/month (invite only)</td>
-        <td>~$1 / 10 receipts</td>
-        <td><input type="checkbox"></td>
-      </tr>
-      <tr>
-        <td>Swagbucks</td>
-        <td>Choose offers first, then upload matching receipt</td>
-        <td>$0.10–$0.50</td>
-        <td><input type="checkbox"></td>
-      </tr>
-      <tr>
-        <td>InboxDollars</td>
-        <td>Activate offers, then upload receipt to match</td>
-        <td>$0.10–$0.50</td>
-        <td><input type="checkbox"></td>
-      </tr>
-      <tr>
-        <td>Shopkick</td>
-        <td>Check if your item earns “kicks” first, then scan receipt</td>
-        <td>$0.01–$0.10</td>
-        <td><input type="checkbox"></td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>App</th>
+          <th>Action</th>
+          <th>Estimated</th>
+          <th>Done</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Ibotta</td>
+          <td>
+            Activate offers + upload receipt
+            <details><summary>Need help?</summary>Open Ibotta, tap offers, activate ones that match your receipt. Then scan/upload your receipt to redeem.</details>
+          </td>
+          <td>$0.10–$5.00</td>
+          <td><input type="checkbox" /></td>
+        </tr>
+        <tr>
+          <td>Fetch Rewards</td>
+          <td>
+            Upload receipt
+            <details><summary>Need help?</summary>Open Fetch, tap the scan icon, and snap a photo of your receipt. Almost any store works.</details>
+          </td>
+          <td>$0.01–$0.50</td>
+          <td><input type="checkbox" /></td>
+        </tr>
+        <tr>
+          <td>Benjamin</td>
+          <td>
+            Upload + link card
+            <details><summary>Need help?</summary>Scan your receipt, and link your debit/credit card to earn extra automatic rewards.</details>
+          </td>
+          <td>$0.05–$0.25</td>
+          <td><input type="checkbox" /></td>
+        </tr>
+        <tr>
+          <td>CoinOut</td>
+          <td>
+            Upload receipt
+            <details><summary>Need help?</summary>Open the app and take a clear pic of the whole receipt. No offers needed, random cash value.</details>
+          </td>
+          <td>$0.01–$0.10</td>
+          <td><input type="checkbox" /></td>
+        </tr>
+        <tr>
+          <td>Receipt Hog</td>
+          <td>
+            Upload receipt
+            <details><summary>Need help?</summary>Use app camera to scan receipt and earn coins. Some give bonus spins or surveys.</details>
+          </td>
+          <td>$0.01–$0.05</td>
+          <td><input type="checkbox" /></td>
+        </tr>
+        <tr>
+          <td>Amazon Panel</td>
+          <td>
+            Upload (invite only)
+            <details><summary>Need help?</summary>Upload 10 receipts per month to earn a $10 Amazon credit. You must be invited to join.</details>
+          </td>
+          <td>~$1 / 10 receipts</td>
+          <td><input type="checkbox" /></td>
+        </tr>
+        <tr>
+          <td>Swagbucks</td>
+          <td>
+            Activate + upload
+            <details><summary>Need help?</summary>Activate offers in the app or website, then upload a receipt that matches those items.</details>
+          </td>
+          <td>$0.10–$0.50</td>
+          <td><input type="checkbox" /></td>
+        </tr>
+        <tr>
+          <td>InboxDollars</td>
+          <td>
+            Activate + upload
+            <details><summary>Need help?</summary>Like Swagbucks: turn on offers first, then submit a matching receipt photo.</details>
+          </td>
+          <td>$0.10–$0.50</td>
+          <td><input type="checkbox" /></td>
+        </tr>
+        <tr>
+          <td>Shopkick</td>
+          <td>
+            Scan receipt (if listed)
+            <details><summary>Need help?</summary>Only certain items qualify. Check app first to see if your receipt includes eligible stuff.</details>
+          </td>
+          <td>$0.01–$0.10</td>
+          <td><input type="checkbox" /></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <div class="footer">
     Stack that receipt gold ✨ One scan at a time.
