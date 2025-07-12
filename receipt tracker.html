@@ -43,68 +43,90 @@
       font-size: 0.9rem;
     }
     
-    /* Mobile-first compact list layout */
-    .apps-list {
+    /* Mobile-first card layout */
+    .apps-grid {
+      display: grid;
+      gap: 1rem;
       margin-bottom: 2rem;
     }
     
-    .app-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .app-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1rem;
-      margin-bottom: 0.75rem;
+      border-radius: 12px;
+      padding: 1.25rem;
+      position: relative;
       transition: border-color 0.2s ease;
     }
     
-    .app-row:focus-within {
+    .app-card:focus-within {
       border-color: var(--accent);
       outline: 2px solid rgba(16, 185, 129, 0.2);
       outline-offset: 2px;
     }
     
-    .app-info {
-      flex: 1;
-      min-width: 0; /* Allow text to wrap */
+    .app-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
     }
     
     .app-name {
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 600;
       color: var(--accent);
-      margin-bottom: 0.25rem;
     }
     
-    .app-brief {
-      font-size: 0.8rem;
+    .app-name a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    .app-name a:hover {
+      color: #14f195;
+      text-decoration: underline;
+    }
+    
+    .app-earnings {
+      font-size: 0.85rem;
       color: var(--text-secondary);
-      margin-bottom: 0.5rem;
-      line-height: 1.3;
+      font-weight: 500;
+    }
+    
+    .app-action {
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+      font-weight: 500;
     }
     
     .app-tooltip {
       background: var(--tooltip-bg);
       border: 1px solid var(--tooltip-border);
-      border-radius: 6px;
-      padding: 0.5rem;
-      font-size: 0.75rem;
+      border-radius: 8px;
+      padding: 0.75rem;
+      font-size: 0.8rem;
       color: var(--text-secondary);
-      line-height: 1.3;
+      line-height: 1.4;
+      margin-bottom: 1rem;
+    }
+    
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
     }
     
     .checkbox-wrapper {
       display: flex;
       align-items: center;
-      justify-content: center;
+      gap: 0.5rem;
       cursor: pointer;
-      padding: 0.5rem;
+      padding: 0.25rem;
       border-radius: 6px;
       transition: background-color 0.2s ease;
-      min-width: 44px; /* Touch target size */
-      min-height: 44px;
     }
     
     .checkbox-wrapper:hover {
@@ -112,19 +134,18 @@
     }
     
     input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
       cursor: pointer;
       accent-color: var(--accent);
-      border-radius: 3px;
+      border-radius: 4px;
     }
     
     .checkbox-label {
-      font-size: 1.2rem;
+      font-size: 0.85rem;
       color: var(--text-secondary);
       cursor: pointer;
       user-select: none;
-      margin-left: 0.25rem;
     }
     
     .footer {
@@ -240,7 +261,7 @@
 
     <div class="app-card">
       <div class="app-header">
-        <div class="app-name">Benjamin</div>
+        <div class="app-name"><a href="https://www.benjaminone.com" target="_blank" rel="noopener noreferrer">Benjamin</a></div>
         <div class="app-earnings">$0.05–$16.00</div>
       </div>
       <div class="app-action">Upload receipt + link card</div>
@@ -291,7 +312,7 @@
 
     <div class="app-card">
       <div class="app-header">
-        <div class="app-name">Amazon Panel</div>
+        <div class="app-name"><a href="https://panel.amazon.com" target="_blank" rel="noopener noreferrer">Amazon Panel</a></div>
         <div class="app-earnings">~$1 / 10 receipts</div>
       </div>
       <div class="app-action">Upload (invite only)</div>
@@ -308,7 +329,7 @@
 
     <div class="app-card">
       <div class="app-header">
-        <div class="app-name">Swagbucks</div>
+        <div class="app-name"><a href="https://www.swagbucks.com" target="_blank" rel="noopener noreferrer">Swagbucks</a></div>
         <div class="app-earnings">$0.10–$0.50</div>
       </div>
       <div class="app-action">Activate + upload</div>
@@ -325,7 +346,7 @@
 
     <div class="app-card">
       <div class="app-header">
-        <div class="app-name">InboxDollars</div>
+        <div class="app-name"><a href="https://www.inboxdollars.com" target="_blank" rel="noopener noreferrer">InboxDollars</a></div>
         <div class="app-earnings">$0.10–$0.50</div>
       </div>
       <div class="app-action">Activate + upload</div>
@@ -342,7 +363,7 @@
 
     <div class="app-card">
       <div class="app-header">
-        <div class="app-name">Shopkick</div>
+        <div class="app-name"><a href="https://www.shopkick.com" target="_blank" rel="noopener noreferrer">Shopkick</a></div>
         <div class="app-earnings">$0.01–$0.10</div>
       </div>
       <div class="app-action">Scan receipt (if listed)</div>
