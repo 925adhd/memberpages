@@ -43,79 +43,68 @@
       font-size: 0.9rem;
     }
     
-    /* Mobile-first card layout */
-    .apps-grid {
-      display: grid;
-      gap: 1rem;
+    /* Mobile-first compact list layout */
+    .apps-list {
       margin-bottom: 2rem;
     }
     
-    .app-card {
+    .app-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.25rem;
-      position: relative;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
       transition: border-color 0.2s ease;
     }
     
-    .app-card:focus-within {
+    .app-row:focus-within {
       border-color: var(--accent);
       outline: 2px solid rgba(16, 185, 129, 0.2);
       outline-offset: 2px;
     }
     
-    .app-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.75rem;
+    .app-info {
+      flex: 1;
+      min-width: 0; /* Allow text to wrap */
     }
     
     .app-name {
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 600;
       color: var(--accent);
+      margin-bottom: 0.25rem;
     }
     
-    .app-earnings {
-      font-size: 0.85rem;
+    .app-brief {
+      font-size: 0.8rem;
       color: var(--text-secondary);
-      font-weight: 500;
-    }
-    
-    .app-action {
-      font-size: 0.9rem;
-      color: var(--text-primary);
-      margin-bottom: 0.75rem;
-      font-weight: 500;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
     }
     
     .app-tooltip {
       background: var(--tooltip-bg);
       border: 1px solid var(--tooltip-border);
-      border-radius: 8px;
-      padding: 0.75rem;
-      font-size: 0.8rem;
+      border-radius: 6px;
+      padding: 0.5rem;
+      font-size: 0.75rem;
       color: var(--text-secondary);
-      line-height: 1.4;
-      margin-bottom: 1rem;
-    }
-    
-    .checkbox-container {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
+      line-height: 1.3;
     }
     
     .checkbox-wrapper {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      justify-content: center;
       cursor: pointer;
-      padding: 0.25rem;
+      padding: 0.5rem;
       border-radius: 6px;
       transition: background-color 0.2s ease;
+      min-width: 44px; /* Touch target size */
+      min-height: 44px;
     }
     
     .checkbox-wrapper:hover {
@@ -123,18 +112,19 @@
     }
     
     input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       cursor: pointer;
       accent-color: var(--accent);
-      border-radius: 4px;
+      border-radius: 3px;
     }
     
     .checkbox-label {
-      font-size: 0.85rem;
+      font-size: 1.2rem;
       color: var(--text-secondary);
       cursor: pointer;
       user-select: none;
+      margin-left: 0.25rem;
     }
     
     .footer {
@@ -251,11 +241,11 @@
     <div class="app-card">
       <div class="app-header">
         <div class="app-name">Benjamin</div>
-        <div class="app-earnings">$0.05–$0.25</div>
+        <div class="app-earnings">$0.05–$16.00</div>
       </div>
-      <div class="app-action">Upload + link card</div>
+      <div class="app-action">Upload receipt + link card</div>
       <div class="app-tooltip">
-        Upload your receipt and link your credit/debit card for automatic cash back.
+        Upload receipt (up to $16 potential but usually $0.05–$0.25). Also earn from games, surveys, and linking debit/credit cards for automatic cashback.
       </div>
       <div class="checkbox-container">
         <label class="checkbox-wrapper">
