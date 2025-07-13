@@ -220,6 +220,49 @@
       position: relative;
     }
 
+    /* Desktop optimizations */
+    @media (min-width: 769px) {
+      .container {
+        max-width: 600px;
+        padding: 2rem;
+        margin-bottom: 1.5rem;
+        background: rgba(26, 31, 46, 0.95);
+        backdrop-filter: blur(15px);
+        border: 2px solid rgba(255, 255, 255, 0.15);
+      }
+
+      .hero-section {
+        padding: 2.5rem 2rem;
+        background: rgba(26, 31, 46, 0.95);
+        backdrop-filter: blur(15px);
+        border: 3px solid var(--gencon-gold);
+        margin-bottom: 1.5rem;
+      }
+
+      .countdown-section {
+        background: rgba(15, 20, 25, 0.95);
+        backdrop-filter: blur(15px);
+      }
+
+      .urgency-section {
+        background: linear-gradient(135deg, rgba(255, 215, 0, 0.95) 0%, rgba(220, 20, 60, 0.95) 100%);
+        backdrop-filter: blur(15px);
+      }
+
+      .main-cta {
+        border: 3px solid var(--accent-success);
+        background: rgba(26, 31, 46, 0.95);
+        backdrop-filter: blur(15px);
+        box-shadow: 0 0 30px rgba(16, 185, 129, 0.3);
+      }
+
+      .gencon-benefits {
+        background: rgba(26, 31, 46, 0.95);
+        backdrop-filter: blur(15px);
+        border: 2px solid var(--gencon-gold);
+      }
+    }
+
     .container::before {
       content: '';
       position: absolute;
@@ -480,36 +523,42 @@
     /* Floating Sticky Buttons */
     .floating-sticky-button {
       position: fixed;
-      bottom: 20px;
-      left: 20px;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
       z-index: 999;
       animation: sticky-entrance 0.8s ease-out 2s both;
     }
 
     .floating-sticky-button-right {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
       z-index: 999;
       animation: sticky-entrance-right 0.8s ease-out 2.5s both;
     }
 
     .sticky-cta, .sticky-cta-home {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 12px;
+      justify-content: center;
+      gap: 8px;
       color: white;
-      padding: 15px 20px;
-      border-radius: 50px;
+      padding: 12px 8px;
+      border-radius: 12px;
       text-decoration: none;
       box-shadow: 
-        0 8px 25px rgba(79, 70, 229, 0.4),
-        0 0 20px rgba(6, 182, 212, 0.3);
+        0 6px 20px rgba(79, 70, 229, 0.4),
+        0 0 15px rgba(6, 182, 212, 0.3);
       transition: all 0.3s ease;
       border: 2px solid rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(10px);
-      max-width: 200px;
+      width: 60px;
       font-family: 'Inter', sans-serif;
+      writing-mode: vertical-lr;
+      text-orientation: mixed;
     }
 
     .sticky-cta {
@@ -519,70 +568,75 @@
     .sticky-cta-home {
       background: linear-gradient(135deg, var(--gencon-gold) 0%, var(--gencon-red) 100%);
       box-shadow: 
-        0 8px 25px rgba(255, 215, 0, 0.4),
-        0 0 20px rgba(220, 20, 60, 0.3);
+        0 6px 20px rgba(255, 215, 0, 0.4),
+        0 0 15px rgba(220, 20, 60, 0.3);
     }
 
     .sticky-cta:hover, .sticky-cta-home:hover {
-      transform: translateY(-3px) scale(1.02);
+      transform: scale(1.05);
       border-color: rgba(255, 255, 255, 0.3);
     }
 
     .sticky-cta:hover {
       box-shadow: 
-        0 12px 35px rgba(79, 70, 229, 0.5),
-        0 0 30px rgba(6, 182, 212, 0.4);
+        0 8px 25px rgba(79, 70, 229, 0.5),
+        0 0 20px rgba(6, 182, 212, 0.4);
     }
 
     .sticky-cta-home:hover {
       box-shadow: 
-        0 12px 35px rgba(255, 215, 0, 0.5),
-        0 0 30px rgba(220, 20, 60, 0.4);
+        0 8px 25px rgba(255, 215, 0, 0.5),
+        0 0 20px rgba(220, 20, 60, 0.4);
     }
 
     .sticky-icon {
-      font-size: 1.5rem;
-      flex-shrink: 0;
+      font-size: 1.8rem;
       filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+      margin-bottom: 4px;
     }
 
     .sticky-text {
       display: flex;
       flex-direction: column;
-      line-height: 1.2;
+      align-items: center;
+      line-height: 1.1;
+      writing-mode: horizontal-tb;
     }
 
     .sticky-main {
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 0.7rem;
       color: white;
+      text-align: center;
+      margin-bottom: 2px;
     }
 
     .sticky-sub {
       font-weight: 500;
-      font-size: 0.75rem;
+      font-size: 0.6rem;
       color: rgba(255, 255, 255, 0.9);
+      text-align: center;
     }
 
     @keyframes sticky-entrance {
       0% {
         opacity: 0;
-        transform: translateX(-100%) scale(0.8);
+        transform: translateY(-50%) translateX(-100%) scale(0.8);
       }
       100% {
         opacity: 1;
-        transform: translateX(0) scale(1);
+        transform: translateY(-50%) translateX(0) scale(1);
       }
     }
 
     @keyframes sticky-entrance-right {
       0% {
         opacity: 0;
-        transform: translateX(100%) scale(0.8);
+        transform: translateY(-50%) translateX(100%) scale(0.8);
       }
       100% {
         opacity: 1;
-        transform: translateX(0) scale(1);
+        transform: translateY(-50%) translateX(0) scale(1);
       }
     }
 
@@ -595,7 +649,7 @@
       right: -5px;
       bottom: -5px;
       background: var(--gradient-primary);
-      border-radius: 50px;
+      border-radius: 12px;
       opacity: 0;
       z-index: -1;
       animation: sticky-pulse 4s ease-in-out infinite;
@@ -609,7 +663,7 @@
       right: -5px;
       bottom: -5px;
       background: var(--gradient-gencon);
-      border-radius: 50px;
+      border-radius: 12px;
       opacity: 0;
       z-index: -1;
       animation: sticky-pulse-home 4.5s ease-in-out infinite;
@@ -640,60 +694,101 @@
     /* Mobile adjustments for floating buttons */
     @media (max-width: 768px) {
       .floating-sticky-button {
-        bottom: 90px;
-        left: 15px;
+        top: auto;
+        bottom: 120px;
+        left: 20px;
+        transform: none;
       }
 
       .floating-sticky-button-right {
-        bottom: 90px;
-        right: 15px;
+        top: auto;
+        bottom: 120px;
+        right: 20px;
+        transform: none;
       }
 
       .sticky-cta, .sticky-cta-home {
-        padding: 12px 16px;
-        gap: 10px;
-        max-width: 180px;
+        flex-direction: row;
+        padding: 10px 14px;
+        gap: 8px;
+        width: auto;
+        max-width: 140px;
+        border-radius: 25px;
+        writing-mode: horizontal-tb;
       }
 
       .sticky-icon {
         font-size: 1.3rem;
+        margin-bottom: 0;
+      }
+
+      .sticky-text {
+        writing-mode: horizontal-tb;
       }
 
       .sticky-main {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
+        margin-bottom: 0;
       }
 
       .sticky-sub {
-        font-size: 0.7rem;
+        font-size: 0.65rem;
+      }
+
+      @keyframes sticky-entrance {
+        0% {
+          opacity: 0;
+          transform: translateX(-100%) scale(0.8);
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0) scale(1);
+        }
+      }
+
+      @keyframes sticky-entrance-right {
+        0% {
+          opacity: 0;
+          transform: translateX(100%) scale(0.8);
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0) scale(1);
+        }
+      }
+
+      .floating-sticky-button::before,
+      .floating-sticky-button-right::before {
+        border-radius: 25px;
       }
     }
 
     @media (max-width: 480px) {
       .floating-sticky-button {
-        bottom: 80px;
-        left: 10px;
+        bottom: 100px;
+        left: 15px;
       }
 
       .floating-sticky-button-right {
-        bottom: 80px;
-        right: 10px;
+        bottom: 100px;
+        right: 15px;
       }
 
       .sticky-cta, .sticky-cta-home {
-        padding: 10px 14px;
-        max-width: 160px;
+        padding: 8px 12px;
+        max-width: 120px;
       }
 
       .sticky-icon {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
       }
 
       .sticky-main {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
       }
 
       .sticky-sub {
-        font-size: 0.65rem;
+        font-size: 0.6rem;
       }
     }
 
@@ -821,7 +916,7 @@
   </div>
 
   <footer>
-    <p>925 ADHD &copy; 2025 | GenCon Exclusive Offer</p>
+    <p><a href="https://925adhd.com" style="color: inherit; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='var(--gencon-gold)'" onmouseout="this.style.color='inherit'">925 ADHD</a> &copy; 2025 | GenCon Exclusive Offer</p>
   </footer>
 
   <script>
