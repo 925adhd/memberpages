@@ -523,20 +523,46 @@
     /* Floating Sticky Buttons */
     .floating-sticky-button {
       position: fixed;
-      top: 50%;
       left: 15px;
-      transform: translateY(-50%);
       z-index: 999;
       animation: sticky-entrance 0.8s ease-out 2s both;
     }
 
     .floating-sticky-button-right {
       position: fixed;
-      top: 50%;
       right: 15px;
-      transform: translateY(-50%);
       z-index: 999;
       animation: sticky-entrance-right 0.8s ease-out 2.5s both;
+    }
+
+    /* Desktop positioning - 20px from bottom */
+    @media (min-width: 769px) {
+      .floating-sticky-button {
+        bottom: 20px;
+        top: auto;
+        transform: none;
+      }
+
+      .floating-sticky-button-right {
+        bottom: 20px;
+        top: auto;
+        transform: none;
+      }
+    }
+
+    /* Mobile positioning - 15px from bottom */
+    @media (max-width: 768px) {
+      .floating-sticky-button {
+        bottom: 15px;
+        top: auto;
+        transform: none;
+      }
+
+      .floating-sticky-button-right {
+        bottom: 15px;
+        top: auto;
+        transform: none;
+      }
     }
 
     .sticky-cta, .sticky-cta-home {
@@ -621,22 +647,22 @@
     @keyframes sticky-entrance {
       0% {
         opacity: 0;
-        transform: translateY(-50%) translateX(-100%) scale(0.8);
+        transform: translateX(-100%) scale(0.8);
       }
       100% {
         opacity: 1;
-        transform: translateY(-50%) translateX(0) scale(1);
+        transform: translateX(0) scale(1);
       }
     }
 
     @keyframes sticky-entrance-right {
       0% {
         opacity: 0;
-        transform: translateY(-50%) translateX(100%) scale(0.8);
+        transform: translateX(100%) scale(0.8);
       }
       100% {
         opacity: 1;
-        transform: translateY(-50%) translateX(0) scale(1);
+        transform: translateX(0) scale(1);
       }
     }
 
@@ -691,22 +717,8 @@
       }
     }
 
-    /* Mobile adjustments for floating buttons */
-    @media (max-width: 768px) {
-      .floating-sticky-button {
-        top: auto;
-        bottom: 15px;
-        left: 20px;
-        transform: none;
-      }
-
-      .floating-sticky-button-right {
-        top: auto;
-        bottom: 15px;
-        right: 20px;
-        transform: none;
-      }
-
+    /* Small mobile adjustments for floating buttons */
+    @media (max-width: 480px) {
       .sticky-cta, .sticky-cta-home {
         flex-direction: row;
         padding: 10px 14px;
@@ -735,60 +747,9 @@
         font-size: 0.65rem;
       }
 
-      @keyframes sticky-entrance {
-        0% {
-          opacity: 0;
-          transform: translateX(-100%) scale(0.8);
-        }
-        100% {
-          opacity: 1;
-          transform: translateX(0) scale(1);
-        }
-      }
-
-      @keyframes sticky-entrance-right {
-        0% {
-          opacity: 0;
-          transform: translateX(100%) scale(0.8);
-        }
-        100% {
-          opacity: 1;
-          transform: translateX(0) scale(1);
-        }
-      }
-
       .floating-sticky-button::before,
       .floating-sticky-button-right::before {
         border-radius: 25px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .floating-sticky-button {
-        bottom: 5px;
-        left: 15px;
-      }
-
-      .floating-sticky-button-right {
-        bottom: 5px;
-        right: 15px;
-      }
-
-      .sticky-cta, .sticky-cta-home {
-        padding: 8px 12px;
-        max-width: 120px;
-      }
-
-      .sticky-icon {
-        font-size: 1.1rem;
-      }
-
-      .sticky-main {
-        font-size: 0.75rem;
-      }
-
-      .sticky-sub {
-        font-size: 0.6rem;
       }
     }
 
