@@ -218,7 +218,7 @@
     .app-screenshot {
       max-width: 100%;
       height: auto;
-      max-height: 300px;
+      max-height: 450px;
       border: 2px solid var(--gencon-gold);
       border-radius: 8px;
       box-shadow: 
@@ -237,13 +237,22 @@
 
     @media (min-width: 769px) {
       .app-screenshot {
+        max-height: 550px;
+        max-width: 90%;
+      }
+    }
+
+    @media (max-width: 768px) and (min-width: 481px) {
+      .app-screenshot {
         max-height: 400px;
+        max-width: 95%;
       }
     }
 
     @media (max-width: 480px) {
       .app-screenshot {
-        max-height: 250px;
+        max-height: 350px;
+        max-width: 100%;
       }
     }
 
@@ -1041,7 +1050,7 @@
     <h2>🏰 Made for GenCon Life</h2>
     
     <div class="app-preview">
-      <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205202.png/:/rs=h:175,m" alt="925 ADHD App Screenshot" class="app-screenshot" onclick="openScreenshotModal()">
+      <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205202.png" alt="925 ADHD App Screenshot" class="app-screenshot" onclick="openScreenshotModal()">
     </div>
     
     <div class="benefit-grid">
@@ -1079,7 +1088,7 @@
   <!-- Screenshot Modal -->
   <div id="screenshotModal" class="screenshot-modal" onclick="closeScreenshotModal()">
     <span class="modal-close" onclick="closeScreenshotModal()">&times;</span>
-    <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205202.png/:/rs=h:175,m" alt="925 ADHD App Screenshot - Full Size">
+    <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205202.png" alt="925 ADHD App Screenshot - Full Size">
     <div class="modal-hint">Click anywhere to close</div>
   </div>
 
