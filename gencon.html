@@ -433,12 +433,30 @@
     /* Mobile optimizations */
     @media (max-width: 480px) {
       body {
-        padding: 4px;
+        padding: 8px;
       }
       
       .container {
         padding: 1rem;
-        margin-bottom: 0.5rem;
+        margin-bottom: 1rem;
+        background: rgba(26, 31, 46, 0.85);
+        backdrop-filter: blur(10px);
+      }
+      
+      .hero-section {
+        background: rgba(26, 31, 46, 0.85);
+        backdrop-filter: blur(10px);
+        margin-bottom: 1.5rem;
+      }
+      
+      .countdown-section {
+        background: rgba(15, 20, 25, 0.85);
+        backdrop-filter: blur(10px);
+      }
+      
+      .urgency-section {
+        background: linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(220, 20, 60, 0.9) 100%);
+        backdrop-filter: blur(10px);
       }
       
       h1 {
@@ -455,7 +473,227 @@
       }
       
       .benefit-grid {
-        gap: 0.5rem;
+        gap: 1rem;
+      }
+    }
+
+    /* Floating Sticky Buttons */
+    .floating-sticky-button {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 999;
+      animation: sticky-entrance 0.8s ease-out 2s both;
+    }
+
+    .floating-sticky-button-right {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+      animation: sticky-entrance-right 0.8s ease-out 2.5s both;
+    }
+
+    .sticky-cta, .sticky-cta-home {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: white;
+      padding: 15px 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 
+        0 8px 25px rgba(79, 70, 229, 0.4),
+        0 0 20px rgba(6, 182, 212, 0.3);
+      transition: all 0.3s ease;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      max-width: 200px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .sticky-cta {
+      background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    }
+
+    .sticky-cta-home {
+      background: linear-gradient(135deg, var(--gencon-gold) 0%, var(--gencon-red) 100%);
+      box-shadow: 
+        0 8px 25px rgba(255, 215, 0, 0.4),
+        0 0 20px rgba(220, 20, 60, 0.3);
+    }
+
+    .sticky-cta:hover, .sticky-cta-home:hover {
+      transform: translateY(-3px) scale(1.02);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .sticky-cta:hover {
+      box-shadow: 
+        0 12px 35px rgba(79, 70, 229, 0.5),
+        0 0 30px rgba(6, 182, 212, 0.4);
+    }
+
+    .sticky-cta-home:hover {
+      box-shadow: 
+        0 12px 35px rgba(255, 215, 0, 0.5),
+        0 0 30px rgba(220, 20, 60, 0.4);
+    }
+
+    .sticky-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+    }
+
+    .sticky-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .sticky-main {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: white;
+    }
+
+    .sticky-sub {
+      font-weight: 500;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    @keyframes sticky-entrance {
+      0% {
+        opacity: 0;
+        transform: translateX(-100%) scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+      }
+    }
+
+    @keyframes sticky-entrance-right {
+      0% {
+        opacity: 0;
+        transform: translateX(100%) scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+      }
+    }
+
+    /* Floating button pulses occasionally */
+    .floating-sticky-button::before {
+      content: '';
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      background: var(--gradient-primary);
+      border-radius: 50px;
+      opacity: 0;
+      z-index: -1;
+      animation: sticky-pulse 4s ease-in-out infinite;
+    }
+
+    .floating-sticky-button-right::before {
+      content: '';
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      background: var(--gradient-gencon);
+      border-radius: 50px;
+      opacity: 0;
+      z-index: -1;
+      animation: sticky-pulse-home 4.5s ease-in-out infinite;
+    }
+
+    @keyframes sticky-pulse {
+      0%, 70%, 100% { 
+        opacity: 0; 
+        transform: scale(1); 
+      }
+      35% { 
+        opacity: 0.3; 
+        transform: scale(1.1); 
+      }
+    }
+
+    @keyframes sticky-pulse-home {
+      0%, 70%, 100% { 
+        opacity: 0; 
+        transform: scale(1); 
+      }
+      35% { 
+        opacity: 0.3; 
+        transform: scale(1.1); 
+      }
+    }
+
+    /* Mobile adjustments for floating buttons */
+    @media (max-width: 768px) {
+      .floating-sticky-button {
+        bottom: 90px;
+        left: 15px;
+      }
+
+      .floating-sticky-button-right {
+        bottom: 90px;
+        right: 15px;
+      }
+
+      .sticky-cta, .sticky-cta-home {
+        padding: 12px 16px;
+        gap: 10px;
+        max-width: 180px;
+      }
+
+      .sticky-icon {
+        font-size: 1.3rem;
+      }
+
+      .sticky-main {
+        font-size: 0.9rem;
+      }
+
+      .sticky-sub {
+        font-size: 0.7rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .floating-sticky-button {
+        bottom: 80px;
+        left: 10px;
+      }
+
+      .floating-sticky-button-right {
+        bottom: 80px;
+        right: 10px;
+      }
+
+      .sticky-cta, .sticky-cta-home {
+        padding: 10px 14px;
+        max-width: 160px;
+      }
+
+      .sticky-icon {
+        font-size: 1.2rem;
+      }
+
+      .sticky-main {
+        font-size: 0.85rem;
+      }
+
+      .sticky-sub {
+        font-size: 0.65rem;
       }
     }
 
@@ -463,6 +701,11 @@
     input:focus, button:focus {
       outline: 3px solid var(--gencon-gold);
       outline-offset: 2px;
+    }
+
+    .sticky-cta:focus, .sticky-cta-home:focus {
+      outline: 3px solid rgba(255, 255, 255, 0.8);
+      outline-offset: 3px;
     }
 
     /* Conversion-focused animations */
@@ -554,6 +797,27 @@
       <input type="email" name="email" placeholder="your.email@gencon.com" required />
       <button type="submit">🔥 Claim My Free Access</button>
     </form>
+  </div>
+
+  <!-- Floating sticky buttons -->
+  <div class="floating-sticky-button">
+    <a href="https://get.925adhd.com" target="_blank" rel="noopener noreferrer" class="sticky-cta">
+      <div class="sticky-icon">📖</div>
+      <div class="sticky-text">
+        <div class="sticky-main">Learn More</div>
+        <div class="sticky-sub">Full Details</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="floating-sticky-button-right">
+    <a href="https://925adhd.com" target="_blank" rel="noopener noreferrer" class="sticky-cta-home">
+      <div class="sticky-icon">🏠</div>
+      <div class="sticky-text">
+        <div class="sticky-main">Home</div>
+        <div class="sticky-sub">Main Site</div>
+      </div>
+    </a>
   </div>
 
   <footer>
