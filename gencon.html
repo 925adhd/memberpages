@@ -583,7 +583,7 @@
       }
     }
 
-    /* Floating Sticky Buttons */
+    /* Floating Sticky Button - Learn More only */
     .floating-sticky-button {
       position: fixed;
       left: 15px;
@@ -591,22 +591,11 @@
       animation: sticky-entrance 0.8s ease-out 2s both;
     }
 
-    .floating-sticky-button-right {
-      position: fixed;
-      right: 15px;
-      z-index: 999;
-      animation: sticky-entrance-right 0.8s ease-out 2.5s both;
-    }
+
 
     /* Desktop positioning - 20px from bottom */
     @media (min-width: 769px) {
       .floating-sticky-button {
-        bottom: 20px;
-        top: auto;
-        transform: none;
-      }
-
-      .floating-sticky-button-right {
         bottom: 20px;
         top: auto;
         transform: none;
@@ -620,15 +609,9 @@
         top: auto;
         transform: none;
       }
-
-      .floating-sticky-button-right {
-        bottom: 15px;
-        top: auto;
-        transform: none;
-      }
     }
 
-    .sticky-cta, .sticky-cta-home {
+    .sticky-cta, .corner-home-link {
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -676,7 +659,7 @@
 
     /* Mobile adjustments for sticky buttons */
     @media (max-width: 768px) {
-      .sticky-cta, .sticky-cta-home {
+      .sticky-cta {
         flex-direction: row;
         padding: 10px 14px;
         gap: 8px;
@@ -705,28 +688,12 @@
       background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
     }
 
-    .sticky-cta-home {
-      background: linear-gradient(135deg, var(--gencon-gold) 0%, var(--gencon-red) 100%);
-      box-shadow: 
-        0 6px 20px rgba(255, 215, 0, 0.4),
-        0 0 15px rgba(220, 20, 60, 0.3);
-    }
-
-    .sticky-cta:hover, .sticky-cta-home:hover {
+    .sticky-cta:hover {
       transform: scale(1.05);
       border-color: rgba(255, 255, 255, 0.3);
-    }
-
-    .sticky-cta:hover {
       box-shadow: 
         0 8px 25px rgba(79, 70, 229, 0.5),
         0 0 20px rgba(6, 182, 212, 0.4);
-    }
-
-    .sticky-cta-home:hover {
-      box-shadow: 
-        0 8px 25px rgba(255, 215, 0, 0.5),
-        0 0 20px rgba(220, 20, 60, 0.4);
     }
 
     .sticky-icon {
@@ -769,17 +736,6 @@
       }
     }
 
-    @keyframes sticky-entrance-right {
-      0% {
-        opacity: 0;
-        transform: translateX(100%) scale(0.8);
-      }
-      100% {
-        opacity: 1;
-        transform: translateX(0) scale(1);
-      }
-    }
-
     /* Floating button pulses occasionally */
     .floating-sticky-button::before {
       content: '';
@@ -795,32 +751,7 @@
       animation: sticky-pulse 4s ease-in-out infinite;
     }
 
-    .floating-sticky-button-right::before {
-      content: '';
-      position: absolute;
-      top: -5px;
-      left: -5px;
-      right: -5px;
-      bottom: -5px;
-      background: var(--gradient-gencon);
-      border-radius: 12px;
-      opacity: 0;
-      z-index: -1;
-      animation: sticky-pulse-home 4.5s ease-in-out infinite;
-    }
-
     @keyframes sticky-pulse {
-      0%, 70%, 100% { 
-        opacity: 0; 
-        transform: scale(1); 
-      }
-      35% { 
-        opacity: 0.3; 
-        transform: scale(1.1); 
-      }
-    }
-
-    @keyframes sticky-pulse-home {
       0%, 70%, 100% { 
         opacity: 0; 
         transform: scale(1); 
@@ -874,7 +805,7 @@
       outline-offset: 2px;
     }
 
-    .sticky-cta:focus, .sticky-cta-home:focus {
+    .sticky-cta:focus {
       outline: 3px solid rgba(255, 255, 255, 0.8);
       outline-offset: 3px;
     }
@@ -906,12 +837,14 @@
 
   <div class="hero-section">
     <div class="logo-container">
-      <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/SmartSelect_20241218_055052_Gallery.png/:/rs=h:175,m" alt="925 ADHD Logo" class="hero-logo">
+      <a href="https://925adhd.com" target="_blank" rel="noopener noreferrer">
+        <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/SmartSelect_20241218_055052_Gallery.png/:/rs=h:175,m" alt="925 ADHD Logo" class="hero-logo">
+      </a>
     </div>
-    <h1>🧠 Turn Your ADHD Into Your <span class="green-gradient-text">Earning</span> <span class="gradient-text">Power</span></h1>
+    <h1>🧠 Turn Your ADHD Into Your <span class="green-gradient-text">Earning</span> <span class="gradient-text">Power</span>💸</h1> 
     <div class="hero-subtitle">Perfect for GenCon Weekend!</div>
     <div class="hero-description">
-      Stop fighting your ADHD. Start earning money with it—even while waiting in line or between sessions.
+      Stop fighting your ADHD. Start earning money with it—even while waiting in line or between game sessions. 😏
     </div>
   </div>
 
@@ -973,23 +906,13 @@
     </form>
   </div>
 
-  <!-- Floating sticky buttons -->
+  <!-- Single prominent sticky button -->
   <div class="floating-sticky-button">
     <a href="https://get.925adhd.com" target="_blank" rel="noopener noreferrer" class="sticky-cta">
       <div class="sticky-icon">📖</div>
       <div class="sticky-text">
         <div class="sticky-main">Learn More</div>
         <div class="sticky-sub">Full Details</div>
-      </div>
-    </a>
-  </div>
-
-  <div class="floating-sticky-button-right">
-    <a href="https://925adhd.com" target="_blank" rel="noopener noreferrer" class="sticky-cta-home">
-      <div class="sticky-icon">🏠</div>
-      <div class="sticky-text">
-        <div class="sticky-main">Home</div>
-        <div class="sticky-sub">Main Site</div>
       </div>
     </a>
   </div>
