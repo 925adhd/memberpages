@@ -161,6 +161,13 @@
       background-clip: text;
     }
 
+    .green-gradient-text {
+      background: var(--gradient-success);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
     .hero-subtitle {
       color: var(--gencon-gold);
       font-size: 1.1rem;
@@ -567,12 +574,11 @@
 
     .sticky-cta, .sticky-cta-home {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 12px;
       color: white;
-      padding: 12px 8px;
       border-radius: 12px;
       text-decoration: none;
       box-shadow: 
@@ -581,10 +587,62 @@
       transition: all 0.3s ease;
       border: 2px solid rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(10px);
-      width: 60px;
       font-family: 'Inter', sans-serif;
-      writing-mode: vertical-lr;
-      text-orientation: mixed;
+      /* Desktop sizing - horizontal layout */
+      padding: 16px 20px;
+      width: auto;
+      min-width: 140px;
+      height: 60px;
+    }
+
+    /* Desktop specific styling */
+    @media (min-width: 769px) {
+      .sticky-text {
+        writing-mode: horizontal-tb;
+        text-orientation: initial;
+      }
+      
+      .sticky-main {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: white;
+        text-align: center;
+        margin-bottom: 2px;
+      }
+
+      .sticky-sub {
+        font-size: 0.7rem;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.9);
+        text-align: center;
+      }
+    }
+
+    /* Mobile adjustments for sticky buttons */
+    @media (max-width: 768px) {
+      .sticky-cta, .sticky-cta-home {
+        flex-direction: row;
+        padding: 10px 14px;
+        gap: 8px;
+        width: auto;
+        max-width: 140px;
+        min-height: auto;
+        height: auto;
+        border-radius: 25px;
+      }
+
+      .sticky-text {
+        writing-mode: horizontal-tb;
+      }
+
+      .sticky-main {
+        font-size: 0.8rem;
+        margin-bottom: 0;
+      }
+
+      .sticky-sub {
+        font-size: 0.65rem;
+      }
     }
 
     .sticky-cta {
@@ -618,7 +676,8 @@
     .sticky-icon {
       font-size: 1.8rem;
       filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
-      margin-bottom: 4px;
+      margin-bottom: 0;
+      margin-right: 0;
     }
 
     .sticky-text {
@@ -626,7 +685,6 @@
       flex-direction: column;
       align-items: center;
       line-height: 1.1;
-      writing-mode: horizontal-tb;
     }
 
     .sticky-main {
@@ -725,6 +783,7 @@
         gap: 8px;
         width: auto;
         max-width: 140px;
+        min-height: auto;
         border-radius: 25px;
         writing-mode: horizontal-tb;
       }
@@ -790,7 +849,7 @@
   </div>
 
   <div class="hero-section">
-    <h1>🧠 Turn Your ADHD Into Your <span class="gradient-text">Earning Power</span></h1>
+    <h1>🧠 Turn Your ADHD Into Your <span class="green-gradient-text">Earning</span> <span class="gradient-text">Power</span></h1>
     <div class="hero-subtitle">Perfect for GenCon Weekend!</div>
     <div class="hero-description">
       Stop fighting your ADHD. Start earning money with it—even while waiting in line or between sessions.
