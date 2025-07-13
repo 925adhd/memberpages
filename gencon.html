@@ -55,7 +55,7 @@
       right: 0;
       bottom: 0;
       background-image: url('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/die%20bg.png/:/rs=h:175,m');
-      background-size: 300px 300px;
+      background-size: auto;
       background-position: 0 0;
       background-repeat: repeat;
       opacity: 0.15;
@@ -210,7 +210,7 @@
     .app-screenshot {
       max-width: 100%;
       height: auto;
-      max-height: 450px;
+      max-height: 600px;
       border: 2px solid var(--gencon-gold);
       border-radius: 8px;
       box-shadow: 
@@ -229,21 +229,21 @@
 
     @media (min-width: 769px) {
       .app-screenshot {
-        max-height: 550px;
-        max-width: 90%;
+        max-height: 700px;
+        max-width: 100%;
       }
     }
 
     @media (max-width: 768px) and (min-width: 481px) {
       .app-screenshot {
-        max-height: 400px;
-        max-width: 95%;
+        max-height: 550px;
+        max-width: 100%;
       }
     }
 
     @media (max-width: 480px) {
       .app-screenshot {
-        max-height: 350px;
+        max-height: 450px;
         max-width: 100%;
       }
     }
@@ -1037,8 +1037,17 @@
       Join hundreds of ADHD earners already trying the <a href="https://get.925adhd.com" target="_blank" rel="noopener noreferrer" class="app-name">925 ADHD app</a> at GenCon
     </div>
     
+    <div style="text-align: center; margin: 1.5rem 0 1rem; padding: 1rem; background: rgba(79, 70, 229, 0.1); border: 1px solid var(--accent-primary); border-radius: 8px;">
+      <p style="color: var(--text-primary); font-size: 1.1rem; margin-bottom: 0.5rem; font-weight: 600;">
+        And then just sign in to the app here on this screen 👇
+      </p>
+      <p style="color: var(--text-secondary); font-size: 0.95rem; margin: 0;">
+        at <strong style="color: var(--accent-primary);">app.925adhd.com</strong> using the email you signed up with/purchased with
+      </p>
+    </div>
+    
     <div class="app-preview">
-      <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/image_2025-07-13_042629331.png/:/rs=h:175,m" alt="925 ADHD App Screenshot" class="app-screenshot" onclick="openScreenshotModal()">
+      <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/image_2025-07-13_042629331.png" alt="925 ADHD App Screenshot" class="app-screenshot" onclick="openScreenshotModal()">
     </div>
   </div>
 
@@ -1097,7 +1106,13 @@
 
   <footer>
     <p><a href="https://925adhd.com" style="color: inherit; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='var(--gencon-gold)'" onmouseout="this.style.color='inherit'">925 ADHD</a> &copy; 2025 | GenCon Exclusive Offer</p>
+    <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-muted);">
+      Any issues? Reach out at <a href="mailto:spicycoordinator@925adhd.com" style="color: var(--accent-primary); text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='var(--gencon-gold)'" onmouseout="this.style.color='var(--accent-primary)'">spicycoordinator@925adhd.com</a>
+    </p>
   </footer>
+
+  <!-- Extra spacing to prevent floating button overlap -->
+  <div style="height: 120px; background: transparent;"></div>
 
   <script>
     // Realistic countdown timer
