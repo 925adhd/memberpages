@@ -212,6 +212,42 @@
       }
     }
 
+    .app-preview {
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+
+    .app-screenshot {
+      max-width: 100%;
+      height: auto;
+      max-height: 300px;
+      border: 2px solid var(--gencon-gold);
+      border-radius: 8px;
+      box-shadow: 
+        0 8px 25px rgba(255, 215, 0, 0.3),
+        0 0 15px rgba(255, 215, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .app-screenshot:hover {
+      transform: scale(1.02);
+      box-shadow: 
+        0 12px 35px rgba(255, 215, 0, 0.4),
+        0 0 25px rgba(255, 215, 0, 0.3);
+    }
+
+    @media (min-width: 769px) {
+      .app-screenshot {
+        max-height: 400px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .app-screenshot {
+        max-height: 250px;
+      }
+    }
+
     .hero-subtitle {
       color: var(--gencon-gold);
       font-size: 1.1rem;
@@ -879,7 +915,7 @@
   <div class="container main-cta">
     <h2>🎯 Try the <a href="https://get.925adhd.com" target="_blank" rel="noopener noreferrer" class="app-name">925 ADHD App</a> FREE This Weekend</h2>
     <p style="color: var(--text-secondary); text-align: center; margin-bottom: 1rem;">
-      <strong>Usually $9.25/month</strong> — <span style="color: var(--accent-success); font-weight: 900;">Try the <a href="https://get.925adhd.com" target="_blank" rel="noopener noreferrer" class="app-name">925 ADHD app</a> FREE for GenCon weekend</span>
+      <strong>Usually $9.25/month</strong> — <span style="color: var(--accent-success); font-weight: 900;">FREE for GenCon weekend</span>
     </p>
     <form action="#" method="POST">
       <input type="email" name="email" placeholder="your.email@gencon.com" required />
@@ -893,6 +929,11 @@
 
   <div class="container gencon-benefits">
     <h2>🏰 Made for GenCon Life</h2>
+    
+    <div class="app-preview">
+      <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205202.png/:/rs=h:175,m" alt="925 ADHD App Screenshot" class="app-screenshot">
+    </div>
+    
     <div class="benefit-grid">
       <div class="benefit-item">
         <div class="benefit-icon">⏰</div>
