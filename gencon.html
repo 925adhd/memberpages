@@ -586,29 +586,48 @@
     /* Floating Sticky Button - Learn More only */
     .floating-sticky-button {
       position: fixed;
-      left: 15px;
+      right: 15px;
       z-index: 999;
       animation: sticky-entrance 0.8s ease-out 2s both;
     }
 
 
 
-    /* Desktop positioning - 20px from bottom */
+    /* Desktop positioning - 20px from bottom, but not over footer */
     @media (min-width: 769px) {
       .floating-sticky-button {
         bottom: 20px;
         top: auto;
         transform: none;
       }
+
+      /* Hide button when footer is visible */
+      footer:hover ~ .floating-sticky-button,
+      footer + * .floating-sticky-button {
+        opacity: 0;
+        pointer-events: none;
+      }
     }
 
-    /* Mobile positioning - 15px from bottom */
+    /* Mobile positioning - 15px from bottom, but not over footer */
     @media (max-width: 768px) {
       .floating-sticky-button {
         bottom: 15px;
         top: auto;
         transform: none;
       }
+    }
+
+    /* Prevent sticky button from overlapping footer */
+    .floating-sticky-button {
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    /* Hide when scrolled to bottom */
+    body.at-bottom .floating-sticky-button {
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
     }
 
     .sticky-cta, .corner-home-link {
@@ -728,7 +747,7 @@
     @keyframes sticky-entrance {
       0% {
         opacity: 0;
-        transform: translateX(-100%) scale(0.8);
+        transform: translateX(100%) scale(0.8);
       }
       100% {
         opacity: 1;
@@ -841,10 +860,10 @@
         <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/SmartSelect_20241218_055052_Gallery.png/:/rs=h:175,m" alt="925 ADHD Logo" class="hero-logo">
       </a>
     </div>
-    <h1>🧠 Turn Your ADHD Into Your <span class="green-gradient-text">Earning</span> <span class="gradient-text">Power</span>💸</h1> 
+    <h1>🧠 Turn Your ADHD Into Your <span class="green-gradient-text">Earning</span> <span class="gradient-text">Power</span></h1>
     <div class="hero-subtitle">Perfect for GenCon Weekend!</div>
     <div class="hero-description">
-      Stop fighting your ADHD. Start earning money with it—even while waiting in line or between game sessions. 😏
+      Stop fighting your ADHD. Start earning money with it—even while waiting in line or between sessions.
     </div>
   </div>
 
@@ -974,6 +993,28 @@
         this.innerHTML = '<div style="color: var(--accent-success); text-align: center; font-weight: 700; font-size: 1.2rem; padding: 2rem;">🎉 Success! Check your email for instant access!</div>';
       });
     });
+
+    // Hide sticky button when footer is visible
+    function handleStickyButtonVisibility() {
+      const footer = document.querySelector('footer');
+      const stickyButton = document.querySelector('.floating-sticky-button');
+      const footerRect = footer.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      // If footer is visible in viewport, hide the sticky button
+      if (footerRect.top < windowHeight) {
+        document.body.classList.add('at-bottom');
+      } else {
+        document.body.classList.remove('at-bottom');
+      }
+    }
+    
+    // Check on scroll and resize
+    window.addEventListener('scroll', handleStickyButtonVisibility);
+    window.addEventListener('resize', handleStickyButtonVisibility);
+    
+    // Initial check
+    handleStickyButtonVisibility();
   </script>
 </body>
 </html>
