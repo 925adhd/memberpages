@@ -42,7 +42,7 @@
       line-height: 1.6;
       overflow-x: hidden;
       min-height: 100vh;
-      padding: 8px;
+      padding: 16px;
       position: relative;
     }
 
@@ -83,7 +83,7 @@
       font-size: 1.1rem;
       text-transform: uppercase;
       letter-spacing: 2px;
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
       box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
       position: relative;
       overflow: hidden;
@@ -112,7 +112,7 @@
       padding: 1.5rem;
       background: var(--secondary-bg);
       border: 3px solid var(--gencon-gold);
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
       box-shadow: 
         0 0 40px rgba(255, 215, 0, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -168,6 +168,50 @@
       background-clip: text;
     }
 
+    .app-name {
+      color: var(--gencon-gold);
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+      font-weight: 900;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .app-name:hover {
+      color: #fff;
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+      transform: scale(1.02);
+    }
+
+    .logo-container {
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .hero-logo {
+      height: 60px;
+      width: auto;
+      filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+      transition: all 0.3s ease;
+    }
+
+    .hero-logo:hover {
+      filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5));
+      transform: scale(1.05);
+    }
+
+    @media (min-width: 769px) {
+      .hero-logo {
+        height: 75px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-logo {
+        height: 50px;
+      }
+    }
+
     .hero-subtitle {
       color: var(--gencon-gold);
       font-size: 1.1rem;
@@ -192,7 +236,7 @@
       background: var(--primary-bg);
       border: 2px solid var(--gencon-red);
       padding: 1rem;
-      margin: 0 auto 1rem;
+      margin: 0 auto 2rem;
       max-width: 400px;
       text-align: center;
       box-shadow: 0 0 25px rgba(220, 20, 60, 0.4);
@@ -217,8 +261,8 @@
     }
 
     .container {
-      max-width: 500px;
-      margin: 0 auto 1rem;
+      max-width: 450px;
+      margin: 0 auto 2rem;
       background: var(--secondary-bg);
       border: 2px solid var(--border-subtle);
       padding: 1.5rem;
@@ -230,9 +274,9 @@
     /* Desktop optimizations */
     @media (min-width: 769px) {
       .container {
-        max-width: 600px;
+        max-width: 550px;
         padding: 2rem;
-        margin-bottom: 1.5rem;
+        margin-bottom: 2.5rem;
         background: rgba(26, 31, 46, 0.95);
         backdrop-filter: blur(15px);
         border: 2px solid rgba(255, 255, 255, 0.15);
@@ -243,17 +287,19 @@
         background: rgba(26, 31, 46, 0.95);
         backdrop-filter: blur(15px);
         border: 3px solid var(--gencon-gold);
-        margin-bottom: 1.5rem;
+        margin-bottom: 2.5rem;
       }
 
       .countdown-section {
         background: rgba(15, 20, 25, 0.95);
         backdrop-filter: blur(15px);
+        margin-bottom: 2.5rem;
       }
 
       .urgency-section {
         background: linear-gradient(135deg, rgba(255, 215, 0, 0.95) 0%, rgba(220, 20, 60, 0.95) 100%);
         backdrop-filter: blur(15px);
+        margin-bottom: 2.5rem;
       }
 
       .main-cta {
@@ -267,6 +313,10 @@
         background: rgba(26, 31, 46, 0.95);
         backdrop-filter: blur(15px);
         border: 2px solid var(--gencon-gold);
+      }
+
+      .social-proof {
+        margin-bottom: 2.5rem;
       }
     }
 
@@ -305,7 +355,7 @@
       border: 2px solid var(--gencon-gold);
       padding: 1rem;
       text-align: center;
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
       font-size: 1.1rem;
       color: var(--gencon-gold);
       font-weight: 700;
@@ -439,7 +489,7 @@
       color: white;
       padding: 1.5rem;
       text-align: center;
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
       border: 3px solid var(--gencon-red);
       box-shadow: 0 0 30px rgba(220, 20, 60, 0.4);
     }
@@ -483,12 +533,12 @@
     /* Mobile optimizations */
     @media (max-width: 480px) {
       body {
-        padding: 8px;
+        padding: 12px;
       }
       
       .container {
         padding: 1rem;
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
         background: rgba(26, 31, 46, 0.85);
         backdrop-filter: blur(10px);
       }
@@ -502,11 +552,17 @@
       .countdown-section {
         background: rgba(15, 20, 25, 0.85);
         backdrop-filter: blur(10px);
+        margin-bottom: 1.5rem;
       }
       
       .urgency-section {
         background: linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(220, 20, 60, 0.9) 100%);
         backdrop-filter: blur(10px);
+        margin-bottom: 1.5rem;
+      }
+
+      .social-proof {
+        margin-bottom: 1.5rem;
       }
       
       h1 {
@@ -849,6 +905,9 @@
   </div>
 
   <div class="hero-section">
+    <div class="logo-container">
+      <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/SmartSelect_20241218_055052_Gallery.png/:/rs=h:175,m" alt="925 ADHD Logo" class="hero-logo">
+    </div>
     <h1>🧠 Turn Your ADHD Into Your <span class="green-gradient-text">Earning</span> <span class="gradient-text">Power</span></h1>
     <div class="hero-subtitle">Perfect for GenCon Weekend!</div>
     <div class="hero-description">
@@ -866,9 +925,9 @@
   </div>
 
   <div class="container main-cta">
-    <h2>🎯 Try the 925 ADHD App FREE This Weekend</h2>
+    <h2>🎯 Try the <a href="https://get.925adhd.com" target="_blank" rel="noopener noreferrer" class="app-name">925 ADHD App</a> FREE This Weekend</h2>
     <p style="color: var(--text-secondary); text-align: center; margin-bottom: 1rem;">
-      <strong>Usually $9.25/month</strong> — <span style="color: var(--accent-success); font-weight: 900;">Try the 925 ADHD app FREE for GenCon weekend</span>
+      <strong>Usually $9.25/month</strong> — <span style="color: var(--accent-success); font-weight: 900;">Try the <a href="https://get.925adhd.com" target="_blank" rel="noopener noreferrer" class="app-name">925 ADHD app</a> FREE for GenCon weekend</span>
     </p>
     <form action="#" method="POST">
       <input type="email" name="email" placeholder="your.email@gencon.com" required />
@@ -876,7 +935,7 @@
     </form>
     <div class="info-box">
       <strong>✅ Instant access when you sign up</strong><br>
-      Join hundreds of ADHD earners already trying the 925 ADHD app at GenCon
+      Join hundreds of ADHD earners already trying the <a href="https://get.925adhd.com" target="_blank" rel="noopener noreferrer" class="app-name">925 ADHD app</a> at GenCon
     </div>
   </div>
 
@@ -904,7 +963,7 @@
   <div class="urgency-section">
     <h2>⚡ Don't Miss Out</h2>
     <div class="scarcity-counter" id="signups">1,153</div>
-    <p>GenCon attendees have already started trying the 925 ADHD app this weekend.</p>
+    <p>GenCon attendees have already started trying the <a href="https://get.925adhd.com" target="_blank" rel="noopener noreferrer" class="app-name">925 ADHD app</a> this weekend.</p>
     <p style="margin-top: 1rem; font-size: 1.1rem; font-weight: 700;">
       <span class="urgent-blink">Limited spots remaining!</span>
     </p>
