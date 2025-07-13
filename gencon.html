@@ -46,7 +46,7 @@
       position: relative;
     }
 
-    /* Enhanced D&D dice pattern background */
+    /* Custom dice background */
     body::before {
       content: '';
       position: fixed;
@@ -54,22 +54,20 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-image: 
-        url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23FFD700' stroke-width='2' opacity='0.2'%3E%3Cpolygon points='50,10 75,35 50,60 25,35' /%3E%3Ctext x='50' y='42' text-anchor='middle' font-size='16' font-weight='bold' fill='%23FFD700' opacity='0.6'%3E20%3C/text%3E%3C/g%3E%3C/svg%3E"),
-        url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23DC143C' stroke-width='1.5' opacity='0.15'%3E%3Crect x='20' y='20' width='40' height='40' rx='6'/%3E%3Ccircle cx='30' cy='30' r='3' fill='%23DC143C' opacity='0.4'/%3E%3Ccircle cx='50' cy='30' r='3' fill='%23DC143C' opacity='0.4'/%3E%3Ccircle cx='30' cy='50' r='3' fill='%23DC143C' opacity='0.4'/%3E%3Ccircle cx='50' cy='50' r='3' fill='%23DC143C' opacity='0.4'/%3E%3Ccircle cx='40' cy='40' r='3' fill='%23DC143C' opacity='0.4'/%3E%3C/g%3E%3C/svg%3E"),
-        url("data:image/svg+xml,%3Csvg width='90' height='90' viewBox='0 0 90 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%234f46e5' stroke-width='1.5' opacity='0.12'%3E%3Cpolygon points='45,15 70,30 60,55 30,55 20,30' /%3E%3Ctext x='45' y='40' text-anchor='middle' font-size='14' font-weight='bold' fill='%234f46e5' opacity='0.5'%3E12%3C/text%3E%3C/g%3E%3C/svg%3E");
-      background-size: 200px 200px, 160px 160px, 180px 180px;
-      background-position: 0 0, 100px 100px, 200px 50px;
+      background-image: url('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/die%20bg.png/:/rs=h:175,m');
+      background-size: 300px 300px;
+      background-position: 0 0;
       background-repeat: repeat;
+      opacity: 0.15;
       z-index: -2;
       animation: dice-roll 30s ease-in-out infinite;
     }
 
     @keyframes dice-roll {
-      0%, 100% { transform: rotate(0deg) scale(1); opacity: 0.2; }
-      25% { transform: rotate(2deg) scale(1.02); opacity: 0.3; }
-      50% { transform: rotate(-1deg) scale(0.98); opacity: 0.25; }
-      75% { transform: rotate(1deg) scale(1.01); opacity: 0.35; }
+      0%, 100% { transform: rotate(0deg) scale(1); opacity: 0.15; }
+      25% { transform: rotate(2deg) scale(1.02); opacity: 0.2; }
+      50% { transform: rotate(-1deg) scale(0.98); opacity: 0.12; }
+      75% { transform: rotate(1deg) scale(1.01); opacity: 0.18; }
     }
 
     /* GenCon exclusive banner */
@@ -227,6 +225,7 @@
         0 8px 25px rgba(255, 215, 0, 0.3),
         0 0 15px rgba(255, 215, 0, 0.2);
       transition: all 0.3s ease;
+      cursor: pointer;
     }
 
     .app-screenshot:hover {
@@ -245,6 +244,119 @@
     @media (max-width: 480px) {
       .app-screenshot {
         max-height: 250px;
+      }
+    }
+
+    /* Modal styles for expanded screenshot */
+    .screenshot-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 9999;
+      cursor: pointer;
+      animation: modal-fade-in 0.3s ease-out;
+    }
+
+    .screenshot-modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .screenshot-modal img {
+      max-width: 95vw;
+      max-height: 95vh;
+      width: auto;
+      height: auto;
+      border: 3px solid var(--gencon-gold);
+      border-radius: 12px;
+      box-shadow: 
+        0 0 50px rgba(255, 215, 0, 0.5),
+        0 0 100px rgba(255, 215, 0, 0.3);
+      animation: modal-zoom-in 0.3s ease-out;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: var(--gencon-gold);
+      font-size: 3rem;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 10000;
+      transition: all 0.3s ease;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-close:hover {
+      color: white;
+      transform: scale(1.1);
+      text-shadow: 
+        0 0 15px rgba(255, 215, 0, 0.8),
+        0 0 10px rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-hint {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--text-secondary);
+      font-size: 1rem;
+      text-align: center;
+      opacity: 0.8;
+      animation: hint-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes modal-fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes modal-zoom-in {
+      from { 
+        opacity: 0;
+        transform: scale(0.5);
+      }
+      to { 
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes hint-pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    /* Mobile optimizations for modal */
+    @media (max-width: 768px) {
+      .screenshot-modal {
+        padding: 10px;
+      }
+      
+      .screenshot-modal img {
+        max-width: 98vw;
+        max-height: 98vh;
+        border-radius: 8px;
+      }
+      
+      .modal-close {
+        top: 10px;
+        right: 15px;
+        font-size: 2.5rem;
+      }
+      
+      .modal-hint {
+        bottom: 20px;
+        font-size: 0.9rem;
+        padding: 0 20px;
       }
     }
 
@@ -627,8 +739,6 @@
       animation: sticky-entrance 0.8s ease-out 2s both;
     }
 
-
-
     /* Desktop positioning - 20px from bottom, but not over footer */
     @media (min-width: 769px) {
       .floating-sticky-button {
@@ -931,7 +1041,7 @@
     <h2>🏰 Made for GenCon Life</h2>
     
     <div class="app-preview">
-      <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205202.png/:/rs=h:175,m" alt="925 ADHD App Screenshot" class="app-screenshot">
+      <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205202.png/:/rs=h:175,m" alt="925 ADHD App Screenshot" class="app-screenshot" onclick="openScreenshotModal()">
     </div>
     
     <div class="benefit-grid">
@@ -964,6 +1074,13 @@
       <input type="email" name="email" placeholder="your.email@gencon.com" required />
       <button type="submit">🔥 Claim My Free Access</button>
     </form>
+  </div>
+
+  <!-- Screenshot Modal -->
+  <div id="screenshotModal" class="screenshot-modal" onclick="closeScreenshotModal()">
+    <span class="modal-close" onclick="closeScreenshotModal()">&times;</span>
+    <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205202.png/:/rs=h:175,m" alt="925 ADHD App Screenshot - Full Size">
+    <div class="modal-hint">Click anywhere to close</div>
   </div>
 
   <!-- Single prominent sticky button -->
@@ -1033,6 +1150,26 @@
         // Show success message
         this.innerHTML = '<div style="color: var(--accent-success); text-align: center; font-weight: 700; font-size: 1.2rem; padding: 2rem;">🎉 Success! Check your email for instant access!</div>';
       });
+    });
+
+    // Screenshot modal functionality
+    function openScreenshotModal() {
+      const modal = document.getElementById('screenshotModal');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+    
+    function closeScreenshotModal() {
+      const modal = document.getElementById('screenshotModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto'; // Restore scrolling
+    }
+    
+    // Close modal on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeScreenshotModal();
+      }
     });
 
     // Hide sticky button when footer is visible
