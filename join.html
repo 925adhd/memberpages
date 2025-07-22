@@ -57,16 +57,6 @@
       justify-content: center;
       padding: 20px;
       box-sizing: border-box;
-      animation: fadeIn 0.3s ease-out;
-    }
-
-    .non-adhd-popup.show {
-      display: flex;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
     }
 
     .popup-content {
@@ -1348,7 +1338,7 @@
   <div class="floating-orb orb-2"></div>
 
   <!-- Non-ADHD Popup -->
-  <div id="nonAdhdPopup" class="non-adhd-popup">
+  <div id="nonAdhdPopup" class="non-adhd-popup" onclick="if(event.target === this) closeNonAdhdPopup()">
     <div class="popup-content">
       <button class="popup-close" onclick="closeNonAdhdPopup()">&times;</button>
       
@@ -1806,74 +1796,32 @@
   </div>
 
   <script>
-    // Simple popup functionality for GitHub Pages
-    let popupShown = false;
-
-    function showNonAdhdPopup() {
-      if (!popupShown) {
-        const popup = document.getElementById('nonAdhdPopup');
-        if (popup) {
-          popup.style.display = 'flex';
-          popupShown = true;
-          document.body.style.overflow = 'hidden';
-        }
-      }
+    // Ultra-simple popup for GitHub Pages
+    function showPopup() {
+      document.getElementById('nonAdhdPopup').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
     }
 
     function closeNonAdhdPopup() {
-      const popup = document.getElementById('nonAdhdPopup');
-      if (popup) {
-        popup.style.display = 'none';
-        document.body.style.overflow = 'auto';
-      }
+      document.getElementById('nonAdhdPopup').style.display = 'none';
+      document.body.style.overflow = 'auto';
     }
 
-    // Show popup after page loads
-    window.addEventListener('load', function() {
-      // Show after 10 seconds (change to 45000 for production)
-      setTimeout(showNonAdhdPopup, 10000);
-    });
-
-    // Show on scroll
-    let hasScrolled = false;
-    window.addEventListener('scroll', function() {
-      if (!hasScrolled && !popupShown && window.pageYOffset > 800) {
-        hasScrolled = true;
-        setTimeout(showNonAdhdPopup, 2000);
-      }
-    });
-
-    // Close popup events
-    window.addEventListener('load', function() {
-      const popup = document.getElementById('nonAdhdPopup');
-      if (popup) {
-        popup.addEventListener('click', function(e) {
-          if (e.target === popup) {
-            closeNonAdhdPopup();
-          }
-        });
-      }
-    });
-
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        closeNonAdhdPopup();
-      }
-    });
+    // Show popup after 5 seconds (for testing)
+    setTimeout(showPopup, 5000);
 
     // Back to Top functionality
-    const backToTopButton = document.getElementById('backToTop');
-
-    // Show/hide button based on scroll position
-    window.addEventListener('scroll', function() {
-      if (window.pageYOffset > 300) {
-        if (backToTopButton) backToTopButton.classList.add('visible');
+    window.onscroll = function() {
+      var backButton = document.getElementById('backToTop');
+      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        backButton.style.opacity = '1';
+        backButton.style.visibility = 'visible';
       } else {
-        if (backToTopButton) backToTopButton.classList.remove('visible');
+        backButton.style.opacity = '0';
+        backButton.style.visibility = 'hidden';
       }
-    });
+    };
 
-    // Smooth scroll to top
     function scrollToTop() {
       window.scrollTo({
         top: 0,
@@ -1881,20 +1829,17 @@
       });
     }
 
-    // Rest of existing script
+    // Modal functionality
     let isZoomed = false;
-    let startScale = 1;
     let currentScale = 1;
-    let startX = 0;
-    let startY = 0;
     let currentX = 0;
     let currentY = 0;
 
     function openModal(imageSrc, title, description) {
-      const modal = document.getElementById('imageModal');
-      const modalImg = document.getElementById('modalImg');
-      const modalTitle = document.getElementById('modalTitle');
-      const modalDesc = document.getElementById('modalDesc');
+      var modal = document.getElementById('imageModal');
+      var modalImg = document.getElementById('modalImg');
+      var modalTitle = document.getElementById('modalTitle');
+      var modalDesc = document.getElementById('modalDesc');
       
       modal.style.display = 'block';
       modalImg.src = imageSrc;
@@ -1907,114 +1852,22 @@
       currentX = 0;
       currentY = 0;
       modalImg.style.transform = 'translate(0px, 0px) scale(1)';
-      modalImg.classList.remove('zoomed');
       
-      // Prevent body scroll when modal is open
       document.body.style.overflow = 'hidden';
     }
 
     function closeModal() {
-      const modal = document.getElementById('imageModal');
-      modal.style.display = 'none';
-      
-      // Restore body scroll
+      document.getElementById('imageModal').style.display = 'none';
       document.body.style.overflow = 'auto';
     }
 
-    // Image zoom functionality
-    window.addEventListener('load', function() {
-      const modalImg = document.getElementById('modalImg');
-      
-      if (modalImg) {
-        // Click to zoom
-        modalImg.addEventListener('click', function(e) {
-          e.stopPropagation();
-          
-          if (!isZoomed) {
-            // Zoom in to 2x
-            currentScale = 2;
-            isZoomed = true;
-            modalImg.classList.add('zoomed');
-          } else {
-            // Zoom out
-            currentScale = 1;
-            currentX = 0;
-            currentY = 0;
-            isZoomed = false;
-            modalImg.classList.remove('zoomed');
-          }
-          
-          modalImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${currentScale})`;
-        });
-
-        // Touch events for mobile
-        let initialDistance = 0;
-        let initialScale = 1;
-
-        modalImg.addEventListener('touchstart', function(e) {
-          if (e.touches.length === 2) {
-            e.preventDefault();
-            initialDistance = getDistance(e.touches[0], e.touches[1]);
-            initialScale = currentScale;
-          }
-        });
-
-        modalImg.addEventListener('touchmove', function(e) {
-          if (e.touches.length === 2) {
-            e.preventDefault();
-            const distance = getDistance(e.touches[0], e.touches[1]);
-            const scale = (distance / initialDistance) * initialScale;
-            currentScale = Math.min(Math.max(1, scale), 3);
-            modalImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${currentScale})`;
-          }
-        });
-
-        function getDistance(touch1, touch2) {
-          const dx = touch1.clientX - touch2.clientX;
-          const dy = touch1.clientY - touch2.clientY;
-          return Math.sqrt(dx * dx + dy * dy);
-        }
-
-        // Drag functionality for zoomed images
-        let isDragging = false;
-        let dragStartX = 0;
-        let dragStartY = 0;
-        let dragStartTranslateX = 0;
-        let dragStartTranslateY = 0;
-
-        modalImg.addEventListener('mousedown', function(e) {
-          if (currentScale > 1) {
-            isDragging = true;
-            dragStartX = e.clientX;
-            dragStartY = e.clientY;
-            dragStartTranslateX = currentX;
-            dragStartTranslateY = currentY;
-            modalImg.style.cursor = 'grabbing';
-            e.preventDefault();
-          }
-        });
-
-        document.addEventListener('mousemove', function(e) {
-          if (isDragging && currentScale > 1) {
-            const deltaX = e.clientX - dragStartX;
-            const deltaY = e.clientY - dragStartY;
-            currentX = dragStartTranslateX + deltaX;
-            currentY = dragStartTranslateY + deltaY;
-            modalImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${currentScale})`;
-          }
-        });
-
-        document.addEventListener('mouseup', function() {
-          if (isDragging) {
-            isDragging = false;
-            modalImg.style.cursor = currentScale > 1 ? 'grab' : 'zoom-in';
-          }
-        });
-
-        // Set initial cursor
-        modalImg.style.cursor = 'zoom-in';
+    // Close popup with escape key
+    document.onkeydown = function(event) {
+      if (event.key === 'Escape') {
+        closeNonAdhdPopup();
+        closeModal();
       }
-    });
+    };
   </script>
 </body>
 </html>
