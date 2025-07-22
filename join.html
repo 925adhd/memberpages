@@ -1811,7 +1811,7 @@
     let popupTimeout;
 
     function showNonAdhdPopup() {
-      if (!popupShown && !localStorage.getItem('nonAdhdPopupDismissed')) {
+      if (!popupShown) {
         const popup = document.getElementById('nonAdhdPopup');
         popup.classList.add('show');
         popupShown = true;
@@ -1827,9 +1827,6 @@
       
       // Restore body scroll
       document.body.style.overflow = 'auto';
-      
-      // Remember that user dismissed popup
-      localStorage.setItem('nonAdhdPopupDismissed', 'true');
     }
 
     // Show popup after 45 seconds
