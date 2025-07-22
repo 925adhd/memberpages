@@ -15,15 +15,6 @@
     gtag('config', 'AW-11509175122');
   </script>
   
-
-<script>
-// Fixed TrustedSite badge script for GitHub Pages
-var t = document.createElement('script');
-t.setAttribute("type", "text/javascript");
-t.setAttribute("src", "https://cdn.ywxi.net/js/1.js");
-document.getElementsByTagName("head")[0].appendChild(t);
-</script>
-  
   <link rel="icon" type="image/png" href="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/SmartSelect_20241218_055052_Gallery.png/:/rs=h:175,m">
   <link rel="shortcut icon" type="image/png" href="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/SmartSelect_20241218_055052_Gallery.png/:/rs=h:175,m">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -430,6 +421,62 @@ document.getElementsByTagName("head")[0].appendChild(t);
         font-size: 18px;
         width: 28px;
         height: 28px;
+      }
+    }
+
+    /* Floating Trust Banner with Stripe Logo */
+    .trust-banner {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 99;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      animation: trustBannerSlideIn 0.8s ease-out 3s forwards;
+    }
+
+    @keyframes trustBannerSlideIn {
+      to {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+    }
+
+    .trust-banner:hover {
+      transform: translateY(-1px);
+    }
+
+    .trust-banner img {
+      height: 22px;
+      width: auto;
+    }
+
+    /* Mobile adjustments for trust banner */
+    @media (max-width: 768px) {
+      .trust-banner {
+        bottom: 20px;
+        left: 20px;
+      }
+
+      .trust-banner img {
+        height: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .trust-banner {
+        bottom: 15px;
+        left: 15px;
+      }
+
+      .trust-banner img {
+        height: 18px;
       }
     }
 
@@ -1954,6 +2001,11 @@ document.getElementsByTagName("head")[0].appendChild(t);
       </div>
     </div>
   </footer>
+
+  <!-- Floating Trust Banner -->
+  <div class="trust-banner">
+    <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Powered%20by%20Stripe%20-%20blurple.svg/:/rs=h:175,m" alt="Powered by Stripe">
+  </div>
 
   <!-- Back to Top Button -->
   <div id="backToTop" class="back-to-top" onclick="scrollToTop()">
