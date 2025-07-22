@@ -19,6 +19,114 @@
   <link rel="shortcut icon" type="image/png" href="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/SmartSelect_20241218_055052_Gallery.png/:/rs=h:175,m">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    /* Subtle Top Banner */
+    .top-banner {
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.15), rgba(16, 185, 129, 0.15));
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 12px 0;
+      text-align: center;
+      position: relative;
+      z-index: 101;
+      animation: slideDown 0.5s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-100%);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .banner-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .banner-text {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .banner-highlight {
+      color: var(--accent-secondary);
+      font-weight: 600;
+    }
+
+    .banner-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 18px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .banner-close:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .banner-hidden {
+      display: none;
+    }
+
+    /* Mobile adjustments for banner */
+    @media (max-width: 768px) {
+      .top-banner {
+        padding: 10px 15px;
+      }
+
+      .banner-content {
+        gap: 10px;
+        padding-right: 40px;
+      }
+
+      .banner-text {
+        font-size: 0.85rem;
+        text-align: center;
+      }
+
+      .banner-close {
+        right: 15px;
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .top-banner {
+        padding: 8px 12px;
+      }
+
+      .banner-content {
+        padding-right: 35px;
+      }
+
+      .banner-text {
+        font-size: 0.8rem;
+        line-height: 1.4;
+      }
+
+      .banner-close {
+        right: 12px;
+        font-size: 14px;
+        padding: 3px 6px;
+      }
+    }
+
     :root {
       --primary-bg: #0f1419;
       --secondary-bg: #1a1f2e;
@@ -1416,40 +1524,14 @@
   <div class="floating-orb orb-1"></div>
   <div class="floating-orb orb-2"></div>
 
-  <!-- Non-ADHD Popup -->
-  <div id="nonAdhdPopup" class="non-adhd-popup">
-    <div class="popup-content">
-      <button class="popup-close" onclick="closeNonAdhdPopup()">&times;</button>
-      
-      <h2 class="popup-title">🤔 Hey, I don't have ADHD though! Can I still benefit?</h2>
-      
-      <p class="popup-text">
-        Absolutely! While this is built with ADHD brains in mind, the tools and platform curation work great for anyone who wants to freelance smarter, not harder.
-      </p>
-      
-      <div class="popup-benefits">
-        <h4>🎯 You'll Still Get:</h4>
-        <ul>
-          <li>50+ curated, verified platforms (no scams or time-wasters)</li>
-          <li>Clear, step-by-step guides for each platform</li>
-          <li>Productivity tools that work for any brain type</li>
-          <li>Regular updates with new opportunities</li>
-          <li>Discord community support</li>
-          <li>Real payout proof and honest reviews</li>
-        </ul>
-      </div>
-      
-      <p style="color: var(--text-secondary); font-size: 0.95rem; margin: 20px 0; line-height: 1.5;">
-        The "ADHD-friendly" approach just means everything is organized, easy to follow, and cuts through the noise — which benefits everyone!
-      </p>
-      
-      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
-        <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="popup-cta">
-          🚀 Perfect! Get the App
-        </a>
-        <button class="popup-dismiss" onclick="closeNonAdhdPopup()">
-          Maybe Later
-        </button>
+  <!-- Subtle Top Banner -->
+  <div id="topBanner" class="top-banner">
+    <div class="container">
+      <div class="banner-content">
+        <span class="banner-text">
+          🤔 <span class="banner-highlight">Don't have ADHD?</span> Our organized approach works for everyone!
+        </span>
+        <button class="banner-close" onclick="closeBanner()" aria-label="Close banner">&times;</button>
       </div>
     </div>
   </div>
@@ -1875,53 +1957,20 @@
   </div>
 
   <script>
-    // Non-ADHD Popup functionality
-    let popupShown = false;
-    let popupTimeout;
-
-    function showNonAdhdPopup() {
-      if (!popupShown) {
-        const popup = document.getElementById('nonAdhdPopup');
-        popup.classList.add('show');
-        popupShown = true;
-        
-        // Prevent body scroll when popup is open
-        document.body.style.overflow = 'hidden';
-      }
-    }
-
-    function closeNonAdhdPopup() {
-      const popup = document.getElementById('nonAdhdPopup');
-      popup.classList.remove('show');
+    // Top Banner functionality
+    function closeBanner() {
+      const banner = document.getElementById('topBanner');
+      banner.classList.add('banner-hidden');
       
-      // Restore body scroll
-      document.body.style.overflow = 'auto';
+      // Remember that user dismissed banner
+      localStorage.setItem('topBannerDismissed', 'true');
     }
 
-    // Show popup after 60 seconds
-    popupTimeout = setTimeout(showNonAdhdPopup, 60000);
-
-    // Also show popup when user scrolls down significantly (50% of page)
-    let scrollTriggered = false;
-    window.addEventListener('scroll', function() {
-      if (!scrollTriggered && !popupShown && window.pageYOffset > window.innerHeight * 0.5) {
-        scrollTriggered = true;
-        clearTimeout(popupTimeout); // Cancel the timer-based popup
-        setTimeout(showNonAdhdPopup, 2000); // Show after 2 seconds of scrolling
-      }
-    });
-
-    // Close popup when clicking outside content
-    document.getElementById('nonAdhdPopup').addEventListener('click', function(e) {
-      if (e.target === this) {
-        closeNonAdhdPopup();
-      }
-    });
-
-    // Close popup with Escape key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && popupShown) {
-        closeNonAdhdPopup();
+    // Check if banner was previously dismissed
+    document.addEventListener('DOMContentLoaded', function() {
+      if (localStorage.getItem('topBannerDismissed') === 'true') {
+        const banner = document.getElementById('topBanner');
+        banner.classList.add('banner-hidden');
       }
     });
 
