@@ -42,28 +42,31 @@
       --gradient-adhd: linear-gradient(135deg, #4f46e5 0%, #06b6d4 50%, #10b981 100%);
     }
 
-    /* Non-ADHD Popup Styles - Enhanced for debugging */
+    /* Non-ADHD Popup Styles */
     .non-adhd-popup {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.9) !important;
-      /* Removed backdrop-filter for compatibility */
-      z-index: 9999 !important;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 2000;
       display: none;
       align-items: center;
       justify-content: center;
       padding: 20px;
       box-sizing: border-box;
+      animation: fadeIn 0.3s ease-out;
     }
-    
-    /* Force visibility when shown */
+
     .non-adhd-popup.show {
-      display: flex !important;
-      visibility: visible !important;
-      opacity: 1 !important;
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .popup-content {
@@ -242,21 +245,6 @@
       .popup-text {
         font-size: 0.9rem;
       }
-    }
-
-    /* Add debug button for testing */
-    .debug-button {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background: var(--accent-warning);
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      z-index: 3000;
-      font-weight: 600;
     }
 
     /* Back to Top Button */
@@ -622,27 +610,654 @@
       animation: fadeInUp 0.8s ease-out 0.2s both;
     }
 
-    /* Simple demo section for testing */
-    .demo-section {
-      padding: 40px 0;
-      text-align: center;
+    /* Time Hook/Urgency Bar */
+    .urgency-bar {
+      background: linear-gradient(135deg, var(--accent-warning), #ff7c3c);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: inline-block;
+      margin: 20px 0;
+      animation: pulse 2s infinite;
+      box-shadow: var(--shadow-soft);
     }
 
-    .demo-section h2 {
-      font-size: 2rem;
-      margin-bottom: 30px;
-      color: var(--text-primary);
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
     }
 
-    .demo-content {
+    .value-props {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin: 30px 0;
+      animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+
+    /* Mobile adjustments for value props */
+    @media (max-width: 768px) {
+      .value-props {
+        gap: 15px;
+        margin: 25px 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .value-props {
+        gap: 12px;
+        margin: 20px 0;
+      }
+    }
+
+    .value-prop {
       background: var(--glass-bg);
       border: 1px solid var(--border-subtle);
       border-radius: 16px;
-      padding: 30px;
-      max-width: 600px;
-      margin: 0 auto;
+      padding: 25px;
+      text-align: center;
+      transition: all 0.3s ease;
     }
 
+    .value-prop:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-bright);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .value-prop-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .value-prop-title {
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .value-prop-desc {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .value-prop-features {
+      margin-top: 15px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* CTA Buttons - Enhanced */
+    .cta-primary {
+      background: var(--gradient-primary);
+      color: white;
+      padding: 22px 40px;
+      border-radius: 15px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.2rem;
+      display: inline-block;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-medium);
+      border: 2px solid rgba(255,255,255,0.2);
+      position: relative;
+      overflow: hidden;
+      margin: 20px 10px;
+    }
+
+    .cta-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .cta-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .cta-primary:hover::before {
+      left: 100%;
+    }
+
+    .price-hero {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(79, 70, 229, 0.15));
+      border: 2px solid var(--accent-primary);
+      border-radius: 20px;
+      padding: 40px;
+      margin: 30px auto;
+      max-width: 450px;
+      box-shadow: var(--shadow-medium);
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 0.8s ease-out 0.8s both;
+    }
+
+    .price-badge {
+      background: var(--accent-warning);
+      color: white;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      position: absolute;
+      top: -10px;
+      right: 20px;
+    }
+
+    .price-amount {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--accent-success);
+      margin-bottom: 5px;
+    }
+
+    .price-period {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+    }
+
+    .guarantee {
+      margin-top: 25px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      animation: fadeInUp 0.8s ease-out 1s both;
+    }
+
+    .guarantee-highlight {
+      background: var(--glass-bg);
+      border: 1px solid var(--accent-success);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 15px auto;
+      max-width: 400px;
+      color: var(--accent-success);
+      font-weight: 600;
+    }
+
+    /* Free Download Section */
+    .free-download {
+      background: var(--glass-bg);
+      border: 2px solid var(--accent-warning);
+      border-radius: 16px;
+      padding: 30px;
+      margin: 40px auto;
+      max-width: 600px;
+      text-align: center;
+    }
+
+    .free-download-title {
+      color: var(--accent-warning);
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .free-download-desc {
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .download-button {
+      background: var(--accent-warning);
+      color: white;
+      padding: 15px 30px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      display: inline-block;
+      transition: all 0.3s ease;
+      margin: 10px;
+    }
+
+    .download-button:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-medium);
+    }
+
+    /* Sneak Peek Section */
+    .sneak-peek {
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(16, 185, 129, 0.1));
+      border: 2px solid var(--accent-primary);
+      border-radius: 20px;
+      padding: 40px;
+      margin: 40px auto;
+      max-width: 800px;
+      animation: fadeInUp 0.8s ease-out 0.6s both;
+    }
+
+    .sneak-peek-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent-secondary);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .sneak-peek-subtitle {
+      color: var(--text-secondary);
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+    }
+
+    /* Proof Section */
+    .proof-section {
+      padding: 80px 0;
+      background: var(--secondary-bg);
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: var(--text-primary);
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      margin-bottom: 60px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+      margin-top: 50px;
+    }
+
+    .proof-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--accent-success);
+      border-radius: 16px;
+      padding: 30px;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .proof-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .proof-img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .proof-img:hover {
+      transform: scale(1.02);
+    }
+
+    .proof-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--accent-success);
+      margin-bottom: 10px;
+    }
+
+    .proof-desc {
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Real User Stories */
+    .user-stories {
+      padding: 80px 0;
+      background: var(--glass-bg);
+    }
+
+    .testimonial-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 25px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-bright);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .quote-mark {
+      position: absolute;
+      top: -5px;
+      left: 15px;
+      font-size: 3rem;
+      color: var(--accent-secondary);
+      font-family: serif;
+      opacity: 0.7;
+    }
+
+    .testimonial-text {
+      font-style: italic;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-size: 1rem;
+      padding-left: 20px;
+      margin-bottom: 15px;
+    }
+
+    .testimonial-author {
+      padding-left: 20px;
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* Honest Expectations */
+    .expectations {
+      padding: 80px 0;
+      background: var(--secondary-bg);
+    }
+
+    .expectation-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-top: 50px;
+    }
+
+    .expectation-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .expectation-icon {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .expectation-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+    }
+
+    .expectation-desc {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* Final CTA */
+    .final-cta {
+      padding: 80px 0;
+      text-align: center;
+      background: var(--glass-bg);
+    }
+
+    .cta-box {
+      background: var(--card-bg);
+      border: 2px solid var(--accent-primary);
+      border-radius: 20px;
+      padding: 50px 40px;
+      max-width: 600px;
+      margin: 0 auto;
+      box-shadow: var(--shadow-strong);
+    }
+
+    .cta-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .cta-subtitle {
+      color: var(--text-secondary);
+      margin-bottom: 35px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .modal-content {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-img {
+      max-width: 100%;
+      max-height: calc(100vh - 120px);
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: var(--shadow-strong);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+      z-index: 1001;
+      background: rgba(0, 0, 0, 0.5);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-close:hover {
+      opacity: 0.7;
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .modal-info {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 15px 25px;
+      border-radius: 25px;
+      text-align: center;
+      max-width: calc(100vw - 40px);
+      width: auto;
+    }
+
+    .modal-title {
+      font-weight: 600;
+      margin-bottom: 5px;
+      font-size: 1rem;
+    }
+
+    .modal-desc {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      line-height: 1.4;
+    }
+
+    /* Screenshots Container - Swipable on Mobile */
+    .screenshots-container {
+      margin: 40px 0;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .screenshots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .screenshot-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 15px;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .screenshot-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-bright);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .screenshot-img {
+      width: 100%;
+      max-width: 160px;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .screenshot-img:hover {
+      transform: scale(1.05);
+    }
+
+    .screenshot-title {
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+      font-size: 1rem;
+    }
+
+    .screenshot-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.3;
+    }
+
+    /* Mobile-first: Horizontal scrolling */
+    @media (max-width: 768px) {
+      .screenshots-container {
+        margin: 30px 0;
+        padding: 0 15px;
+      }
+
+      .screenshots-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 15px;
+        padding: 10px 0 20px 0;
+        margin: 0 -15px;
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+
+      .screenshots-grid::-webkit-scrollbar {
+        display: none;
+      }
+
+      .screenshots-grid {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      .screenshot-card {
+        flex: 0 0 280px;
+        scroll-snap-align: start;
+        padding: 15px;
+        margin-right: 0;
+      }
+
+      .screenshot-card:last-child {
+        margin-right: 15px;
+      }
+
+      .screenshot-img {
+        max-width: 180px;
+      }
+
+      .screenshot-title {
+        font-size: 1rem;
+      }
+
+      .screenshot-desc {
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .screenshot-card {
+        flex: 0 0 260px;
+        padding: 12px;
+      }
+
+      .screenshot-img {
+        max-width: 160px;
+      }
+
+      .screenshot-title {
+        font-size: 0.95rem;
+      }
+
+      .screenshot-desc {
+        font-size: 0.8rem;
+      }
+    }
     @media (max-width: 768px) {
       .container {
         padding: 0 15px;
@@ -660,7 +1275,41 @@
         font-size: 1.1rem;
       }
 
-      .demo-section h2 {
+      .value-props {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .price-amount {
+        font-size: 3rem;
+      }
+
+      .cta-primary {
+        padding: 18px 30px;
+        font-size: 1.1rem;
+        margin: 10px 5px;
+      }
+
+      .proof-grid, .expectation-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-box {
+        padding: 40px 25px;
+      }
+
+      .cta-title {
+        font-size: 1.8rem;
+      }
+
+      .sneak-peek {
+        padding: 30px 20px;
+      }
+
+      .sneak-peek-title {
         font-size: 1.6rem;
       }
     }
@@ -668,6 +1317,27 @@
     @media (max-width: 480px) {
       .hero h1 {
         font-size: 1.9rem;
+      }
+
+      .price-hero {
+        padding: 30px 20px;
+      }
+
+      .price-amount {
+        font-size: 2.5rem;
+      }
+
+      .cta-primary {
+        padding: 16px 25px;
+        font-size: 1rem;
+      }
+
+      .section-title {
+        font-size: 1.7rem;
+      }
+
+      .sneak-peek-title {
+        font-size: 1.4rem;
       }
     }
   </style>
@@ -677,11 +1347,8 @@
   <div class="floating-orb orb-1"></div>
   <div class="floating-orb orb-2"></div>
 
-  <!-- Debug button for testing -->
-  <button class="debug-button" onclick="showPopup()">Test Popup</button>
-
   <!-- Non-ADHD Popup -->
-  <div id="nonAdhdPopup" class="non-adhd-popup" onclick="if(event.target === this) closeNonAdhdPopup()">
+  <div id="nonAdhdPopup" class="non-adhd-popup">
     <div class="popup-content">
       <button class="popup-close" onclick="closeNonAdhdPopup()">&times;</button>
       
@@ -768,20 +1435,365 @@
         <p class="hero-subtitle">
           I've tested <strong>dozens of platforms</strong> — survived the scams and duds so you don't have to. All that scattered research was driving my ADHD brain crazy, <strong>so I put everything into one simple app.</strong>
         </p>
+
+        <div class="urgency-bar">
+          🔥 Limited Early Access: Lock in the $9.25/month price before it increases
+        </div>
+
+        <div class="price-hero">
+          <div class="price-badge">Early Access</div>
+          <div class="price-amount">$9.25</div>
+          <div class="price-period">per month • Cancel anytime</div>
+          
+          <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-primary">
+            🚀 Get the 925 ADHD App
+          </a>
+
+          <div class="guarantee">
+            <div class="guarantee-highlight">
+              🛡️ 30-Day Money-Back Guarantee
+            </div>
+            Try it risk-free • Cancel anytime • Built by someone who gets it
+          </div>
+        </div>
+
+        <div class="value-props">
+          <div class="value-prop">
+            <span class="value-prop-icon">📋</span>
+            <div class="value-prop-title">Curated Platform Directory</div>
+            <div class="value-prop-desc">Only platforms I've personally tested and been paid from — no time wasted on scams or low-pay sites. Skip the endless Googling and forum diving.</div>
+            <div class="value-prop-features">✓ 50+ verified platforms across 10 categories<br>✓ Real payout proof included<br>✓ Regular updates as new platforms are tested</div>
+            <a href="#proof-section" style="display: inline-block; margin-top: 8px; color: var(--accent-success); text-decoration: underline; font-size: 0.9rem; font-weight: 600; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-secondary)'" onmouseout="this.style.color='var(--accent-success)'">See the proof →</a>
+          </div>
+          <div class="value-prop">
+            <span class="value-prop-icon">📖</span>
+            <div class="value-prop-title">Beginner-Friendly Guides</div>
+            <div class="value-prop-desc">Step-by-step instructions to get started on each platform, written specifically for ADHD brains with clear, actionable guidance.</div>
+            <div class="value-prop-features">✓ Simple signup walkthroughs<br>✓ ADHD-specific success strategies<br>✓ What to expect from each platform</div>
+          </div>
+          <div class="value-prop">
+            <span class="value-prop-icon">🧠</span>
+            <div class="value-prop-title">ADHD Productivity Tools</div>
+            <div class="value-prop-desc">7 web-based tools designed to help you stay organized, focused, and motivated. Built for how your brain actually works.</div>
+            <div class="value-prop-features">✓ Task tracker with dopamine rewards<br>✓ Focus timers and break reminders<br>✓ Simple organization systems</div>
+          </div>
+          <div class="value-prop">
+            <span class="value-prop-icon">💬</span>
+            <div class="value-prop-title">Discord Community & Updates</div>
+            <div class="value-prop-desc">Connect with others who understand the neurodivergent freelancing journey, plus get regular platform updates as I discover and test new opportunities.</div>
+            <div class="value-prop-features">✓ Real-time support from community<br>✓ Monthly platform additions<br>✓ Honest reviews of what works/doesn't</div>
+          </div>
+          <div class="value-prop" style="grid-column: 1 / -1; max-width: 600px; margin: 0 auto;">
+            <span class="value-prop-icon">🔄</span>
+            <div class="value-prop-title" style="color: var(--accent-primary);">Monthly Subscription Service</div>
+            <div class="value-prop-desc">You're subscribing to app access with regular platform updates, Discord community access, charged monthly at $9.25. Cancel anytime with no fees.</div>
+            <div class="value-prop-features">✓ No long-term contracts<br>✓ 30-day money-back guarantee<br>✓ Cancel with one click</div>
+          </div>
+        </div>
+
+        <!-- NEW: Combined Sneak Peek Section -->
+        <div class="sneak-peek">
+          <h2 class="sneak-peek-title">👀 See Inside The App</h2>
+          <p class="sneak-peek-subtitle">Get a preview of the organized, ADHD-friendly platform guides and tools you'll access</p>
+          
+          <div class="screenshots-container">
+            <div class="screenshots-grid">
+              <div class="screenshot-card" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205130.png', 'Platform Guides', 'Step-by-step guides for beginners')">
+                <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205130.png" alt="Platform Guides" class="screenshot-img">
+                <div class="screenshot-title">Platform Guides</div>
+                <div class="screenshot-desc">Step-by-step guides for beginners</div>
+              </div>
+              
+              <div class="screenshot-card" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Your%20paragraph%20text-3be1a9e.png', 'Platform Categories', 'Organized by earning type and difficulty')">
+                <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Your%20paragraph%20text-3be1a9e.png" alt="Platform Categories" class="screenshot-img">
+                <div class="screenshot-title">Platform Categories</div>
+                <div class="screenshot-desc">Organized by type & difficulty</div>
+              </div>
+              
+              <div class="screenshot-card" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/platforms.png', 'Freelance Platforms', 'Curated list of verified freelance platforms')">
+                <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/platforms.png" alt="Freelance Platforms" class="screenshot-img">
+                <div class="screenshot-title">Freelance Platforms</div>
+                <div class="screenshot-desc">Curated list of verified platforms</div>
+              </div>
+              
+              <div class="screenshot-card" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/apps.png', 'Mobile Apps', 'Earn money using mobile apps')">
+                <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/apps.png" alt="Mobile Apps" class="screenshot-img">
+                <div class="screenshot-title">Mobile Apps</div>
+                <div class="screenshot-desc">Earn money using mobile apps</div>
+              </div>
+              
+              <div class="screenshot-card" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205121.png', 'Discord Community', 'Real-time support & tips')">
+                <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205121.png" alt="Discord Community" class="screenshot-img">
+                <div class="screenshot-title">Discord Community</div>
+                <div class="screenshot-desc">Real-time support & tips</div>
+              </div>
+              
+              <div class="screenshot-card" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205151.png', 'ADHD Tools', 'Focus & productivity aids')">
+                <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot%202025-06-04%20205151.png" alt="ADHD Tools" class="screenshot-img">
+                <div class="screenshot-title">ADHD Tools</div>
+                <div class="screenshot-desc">Focus & productivity aids</div>
+              </div>
+              
+              <div class="screenshot-card" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/image_2025-06-19_191959293.png', 'Daily Schedule Tool', 'Plan your freelance day with ADHD-friendly scheduling')">
+                <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/image_2025-06-19_191959293.png" alt="Daily Schedule Tool" class="screenshot-img">
+                <div class="screenshot-title">Daily Schedule Tool</div>
+                <div class="screenshot-desc">ADHD-friendly scheduling</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Platform Categories Preview -->
+          <div style="background: var(--glass-bg); border: 1px solid var(--accent-secondary); border-radius: 16px; padding: 25px; margin: 30px 0;">
+            <h3 style="text-align: center; color: var(--accent-secondary); margin-bottom: 20px; font-size: 1.2rem;">🔍 What's Inside: Platform Categories</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+              <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
+                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">📝 AI Training & Data</div>
+                <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$3-$14/hr range</div>
+              </div>
+              <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
+                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">🎯 Surveys & Research</div>
+                <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$1-$150/hr range</div>
+              </div>
+              <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
+                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">✍️ Content Writing</div>
+                <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$15-$500+ per piece</div>
+              </div>
+              <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
+                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">🎨 Creative & Design</div>
+                <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$25-$200+/hr</div>
+              </div>
+            </div>
+            <p style="text-align: center; margin-top: 20px; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5;">
+              <strong>Plus 6 more categories</strong> with detailed platform reviews, signup tips, and ADHD-specific strategies for each
+            </p>
+          </div>
+          
+          <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-primary">
+            🚀 Get the 925 ADHD App
+          </a>
+        </div>
+
+        <!-- Web App Explanation Section -->
+        <div style="background: linear-gradient(135deg, rgba(79, 70, 229, 0.08), rgba(16, 185, 129, 0.08)); border: 2px solid var(--accent-secondary); border-radius: 16px; padding: 30px; margin: 40px auto; max-width: 700px;">
+          <h3 style="text-align: center; color: var(--accent-secondary); margin-bottom: 20px; font-size: 1.3rem;">🔍 Can't Find It in App Stores? Here's Why</h3>
+          
+          <div style="background: var(--glass-bg); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; margin-bottom: 25px;">
+            <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; text-align: center;">
+              <strong style="color: var(--text-primary);">This is a web app, not a traditional app store download.</strong> You access it at <a href="https://app.925adhd.com" target="_blank" rel="noopener noreferrer" style="color: var(--accent-secondary); text-decoration: underline; font-weight: 600; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-primary)'" onmouseout="this.style.color='var(--accent-secondary)'">app.925adhd.com</a> through your browser, but it works and feels like a native app once installed.
+            </p>
+          </div>
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 25px;">
+            <div style="text-align: center;">
+              <div style="font-size: 2rem; margin-bottom: 10px;">🌐</div>
+              <h4 style="color: var(--text-primary); margin-bottom: 8px; font-size: 1rem; font-weight: 600;">Access via Browser</h4>
+              <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.4;">Open in Safari, Chrome, or any browser. Works on all devices.</p>
+            </div>
+            
+            <div style="text-align: center;">
+              <div style="font-size: 2rem; margin-bottom: 10px;">📱</div>
+              <h4 style="color: var(--text-primary); margin-bottom: 8px; font-size: 1rem; font-weight: 600;">Install to Home Screen</h4>
+              <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.4;">Add to home screen for app-like experience with offline access.</p>
+            </div>
+            
+            <div style="text-align: center;">
+              <div style="font-size: 2rem; margin-bottom: 10px;">⚡</div>
+              <h4 style="color: var(--text-primary); margin-bottom: 8px; font-size: 1rem; font-weight: 600;">Always Updated</h4>
+              <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.4;">New platforms added instantly — no waiting for app store approvals.</p>
+            </div>
+          </div>
+          
+          <div style="background: var(--card-bg); border: 1px solid var(--accent-success); border-radius: 12px; padding: 20px;">
+            <h4 style="color: var(--accent-success); margin-bottom: 15px; font-size: 1.1rem; text-align: center;">📲 How to Install:</h4>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+              <div>
+                <p style="color: var(--text-primary); font-weight: 600; margin-bottom: 8px; font-size: 0.9rem;">📱 iPhone/iPad:</p>
+                <p style="color: var(--text-secondary); font-size: 0.85rem; line-height: 1.4;">Open in Safari → Tap Share button → "Add to Home Screen"</p>
+              </div>
+              <div>
+                <p style="color: var(--text-primary); font-weight: 600; margin-bottom: 8px; font-size: 0.9rem;">🤖 Android:</p>
+                <p style="color: var(--text-secondary); font-size: 0.85rem; line-height: 1.4;">Open in Chrome → Tap menu (⋮) → "Add to Home screen"</p>
+              </div>
+              <div>
+                <p style="color: var(--text-primary); font-weight: 600; margin-bottom: 8px; font-size: 0.9rem;">💻 Desktop:</p>
+                <p style="color: var(--text-secondary); font-size: 0.85rem; line-height: 1.4;">Look for install prompt in address bar, or bookmark for easy access</p>
+              </div>
+            </div>
+            <p style="color: var(--accent-success); font-size: 0.9rem; font-weight: 600; text-align: center; margin-top: 15px;">
+              💡 Once installed, it launches like any other app on your device!
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Demo Section -->
-  <section class="demo-section">
+  <!-- Proof Section -->
+  <section id="proof-section" class="proof-section">
     <div class="container">
-      <h2>Testing Popup Functionality</h2>
-      <div class="demo-content">
-        <p>This is a simplified version for testing the popup. The popup should appear automatically after 3 seconds, or you can click the "Test Popup" button in the top-left corner.</p>
-        <p>Check your browser's developer console for any JavaScript errors.</p>
+      <h2 class="section-title">Real Payout Proof (Not Just Claims)</h2>
+      <p class="section-subtitle">Here's actual evidence from platforms I've been paid from — because I've waded through the scams so you don't have to.</p>
+      
+      <div class="proof-grid">
+        <div class="proof-card">
+          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/micro%20earners-a9849c1.png" alt="Quick Payout Proof" class="proof-img" onclick="openModal(this.src, 'Quick Payout Platforms', 'Real earnings from same-day payout platforms')">
+          <div class="proof-title">Quick Payout Platforms</div>
+          <div class="proof-desc">Perfect for ADHD brains that need immediate gratification. Get paid the same day you work.</div>
+        </div>
+
+        <div class="proof-card">
+          <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/higher%20earners-5fa5cb1.png" alt="Higher Earning Proof" class="proof-img" onclick="openModal(this.src, 'Higher Earning Platforms', 'Real earnings from platforms with better pay rates')">
+          <div class="proof-title">Higher Earning Platforms</div>
+          <div class="proof-desc">For when you're in hyperfocus mode and ready to tackle bigger projects with better pay.</div>
+        </div>
+      </div>
+
+      <div style="background: var(--glass-bg); border: 1px solid var(--accent-secondary); border-radius: 12px; padding: 25px; margin: 40px auto 0; max-width: 600px; text-align: center;">
+        <h3 style="color: var(--accent-secondary); margin-bottom: 15px; font-size: 1.2rem;">🛡️ Why This Matters</h3>
+        <p style="color: var(--text-secondary); line-height: 1.6;">Too many people sell lists of platforms they've never tried. I've personally tested dozens of sites and apps — been burned by the scams, frustrated by the duds, and found the gems. You get only the ones that actually pay.</p>
+      </div>
+
+      <!-- CTA after proof -->
+      <div style="text-align: center; margin-top: 40px;">
+        <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-primary">
+          🚀 Get the 925 ADHD App
+        </a>
       </div>
     </div>
   </section>
+
+  <!-- Real User Stories -->
+  <section class="user-stories">
+    <div class="container">
+      <h2 class="section-title">What Early Users Are Saying</h2>
+      <p class="section-subtitle">Real feedback from people who understand the ADHD struggle</p>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-top: 50px;">
+        <div class="testimonial-card">
+          <div class="quote-mark">"</div>
+          <div class="testimonial-text">
+            The platform guides saved me hours of research. Having someone with ADHD test these first and tell me what's actually worth my time is invaluable.
+          </div>
+          <div class="testimonial-author">— Erica, Community Member</div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="quote-mark">"</div>
+          <div class="testimonial-text">
+            Finally, a curated list of platforms that actually work! I was drowning in all the options online. This cut through the noise and showed me exactly where to focus my energy.
+          </div>
+          <div class="testimonial-author">— Garrett, Early Member</div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="quote-mark">"</div>
+          <div class="testimonial-text">
+            Having everything organized in one place is a game-changer for my ADHD brain. No more bookmarking random articles or forgetting which platforms I wanted to try.
+          </div>
+          <div class="testimonial-author">— Kara, Beta User</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Honest Expectations -->
+  <section class="expectations">
+    <div class="container">
+      <h2 class="section-title">Let's Be Honest About Expectations</h2>
+      <p class="section-subtitle">No false promises—just real talk about what this can and can't do for you</p>
+      
+      <div class="expectation-cards">
+        <div class="expectation-card">
+          <span class="expectation-icon">⏰</span>
+          <h3 class="expectation-title">You Still Need to Work</h3>
+          <p class="expectation-desc">These tools help you stay organized, but you still need to put in effort. More time invested = more potential earnings.</p>
+        </div>
+
+        <div class="expectation-card">
+          <span class="expectation-icon">📊</span>
+          <h3 class="expectation-title">Results Vary</h3>
+          <p class="expectation-desc">Earnings depend on your skills, time commitment, and market demand. No specific income guarantees.</p>
+        </div>
+
+        <div class="expectation-card">
+          <span class="expectation-icon">🧠</span>
+          <h3 class="expectation-title">ADHD-Optimized</h3>
+          <p class="expectation-desc">Tools and strategies designed to work with ADHD brains, not against them. Better organization = better results.</p>
+        </div>
+
+        <div class="expectation-card">
+          <span class="expectation-icon">🎯</span>
+          <h3 class="expectation-title">Focus on Quality</h3>
+          <p class="expectation-desc">Only verified platforms that actually pay. No wasted time on scams or platforms that don't deliver.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta">
+    <div class="container">
+      <div class="cta-box">
+        <h2 class="cta-title">Ready to Stop Researching and Start Earning?</h2>
+        <p class="cta-subtitle">
+          Join other ADHD freelancers who've found their focus and started earning from platforms that actually work.
+        </p>
+        <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-primary">
+          🚀 Get the 925 ADHD App - $9.25/month
+        </a>
+        <div style="margin-top: 20px; color: var(--text-secondary); font-size: 0.9rem;">
+          30-day money-back guarantee • Cancel anytime
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Free Download Teaser - Moved to end as last chance offer -->
+  <section style="padding: 60px 0; background: var(--primary-bg);">
+    <div class="container">
+      <div class="free-download">
+        <h3 class="free-download-title">🎁 Still Not Sure? Try the Free Starter Pack</h3>
+        <p class="free-download-desc">Get a taste of what's inside with our basic guide featuring a few platforms to get you started. The full app has everything organized perfectly for your ADHD brain.</p>
+        <a href="https://925adhd.com/free" target="_blank" rel="noopener noreferrer" class="download-button">📥 Download Free Starter Pack</a>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 15px;">Ready for the complete organized system? <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" style="color: var(--accent-secondary); text-decoration: underline; font-weight: 600; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-primary)'" onmouseout="this.style.color='var(--accent-secondary)'">Get the full 925 ADHD App for $9.25/month</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal for image viewing -->
+  <div id="imageModal" class="modal" onclick="closeModal()">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal()">&times;</span>
+      <img id="modalImg" class="modal-img" alt="Enlarged view">
+      <div class="modal-info">
+        <div id="modalTitle" class="modal-title"></div>
+        <div id="modalDesc" class="modal-desc"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer style="background: var(--secondary-bg); padding: 40px 0 30px; border-top: 1px solid var(--border-subtle);">
+    <div class="container">
+      <div style="text-align: center;">
+        <div style="margin-bottom: 20px;">
+          <a href="https://925adhd.com" style="color: var(--text-secondary); text-decoration: none; margin: 0 15px; font-size: 0.9rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-secondary)'" onmouseout="this.style.color='var(--text-secondary)'">Home</a>
+          <a href="https://925adhd.com/terms-of-service" style="color: var(--text-secondary); text-decoration: none; margin: 0 15px; font-size: 0.9rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-secondary)'" onmouseout="this.style.color='var(--text-secondary)'">Terms of Service</a>
+          <a href="https://925adhd.com/privacy-policy" style="color: var(--text-secondary); text-decoration: none; margin: 0 15px; font-size: 0.9rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-secondary)'" onmouseout="this.style.color='var(--text-secondary)'">Privacy Policy</a>
+          <a href="https://925adhd.com/disclaimer" style="color: var(--text-secondary); text-decoration: none; margin: 0 15px; font-size: 0.9rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-secondary)'" onmouseout="this.style.color='var(--text-secondary)'">Disclaimer</a>
+          <a href="https://925adhd.com/contact" style="color: var(--text-secondary); text-decoration: none; margin: 0 15px; font-size: 0.9rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-secondary)'" onmouseout="this.style.color='var(--text-secondary)'">Contact</a>
+        </div>
+        
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 10px;">
+          Copyright © 2025 925 ADHD LLC - All Rights Reserved.
+        </p>
+        
+        <p style="color: var(--accent-secondary); font-size: 0.9rem; margin: 0;">
+          💡 Designed with ADHD 🧠's in mind
+        </p>
+      </div>
+    </div>
+  </footer>
 
   <!-- Back to Top Button -->
   <div id="backToTop" class="back-to-top" onclick="scrollToTop()">
@@ -794,107 +1806,69 @@
   </div>
 
   <script>
-    // Enhanced popup functions with more robust debugging
-    function showPopup() {
-      console.log('=== POPUP DEBUG START ===');
-      console.log('showPopup() called');
-      
-      const popup = document.getElementById('nonAdhdPopup');
-      console.log('Popup element:', popup);
-      
-      if (popup) {
-        console.log('Popup element found, showing popup');
-        
-        // Multiple methods to ensure visibility
-        popup.style.display = 'flex';
-        popup.style.visibility = 'visible';
-        popup.style.opacity = '1';
+    // Non-ADHD Popup functionality
+    let popupShown = false;
+    let popupTimeout;
+
+    function showNonAdhdPopup() {
+      if (!popupShown) {
+        const popup = document.getElementById('nonAdhdPopup');
         popup.classList.add('show');
+        popupShown = true;
         
-        // Force body overflow
+        // Prevent body scroll when popup is open
         document.body.style.overflow = 'hidden';
-        
-        console.log('Applied styles:');
-        console.log('- display:', popup.style.display);
-        console.log('- visibility:', popup.style.visibility);
-        console.log('- opacity:', popup.style.opacity);
-        console.log('- classes:', popup.className);
-        
-        // Check computed styles
-        const computedStyle = window.getComputedStyle(popup);
-        console.log('Computed styles:');
-        console.log('- display:', computedStyle.display);
-        console.log('- visibility:', computedStyle.visibility);
-        console.log('- opacity:', computedStyle.opacity);
-        console.log('- z-index:', computedStyle.zIndex);
-        
-        console.log('Popup should now be visible');
-      } else {
-        console.error('❌ Popup element not found!');
-        console.log('Available elements with IDs:');
-        const elementsWithIds = document.querySelectorAll('[id]');
-        elementsWithIds.forEach(el => console.log('- ID:', el.id));
       }
-      console.log('=== POPUP DEBUG END ===');
     }
 
     function closeNonAdhdPopup() {
-      console.log('closeNonAdhdPopup() called');
       const popup = document.getElementById('nonAdhdPopup');
-      if (popup) {
-        popup.style.display = 'none';
-        popup.classList.remove('show');
-        document.body.style.overflow = 'auto';
-        console.log('Popup closed');
-      }
+      popup.classList.remove('show');
+      
+      // Restore body scroll
+      document.body.style.overflow = 'auto';
     }
 
-    // Multiple triggers for testing
-    console.log('🔧 Setting up popup triggers...');
-    
-    // 1. Automatic trigger after 3 seconds
-    setTimeout(function() {
-      console.log('⏰ Timeout reached (3s), showing popup');
-      showPopup();
-    }, 3000);
-    
-    // 2. Backup trigger after 5 seconds
-    setTimeout(function() {
-      console.log('⏰ Backup timeout reached (5s)');
-      const popup = document.getElementById('nonAdhdPopup');
-      if (popup && popup.style.display === 'none') {
-        console.log('🔄 Popup still hidden, trying again...');
-        showPopup();
+    // Show popup after 45 seconds
+    popupTimeout = setTimeout(showNonAdhdPopup, 45000);
+
+    // Also show popup when user scrolls down significantly (50% of page)
+    let scrollTriggered = false;
+    window.addEventListener('scroll', function() {
+      if (!scrollTriggered && !popupShown && window.pageYOffset > window.innerHeight * 0.5) {
+        scrollTriggered = true;
+        clearTimeout(popupTimeout); // Cancel the timer-based popup
+        setTimeout(showNonAdhdPopup, 2000); // Show after 2 seconds of scrolling
       }
-    }, 5000);
-    
-    // 3. Page interaction trigger (fallback)
-    let interactionTriggered = false;
-    function triggerOnInteraction() {
-      if (!interactionTriggered) {
-        interactionTriggered = true;
-        console.log('👆 User interaction detected, showing popup');
-        setTimeout(showPopup, 1000);
+    });
+
+    // Close popup when clicking outside content
+    document.getElementById('nonAdhdPopup').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeNonAdhdPopup();
       }
-    }
-    
-    // Add interaction listeners
-    document.addEventListener('click', triggerOnInteraction);
-    document.addEventListener('scroll', triggerOnInteraction);
-    document.addEventListener('keydown', triggerOnInteraction);
+    });
+
+    // Close popup with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && popupShown) {
+        closeNonAdhdPopup();
+      }
+    });
 
     // Back to Top functionality
-    window.onscroll = function() {
-      var backButton = document.getElementById('backToTop');
-      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-        backButton.style.opacity = '1';
-        backButton.style.visibility = 'visible';
-      } else {
-        backButton.style.opacity = '0';
-        backButton.style.visibility = 'hidden';
-      }
-    };
+    const backToTopButton = document.getElementById('backToTop');
 
+    // Show/hide button based on scroll position
+    window.addEventListener('scroll', function() {
+      if (window.pageYOffset > 300) {
+        backToTopButton.classList.add('visible');
+      } else {
+        backToTopButton.classList.remove('visible');
+      }
+    });
+
+    // Smooth scroll to top
     function scrollToTop() {
       window.scrollTo({
         top: 0,
@@ -902,21 +1876,137 @@
       });
     }
 
-    // Close popup with escape key
-    document.onkeydown = function(event) {
-      if (event.key === 'Escape') {
-        closeNonAdhdPopup();
-      }
-    };
+    // Rest of existing script
+    let isZoomed = false;
+    let startScale = 1;
+    let currentScale = 1;
+    let startX = 0;
+    let startY = 0;
+    let currentX = 0;
+    let currentY = 0;
 
-    // Log when page is fully loaded
-    window.addEventListener('load', function() {
-      console.log('Page fully loaded');
-    });
+    function openModal(imageSrc, title, description) {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImg');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalDesc = document.getElementById('modalDesc');
+      
+      modal.style.display = 'block';
+      modalImg.src = imageSrc;
+      modalTitle.textContent = title;
+      modalDesc.textContent = description;
+      
+      // Reset zoom
+      isZoomed = false;
+      currentScale = 1;
+      currentX = 0;
+      currentY = 0;
+      modalImg.style.transform = 'translate(0px, 0px) scale(1)';
+      modalImg.classList.remove('zoomed');
+      
+      // Prevent body scroll when modal is open
+      document.body.style.overflow = 'hidden';
+    }
 
-    // Log when DOM is ready
+    function closeModal() {
+      const modal = document.getElementById('imageModal');
+      modal.style.display = 'none';
+      
+      // Restore body scroll
+      document.body.style.overflow = 'auto';
+    }
+
+    // Image zoom functionality
     document.addEventListener('DOMContentLoaded', function() {
-      console.log('DOM fully loaded');
+      const modalImg = document.getElementById('modalImg');
+      
+      // Click to zoom
+      modalImg.addEventListener('click', function(e) {
+        e.stopPropagation();
+        
+        if (!isZoomed) {
+          // Zoom in to 2x
+          currentScale = 2;
+          isZoomed = true;
+          modalImg.classList.add('zoomed');
+        } else {
+          // Zoom out
+          currentScale = 1;
+          currentX = 0;
+          currentY = 0;
+          isZoomed = false;
+          modalImg.classList.remove('zoomed');
+        }
+        
+        modalImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${currentScale})`;
+      });
+
+      // Touch events for mobile
+      let initialDistance = 0;
+      let initialScale = 1;
+
+      modalImg.addEventListener('touchstart', function(e) {
+        if (e.touches.length === 2) {
+          e.preventDefault();
+          initialDistance = getDistance(e.touches[0], e.touches[1]);
+          initialScale = currentScale;
+        }
+      });
+
+      modalImg.addEventListener('touchmove', function(e) {
+        if (e.touches.length === 2) {
+          e.preventDefault();
+          const distance = getDistance(e.touches[0], e.touches[1]);
+          const scale = (distance / initialDistance) * initialScale;
+          currentScale = Math.min(Math.max(1, scale), 3);
+          modalImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${currentScale})`;
+        }
+      });
+
+      function getDistance(touch1, touch2) {
+        const dx = touch1.clientX - touch2.clientX;
+        const dy = touch1.clientY - touch2.clientY;
+        return Math.sqrt(dx * dx + dy * dy);
+      }
+
+      // Drag functionality for zoomed images
+      let isDragging = false;
+      let dragStartX = 0;
+      let dragStartY = 0;
+      let dragStartTranslateX = 0;
+      let dragStartTranslateY = 0;
+
+      modalImg.addEventListener('mousedown', function(e) {
+        if (currentScale > 1) {
+          isDragging = true;
+          dragStartX = e.clientX;
+          dragStartY = e.clientY;
+          dragStartTranslateX = currentX;
+          dragStartTranslateY = currentY;
+          modalImg.style.cursor = 'grabbing';
+          e.preventDefault();
+        }
+      });
+
+      document.addEventListener('mousemove', function(e) {
+        if (isDragging && currentScale > 1) {
+          const deltaX = e.clientX - dragStartX;
+          const deltaY = e.clientY - dragStartY;
+          currentX = dragStartTranslateX + deltaX;
+          currentY = dragStartTranslateY + deltaY;
+          modalImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${currentScale})`;
+        }
+      });
+
+      document.addEventListener('mouseup', function() {
+        if (isDragging) {
+          isDragging = false;
+          modalImg.style.cursor = currentScale > 1 ? 'grab' : 'zoom-in';
+        }
+      });
+
+      // Set initial cursor
+      modalImg.style.cursor = 'zoom-in';
     });
   </script>
 </body>
