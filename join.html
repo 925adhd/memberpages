@@ -1809,51 +1809,75 @@
     // Non-ADHD Popup functionality
     let popupShown = false;
     let popupTimeout;
+    let scrollTriggered = false;
 
     function showNonAdhdPopup() {
+      console.log('Attempting to show popup, popupShown:', popupShown);
       if (!popupShown) {
         const popup = document.getElementById('nonAdhdPopup');
-        popup.classList.add('show');
-        popupShown = true;
-        
-        // Prevent body scroll when popup is open
-        document.body.style.overflow = 'hidden';
+        if (popup) {
+          popup.classList.add('show');
+          popupShown = true;
+          console.log('Popup shown successfully');
+          
+          // Prevent body scroll when popup is open
+          document.body.style.overflow = 'hidden';
+        } else {
+          console.error('Popup element not found');
+        }
       }
     }
 
     function closeNonAdhdPopup() {
       const popup = document.getElementById('nonAdhdPopup');
-      popup.classList.remove('show');
-      
-      // Restore body scroll
-      document.body.style.overflow = 'auto';
+      if (popup) {
+        popup.classList.remove('show');
+        
+        // Restore body scroll
+        document.body.style.overflow = 'auto';
+        console.log('Popup closed');
+      }
     }
 
-    // Show popup after 45 seconds
-    popupTimeout = setTimeout(showNonAdhdPopup, 45000);
+    // Initialize popup functionality when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOM loaded, setting up popup');
+      
+      // Show popup after 10 seconds for testing (change to 45000 for production)
+      popupTimeout = setTimeout(function() {
+        console.log('Timer triggered, showing popup');
+        showNonAdhdPopup();
+      }, 10000);
 
-    // Also show popup when user scrolls down significantly (50% of page)
-    let scrollTriggered = false;
-    window.addEventListener('scroll', function() {
-      if (!scrollTriggered && !popupShown && window.pageYOffset > window.innerHeight * 0.5) {
-        scrollTriggered = true;
-        clearTimeout(popupTimeout); // Cancel the timer-based popup
-        setTimeout(showNonAdhdPopup, 2000); // Show after 2 seconds of scrolling
-      }
-    });
+      // Also show popup when user scrolls down significantly (50% of page)
+      window.addEventListener('scroll', function() {
+        if (!scrollTriggered && !popupShown) {
+          const scrollPercent = window.pageYOffset / (document.body.scrollHeight - window.innerHeight);
+          if (scrollPercent > 0.5) {
+            scrollTriggered = true;
+            clearTimeout(popupTimeout); // Cancel the timer-based popup
+            console.log('Scroll triggered, showing popup in 2 seconds');
+            setTimeout(showNonAdhdPopup, 2000); // Show after 2 seconds of scrolling
+          }
+        }
+      });
 
-    // Close popup when clicking outside content
-    document.getElementById('nonAdhdPopup').addEventListener('click', function(e) {
-      if (e.target === this) {
-        closeNonAdhdPopup();
+      // Close popup when clicking outside content
+      const popup = document.getElementById('nonAdhdPopup');
+      if (popup) {
+        popup.addEventListener('click', function(e) {
+          if (e.target === this) {
+            closeNonAdhdPopup();
+          }
+        });
       }
-    });
 
-    // Close popup with Escape key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && popupShown) {
-        closeNonAdhdPopup();
-      }
+      // Close popup with Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && popupShown) {
+          closeNonAdhdPopup();
+        }
+      });
     });
 
     // Back to Top functionality
