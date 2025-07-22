@@ -1806,24 +1806,16 @@
   </div>
 
   <script>
-    // Non-ADHD Popup functionality
+    // Simple popup functionality for GitHub Pages
     let popupShown = false;
-    let popupTimeout;
-    let scrollTriggered = false;
 
     function showNonAdhdPopup() {
-      console.log('Attempting to show popup, popupShown:', popupShown);
       if (!popupShown) {
         const popup = document.getElementById('nonAdhdPopup');
         if (popup) {
-          popup.classList.add('show');
+          popup.style.display = 'flex';
           popupShown = true;
-          console.log('Popup shown successfully');
-          
-          // Prevent body scroll when popup is open
           document.body.style.overflow = 'hidden';
-        } else {
-          console.error('Popup element not found');
         }
       }
     }
@@ -1831,53 +1823,42 @@
     function closeNonAdhdPopup() {
       const popup = document.getElementById('nonAdhdPopup');
       if (popup) {
-        popup.classList.remove('show');
-        
-        // Restore body scroll
+        popup.style.display = 'none';
         document.body.style.overflow = 'auto';
-        console.log('Popup closed');
       }
     }
 
-    // Initialize popup functionality when DOM is loaded
-    document.addEventListener('DOMContentLoaded', function() {
-      console.log('DOM loaded, setting up popup');
-      
-      // Show popup after 10 seconds for testing (change to 45000 for production)
-      popupTimeout = setTimeout(function() {
-        console.log('Timer triggered, showing popup');
-        showNonAdhdPopup();
-      }, 10000);
+    // Show popup after page loads
+    window.addEventListener('load', function() {
+      // Show after 10 seconds (change to 45000 for production)
+      setTimeout(showNonAdhdPopup, 10000);
+    });
 
-      // Also show popup when user scrolls down significantly (50% of page)
-      window.addEventListener('scroll', function() {
-        if (!scrollTriggered && !popupShown) {
-          const scrollPercent = window.pageYOffset / (document.body.scrollHeight - window.innerHeight);
-          if (scrollPercent > 0.5) {
-            scrollTriggered = true;
-            clearTimeout(popupTimeout); // Cancel the timer-based popup
-            console.log('Scroll triggered, showing popup in 2 seconds');
-            setTimeout(showNonAdhdPopup, 2000); // Show after 2 seconds of scrolling
-          }
-        }
-      });
+    // Show on scroll
+    let hasScrolled = false;
+    window.addEventListener('scroll', function() {
+      if (!hasScrolled && !popupShown && window.pageYOffset > 800) {
+        hasScrolled = true;
+        setTimeout(showNonAdhdPopup, 2000);
+      }
+    });
 
-      // Close popup when clicking outside content
+    // Close popup events
+    window.addEventListener('load', function() {
       const popup = document.getElementById('nonAdhdPopup');
       if (popup) {
         popup.addEventListener('click', function(e) {
-          if (e.target === this) {
+          if (e.target === popup) {
             closeNonAdhdPopup();
           }
         });
       }
+    });
 
-      // Close popup with Escape key
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && popupShown) {
-          closeNonAdhdPopup();
-        }
-      });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeNonAdhdPopup();
+      }
     });
 
     // Back to Top functionality
@@ -1886,9 +1867,9 @@
     // Show/hide button based on scroll position
     window.addEventListener('scroll', function() {
       if (window.pageYOffset > 300) {
-        backToTopButton.classList.add('visible');
+        if (backToTopButton) backToTopButton.classList.add('visible');
       } else {
-        backToTopButton.classList.remove('visible');
+        if (backToTopButton) backToTopButton.classList.remove('visible');
       }
     });
 
@@ -1941,96 +1922,98 @@
     }
 
     // Image zoom functionality
-    document.addEventListener('DOMContentLoaded', function() {
+    window.addEventListener('load', function() {
       const modalImg = document.getElementById('modalImg');
       
-      // Click to zoom
-      modalImg.addEventListener('click', function(e) {
-        e.stopPropagation();
-        
-        if (!isZoomed) {
-          // Zoom in to 2x
-          currentScale = 2;
-          isZoomed = true;
-          modalImg.classList.add('zoomed');
-        } else {
-          // Zoom out
-          currentScale = 1;
-          currentX = 0;
-          currentY = 0;
-          isZoomed = false;
-          modalImg.classList.remove('zoomed');
-        }
-        
-        modalImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${currentScale})`;
-      });
-
-      // Touch events for mobile
-      let initialDistance = 0;
-      let initialScale = 1;
-
-      modalImg.addEventListener('touchstart', function(e) {
-        if (e.touches.length === 2) {
-          e.preventDefault();
-          initialDistance = getDistance(e.touches[0], e.touches[1]);
-          initialScale = currentScale;
-        }
-      });
-
-      modalImg.addEventListener('touchmove', function(e) {
-        if (e.touches.length === 2) {
-          e.preventDefault();
-          const distance = getDistance(e.touches[0], e.touches[1]);
-          const scale = (distance / initialDistance) * initialScale;
-          currentScale = Math.min(Math.max(1, scale), 3);
+      if (modalImg) {
+        // Click to zoom
+        modalImg.addEventListener('click', function(e) {
+          e.stopPropagation();
+          
+          if (!isZoomed) {
+            // Zoom in to 2x
+            currentScale = 2;
+            isZoomed = true;
+            modalImg.classList.add('zoomed');
+          } else {
+            // Zoom out
+            currentScale = 1;
+            currentX = 0;
+            currentY = 0;
+            isZoomed = false;
+            modalImg.classList.remove('zoomed');
+          }
+          
           modalImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${currentScale})`;
-        }
-      });
+        });
 
-      function getDistance(touch1, touch2) {
-        const dx = touch1.clientX - touch2.clientX;
-        const dy = touch1.clientY - touch2.clientY;
-        return Math.sqrt(dx * dx + dy * dy);
+        // Touch events for mobile
+        let initialDistance = 0;
+        let initialScale = 1;
+
+        modalImg.addEventListener('touchstart', function(e) {
+          if (e.touches.length === 2) {
+            e.preventDefault();
+            initialDistance = getDistance(e.touches[0], e.touches[1]);
+            initialScale = currentScale;
+          }
+        });
+
+        modalImg.addEventListener('touchmove', function(e) {
+          if (e.touches.length === 2) {
+            e.preventDefault();
+            const distance = getDistance(e.touches[0], e.touches[1]);
+            const scale = (distance / initialDistance) * initialScale;
+            currentScale = Math.min(Math.max(1, scale), 3);
+            modalImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${currentScale})`;
+          }
+        });
+
+        function getDistance(touch1, touch2) {
+          const dx = touch1.clientX - touch2.clientX;
+          const dy = touch1.clientY - touch2.clientY;
+          return Math.sqrt(dx * dx + dy * dy);
+        }
+
+        // Drag functionality for zoomed images
+        let isDragging = false;
+        let dragStartX = 0;
+        let dragStartY = 0;
+        let dragStartTranslateX = 0;
+        let dragStartTranslateY = 0;
+
+        modalImg.addEventListener('mousedown', function(e) {
+          if (currentScale > 1) {
+            isDragging = true;
+            dragStartX = e.clientX;
+            dragStartY = e.clientY;
+            dragStartTranslateX = currentX;
+            dragStartTranslateY = currentY;
+            modalImg.style.cursor = 'grabbing';
+            e.preventDefault();
+          }
+        });
+
+        document.addEventListener('mousemove', function(e) {
+          if (isDragging && currentScale > 1) {
+            const deltaX = e.clientX - dragStartX;
+            const deltaY = e.clientY - dragStartY;
+            currentX = dragStartTranslateX + deltaX;
+            currentY = dragStartTranslateY + deltaY;
+            modalImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${currentScale})`;
+          }
+        });
+
+        document.addEventListener('mouseup', function() {
+          if (isDragging) {
+            isDragging = false;
+            modalImg.style.cursor = currentScale > 1 ? 'grab' : 'zoom-in';
+          }
+        });
+
+        // Set initial cursor
+        modalImg.style.cursor = 'zoom-in';
       }
-
-      // Drag functionality for zoomed images
-      let isDragging = false;
-      let dragStartX = 0;
-      let dragStartY = 0;
-      let dragStartTranslateX = 0;
-      let dragStartTranslateY = 0;
-
-      modalImg.addEventListener('mousedown', function(e) {
-        if (currentScale > 1) {
-          isDragging = true;
-          dragStartX = e.clientX;
-          dragStartY = e.clientY;
-          dragStartTranslateX = currentX;
-          dragStartTranslateY = currentY;
-          modalImg.style.cursor = 'grabbing';
-          e.preventDefault();
-        }
-      });
-
-      document.addEventListener('mousemove', function(e) {
-        if (isDragging && currentScale > 1) {
-          const deltaX = e.clientX - dragStartX;
-          const deltaY = e.clientY - dragStartY;
-          currentX = dragStartTranslateX + deltaX;
-          currentY = dragStartTranslateY + deltaY;
-          modalImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${currentScale})`;
-        }
-      });
-
-      document.addEventListener('mouseup', function() {
-        if (isDragging) {
-          isDragging = false;
-          modalImg.style.cursor = currentScale > 1 ? 'grab' : 'zoom-in';
-        }
-      });
-
-      // Set initial cursor
-      modalImg.style.cursor = 'zoom-in';
     });
   </script>
 </body>
