@@ -42,6 +42,211 @@
       --gradient-adhd: linear-gradient(135deg, #4f46e5 0%, #06b6d4 50%, #10b981 100%);
     }
 
+    /* Non-ADHD Popup Styles */
+    .non-adhd-popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      box-sizing: border-box;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .non-adhd-popup.show {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .popup-content {
+      background: var(--secondary-bg);
+      border: 2px solid var(--accent-primary);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      box-shadow: var(--shadow-strong);
+      animation: popupSlideIn 0.5s ease-out;
+    }
+
+    @keyframes popupSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .popup-close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 24px;
+      cursor: pointer;
+      transition: color 0.3s ease;
+      padding: 5px;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .popup-close:hover {
+      color: var(--text-primary);
+    }
+
+    .popup-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent-secondary);
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+
+    .popup-text {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .popup-benefits {
+      background: var(--glass-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0;
+      text-align: left;
+    }
+
+    .popup-benefits h4 {
+      color: var(--accent-success);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .popup-benefits ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .popup-benefits li {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 8px;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .popup-benefits li::before {
+      content: "✓";
+      color: var(--accent-success);
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+
+    .popup-cta {
+      background: var(--gradient-primary);
+      color: white;
+      padding: 15px 30px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: inline-block;
+      transition: all 0.3s ease;
+      margin: 10px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .popup-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .popup-dismiss {
+      background: transparent;
+      border: 2px solid var(--border-subtle);
+      color: var(--text-secondary);
+      padding: 12px 25px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      display: inline-block;
+      transition: all 0.3s ease;
+      margin: 10px;
+      cursor: pointer;
+    }
+
+    .popup-dismiss:hover {
+      border-color: var(--border-bright);
+      color: var(--text-primary);
+    }
+
+    /* Mobile adjustments for popup */
+    @media (max-width: 768px) {
+      .popup-content {
+        padding: 30px 25px;
+        margin: 10px;
+      }
+
+      .popup-title {
+        font-size: 1.3rem;
+      }
+
+      .popup-text {
+        font-size: 0.95rem;
+      }
+
+      .popup-cta, .popup-dismiss {
+        padding: 12px 20px;
+        font-size: 1rem;
+        margin: 8px;
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .popup-content {
+        padding: 25px 20px;
+      }
+
+      .popup-title {
+        font-size: 1.2rem;
+      }
+
+      .popup-text {
+        font-size: 0.9rem;
+      }
+    }
+
     /* Back to Top Button */
     .back-to-top {
       position: fixed;
@@ -1142,6 +1347,44 @@
   <div class="floating-orb orb-1"></div>
   <div class="floating-orb orb-2"></div>
 
+  <!-- Non-ADHD Popup -->
+  <div id="nonAdhdPopup" class="non-adhd-popup">
+    <div class="popup-content">
+      <button class="popup-close" onclick="closeNonAdhdPopup()">&times;</button>
+      
+      <h2 class="popup-title">🤔 Hey, I don't have ADHD though! Can I still benefit?</h2>
+      
+      <p class="popup-text">
+        Absolutely! While this is built with ADHD brains in mind, the tools and platform curation work great for anyone who wants to freelance smarter, not harder.
+      </p>
+      
+      <div class="popup-benefits">
+        <h4>🎯 You'll Still Get:</h4>
+        <ul>
+          <li>50+ curated, verified platforms (no scams or time-wasters)</li>
+          <li>Clear, step-by-step guides for each platform</li>
+          <li>Productivity tools that work for any brain type</li>
+          <li>Regular updates with new opportunities</li>
+          <li>Discord community support</li>
+          <li>Real payout proof and honest reviews</li>
+        </ul>
+      </div>
+      
+      <p style="color: var(--text-secondary); font-size: 0.95rem; margin: 20px 0; line-height: 1.5;">
+        The "ADHD-friendly" approach just means everything is organized, easy to follow, and cuts through the noise — which benefits everyone!
+      </p>
+      
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
+        <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="popup-cta">
+          🚀 Perfect! Get the App
+        </a>
+        <button class="popup-dismiss" onclick="closeNonAdhdPopup()">
+          Maybe Later
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Header -->
   <header class="header">
     <div class="container">
@@ -1563,6 +1806,59 @@
   </div>
 
   <script>
+    // Non-ADHD Popup functionality
+    let popupShown = false;
+    let popupTimeout;
+
+    function showNonAdhdPopup() {
+      if (!popupShown && !localStorage.getItem('nonAdhdPopupDismissed')) {
+        const popup = document.getElementById('nonAdhdPopup');
+        popup.classList.add('show');
+        popupShown = true;
+        
+        // Prevent body scroll when popup is open
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeNonAdhdPopup() {
+      const popup = document.getElementById('nonAdhdPopup');
+      popup.classList.remove('show');
+      
+      // Restore body scroll
+      document.body.style.overflow = 'auto';
+      
+      // Remember that user dismissed popup
+      localStorage.setItem('nonAdhdPopupDismissed', 'true');
+    }
+
+    // Show popup after 45 seconds
+    popupTimeout = setTimeout(showNonAdhdPopup, 45000);
+
+    // Also show popup when user scrolls down significantly (50% of page)
+    let scrollTriggered = false;
+    window.addEventListener('scroll', function() {
+      if (!scrollTriggered && !popupShown && window.pageYOffset > window.innerHeight * 0.5) {
+        scrollTriggered = true;
+        clearTimeout(popupTimeout); // Cancel the timer-based popup
+        setTimeout(showNonAdhdPopup, 2000); // Show after 2 seconds of scrolling
+      }
+    });
+
+    // Close popup when clicking outside content
+    document.getElementById('nonAdhdPopup').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeNonAdhdPopup();
+      }
+    });
+
+    // Close popup with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && popupShown) {
+        closeNonAdhdPopup();
+      }
+    });
+
     // Back to Top functionality
     const backToTopButton = document.getElementById('backToTop');
 
