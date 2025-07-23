@@ -3,30 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Guide to Start Working Online</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Complete Guide: Start Working Online Today</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-bg: #0f1114;
-            --secondary-bg: #1a1d23;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --text-primary: #ffffff;
-            --text-secondary: #b4bcd0;
-            --text-muted: #8892a6;
-            --accent-blue: #4f46e5;
+            --bg-dark: #1a1a2e;
+            --bg-card: #16213e;
+            --text-white: #ffffff;
+            --text-light: #e0e6ed;
+            --blue: #4facfe;
+            --green: #43e97b;
+            --purple: #a855f7;
+            --orange: #fb923c;
+            --red: #f87171;
+            --yellow: #fbbf24;
             --accent-teal: #06b6d4;
-            --accent-emerald: #10b981;
-            --accent-amber: #f59e0b;
-            --accent-rose: #f43f5e;
-            --accent-purple: #8b5cf6;
-            --border-subtle: rgba(255, 255, 255, 0.1);
-            --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.15);
-            --shadow-medium: 0 8px 40px rgba(0, 0, 0, 0.25);
-            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-success: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
-            --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
-            --gradient-freelance: linear-gradient(135deg, #4f46e5 0%, #06b6d4 50%, #10b981 100%);
+            --accent-blue: #4facfe;
         }
 
         * {
@@ -36,962 +28,1061 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--primary-bg);
-            color: var(--text-primary);
+            font-family: 'Open Sans', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-white);
             line-height: 1.8;
-            overflow-x: hidden;
             font-size: 18px;
-        }
-
-        .bg-gradient {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(ellipse at top, rgba(79, 70, 229, 0.1) 0%, transparent 50%),
-                        radial-gradient(ellipse at bottom right, rgba(16, 185, 129, 0.08) 0%, transparent 50%);
-            z-index: -1;
-            animation: gradientShift 20s ease-in-out infinite alternate;
-        }
-
-        @keyframes gradientShift {
-            0% { 
-                background: radial-gradient(ellipse at top, rgba(79, 70, 229, 0.1) 0%, transparent 50%),
-                            radial-gradient(ellipse at bottom right, rgba(16, 185, 129, 0.08) 0%, transparent 50%);
-            }
-            50% { 
-                background: radial-gradient(ellipse at top left, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-                            radial-gradient(ellipse at bottom, rgba(6, 182, 212, 0.08) 0%, transparent 50%);
-            }
-            100% { 
-                background: radial-gradient(ellipse at top right, rgba(245, 158, 11, 0.08) 0%, transparent 50%),
-                            radial-gradient(ellipse at bottom left, rgba(244, 63, 94, 0.08) 0%, transparent 50%);
-            }
+            padding: 20px;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 1rem;
-            margin-top: 2rem;
         }
 
-        .hero-header {
-            text-align: center;
-            padding: 2rem 1rem 3rem;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            border: 1px solid var(--border-subtle);
-            margin-bottom: 2rem;
-        }
-
-        .main-title {
-            font-size: clamp(2rem, 6vw, 3rem);
-            font-weight: 700;
-            background: var(--gradient-freelance);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: textGradient 4s ease-in-out infinite;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        @keyframes textGradient {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .subtitle {
-            font-size: 1.3rem;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-        }
-
-        .section {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border-radius: 16px;
-            border: 1px solid var(--border-subtle);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .section-title .emoji {
+        /* Big, clear headers */
+        h1 {
+            font-family: 'Comic Neue', cursive;
             font-size: 2.5rem;
-            flex-shrink: 0;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+            color: var(--text-white);
         }
 
-        .section-title .title-text {
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
+        h1 .gradient-text {
+            background: linear-gradient(45deg, var(--blue), var(--green));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            flex: 1;
         }
 
-        .big-button {
-            background: var(--gradient-success);
-            color: white;
-            padding: 1.5rem 2rem;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.2rem;
+        h2 {
+            font-family: 'Comic Neue', cursive;
+            font-size: 2rem;
+            color: var(--blue);
+            margin: 40px 0 20px;
+            padding: 20px;
+            background: var(--bg-card);
+            border-radius: 15px;
+            border-left: 5px solid var(--blue);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--green);
+            margin: 30px 0 15px;
             font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
+        }
+
+        /* Cards for every section */
+        .card {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            border-left: 5px solid var(--blue);
+        }
+
+        .card.important {
+            border-left-color: var(--red);
+            background: linear-gradient(135deg, var(--bg-card), rgba(248, 113, 113, 0.1));
+        }
+
+        .card.tip {
+            border-left-color: var(--green);
+            background: linear-gradient(135deg, var(--bg-card), rgba(67, 233, 123, 0.1));
+        }
+
+        .card.warning {
+            border-left-color: var(--orange);
+            background: linear-gradient(135deg, var(--bg-card), rgba(251, 146, 60, 0.1));
+        }
+
+        .card.success {
+            border-left-color: var(--green);
+            background: linear-gradient(135deg, var(--bg-card), rgba(67, 233, 123, 0.1));
+        }
+
+        .card.money {
+            border-left-color: var(--yellow);
+            background: linear-gradient(135deg, var(--bg-card), rgba(251, 191, 36, 0.1));
+        }
+
+        /* Simple lists with big spacing */
+        ul, ol {
+            padding-left: 30px;
+            margin: 20px 0;
+        }
+
+        li {
+            margin: 15px 0;
+            font-size: 17px;
+        }
+
+        /* Big buttons */
+        .big-button {
             display: inline-block;
-            margin: 1rem 0;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+            background: linear-gradient(45deg, var(--blue), var(--purple));
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            margin: 10px 5px;
+            transition: transform 0.3s ease;
         }
 
         .big-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 30px rgba(16, 185, 129, 0.4);
+            transform: scale(1.05);
         }
 
-        .start-card {
-            background: linear-gradient(135deg, rgba(79, 70, 229, 0.15), rgba(16, 185, 129, 0.15));
-            border: 2px solid var(--accent-emerald);
-            border-radius: 16px;
-            padding: 2rem;
-            margin: 2rem 0;
+        /* Quick nav */
+        .quick-nav {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .nav-item {
+            background: linear-gradient(45deg, var(--blue), var(--green));
+            padding: 20px;
+            border-radius: 10px;
             text-align: center;
-            animation: startPulse 2s infinite;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease;
         }
 
-        @keyframes startPulse {
-            0%, 100% { border-color: var(--accent-emerald); }
-            50% { border-color: var(--accent-blue); }
+        .nav-item:hover {
+            transform: translateY(-5px);
         }
 
-        .start-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--accent-emerald);
-            margin-bottom: 1rem;
+        /* Platform boxes */
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
         }
 
-        .step-box {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-subtle);
+        .platform-box {
+            background: var(--bg-card);
             border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1rem 0;
+            padding: 20px;
+            border: 2px solid var(--blue);
             transition: all 0.3s ease;
         }
 
-        .step-box:hover {
+        .platform-box:hover {
+            border-color: var(--green);
+            transform: translateY(-3px);
+        }
+
+        .platform-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--blue);
+            margin-bottom: 10px;
+        }
+
+        .pay-range {
+            background: var(--green);
+            color: var(--bg-dark);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 10px 0;
+        }
+
+        .difficulty {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 5px 0;
+        }
+
+        .easy { background: var(--green); color: var(--bg-dark); }
+        .medium { background: var(--orange); color: var(--bg-dark); }
+        .hard { background: var(--red); color: white; }
+
+        .platform-link {
+            color: var(--accent-teal);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .platform-link:hover {
+            border-bottom-color: var(--accent-teal);
+        }
+
+        /* Checklists */
+        .checklist {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .checklist h3 {
+            color: var(--green);
+            margin-bottom: 20px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .check-item:hover {
             background: rgba(255, 255, 255, 0.08);
-            border-color: var(--accent-teal);
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--green);
+            border-radius: 4px;
+            margin-right: 15px;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Progress steps */
+        .steps {
+            margin: 30px 0;
+        }
+
+        .step {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 5px solid var(--blue);
+            display: flex;
+            align-items: flex-start;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            border-left-color: var(--green);
+            transform: translateX(5px);
         }
 
         .step-number {
-            background: var(--accent-blue);
+            background: var(--blue);
             color: white;
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-right: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .step-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--accent-teal);
-            margin-bottom: 0.5rem;
-        }
-
-        .easy-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .easy-list li {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 0.5rem 0;
-            border-left: 4px solid var(--accent-teal);
-            font-size: 1.1rem;
-        }
-
-        .money-box {
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(16, 185, 129, 0.1));
-            border: 1px solid var(--accent-amber);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            text-align: center;
-        }
-
-        .money-title {
-            font-size: 1.5rem;
-            color: var(--accent-amber);
-            margin-bottom: 1rem;
-        }
-
-        .warning-box {
-            background: linear-gradient(135deg, rgba(244, 63, 94, 0.1), rgba(245, 158, 11, 0.1));
-            border: 1px solid var(--accent-rose);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-        }
-
-        .warning-title {
-            font-size: 1.3rem;
-            color: var(--accent-rose);
-            margin-bottom: 1rem;
-        }
-
-        .website-link {
-            color: var(--accent-teal);
-            text-decoration: none;
-            font-weight: 600;
-            border-bottom: 2px solid transparent;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-        }
-
-        .website-link:hover {
-            border-bottom-color: var(--accent-teal);
-            color: var(--accent-blue);
-        }
-
-        .checklist {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-        }
-
-        .checklist-title {
-            font-size: 1.4rem;
-            color: var(--accent-emerald);
-            margin-bottom: 1rem;
-        }
-
-        .checklist-item {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            padding: 0.75rem 0;
-            font-size: 1.1rem;
-        }
-
-        .checkbox {
-            width: 24px;
-            height: 24px;
-            border: 2px solid var(--accent-emerald);
-            border-radius: 4px;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 20px;
             flex-shrink: 0;
         }
 
-        .tip-box {
-            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(139, 92, 246, 0.1));
-            border: 1px solid var(--accent-teal);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-        }
-
-        .tip-title {
-            font-size: 1.3rem;
-            color: var(--accent-teal);
-            margin-bottom: 1rem;
-        }
-
-        .platform-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-subtle);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            transition: all 0.3s ease;
-        }
-
-        .platform-card:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--accent-teal);
-        }
-
-        .platform-name {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--accent-blue);
-            margin-bottom: 0.5rem;
-        }
-
-        .platform-description {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-        }
-
-        .platform-pay {
+        .step-content h4 {
+            color: var(--green);
+            margin-bottom: 10px;
             font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--accent-emerald);
         }
 
-        .category-title {
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: var(--accent-purple);
-            margin: 2rem 0 1rem 0;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--accent-purple);
-        }
-
-        .platform-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-
-        .work-ready-box {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(79, 70, 229, 0.15));
-            border: 2px solid var(--accent-emerald);
-            border-radius: 16px;
-            padding: 2rem;
-            margin: 2rem 0;
+        /* Reality check boxes */
+        .reality-box {
+            background: linear-gradient(135deg, rgba(248, 113, 113, 0.2), rgba(251, 146, 60, 0.2));
+            border: 2px solid var(--red);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
             text-align: center;
         }
 
-        .work-ready-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--accent-emerald);
-            margin-bottom: 1rem;
+        .reality-box h3 {
+            color: var(--red);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
         }
 
-        /* Responsive Design */
+        /* Success stories */
+        .success-box {
+            background: linear-gradient(135deg, rgba(67, 233, 123, 0.2), rgba(79, 172, 254, 0.2));
+            border: 2px solid var(--green);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .success-box h3 {
+            color: var(--green);
+            margin-bottom: 15px;
+        }
+
+        /* Mobile friendly */
         @media (max-width: 768px) {
-            .container {
-                padding: 0.75rem;
-            }
-            
-            .section {
-                padding: 1.5rem;
-            }
-            
-            .main-title {
-                font-size: 2rem;
-            }
-            
-            .subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .section-title {
-                font-size: 1.6rem;
-            }
-            
             body {
                 font-size: 16px;
+                padding: 15px;
             }
-            
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.7rem;
+                padding: 15px;
+            }
+
+            .nav-grid {
+                grid-template-columns: 1fr;
+            }
+
             .platform-grid {
                 grid-template-columns: 1fr;
             }
+
+            .card {
+                padding: 20px;
+            }
         }
 
-        @media (max-width: 480px) {
-            .container {
-                padding: 0.5rem;
-            }
-            
-            .section {
-                padding: 1rem;
-            }
-            
-            .main-title {
-                font-size: 1.5rem;
-            }
-            
-            .section-title {
-                font-size: 1.4rem;
-            }
-            
-            .section-title .emoji {
-                font-size: 2rem;
-            }
-            
-            body {
-                font-size: 15px;
-            }
+        /* Big emoji headers */
+        .emoji-header {
+            font-size: 3rem;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        /* Highlight important text */
+        .big-text {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--yellow);
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(251, 191, 36, 0.1);
+            border-radius: 10px;
+        }
+
+        /* Simple tables */
+        .simple-table {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .table-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .table-label {
+            font-weight: bold;
+            color: var(--blue);
+        }
+
+        .table-value {
+            color: var(--text-light);
+        }
+
+        /* Timeline styles */
+        .timeline-week {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 5px solid var(--blue);
+        }
+
+        .week-header {
+            background: var(--blue);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .time-estimate {
+            background: rgba(67, 233, 123, 0.2);
+            border: 1px solid var(--green);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <div class="bg-gradient"></div>
-    
     <div class="container">
-        <div class="hero-header">
-            <h1 class="main-title">How to Start Working Online</h1>
-            <p class="subtitle">Easy steps anyone can follow</p>
-            <div style="background: rgba(16, 185, 129, 0.2); border: 1px solid var(--accent-emerald); border-radius: 12px; padding: 1rem; margin-top: 1.5rem;">
-                <p style="font-size: 1.1rem; margin: 0; color: var(--accent-emerald); font-weight: 600;">⏰ Total Time: 60-90 minutes to get completely ready to work</p>
+        <h1>🚀 <span class="gradient-text">Complete Guide: Start Working Online Today</span></h1>
+        
+        <div class="card tip" style="text-align: center; margin: 20px 0;">
+            <h3>⏱️ Total Setup Time</h3>
+            <p><strong>📖 Complete setup:</strong> 60-90 minutes | <strong>⚡ Quick start:</strong> 30 minutes</p>
+            <p>Perfect for one focused session to get everything ready!</p>
+        </div>
+
+        <div class="quick-nav">
+            <h3 style="text-align: center; color: var(--blue); margin-bottom: 15px;">📋 Quick Jump Menu</h3>
+            <div class="nav-grid">
+                <a href="#step1" class="nav-item">📧 Work Email</a>
+                <a href="#step2" class="nav-item">💳 PayPal Setup</a>
+                <a href="#step3" class="nav-item">🌐 Best Websites</a>
+                <a href="#step4" class="nav-item">📱 Passive Income</a>
+                <a href="#step5" class="nav-item">✨ Profile Tips</a>
+                <a href="#timeline" class="nav-item">🗓️ 30-Day Plan</a>
             </div>
         </div>
 
-        <div class="start-card">
-            
-          
-            <a href="#step1" class="big-button">Step 1: Get Work Email</a>
+        <div class="reality-box">
+            <h3>💰 Real Income Expectations</h3>
+            <p><strong>Month 1:</strong> $50-400 (learning and setup)</p>
+            <p><strong>Month 2:</strong> $200-800 (building experience)</p>
+            <p><strong>Month 3+:</strong> $500-1500+ (with dedication and skills)</p>
+            <p>This is real work that requires effort, but the flexibility is incredible!</p>
         </div>
 
-        <div class="work-ready-box">
-            <div class="work-ready-title">🎯 What You're Preparing For</div>
-            <p style="font-size: 1.1rem; margin-bottom: 1rem;">You're getting ready to work on websites where companies pay you to:</p>
-            <ul class="easy-list">
-                <li>Write things for them</li>
-                <li>Take surveys and give opinions</li>
-                <li>Test their websites</li>
-                <li>Type information</li>
-                <li>Help with small tasks</li>
+        <div class="success-box">
+            <h3>🎯 What You're Building</h3>
+            <p>You're creating multiple income streams through legitimate online platforms where companies pay you to:</p>
+            <ul>
+                <li><strong>Content Creation:</strong> Writing, editing, and creative tasks</li>
+                <li><strong>Data Work:</strong> Research, surveys, and information processing</li>
+                <li><strong>Testing:</strong> Website usability and app functionality</li>
+                <li><strong>Communication:</strong> Customer service and virtual assistance</li>
             </ul>
-            <p style="font-size: 1.1rem; margin-top: 1rem;"><strong>This is real work that pays real money!</strong></p>
+            <p><strong>This is professional freelance work with real career potential!</strong></p>
         </div>
 
-        <div class="section" id="step1">
-            <h2 class="section-title">
-                <span class="emoji">📧</span>
-                <span class="title-text">Step 1: Get Work Email (5 minutes)</span>
-            </h2>
+        <section id="step1">
+            <h2>📧 Step 1: Create Your Professional Work Email</h2>
             
-            <div class="tip-box">
-                <div class="tip-title">💡 Why you need a work email</div>
-                <p>You need a separate email just for work. This keeps your work stuff separate from your personal stuff and makes everything easier!</p>
+            <div class="time-estimate">
+                <p style="font-size: 1.1rem; margin: 0; color: var(--green); font-weight: 600;">⏰ Time Required: 5-10 minutes</p>
             </div>
 
-            <div class="step-box">
-                <div class="step-number">1</div>
-                <div class="step-title">Pick Your Email Provider</div>
-                <p><strong>Easy option:</strong> Use Gmail, Yahoo, or any free email service</p>
-                <p><strong>Extra secure option:</strong> Use <a href="https://protonmail.com" class="website-link" target="_blank">ProtonMail.com</a> if you want extra privacy</p>
+            <div class="card tip">
+                <h3>🎯 Why This Matters</h3>
+                <p>A dedicated work email keeps your professional communications organized, helps you track earnings, and presents a professional image to clients. This separation is crucial for managing multiple income streams effectively.</p>
             </div>
 
-            <div class="step-box">
-                <div class="step-number">2</div>
-                <div class="step-title">Pick a Good Name</div>
-                <p>Use your real name like: john.smith.work@gmail.com</p>
-                <p>Or: john.smith@protonmail.com</p>
-                <p>Don't use: coolguy123@gmail.com</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Choose Your Email Provider</h4>
+                        <p><strong>Recommended:</strong> Gmail (most compatible with platforms)</p>
+                        <p><strong>Privacy-focused:</strong> ProtonMail (extra security)</p>
+                        <p><strong>Business option:</strong> Outlook (professional appearance)</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Professional Email Format</h4>
+                        <p><strong>Best format:</strong> firstname.lastname.work@gmail.com</p>
+                        <p><strong>Alternative:</strong> firstname.lastname.freelance@gmail.com</p>
+                        <p><strong>Avoid:</strong> Nicknames, numbers, or unprofessional terms</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Secure Your Account</h4>
+                        <p>Use a strong, unique password and enable two-factor authentication. Save credentials in a secure password manager.</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="step-box">
-                <div class="step-number">3</div>
-                <div class="step-title">Make a Password</div>
-                <p>Use a strong password. Write it down somewhere safe!</p>
-            </div>
-
-            <div class="money-box">
-                <div class="money-title">💰 This is FREE!</div>
-                <p>All these email services are free. You can use any of them to apply for jobs right away!</p>
-            </div>
-
-            <div class="tip-box">
-                <div class="tip-title">💡 Why a separate email helps</div>
-                <p>Having a work-only email means:</p>
-                <ul class="easy-list">
-                    <li>All your work messages stay in one place</li>
-                    <li>You won't miss important job emails</li>
-                    <li>You look more professional to companies</li>
-                    <li>You can keep work and personal life separate</li>
+            <div class="card success">
+                <h3>✅ Pro Tips for Email Success</h3>
+                <ul>
+                    <li>Set up email forwarding to your main account for notifications</li>
+                    <li>Create folders for different platforms and job types</li>
+                    <li>Use email templates for common responses</li>
+                    <li>Check this email daily during business hours</li>
                 </ul>
             </div>
-        </div>
+        </section>
 
-        <div class="section">
-            <h2 class="section-title">
-                <span class="emoji">💳</span>
-                <span class="title-text">Step 2: Set Up PayPal to Get Paid (10 minutes)</span>
-            </h2>
+        <section id="step2">
+            <h2>💳 Step 2: Set Up PayPal for Payments</h2>
 
-            <div class="tip-box">
-                <div class="tip-title">💡 Why you need PayPal</div>
-                <p>PayPal is how most websites pay you. After you finish work, they send money to your PayPal account!</p>
+            <div class="time-estimate">
+                <p style="font-size: 1.1rem; margin: 0; color: var(--green); font-weight: 600;">⏰ Time Required: 10-15 minutes</p>
             </div>
 
-            <div class="step-box">
-                <div class="step-number">1</div>
-                <div class="step-title">Go to PayPal</div>
-                <p>Go to <a href="https://paypal.com/business" class="website-link" target="_blank">PayPal.com/business</a></p>
+            <div class="card tip">
+                <h3>💡 Payment Processing Hub</h3>
+                <p>PayPal is the primary payment method for 80%+ of online work platforms. Setting this up correctly ensures smooth, fast payments and professional transaction management.</p>
             </div>
 
-            <div class="step-box">
-                <div class="step-number">2</div>
-                <div class="step-title">Pick Business Account</div>
-                <p>Choose "Business Account" even if you work alone</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Account Type Selection</h4>
+                        <p>Choose <strong>Business Account</strong> - even as a solo worker, this provides:</p>
+                        <ul>
+                            <li>Better payment protection</li>
+                            <li>Professional appearance to clients</li>
+                            <li>Advanced reporting for taxes</li>
+                            <li>Higher transaction limits</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Link Your Work Email</h4>
+                        <p>Use the professional email you just created. This maintains consistency across all platforms.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Verify Your Account</h4>
+                        <p>Complete bank account verification for faster withdrawals and higher limits. Add a backup payment method.</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="step-box">
-                <div class="step-number">3</div>
-                <div class="step-title">Use Your New Email</div>
-                <p>Use the ProtonMail email you just made</p>
+            <div class="card money">
+                <h3>💰 Money Management Tips</h3>
+                <ul>
+                    <li><strong>Get the PayPal debit card</strong> - 1% cashback on purchases</li>
+                    <li><strong>Set up automatic transfers</strong> - weekly transfers to savings</li>
+                    <li><strong>Track all transactions</strong> - for tax purposes</li>
+                    <li><strong>Maintain 25% buffer</strong> - for taxes and fees</li>
+                </ul>
             </div>
 
-            <div class="money-box">
-                <div class="money-title">💰 Extra Money Tip!</div>
-                <p>Get the PayPal debit card. It gives you money back when you buy things!</p>
+            <div class="platform-box">
+                <div class="platform-name">🔗 Quick Setup Link</div>
+                <p><a href="https://paypal.com/business" class="platform-link" target="_blank">PayPal.com/business →</a></p>
+                <p>Click "Get Started" and select Business Account</p>
             </div>
-        </div>
+        </section>
 
-        <div class="section">
-            <h2 class="section-title">
-                <span class="emoji">🌐</span>
-                <span class="title-text">Step 3: Sign Up for Work Websites (15 minutes)</span>
-            </h2>
+        <section id="step3">
+            <h2>🌐 Step 3: Sign Up for Work Platforms</h2>
 
-            <div class="warning-box">
-                <div class="warning-title">⚠️ Important!</div>
-                <p>Some work websites stop taking new workers without warning. Sign up fast so you don't miss out!</p>
+            <div class="time-estimate">
+                <p style="font-size: 1.1rem; margin: 0; color: var(--green); font-weight: 600;">⏰ Time Required: 30-45 minutes total</p>
             </div>
 
-            <div class="tip-box">
-                <div class="tip-title">💡 What these websites are</div>
-                <p>These are websites where companies post jobs. You sign up, apply for jobs, do the work, and get paid!</p>
+            <div class="card warning">
+                <h3>⚠️ Platform Availability Alert</h3>
+                <p><strong>Many platforms limit new signups!</strong> Apply to 8-10 platforms today to maximize acceptance chances. Some platforms close registrations without warning, so speed matters.</p>
             </div>
 
-            <div class="category-title">🏆 Best Websites to Start With</div>
+            <div class="card tip">
+                <h3>🎯 Strategic Approach</h3>
+                <p>Start with platforms marked "Easy" to build confidence and ratings, then progress to higher-paying opportunities. Diversification across multiple platforms creates income stability.</p>
+            </div>
+
+            <h3 style="color: var(--green); margin: 30px 0 20px;">🏆 Tier 1: High-Value Platforms</h3>
 
             <div class="platform-grid">
-                <div class="platform-card">
+                <div class="platform-box">
                     <div class="platform-name">🌟 Upwork</div>
-                    <div class="platform-description">Website: <a href="https://www.upwork.com" class="website-link" target="_blank">Upwork.com</a></div>
-                    <div class="platform-description">Work: Writing, computer tasks, design</div>
-                    <div class="platform-pay">Pay: $15-100+ per hour</div>
-                    <p style="color: var(--accent-rose); font-weight: 600;">Hard to get accepted - but pays well!</p>
+                    <div class="pay-range">$15-100+/hour</div>
+                    <div class="difficulty hard">Competitive Entry</div>
+                    <p><strong>Best for:</strong> Professional writing, web development, design</p>
+                    <p><strong>Success tip:</strong> Focus on one skill area initially</p>
+                    <p><a href="https://www.upwork.com" class="platform-link" target="_blank">Apply at Upwork.com →</a></p>
                 </div>
 
-                <div class="platform-card">
+                <div class="platform-box">
                     <div class="platform-name">🎯 Fiverr</div>
-                    <div class="platform-description">Website: <a href="https://www.fiverr.com" class="website-link" target="_blank">Fiverr.com</a></div>
-                    <div class="platform-description">Work: Quick jobs, creative tasks</div>
-                    <div class="platform-pay">Pay: $5-500+ per job</div>
-                    <p style="color: var(--accent-emerald); font-weight: 600;">Easy to get started!</p>
+                    <div class="pay-range">$5-500+/gig</div>
+                    <div class="difficulty easy">Easy Start</div>
+                    <p><strong>Best for:</strong> Creative services, quick tasks</p>
+                    <p><strong>Success tip:</strong> Start with $5-15 services</p>
+                    <p><a href="https://www.fiverr.com" class="platform-link" target="_blank">Apply at Fiverr.com →</a></p>
                 </div>
 
-                <div class="platform-card">
-                    <div class="platform-name">🔬 Prolific</div>
-                    <div class="platform-description">Website: <a href="https://prolific.co" class="website-link" target="_blank">Prolific.co</a></div>
-                    <div class="platform-description">Work: Answer questions for studies</div>
-                    <div class="platform-pay">Pay: $8-18 per hour</div>
-                    <p style="color: var(--accent-emerald); font-weight: 600;">Great for beginners!</p>
-                </div>
-
-                <div class="platform-card">
+                <div class="platform-box">
                     <div class="platform-name">🎤 User Interviews</div>
-                    <div class="platform-description">Website: <a href="https://userinterviews.com" class="website-link" target="_blank">UserInterviews.com</a></div>
-                    <div class="platform-description">Work: Talk to people about products</div>
-                    <div class="platform-pay">Pay: $50-200+ per interview</div>
-                    <p style="color: var(--accent-emerald); font-weight: 600;">Very easy - just talk!</p>
+                    <div class="pay-range">$50-200+/session</div>
+                    <div class="difficulty easy">Very Easy</div>
+                    <p><strong>Best for:</strong> Speaking about your experiences</p>
+                    <p><strong>Success tip:</strong> Complete your profile thoroughly</p>
+                    <p><a href="https://userinterviews.com" class="platform-link" target="_blank">Apply at UserInterviews.com →</a></p>
+                </div>
+
+                <div class="platform-box">
+                    <div class="platform-name">🔬 Prolific</div>
+                    <div class="pay-range">$8-18/hour</div>
+                    <div class="difficulty easy">Beginner Friendly</div>
+                    <p><strong>Best for:</strong> Academic research studies</p>
+                    <p><strong>Success tip:</strong> Check daily for new studies</p>
+                    <p><a href="https://prolific.co" class="platform-link" target="_blank">Apply at Prolific.co →</a></p>
                 </div>
             </div>
 
-            <div class="category-title">📝 Survey and Opinion Websites</div>
+            <h3 style="color: var(--green); margin: 30px 0 20px;">📊 Tier 2: Survey & Opinion Platforms</h3>
 
             <div class="platform-grid">
-                <div class="platform-card">
-                    <div class="platform-name">📊 Survey Junkie</div>
-                    <div class="platform-description">Website: <a href="https://www.surveyjunkie.com" class="website-link" target="_blank">SurveyJunkie.com</a></div>
-                    <div class="platform-description">Work: Take surveys about products</div>
-                    <div class="platform-pay">Pay: $1-5 per hour</div>
-                    <p style="color: var(--accent-emerald); font-weight: 600;">Easy to start!</p>
+                <div class="platform-box">
+                    <div class="platform-name">📋 Survey Junkie</div>
+                    <div class="pay-range">$1-5/hour</div>
+                    <div class="difficulty easy">Very Easy</div>
+                    <p><strong>Best for:</strong> Consistent small earnings</p>
+                    <p><a href="https://www.surveyjunkie.com" class="platform-link" target="_blank">Apply at SurveyJunkie.com →</a></p>
                 </div>
 
-                <div class="platform-card">
+                <div class="platform-box">
                     <div class="platform-name">👥 Crowdtap</div>
-                    <div class="platform-description">Website: <a href="https://www.crowdtap.com" class="website-link" target="_blank">Crowdtap.com</a></div>
-                    <div class="platform-description">Work: Short surveys and polls</div>
-                    <div class="platform-pay">Pay: $3-4 per hour (gift cards)</div>
-                    <p style="color: var(--accent-emerald); font-weight: 600;">No getting kicked out of surveys!</p>
+                    <div class="pay-range">$3-4/hour</div>
+                    <div class="difficulty easy">Easy</div>
+                    <p><strong>Best for:</strong> Quick opinions, no disqualifications</p>
+                    <p><a href="https://www.crowdtap.com" class="platform-link" target="_blank">Apply at Crowdtap.com →</a></p>
                 </div>
 
-                <div class="platform-card">
-                    <div class="platform-name">🎯 Paid Viewpoint</div>
-                    <div class="platform-description">Website: <a href="https://www.paidviewpoint.com" class="website-link" target="_blank">PaidViewpoint.com</a></div>
-                    <div class="platform-description">Work: Short surveys, multiple choice</div>
-                    <div class="platform-pay">Pay: $1-3 per hour</div>
-                    <p style="color: var(--accent-emerald); font-weight: 600;">Very quick surveys!</p>
-                </div>
-            </div>
-
-            <div class="category-title">🎬 Fun and Creative Work</div>
-
-            <div class="platform-grid">
-                <div class="platform-card">
-                    <div class="platform-name">🎵 Slice The Pie</div>
-                    <div class="platform-description">Website: <a href="https://www.slicethepie.com" class="website-link" target="_blank">SliceThePie.com</a></div>
-                    <div class="platform-description">Work: Review music and videos</div>
-                    <div class="platform-pay">Pay: $1-8 per hour</div>
-                    <p style="color: var(--accent-emerald); font-weight: 600;">Fun work listening to music!</p>
-                </div>
-
-                <div class="platform-card">
+                <div class="platform-box">
                     <div class="platform-name">📺 UserTesting</div>
-                    <div class="platform-description">Website: <a href="https://www.usertesting.com" class="website-link" target="_blank">UserTesting.com</a></div>
-                    <div class="platform-description">Work: Test websites and apps</div>
-                    <div class="platform-pay">Pay: $10-60 per hour</div>
-                    <p style="color: var(--accent-amber); font-weight: 600;">Higher pay but takes practice!</p>
+                    <div class="pay-range">$10-60/hour</div>
+                    <div class="difficulty medium">Moderate</div>
+                    <p><strong>Best for:</strong> Website and app testing</p>
+                    <p><a href="https://www.usertesting.com" class="platform-link" target="_blank">Apply at UserTesting.com →</a></p>
                 </div>
             </div>
 
-            <div class="tip-box">
-                <div class="tip-title">💡 Smart Plan</div>
-                <p>Sign up for 5-10 of these websites today. Some might say no, but some will say yes! The more you sign up for, the more chances you have to work!</p>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">
-                <span class="emoji">📱</span>
-                <span class="title-text">Step 4: Make Money With Old Phones (10 minutes)</span>
-            </h2>
-
-            <div class="tip-box">
-                <div class="tip-title">💡 What is this?</div>
-                <p>While you're working on other jobs, old phones can make extra money! They work all day and night making you money.</p>
-            </div>
-
-            <div class="step-box">
-                <div class="step-number">1</div>
-                <div class="step-title">Find Old Devices</div>
-                <p>Look for old phones, tablets, or computers you don't use anymore</p>
-            </div>
-
-            <div class="step-box">
-                <div class="step-number">2</div>
-                <div class="step-title">Download Honeygain</div>
-                <p>Go to <a href="https://honeygain.com" class="website-link" target="_blank">Honeygain.com</a> and download the app</p>
-            </div>
-
-            <div class="step-box">
-                <div class="step-number">3</div>
-                <div class="step-title">Install and Run</div>
-                <p>Put the app on your device and let it run. Keep the device plugged in!</p>
-            </div>
-
-            <div class="money-box">
-                <div class="money-title">💰 How Much Money?</div>
-                <p>Each device makes about $1-3 per month. It's not much, but it's extra money while you do other work!</p>
-            </div>
-
-            <div class="warning-box">
-                <div class="warning-title">⚠️ Things to Know</div>
-                <p>This uses your internet. Make sure you have unlimited internet or it might cost you money!</p>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">
-                <span class="emoji">✨</span>
-                <span class="title-text">Step 5: Make a Good Profile to Get Hired (20 minutes)</span>
-            </h2>
-
-            <div class="tip-box">
-                <div class="tip-title">💡 Why this matters</div>
-                <p>Your profile is like a job application. A good profile helps companies want to hire you for work!</p>
-            </div>
-
-            <div class="step-box">
-                <div class="step-number">1</div>
-                <div class="step-title">Get a Good Photo</div>
-                <ul class="easy-list">
-                    <li>Use a clear photo of your face</li>
-                    <li>Smile and look friendly</li>
-                    <li>Wear nice clothes</li>
-                    <li>Don't use selfies or group photos</li>
-                </ul>
-            </div>
-
-            <div class="step-box">
-                <div class="step-number">2</div>
-                <div class="step-title">Write a Good Job Title</div>
-                <p>Examples:</p>
-                <ul class="easy-list">
-                    <li>"Data Entry Expert - Fast and Accurate"</li>
-                    <li>"Writer - I Help You Tell Your Story"</li>
-                    <li>"Website Helper - I Make Sites Look Good"</li>
-                    <li>"Survey Taker - I Give Good Opinions"</li>
-                </ul>
-            </div>
-
-            <div class="step-box">
-                <div class="step-number">3</div>
-                <div class="step-title">Tell People What Work You Do</div>
-                <p>Write 2-3 sentences about:</p>
-                <ul class="easy-list">
-                    <li>What kind of work you want to do</li>
-                    <li>Why you're good at it</li>
-                    <li>How you help companies</li>
-                </ul>
-            </div>
-
-            <div class="step-box">
-                <div class="step-number">4</div>
-                <div class="step-title">Apply for Your First Jobs</div>
-                <p>Now you're ready to apply for work! Look for:</p>
-                <ul class="easy-list">
-                    <li>Easy jobs that don't need much experience</li>
-                    <li>Jobs that pay what you want</li>
-                    <li>Jobs you can do from home</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">
-                <span class="emoji">🎯</span>
-                <span class="title-text">Your 30-Day Work Plan</span>
-            </h2>
-
-            <div class="work-ready-box">
-                <div class="work-ready-title">🚀 You're Ready to Start Working!</div>
-                <p style="font-size: 1.1rem;">After you finish these steps, you'll be ready to start working on these websites and making money!</p>
-            </div>
-
-            <div class="step-box">
-                <div style="background: var(--accent-blue); color: white; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-                    <h3 style="margin: 0;">Week 1: Get Ready to Work</h3>
-                </div>
-                <ul class="easy-list">
-                    <li>Make your work email at ProtonMail</li>
-                    <li>Set up PayPal to get paid</li>
-                    <li>Sign up for 5-10 work websites</li>
-                    <li>Start phone apps for extra money</li>
-                    <li>Make your work profile with photo</li>
-                </ul>
-            </div>
-
-            <div class="step-box">
-                <div style="background: var(--accent-teal); color: white; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-                    <h3 style="margin: 0;">Week 2: Apply for Work</h3>
-                </div>
-                <ul class="easy-list">
-                    <li>Look for easy jobs on the websites</li>
-                    <li>Send messages to companies that need help</li>
-                    <li>Take any tests the websites want</li>
-                    <li>Keep making your profile better</li>
-                </ul>
-            </div>
-
-            <div class="step-box">
-                <div style="background: var(--accent-emerald); color: white; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-                    <h3 style="margin: 0;">Week 3: Start Working</h3>
-                </div>
-                <ul class="easy-list">
-                    <li>Get hired for your first job</li>
-                    <li>Do great work for companies</li>
-                    <li>Ask for good reviews</li>
-                    <li>Apply for more jobs</li>
-                </ul>
-            </div>
-
-            <div class="step-box">
-                <div style="background: var(--accent-purple); color: white; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-                    <h3 style="margin: 0;">Week 4: Get Better at Working</h3>
-                </div>
-                <ul class="easy-list">
-                    <li>Look for jobs that pay more money</li>
-                    <li>Ask for more money per hour</li>
-                    <li>Keep learning new skills</li>
-                    <li>Plan what to do next month</li>
-                </ul>
-            </div>
-
-            <div class="money-box">
-                <div class="money-title">💰 How Much Money Can You Make?</div>
-                <p><strong>Month 1:</strong> $50-400 (depends on how much you work)</p>
-                <p><strong>Month 2:</strong> $200-800 (you get better and faster)</p>
-                <p><strong>Month 3+:</strong> $500-1500+ (if you work hard and learn)</p>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">
-                <span class="emoji">✅</span>
-                <span class="title-text">Checklist - Are You Ready to Work?</span>
-            </h2>
-
-            <div class="checklist">
-                <div class="checklist-title">✅ Check off when you finish each step:</div>
-                <div class="checklist-item">
-                    <div class="checkbox"></div>
-                    <span>Made a ProtonMail work email</span>
-                </div>
-                <div class="checklist-item">
-                    <div class="checkbox"></div>
-                    <span>Set up PayPal to get paid</span>
-                </div>
-                <div class="checklist-item">
-                    <div class="checkbox"></div>
-                    <span>Signed up for 5+ work websites</span>
-                </div>
-                <div class="checklist-item">
-                    <div class="checkbox"></div>
-                    <span>Started phone apps for extra money</span>
-                </div>
-                <div class="checklist-item">
-                    <div class="checkbox"></div>
-                    <span>Made a good work profile with photo</span>
-                </div>
-                <div class="checklist-item">
-                    <div class="checkbox"></div>
-                    <span>Applied for my first job</span>
-                </div>
-                <div class="checklist-item">
-                    <div class="checkbox"></div>
-                    <span>Got hired to do work</span>
-                </div>
-                <div class="checklist-item">
-                    <div class="checkbox"></div>
-                    <span>Finished work and got paid</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">
-                <span class="emoji">📚</span>
-                <span class="title-text">More Work Websites to Try</span>
-            </h2>
-
-            <div class="tip-box">
-                <div class="tip-title">💡 Try these when you're ready</div>
-                <p>After you get good at the first websites, try these for more work opportunities!</p>
-            </div>
-
-            <div class="category-title">✍️ Writing and Typing Work</div>
+            <h3 style="color: var(--green); margin: 30px 0 20px;">✍️ Tier 3: Specialized Work</h3>
 
             <div class="platform-grid">
-                <div class="platform-card">
+                <div class="platform-box">
                     <div class="platform-name">📝 Rev</div>
-                    <div class="platform-description">Website: <a href="https://www.rev.com" class="website-link" target="_blank">Rev.com</a></div>
-                    <div class="platform-description">Work: Type what people say in videos</div>
-                    <div class="platform-pay">Pay: $10-20 per hour</div>
+                    <div class="pay-range">$10-20/hour</div>
+                    <div class="difficulty medium">Skill-Based</div>
+                    <p><strong>Best for:</strong> Transcription work</p>
+                    <p><a href="https://www.rev.com" class="platform-link" target="_blank">Apply at Rev.com →</a></p>
                 </div>
 
-                <div class="platform-card">
-                    <div class="platform-name">📊 TranscribeMe</div>
-                    <div class="platform-description">Website: <a href="https://www.transcribeme.com" class="website-link" target="_blank">TranscribeMe.com</a></div>
-                    <div class="platform-description">Work: Type short audio clips</div>
-                    <div class="platform-pay">Pay: $15-22 per hour</div>
-                </div>
-            </div>
-
-            <div class="category-title">🤖 Computer and AI Work</div>
-
-            <div class="platform-grid">
-                <div class="platform-card">
-                    <div class="platform-name">🔧 Appen</div>
-                    <div class="platform-description">Website: <a href="https://appen.com" class="website-link" target="_blank">Appen.com</a></div>
-                    <div class="platform-description">Work: Help train AI computers</div>
-                    <div class="platform-pay">Pay: $3-14 per hour</div>
-                </div>
-
-                <div class="platform-card">
-                    <div class="platform-name">💻 Clickworker</div>
-                    <div class="platform-description">Website: <a href="https://www.clickworker.com" class="website-link" target="_blank">Clickworker.com</a></div>
-                    <div class="platform-description">Work: Small computer tasks</div>
-                    <div class="platform-pay">Pay: $5-12 per hour</div>
+                <div class="platform-box">
+                    <div class="platform-name">🤖 Appen</div>
+                    <div class="pay-range">$3-14/hour</div>
+                    <div class="difficulty medium">Variable</div>
+                    <p><strong>Best for:</strong> AI training tasks</p>
+                    <p><a href="https://appen.com" class="platform-link" target="_blank">Apply at Appen.com →</a></p>
                 </div>
             </div>
 
-            <div class="category-title">🛍️ Shopping and Testing Work</div>
+            <div class="card success">
+                <h3>🚀 Application Strategy</h3>
+                <p><strong>Week 1 Priority:</strong> Apply to all Tier 1 platforms</p>
+                <p><strong>Week 2 Focus:</strong> Complete Tier 2 applications</p>
+                <p><strong>Week 3 Expansion:</strong> Explore Tier 3 specialized work</p>
+                <p><strong>Success metrics:</strong> Aim for 5+ platform acceptances</p>
+            </div>
+        </section>
 
-            <div class="platform-grid">
-                <div class="platform-card">
-                    <div class="platform-name">🕵️ BestMark</div>
-                    <div class="platform-description">Website: <a href="https://www.bestmark.com" class="website-link" target="_blank">BestMark.com</a></div>
-                    <div class="platform-description">Work: Visit stores and check things</div>
-                    <div class="platform-pay">Pay: $10-25 per visit</div>
+        <section id="step4">
+            <h2>📱 Step 4: Set Up Passive Income Streams</h2>
+
+            <div class="time-estimate">
+                <p style="font-size: 1.1rem; margin: 0; color: var(--green); font-weight: 600;">⏰ Time Required: 15-20 minutes</p>
+            </div>
+
+            <div class="card tip">
+                <h3>💡 What Is Passive Income?</h3>
+                <p>These are "set it and forget it" income streams that earn money while you focus on active work. Perfect for maximizing earnings from devices you already own.</p>
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Inventory Your Devices</h4>
+                        <p>Gather old smartphones, tablets, or computers that:</p>
+                        <ul>
+                            <li>Can connect to WiFi</li>
+                            <li>You don't actively use</li>
+                            <li>Can stay plugged in 24/7</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <div class="platform-card">
-                    <div class="platform-name">🏪 iSecretShop</div>
-                    <div class="platform-description">Website: <a href="https://www.isecretshop.com" class="website-link" target="_blank">iSecretShop.com</a></div>
-                    <div class="platform-description">Work: Shop and report on stores</div>
-                    <div class="platform-pay">Pay: $5-20 per visit</div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Install Earning Apps</h4>
+                        <p><strong>Honeygain:</strong> Shares unused internet bandwidth</p>
+                        <p><strong>Download:</strong> <a href="https://honeygain.com" class="platform-link" target="_blank">Honeygain.com</a></p>
+                        <p><strong>Earnings:</strong> $1-3 per device monthly</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Optimize Setup</h4>
+                        <ul>
+                            <li>Keep devices plugged in constantly</li>
+                            <li>Use devices on different IP addresses if possible</li>
+                            <li>Monitor earnings weekly</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
-            <div class="warning-box">
-                <div class="warning-title">⚠️ Important Safety Tips</div>
-                <ul class="easy-list">
-                    <li>Never pay money to get a job</li>
-                    <li>Don't give your Social Security number unless it's for taxes</li>
-                    <li>Only download apps from official websites</li>
-                    <li>If something seems too good to be true, it probably is</li>
+            <div class="card money">
+                <h3>💰 Passive Income Potential</h3>
+                <div class="simple-table">
+                    <div class="table-row">
+                        <span class="table-label">1 Device:</span>
+                        <span class="table-value">$1-3/month</span>
+                    </div>
+                    <div class="table-row">
+                        <span class="table-label">3 Devices:</span>
+                        <span class="table-value">$3-9/month</span>
+                    </div>
+                    <div class="table-row">
+                        <span class="table-label">5 Devices:</span>
+                        <span class="table-value">$5-15/month</span>
+                    </div>
+                    <div class="table-row">
+                        <span class="table-label">Annual Potential:</span>
+                        <span class="table-value">$60-180</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card warning">
+                <h3>⚠️ Important Considerations</h3>
+                <ul>
+                    <li><strong>Internet usage:</strong> Ensure you have unlimited internet</li>
+                    <li><strong>Electricity costs:</strong> Factor in power consumption</li>
+                    <li><strong>Device security:</strong> Use dedicated devices, not primary phones</li>
+                    <li><strong>Terms compliance:</strong> Read platform terms carefully</li>
                 </ul>
+            </div>
+        </section>
+
+        <section id="step5">
+            <h2>✨ Step 5: Create Compelling Profiles</h2>
+
+            <div class="time-estimate">
+                <p style="font-size: 1.1rem; margin: 0; color: var(--green); font-weight: 600;">⏰ Time Required: 30-40 minutes per platform</p>
+            </div>
+
+            <div class="card tip">
+                <h3>🎯 Profile Psychology</h3>
+                <p>Your profile is your first impression and primary sales tool. It must quickly communicate competence, reliability, and value to potential clients browsing hundreds of options.</p>
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Professional Photography</h4>
+                        <p><strong>Requirements:</strong></p>
+                        <ul>
+                            <li>Clear, well-lit face shot</li>
+                            <li>Genuine smile and direct eye contact</li>
+                            <li>Professional or business casual attire</li>
+                            <li>Neutral, uncluttered background</li>
+                        </ul>
+                        <p><strong>Avoid:</strong> Selfies, group photos, sunglasses, overly casual clothing</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Compelling Headlines</h4>
+                        <p><strong>Formula:</strong> [Skill] + [Benefit] + [Outcome]</p>
+                        <p><strong>Examples:</strong></p>
+                        <ul>
+                            <li>"Content Writer - I Help Businesses Tell Their Story & Convert Readers"</li>
+                            <li>"Data Entry Specialist - Fast, Accurate, and Detail-Oriented Results"</li>
+                            <li>"Virtual Assistant - I Handle Details So You Can Focus on Growth"</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Value-Driven Descriptions</h4>
+                        <p><strong>Structure:</strong></p>
+                        <ul>
+                            <li><strong>Opening:</strong> What you do and who you help</li>
+                            <li><strong>Skills:</strong> 3-5 core competencies</li>
+                            <li><strong>Experience:</strong> Relevant background (even if limited)</li>
+                            <li><strong>Working style:</strong> How you approach projects</li>
+                            <li><strong>Call to action:</strong> Invitation to connect</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Skills and Portfolio</h4>
+                        <ul>
+                            <li>List 5-10 relevant skills</li>
+                            <li>Create 2-3 sample work pieces</li>
+                            <li>Include any relevant certifications</li>
+                            <li>Add language proficiencies</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card success">
+                <h3>🏆 Profile Optimization Checklist</h3>
+                <div class="checklist">
+                    <div class="check-item">
+                        <div class="checkbox"></div>
+                        <span>Professional headshot uploaded</span>
+                    </div>
+                    <div class="check-item">
+                        <div class="checkbox"></div>
+                        <span>Compelling headline written</span>
+                    </div>
+                    <div class="check-item">
+                        <div class="checkbox"></div>
+                        <span>Detailed description completed</span>
+                    </div>
+                    <div class="check-item">
+                        <div class="checkbox"></div>
+                        <span>Skills section filled out</span>
+                    </div>
+                    <div class="check-item">
+                        <div class="checkbox"></div>
+                        <span>Portfolio samples added</span>
+                    </div>
+                    <div class="check-item">
+                        <div class="checkbox"></div>
+                        <span>Contact information verified</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="timeline">
+            <h2>🗓️ Your 30-Day Success Timeline</h2>
+
+            <div class="card success" style="text-align: center; margin: 20px 0;">
+                <h3>🎯 Goal: First $200+ Earned</h3>
+                <p>This timeline transforms you from complete beginner to earning freelancer in one month!</p>
+            </div>
+
+            <div class="timeline-week">
+                <div class="week-header">Week 1: Foundation & Setup</div>
+                <ul>
+                    <li><strong>Day 1-2:</strong> Complete email and PayPal setup</li>
+                    <li><strong>Day 3-4:</strong> Apply to all Tier 1 platforms</li>
+                    <li><strong>Day 5-6:</strong> Set up passive income streams</li>
+                    <li><strong>Day 7:</strong> Begin profile creation on accepted platforms</li>
+                </ul>
+                <p><strong>Week 1 Goal:</strong> 5+ platform applications submitted</p>
+            </div>
+
+            <div class="timeline-week">
+                <div class="week-header">Week 2: Profile Building & Applications</div>
+                <ul>
+                    <li><strong>Day 8-10:</strong> Complete professional profiles</li>
+                    <li><strong>Day 11-12:</strong> Apply to Tier 2 platforms</li>
+                    <li><strong>Day 13-14:</strong> Submit first job applications</li>
+                </ul>
+                <p><strong>Week 2 Goal:</strong> 3+ polished profiles, 10+ job applications</p>
+            </div>
+
+            <div class="timeline-week">
+                <div class="week-header">Week 3: First Jobs & Experience</div>
+                <ul>
+                    <li><strong>Day 15-17:</strong> Land and complete first paid work</li>
+                    <li><strong>Day 18-19:</strong> Request reviews and testimonials</li>
+                    <li><strong>Day 20-21:</strong> Apply for higher-value opportunities</li>
+                </ul>
+                <p><strong>Week 3 Goal:</strong> $50+ earned, positive reviews received</p>
+            </div>
+
+            <div class="timeline-week">
+                <div class="week-header">Week 4: Scale & Optimize</div>
+                <ul>
+                    <li><strong>Day 22-24:</strong> Increase rates and pursue better clients</li>
+                    <li><strong>Day 25-26:</strong> Expand to specialized platforms</li>
+                    <li><strong>Day 27-28:</strong> Plan month 2 growth strategy</li>
+                </ul>
+                <p><strong>Week 4 Goal:</strong> $200+ total earned, consistent workflow established</p>
+            </div>
+
+            <div class="card money">
+                <h3>💰 Expected Monthly Progression</h3>
+                <div class="simple-table">
+                    <div class="table-row">
+                        <span class="table-label">Month 1 (Learning):</span>
+                        <span class="table-value">$50-400</span>
+                    </div>
+                    <div class="table-row">
+                        <span class="table-label">Month 2 (Building):</span>
+                        <span class="table-value">$200-800</span>
+                    </div>
+                    <div class="table-row">
+                        <span class="table-label">Month 3 (Growing):</span>
+                        <span class="table-value">$500-1200</span>
+                    </div>
+                    <div class="table-row">
+                        <span class="table-label">Month 6 (Established):</span>
+                        <span class="table-value">$800-2000+</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="checklist">
+            <h3>✅ Complete Setup Checklist</h3>
+            
+            <div class="check-item">
+                <div class="checkbox"></div>
+                <span>Professional work email created and secured</span>
+            </div>
+            
+            <div class="check-item">
+                <div class="checkbox"></div>
+                <span>PayPal business account set up and verified</span>
+            </div>
+            
+            <div class="check-item">
+                <div class="checkbox"></div>
+                <span>Applied to 8+ work platforms</span>
+            </div>
+            
+            <div class="check-item">
+                <div class="checkbox"></div>
+                <span>Passive income apps installed on 2+ devices</span>
+            </div>
+            
+            <div class="check-item">
+                <div class="checkbox"></div>
+                <span>Professional profiles created with photos</span>
+            </div>
+            
+            <div class="check-item">
+                <div class="checkbox"></div>
+                <span>First job applications submitted</span>
+            </div>
+            
+            <div class="check-item">
+                <div class="checkbox"></div>
+                <span>Work tracking system established</span>
+            </div>
+            
+            <div class="check-item">
+                <div class="checkbox"></div>
+                <span>Tax preparation plan in place</span>
             </div>
         </div>
 
-        <div class="start-card">
-            <div class="start-title">🚨 Stop Reading - Start Working!</div>
-            <p style="font-size: 1.2rem; margin-bottom: 1.5rem;">You now know how to get ready to work online! Pick the first step and do it today!</p>
-            <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">Remember: This is about getting ready to do real work for real companies. Follow these steps and you'll be ready to start your new online job!</p>
-            <a href="#step1" class="big-button">Start Step 1 Now!</a>
+        <div class="card warning">
+            <h3>🚨 Safety & Legitimacy Guidelines</h3>
+            <ul>
+                <li><strong>Never pay to work:</strong> Legitimate platforms never charge upfront fees</li>
+                <li><strong>Protect personal info:</strong> Don't share SSN unless for tax purposes</li>
+                <li><strong>Verify platforms:</strong> Research reviews and payment histories</li>
+                <li><strong>Trust your instincts:</strong> If something feels wrong, it probably is</li>
+                <li><strong>Keep records:</strong> Track all earnings for tax purposes</li>
+            </ul>
         </div>
 
-        <div class="section">
-            <h2 class="section-title">
-                <span class="emoji">🎓</span>
-                <span class="title-text">Quick Tips for Success</span>
-            </h2>
+        <div class="big-text">
+            You now have a complete roadmap to online work success. Start with Step 1 today and begin building your new income streams. The hardest part is starting - you've got this! 🚀
+        </div>
 
-            <div class="tip-box">
-                <div class="tip-title">💡 How to Get Hired More Often</div>
-                <ul class="easy-list">
-                    <li>Always be nice and polite in messages</li>
-                    <li>Do work fast and do it well</li>
-                    <li>Ask questions if you don't understand something</li>
-                    <li>Be honest about what you can and can't do</li>
-                    <li>Always finish work on time</li>
-                </ul>
-            </div>
+        <div style="text-align: center; margin: 40px 0;">
+            <a href="#step1" class="big-button">🔥 Start Step 1 Now</a>
+            <a href="https://upwork.com" class="big-button" target="_blank">💼 Apply to Upwork</a>
+            <a href="https://fiverr.com" class="big-button" target="_blank">⚡ Join Fiverr</a>
+            <a href="https://userinterviews.com" class="big-button" target="_blank">🎤 Try User Interviews</a>
+        </div>
 
-            <div class="money-box">
-                <div class="money-title">💰 How to Make More Money</div>
-                <ul class="easy-list">
-                    <li>Start with easy jobs, then try harder ones</li>
-                    <li>Learn new skills to get better jobs</li>
-                    <li>Ask for more money when you get good at something</li>
-                    <li>Work on multiple websites to get more jobs</li>
-                    <li>Keep track of how much money you make</li>
-                </ul>
-            </div>
-
-            <div class="work-ready-box">
-                <div class="work-ready-title">🎯 You're Ready to Start Your Online Work Journey!</div>
-                <p style="font-size: 1.1rem;">Follow these steps and you'll be working online and making money soon. Good luck with your new online job!</p>
-            </div>
+        <div class="success-box" style="text-align: center; margin-top: 50px;">
+            <h3 style="color: var(--green);">🎉 Your Online Work Journey Starts Now</h3>
+            <p>Follow this guide step-by-step, stay consistent, and you'll be earning your first online income within weeks. Remember: every expert was once a beginner! 🌟</p>
         </div>
     </div>
+
+    <script>
+        // Simple smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Interactive checkboxes
+        document.querySelectorAll('.check-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const checkbox = this.querySelector('.checkbox');
+                if (checkbox.style.backgroundColor === 'rgb(67, 233, 123)') {
+                    checkbox.style.backgroundColor = '';
+                    checkbox.innerHTML = '';
+                } else {
+                    checkbox.style.backgroundColor = 'var(--green)';
+                    checkbox.innerHTML = '✓';
+                    checkbox.style.display = 'flex';
+                    checkbox.style.alignItems = 'center';
+                    checkbox.style.justifyContent = 'center';
+                    checkbox.style.color = 'var(--bg-dark)';
+                    checkbox.style.fontWeight = 'bold';
+                }
+            });
+        });
+
+        // Add loading states to external links
+        document.querySelectorAll('a[target="_blank"]').forEach(link => {
+            link.addEventListener('click', function() {
+                const originalText = this.textContent;
+                this.textContent = 'Opening...';
+                setTimeout(() => {
+                    this.textContent = originalText;
+                }, 2000);
+            });
+        });
+    </script>
 </body>
 </html>
