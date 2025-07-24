@@ -683,20 +683,6 @@
       animation: success-fade-in 0.5s ease-out;
     }
 
-    /* Error message styling */
-    .error-message {
-      background: var(--accent-danger);
-      color: white;
-      padding: 1.5rem;
-      text-align: center;
-      border-radius: 8px;
-      margin: 1rem 0;
-      font-weight: 600;
-      font-size: 1.1rem;
-      box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
-      animation: error-fade-in 0.5s ease-out;
-    }
-
     @keyframes success-fade-in {
       from {
         opacity: 0;
@@ -706,33 +692,6 @@
         opacity: 1;
         transform: translateY(0);
       }
-    }
-
-    @keyframes error-fade-in {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Loading state */
-    .loading {
-      opacity: 0.7;
-      pointer-events: none;
-    }
-
-    .loading button {
-      background: var(--text-muted);
-      animation: loading-pulse 1.5s infinite;
-    }
-
-    @keyframes loading-pulse {
-      0%, 100% { opacity: 0.7; }
-      50% { opacity: 1; }
     }
 
     footer {
@@ -1111,7 +1070,7 @@
   </div>
 
   <div class="social-proof">
-    <span class="urgent-blink">🔥 <span id="signups">0</span> GenCon attendees signed up!</span>
+    <span class="urgent-blink">🔥 <span id="signups">0</span> GenCon attendees interested!</span>
   </div>
 
   <div class="container main-cta" id="main-content">
@@ -1120,11 +1079,14 @@
       <strong>Usually $9.25/month</strong> — <span style="color: var(--accent-success); font-weight: 900;">FREE for GenCon weekend</span>
     </p>
     
-    <!-- Custom Form for Google Sheets -->
-    <form id="signupForm1" onsubmit="handleFormSubmit(event, this)">
-      <input type="email" name="email" placeholder="your.email@gencon.com" required />
+    <!-- Email Collection Form -->
+    <form action="https://docs.google.com/forms/d/e/1FAIpQLSeHgLeSdOWZBVGzjmphBN5WNNyZTy8hRqX9ZTrJHaPExGg-Uw/formResponse" method="POST" target="hidden_iframe" onsubmit="handleFormSubmit(this)">
+      <input type="email" name="entry.374291112" placeholder="your.email@gencon.com" required />
       <button type="submit">🚀 Get Instant Access Now</button>
     </form>
+    
+    <!-- Hidden iframe for form submission -->
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="handleFormResponse()"></iframe>
     
     <div class="info-box">
       <strong>✅ Instant access when you sign up</strong><br>
@@ -1133,7 +1095,7 @@
     
     <div style="text-align: center; margin: 1.5rem 0 1rem; padding: 1rem; background: rgba(79, 70, 229, 0.1); border: 1px solid var(--accent-primary); border-radius: 8px;">
       <p style="color: var(--text-primary); font-size: 1.1rem; margin-bottom: 0.5rem; font-weight: 600;">
-        After providing your email above, you can access the app here from this screen 👇
+        After providing your email above, you can access the app here 👇
       </p>
       <p style="color: var(--text-secondary); font-size: 0.95rem; margin: 0;">
         at <a href="https://app.925adhd.com" target="_blank" rel="noopener noreferrer" style="color: var(--accent-primary); font-weight: bold; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='var(--gencon-gold)'" onmouseout="this.style.color='var(--accent-primary)'">app.925adhd.com</a> and sign in with that email. You'll receive a PIN to login—no password making/remembering required!
@@ -1175,11 +1137,14 @@
       <span class="urgent-blink">Limited spots remaining!</span>
     </p>
     
-    <!-- Second Custom Form for Google Sheets -->
-    <form id="signupForm2" onsubmit="handleFormSubmit(event, this)" style="margin-top: 1.5rem;">
-      <input type="email" name="email" placeholder="your.email@gencon.com" required />
+    <!-- Second Email Collection Form -->
+    <form action="https://docs.google.com/forms/d/e/1FAIpQLSeHgLeSdOWZBVGzjmphBN5WNNyZTy8hRqX9ZTrJHaPExGg-Uw/formResponse" method="POST" target="hidden_iframe2" onsubmit="handleFormSubmit(this)" style="margin-top: 1.5rem;">
+      <input type="email" name="entry.374291112" placeholder="your.email@gencon.com" required />
       <button type="submit">🔥 Claim My Free Access</button>
     </form>
+    
+    <!-- Hidden iframe for second form -->
+    <iframe name="hidden_iframe2" id="hidden_iframe2" style="display:none;" onload="handleFormResponse()"></iframe>
   </div>
 
   <!-- Screenshot Modal -->
@@ -1211,9 +1176,6 @@
   <div style="height: 120px; background: transparent;"></div>
 
   <script>
-    // IMPORTANT: Replace this URL with your Google Apps Script Web App URL
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxCAlNCvuiACVzq2cn7gFxhacI8n9qqlDm2ea40V_k8C3wknKqRnav7HmO8DvKch6AY/exec';
-    
     // Simple signup counter
     let currentSignupCount = 0;
     
@@ -1228,72 +1190,32 @@
       updateSignupDisplays();
     }
     
-    // Handle form submission to Google Sheets
-    async function handleFormSubmit(event, form) {
-      event.preventDefault();
+    // Google Forms submission handler
+    function handleFormSubmit(form) {
+      // Increment counter immediately
+      incrementSignupCounter();
       
-      // Get form data
-      const formData = new FormData(form);
-      const email = formData.get('email');
-      const timestamp = new Date().toISOString();
-      
-      // Add loading state
-      form.classList.add('loading');
-      const submitButton = form.querySelector('button[type="submit"]');
-      const originalButtonText = submitButton.textContent;
-      submitButton.textContent = 'Submitting...';
-      
-      try {
-        // Send data to Google Apps Script
-        const response = await fetch(GOOGLE_SCRIPT_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: email,
-            timestamp: timestamp,
-            source: 'GenCon Landing Page'
-          })
-        });
-        
-        if (response.ok) {
-          // Success - increment counter and show success message
-          incrementSignupCounter();
-          
-          form.innerHTML = `
-            <div class="success-message">
-              🎉 Success! Check your email for instant access!
-              <br><small style="margin-top: 1rem; display: block; opacity: 0.9;">
-                You can also access the app directly at 
-                <a href="https://app.925adhd.com" target="_blank" style="color: white; text-decoration: underline;">app.925adhd.com</a>
-              </small>
-            </div>
-          `;
-        } else {
-          throw new Error('Network response was not ok');
-        }
-        
-      } catch (error) {
-        console.error('Error submitting form:', error);
-        
-        // Show error message but still increment counter (fallback)
-        incrementSignupCounter();
-        
+      // Show success message after short delay
+      setTimeout(() => {
         form.innerHTML = `
-          <div class="error-message">
-            ⚠️ There was an issue submitting your email, but don't worry!
+          <div class="success-message">
+            🎉 Success! Check your email for instant access!
             <br><small style="margin-top: 1rem; display: block; opacity: 0.9;">
-              You can still access the app at 
+              You can also access the app directly at 
               <a href="https://app.925adhd.com" target="_blank" style="color: white; text-decoration: underline;">app.925adhd.com</a>
-              with your email: <strong>${email}</strong>
             </small>
           </div>
         `;
-      } finally {
-        // Remove loading state
-        form.classList.remove('loading');
-      }
+      }, 500);
+      
+      // Allow form to submit to Google Forms
+      return true;
+    }
+    
+    // Handle iframe response (optional - for additional feedback)
+    function handleFormResponse() {
+      // This runs when the hidden iframe loads after form submission
+      // Could be used for additional success tracking if needed
     }
     
     // Countdown timer - ends August 3rd, 2025 at 11:59:59 PM
