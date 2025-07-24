@@ -886,21 +886,33 @@
     async function fetchRealResponseCount() {
       try {
         const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${GOOGLE_API_KEY}`;
+        console.log('Fetching from URL:', url);
+        
         const response = await fetch(url);
+        console.log('Response status:', response.status);
+        console.log('Response ok:', response.ok);
+        
         const data = await response.json();
+        console.log('Raw data from Google Sheets:', data);
         
         if (data.values) {
           // Subtract 1 for header row, get actual response count
           const responseCount = Math.max(0, data.values.length - 1);
           currentSignupCount = responseCount;
           updateSignupDisplays();
-          console.log(`Updated count from Google Sheets: ${responseCount} responses`);
+          console.log(`✅ Updated count from Google Sheets: ${responseCount} responses`);
+        } else {
+          console.log('No values found in sheet data');
+          // Fallback to starting number if no data
+          currentSignupCount = Math.floor(Math.random() * 15) + 8;
+          updateSignupDisplays();
         }
       } catch (error) {
-        console.error('Error fetching response count:', error);
+        console.error('❌ Error fetching response count:', error);
         // Fallback to starting number if API fails
         currentSignupCount = Math.floor(Math.random() * 15) + 8;
         updateSignupDisplays();
+        console.log('Using fallback count:', currentSignupCount);
       }
     }
     
