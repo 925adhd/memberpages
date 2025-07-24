@@ -202,165 +202,6 @@
       }
     }
 
-    .app-preview {
-      text-align: center;
-      margin: 1.5rem 0;
-    }
-
-    .app-screenshot {
-      max-width: 100%;
-      height: auto;
-      max-height: 600px;
-      border: 2px solid var(--gencon-gold);
-      border-radius: 8px;
-      box-shadow: 
-        0 8px 25px rgba(255, 215, 0, 0.3),
-        0 0 15px rgba(255, 215, 0, 0.2);
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-
-    .app-screenshot:hover {
-      transform: scale(1.02);
-      box-shadow: 
-        0 12px 35px rgba(255, 215, 0, 0.4),
-        0 0 25px rgba(255, 215, 0, 0.3);
-    }
-
-    @media (min-width: 769px) {
-      .app-screenshot {
-        max-height: 700px;
-        max-width: 100%;
-      }
-    }
-
-    @media (max-width: 768px) and (min-width: 481px) {
-      .app-screenshot {
-        max-height: 550px;
-        max-width: 100%;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .app-screenshot {
-        max-height: 450px;
-        max-width: 100%;
-      }
-    }
-
-    /* Modal styles for expanded screenshot */
-    .screenshot-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
-      z-index: 9999;
-      cursor: pointer;
-      animation: modal-fade-in 0.3s ease-out;
-    }
-
-    .screenshot-modal.active {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .screenshot-modal img {
-      max-width: 95vw;
-      max-height: 95vh;
-      width: auto;
-      height: auto;
-      border: 3px solid var(--gencon-gold);
-      border-radius: 12px;
-      box-shadow: 
-        0 0 50px rgba(255, 215, 0, 0.5),
-        0 0 100px rgba(255, 215, 0, 0.3);
-      animation: modal-zoom-in 0.3s ease-out;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      color: var(--gencon-gold);
-      font-size: 3rem;
-      font-weight: bold;
-      cursor: pointer;
-      z-index: 10000;
-      transition: all 0.3s ease;
-      text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
-    }
-
-    .modal-close:hover {
-      color: white;
-      transform: scale(1.1);
-      text-shadow: 
-        0 0 15px rgba(255, 215, 0, 0.8),
-        0 0 10px rgba(0, 0, 0, 0.8);
-    }
-
-    .modal-hint {
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: var(--text-secondary);
-      font-size: 1rem;
-      text-align: center;
-      opacity: 0.8;
-      animation: hint-pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes modal-fade-in {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes modal-zoom-in {
-      from { 
-        opacity: 0;
-        transform: scale(0.5);
-      }
-      to { 
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    @keyframes hint-pulse {
-      0%, 100% { opacity: 0.6; }
-      50% { opacity: 1; }
-    }
-
-    /* Mobile optimizations for modal */
-    @media (max-width: 768px) {
-      .screenshot-modal {
-        padding: 10px;
-      }
-      
-      .screenshot-modal img {
-        max-width: 98vw;
-        max-height: 98vh;
-        border-radius: 8px;
-      }
-      
-      .modal-close {
-        top: 10px;
-        right: 15px;
-        font-size: 2.5rem;
-      }
-      
-      .modal-hint {
-        bottom: 20px;
-        font-size: 0.9rem;
-        padding: 0 20px;
-      }
-    }
-
     .hero-subtitle {
       color: var(--gencon-gold);
       font-size: 1.1rem;
@@ -445,12 +286,6 @@
         margin-bottom: 2.5rem;
       }
 
-      .urgency-section {
-        background: linear-gradient(135deg, rgba(255, 215, 0, 0.95) 0%, rgba(220, 20, 60, 0.95) 100%);
-        backdrop-filter: blur(15px);
-        margin-bottom: 2.5rem;
-      }
-
       .main-cta {
         border: 3px solid var(--accent-success);
         background: rgba(26, 31, 46, 0.95);
@@ -511,14 +346,6 @@
       box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
     }
 
-    /* Embedded Google Form styling */
-    iframe[src*="docs.google.com/forms"] {
-      border: 2px solid var(--gencon-gold) !important;
-      background: var(--primary-bg) !important;
-      border-radius: 8px;
-      box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-    }
-
     .gencon-benefits {
       background: var(--secondary-bg);
       border: 2px solid var(--gencon-gold);
@@ -577,32 +404,6 @@
       line-height: 1.4;
     }
 
-    .urgency-section {
-      background: var(--gradient-gencon);
-      color: white;
-      padding: 1.5rem;
-      text-align: center;
-      margin-bottom: 2rem;
-      border: 3px solid var(--gencon-red);
-      box-shadow: 0 0 30px rgba(220, 20, 60, 0.4);
-    }
-
-    .urgency-section h2 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      font-family: 'Orbitron', monospace;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    }
-
-    .scarcity-counter {
-      font-size: 1.8rem;
-      font-weight: 900;
-      margin: 1rem 0;
-      text-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
-    }
-
     .info-box {
       background: var(--primary-bg);
       border: 2px solid var(--accent-success);
@@ -613,29 +414,15 @@
       margin-top: 1rem;
     }
 
-    /* Success message styling */
-    .success-message {
-      background: var(--gradient-success);
-      color: white;
-      padding: 2rem;
-      text-align: center;
+    /* Google Form iframe styling */
+    iframe {
+      width: 100%;
+      height: 800px;
+      border: 2px solid var(--gencon-gold) !important;
+      background: var(--primary-bg) !important;
       border-radius: 8px;
-      margin: 1rem 0;
-      font-weight: 700;
-      font-size: 1.2rem;
-      box-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
-      animation: success-fade-in 0.5s ease-out;
-    }
-
-    @keyframes success-fade-in {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+      margin-top: 1rem;
     }
 
     footer {
@@ -672,12 +459,6 @@
         backdrop-filter: blur(10px);
         margin-bottom: 1.5rem;
       }
-      
-      .urgency-section {
-        background: linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(220, 20, 60, 0.9) 100%);
-        backdrop-filter: blur(10px);
-        margin-bottom: 1.5rem;
-      }
 
       .social-proof {
         margin-bottom: 1.5rem;
@@ -691,9 +472,8 @@
         font-size: 1.6rem;
       }
       
-      iframe[src*="docs.google.com/forms"] {
-        height: 600px !important;
-        border-radius: 6px;
+      iframe {
+        height: 900px;
       }
       
       .benefit-grid {
@@ -1018,14 +798,8 @@
       <strong>Usually $9.25/month</strong> — <span style="color: var(--accent-success); font-weight: 900;">FREE for GenCon weekend</span>
     </p>
     
-    <!-- Email Collection Form -->
-    <form action="https://docs.google.com/forms/d/e/1FAIpQLSeHgLeSdOWZBVGzjmphBN5WNNyZTy8hRqX9ZTrJHaPExGg-Uw/formResponse" method="POST" target="hidden_iframe" onsubmit="handleSubmit(this)">
-      <input type="email" name="entry.374291112" placeholder="your.email@gencon.com" required />
-      <button type="submit">🚀 Get Instant Access Now</button>
-    </form>
-    
-    <!-- Hidden iframe for form submission -->
-    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+    <!-- ✅ Working Google Form - Based on your successful example -->
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeHgLeSdOWZBVGzjmphBN5WNNyZTy8hRqX9ZTrJHaPExGg-Uw/viewform?embedded=true" width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
     
     <div class="info-box">
       <strong>✅ Instant access when you sign up</strong><br>
@@ -1039,10 +813,6 @@
       <p style="color: var(--text-secondary); font-size: 0.95rem; margin: 0;">
         at <a href="https://app.925adhd.com" target="_blank" rel="noopener noreferrer" style="color: var(--accent-primary); font-weight: bold; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='var(--gencon-gold)'" onmouseout="this.style.color='var(--accent-primary)'">app.925adhd.com</a> and sign in with that email. You'll receive a PIN to login—no password making/remembering required!
       </p>
-    </div>
-    
-    <div class="app-preview">
-      <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/image_2025-07-13_042629331.png" alt="925 ADHD App Screenshot" class="app-screenshot" onclick="openScreenshotModal()">
     </div>
   </div>
 
@@ -1066,31 +836,6 @@
         <div class="benefit-desc">Turn your ADHD energy into earnings during breaks and meal times</div>
       </div>
     </div>
-  </div>
-
-  <div class="urgency-section">
-    <h2>⚡ Don't Miss Out</h2>
-    <div class="scarcity-counter" id="signups-urgency">0</div>
-    <p>GenCon attendees have already started trying the <a href="https://get.925adhd.com" target="_blank" rel="noopener noreferrer" class="app-name">925 ADHD app</a> this weekend.</p>
-    <p style="margin-top: 1rem; font-size: 1.1rem; font-weight: 700;">
-      <span class="urgent-blink">Limited spots remaining!</span>
-    </p>
-    
-    <!-- Second Email Collection Form -->
-    <form action="https://docs.google.com/forms/d/e/1FAIpQLSeHgLeSdOWZBVGzjmphBN5WNNyZTy8hRqX9ZTrJHaPExGg-Uw/formResponse" method="POST" target="hidden_iframe2" onsubmit="handleSubmit(this)" style="margin-top: 1.5rem;">
-      <input type="email" name="entry.374291112" placeholder="your.email@gencon.com" required />
-      <button type="submit">🔥 Claim My Free Access</button>
-    </form>
-    
-    <!-- Hidden iframe for second form -->
-    <iframe name="hidden_iframe2" id="hidden_iframe2" style="display:none;"></iframe>
-  </div>
-
-  <!-- Screenshot Modal -->
-  <div id="screenshotModal" class="screenshot-modal" onclick="closeScreenshotModal()">
-    <span class="modal-close" onclick="closeScreenshotModal()">&times;</span>
-    <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/image_2025-07-13_042629331.png/:/rs=h:175,m" alt="925 ADHD App Screenshot - Full Size">
-    <div class="modal-hint">Click anywhere to close</div>
   </div>
 
   <!-- Single prominent sticky button -->
@@ -1121,7 +866,6 @@
     function updateSignupDisplays() {
       document.getElementById('signups').textContent = currentSignupCount.toLocaleString();
       document.getElementById('signups-footer').textContent = currentSignupCount.toLocaleString();
-      document.getElementById('signups-urgency').textContent = currentSignupCount.toLocaleString();
     }
     
     // Countdown timer - ends August 3rd, 2025 at 11:59:59 PM
@@ -1166,26 +910,6 @@
     // Update countdown every second
     setInterval(updateCountdown, 1000);
     updateCountdown();
-
-    // Screenshot modal functionality
-    function openScreenshotModal() {
-      const modal = document.getElementById('screenshotModal');
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-    
-    function closeScreenshotModal() {
-      const modal = document.getElementById('screenshotModal');
-      modal.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    }
-    
-    // Close modal on Escape key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        closeScreenshotModal();
-      }
-    });
 
     // Hide sticky button when footer is visible
     function handleStickyButtonVisibility() {
