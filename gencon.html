@@ -1095,11 +1095,14 @@
       <strong>Usually $9.25/month</strong> — <span style="color: var(--accent-success); font-weight: 900;">FREE for GenCon weekend</span>
     </p>
     
-    <!-- Google Form Integration - CORS-Safe Method -->
-    <form id="signup-form-1" onsubmit="submitFormWithRedirect(this, event);">
-      <input type="email" id="email-1" placeholder="your.email@gencon.com" required />
+    <!-- Google Form Integration - Clean & Simple -->
+    <form action="https://docs.google.com/forms/d/e/1FAIpQLSeHgLeSdOWZBVGzjmphBN5WNNyZTy8hRqX9ZTrJHaPExGg-Uw/formResponse" method="POST" target="hidden_iframe" onsubmit="handleSubmit(this)">
+      <input type="email" name="entry.374291112" placeholder="your.email@gencon.com" required />
       <button type="submit">🚀 Get Instant Access Now</button>
     </form>
+    
+    <!-- Hidden iframe for form submission -->
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
     
     <!-- Hidden iframe for form submission -->
     <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="handleFormResponse()"></iframe>
@@ -1154,10 +1157,13 @@
     </p>
     
     <!-- Second Google Form (same configuration) -->
-    <form id="signup-form-2" onsubmit="submitFormWithRedirect(this, event);" style="margin-top: 1.5rem;">
-      <input type="email" id="email-2" placeholder="your.email@gencon.com" required />
+    <form action="https://docs.google.com/forms/d/e/1FAIpQLSeHgLeSdOWZBVGzjmphBN5WNNyZTy8hRqX9ZTrJHaPExGg-Uw/formResponse" method="POST" target="hidden_iframe2" onsubmit="handleSubmit(this)" style="margin-top: 1.5rem;">
+      <input type="email" name="entry.374291112" placeholder="your.email@gencon.com" required />
       <button type="submit">🔥 Claim My Free Access</button>
     </form>
+    
+    <!-- Hidden iframe for second form -->
+    <iframe name="hidden_iframe2" id="hidden_iframe2" style="display:none;"></iframe>
 
   </div>
 
@@ -1204,47 +1210,18 @@
       updateSignupDisplays();
     }
     
-    // CORS-safe form submission method
-    function submitFormWithRedirect(form, event) {
-      event.preventDefault(); // Stop the default form submission
-      
-      // Get the email value
-      const emailInput = form.querySelector('input[type="email"]');
-      const email = emailInput.value;
-      
-      if (!email) {
-        alert('Please enter an email address');
-        return false;
-      }
-      
-      // Show success message immediately
+    // Clean form submission handler
+    function handleSubmit(form) {
+      // Increment counter
       incrementSignupCounter();
-      form.innerHTML = '<div class="success-message">🎉 Success! Check your email for instant access!<br><small style="margin-top: 1rem; display: block; opacity: 0.9;">You can also access the app directly at <a href="https://app.925adhd.com" target="_blank" style="color: white; text-decoration: underline;">app.925adhd.com</a></small></div>';
       
-      // Submit to Google Forms in background using a hidden form
-      const hiddenForm = document.createElement('form');
-      hiddenForm.action = 'https://docs.google.com/forms/d/e/1FAIpQLSeHgLeSdOWZBVGzjmphBN5WNNyZTy8hRqX9ZTrJHaPExGg-Uw/formResponse';
-      hiddenForm.method = 'POST';
-      hiddenForm.target = '_blank'; // Opens in new tab
-      hiddenForm.style.display = 'none';
-      
-      const hiddenEmailInput = document.createElement('input');
-      hiddenEmailInput.type = 'email';
-      hiddenEmailInput.name = 'entry.374291112';
-      hiddenEmailInput.value = email;
-      
-      hiddenForm.appendChild(hiddenEmailInput);
-      document.body.appendChild(hiddenForm);
-      
-      // Submit and immediately close the new tab
-      hiddenForm.submit();
-      
-      // Clean up
+      // Show success message after short delay
       setTimeout(() => {
-        document.body.removeChild(hiddenForm);
-      }, 1000);
+        form.innerHTML = '<div class="success-message">🎉 Success! Check your email for instant access!<br><small style="margin-top: 1rem; display: block; opacity: 0.9;">You can also access the app directly at <a href="https://app.925adhd.com" target="_blank" style="color: white; text-decoration: underline;">app.925adhd.com</a></small></div>';
+      }, 500);
       
-      return false;
+      // Don't prevent form submission
+      return true;
     }
     
     // Countdown timer - ends August 3rd, 2025 at 11:59:59 PM
@@ -1294,13 +1271,13 @@
     function openScreenshotModal() {
       const modal = document.getElementById('screenshotModal');
       modal.classList.add('active');
-      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+      document.body.style.overflow = 'hidden';
     }
     
     function closeScreenshotModal() {
       const modal = document.getElementById('screenshotModal');
       modal.classList.remove('active');
-      document.body.style.overflow = 'auto'; // Restore scrolling
+      document.body.style.overflow = 'auto';
     }
     
     // Close modal on Escape key
@@ -1313,11 +1290,9 @@
     // Hide sticky button when footer is visible
     function handleStickyButtonVisibility() {
       const footer = document.querySelector('footer');
-      const stickyButton = document.querySelector('.floating-sticky-button');
       const footerRect = footer.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       
-      // If footer is visible in viewport, hide the sticky button
       if (footerRect.top < windowHeight) {
         document.body.classList.add('at-bottom');
       } else {
@@ -1328,8 +1303,6 @@
     // Check on scroll and resize
     window.addEventListener('scroll', handleStickyButtonVisibility);
     window.addEventListener('resize', handleStickyButtonVisibility);
-    
-    // Initial check
     handleStickyButtonVisibility();
     
     // Initialize signup counter displays
