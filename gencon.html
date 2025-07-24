@@ -979,8 +979,8 @@
       }
     }
     
-    // Custom form submission to Zapier webhook
-    async function handleCustomFormSubmit(event) {
+    // CORS-friendly form submission using hidden iframe method
+    function handleCustomFormSubmit(event) {
       event.preventDefault();
       
       const form = document.getElementById('genconForm');
@@ -993,35 +993,49 @@
       submitBtn.disabled = true;
       submitBtn.innerHTML = '⏳ Submitting...';
       
-      try {
-        // Submit to Zapier webhook
-        const response = await fetch('https://hooks.zapier.com/hooks/catch/23232797/uusz3cp/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: email,
-            timestamp: new Date().toISOString()
-          })
-        });
+      // Create hidden form that submits to Zapier
+      const hiddenForm = document.createElement('form');
+      hiddenForm.method = 'POST';
+      hiddenForm.action = 'https://hooks.zapier.com/hooks/catch/23232797/uusz3cp/';
+      hiddenForm.target = 'zapier_iframe';
+      hiddenForm.style.display = 'none';
+      
+      // Add email field
+      const emailField = document.createElement('input');
+      emailField.type = 'email';
+      emailField.name = 'email';
+      emailField.value = email;
+      hiddenForm.appendChild(emailField);
+      
+      // Add timestamp field
+      const timestampField = document.createElement('input');
+      timestampField.type = 'hidden';
+      timestampField.name = 'timestamp';
+      timestampField.value = new Date().toISOString();
+      hiddenForm.appendChild(timestampField);
+      
+      // Create hidden iframe
+      const iframe = document.createElement('iframe');
+      iframe.name = 'zapier_iframe';
+      iframe.style.display = 'none';
+      
+      // Add to page
+      document.body.appendChild(hiddenForm);
+      document.body.appendChild(iframe);
+      
+      // Submit form
+      hiddenForm.submit();
+      
+      // Show success after short delay (assume it worked)
+      setTimeout(() => {
+        form.style.display = 'none';
+        successMessage.style.display = 'block';
+        console.log('✅ Email submitted to Zapier via iframe:', email);
         
-        if (response.ok) {
-          // Success! Hide form and show success message
-          form.style.display = 'none';
-          successMessage.style.display = 'block';
-          console.log('✅ Email submitted successfully to Zapier:', email);
-        } else {
-          throw new Error('Submission failed');
-        }
-        
-      } catch (error) {
-        // Error handling
-        console.error('❌ Error submitting email:', error);
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = '🚀 Get Instant Access Now';
-        alert('Oops! Something went wrong. Please try again.');
-      }
+        // Clean up
+        document.body.removeChild(hiddenForm);
+        document.body.removeChild(iframe);
+      }, 1000);
     }
     
     // Update count every 30 seconds for real-time accuracy
