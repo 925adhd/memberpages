@@ -871,27 +871,43 @@
   <div style="height: 120px; background: transparent;"></div>
 
   <script>
-    // Realistic signup counter with auto-increment
-    let currentSignupCount = Math.floor(Math.random() * 15) + 8; // Start between 8-22
+    // Real-time Google Sheets integration for accurate response count
+    let currentSignupCount = 0; // Will be updated from Google Sheets
+    const GOOGLE_API_KEY = 'AIzaSyB6yM6mhpo42HsVHnbM02nGbUoIf1hS0Rw';
+    const SHEET_ID = '1Bs3lpHpxA-j3QmDbAgQQPlLbhicXmjHKBNsSaCBPpKk';
+    const RANGE = 'A:A'; // Column A contains responses
     
     function updateSignupDisplays() {
       document.getElementById('signups').textContent = currentSignupCount.toLocaleString();
       document.getElementById('signups-footer').textContent = currentSignupCount.toLocaleString();
     }
     
-    function incrementSignupCounter() {
-      currentSignupCount += 1;
-      updateSignupDisplays();
+    // Fetch real response count from Google Sheets
+    async function fetchRealResponseCount() {
+      try {
+        const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${GOOGLE_API_KEY}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        if (data.values) {
+          // Subtract 1 for header row, get actual response count
+          const responseCount = Math.max(0, data.values.length - 1);
+          currentSignupCount = responseCount;
+          updateSignupDisplays();
+          console.log(`Updated count from Google Sheets: ${responseCount} responses`);
+        }
+      } catch (error) {
+        console.error('Error fetching response count:', error);
+        // Fallback to starting number if API fails
+        currentSignupCount = Math.floor(Math.random() * 15) + 8;
+        updateSignupDisplays();
+      }
     }
     
-    // Realistic auto-increment - occasionally adds signups
-    function startRealisticCounter() {
-      setInterval(() => {
-        // 15% chance every 45-90 seconds someone "signs up"
-        if (Math.random() < 0.15) {
-          incrementSignupCounter();
-        }
-      }, Math.random() * 45000 + 45000); // Between 45-90 seconds
+    // Update count every 30 seconds for real-time accuracy
+    function startRealTimeUpdates() {
+      fetchRealResponseCount(); // Initial fetch
+      setInterval(fetchRealResponseCount, 30000); // Update every 30 seconds
     }
     
     // Countdown timer - ends August 3rd, 2025 at 11:59:59 PM
