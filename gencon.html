@@ -1190,21 +1190,21 @@
       updateSignupDisplays();
     }
     
-    // Clean form submission handler (matches original working pattern)
+    // Clean form submission handler with delay
     function handleSubmit(form) {
-      // Log for debugging
+      // Get email before form changes
       const email = form.querySelector('input[name="entry.374291112"]').value;
       console.log('Submitting email to Google Forms:', email);
       
       // Increment counter
       incrementSignupCounter();
       
-      // Show success message after short delay
+      // Show success message after longer delay to ensure submission completes
       setTimeout(() => {
         form.innerHTML = '<div class="success-message">🎉 Success! Check your email for instant access!<br><small style="margin-top: 1rem; display: block; opacity: 0.9;">You can also access the app directly at <a href="https://app.925adhd.com" target="_blank" style="color: white; text-decoration: underline;">app.925adhd.com</a></small></div>';
-      }, 500);
+      }, 1000); // Increased delay
       
-      // Don't prevent form submission - let it go to Google Forms
+      // Let form submit to Google Forms
       return true;
     }
     
