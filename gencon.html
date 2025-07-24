@@ -414,43 +414,26 @@
       margin-top: 1rem;
     }
 
-    /* Google Form iframe styling - attempt to minimize extra elements */
-    .form-container {
-      position: relative;
-      overflow: hidden;
+    /* Google Form iframe styling - prevent dynamic resizing */
+    iframe {
+      width: 100%;
+      height: 550px; /* Fixed height to prevent shrinking */
+      min-height: 550px !important; /* Force minimum height */
+      max-height: 550px !important; /* Prevent growing */
       border: 2px solid var(--gencon-gold) !important;
+      background: var(--primary-bg) !important;
       border-radius: 8px;
       box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-      background: white;
       margin-top: 1rem;
-    }
-    
-    .form-container iframe {
-      width: 100%;
-      height: 600px;
-      border: none !important;
-      background: white !important;
-      transition: height 0.3s ease;
-      display: block;
-    }
-
-    /* Try to hide Google branding with overlay (limited effectiveness) */
-    .form-container::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 60px;
-      background: linear-gradient(transparent, white);
-      pointer-events: none;
-      z-index: 1;
+      overflow: hidden !important; /* Prevent any overflow issues */
     }
 
     /* Adjust height for different screen sizes */
     @media (min-width: 769px) {
-      .form-container iframe {
-        height: 650px;
+      iframe {
+        height: 600px !important;
+        min-height: 600px !important;
+        max-height: 600px !important;
       }
     }
 
@@ -501,8 +484,10 @@
         font-size: 1.6rem;
       }
       
-      .form-container iframe {
-        height: 700px; /* Slightly taller on mobile */
+      iframe {
+        height: 650px !important; /* Fixed height on mobile */
+        min-height: 650px !important;
+        max-height: 650px !important;
       }
       
       .benefit-grid {
@@ -833,10 +818,8 @@
       </p>
     </div>
     
-    <!-- ✅ Minimal Google Form - Custom container to hide extra elements -->
-    <div class="form-container">
-      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeHgLeSdOWZBVGzjmphBN5WNNyZTy8hRqX9ZTrJHaPExGg-Uw/viewform?embedded=true&usp=pp_url" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0" scrolling="no">Loading…</iframe>
-    </div>
+    <!-- ✅ Working Google Form - No scroll, everything visible -->
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeHgLeSdOWZBVGzjmphBN5WNNyZTy8hRqX9ZTrJHaPExGg-Uw/viewform?embedded=true" width="100%" height="550" frameborder="0" marginheight="0" marginwidth="0" scrolling="no">Loading…</iframe>
     
     <div class="info-box">
       <strong>✅ Instant access when you sign up</strong><br>
