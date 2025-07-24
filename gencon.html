@@ -1192,19 +1192,47 @@
   <div style="height: 120px; background: transparent;"></div>
 
   <script>
-    // Real signup counter - starts at 0 and only increments on actual form submissions
+    // Google Sheets API configuration
+    const GOOGLE_SHEETS_API_KEY = 'YOUR_API_KEY_HERE'; // Replace with your API key
+    const SPREADSHEET_ID = 'YOUR_SPREADSHEET_ID_HERE'; // Replace with your spreadsheet ID
+    const RANGE = 'Form Responses 1!A:A'; // Range to count (column A)
+    
+    // Real signup counter - gets actual count from Google Sheets
     let currentSignupCount = 0;
     let isSubmitting = false;
     
-    function incrementSignupCounter() {
-      currentSignupCount += 1;
-      // Update all signup displays
+    // Fetch real count from Google Sheets
+    async function fetchRealSignupCount() {
+      try {
+        const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${RANGE}?key=${GOOGLE_SHEETS_API_KEY}`);
+        const data = await response.json();
+        
+        if (data.values) {
+          // Subtract 1 for header row, or adjust as needed
+          currentSignupCount = Math.max(0, data.values.length - 1);
+        } else {
+          currentSignupCount = 0;
+        }
+        
+        updateSignupDisplays();
+      } catch (error) {
+        console.log('Unable to fetch signup count, using manual count');
+        // Fallback to manual incrementing if API fails
+      }
+    }
+    
+    function updateSignupDisplays() {
       document.getElementById('signups').textContent = currentSignupCount.toLocaleString();
       document.getElementById('signups-footer').textContent = currentSignupCount.toLocaleString();
       document.getElementById('signups-urgency').textContent = currentSignupCount.toLocaleString();
     }
     
-    // Google Forms submission handler
+    function incrementSignupCounter() {
+      currentSignupCount += 1;
+      updateSignupDisplays();
+    }
+    
+    // Google Forms submission handler with better debugging
     function submitToGoogle(form) {
       if (isSubmitting) return false;
       
@@ -1222,6 +1250,10 @@
       const originalButtonText = button.textContent;
       button.textContent = '⏳ Submitting...';
       
+      // Get email for debugging
+      const email = form.querySelector('input[type="email"]').value;
+      console.log('Submitting email:', email);
+      
       // Allow form to submit to Google
       return true;
     }
@@ -1230,8 +1262,15 @@
     function handleFormResponse() {
       if (!isSubmitting) return;
       
-      // Increment counter
+      console.log('Form submitted successfully!');
+      
+      // Increment counter (will be replaced by real count on next fetch)
       incrementSignupCounter();
+      
+      // Fetch updated count from Google Sheets
+      setTimeout(() => {
+        fetchRealSignupCount();
+      }, 2000); // Wait 2 seconds for Google to process
       
       // Find the form that was just submitted
       const forms = document.querySelectorAll('form');
@@ -1295,6 +1334,10 @@
     // Update countdown every second
     setInterval(updateCountdown, 1000);
     updateCountdown();
+    
+    // Fetch real signup count every 30 seconds
+    fetchRealSignupCount();
+    setInterval(fetchRealSignupCount, 30000);
 
     // Screenshot modal functionality
     function openScreenshotModal() {
@@ -1339,9 +1382,7 @@
     handleStickyButtonVisibility();
     
     // Initialize signup counter displays
-    document.getElementById('signups').textContent = currentSignupCount.toLocaleString();
-    document.getElementById('signups-footer').textContent = currentSignupCount.toLocaleString();
-    document.getElementById('signups-urgency').textContent = currentSignupCount.toLocaleString();
+    updateSignupDisplays();
   </script>
 </body>
 </html>
