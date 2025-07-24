@@ -669,6 +669,47 @@
       margin-top: 1rem;
     }
 
+    /* Success message styling */
+    .success-message {
+      background: var(--gradient-success);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      border-radius: 8px;
+      margin: 1rem 0;
+      font-weight: 700;
+      font-size: 1.2rem;
+      box-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
+      animation: success-fade-in 0.5s ease-out;
+    }
+
+    @keyframes success-fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Loading state */
+    .loading {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .loading button {
+      background: var(--text-muted);
+      animation: loading-pulse 1.5s infinite;
+    }
+
+    @keyframes loading-pulse {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+
     footer {
       text-align: center;
       color: var(--text-secondary);
@@ -994,6 +1035,31 @@
       0%, 50% { opacity: 1; }
       51%, 100% { opacity: 0.7; }
     }
+
+    /* Expired offer styling */
+    .offer-expired {
+      background: var(--primary-bg);
+      border: 3px solid var(--accent-danger);
+      padding: 2rem;
+      text-align: center;
+      margin: 2rem auto;
+      max-width: 500px;
+      box-shadow: 0 0 30px rgba(239, 68, 68, 0.4);
+    }
+
+    .offer-expired h2 {
+      color: var(--accent-danger);
+      font-family: 'Orbitron', monospace;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .offer-expired p {
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
   </style>
 </head>
 <body>
@@ -1020,21 +1086,27 @@
   </div>
 
   <div class="social-proof">
-    <span class="urgent-blink">🔥 847 GenCon attendees signed up in 24 hours!</span>
+    <span class="urgent-blink">🔥 <span id="signups">0</span> GenCon attendees signed up!</span>
   </div>
 
-  <div class="container main-cta">
+  <div class="container main-cta" id="main-content">
     <h2>🎯 Try the <a href="https://get.925adhd.com" target="_blank" rel="noopener noreferrer" class="app-name">925 ADHD App</a> FREE This Weekend</h2>
     <p style="color: var(--text-secondary); text-align: center; margin-bottom: 1rem;">
       <strong>Usually $9.25/month</strong> — <span style="color: var(--accent-success); font-weight: 900;">FREE for GenCon weekend</span>
     </p>
-    <form action="#" method="POST">
-      <input type="email" name="email" placeholder="your.email@gencon.com" required />
+    
+    <!-- Google Form Integration -->
+    <form action="https://docs.google.com/forms/d/e/1FAIpQLSeHgLeSdOWZBVGzjmphBN5WNNyZTy8hRqX9ZTrJHaPExGg-Uw/formResponse" method="POST" target="hidden_iframe" onsubmit="return submitToGoogle(this);">
+      <input type="email" name="entry.374291112" placeholder="your.email@gencon.com" required />
       <button type="submit">🚀 Get Instant Access Now</button>
     </form>
+    
+    <!-- Hidden iframe for form submission -->
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="handleFormResponse()"></iframe>
+    
     <div class="info-box">
       <strong>✅ Instant access when you sign up</strong><br>
-      Join hundreds of ADHD earners already trying the <a href="https://get.925adhd.com" target="_blank" rel="noopener noreferrer" class="app-name">925 ADHD app</a> at GenCon
+      Join <span id="signups-footer">0</span> ADHD earners already trying the <a href="https://get.925adhd.com" target="_blank" rel="noopener noreferrer" class="app-name">925 ADHD app</a> at GenCon
     </div>
     
     <div style="text-align: center; margin: 1.5rem 0 1rem; padding: 1rem; background: rgba(79, 70, 229, 0.1); border: 1px solid var(--accent-primary); border-radius: 8px;">
@@ -1075,15 +1147,20 @@
 
   <div class="urgency-section">
     <h2>⚡ Don't Miss Out</h2>
-    <div class="scarcity-counter" id="signups">1,153</div>
+    <div class="scarcity-counter" id="signups-urgency">0</div>
     <p>GenCon attendees have already started trying the <a href="https://get.925adhd.com" target="_blank" rel="noopener noreferrer" class="app-name">925 ADHD app</a> this weekend.</p>
     <p style="margin-top: 1rem; font-size: 1.1rem; font-weight: 700;">
       <span class="urgent-blink">Limited spots remaining!</span>
     </p>
-    <form action="#" method="POST" style="margin-top: 1.5rem;">
-      <input type="email" name="email" placeholder="your.email@gencon.com" required />
+    
+    <!-- Second Google Form (same configuration) -->
+    <form action="https://docs.google.com/forms/d/e/1FAIpQLSeHgLeSdOWZBVGzjmphBN5WNNyZTy8hRqX9ZTrJHaPExGg-Uw/formResponse" method="POST" target="hidden_iframe2" onsubmit="return submitToGoogle(this);" style="margin-top: 1.5rem;">
+      <input type="email" name="entry.374291112" placeholder="your.email@gencon.com" required />
       <button type="submit">🔥 Claim My Free Access</button>
     </form>
+    
+    <!-- Hidden iframe for second form -->
+    <iframe name="hidden_iframe2" id="hidden_iframe2" style="display:none;" onload="handleFormResponse()"></iframe>
   </div>
 
   <!-- Screenshot Modal -->
@@ -1115,12 +1192,65 @@
   <div style="height: 120px; background: transparent;"></div>
 
   <script>
-    // Realistic countdown timer
+    // Real signup counter - starts at 0 and only increments on actual form submissions
+    let currentSignupCount = 0;
+    let isSubmitting = false;
+    
+    function incrementSignupCounter() {
+      currentSignupCount += 1;
+      // Update all signup displays
+      document.getElementById('signups').textContent = currentSignupCount.toLocaleString();
+      document.getElementById('signups-footer').textContent = currentSignupCount.toLocaleString();
+      document.getElementById('signups-urgency').textContent = currentSignupCount.toLocaleString();
+    }
+    
+    // Google Forms submission handler
+    function submitToGoogle(form) {
+      if (isSubmitting) return false;
+      
+      // Check if offer is still active
+      if (!isOfferActive()) {
+        form.innerHTML = '<div style="color: var(--accent-danger); text-align: center; font-weight: 700; font-size: 1.2rem; padding: 2rem;">❌ Sorry, this offer has expired!</div>';
+        return false;
+      }
+      
+      isSubmitting = true;
+      
+      // Add loading state
+      form.classList.add('loading');
+      const button = form.querySelector('button');
+      const originalButtonText = button.textContent;
+      button.textContent = '⏳ Submitting...';
+      
+      // Allow form to submit to Google
+      return true;
+    }
+    
+    // Handle form response after Google submission
+    function handleFormResponse() {
+      if (!isSubmitting) return;
+      
+      // Increment counter
+      incrementSignupCounter();
+      
+      // Find the form that was just submitted
+      const forms = document.querySelectorAll('form');
+      forms.forEach(form => {
+        if (form.classList.contains('loading')) {
+          // Show success message
+          form.innerHTML = '<div class="success-message">🎉 Success! Check your email for instant access!<br><small style="margin-top: 1rem; display: block; opacity: 0.9;">You can also access the app directly at <a href="https://app.925adhd.com" target="_blank" style="color: white; text-decoration: underline;">app.925adhd.com</a></small></div>';
+        }
+      });
+      
+      isSubmitting = false;
+    }
+    
+    // Countdown timer - ends August 3rd, 2025 at 11:59:59 PM
     function updateCountdown() {
       const countdownElement = document.getElementById('countdown');
       const now = new Date().getTime();
-      const endOfGenCon = new Date('August 4, 2025 23:59:59').getTime();
-      const timeLeft = endOfGenCon - now;
+      const endOfOffer = new Date('August 3, 2025 23:59:59').getTime();
+      const timeLeft = endOfOffer - now;
       
       if (timeLeft > 0) {
         const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
@@ -1134,39 +1264,37 @@
           countdownElement.innerHTML = `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         }
       } else {
+        // Offer has expired
         countdownElement.innerHTML = 'EXPIRED';
+        showExpiredOffer();
       }
     }
     
-    // Social proof counter
-    function updateSignups() {
-      const signupsElement = document.getElementById('signups');
-      const baseCount = 1153;
-      const randomIncrease = Math.floor(Math.random() * 3) + 1;
-      const currentCount = parseInt(signupsElement.textContent) + randomIncrease;
-      signupsElement.textContent = currentCount.toLocaleString();
+    // Show expired offer message
+    function showExpiredOffer() {
+      const mainContent = document.getElementById('main-content');
+      if (mainContent) {
+        mainContent.innerHTML = `
+          <div class="offer-expired">
+            <h2>🚫 Offer Expired</h2>
+            <p>The GenCon exclusive offer has ended. Thanks to everyone who participated!</p>
+            <p>Visit <a href="https://925adhd.com" style="color: var(--accent-primary);">925adhd.com</a> for regular pricing and updates.</p>
+          </div>
+        `;
+      }
+    }
+    
+    // Check if we're in the valid date range (August 1-3, 2025)
+    function isOfferActive() {
+      const now = new Date();
+      const startDate = new Date('August 1, 2025 00:00:00');
+      const endDate = new Date('August 3, 2025 23:59:59');
+      return now >= startDate && now <= endDate;
     }
     
     // Update countdown every second
     setInterval(updateCountdown, 1000);
     updateCountdown();
-    
-    // Update signup counter every 15 seconds
-    setInterval(updateSignups, 15000);
-    
-    // Form submission analytics
-    document.querySelectorAll('form').forEach(form => {
-      form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const email = this.querySelector('input[type="email"]').value;
-        
-        // Replace with your actual form submission logic
-        console.log('GenCon signup:', email);
-        
-        // Show success message
-        this.innerHTML = '<div style="color: var(--accent-success); text-align: center; font-weight: 700; font-size: 1.2rem; padding: 2rem;">🎉 Success! Check your email for instant access!</div>';
-      });
-    });
 
     // Screenshot modal functionality
     function openScreenshotModal() {
@@ -1209,6 +1337,11 @@
     
     // Initial check
     handleStickyButtonVisibility();
+    
+    // Initialize signup counter displays
+    document.getElementById('signups').textContent = currentSignupCount.toLocaleString();
+    document.getElementById('signups-footer').textContent = currentSignupCount.toLocaleString();
+    document.getElementById('signups-urgency').textContent = currentSignupCount.toLocaleString();
   </script>
 </body>
 </html>
