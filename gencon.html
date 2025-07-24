@@ -1095,14 +1095,11 @@
       <strong>Usually $9.25/month</strong> — <span style="color: var(--accent-success); font-weight: 900;">FREE for GenCon weekend</span>
     </p>
     
-    <!-- Google Form Integration - Clean & Simple -->
+    <!-- Updated Google Form Integration -->
     <form action="https://docs.google.com/forms/d/e/1FAIpQLSeHgLeSdOWZBVGzjmphBN5WNNyZTy8hRqX9ZTrJHaPExGg-Uw/formResponse" method="POST" target="hidden_iframe" onsubmit="handleSubmit(this)">
       <input type="email" name="entry.374291112" placeholder="your.email@gencon.com" required />
       <button type="submit">🚀 Get Instant Access Now</button>
     </form>
-    
-    <!-- Hidden iframe for form submission -->
-    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
     
     <!-- Hidden iframe for form submission -->
     <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="handleFormResponse()"></iframe>
@@ -1156,14 +1153,14 @@
       <span class="urgent-blink">Limited spots remaining!</span>
     </p>
     
-    <!-- Second Google Form (same configuration) -->
+    <!-- Updated Second Google Form -->
     <form action="https://docs.google.com/forms/d/e/1FAIpQLSeHgLeSdOWZBVGzjmphBN5WNNyZTy8hRqX9ZTrJHaPExGg-Uw/formResponse" method="POST" target="hidden_iframe2" onsubmit="handleSubmit(this)" style="margin-top: 1.5rem;">
       <input type="email" name="entry.374291112" placeholder="your.email@gencon.com" required />
       <button type="submit">🔥 Claim My Free Access</button>
     </form>
     
     <!-- Hidden iframe for second form -->
-    <iframe name="hidden_iframe2" id="hidden_iframe2" style="display:none;"></iframe>
+    <iframe name="hidden_iframe2" id="hidden_iframe2" style="display:none;" onload="handleFormResponse()"></iframe>
 
   </div>
 
@@ -1222,6 +1219,12 @@
       
       // Don't prevent form submission
       return true;
+    }
+    
+    // Handle form response (called when iframe loads)
+    function handleFormResponse() {
+      // Form was successfully submitted to Google Forms
+      console.log('Form submitted successfully to Google Forms');
     }
     
     // Countdown timer - ends August 3rd, 2025 at 11:59:59 PM
