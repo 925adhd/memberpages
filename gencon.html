@@ -1095,9 +1095,9 @@
       <strong>Usually $9.25/month</strong> — <span style="color: var(--accent-success); font-weight: 900;">FREE for GenCon weekend</span>
     </p>
     
-    <!-- Google Form Integration - SIMPLIFIED -->
-    <form action="https://docs.google.com/forms/d/e/1FAIpQLSeHgLeSdOWZBVGzjmphBN5WNNyZTy8hRqX9ZTrJHaPExGg-Uw/formResponse" method="POST" target="hidden_iframe" onsubmit="showSuccessMessage(this);">
-      <input type="email" name="entry.374291112" placeholder="your.email@gencon.com" required />
+    <!-- Google Form Integration - CORS-Safe Method -->
+    <form id="signup-form-1" onsubmit="submitFormWithRedirect(this, event);">
+      <input type="email" id="email-1" placeholder="your.email@gencon.com" required />
       <button type="submit">🚀 Get Instant Access Now</button>
     </form>
     
@@ -1154,13 +1154,11 @@
     </p>
     
     <!-- Second Google Form (same configuration) -->
-    <form action="https://docs.google.com/forms/d/e/1FAIpQLSeHgLeSdOWZBVGzjmphBN5WNNyZTy8hRqX9ZTrJHaPExGg-Uw/formResponse" method="POST" target="hidden_iframe2" onsubmit="showSuccessMessage(this);" style="margin-top: 1.5rem;">
-      <input type="email" name="entry.374291112" placeholder="your.email@gencon.com" required />
+    <form id="signup-form-2" onsubmit="submitFormWithRedirect(this, event);" style="margin-top: 1.5rem;">
+      <input type="email" id="email-2" placeholder="your.email@gencon.com" required />
       <button type="submit">🔥 Claim My Free Access</button>
     </form>
-    
-    <!-- Hidden iframe for second form -->
-    <iframe name="hidden_iframe2" id="hidden_iframe2" style="display:none;" onload="handleFormResponse()"></iframe>
+
   </div>
 
   <!-- Screenshot Modal -->
@@ -1206,18 +1204,47 @@
       updateSignupDisplays();
     }
     
-    // Simple form success handler - doesn't interfere with submission
-    function showSuccessMessage(form) {
-      // Increment counter immediately
-      incrementSignupCounter();
+    // CORS-safe form submission method
+    function submitFormWithRedirect(form, event) {
+      event.preventDefault(); // Stop the default form submission
       
-      // Show success message after a short delay (form needs time to submit)
+      // Get the email value
+      const emailInput = form.querySelector('input[type="email"]');
+      const email = emailInput.value;
+      
+      if (!email) {
+        alert('Please enter an email address');
+        return false;
+      }
+      
+      // Show success message immediately
+      incrementSignupCounter();
+      form.innerHTML = '<div class="success-message">🎉 Success! Check your email for instant access!<br><small style="margin-top: 1rem; display: block; opacity: 0.9;">You can also access the app directly at <a href="https://app.925adhd.com" target="_blank" style="color: white; text-decoration: underline;">app.925adhd.com</a></small></div>';
+      
+      // Submit to Google Forms in background using a hidden form
+      const hiddenForm = document.createElement('form');
+      hiddenForm.action = 'https://docs.google.com/forms/d/e/1FAIpQLSeHgLeSdOWZBVGzjmphBN5WNNyZTy8hRqX9ZTrJHaPExGg-Uw/formResponse';
+      hiddenForm.method = 'POST';
+      hiddenForm.target = '_blank'; // Opens in new tab
+      hiddenForm.style.display = 'none';
+      
+      const hiddenEmailInput = document.createElement('input');
+      hiddenEmailInput.type = 'email';
+      hiddenEmailInput.name = 'entry.374291112';
+      hiddenEmailInput.value = email;
+      
+      hiddenForm.appendChild(hiddenEmailInput);
+      document.body.appendChild(hiddenForm);
+      
+      // Submit and immediately close the new tab
+      hiddenForm.submit();
+      
+      // Clean up
       setTimeout(() => {
-        form.innerHTML = '<div class="success-message">🎉 Success! Check your email for instant access!<br><small style="margin-top: 1rem; display: block; opacity: 0.9;">You can also access the app directly at <a href="https://app.925adhd.com" target="_blank" style="color: white; text-decoration: underline;">app.925adhd.com</a></small></div>';
+        document.body.removeChild(hiddenForm);
       }, 1000);
       
-      // Don't prevent form submission - let it go to Google Forms
-      return true;
+      return false;
     }
     
     // Countdown timer - ends August 3rd, 2025 at 11:59:59 PM
