@@ -1095,8 +1095,8 @@
       <strong>Usually $9.25/month</strong> — <span style="color: var(--accent-success); font-weight: 900;">FREE for GenCon weekend</span>
     </p>
     
-    <!-- Google Form Integration -->
-    <form action="https://docs.google.com/forms/d/e/1FAIpQLSeHgLeSdOWZBVGzjmphBN5WNNyZTy8hRqX9ZTrJHaPExGg-Uw/formResponse" method="POST" target="hidden_iframe" onsubmit="return submitToGoogle(this);">
+    <!-- Google Form Integration - SIMPLIFIED -->
+    <form action="https://docs.google.com/forms/d/e/1FAIpQLSeHgLeSdOWZBVGzjmphBN5WNNyZTy8hRqX9ZTrJHaPExGg-Uw/formResponse" method="POST" target="hidden_iframe" onsubmit="showSuccessMessage(this);">
       <input type="email" name="entry.374291112" placeholder="your.email@gencon.com" required />
       <button type="submit">🚀 Get Instant Access Now</button>
     </form>
@@ -1154,7 +1154,7 @@
     </p>
     
     <!-- Second Google Form (same configuration) -->
-    <form action="https://docs.google.com/forms/d/e/1FAIpQLSeHgLeSdOWZBVGzjmphBN5WNNyZTy8hRqX9ZTrJHaPExGg-Uw/formResponse" method="POST" target="hidden_iframe2" onsubmit="return submitToGoogle(this);" style="margin-top: 1.5rem;">
+    <form action="https://docs.google.com/forms/d/e/1FAIpQLSeHgLeSdOWZBVGzjmphBN5WNNyZTy8hRqX9ZTrJHaPExGg-Uw/formResponse" method="POST" target="hidden_iframe2" onsubmit="showSuccessMessage(this);" style="margin-top: 1.5rem;">
       <input type="email" name="entry.374291112" placeholder="your.email@gencon.com" required />
       <button type="submit">🔥 Claim My Free Access</button>
     </form>
@@ -1192,34 +1192,8 @@
   <div style="height: 120px; background: transparent;"></div>
 
   <script>
-    // Google Sheets API configuration
-    const GOOGLE_SHEETS_API_KEY = 'YOUR_API_KEY_HERE'; // Replace with your API key
-    const SPREADSHEET_ID = 'YOUR_SPREADSHEET_ID_HERE'; // Replace with your spreadsheet ID
-    const RANGE = 'Form Responses 1!A:A'; // Range to count (column A)
-    
-    // Real signup counter - gets actual count from Google Sheets
+    // Simple signup counter
     let currentSignupCount = 0;
-    let isSubmitting = false;
-    
-    // Fetch real count from Google Sheets
-    async function fetchRealSignupCount() {
-      try {
-        const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${RANGE}?key=${GOOGLE_SHEETS_API_KEY}`);
-        const data = await response.json();
-        
-        if (data.values) {
-          // Subtract 1 for header row, or adjust as needed
-          currentSignupCount = Math.max(0, data.values.length - 1);
-        } else {
-          currentSignupCount = 0;
-        }
-        
-        updateSignupDisplays();
-      } catch (error) {
-        console.log('Unable to fetch signup count, using manual count');
-        // Fallback to manual incrementing if API fails
-      }
-    }
     
     function updateSignupDisplays() {
       document.getElementById('signups').textContent = currentSignupCount.toLocaleString();
@@ -1232,56 +1206,18 @@
       updateSignupDisplays();
     }
     
-    // Google Forms submission handler with better debugging
-    function submitToGoogle(form) {
-      if (isSubmitting) return false;
-      
-      // Check if offer is still active
-      if (!isOfferActive()) {
-        form.innerHTML = '<div style="color: var(--accent-danger); text-align: center; font-weight: 700; font-size: 1.2rem; padding: 2rem;">❌ Sorry, this offer has expired!</div>';
-        return false;
-      }
-      
-      isSubmitting = true;
-      
-      // Add loading state
-      form.classList.add('loading');
-      const button = form.querySelector('button');
-      const originalButtonText = button.textContent;
-      button.textContent = '⏳ Submitting...';
-      
-      // Get email for debugging
-      const email = form.querySelector('input[type="email"]').value;
-      console.log('Submitting email:', email);
-      
-      // Allow form to submit to Google
-      return true;
-    }
-    
-    // Handle form response after Google submission
-    function handleFormResponse() {
-      if (!isSubmitting) return;
-      
-      console.log('Form submitted successfully!');
-      
-      // Increment counter (will be replaced by real count on next fetch)
+    // Simple form success handler - doesn't interfere with submission
+    function showSuccessMessage(form) {
+      // Increment counter immediately
       incrementSignupCounter();
       
-      // Fetch updated count from Google Sheets
+      // Show success message after a short delay (form needs time to submit)
       setTimeout(() => {
-        fetchRealSignupCount();
-      }, 2000); // Wait 2 seconds for Google to process
+        form.innerHTML = '<div class="success-message">🎉 Success! Check your email for instant access!<br><small style="margin-top: 1rem; display: block; opacity: 0.9;">You can also access the app directly at <a href="https://app.925adhd.com" target="_blank" style="color: white; text-decoration: underline;">app.925adhd.com</a></small></div>';
+      }, 1000);
       
-      // Find the form that was just submitted
-      const forms = document.querySelectorAll('form');
-      forms.forEach(form => {
-        if (form.classList.contains('loading')) {
-          // Show success message
-          form.innerHTML = '<div class="success-message">🎉 Success! Check your email for instant access!<br><small style="margin-top: 1rem; display: block; opacity: 0.9;">You can also access the app directly at <a href="https://app.925adhd.com" target="_blank" style="color: white; text-decoration: underline;">app.925adhd.com</a></small></div>';
-        }
-      });
-      
-      isSubmitting = false;
+      // Don't prevent form submission - let it go to Google Forms
+      return true;
     }
     
     // Countdown timer - ends August 3rd, 2025 at 11:59:59 PM
@@ -1323,21 +1259,9 @@
       }
     }
     
-    // Check if we're in the valid date range (July 24 - August 3, 2025)
-    function isOfferActive() {
-      const now = new Date();
-      const startDate = new Date('July 24, 2025 00:00:00');
-      const endDate = new Date('August 3, 2025 23:59:59');
-      return now >= startDate && now <= endDate;
-    }
-    
     // Update countdown every second
     setInterval(updateCountdown, 1000);
     updateCountdown();
-    
-    // Fetch real signup count every 30 seconds
-    fetchRealSignupCount();
-    setInterval(fetchRealSignupCount, 30000);
 
     // Screenshot modal functionality
     function openScreenshotModal() {
