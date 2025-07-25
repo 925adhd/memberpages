@@ -536,16 +536,107 @@
             color: var(--purple);
             margin-bottom: 15px;
         }
+
+        /* Progress indicator */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--blue), var(--green));
+            z-index: 1001;
+            transition: width 0.3s ease;
+        }
+
+        /* Break reminder */
+        .break-reminder {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--bg-card);
+            border: 2px solid var(--green);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            z-index: 1002;
+            display: none;
+            max-width: 400px;
+        }
+
+        .break-reminder h3 {
+            color: var(--green);
+            margin-bottom: 15px;
+        }
+
+        .break-reminder button {
+            background: var(--green);
+            color: var(--bg-dark);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .break-reminder button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Floating elements */
+        .floating-tip {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--blue);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 300px;
+            z-index: 1000;
+            display: none;
+        }
     </style>
 </head>
 <body>
+    <!-- Progress bar -->
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <!-- Break reminder modal -->
+    <div class="break-reminder" id="breakReminder">
+        <h3>🧠 Time for a Brain Break?</h3>
+        <p>You've been reading for 15 minutes. ADHD brains work better with breaks!</p>
+        <p><strong>Take 2-3 minutes to:</strong> stretch, hydrate, or just breathe</p>
+        <button onclick="dismissBreakReminder()">I'll take a break!</button>
+        <button onclick="continueReading()">Keep reading</button>
+    </div>
+
     <div class="container">
         <h1>📊 <span class="gradient-text">ADHD-Friendly Guide to Surveys & Market Research</span></h1>
         
         <div class="card tip" style="text-align: center; margin: 20px 0;">
+            <h3>⏱️ Time to Read</h3>
+            <p><strong>📖 Full Read:</strong> 20-25 minutes (comprehensive guide)</p>
+            <p><strong>⚡ Quick Skim:</strong> 7-10 minutes (key sections only)</p>
+            <p><strong>🎯 Just Getting Started:</strong> 4 minutes (jump to Action Plan)</p>
+        </div>
+
+        <div class="card tip" style="text-align: center; margin: 20px 0;">
             <h3>📅 Updated for 2025</h3>
             <p><strong>Realistic Supplemental Income Strategies</strong></p>
             <p>Honest expectations, real earnings, and ADHD-specific strategies that actually work</p>
+        </div>
+
+        <div class="card adhd" style="text-align: center; margin: 20px 0;">
+            <h3>🧠 Choose Your Reading Path</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px;">
+                <a href="#overview" class="big-button" style="text-decoration: none;">🔍 Am I Compatible?</a>
+                <a href="#earnings" class="big-button" style="text-decoration: none;">💰 Show Me Earnings</a>
+                <a href="#platforms" class="big-button" style="text-decoration: none;">📊 Platform Guide</a>
+                <a href="#getting-started" class="big-button" style="text-decoration: none;">🚀 Just Get Started</a>
+            </div>
         </div>
 
         <div class="reality-box">
@@ -556,16 +647,21 @@
         </div>
 
         <div class="quick-nav">
-            <h3 style="text-align: center; color: var(--blue); margin-bottom: 15px;">📋 Quick Navigation</h3>
+            <h3 style="text-align: center; color: var(--blue); margin-bottom: 15px;">📋 Section Guide & Time Estimates</h3>
+            <p style="text-align: center; margin-bottom: 20px; color: var(--text-light);">Each section includes estimated reading time to help you plan your focus</p>
             <div class="nav-grid">
-                <a href="#overview" class="nav-item">🎯 Is This Right for You?</a>
-                <a href="#earnings" class="nav-item">💰 Realistic Earnings</a>
-                <a href="#platforms" class="nav-item">🔍 Platform Comparison</a>
-                <a href="#adhd-strategies" class="nav-item">⚡ ADHD Strategies</a>
-                <a href="#focus-techniques" class="nav-item">🎯 Focus Techniques</a>
-                <a href="#time-management" class="nav-item">⏰ Time Management</a>
-                <a href="#real-experiences" class="nav-item">📝 Real Experiences</a>
-                <a href="#getting-started" class="nav-item">🚀 Action Plan</a>
+                <a href="#overview" class="nav-item">🎯 Is This Right for You?<br><small>⏱️ 3-4 min</small></a>
+                <a href="#earnings" class="nav-item">💰 Realistic Earnings<br><small>⏱️ 4-5 min</small></a>
+                <a href="#platforms" class="nav-item">🔍 Platform Comparison<br><small>⏱️ 5-6 min</small></a>
+                <a href="#adhd-strategies" class="nav-item">⚡ ADHD Strategies<br><small>⏱️ 3-4 min</small></a>
+                <a href="#focus-techniques" class="nav-item">🎯 Focus Techniques<br><small>⏱️ 2-3 min</small></a>
+                <a href="#time-management" class="nav-item">⏰ Time Management<br><small>⏱️ 3-4 min</small></a>
+                <a href="#real-experiences" class="nav-item">📝 Real Experiences<br><small>⏱️ 2-3 min</small></a>
+                <a href="#getting-started" class="nav-item">🚀 Action Plan<br><small>⏱️ 4-5 min</small></a>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px; padding: 15px; background: rgba(67, 233, 123, 0.1); border-radius: 10px;">
+                <p style="margin: 0; color: var(--green); font-weight: 600;">💡 ADHD Tip: Pick 2-3 sections that interest you most, then come back for the rest later!</p>
             </div>
         </div>
 
@@ -1088,6 +1184,48 @@
     </div>
 
     <script>
+        // Progress tracking
+        let startTime = Date.now();
+        let breakReminderShown = false;
+
+        // Update progress bar based on scroll position
+        function updateProgressBar() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('progressBar').style.width = scrollPercent + '%';
+        }
+
+        // Break reminder after 15 minutes
+        function checkBreakReminder() {
+            const currentTime = Date.now();
+            const readingTime = (currentTime - startTime) / 1000 / 60; // in minutes
+            
+            if (readingTime >= 15 && !breakReminderShown) {
+                document.getElementById('breakReminder').style.display = 'block';
+                breakReminderShown = true;
+            }
+        }
+
+        // Break reminder functions
+        function dismissBreakReminder() {
+            document.getElementById('breakReminder').style.display = 'none';
+            startTime = Date.now(); // Reset timer
+            breakReminderShown = false;
+            showFloatingMessage('✨ Great choice! Your brain will thank you.');
+        }
+
+        function continueReading() {
+            document.getElementById('breakReminder').style.display = 'none';
+            setTimeout(() => {
+                breakReminderShown = false; // Allow reminder again in 15 minutes
+            }, 900000); // 15 minutes
+        }
+
+        // Event listeners for progress tracking
+        window.addEventListener('scroll', updateProgressBar);
+        setInterval(checkBreakReminder, 60000); // Check every minute
+
         // Simple smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1132,30 +1270,6 @@
             });
         });
 
-        // Progress tracking for checklist completion
-        let checkedItems = 0;
-        const totalItems = document.querySelectorAll('.check-item').length;
-
-        document.querySelectorAll('.check-item').forEach(item => {
-            item.addEventListener('click', function() {
-                const checkbox = this.querySelector('.checkbox');
-                if (checkbox.style.backgroundColor === 'rgb(67, 233, 123)') {
-                    checkedItems--;
-                } else {
-                    checkedItems++;
-                }
-                
-                // Show encouragement messages
-                if (checkedItems === totalItems) {
-                    showFloatingMessage('🎉 Amazing! You\'ve completed all checklist items!');
-                } else if (checkedItems === Math.floor(totalItems / 2)) {
-                    showFloatingMessage('🚀 Great progress! You\'re halfway there!');
-                } else if (checkedItems === 1) {
-                    showFloatingMessage('✨ Great start! Keep going!');
-                }
-            });
-        });
-
         // Floating message system
         function showFloatingMessage(message) {
             const messageDiv = document.createElement('div');
@@ -1196,6 +1310,30 @@
                 }
             }, 4000);
         }
+
+        // Progress tracking for checklist completion
+        let checkedItems = 0;
+        const totalItems = document.querySelectorAll('.check-item').length;
+
+        document.querySelectorAll('.check-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const checkbox = this.querySelector('.checkbox');
+                if (checkbox.style.backgroundColor === 'rgb(67, 233, 123)') {
+                    checkedItems--;
+                } else {
+                    checkedItems++;
+                }
+                
+                // Show encouragement messages
+                if (checkedItems === totalItems) {
+                    showFloatingMessage('🎉 Amazing! You\'ve completed all checklist items!');
+                } else if (checkedItems === Math.floor(totalItems / 2)) {
+                    showFloatingMessage('🚀 Great progress! You\'re halfway there!');
+                } else if (checkedItems === 1) {
+                    showFloatingMessage('✨ Great start! Keep going!');
+                }
+            });
+        });
 
         // Platform highlighting based on ADHD rating
         document.querySelectorAll('.platform-box').forEach(box => {
@@ -1258,6 +1396,9 @@
         document.addEventListener('DOMContentLoaded', function() {
             setTimeout(createPayCalculator, 1000);
         });
+
+        // Initialize progress bar
+        updateProgressBar();
     </script>
 </body>
 </html>
