@@ -460,6 +460,54 @@
             display: none;
         }
 
+        /* Progress indicator */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--blue), var(--green));
+            z-index: 1001;
+            transition: width 0.3s ease;
+        }
+
+        /* Break reminder */
+        .break-reminder {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--bg-card);
+            border: 2px solid var(--green);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            z-index: 1002;
+            display: none;
+            max-width: 400px;
+        }
+
+        .break-reminder h3 {
+            color: var(--green);
+            margin-bottom: 15px;
+        }
+
+        .break-reminder button {
+            background: var(--green);
+            color: var(--bg-dark);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .break-reminder button:hover {
+            transform: scale(1.05);
+        }
+
         /* Enhanced timeline */
         .timeline {
             margin: 30px 0;
@@ -547,13 +595,42 @@
     </style>
 </head>
 <body>
+    <!-- Progress bar -->
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <!-- Break reminder modal -->
+    <div class="break-reminder" id="breakReminder">
+        <h3>🧠 Time for a Brain Break?</h3>
+        <p>You've been reading for 15 minutes. ADHD brains work better with breaks!</p>
+        <p><strong>Take 2-3 minutes to:</strong> stretch, hydrate, or just breathe</p>
+        <button onclick="dismissBreakReminder()">I'll take a break!</button>
+        <button onclick="continueReading()">Keep reading</button>
+    </div>
+
     <div class="container">
         <h1>⚡ <span class="gradient-text">ADHD-Friendly Guide to Remote Transcription</span></h1>
         
+        <div class="card tip" style="text-align: center; margin: 20px 0;">
+            <h3>⏱️ Time to Read</h3>
+            <p><strong>📖 Full Read:</strong> 25-30 minutes (comprehensive guide)</p>
+            <p><strong>⚡ Quick Skim:</strong> 8-12 minutes (key sections only)</p>
+            <p><strong>🎯 Just Getting Started:</strong> 5 minutes (jump to Action Plan)</p>
+        </div>
+
         <div class="card warning" style="text-align: center; margin: 20px 0;">
             <h3>📅 Updated for 2025</h3>
             <p><strong>Realistic Income in a Changing Field</strong></p>
             <p>Honest expectations about AI impact, current earnings, and your ADHD advantages</p>
+        </div>
+
+        <div class="card adhd" style="text-align: center; margin: 20px 0;">
+            <h3>🧠 Choose Your Reading Path</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px;">
+                <a href="#overview" class="big-button" style="text-decoration: none;">🔍 Learn the Basics</a>
+                <a href="#earnings" class="big-button" style="text-decoration: none;">💰 Show Me the Money</a>
+                <a href="#adhd-strategies" class="big-button" style="text-decoration: none;">⚡ ADHD Success Tips</a>
+                <a href="#getting-started" class="big-button" style="text-decoration: none;">🚀 Just Get Started</a>
+            </div>
         </div>
 
         <div class="reality-box">
@@ -564,16 +641,21 @@
         </div>
 
         <div class="quick-nav">
-            <h3 style="text-align: center; color: var(--blue); margin-bottom: 15px;">📋 Quick Navigation</h3>
+            <h3 style="text-align: center; color: var(--blue); margin-bottom: 15px;">📋 Section Guide & Time Estimates</h3>
+            <p style="text-align: center; margin-bottom: 20px; color: var(--text-light);">Each section includes estimated reading time to help you plan your focus</p>
             <div class="nav-grid">
-                <a href="#overview" class="nav-item">🎯 ADHD & Transcription Today</a>
-                <a href="#earnings" class="nav-item">💰 Realistic Earnings</a>
-                <a href="#ai-impact" class="nav-item">🤖 AI Reality</a>
-                <a href="#skills" class="nav-item">🔧 Essential Skills</a>
-                <a href="#adhd-strategies" class="nav-item">⚡ ADHD Strategies</a>
-                <a href="#specializations" class="nav-item">🎓 Specialization Options</a>
-                <a href="#future-proof" class="nav-item">🚀 Future-Proofing</a>
-                <a href="#getting-started" class="nav-item">📝 Action Plan</a>
+                <a href="#overview" class="nav-item">🎯 ADHD & Transcription Today<br><small>⏱️ 4-5 min</small></a>
+                <a href="#earnings" class="nav-item">💰 Realistic Earnings<br><small>⏱️ 6-8 min</small></a>
+                <a href="#ai-impact" class="nav-item">🤖 AI Reality<br><small>⏱️ 4-5 min</small></a>
+                <a href="#skills" class="nav-item">🔧 Essential Skills<br><small>⏱️ 5-6 min</small></a>
+                <a href="#adhd-strategies" class="nav-item">⚡ ADHD Strategies<br><small>⏱️ 8-10 min</small></a>
+                <a href="#specializations" class="nav-item">🎓 Specialization Options<br><small>⏱️ 3-4 min</small></a>
+                <a href="#future-proof" class="nav-item">🚀 Future-Proofing<br><small>⏱️ 3-4 min</small></a>
+                <a href="#getting-started" class="nav-item">📝 Action Plan<br><small>⏱️ 6-8 min</small></a>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px; padding: 15px; background: rgba(67, 233, 123, 0.1); border-radius: 10px;">
+                <p style="margin: 0; color: var(--green); font-weight: 600;">💡 ADHD Tip: Pick 2-3 sections that interest you most, then come back for the rest later!</p>
             </div>
         </div>
 
@@ -1337,6 +1419,48 @@
     </div>
 
     <script>
+        // Progress tracking
+        let startTime = Date.now();
+        let breakReminderShown = false;
+
+        // Update progress bar based on scroll position
+        function updateProgressBar() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('progressBar').style.width = scrollPercent + '%';
+        }
+
+        // Break reminder after 15 minutes
+        function checkBreakReminder() {
+            const currentTime = Date.now();
+            const readingTime = (currentTime - startTime) / 1000 / 60; // in minutes
+            
+            if (readingTime >= 15 && !breakReminderShown) {
+                document.getElementById('breakReminder').style.display = 'block';
+                breakReminderShown = true;
+            }
+        }
+
+        // Break reminder functions
+        function dismissBreakReminder() {
+            document.getElementById('breakReminder').style.display = 'none';
+            startTime = Date.now(); // Reset timer
+            breakReminderShown = false;
+            showFloatingTip('✨ Great choice! Your brain will thank you.');
+        }
+
+        function continueReading() {
+            document.getElementById('breakReminder').style.display = 'none';
+            setTimeout(() => {
+                breakReminderShown = false; // Allow reminder again in 15 minutes
+            }, 900000); // 15 minutes
+        }
+
+        // Event listeners for progress tracking
+        window.addEventListener('scroll', updateProgressBar);
+        setInterval(checkBreakReminder, 60000); // Check every minute
+
         // Simple smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1408,7 +1532,7 @@
             });
         });
 
-        // Progress tracking
+        // Checklist progress tracking
         let checkedItems = 0;
         document.querySelectorAll('.check-item').forEach(item => {
             item.addEventListener('click', function() {
@@ -1426,6 +1550,9 @@
                 }
             });
         });
+
+        // Initialize progress bar
+        updateProgressBar();
     </script>
 </body>
 </html>
