@@ -882,7 +882,7 @@
       </p>
     </div>
     
-    <!-- ✅ Beautiful Custom Form - Fixed Zapier Integration with UPPERCASE keys -->
+    <!-- ✅ Beautiful Custom Form - Google Apps Script Integration -->
     <form id="genconForm" onsubmit="handleCustomFormSubmit(event)">
       <input type="email" id="emailInput" placeholder="your.email@gencon.com" required />
       <button type="submit" id="submitBtn">🚀 Get Instant Access Now</button>
@@ -950,7 +950,7 @@
     let currentSignupCount = 0; // Will be updated from Google Sheets
     const GOOGLE_API_KEY = 'AIzaSyB6yM6mhpo42HsVHnbM02nGbUoIf1hS0Rw';
     const SHEET_ID = '1nEaFN7dr4FY8Ae5RHUCjkQmUko00pF0rs9fifAWiwSA';
-    const RANGE = 'A:A'; // Column A contains responses
+    const RANGE = 'B:B'; // Column B contains email responses
     
     function updateSignupDisplays() {
       document.getElementById('signups').textContent = currentSignupCount.toLocaleString();
@@ -991,7 +991,7 @@
       }
     }
     
-    // ✅ FIXED: CORS-friendly Zapier Integration using FormData with UPPERCASE keys
+    // ✅ Google Apps Script Integration - Direct to Google Sheets
     async function handleCustomFormSubmit(event) {
       event.preventDefault();
       
@@ -1006,40 +1006,41 @@
       submitBtn.innerHTML = '⏳ Submitting...';
       
       try {
-        // Create FormData (CORS-friendly for Zapier) with UPPERCASE keys
-        const formData = new FormData();
-        formData.append('Email', email);                    // ← UPPERCASE: "Email"
-        formData.append('Timestamp', new Date().toISOString()); // ← UPPERCASE: "Timestamp"
-        formData.append('Source', 'GenCon Landing Page');       // ← UPPERCASE: "Source"
-        
-        // Send FormData to Zapier webhook (no Content-Type header needed)
-        const response = await fetch('https://hooks.zapier.com/hooks/catch/23232797/uusz3cp/', {
+        // Send to Google Apps Script (no FormData needed, just URL parameters)
+        const response = await fetch('https://script.google.com/macros/s/AKfycbxmgVT3IggKu1O1wds0IY9qmZ7Oie8E5zCPUCy5asWR5_PErjQqG5OClUI4oTNV05oWgA/exec', {
           method: 'POST',
-          body: formData // No headers needed - browser sets the right Content-Type automatically
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: new URLSearchParams({
+            email: email,
+            timestamp: new Date().toISOString(),
+            source: 'GenCon Landing Page'
+          })
         });
         
-        console.log('Zapier response status:', response.status);
-        console.log('Zapier response OK:', response.ok);
+        console.log('Google Apps Script response status:', response.status);
+        console.log('Google Apps Script response OK:', response.ok);
         
         if (response.ok) {
           // Show success message
           form.style.display = 'none';
           successMessage.style.display = 'block';
-          console.log('✅ Email successfully sent to Zapier:', email);
+          console.log('✅ Email successfully sent to Google Apps Script:', email);
           
           // Update the signup counter immediately (optimistic update)
           currentSignupCount++;
           updateSignupDisplays();
           
-          // Refresh the real count from Google Sheets after Zapier processes it
-          setTimeout(fetchRealResponseCount, 5000); // Wait 5 seconds for Zapier to process
+          // Refresh the real count from Google Sheets after processing
+          setTimeout(fetchRealResponseCount, 3000); // Wait 3 seconds for Google Apps Script to process
           
         } else {
-          throw new Error(`Zapier webhook returned status ${response.status}`);
+          throw new Error(`Google Apps Script returned status ${response.status}`);
         }
         
       } catch (error) {
-        console.error('❌ Error submitting to Zapier:', error);
+        console.error('❌ Error submitting to Google Apps Script:', error);
         
         // Reset button state
         submitBtn.disabled = false;
