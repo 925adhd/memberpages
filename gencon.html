@@ -829,6 +829,18 @@
       color: var(--text-secondary);
       margin-bottom: 1rem;
     }
+
+    /* Success message styling */
+    .success-message {
+      background: var(--gradient-success);
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.5);
+    }
   </style>
 </head>
 <body>
@@ -870,7 +882,7 @@
       </p>
     </div>
     
-    <!-- ✅ Beautiful Custom Form - No More Ugly Google Forms! -->
+    <!-- ✅ Beautiful Custom Form - Fixed Zapier Integration -->
     <form id="genconForm" onsubmit="handleCustomFormSubmit(event)">
       <input type="email" id="emailInput" placeholder="your.email@gencon.com" required />
       <button type="submit" id="submitBtn">🚀 Get Instant Access Now</button>
@@ -979,8 +991,8 @@
       }
     }
     
-    // CORS-friendly form submission using hidden iframe method
-    function handleCustomFormSubmit(event) {
+    // ✅ FIXED: Proper Zapier Integration with JSON Data
+    async function handleCustomFormSubmit(event) {
       event.preventDefault();
       
       const form = document.getElementById('genconForm');
@@ -993,49 +1005,50 @@
       submitBtn.disabled = true;
       submitBtn.innerHTML = '⏳ Submitting...';
       
-      // Create hidden form that submits to Zapier
-      const hiddenForm = document.createElement('form');
-      hiddenForm.method = 'POST';
-      hiddenForm.action = 'https://hooks.zapier.com/hooks/catch/23232797/uusz3cp/';
-      hiddenForm.target = 'zapier_iframe';
-      hiddenForm.style.display = 'none';
-      
-      // Add email field
-      const emailField = document.createElement('input');
-      emailField.type = 'email';
-      emailField.name = 'email';
-      emailField.value = email;
-      hiddenForm.appendChild(emailField);
-      
-      // Add timestamp field
-      const timestampField = document.createElement('input');
-      timestampField.type = 'hidden';
-      timestampField.name = 'timestamp';
-      timestampField.value = new Date().toISOString();
-      hiddenForm.appendChild(timestampField);
-      
-      // Create hidden iframe
-      const iframe = document.createElement('iframe');
-      iframe.name = 'zapier_iframe';
-      iframe.style.display = 'none';
-      
-      // Add to page
-      document.body.appendChild(hiddenForm);
-      document.body.appendChild(iframe);
-      
-      // Submit form
-      hiddenForm.submit();
-      
-      // Show success after short delay (assume it worked)
-      setTimeout(() => {
-        form.style.display = 'none';
-        successMessage.style.display = 'block';
-        console.log('✅ Email submitted to Zapier via iframe:', email);
+      try {
+        // Send JSON data to your Zapier webhook
+        const response = await fetch('https://hooks.zapier.com/hooks/catch/23232797/uusz3cp/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: email,
+            timestamp: new Date().toISOString(),
+            source: 'GenCon Landing Page'
+          })
+        });
         
-        // Clean up
-        document.body.removeChild(hiddenForm);
-        document.body.removeChild(iframe);
-      }, 1000);
+        console.log('Zapier response status:', response.status);
+        console.log('Zapier response OK:', response.ok);
+        
+        if (response.ok) {
+          // Show success message
+          form.style.display = 'none';
+          successMessage.style.display = 'block';
+          console.log('✅ Email successfully sent to Zapier:', email);
+          
+          // Update the signup counter immediately (optimistic update)
+          currentSignupCount++;
+          updateSignupDisplays();
+          
+          // Refresh the real count from Google Sheets after Zapier processes it
+          setTimeout(fetchRealResponseCount, 5000); // Wait 5 seconds for Zapier to process
+          
+        } else {
+          throw new Error(`Zapier webhook returned status ${response.status}`);
+        }
+        
+      } catch (error) {
+        console.error('❌ Error submitting to Zapier:', error);
+        
+        // Reset button state
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '🚀 Get Instant Access Now';
+        
+        // Show user-friendly error message
+        alert('There was an issue submitting your email. Please try again or contact spicycoordinator@925adhd.com');
+      }
     }
     
     // Update count every 30 seconds for real-time accuracy
@@ -1105,30 +1118,8 @@
     window.addEventListener('resize', handleStickyButtonVisibility);
     handleStickyButtonVisibility();
     
-    // Attempt to adjust iframe height after form submission
-    function adjustIframeHeight() {
-      const iframe = document.querySelector('iframe[src*="docs.google.com/forms"]');
-      if (iframe) {
-        // Try to detect if content has changed (form submitted)
-        // This is limited due to cross-origin restrictions, but we can make educated adjustments
-        setTimeout(() => {
-          // After 2 seconds, assume form might be submitted and reduce height
-          iframe.style.height = '400px';
-        }, 2000);
-        
-        // Listen for any iframe load events
-        iframe.addEventListener('load', function() {
-          setTimeout(() => {
-            // Reduce height after load, assuming it might be the confirmation message
-            this.style.minHeight = '300px';
-            this.style.height = '400px';
-          }, 1000);
-        });
-      }
-    }
-    
-    // Initialize iframe height adjustment
-    setTimeout(adjustIframeHeight, 1000);
+    // Initialize real-time updates
+    startRealTimeUpdates();
   </script>
 </body>
 </html>
