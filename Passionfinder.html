@@ -22,7 +22,6 @@
       --border-bright: rgba(255, 255, 255, 0.2);
       --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.25);
       --shadow-medium: 0 8px 40px rgba(0, 0, 0, 0.35);
-      --shadow-strong: 0 16px 64px rgba(0, 0, 0, 0.45);
       --gradient-primary: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
       --gradient-success: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
       --gradient-adhd: linear-gradient(135deg, #4f46e5 0%, #06b6d4 50%, #10b981 100%);
@@ -35,92 +34,53 @@
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
       background: var(--primary-bg);
       color: var(--text-primary);
       line-height: 1.6;
       overflow-x: hidden;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Background Effects */
+    /* Background Effects - Optimized for embed */
     .bg-gradient {
-      position: fixed;
+      position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
       background: 
-        radial-gradient(ellipse at top, rgba(79, 70, 229, 0.1) 0%, transparent 50%),
-        radial-gradient(ellipse at bottom right, rgba(16, 185, 129, 0.08) 0%, transparent 50%);
+        radial-gradient(ellipse at top, rgba(79, 70, 229, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom right, rgba(16, 185, 129, 0.06) 0%, transparent 50%);
       z-index: -1;
-      animation: gradientShift 20s ease-in-out infinite alternate;
-    }
-
-    @keyframes gradientShift {
-      0% { opacity: 1; }
-      50% { opacity: 0.8; }
-      100% { opacity: 1; }
-    }
-
-    .floating-orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(60px);
-      opacity: 0.12;
-      z-index: -1;
-      animation: float 25s infinite ease-in-out;
-    }
-
-    .orb-1 {
-      width: 300px;
-      height: 300px;
-      background: var(--accent-primary);
-      top: -150px;
-      right: -150px;
-    }
-
-    .orb-2 {
-      width: 250px;
-      height: 250px;
-      background: var(--accent-secondary);
-      bottom: -125px;
-      left: -125px;
-      animation-delay: -12s;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(-30px, -20px) scale(1.05); }
-      66% { transform: translate(30px, -15px) scale(0.95); }
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 100%;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 15px;
+      position: relative;
     }
 
-    /* Header */
-    header {
-      background: rgba(15, 20, 25, 0.95);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border-subtle);
-      padding: 1.5rem 0;
+    /* Header - Simplified for embed */
+    .header {
       text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      padding: 20px 0 15px;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 20px;
     }
 
-    h1 {
-      font-size: 3.2rem;
+    .title {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
       font-weight: 800;
-      line-height: 1.1;
-      margin: 0 0 10px 0;
+      line-height: 1.2;
+      margin: 0 0 8px 0;
       color: var(--text-primary);
     }
 
-    h1 .gradient-text {
+    .title .gradient-text {
       background: var(--gradient-adhd);
       background-size: 200% 200%;
       -webkit-background-clip: text;
@@ -134,61 +94,57 @@
       50% { background-position: 100% 50%; }
     }
 
-    .hero-subtitle {
-      font-size: 1.3rem;
+    .subtitle {
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
       color: var(--text-secondary);
-      margin-bottom: 0;
-      line-height: 1.5;
+      margin: 0;
+      max-width: 600px;
+      margin: 0 auto;
     }
 
     /* Progress Bar */
     .progress-container {
       background: var(--glass-bg);
-      border-radius: 20px;
-      padding: 20px;
-      margin: 20px auto;
-      max-width: 600px;
+      border-radius: 12px;
+      padding: 15px;
+      margin: 15px 0 25px;
       border: 1px solid var(--border-subtle);
     }
 
     .progress-bar {
       width: 100%;
-      height: 8px;
+      height: 6px;
       background: var(--secondary-bg);
-      border-radius: 10px;
+      border-radius: 8px;
       overflow: hidden;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .progress-fill {
       height: 100%;
       background: var(--gradient-primary);
       transition: width 0.5s ease;
-      border-radius: 10px;
+      border-radius: 8px;
     }
 
     .progress-text {
       text-align: center;
       color: var(--text-secondary);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-weight: 600;
     }
 
-    /* Main Section */
-    section {
-      padding: 60px 0;
+    /* Main Content */
+    .main-content {
       position: relative;
-      min-height: 70vh;
-      display: flex;
-      align-items: center;
+      min-height: 50vh;
     }
 
     .form-container {
       background: var(--glass-bg);
-      border: 2px solid var(--border-subtle);
-      border-radius: 20px;
-      padding: 40px;
-      max-width: 800px;
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: clamp(20px, 4vw, 35px);
       margin: 0 auto;
       box-shadow: var(--shadow-medium);
       position: relative;
@@ -202,14 +158,14 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 3px;
+      height: 2px;
       background: var(--gradient-primary);
     }
 
     /* Question Pages */
     .question-page {
       display: none;
-      animation: fadeInUp 0.6s ease-out;
+      animation: fadeInUp 0.5s ease-out;
     }
 
     .question-page.active {
@@ -219,7 +175,7 @@
     @keyframes fadeInUp {
       from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(20px);
       }
       to {
         opacity: 1;
@@ -229,84 +185,95 @@
 
     .question {
       text-align: center;
-      padding: 20px 0;
+      padding: 10px 0;
     }
 
     .question h2 {
-      font-size: 2.2rem;
+      font-size: clamp(1.3rem, 3.5vw, 1.8rem);
       font-weight: 700;
       color: var(--text-primary);
-      margin-bottom: 15px;
+      margin-bottom: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 15px;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     .question h2::before {
       content: '🎯';
-      font-size: 2rem;
+      font-size: clamp(1.3rem, 3vw, 1.6rem);
     }
 
     .question-desc {
       color: var(--text-secondary);
-      font-size: 1.1rem;
-      margin-bottom: 40px;
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+      margin-bottom: 25px;
       font-style: italic;
       max-width: 500px;
       margin-left: auto;
       margin-right: auto;
+      line-height: 1.5;
     }
 
     .options-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      margin-bottom: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .options-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
     }
 
     .option-card {
       background: var(--card-bg);
       border: 2px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 25px;
+      border-radius: 12px;
+      padding: 20px;
       cursor: pointer;
       transition: all 0.3s ease;
       text-align: center;
       position: relative;
-      min-height: 120px;
+      min-height: 100px;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .option-card:hover {
       border-color: var(--accent-primary);
-      transform: translateY(-3px);
+      transform: translateY(-2px);
       box-shadow: var(--shadow-soft);
     }
 
     .option-card.selected {
       border-color: var(--accent-secondary);
-      background: rgba(6, 182, 212, 0.1);
+      background: rgba(6, 182, 212, 0.15);
       box-shadow: var(--shadow-medium);
     }
 
     .option-card .emoji {
-      font-size: 2.5rem;
-      margin-bottom: 15px;
+      font-size: clamp(1.8rem, 4vw, 2.2rem);
+      margin-bottom: 12px;
       display: block;
     }
 
     .option-card .title {
-      font-size: 1.2rem;
+      font-size: clamp(1rem, 2.5vw, 1.1rem);
       font-weight: 700;
       color: var(--text-primary);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
+      line-height: 1.3;
     }
 
     .option-card .desc {
-      font-size: 0.95rem;
+      font-size: clamp(0.85rem, 2vw, 0.9rem);
       color: var(--text-muted);
       line-height: 1.4;
     }
@@ -324,34 +291,52 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 40px;
+      margin-top: 30px;
+      gap: 15px;
+    }
+
+    @media (max-width: 480px) {
+      .nav-buttons {
+        flex-direction: column;
+        gap: 12px;
+      }
     }
 
     .btn {
-      padding: 16px 32px;
+      padding: clamp(12px, 3vw, 16px) clamp(20px, 5vw, 32px);
       border: none;
-      font-size: 1.1rem;
-      font-weight: 700;
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+      font-weight: 600;
       cursor: pointer;
-      border-radius: 12px;
+      border-radius: 10px;
       transition: all 0.3s ease;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
-      min-height: 54px;
+      min-height: 48px;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    @media (max-width: 480px) {
+      .btn {
+        width: 100%;
+        min-height: 50px;
+      }
     }
 
     .btn-primary {
       background: var(--gradient-primary);
       color: white;
       box-shadow: var(--shadow-medium);
-      border: 2px solid rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.2);
     }
 
-    .btn-primary:hover {
+    .btn-primary:hover:not(:disabled) {
       transform: translateY(-2px);
-      box-shadow: var(--shadow-strong);
+      box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4);
     }
 
     .btn-primary:disabled {
@@ -364,23 +349,23 @@
     .btn-secondary {
       background: var(--card-bg);
       color: var(--text-secondary);
-      border: 2px solid var(--border-subtle);
+      border: 1px solid var(--border-subtle);
     }
 
     .btn-secondary:hover {
       border-color: var(--border-bright);
       color: var(--text-primary);
-      transform: translateY(-2px);
+      transform: translateY(-1px);
     }
 
     .btn-restart {
       background: var(--accent-warning);
       color: white;
-      border: 2px solid rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.2);
     }
 
     .btn-restart:hover {
-      transform: translateY(-2px);
+      transform: translateY(-1px);
       box-shadow: var(--shadow-soft);
     }
 
@@ -391,91 +376,160 @@
 
     .results-page.active {
       display: block;
-      animation: fadeInUp 0.8s ease-out;
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    .results-header {
+      text-align: center;
+      margin-bottom: 30px;
     }
 
     .results h3 {
-      font-size: 2.5rem;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
       font-weight: 700;
       color: var(--accent-success);
-      margin-bottom: 30px;
+      margin-bottom: 15px;
+    }
+
+    .results-summary {
+      background: var(--glass-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 25px;
       text-align: center;
     }
 
+    .next-steps {
+      color: var(--text-secondary);
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+      line-height: 1.6;
+    }
+
     .category-section {
-      margin-bottom: 40px;
+      margin-bottom: 30px;
     }
 
     .category-title {
-      font-size: 1.5rem;
+      font-size: clamp(1.2rem, 3vw, 1.4rem);
       font-weight: 600;
       color: var(--accent-secondary);
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       display: flex;
       align-items: center;
       gap: 10px;
       text-align: center;
       justify-content: center;
+      flex-wrap: wrap;
     }
 
     .platform-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 15px;
+    }
+
+    @media (max-width: 768px) {
+      .platform-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
     }
 
     .platform-card {
       background: var(--card-bg);
       border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 20px;
+      border-radius: 12px;
+      padding: 18px;
       transition: all 0.3s ease;
-      text-align: center;
       position: relative;
     }
 
     .platform-card:hover {
-      transform: translateY(-3px);
+      transform: translateY(-2px);
       border-color: var(--accent-secondary);
       box-shadow: var(--shadow-soft);
     }
 
+    .platform-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      gap: 10px;
+    }
+
     .platform-name {
-      font-weight: 600;
+      font-weight: 700;
       color: var(--text-primary);
-      margin-bottom: 8px;
-      font-size: 1.2rem;
+      font-size: clamp(1rem, 2.5vw, 1.1rem);
+      line-height: 1.3;
+      flex: 1;
+    }
+
+    .difficulty-badge {
+      background: var(--accent-success);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 8px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .difficulty-badge.medium {
+      background: var(--accent-warning);
+    }
+
+    .difficulty-badge.hard {
+      background: var(--accent-danger);
     }
 
     .platform-desc {
-      font-size: 0.9rem;
+      font-size: clamp(0.85rem, 2vw, 0.9rem);
       color: var(--text-muted);
       line-height: 1.4;
       margin-bottom: 12px;
     }
 
+    .platform-stats {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
     .earning-potential {
-      font-size: 0.85rem;
+      font-size: clamp(0.8rem, 2vw, 0.85rem);
       color: var(--accent-success);
       font-weight: 600;
-      margin-bottom: 15px;
+    }
+
+    .time-to-start {
+      font-size: clamp(0.75rem, 1.8vw, 0.8rem);
+      color: var(--text-muted);
+      font-style: italic;
     }
 
     .platform-link {
-      display: inline-block;
+      display: block;
       background: var(--gradient-primary);
       color: white;
       padding: 10px 20px;
-      border-radius: 25px;
+      border-radius: 8px;
       text-decoration: none;
-      font-size: 0.85rem;
+      font-size: clamp(0.8rem, 2vw, 0.85rem);
       font-weight: 600;
       transition: all 0.3s ease;
+      text-align: center;
       border: 1px solid rgba(255,255,255,0.2);
+      -webkit-tap-highlight-color: transparent;
     }
 
     .platform-link:hover {
-      transform: translateY(-2px);
+      transform: translateY(-1px);
       box-shadow: var(--shadow-soft);
       color: white;
     }
@@ -484,361 +538,256 @@
       text-align: center;
       color: var(--text-secondary);
       font-style: italic;
-      padding: 60px 20px;
+      padding: 40px 20px;
     }
 
     .no-matches h3 {
       color: var(--text-primary);
       margin-bottom: 15px;
+      font-size: clamp(1.3rem, 3vw, 1.6rem);
     }
 
-    /* Mobile-First Optimizations */
-    @media (max-width: 768px) {
-      .container {
-        padding: 0 12px;
-      }
-
-      header {
-        padding: 1rem 0;
-      }
-
-      h1 {
-        font-size: 2.2rem;
-        line-height: 1.2;
-      }
-
-      .hero-subtitle {
-        font-size: 1rem;
-        padding: 0 10px;
-      }
-
-      section {
-        padding: 30px 0;
-        min-height: 60vh;
-      }
-
-      .form-container {
-        padding: 25px;
-        margin: 15px auto;
-        border-radius: 16px;
-      }
-
-      .question h2 {
-        font-size: 1.6rem;
-        margin-bottom: 12px;
-      }
-
-      .question h2::before {
-        font-size: 1.5rem;
-      }
-
-      .question-desc {
-        font-size: 1rem;
-        margin-bottom: 30px;
-      }
-
-      .options-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-        margin-bottom: 30px;
-      }
-
-      .option-card {
-        padding: 20px;
-        min-height: 100px;
-      }
-
-      .option-card .emoji {
-        font-size: 2rem;
-        margin-bottom: 10px;
-      }
-
-      .option-card .title {
-        font-size: 1.1rem;
-        margin-bottom: 6px;
-      }
-
-      .option-card .desc {
-        font-size: 0.9rem;
-      }
-
-      .nav-buttons {
-        flex-direction: column;
-        gap: 15px;
-        margin-top: 30px;
-      }
-
-      .btn {
-        width: 100%;
-        justify-content: center;
-        padding: 16px 24px;
-        font-size: 1rem;
-      }
-
-      .platform-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-      }
-
-      .platform-card {
-        padding: 18px;
-      }
-
-      .results h3 {
-        font-size: 2rem;
-        margin-bottom: 25px;
-      }
-
-      .category-title {
-        font-size: 1.3rem;
-        margin-bottom: 15px;
-      }
-    }
-
+    /* Responsive Optimizations */
     @media (max-width: 480px) {
-      h1 {
-        font-size: 1.8rem;
-        margin-bottom: 8px;
-      }
-
-      .hero-subtitle {
-        font-size: 0.9rem;
-        line-height: 1.4;
+      .container {
+        padding: 10px;
       }
 
       .form-container {
-        padding: 20px;
-        margin: 10px auto;
-      }
-
-      .question h2 {
-        font-size: 1.4rem;
-      }
-
-      .question-desc {
-        font-size: 0.95rem;
-        margin-bottom: 25px;
+        padding: 20px 15px;
+        margin: 10px 0;
+        border-radius: 12px;
       }
 
       .option-card {
-        padding: 18px;
+        padding: 16px;
         min-height: 90px;
       }
 
-      .btn {
-        padding: 14px 20px;
-        font-size: 0.95rem;
-        min-height: 50px;
+      .platform-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
       }
 
-      .results h3 {
-        font-size: 1.7rem;
+      .platform-stats {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+    }
+
+    /* Touch device optimizations */
+    @media (hover: none) and (pointer: coarse) {
+      .option-card:hover {
+        transform: none;
+      }
+      
+      .option-card:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+      }
+
+      .btn:hover {
+        transform: none;
+      }
+
+      .btn:active {
+        transform: scale(0.98);
       }
     }
   </style>
 </head>
 <body>
   <div class="bg-gradient"></div>
-  <div class="floating-orb orb-1"></div>
-  <div class="floating-orb orb-2"></div>
-
-  <header>
-    <div class="container">
-      <h1>🧠 <span class="gradient-text">Passion Finder</span></h1>
-      <p class="hero-subtitle">Find your dopamine-boosting, freedom-loving income path</p>
-    </div>
-  </header>
 
   <div class="container">
+    <div class="header">
+      <h1 class="title">🧠 <span class="gradient-text">Passion Finder</span></h1>
+      <p class="subtitle">Find your perfect online income stream based on your energy, skills, and goals</p>
+    </div>
+
     <div class="progress-container">
       <div class="progress-bar">
         <div class="progress-fill" id="progressFill"></div>
       </div>
       <div class="progress-text" id="progressText">Question 1 of 4</div>
     </div>
-  </div>
 
-  <section>
-    <div class="container">
+    <div class="main-content">
       <div class="form-container">
         
-        <!-- Question 1: Energy Level -->
+        <!-- Question 1: Current Situation -->
         <div class="question-page active" id="question1">
           <div class="question">
-            <h2>What's Your Current Energy & Motivation?</h2>
-            <p class="question-desc">Be honest about where you're at right now - no judgment!</p>
+            <h2>What's Your Current Situation?</h2>
+            <p class="question-desc">Be honest - where are you at right now?</p>
             
             <div class="options-grid">
-              <div class="option-card" data-value="low">
-                <span class="emoji">🛋️</span>
-                <div class="title">Low Energy</div>
-                <div class="desc">Just want something simple and low-effort</div>
+              <div class="option-card" data-value="overwhelmed">
+                <span class="emoji">😴</span>
+                <div class="title">Overwhelmed/Low Energy</div>
+                <div class="desc">Need something simple to start with</div>
               </div>
-              <div class="option-card" data-value="medium">
+              <div class="option-card" data-value="ready">
                 <span class="emoji">🎯</span>
-                <div class="title">Moderate Energy</div>
-                <div class="desc">Ready for some structure and routine</div>
+                <div class="title">Ready to Learn</div>
+                <div class="desc">Willing to put in effort for better results</div>
               </div>
-              <div class="option-card" data-value="high">
+              <div class="option-card" data-value="motivated">
                 <span class="emoji">🚀</span>
-                <div class="title">High Energy</div>
-                <div class="desc">Let's build something big and exciting!</div>
+                <div class="title">Highly Motivated</div>
+                <div class="desc">Ready to build something significant</div>
               </div>
             </div>
 
             <div class="nav-buttons">
               <div></div>
-              <button class="btn btn-primary" id="next1" disabled>Next Question →</button>
+              <div></div>
             </div>
           </div>
         </div>
 
-        <!-- Question 2: Work Style -->
+        <!-- Question 2: Time & Schedule -->
         <div class="question-page" id="question2">
           <div class="question">
-            <h2>How Do You Like to Work?</h2>
-            <p class="question-desc">Pick what feels good for your brain (select multiple)</p>
+            <h2>How Much Time Can You Commit?</h2>
+            <p class="question-desc">Be realistic about your available time and preferred schedule</p>
             
             <div class="options-grid">
+              <div class="option-card" data-value="minimal">
+                <span class="emoji">⏰</span>
+                <div class="title">1-5 Hours/Week</div>
+                <div class="desc">Just starting, very limited time</div>
+              </div>
+              <div class="option-card" data-value="parttime">
+                <span class="emoji">📅</span>
+                <div class="title">5-15 Hours/Week</div>
+                <div class="desc">Steady side income goal</div>
+              </div>
+              <div class="option-card" data-value="serious">
+                <span class="emoji">💼</span>
+                <div class="title">15+ Hours/Week</div>
+                <div class="desc">Serious about building income</div>
+              </div>
               <div class="option-card" data-value="flexible">
-                <span class="emoji">🌎</span>
+                <span class="emoji">🌍</span>
                 <div class="title">Flexible Schedule</div>
-                <div class="desc">Work when I want, where I want</div>
-              </div>
-              <div class="option-card" data-value="social">
-                <span class="emoji">👥</span>
-                <div class="title">Social Interaction</div>
-                <div class="desc">I like talking to people</div>
-              </div>
-              <div class="option-card" data-value="solo">
-                <span class="emoji">🎧</span>
-                <div class="title">Solo Work</div>
-                <div class="desc">Just me and my focus zone</div>
-              </div>
-              <div class="option-card" data-value="creative">
-                <span class="emoji">🎨</span>
-                <div class="title">Creative Expression</div>
-                <div class="desc">Making and creating things</div>
-              </div>
-              <div class="option-card" data-value="analytical">
-                <span class="emoji">🧠</span>
-                <div class="title">Problem Solving</div>
-                <div class="desc">Using my brain to figure things out</div>
+                <div class="desc">Need to work around life/other commitments</div>
               </div>
             </div>
 
             <div class="nav-buttons">
               <button class="btn btn-secondary" id="back2">← Back</button>
-              <button class="btn btn-primary" id="next2">Next Question →</button>
+              <div></div>
             </div>
           </div>
         </div>
 
-        <!-- Question 3: Skills -->
+        <!-- Question 3: Skills & Interests -->
         <div class="question-page" id="question3">
           <div class="question">
-            <h2>What Skills Feel Natural to You?</h2>
-            <p class="question-desc">Choose what you're already good at or enjoy doing (select multiple)</p>
+            <h2>What Are You Naturally Good At?</h2>
+            <p class="question-desc">Choose what feels easy or interesting to you (select multiple)</p>
             
             <div class="options-grid">
               <div class="option-card" data-value="communication">
                 <span class="emoji">💬</span>
-                <div class="title">Communication</div>
-                <div class="desc">Talking, explaining, teaching</div>
+                <div class="title">Talking & Teaching</div>
+                <div class="desc">Explaining things, helping others</div>
               </div>
               <div class="option-card" data-value="writing">
                 <span class="emoji">✍️</span>
                 <div class="title">Writing</div>
-                <div class="desc">Emails, posts, stories, content</div>
+                <div class="desc">Content, emails, social media</div>
               </div>
-              <div class="option-card" data-value="listening">
-                <span class="emoji">👂</span>
-                <div class="title">Good Listener</div>
-                <div class="desc">Helping others, being supportive</div>
-              </div>
-              <div class="option-card" data-value="opinions">
-                <span class="emoji">🗣️</span>
-                <div class="title">Sharing Opinions</div>
-                <div class="desc">Reviews, feedback, critiques</div>
-              </div>
-              <div class="option-card" data-value="testing">
-                <span class="emoji">🔍</span>
-                <div class="title">Testing & QA</div>
-                <div class="desc">Finding bugs, testing products</div>
-              </div>
-              <div class="option-card" data-value="social-media">
-                <span class="emoji">📱</span>
-                <div class="title">Social Media</div>
-                <div class="desc">Content creation, engagement</div>
-              </div>
-              <div class="option-card" data-value="making">
-                <span class="emoji">🛠️</span>
-                <div class="title">Making Things</div>
-                <div class="desc">Crafting, building, creating</div>
+              <div class="option-card" data-value="creative">
+                <span class="emoji">🎨</span>
+                <div class="title">Creative Work</div>
+                <div class="desc">Design, art, making things</div>
               </div>
               <div class="option-card" data-value="tech">
                 <span class="emoji">💻</span>
                 <div class="title">Tech Skills</div>
-                <div class="desc">Coding, digital tools, computers</div>
+                <div class="desc">Websites, apps, digital tools</div>
               </div>
-              <div class="option-card" data-value="design">
-                <span class="emoji">🎨</span>
-                <div class="title">Visual Design</div>
-                <div class="desc">Graphics, aesthetics, layouts</div>
+              <div class="option-card" data-value="social">
+                <span class="emoji">📱</span>
+                <div class="title">Social Media</div>
+                <div class="desc">Content creation, engagement</div>
+              </div>
+              <div class="option-card" data-value="research">
+                <span class="emoji">🔍</span>
+                <div class="title">Research & Analysis</div>
+                <div class="desc">Finding info, testing, reviewing</div>
+              </div>
+              <div class="option-card" data-value="helping">
+                <span class="emoji">🤝</span>
+                <div class="title">Helping Others</div>
+                <div class="desc">Support, customer service, assistance</div>
+              </div>
+              <div class="option-card" data-value="sales">
+                <span class="emoji">🛍️</span>
+                <div class="title">Sales & Marketing</div>
+                <div class="desc">Promoting products, persuading</div>
               </div>
             </div>
 
             <div class="nav-buttons">
               <button class="btn btn-secondary" id="back3">← Back</button>
-              <button class="btn btn-primary" id="next3">Next Question →</button>
+              <button class="btn btn-primary" id="next3" disabled>Next Question →</button>
             </div>
           </div>
         </div>
 
-        <!-- Question 4: Goals -->
+        <!-- Question 4: Income Goals -->
         <div class="question-page" id="question4">
           <div class="question">
-            <h2>What's Your Main Goal Right Now?</h2>
-            <p class="question-desc">What would feel like a win for you?</p>
+            <h2>What's Your Income Goal?</h2>
+            <p class="question-desc">What would feel like success to you?</p>
             
             <div class="options-grid">
-              <div class="option-card" data-value="quick-cash">
+              <div class="option-card" data-value="pocket-money">
+                <span class="emoji">💵</span>
+                <div class="title">$50-200/month</div>
+                <div class="desc">Just some extra pocket money</div>
+              </div>
+              <div class="option-card" data-value="bill-money">
+                <span class="emoji">📊</span>
+                <div class="title">$200-800/month</div>
+                <div class="desc">Cover some bills or expenses</div>
+              </div>
+              <div class="option-card" data-value="serious-income">
                 <span class="emoji">💰</span>
-                <div class="title">Quick Side Income</div>
-                <div class="desc">$50-200/month to start</div>
+                <div class="title">$800-2500/month</div>
+                <div class="desc">Significant additional income</div>
               </div>
-              <div class="option-card" data-value="steady-income">
-                <span class="emoji">📈</span>
-                <div class="title">Steady Income</div>
-                <div class="desc">$200-1000/month consistently</div>
-              </div>
-              <div class="option-card" data-value="business">
-                <span class="emoji">🚀</span>
-                <div class="title">Real Business</div>
-                <div class="desc">Scale up and build something big</div>
-              </div>
-              <div class="option-card" data-value="portfolio">
-                <span class="emoji">🧩</span>
-                <div class="title">Build Skills</div>
-                <div class="desc">Portfolio and experience for future</div>
-              </div>
-              <div class="option-card" data-value="dopamine">
-                <span class="emoji">🎮</span>
-                <div class="title">Fun & Engaging</div>
-                <div class="desc">Something enjoyable and stimulating</div>
+              <div class="option-card" data-value="replacement">
+                <span class="emoji">🏆</span>
+                <div class="title">$2500+/month</div>
+                <div class="desc">Replace current job income</div>
               </div>
             </div>
 
             <div class="nav-buttons">
               <button class="btn btn-secondary" id="back4">← Back</button>
-              <button class="btn btn-primary" id="findMatches" disabled>🎯 Find My Matches</button>
+              <div></div>
             </div>
           </div>
         </div>
 
         <!-- Results Page -->
         <div class="results-page" id="resultsPage">
+          <div class="results-header">
+            <h3>🎉 Your Personalized Income Paths!</h3>
+          </div>
+          
+          <div class="results-summary">
+            <p class="next-steps">Here are the best opportunities based on your answers. Start with the "Beginner Friendly" options, then work your way up as you gain experience and confidence!</p>
+          </div>
+
           <div id="resultsContent"></div>
+          
           <div class="nav-buttons">
             <button class="btn btn-restart" id="restart">🔄 Start Over</button>
             <div></div>
@@ -847,276 +796,266 @@
 
       </div>
     </div>
-  </section>
+  </div>
 
   <script>
-    const platforms = {
-      quickStart: [
-        { 
-          name: "Swagbucks", 
-          desc: "Surveys, watching videos, shopping cashback", 
-          earning: "$20-50/month", 
-          skills: ["opinions"], 
-          workStyle: ["flexible", "solo"], 
-          energy: ["low"],
-          url: "https://www.swagbucks.com",
-          category: "Quick Money"
-        },
-        { 
-          name: "UserTesting", 
-          desc: "Test websites and apps, give feedback", 
-          earning: "$10/test", 
-          skills: ["opinions", "testing"], 
-          workStyle: ["flexible", "solo"], 
-          energy: ["low", "medium"],
-          url: "https://www.usertesting.com",
-          category: "Quick Money"
-        },
-        { 
-          name: "Prolific", 
-          desc: "Academic research surveys (better pay)", 
-          earning: "$30-100/month", 
-          skills: ["opinions"], 
-          workStyle: ["flexible", "solo"], 
-          energy: ["low", "medium"],
-          url: "https://prolific.co",
-          category: "Quick Money"
-        },
-        { 
-          name: "Amazon MTurk", 
-          desc: "Micro tasks, data entry, simple jobs", 
-          earning: "$50-200/month", 
-          skills: ["listening", "testing"], 
-          workStyle: ["flexible", "solo"], 
-          energy: ["low", "medium"],
-          url: "https://www.mturk.com",
-          category: "Quick Money"
-        }
-      ],
-      
-      communication: [
-        { 
-          name: "Cambly", 
-          desc: "Casual English conversation (no teaching exp needed)", 
-          earning: "$10/hour", 
-          skills: ["communication"], 
-          workStyle: ["social", "flexible"], 
-          energy: ["medium", "high"],
-          url: "https://www.cambly.com",
-          category: "Communication & Teaching"
-        },
-        { 
-          name: "Rev", 
-          desc: "Transcription and captioning work", 
-          earning: "$15-20/hour", 
-          skills: ["listening", "writing"], 
-          workStyle: ["solo", "flexible"], 
-          energy: ["low", "medium"],
-          url: "https://www.rev.com",
-          category: "Communication & Teaching"
-        },
-        { 
-          name: "Respondent", 
-          desc: "High-paying research interviews", 
-          earning: "$50-300/session", 
-          skills: ["communication", "opinions"], 
-          workStyle: ["social"], 
-          energy: ["medium", "high"],
-          url: "https://www.respondent.io",
-          category: "Communication & Teaching"
-        },
-        { 
-          name: "Preply", 
-          desc: "Online tutoring in any subject", 
-          earning: "$10-40/hour", 
-          skills: ["communication", "writing"], 
-          workStyle: ["social", "flexible"], 
-          energy: ["medium", "high"],
-          url: "https://preply.com",
-          category: "Communication & Teaching"
-        }
-      ],
+    const platforms = [
+      // Beginner/Low Energy Options
+      { 
+        name: "Swagbucks", 
+        desc: "Surveys, watching videos, online shopping cashback - perfect for multitasking", 
+        earning: "$30-100/month", 
+        timeToStart: "Start earning today",
+        difficulty: "easy",
+        skills: ["research"], 
+        timeCommitment: ["minimal", "flexible"], 
+        energy: ["overwhelmed"],
+        income: ["pocket-money"],
+        url: "https://www.swagbucks.com",
+        category: "Quick & Easy Money"
+      },
+      { 
+        name: "UserTesting", 
+        desc: "Test websites and share your honest opinion - $10 per 20-minute test", 
+        earning: "$60-300/month", 
+        timeToStart: "1-2 days approval",
+        difficulty: "easy",
+        skills: ["research", "communication"], 
+        timeCommitment: ["minimal", "parttime", "flexible"], 
+        energy: ["overwhelmed", "ready"],
+        income: ["pocket-money", "bill-money"],
+        url: "https://www.usertesting.com",
+        category: "Quick & Easy Money"
+      },
+      { 
+        name: "Prolific", 
+        desc: "Academic research studies - much better pay than typical surveys (may have waitlist)", 
+        earning: "$80-250/month", 
+        timeToStart: "Instant approval or waitlist",
+        difficulty: "easy",
+        skills: ["research"], 
+        timeCommitment: ["minimal", "parttime", "flexible"], 
+        energy: ["overwhelmed", "ready"],
+        income: ["pocket-money", "bill-money"],
+        url: "https://prolific.co",
+        category: "Quick & Easy Money"
+      },
+      { 
+        name: "Amazon Mechanical Turk", 
+        desc: "Micro-tasks like data entry, transcription, simple research", 
+        earning: "$100-500/month", 
+        timeToStart: "1-3 days approval",
+        difficulty: "easy",
+        skills: ["research", "writing"], 
+        timeCommitment: ["minimal", "parttime", "flexible"], 
+        energy: ["overwhelmed", "ready"],
+        income: ["pocket-money", "bill-money"],
+        url: "https://www.mturk.com",
+        category: "Quick & Easy Money"
+      },
 
-      creative: [
-        { 
-          name: "Etsy", 
-          desc: "Sell handmade or digital products", 
-          earning: "$100-1000+/month", 
-          skills: ["making", "design"], 
-          workStyle: ["creative", "solo"], 
-          energy: ["medium", "high"],
-          url: "https://www.etsy.com",
-          category: "Creative & Design"
-        },
-        { 
-          name: "Fiverr", 
-          desc: "Freelance creative services", 
-          earning: "$100-2000+/month", 
-          skills: ["design", "writing", "tech"], 
-          workStyle: ["creative", "flexible"], 
-          energy: ["medium", "high"],
-          url: "https://www.fiverr.com",
-          category: "Creative & Design"
-        },
-        { 
-          name: "Redbubble", 
-          desc: "Upload designs, earn passive income", 
-          earning: "$50-500/month", 
-          skills: ["design"], 
-          workStyle: ["creative", "solo"], 
-          energy: ["medium"],
-          url: "https://www.redbubble.com",
-          category: "Creative & Design"
-        },
-        { 
-          name: "99designs", 
-          desc: "Design contests and freelance projects", 
-          earning: "$200-2000+/month", 
-          skills: ["design"], 
-          workStyle: ["creative", "solo"], 
-          energy: ["medium", "high"],
-          url: "https://99designs.com",
-          category: "Creative & Design"
-        }
-      ],
+      // Communication & Teaching
+      { 
+        name: "Cambly", 
+        desc: "Casual English conversation - no teaching experience required, just be a native speaker", 
+        earning: "$200-800/month", 
+        timeToStart: "2-3 days",
+        difficulty: "easy",
+        skills: ["communication"], 
+        timeCommitment: ["parttime", "serious", "flexible"], 
+        energy: ["ready", "motivated"],
+        income: ["bill-money"],
+        url: "https://www.cambly.com",
+        category: "Communication & Teaching"
+      },
+      { 
+        name: "Preply", 
+        desc: "Teach any skill you know - languages, music, academic subjects, life skills", 
+        earning: "$400-2000/month", 
+        timeToStart: "1 week",
+        difficulty: "medium",
+        skills: ["communication", "helping"], 
+        timeCommitment: ["parttime", "serious"], 
+        energy: ["ready", "motivated"],
+        income: ["bill-money", "serious-income"],
+        url: "https://preply.com",
+        category: "Communication & Teaching"
+      },
+      { 
+        name: "Rev Transcription", 
+        desc: "Transcribe audio to text - work when you want, good for people who like detail work", 
+        earning: "$150-600/month", 
+        timeToStart: "Pass skills test",
+        difficulty: "easy",
+        skills: ["writing", "research"], 
+        timeCommitment: ["minimal", "parttime", "flexible"], 
+        energy: ["overwhelmed", "ready"],
+        income: ["pocket-money", "bill-money"],
+        url: "https://www.rev.com",
+        category: "Communication & Teaching"
+      },
 
-      tech: [
-        { 
-          name: "Upwork", 
-          desc: "Freelance tech projects", 
-          earning: "$500-5000+/month", 
-          skills: ["tech", "writing"], 
-          workStyle: ["solo", "analytical"], 
-          energy: ["medium", "high"],
-          url: "https://www.upwork.com",
-          category: "Tech & Development"
-        },
-        { 
-          name: "Clickworker", 
-          desc: "AI training, data entry, web research", 
-          earning: "$100-400/month", 
-          skills: ["tech", "testing"], 
-          workStyle: ["solo", "flexible"], 
-          energy: ["low", "medium"],
-          url: "https://www.clickworker.com",
-          category: "Tech & Development"
-        },
-        { 
-          name: "Appen", 
-          desc: "Search engine evaluation, AI training", 
-          earning: "$200-800/month", 
-          skills: ["tech", "testing"], 
-          workStyle: ["solo", "flexible"], 
-          energy: ["medium"],
-          url: "https://appen.com",
-          category: "Tech & Development"
-        },
-        { 
-          name: "Toptal", 
-          desc: "Elite freelance network for developers", 
-          earning: "$2000-10000+/month", 
-          skills: ["tech"], 
-          workStyle: ["solo", "analytical"], 
-          energy: ["high"],
-          url: "https://www.toptal.com",
-          category: "Tech & Development"
-        }
-      ],
+      // Creative & Content
+      { 
+        name: "Fiverr", 
+        desc: "Sell any service you can do - writing, design, voice-overs, even lifestyle advice", 
+        earning: "$300-3000/month", 
+        timeToStart: "Create profile today",
+        difficulty: "medium",
+        skills: ["creative", "writing", "tech", "helping"], 
+        timeCommitment: ["parttime", "serious"], 
+        energy: ["ready", "motivated"],
+        income: ["bill-money", "serious-income"],
+        url: "https://www.fiverr.com",
+        category: "Creative & Content"
+      },
+      { 
+        name: "Etsy Digital Products", 
+        desc: "Create and sell digital downloads - printables, templates, guides, courses", 
+        earning: "$200-2000/month", 
+        timeToStart: "1-2 weeks to create",
+        difficulty: "medium",
+        skills: ["creative", "writing", "tech"], 
+        timeCommitment: ["parttime", "serious"], 
+        energy: ["ready", "motivated"],
+        income: ["bill-money", "serious-income"],
+        url: "https://www.etsy.com",
+        category: "Creative & Content"
+      },
+      { 
+        name: "Medium Partner Program", 
+        desc: "Get paid for writing articles about things you're passionate about", 
+        earning: "$100-1500/month", 
+        timeToStart: "Start writing today",
+        difficulty: "easy",
+        skills: ["writing"], 
+        timeCommitment: ["minimal", "parttime", "flexible"], 
+        energy: ["ready", "motivated"],
+        income: ["pocket-money", "bill-money", "serious-income"],
+        url: "https://medium.com/creators",
+        category: "Creative & Content"
+      },
 
-      social: [
-        { 
-          name: "TikTok Creator Fund", 
-          desc: "Get paid for viral content", 
-          earning: "$20-500+/month", 
-          skills: ["social-media"], 
-          workStyle: ["creative", "flexible"], 
-          energy: ["high"],
-          url: "https://www.tiktok.com/creators",
-          category: "Social Media & Content"
-        },
-        { 
-          name: "YouTube Partner", 
-          desc: "Monetize your video content", 
-          earning: "$100-10000+/month", 
-          skills: ["communication", "social-media"], 
-          workStyle: ["creative", "flexible"], 
-          energy: ["high"],
-          url: "https://www.youtube.com/creators",
-          category: "Social Media & Content"
-        },
-        { 
-          name: "Twitch Affiliate", 
-          desc: "Stream games or creative content", 
-          earning: "$100-5000+/month", 
-          skills: ["communication", "social-media"], 
-          workStyle: ["social", "creative"], 
-          energy: ["high"],
-          url: "https://www.twitch.tv",
-          category: "Social Media & Content"
-        },
-        { 
-          name: "Instagram Reels", 
-          desc: "Monetize your content", 
-          earning: "$50-1000+/month", 
-          skills: ["social-media", "design"], 
-          workStyle: ["creative", "flexible"], 
-          energy: ["medium", "high"],
-          url: "https://creators.instagram.com",
-          category: "Social Media & Content"
-        }
-      ],
+      // Social Media & Content Creation
+      { 
+        name: "TikTok Creator Fund", 
+        desc: "Create engaging short videos about your interests or expertise", 
+        earning: "$100-5000/month", 
+        timeToStart: "Build audience first",
+        difficulty: "medium",
+        skills: ["social", "creative"], 
+        timeCommitment: ["parttime", "serious"], 
+        energy: ["motivated"],
+        income: ["bill-money", "serious-income", "replacement"],
+        url: "https://www.tiktok.com/creators",
+        category: "Social Media & Content"
+      },
+      { 
+        name: "YouTube", 
+        desc: "Video content creation - tutorials, vlogs, reviews, or educational content", 
+        earning: "$200-10000+/month", 
+        timeToStart: "3-6 months to monetize",
+        difficulty: "hard",
+        skills: ["communication", "creative", "tech"], 
+        timeCommitment: ["serious"], 
+        energy: ["motivated"],
+        income: ["serious-income", "replacement"],
+        url: "https://www.youtube.com/creators",
+        category: "Social Media & Content"
+      },
 
-      writing: [
-        { 
-          name: "Contently", 
-          desc: "Content marketing writing", 
-          earning: "$50-500/article", 
-          skills: ["writing"], 
-          workStyle: ["solo", "flexible"], 
-          energy: ["medium"],
-          url: "https://contently.com",
-          category: "Writing & Content"
-        },
-        { 
-          name: "Medium Partner", 
-          desc: "Get paid for your stories", 
-          earning: "$50-2000+/month", 
-          skills: ["writing"], 
-          workStyle: ["solo", "flexible"], 
-          energy: ["medium"],
-          url: "https://medium.com/creators",
-          category: "Writing & Content"
-        },
-        { 
-          name: "Substack", 
-          desc: "Newsletter monetization", 
-          earning: "$100-5000+/month", 
-          skills: ["writing"], 
-          workStyle: ["solo", "flexible"], 
-          energy: ["medium", "high"],
-          url: "https://substack.com",
-          category: "Writing & Content"
-        },
-        { 
-          name: "Textbroker", 
-          desc: "Freelance content writing", 
-          earning: "$100-1000/month", 
-          skills: ["writing"], 
-          workStyle: ["solo", "flexible"], 
-          energy: ["medium"],
-          url: "https://www.textbroker.com",
-          category: "Writing & Content"
-        }
-      ]
-    };
+      // Tech & Development
+      { 
+        name: "Upwork", 
+        desc: "Freelance platform for all skills - writing, design, programming, virtual assistance", 
+        earning: "$500-5000+/month", 
+        timeToStart: "Profile approval + first client",
+        difficulty: "medium",
+        skills: ["tech", "writing", "creative", "helping"], 
+        timeCommitment: ["parttime", "serious"], 
+        energy: ["ready", "motivated"],
+        income: ["bill-money", "serious-income", "replacement"],
+        url: "https://www.upwork.com",
+        category: "Professional Freelancing"
+      },
+      { 
+        name: "Shopify App Development", 
+        desc: "Create simple apps for online stores - lots of tutorials available", 
+        earning: "$1000-10000+/month", 
+        timeToStart: "2-3 months learning",
+        difficulty: "hard",
+        skills: ["tech"], 
+        timeCommitment: ["serious"], 
+        energy: ["motivated"],
+        income: ["serious-income", "replacement"],
+        url: "https://developers.shopify.com",
+        category: "Tech & Development"
+      },
+
+      // Sales & E-commerce
+      { 
+        name: "Amazon FBA", 
+        desc: "Private label products or retail arbitrage - Amazon handles storage and shipping", 
+        earning: "$500-5000+/month", 
+        timeToStart: "1-3 months setup",
+        difficulty: "hard",
+        skills: ["research", "sales"], 
+        timeCommitment: ["parttime", "serious"], 
+        energy: ["motivated"],
+        income: ["serious-income", "replacement"],
+        url: "https://sellercentral.amazon.com",
+        category: "E-commerce & Sales"
+      },
+      { 
+        name: "Dropshipping", 
+        desc: "Sell products online without holding inventory - focus on marketing", 
+        earning: "$300-3000+/month", 
+        timeToStart: "2-4 weeks setup",
+        difficulty: "medium",
+        skills: ["sales", "social", "creative"], 
+        timeCommitment: ["parttime", "serious"], 
+        energy: ["ready", "motivated"],
+        income: ["bill-money", "serious-income"],
+        url: "https://www.shopify.com",
+        category: "E-commerce & Sales"
+      },
+
+      // Virtual Services
+      { 
+        name: "Virtual Assistant", 
+        desc: "Help businesses with admin tasks, email management, scheduling, research", 
+        earning: "$400-2500/month", 
+        timeToStart: "1-2 weeks",
+        difficulty: "easy",
+        skills: ["helping", "communication", "research"], 
+        timeCommitment: ["parttime", "serious"], 
+        energy: ["ready", "motivated"],
+        income: ["bill-money", "serious-income"],
+        url: "https://belay.com",
+        category: "Virtual Services"
+      },
+      { 
+        name: "Online Bookkeeping", 
+        desc: "Manage finances for small businesses - QuickBooks certification helpful", 
+        earning: "$800-3000/month", 
+        timeToStart: "1-2 months training",
+        difficulty: "medium",
+        skills: ["research", "helping"], 
+        timeCommitment: ["parttime", "serious"], 
+        energy: ["ready", "motivated"],
+        income: ["serious-income", "replacement"],
+        url: "https://www.intuit.com/quickbooks",
+        category: "Virtual Services"
+      }
+    ];
 
     // Application state
     let currentQuestion = 1;
     let answers = {
       energy: null,
-      workStyle: [],
+      timeCommitment: null,
       skills: [],
-      goal: null
+      income: null
     };
 
     // Initialize the app
@@ -1132,32 +1071,30 @@
           const value = this.dataset.value;
           const questionNum = getCurrentQuestionNumber();
           
-          if (questionNum === 1 || questionNum === 4) {
-            // Single selection for energy and goal
+          if (questionNum === 1 || questionNum === 2 || questionNum === 4) {
+            // Single selection for energy, time, and income
             const siblings = this.parentElement.querySelectorAll('.option-card');
             siblings.forEach(sibling => sibling.classList.remove('selected'));
             this.classList.add('selected');
             
             if (questionNum === 1) {
               answers.energy = value;
-              updateNextButton(1);
+              // Auto-advance after short delay
+              setTimeout(() => goToQuestion(2), 800);
+            } else if (questionNum === 2) {
+              answers.timeCommitment = value;
+              // Auto-advance after short delay
+              setTimeout(() => goToQuestion(3), 800);
             } else if (questionNum === 4) {
-              answers.goal = value;
-              updateNextButton(4);
+              answers.income = value;
+              // Auto-advance to results after short delay
+              setTimeout(() => showResults(), 800);
             }
           } else {
-            // Multiple selection for workStyle and skills
+            // Multiple selection for skills (question 3)
             this.classList.toggle('selected');
             
-            if (questionNum === 2) {
-              if (this.classList.contains('selected')) {
-                if (!answers.workStyle.includes(value)) {
-                  answers.workStyle.push(value);
-                }
-              } else {
-                answers.workStyle = answers.workStyle.filter(item => item !== value);
-              }
-            } else if (questionNum === 3) {
+            if (questionNum === 3) {
               if (this.classList.contains('selected')) {
                 if (!answers.skills.includes(value)) {
                   answers.skills.push(value);
@@ -1165,17 +1102,19 @@
               } else {
                 answers.skills = answers.skills.filter(item => item !== value);
               }
+              
+              // Enable/disable next button based on selections
+              const nextButton = document.getElementById('next3');
+              if (nextButton) {
+                nextButton.disabled = answers.skills.length === 0;
+              }
             }
           }
         });
       });
 
       // Navigation buttons
-      document.getElementById('next1').addEventListener('click', () => goToQuestion(2));
-      document.getElementById('next2').addEventListener('click', () => goToQuestion(3));
       document.getElementById('next3').addEventListener('click', () => goToQuestion(4));
-      document.getElementById('findMatches').addEventListener('click', showResults);
-
       document.getElementById('back2').addEventListener('click', () => goToQuestion(1));
       document.getElementById('back3').addEventListener('click', () => goToQuestion(2));
       document.getElementById('back4').addEventListener('click', () => goToQuestion(3));
@@ -1213,13 +1152,6 @@
       document.getElementById('progressText').textContent = `Question ${currentQuestion} of 4`;
     }
 
-    function updateNextButton(questionNum) {
-      const button = document.getElementById(`next${questionNum}`) || document.getElementById('findMatches');
-      if (button) {
-        button.disabled = false;
-      }
-    }
-
     function showResults() {
       const matches = findMatches();
       displayResults(matches);
@@ -1239,33 +1171,31 @@
     }
 
     function findMatches() {
-      const allPlatforms = Object.values(platforms).flat();
-      const scored = allPlatforms.map(platform => {
+      const scored = platforms.map(platform => {
         let score = 0;
         
-        // Energy match (important)
-        if (platform.energy.includes(answers.energy)) score += 3;
+        // Energy/motivation match (high importance)
+        if (platform.energy.includes(answers.energy)) score += 4;
         
-        // Work style matches
-        answers.workStyle.forEach(style => {
-          if (platform.workStyle.includes(style)) score += 2;
-        });
+        // Time commitment match (high importance)
+        if (platform.timeCommitment.includes(answers.timeCommitment)) score += 3;
         
-        // Skills matches
+        // Income goal match (high importance)
+        if (platform.income.includes(answers.income)) score += 3;
+        
+        // Skills matches (medium importance)
         answers.skills.forEach(skill => {
           if (platform.skills.includes(skill)) score += 2;
         });
         
-        // Goal-based scoring
-        if (answers.goal === "quick-cash" && (platform.earning.includes("$20") || platform.earning.includes("$10"))) score += 2;
-        if (answers.goal === "steady-income" && platform.earning.includes("$100")) score += 2;
-        if (answers.goal === "business" && (platform.earning.includes("$1000") || platform.earning.includes("$5000"))) score += 3;
-        if (answers.goal === "dopamine" && (platform.workStyle.includes("creative") || platform.workStyle.includes("social"))) score += 2;
+        // Bonus for exact energy level match
+        if (answers.energy === "overwhelmed" && platform.difficulty === "easy") score += 2;
+        if (answers.energy === "motivated" && platform.difficulty === "hard") score += 1;
         
         return { ...platform, score };
       });
 
-      return scored.filter(p => p.score > 0).sort((a, b) => b.score - a.score).slice(0, 8);
+      return scored.filter(p => p.score > 2).sort((a, b) => b.score - a.score);
     }
 
     function displayResults(matches) {
@@ -1274,8 +1204,8 @@
       if (matches.length === 0) {
         resultsContent.innerHTML = `
           <div class="no-matches">
-            <h3>🤔 No perfect matches yet!</h3>
-            <p>Try going back and selecting more options - the more you tell us, the better we can match you!</p>
+            <h3>🤔 Let's find more matches!</h3>
+            <p>Try going back and selecting more skills or adjusting your preferences. The more you tell us, the better we can help!</p>
           </div>
         `;
       } else {
@@ -1295,13 +1225,19 @@
             <div class="category-section">
               <div class="category-title">${categoryIcon} ${category}</div>
               <div class="platform-grid">
-                ${groupedMatches[category].map(platform => `
+                ${groupedMatches[category].slice(0, 3).map(platform => `
                   <div class="platform-card">
-                    <div class="platform-name">${platform.name}</div>
+                    <div class="platform-header">
+                      <div class="platform-name">${platform.name}</div>
+                      <div class="difficulty-badge ${platform.difficulty}">${platform.difficulty.toUpperCase()}</div>
+                    </div>
                     <div class="platform-desc">${platform.desc}</div>
-                    <div class="earning-potential">${platform.earning}</div>
+                    <div class="platform-stats">
+                      <div class="earning-potential">${platform.earning}</div>
+                      <div class="time-to-start">${platform.timeToStart}</div>
+                    </div>
                     <a href="${platform.url}" target="_blank" rel="noopener noreferrer" class="platform-link">
-                      Start Here →
+                      Get Started →
                     </a>
                   </div>
                 `).join('')}
@@ -1310,21 +1246,20 @@
           `;
         });
 
-        resultsContent.innerHTML = `
-          <h3>🎉 Perfect Matches for You!</h3>
-          ${categoriesHTML}
-        `;
+        resultsContent.innerHTML = categoriesHTML;
       }
     }
 
     function getCategoryIcon(category) {
       const icons = {
-        "Quick Money": "⚡",
+        "Quick & Easy Money": "⚡",
         "Communication & Teaching": "💬",
-        "Creative & Design": "🎨",
-        "Tech & Development": "💻",
+        "Creative & Content": "🎨",
         "Social Media & Content": "📱",
-        "Writing & Content": "✍️"
+        "Tech & Development": "💻",
+        "Professional Freelancing": "💼",
+        "E-commerce & Sales": "🛍️",
+        "Virtual Services": "🤝"
       };
       return icons[category] || "💡";
     }
@@ -1333,9 +1268,9 @@
       // Reset answers
       answers = {
         energy: null,
-        workStyle: [],
+        timeCommitment: null,
         skills: [],
-        goal: null
+        income: null
       };
       
       // Reset UI
@@ -1343,11 +1278,11 @@
         card.classList.remove('selected');
       });
       
-      document.querySelectorAll('.btn-primary').forEach(btn => {
-        if (btn.id !== 'next2' && btn.id !== 'next3') {
-          btn.disabled = true;
-        }
-      });
+      // Reset next button for question 3
+      const nextButton = document.getElementById('next3');
+      if (nextButton) {
+        nextButton.disabled = true;
+      }
       
       // Go back to first question
       currentQuestion = 1;
