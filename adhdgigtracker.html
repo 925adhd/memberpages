@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Earnings Tracker</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital@0;1&display=swap" rel="stylesheet">
+  <title>Online Work Tracker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary-bg: #0a0e1a;
@@ -22,7 +22,6 @@
       --border-subtle: rgba(255, 255, 255, 0.1);
       --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.15);
       --shadow-medium: 0 8px 40px rgba(0, 0, 0, 0.25);
-      --shadow-strong: 0 16px 64px rgba(0, 0, 0, 0.35);
       --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       --gradient-success: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
       --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
@@ -47,7 +46,6 @@
       position: relative;
     }
     
-    /* Background Effects */
     .bg-gradient {
       position: fixed;
       top: 0;
@@ -87,22 +85,12 @@
       animation-delay: -10s;
     }
     
-    .orb-3 {
-      width: 180px;
-      height: 180px;
-      background: var(--accent-emerald);
-      top: 40%;
-      right: -90px;
-      animation-delay: -15s;
-    }
-    
     @keyframes float {
       0%, 100% { transform: translate(0, 0) scale(1); }
       33% { transform: translate(-20px, -20px) scale(1.1); }
       66% { transform: translate(20px, -15px) scale(0.9); }
     }
     
-    /* Glass Card Component */
     .glass-card {
       background: var(--glass-bg);
       backdrop-filter: blur(20px);
@@ -110,12 +98,6 @@
       border-radius: 20px;
       box-shadow: var(--shadow-soft);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .glass-card:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-medium);
-      border-color: rgba(255, 255, 255, 0.2);
     }
     
     .container {
@@ -149,7 +131,6 @@
       margin-bottom: 20px;
       position: relative;
       z-index: 1;
-      font-family: 'Crimson Text', serif;
       font-style: italic;
     }
     
@@ -176,7 +157,7 @@
     
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 8px;
       position: relative;
       z-index: 1;
@@ -186,7 +167,7 @@
       text-align: center;
       background: rgba(255,255,255,0.2);
       backdrop-filter: blur(10px);
-      padding: 12px 8px;
+      padding: 10px 6px;
       border-radius: 12px;
       min-height: 60px;
       display: flex;
@@ -196,7 +177,7 @@
     }
     
     .stat-value {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 800;
       color: white;
       line-height: 1.2;
@@ -204,11 +185,56 @@
     }
     
     .stat-label {
-      font-size: 9px;
+      font-size: 8px;
       color: rgba(255,255,255,0.9);
       text-transform: uppercase;
       font-weight: 600;
       margin-top: 2px;
+    }
+    
+    /* Time Tracking */
+    .time-section {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+    
+    .time-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    
+    .timer-display {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent-emerald);
+      font-family: monospace;
+    }
+    
+    .timer-btn {
+      padding: 8px 16px;
+      background: var(--accent-emerald);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.3s ease;
+    }
+    
+    .timer-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-soft);
+    }
+    
+    .timer-btn.stop {
+      background: var(--accent-rose);
     }
     
     /* Progress */
@@ -342,7 +368,7 @@
     .platform-btn {
       border: none;
       border-radius: 16px;
-      padding: 16px 12px;
+      padding: 14px 10px;
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow: var(--shadow-soft);
@@ -364,7 +390,7 @@
     }
     
     .platform-emoji {
-      font-size: 20px;
+      font-size: 18px;
       position: relative;
       z-index: 1;
     }
@@ -433,6 +459,7 @@
       display: flex;
       gap: 10px;
       width: 100%;
+      overflow: hidden;
     }
     
     .manual-input {
@@ -449,6 +476,7 @@
       color: var(--text-primary);
       transition: all 0.3s ease;
       box-sizing: border-box;
+      min-width: 0;
     }
     
     .manual-input::placeholder {
@@ -462,7 +490,7 @@
     }
     
     .manual-btn {
-      padding: 16px 20px;
+      padding: 16px 18px;
       background: var(--gradient-primary);
       color: white;
       border: none;
@@ -471,11 +499,12 @@
       cursor: pointer;
       white-space: nowrap;
       min-height: 56px;
-      min-width: 80px;
+      width: 70px;
       user-select: none;
       transition: all 0.3s ease;
       box-shadow: var(--shadow-soft);
       flex-shrink: 0;
+      font-size: 14px;
     }
     
     .manual-btn:hover {
@@ -492,6 +521,38 @@
       cursor: not-allowed;
       transform: none;
       opacity: 0.6;
+    }
+    
+    /* Platform Analytics */
+    .analytics-section {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-soft);
+    }
+    
+    .top-platform {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      background: rgba(16, 185, 129, 0.1);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      border: 1px solid var(--accent-emerald);
+    }
+    
+    .platform-name {
+      font-weight: 600;
+      color: var(--accent-emerald);
+    }
+    
+    .platform-earnings {
+      font-weight: 700;
+      color: var(--accent-emerald);
     }
     
     /* History */
@@ -543,10 +604,20 @@
       margin-top: 2px;
     }
     
+    .history-right {
+      text-align: right;
+    }
+    
     .history-amount {
       font-weight: 700;
       color: var(--accent-emerald);
       font-size: 14px;
+    }
+    
+    .history-rate {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 1px;
     }
     
     /* Action Buttons */
@@ -648,7 +719,7 @@
       display: none !important;
     }
     
-    /* Mobile-specific optimizations */
+    /* Mobile optimizations */
     @media (max-width: 480px) {
       body {
         padding: 8px;
@@ -664,12 +735,16 @@
       }
       
       .stat-item {
-        padding: 10px 6px;
+        padding: 8px 4px;
         min-height: 55px;
       }
       
       .stat-value {
-        font-size: 14px;
+        font-size: 12px;
+      }
+      
+      .stat-label {
+        font-size: 7px;
       }
       
       .total-amount {
@@ -681,118 +756,15 @@
       }
       
       .platform-btn {
-        padding: 14px 10px;
+        padding: 12px 8px;
         min-height: 65px;
         border-radius: 12px;
+        font-size: 10px;
       }
       
       .platform-emoji {
-        font-size: 18px;
+        font-size: 16px;
       }
-      
-      .quick-grid {
-        gap: 8px;
-      }
-      
-      .quick-btn {
-        min-height: 52px;
-        font-size: 13px;
-        border-radius: 12px;
-      }
-      
-      .manual-input-row {
-        gap: 8px;
-      }
-      
-      .manual-input {
-        font-size: 14px;
-        padding: 14px;
-        min-height: 52px;
-      }
-      
-      .manual-btn {
-        padding: 14px 16px;
-        min-height: 52px;
-        min-width: 70px;
-        font-size: 13px;
-      }
-      
-      .action-grid {
-        gap: 8px;
-      }
-      
-      .action-btn {
-        min-height: 52px;
-        font-size: 11px;
-        border-radius: 8px;
-      }
-    }
-    
-    /* Landscape mobile optimization */
-    @media (max-height: 500px) and (orientation: landscape) {
-      .stats-box, .total-box {
-        padding: 12px;
-        margin-bottom: 16px;
-      }
-      
-      .section-title {
-        margin-bottom: 8px;
-      }
-      
-      .platform-grid, .quick-grid, .manual-section, .history-section {
-        margin-bottom: 16px;
-      }
-      
-      .history-list {
-        max-height: 100px;
-      }
-    }
-    
-    /* For very small screens */
-    @media (max-width: 320px) {
-      .title {
-        font-size: 20px;
-      }
-      
-      .subtitle {
-        font-size: 12px;
-      }
-      
-      .stat-value {
-        font-size: 13px;
-      }
-      
-      .total-amount {
-        font-size: 24px;
-      }
-      
-      .platform-btn {
-        font-size: 10px;
-        min-height: 60px;
-      }
-      
-      .quick-btn {
-        font-size: 12px;
-      }
-      
-      .manual-input-row {
-        gap: 6px;
-      }
-      
-      .manual-btn {
-        min-width: 60px;
-        padding: 12px;
-        font-size: 12px;
-      }
-    }
-
-    /* Focus styles for accessibility */
-    .platform-btn:focus,
-    .quick-btn:focus,
-    .manual-btn:focus,
-    .action-btn:focus {
-      outline: 2px solid var(--accent-blue);
-      outline-offset: 2px;
     }
   </style>
 </head>
@@ -801,7 +773,6 @@
   <div class="bg-gradient"></div>
   <div class="floating-orb orb-1"></div>
   <div class="floating-orb orb-2"></div>
-  <div class="floating-orb orb-3"></div>
 
   <div class="container">
     <!-- Notification -->
@@ -810,12 +781,12 @@
     </div>
     
     <!-- Header -->
-    <h1 class="title">💰 Earnings Tracker</h1>
-    <p class="subtitle">Simple earnings tracking for gig workers</p>
+    <h1 class="title">💰 Online Work Tracker</h1>
+    <p class="subtitle">Track earnings from surveys, freelancing, and online gigs</p>
     
     <!-- Today's Stats -->
     <div class="stats-box">
-      <div class="stats-title">🔥 Today's Progress</div>
+      <div class="stats-title">🎯 Today's Progress</div>
       <div class="stats-grid">
         <div class="stat-item">
           <div class="stat-value" id="todayTotal">$0.00</div>
@@ -827,9 +798,22 @@
         </div>
         <div class="stat-item">
           <div class="stat-value" id="todayAvg">$0.00</div>
-          <div class="stat-label">Average</div>
+          <div class="stat-label">Per Task</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="hourlyRate">$0.00</div>
+          <div class="stat-label">Per Hour</div>
         </div>
       </div>
+    </div>
+    
+    <!-- Time Tracking -->
+    <div class="time-section">
+      <div class="time-header">
+        <div class="section-title" style="margin: 0;">⏱️ Work Session</div>
+        <button id="timerBtn" class="timer-btn">Start Timer</button>
+      </div>
+      <div class="timer-display" id="timerDisplay">00:00:00</div>
     </div>
     
     <!-- Progress -->
@@ -837,7 +821,7 @@
       <div class="progress-header">
         <div>
           Goal: $<span class="goal-area" id="goalArea">
-            <span id="goalAmount">50.00</span>
+            <span id="goalAmount">25.00</span>
           </span>
           <input type="number" id="goalInput" class="goal-input hidden" step="0.01" min="1">
         </div>
@@ -857,15 +841,7 @@
     <!-- Platform Selection -->
     <div class="section-title">💼 Select Platform</div>
     <div class="platform-grid">
-      <button class="platform-btn" style="background: linear-gradient(135deg, #ff6b6b, #ff5252);">
-        <div class="platform-emoji">🍕</div>
-        <div>DoorDash</div>
-      </button>
       <button class="platform-btn" style="background: linear-gradient(135deg, #4ecdc4, #26d0ce);">
-        <div class="platform-emoji">🚗</div>
-        <div>Uber</div>
-      </button>
-      <button class="platform-btn" style="background: linear-gradient(135deg, #45b7d1, #2196f3);">
         <div class="platform-emoji">📋</div>
         <div>Surveys</div>
       </button>
@@ -873,17 +849,25 @@
         <div class="platform-emoji">💻</div>
         <div>Fiverr</div>
       </button>
-      <button class="platform-btn" style="background: linear-gradient(135deg, #ffecd2, #fcb69f);">
-        <div class="platform-emoji">🛒</div>
-        <div>Instacart</div>
-      </button>
       <button class="platform-btn" style="background: linear-gradient(135deg, #a8edea, #fed6e3);">
         <div class="platform-emoji">📝</div>
         <div>Upwork</div>
       </button>
+      <button class="platform-btn" style="background: linear-gradient(135deg, #45b7d1, #2196f3);">
+        <div class="platform-emoji">🔬</div>
+        <div>User Testing</div>
+      </button>
       <button class="platform-btn" style="background: linear-gradient(135deg, #d299c2, #fef9d7);">
-        <div class="platform-emoji">⚡</div>
-        <div>Micro Work</div>
+        <div class="platform-emoji">🎯</div>
+        <div>Prolific</div>
+      </button>
+      <button class="platform-btn" style="background: linear-gradient(135deg, #ffecd2, #fcb69f);">
+        <div class="platform-emoji">✍️</div>
+        <div>Content Writing</div>
+      </button>
+      <button class="platform-btn" style="background: linear-gradient(135deg, #ff9a9e, #fecfef);">
+        <div class="platform-emoji">🎤</div>
+        <div>User Interviews</div>
       </button>
       <button class="platform-btn" style="background: linear-gradient(135deg, #89f7fe, #66a6ff);">
         <div class="platform-emoji">✨</div>
@@ -894,10 +878,10 @@
     <!-- Quick Add -->
     <div class="section-title">⚡ Quick Add</div>
     <div class="quick-grid" id="quickGrid">
-      <button class="quick-btn">$0.25</button>
+      <button class="quick-btn">$0.50</button>
       <button class="quick-btn">$2.00</button>
       <button class="quick-btn">$5.00</button>
-      <button class="quick-btn">$10.00</button>
+      <button class="quick-btn">$15.00</button>
     </div>
     
     <!-- Manual Entry -->
@@ -906,6 +890,15 @@
       <div class="manual-input-row">
         <input type="number" id="manualInput" class="manual-input" placeholder="0.00" step="0.01" min="0" inputmode="decimal">
         <button id="manualBtn" class="manual-btn" disabled>Add</button>
+      </div>
+    </div>
+    
+    <!-- Platform Analytics -->
+    <div class="analytics-section">
+      <div class="section-title" style="margin-bottom: 12px;">📊 Top Platform Today</div>
+      <div id="topPlatform" class="top-platform">
+        <div class="platform-name">No earnings yet</div>
+        <div class="platform-earnings">$0.00</div>
       </div>
     </div>
     
@@ -929,23 +922,27 @@
   </div>
 
   <script>
-    // Simple state
+    // State
     let totalEarnings = 0;
-    let dailyGoal = 50;
+    let dailyGoal = 25; // More realistic for online work
     let taskCount = 0;
     let history = [];
     let currentPlatform = '';
+    let workStartTime = null;
+    let totalWorkTime = 0; // in minutes
+    let isTimerRunning = false;
+    let timerInterval = null;
     
-    // Platform data
+    // Platform data - realistic amounts for online work
     const platforms = {
-      'DoorDash': [2.00, 5.00, 8.00, 15.00],
-      'Uber': [2.00, 5.00, 10.00, 15.00],
-      'Surveys': [0.10, 0.25, 0.50, 2.00],
-      'Fiverr': [5.00, 10.00, 25.00, 50.00],
-      'Instacart': [5.00, 10.00, 15.00, 25.00],
-      'Upwork': [5.00, 15.00, 30.00, 75.00],
-      'Micro Work': [0.10, 0.25, 0.50, 1.00],
-      'Other': [0.50, 2.00, 5.00, 10.00]
+      'Surveys': [0.25, 0.50, 1.00, 2.00],
+      'Fiverr': [5.00, 15.00, 25.00, 50.00],
+      'Upwork': [10.00, 25.00, 50.00, 100.00],
+      'User Testing': [4.00, 10.00, 20.00, 60.00],
+      'Prolific': [1.50, 3.00, 5.00, 8.00],
+      'Content Writing': [5.00, 20.00, 40.00, 75.00],
+      'User Interviews': [20.00, 50.00, 100.00, 200.00],
+      'Other': [1.00, 5.00, 10.00, 25.00]
     };
     
     // DOM elements
@@ -956,6 +953,7 @@
       todayTotal: document.getElementById('todayTotal'),
       todayTasks: document.getElementById('todayTasks'),
       todayAvg: document.getElementById('todayAvg'),
+      hourlyRate: document.getElementById('hourlyRate'),
       goalAmount: document.getElementById('goalAmount'),
       goalArea: document.getElementById('goalArea'),
       goalInput: document.getElementById('goalInput'),
@@ -967,8 +965,63 @@
       manualBtn: document.getElementById('manualBtn'),
       quickGrid: document.getElementById('quickGrid'),
       notification: document.getElementById('notification'),
-      notificationText: document.getElementById('notificationText')
+      notificationText: document.getElementById('notificationText'),
+      timerBtn: document.getElementById('timerBtn'),
+      timerDisplay: document.getElementById('timerDisplay'),
+      topPlatform: document.getElementById('topPlatform')
     };
+    
+    // Timer functions
+    function startTimer() {
+      if (!isTimerRunning) {
+        workStartTime = new Date();
+        isTimerRunning = true;
+        elements.timerBtn.textContent = 'Stop Timer';
+        elements.timerBtn.classList.add('stop');
+        
+        timerInterval = setInterval(updateTimerDisplay, 1000);
+        showNotification('Work session started! ⏱️', 'success');
+      } else {
+        stopTimer();
+      }
+    }
+    
+    function stopTimer() {
+      if (isTimerRunning && workStartTime) {
+        const sessionTime = Math.round((new Date() - workStartTime) / 60000); // minutes
+        totalWorkTime += sessionTime;
+        
+        isTimerRunning = false;
+        workStartTime = null;
+        clearInterval(timerInterval);
+        
+        elements.timerBtn.textContent = 'Start Timer';
+        elements.timerBtn.classList.remove('stop');
+        
+        showNotification(`Work session ended! +${sessionTime} minutes`, 'milestone');
+        updateUI();
+      }
+    }
+    
+    function updateTimerDisplay() {
+      if (isTimerRunning && workStartTime) {
+        const elapsed = Math.floor((new Date() - workStartTime) / 1000);
+        const hours = Math.floor(elapsed / 3600);
+        const minutes = Math.floor((elapsed % 3600) / 60);
+        const seconds = elapsed % 60;
+        
+        elements.timerDisplay.textContent = 
+          `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      } else {
+        const totalSeconds = totalWorkTime * 60;
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+        
+        elements.timerDisplay.textContent = 
+          `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      }
+    }
     
     // Show notification
     function showNotification(message, type = 'success') {
@@ -986,6 +1039,11 @@
       elements.todayTotal.textContent = '$' + totalEarnings.toFixed(2);
       elements.todayTasks.textContent = taskCount;
       elements.todayAvg.textContent = '$' + (taskCount > 0 ? (totalEarnings / taskCount).toFixed(2) : '0.00');
+      
+      // Calculate hourly rate
+      const hourlyRate = totalWorkTime > 0 ? (totalEarnings / (totalWorkTime / 60)) : 0;
+      elements.hourlyRate.textContent = '$' + hourlyRate.toFixed(2);
+      
       elements.goalAmount.textContent = dailyGoal.toFixed(2);
       
       // Update progress
@@ -997,7 +1055,7 @@
       if (totalEarnings >= dailyGoal) {
         elements.totalBox.classList.add('complete');
         elements.progressFill.classList.add('complete');
-        elements.totalInfo.textContent = '🏆 GOAL CRUSHED! Amazing work!';
+        elements.totalInfo.textContent = '🏆 GOAL REACHED! Outstanding work!';
       } else {
         elements.totalBox.classList.remove('complete');
         elements.progressFill.classList.remove('complete');
@@ -1008,8 +1066,39 @@
       // Update undo button
       elements.undoBtn.disabled = history.length === 0;
       
+      // Update timer display
+      updateTimerDisplay();
+      
+      // Update top platform
+      updateTopPlatform();
+      
       // Update history
       updateHistory();
+    }
+    
+    // Update top platform analytics
+    function updateTopPlatform() {
+      if (history.length === 0) {
+        elements.topPlatform.innerHTML = 
+          '<div class="platform-name">No earnings yet</div>' +
+          '<div class="platform-earnings">$0.00</div>';
+        return;
+      }
+      
+      // Calculate platform totals
+      const platformTotals = {};
+      history.forEach(entry => {
+        platformTotals[entry.platform] = (platformTotals[entry.platform] || 0) + entry.amount;
+      });
+      
+      // Find top platform
+      const topPlatform = Object.keys(platformTotals).reduce((a, b) => 
+        platformTotals[a] > platformTotals[b] ? a : b
+      );
+      
+      elements.topPlatform.innerHTML = 
+        '<div class="platform-name">🏆 ' + topPlatform + '</div>' +
+        '<div class="platform-earnings">$' + platformTotals[topPlatform].toFixed(2) + '</div>';
     }
     
     // Update history display
@@ -1019,19 +1108,30 @@
         return;
       }
       
-      elements.historyList.innerHTML = history.map(entry => 
-        '<div class="history-item">' +
+      elements.historyList.innerHTML = history.map(entry => {
+        const rate = entry.sessionTime > 0 ? (entry.amount / (entry.sessionTime / 60)).toFixed(2) : '0.00';
+        return '<div class="history-item">' +
           '<div>' +
             '<div class="history-platform">' + entry.platform + '</div>' +
             '<div class="history-time">' + entry.time + '</div>' +
           '</div>' +
-          '<div class="history-amount">+$' + entry.amount.toFixed(2) + '</div>' +
-        '</div>'
-      ).join('');
+          '<div class="history-right">' +
+            '<div class="history-amount">+$' + entry.amount.toFixed(2) + '</div>' +
+            '<div class="history-rate">$' + rate + '/hr</div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
     }
     
     // Add earning
     function addEarning(amount, platform) {
+      // Stop timer if running and add session time
+      let sessionTime = 0;
+      if (isTimerRunning && workStartTime) {
+        sessionTime = Math.round((new Date() - workStartTime) / 60000);
+        stopTimer();
+      }
+      
       totalEarnings += amount;
       taskCount++;
       
@@ -1041,7 +1141,8 @@
         amount: amount,
         platform: platform,
         time: now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
-        timestamp: now
+        timestamp: now,
+        sessionTime: sessionTime
       });
       
       // Keep only last 20 entries
@@ -1055,8 +1156,9 @@
       // Update UI
       updateUI();
       
-      // Show success
-      showNotification('+$' + amount.toFixed(2) + ' from ' + platform + '! 💰');
+      // Show success with rate info
+      const rateInfo = sessionTime > 0 ? ` ($${(amount / (sessionTime / 60)).toFixed(2)}/hr)` : '';
+      showNotification('+$' + amount.toFixed(2) + ' from ' + platform + rateInfo + '! 💰');
       
       // Haptic feedback if available
       if (navigator.vibrate) {
@@ -1064,9 +1166,9 @@
       }
     }
     
-    // Check for milestones
+    // Check for milestones - adjusted for online work
     function checkMilestones() {
-      const milestones = [5, 10, 25, 50, 100];
+      const milestones = [1, 5, 10, 25, 50, 100];
       const currentMilestone = milestones.find(m => totalEarnings >= m && totalEarnings - history[0].amount < m);
       
       if (currentMilestone) {
@@ -1112,10 +1214,10 @@
     // Reset quick buttons
     function resetQuickButtons() {
       elements.quickGrid.innerHTML = 
-        '<button class="quick-btn" onclick="addEarning(0.25, \'Quick Add\')">$0.25</button>' +
+        '<button class="quick-btn" onclick="addEarning(0.50, \'Quick Add\')">$0.50</button>' +
         '<button class="quick-btn" onclick="addEarning(2.00, \'Quick Add\')">$2.00</button>' +
         '<button class="quick-btn" onclick="addEarning(5.00, \'Quick Add\')">$5.00</button>' +
-        '<button class="quick-btn" onclick="addEarning(10.00, \'Quick Add\')">$10.00</button>';
+        '<button class="quick-btn" onclick="addEarning(15.00, \'Quick Add\')">$15.00</button>';
     }
     
     // Manual amount validation
@@ -1127,7 +1229,7 @@
     elements.manualInput.addEventListener('keypress', function(e) {
       if (e.key === 'Enter' && !elements.manualBtn.disabled) {
         addManualAmount();
-        this.blur(); // Hide keyboard on mobile
+        this.blur();
       }
     });
     
@@ -1138,7 +1240,7 @@
         addEarning(amount, currentPlatform || 'Manual Entry');
         elements.manualInput.value = '';
         elements.manualBtn.disabled = true;
-        elements.manualInput.blur(); // Hide keyboard
+        elements.manualInput.blur();
       }
     }
     
@@ -1176,6 +1278,12 @@
         const last = history.shift();
         totalEarnings -= last.amount;
         taskCount = Math.max(0, taskCount - 1);
+        
+        // Adjust work time if it was from a timed session
+        if (last.sessionTime > 0) {
+          totalWorkTime = Math.max(0, totalWorkTime - last.sessionTime);
+        }
+        
         updateUI();
         showNotification('Undid $' + last.amount.toFixed(2) + ' from ' + last.platform, 'error');
         if (navigator.vibrate) {
@@ -1188,19 +1296,25 @@
     function exportData() {
       const today = new Date().toLocaleDateString();
       const avgPerTask = taskCount > 0 ? (totalEarnings / taskCount).toFixed(2) : '0.00';
+      const hourlyRate = totalWorkTime > 0 ? (totalEarnings / (totalWorkTime / 60)).toFixed(2) : '0.00';
       
-      const textData = '💰 Earnings Tracker Report - ' + today + '\n\n' +
+      const textData = '💰 Online Work Tracker Report - ' + today + '\n\n' +
         '💰 SUMMARY:\n' +
         '• Total Earned: $' + totalEarnings.toFixed(2) + '\n' +
         '• Daily Goal: $' + dailyGoal.toFixed(2) + ' (' + Math.round((totalEarnings / dailyGoal) * 100) + '% complete)\n' +
         '• Tasks Completed: ' + taskCount + '\n' +
-        '• Average per Task: $' + avgPerTask + '\n\n' +
+        '• Average per Task: $' + avgPerTask + '\n' +
+        '• Total Work Time: ' + Math.round(totalWorkTime) + ' minutes\n' +
+        '• Hourly Rate: $' + hourlyRate + '/hour\n\n' +
         '📜 EARNINGS HISTORY:\n' +
         (history.length > 0 ? 
-          history.map(entry => '• ' + entry.time + ' - ' + entry.platform + ': $' + entry.amount.toFixed(2)).join('\n') 
+          history.map(entry => {
+            const rate = entry.sessionTime > 0 ? ' ($' + (entry.amount / (entry.sessionTime / 60)).toFixed(2) + '/hr)' : '';
+            return '• ' + entry.time + ' - ' + entry.platform + ': $' + entry.amount.toFixed(2) + rate;
+          }).join('\n') 
           : '• No earnings recorded yet'
         ) + '\n\n' +
-        '---\nGenerated by Earnings Tracker 🎯';
+        '---\nGenerated by Online Work Tracker 🎯';
       
       // Copy to clipboard
       if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -1240,12 +1354,15 @@
       // Platform buttons
       const platformButtons = document.querySelectorAll('.platform-btn');
       platformButtons.forEach((btn, index) => {
-        const platformNames = ['DoorDash', 'Uber', 'Surveys', 'Fiverr', 'Instacart', 'Upwork', 'Micro Work', 'Other'];
+        const platformNames = ['Surveys', 'Fiverr', 'Upwork', 'User Testing', 'Prolific', 'Content Writing', 'User Interviews', 'Other'];
         const platformName = platformNames[index];
         btn.addEventListener('click', () => {
           selectPlatform(platformName, platforms[platformName]);
         });
       });
+      
+      // Timer button
+      elements.timerBtn.addEventListener('click', startTimer);
       
       // Goal area click
       elements.goalArea.addEventListener('click', editGoal);
