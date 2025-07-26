@@ -511,42 +511,6 @@
             transition: width 0.3s ease;
         }
 
-        /* Break reminder */
-        .break-reminder {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--bg-card);
-            border: 2px solid var(--green);
-            border-radius: 15px;
-            padding: 25px;
-            text-align: center;
-            z-index: 1002;
-            display: none;
-            max-width: 400px;
-        }
-
-        .break-reminder h3 {
-            color: var(--green);
-            margin-bottom: 15px;
-        }
-
-        .break-reminder button {
-            background: var(--green);
-            color: var(--bg-dark);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            margin: 5px;
-        }
-
-        .break-reminder button:hover {
-            transform: scale(1.05);
-        }
-
         /* Floating elements */
         .floating-tip {
             position: fixed;
@@ -565,15 +529,6 @@
 <body>
     <!-- Progress bar -->
     <div class="progress-bar" id="progressBar"></div>
-    
-    <!-- Break reminder modal -->
-    <div class="break-reminder" id="breakReminder">
-        <h3>🧠 Time for a Brain Break?</h3>
-        <p>You've been reading for 15 minutes. ADHD brains work better with breaks!</p>
-        <p><strong>Take 2-3 minutes to:</strong> stretch, hydrate, or just breathe</p>
-        <button onclick="dismissBreakReminder()">I'll take a break!</button>
-        <button onclick="continueReading()">Keep reading</button>
-    </div>
 
     <div class="container">
         <h1>📱 <span class="gradient-text">ADHD-Friendly Guide to Social Media Monetization</span></h1>
@@ -1172,10 +1127,6 @@
     </div>
 
     <script>
-        // Progress tracking
-        let startTime = Date.now();
-        let breakReminderShown = false;
-
         // Update progress bar based on scroll position
         function updateProgressBar() {
             const scrollTop = window.pageYOffset;
@@ -1184,35 +1135,8 @@
             document.getElementById('progressBar').style.width = scrollPercent + '%';
         }
 
-        // Break reminder after 15 minutes
-        function checkBreakReminder() {
-            const currentTime = Date.now();
-            const readingTime = (currentTime - startTime) / 1000 / 60; // in minutes
-            
-            if (readingTime >= 15 && !breakReminderShown) {
-                document.getElementById('breakReminder').style.display = 'block';
-                breakReminderShown = true;
-            }
-        }
-
-        // Break reminder functions
-        function dismissBreakReminder() {
-            document.getElementById('breakReminder').style.display = 'none';
-            startTime = Date.now(); // Reset timer
-            breakReminderShown = false;
-            showFloatingMessage('✨ Great choice! Your brain will thank you.');
-        }
-
-        function continueReading() {
-            document.getElementById('breakReminder').style.display = 'none';
-            setTimeout(() => {
-                breakReminderShown = false; // Allow reminder again in 15 minutes
-            }, 900000); // 15 minutes
-        }
-
         // Event listeners for progress tracking
         window.addEventListener('scroll', updateProgressBar);
-        setInterval(checkBreakReminder, 60000); // Check every minute
 
         // Simple smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1319,16 +1243,6 @@
                     showFloatingMessage('🚀 Great progress! You\'re halfway there!');
                 } else if (checkedItems === 1) {
                     showFloatingMessage('✨ Great start! Keep going!');
-                }
-            });
-        });
-
-        // Platform highlighting based on ADHD rating
-        document.querySelectorAll('.platform-box').forEach(box => {
-            box.addEventListener('mouseenter', function() {
-                const rating = this.querySelector('.adhd-rating');
-                if (rating && (rating.classList.contains('rating-5') || rating.classList.contains('rating-4'))) {
-                    showFloatingMessage('💡 This platform is ADHD-friendly!');
                 }
             });
         });
