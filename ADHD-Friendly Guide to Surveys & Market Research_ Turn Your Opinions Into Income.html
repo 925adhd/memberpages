@@ -1335,16 +1335,6 @@
             });
         });
 
-        // Platform highlighting based on ADHD rating
-        document.querySelectorAll('.platform-box').forEach(box => {
-            box.addEventListener('mouseenter', function() {
-                const rating = this.querySelector('.adhd-rating');
-                if (rating && (rating.classList.contains('rating-5') || rating.classList.contains('rating-4'))) {
-                    showFloatingMessage('💡 This platform is ADHD-friendly!');
-                }
-            });
-        });
-
         // Simple pay calculator interactive feature
         function createPayCalculator() {
             const calculatorHtml = `
