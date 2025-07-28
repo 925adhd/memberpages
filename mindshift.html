@@ -299,7 +299,8 @@
       opacity: 0;
       visibility: hidden;
       transition: all 0.3s ease;
-      overflow: hidden;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     .modal-overlay.visible {
@@ -308,17 +309,15 @@
     }
 
     .response-section {
-      height: 100vh;
+      min-height: 100vh;
       width: 100%;
       background: var(--primary-bg);
       position: relative;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
+      padding-bottom: 2rem;
     }
     
     .modal-close {
-      position: absolute;
+      position: fixed;
       top: 1rem;
       right: 1rem;
       background: var(--card-bg);
@@ -349,7 +348,6 @@
       padding: 4rem 1.5rem 2rem;
       text-align: center;
       position: relative;
-      flex-shrink: 0;
     }
     
     .response-title {
@@ -367,9 +365,6 @@
     }
     
     .strategy-content-wrapper {
-      flex: 1;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
       background: var(--primary-bg);
     }
     
@@ -511,7 +506,8 @@
       padding: 1.5rem;
       display: flex;
       justify-content: center;
-      flex-shrink: 0;
+      position: sticky;
+      bottom: 0;
     }
     
     .btn {
@@ -673,7 +669,7 @@
       }
 
       .response-section {
-        height: auto;
+        min-height: auto;
         max-height: 90vh;
         max-width: 700px;
         background: var(--glass-bg);
@@ -683,6 +679,7 @@
         box-shadow: var(--shadow-strong);
         overflow: hidden;
         display: block;
+        padding-bottom: 0;
       }
       
       .response-header {
@@ -732,6 +729,7 @@
       
       .action-buttons {
         padding: 2rem 3rem;
+        position: static;
       }
       
       .btn {
