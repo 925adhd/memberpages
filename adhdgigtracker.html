@@ -974,7 +974,7 @@
     <!-- Instructions -->
     <div style="background: rgba(79, 70, 229, 0.1); border: 1px solid rgba(79, 70, 229, 0.3); border-radius: 12px; padding: 12px; margin-bottom: 20px; text-align: center;">
       <div style="color: var(--accent-blue); font-weight: 600; font-size: 13px; line-height: 1.4;">
-        💡 <strong>Quick Start:</strong> Click "Start Timer" to begin your work session, then add amounts as you earn in real-time to easily track your earnings and hourly rate!
+        💡 <strong>Fixed:</strong> Timer now continues running while you add earnings! Click "Stop Timer" when your work session is complete.
       </div>
     </div>
     
@@ -1260,7 +1260,7 @@
         elements.timerBtn.classList.add('stop');
         
         timerInterval = setInterval(updateTimerDisplay, 1000);
-        showNotification('Work session started! ⏱️', 'success');
+        showNotification('Work session started! Timer will continue until you stop it ⏱️', 'success');
       } else {
         stopTimer();
       }
@@ -1278,7 +1278,7 @@
         elements.timerBtn.textContent = 'Start Timer';
         elements.timerBtn.classList.remove('stop');
         
-        showNotification(`Work session ended! +${sessionTime} minutes`, 'milestone');
+        showNotification(`Work session ended! +${sessionTime} minutes worked`, 'milestone');
         saveData();
         updateUI();
       }
@@ -1419,7 +1419,7 @@
       elements.todayTasks.textContent = taskCount;
       elements.todayAvg.textContent = '$' + (taskCount > 0 ? (totalEarnings / taskCount).toFixed(2) : '0.00');
       
-      // Calculate hourly rate
+      // Calculate hourly rate based on total work time
       const hourlyRate = totalWorkTime > 0 ? (totalEarnings / (totalWorkTime / 60)) : 0;
       elements.hourlyRate.textContent = '$' + hourlyRate.toFixed(2);
       
@@ -1491,7 +1491,18 @@
       }
       
       elements.historyList.innerHTML = history.map(entry => {
-        const rate = entry.sessionTime > 0 ? (entry.amount / (entry.sessionTime / 60)).toFixed(2) : '0.00';
+        // Display current session rate if timer is running
+        let rateDisplay = '$0.00';
+        if (isTimerRunning && workStartTime) {
+          const currentSessionTime = Math.round((new Date() - workStartTime) / 60000);
+          const totalCurrentTime = totalWorkTime + currentSessionTime;
+          if (totalCurrentTime > 0) {
+            rateDisplay = '$' + (totalEarnings / (totalCurrentTime / 60)).toFixed(2);
+          }
+        } else if (totalWorkTime > 0) {
+          rateDisplay = '$' + (totalEarnings / (totalWorkTime / 60)).toFixed(2);
+        }
+        
         return '<div class="history-item">' +
           '<div>' +
             '<div class="history-platform">' + entry.platform + '</div>' +
@@ -1499,21 +1510,14 @@
           '</div>' +
           '<div class="history-right">' +
             '<div class="history-amount">+$' + entry.amount.toFixed(2) + '</div>' +
-            '<div class="history-rate">$' + rate + '/hr</div>' +
+            '<div class="history-rate">' + rateDisplay + '/hr</div>' +
           '</div>' +
         '</div>';
       }).join('');
     }
     
-    // Add earning
+    // Add earning - FIXED: No longer automatically stops timer
     function addEarning(amount, platform) {
-      // Stop timer if running and add session time
-      let sessionTime = 0;
-      if (isTimerRunning && workStartTime) {
-        sessionTime = Math.round((new Date() - workStartTime) / 60000);
-        stopTimer();
-      }
-      
       totalEarnings += amount;
       taskCount++;
       
@@ -1523,8 +1527,7 @@
         amount: amount,
         platform: platform,
         time: now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
-        timestamp: now,
-        sessionTime: sessionTime
+        timestamp: now
       });
       
       // Keep only last 20 entries
@@ -1541,9 +1544,8 @@
       // Update UI
       updateUI();
       
-      // Show success with rate info
-      const rateInfo = sessionTime > 0 ? ` ($${(amount / (sessionTime / 60)).toFixed(2)}/hr)` : '';
-      showNotification('+$' + amount.toFixed(2) + ' from ' + platform + rateInfo + '! 💰');
+      // Show success notification
+      showNotification('+$' + amount.toFixed(2) + ' from ' + platform + '! 💰');
       
       // Haptic feedback if available
       if (navigator.vibrate) {
@@ -1665,11 +1667,6 @@
         totalEarnings -= last.amount;
         taskCount = Math.max(0, taskCount - 1);
         
-        // Adjust work time if it was from a timed session
-        if (last.sessionTime > 0) {
-          totalWorkTime = Math.max(0, totalWorkTime - last.sessionTime);
-        }
-        
         saveData();
         updateUI();
         showNotification('Undid $' + last.amount.toFixed(2) + ' from ' + last.platform, 'error');
@@ -1696,12 +1693,11 @@
         '📜 EARNINGS HISTORY:\n' +
         (history.length > 0 ? 
           history.map(entry => {
-            const rate = entry.sessionTime > 0 ? ' ($' + (entry.amount / (entry.sessionTime / 60)).toFixed(2) + '/hr)' : '';
-            return '• ' + entry.time + ' - ' + entry.platform + ': $' + entry.amount.toFixed(2) + rate;
+            return '• ' + entry.time + ' - ' + entry.platform + ': $' + entry.amount.toFixed(2);
           }).join('\n') 
           : '• No earnings recorded yet'
         ) + '\n\n' +
-        '---\nGenerated by 925 ADHD App 🎯';
+        '---\nGenerated by Online Work Tracker 🎯';
       
       // Copy to clipboard
       if (navigator.clipboard && navigator.clipboard.writeText) {
