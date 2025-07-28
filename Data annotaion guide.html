@@ -27,18 +27,92 @@
             box-sizing: border-box;
         }
 
+        /* Progress Bar Styles */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: rgba(26, 26, 46, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(79, 172, 254, 0.2);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--blue), var(--green), var(--purple));
+            background-size: 200% 100%;
+            width: 0%;
+            transition: width 0.25s ease;
+            animation: progressGlow 3s ease-in-out infinite;
+            box-shadow: 0 0 15px rgba(79, 172, 254, 0.5);
+        }
+
+        @keyframes progressGlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .progress-indicator {
+            position: fixed;
+            top: 8px;
+            right: 20px;
+            background: rgba(22, 33, 62, 0.95);
+            color: var(--text-white);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 1001;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(79, 172, 254, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        .progress-indicator.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .progress-indicator .percentage {
+            color: var(--green);
+            font-weight: bold;
+        }
+
+        /* Progress milestones */
+        .progress-milestone {
+            position: absolute;
+            top: -2px;
+            width: 4px;
+            height: 10px;
+            background: var(--yellow);
+            border-radius: 2px;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+        }
+
+        .progress-milestone.reached {
+            opacity: 1;
+            box-shadow: 0 0 8px var(--yellow);
+        }
+
         body {
             font-family: 'Open Sans', sans-serif;
             background: var(--bg-dark);
             color: var(--text-white);
             line-height: 1.8;
             font-size: 18px;
-            padding: 20px;
+            padding: 30px 20px 20px;
         }
 
         .container {
             max-width: 800px;
-            margin: 0 auto;
+            margin: 10px auto 0;
         }
 
         /* Big, clear headers */
@@ -319,7 +393,7 @@
         @media (max-width: 768px) {
             body {
                 font-size: 16px;
-                padding: 15px;
+                padding: 30px 15px 15px;
             }
 
             h1 {
@@ -341,6 +415,12 @@
 
             .card {
                 padding: 20px;
+            }
+
+            .progress-indicator {
+                right: 10px;
+                padding: 6px 12px;
+                font-size: 12px;
             }
         }
 
@@ -389,6 +469,23 @@
     </style>
 </head>
 <body>
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar"></div>
+        <!-- Milestones for each major section -->
+        <div class="progress-milestone" style="left: 16.66%;" data-section="step1"></div>
+        <div class="progress-milestone" style="left: 33.33%;" data-section="step2"></div>
+        <div class="progress-milestone" style="left: 50%;" data-section="step3"></div>
+        <div class="progress-milestone" style="left: 66.66%;" data-section="step4"></div>
+        <div class="progress-milestone" style="left: 83.33%;" data-section="step5"></div>
+        <div class="progress-milestone" style="left: 100%;" data-section="timeline"></div>
+    </div>
+
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <span class="percentage">0%</span> Complete
+    </div>
+
     <div class="container">
         <h1>🧠 <span class="gradient-text">Data Annotation: Turn Your Focus Into Income</span></h1>
         
@@ -401,11 +498,11 @@
         <div class="quick-nav">
             <h3 style="text-align: center; color: var(--blue); margin-bottom: 15px;">📋 Quick Menu</h3>
             <div class="nav-grid">
-                <a href="#what-is-it" class="nav-item">❓ What Is This?</a>
-                <a href="#money" class="nav-item">💰 Earning Potential</a>
-                <a href="#platforms" class="nav-item">🏢 Best Platforms</a>
-                <a href="#adhd-tips" class="nav-item">⚡ ADHD Advantages</a>
-                <a href="#getting-started" class="nav-item">🚀 Get Started</a>
+                <a href="#step1" class="nav-item">❓ What Is This?</a>
+                <a href="#step2" class="nav-item">💰 Earning Potential</a>
+                <a href="#step3" class="nav-item">🏢 Best Platforms</a>
+                <a href="#step4" class="nav-item">⚡ ADHD Advantages</a>
+                <a href="#step5" class="nav-item">🚀 Get Started</a>
             </div>
         </div>
 
@@ -417,7 +514,7 @@
             <p>Perfect for flexible income and learning cutting-edge AI tech!</p>
         </div>
 
-        <section id="what-is-it">
+        <section id="step1">
             <h2>❓ What Is Data Annotation?</h2>
             
             <div class="card">
@@ -442,7 +539,7 @@
             </div>
         </section>
 
-        <section id="money">
+        <section id="step2">
             <h2>💰 Earning Potential</h2>
 
             <div class="simple-table">
@@ -480,7 +577,7 @@
             </div>
         </section>
 
-        <section id="platforms">
+        <section id="step3">
             <h2>🏢 Platform Analysis</h2>
 
             <div class="card adhd">
@@ -488,28 +585,28 @@
                 <p>Start with these top three for maximum engagement:</p>
                 <ul>
                     <li><strong>DataAnnotation.tech:</strong> Great pay rates, coding and AI training tasks</li>
-                    <li><strong>Remotasks:</strong> Visual annotation focus, comprehensive training (Scale AI)</li>
-                    <li><strong>Outlier:</strong> Premium pay rates, expert-level LLM tasks (Scale AI)</li>
+                    <li><strong>Remotasks:</strong> Visual annotation focus, comprehensive training</li>
+                    <li><strong>Outlier:</strong> Premium pay rates, expert-level LLM tasks</li>
                 </ul>
             </div>
 
             <div class="platform-grid">
                 <div class="platform-box">
-                    <div class="platform-name">Remotasks (Scale AI)</div>
+                    <div class="platform-name">Remotasks</div>
                     <div class="pay-range">$7-30/hour</div>
                     <div class="difficulty easy">Easy to start</div>
                     <p>Good for: Picture work, learning basics</p>
                     <p>ADHD Rating: ⭐⭐⭐⭐</p>
-                    <p><a href="https://www.remotasks.com" class="platform-link" target="_blank" rel="noopener noreferrer">Sign up here →</a></p>
+                    <p><a href="https://www.remotasks.com/en/signup" class="platform-link" target="_blank" rel="noopener noreferrer">Sign up here →</a></p>
                 </div>
 
                 <div class="platform-box">
-                    <div class="platform-name">Outlier (Scale AI)</div>
+                    <div class="platform-name">Outlier</div>
                     <div class="pay-range">$15-40/hour</div>
                     <div class="difficulty medium">Medium to start</div>
                     <p>Good for: LLM training, expert tasks</p>
                     <p>ADHD Rating: ⭐⭐⭐⭐</p>
-                    <p><a href="https://outlier.ai/" class="platform-link" target="_blank" rel="noopener noreferrer">Sign up here →</a></p>
+                    <p><a href="https://app.outlier.ai/en/expert/signup" class="platform-link" target="_blank" rel="noopener noreferrer">Sign up here →</a></p>
                 </div>
 
                 <div class="platform-box">
@@ -518,7 +615,7 @@
                     <div class="difficulty easy">Easy to start</div>
                     <p>Good for: Coding, AI training tasks</p>
                     <p>ADHD Rating: ⭐⭐⭐⭐</p>
-                    <p><a href="https://www.dataannotation.tech/" class="platform-link" target="_blank" rel="noopener noreferrer">Sign up here →</a></p>
+                    <p><a href="https://app.dataannotation.tech/users/sign_up" class="platform-link" target="_blank" rel="noopener noreferrer">Sign up here →</a></p>
                 </div>
 
                 <div class="platform-box">
@@ -527,7 +624,7 @@
                     <div class="difficulty medium">Medium to start</div>
                     <p>Good for: Text work, AI training</p>
                     <p>ADHD Rating: ⭐⭐⭐</p>
-                    <p><a href="https://appen.com/join-our-crowd/" class="platform-link" target="_blank" rel="noopener noreferrer">Sign up here →</a></p>
+                    <p><a href="https://connect.appen.com/qrp/public/jobs" class="platform-link" target="_blank" rel="noopener noreferrer">Sign up here →</a></p>
                 </div>
 
                 <div class="platform-box">
@@ -536,7 +633,7 @@
                     <div class="difficulty medium">Medium to start</div>
                     <p>Good for: Search evaluation, language tasks</p>
                     <p>ADHD Rating: ⭐⭐⭐</p>
-                    <p><a href="https://ai.lionbridge.com/cmp" class="platform-link" target="_blank" rel="noopener noreferrer">Sign up here →</a></p>
+                    <p><a href="https://www.telusinternational.ai/cmp/" class="platform-link" target="_blank" rel="noopener noreferrer">Sign up here →</a></p>
                 </div>
 
                 <div class="platform-box">
@@ -545,7 +642,7 @@
                     <div class="difficulty easy">Easy to start</div>
                     <p>Good for: Simple data entry, surveys</p>
                     <p>ADHD Rating: ⭐⭐ (can be repetitive)</p>
-                    <p><a href="https://www.clickworker.com/become-clickworker/" class="platform-link" target="_blank" rel="noopener noreferrer">Sign up here →</a></p>
+                    <p><a href="https://www.clickworker.com/en/clickworker?utm_source=cwportal&utm_medium=direct&utm_campaign=public_cwportal" class="platform-link" target="_blank" rel="noopener noreferrer">Sign up here →</a></p>
                 </div>
 
                 <div class="platform-box">
@@ -558,12 +655,12 @@
                 </div>
 
                 <div class="platform-box">
-                    <div class="platform-name">Toloka (Yandex)</div>
+                    <div class="platform-name">Toloka</div>
                     <div class="pay-range">$5-15/hour</div>
                     <div class="difficulty easy">Easy to start</div>
                     <p>Good for: Basic annotation tasks</p>
                     <p>ADHD Rating: ⭐⭐ (inconsistent work)</p>
-                    <p><a href="https://toloka.yandex.com/promo?referralCode=MIGGQE44" class="platform-link" target="_blank" rel="noopener noreferrer">Sign up here →</a></p>
+                    <p><a href="https://toloka.ai/tolokers" class="platform-link" target="_blank" rel="noopener noreferrer">Sign up here →</a></p>
                 </div>
             </div>
 
@@ -590,7 +687,7 @@
             </div>
         </section>
 
-        <section id="adhd-tips">
+        <section id="step4">
             <h2>⚡ Your ADHD Advantage</h2>
 
             <div class="card adhd">
@@ -679,7 +776,7 @@
             </div>
         </section>
 
-        <section id="getting-started">
+        <section id="step5">
             <h2>🚀 Strategic Launch Plan</h2>
 
             <div class="card important">
@@ -782,23 +879,101 @@
             <div class="big-text">
                 Your neurodivergent brain brings unique advantages to AI training work. Leverage your natural strengths, optimize for your work style, and build valuable tech industry experience!
             </div>
-
-            <div style="text-align: center; margin: 40px 0;">
-                <a href="#what-is-it" class="big-button">🔄 Read Again</a>
-                <a href="https://www.dataannotation.tech/" class="big-button" target="_blank">💰 Try DataAnnotation.tech</a>
-                <a href="https://www.remotasks.com" class="big-button" target="_blank">🚀 Try Remotasks</a>
-                <a href="https://outlier.ai/" class="big-button" target="_blank">⭐ Try Outlier</a>
-            </div>
         </section>
 
-        <div class="card" style="text-align: center; margin-top: 50px;">
-            <h3 style="color: var(--green);">🎉 Your Advantage Awaits</h3>
-            <p>Your neurodivergent brain is perfectly suited for this cutting-edge work. Start strategically, optimize your approach, and discover what you can achieve. 🚀</p>
-        </div>
+        <section id="timeline">
+            <div style="text-align: center; margin: 40px 0;">
+                <a href="#step1" class="big-button">🔄 Read Again</a>
+                <a href="https://app.dataannotation.tech/users/sign_up" class="big-button" target="_blank">💰 Try DataAnnotation.tech</a>
+                <a href="https://www.remotasks.com/en/signup" class="big-button" target="_blank">🚀 Try Remotasks</a>
+                <a href="https://app.outlier.ai/en/expert/signup" class="big-button" target="_blank">⭐ Try Outlier</a>
+            </div>
+
+            <div class="card" style="text-align: center; margin-top: 50px;">
+                <h3 style="color: var(--green);">🎉 Your Advantage Awaits</h3>
+                <p>Your neurodivergent brain is perfectly suited for this cutting-edge work. Start strategically, optimize your approach, and discover what you can achieve. 🚀</p>
+            </div>
+        </section>
     </div>
 
     <script>
-        // Simple smooth scrolling
+        // Progress Bar Functionality
+        function updateProgress() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercentage = (scrollTop / scrollHeight) * 100;
+            
+            const progressBar = document.querySelector('.progress-bar');
+            const progressIndicator = document.querySelector('.progress-indicator');
+            const percentageSpan = document.querySelector('.percentage');
+            
+            // Update progress bar width
+            progressBar.style.width = Math.min(scrollPercentage, 100) + '%';
+            
+            // Update percentage text
+            percentageSpan.textContent = Math.round(Math.min(scrollPercentage, 100)) + '%';
+            
+            // Show/hide progress indicator based on scroll
+            if (scrollTop > 100) {
+                progressIndicator.classList.add('visible');
+            } else {
+                progressIndicator.classList.remove('visible');
+            }
+            
+            // Update milestone indicators
+            const milestones = document.querySelectorAll('.progress-milestone');
+            const sections = ['step1', 'step2', 'step3', 'step4', 'step5', 'timeline'];
+            
+            sections.forEach((sectionId, index) => {
+                const section = document.getElementById(sectionId);
+                const milestone = milestones[index];
+                
+                if (section && milestone) {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    
+                    // Check if section is in view or passed
+                    if (scrollTop + window.innerHeight * 0.3 >= sectionTop) {
+                        milestone.classList.add('reached');
+                    } else {
+                        milestone.classList.remove('reached');
+                    }
+                }
+            });
+        }
+
+        // Throttled scroll event for better performance
+        let ticking = false;
+        function requestTick() {
+            if (!ticking) {
+                requestAnimationFrame(updateProgress);
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', () => {
+            requestTick();
+            ticking = false;
+        });
+
+        // Initial progress update
+        window.addEventListener('load', updateProgress);
+
+        // Progress milestone click navigation
+        document.querySelectorAll('.progress-milestone').forEach(milestone => {
+            milestone.addEventListener('click', function() {
+                const sectionId = this.dataset.section;
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    section.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Simple smooth scrolling for nav links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
