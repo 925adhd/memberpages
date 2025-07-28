@@ -143,6 +143,11 @@
       animation: textGradient 4s ease-in-out infinite;
     }
 
+    @keyframes textGradient {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
     .hero-subtitle {
       font-size: clamp(1.1rem, 3vw, 1.4rem);
       color: var(--text-secondary);
@@ -151,50 +156,6 @@
       margin-left: auto;
       margin-right: auto;
       line-height: 1.5;
-    }
-
-    .hero-features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      margin: 40px 0 50px;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .feature-card {
-      background: var(--glass-bg);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 25px 20px;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--accent-secondary);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .feature-icon {
-      font-size: 2.5rem;
-      margin-bottom: 15px;
-      display: block;
-    }
-
-    .feature-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 8px;
-    }
-
-    .feature-desc {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.4;
     }
 
     .start-button {
@@ -210,7 +171,7 @@
       box-shadow: var(--shadow-medium);
       border: 2px solid rgba(255,255,255,0.2);
       -webkit-tap-highlight-color: transparent;
-      margin-top: 20px;
+      margin-top: 30px;
     }
 
     .start-button:hover {
@@ -227,7 +188,7 @@
       background: var(--glass-bg);
       border-radius: 12px;
       padding: 15px;
-      margin: 15px 0 25px;
+      margin: 20px 0 25px;
       border: 1px solid var(--border-subtle);
       display: none;
     }
@@ -700,11 +661,6 @@
         align-items: flex-start;
         gap: 6px;
       }
-
-      .hero-features {
-        grid-template-columns: 1fr;
-        gap: 15px;
-      }
     }
 
     /* Touch device optimizations */
@@ -744,24 +700,6 @@
           Find your perfect online income stream in just 4 questions. 
           Get personalized recommendations based on your energy, skills, and goals.
         </p>
-        
-        <div class="hero-features">
-          <div class="feature-card">
-            <span class="feature-icon">⚡</span>
-            <div class="feature-title">Quick Assessment</div>
-            <div class="feature-desc">4 questions, 2 minutes max</div>
-          </div>
-          <div class="feature-card">
-            <span class="feature-icon">🎯</span>
-            <div class="feature-title">Personalized Results</div>
-            <div class="feature-desc">Matches based on your unique situation</div>
-          </div>
-          <div class="feature-card">
-            <span class="feature-icon">💰</span>
-            <div class="feature-title">Real Opportunities</div>
-            <div class="feature-desc">Proven platforms with actual earning potential</div>
-          </div>
-        </div>
         
         <button class="start-button" id="startButton">
           🚀 Start Assessment
