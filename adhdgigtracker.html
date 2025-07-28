@@ -26,6 +26,7 @@
       --gradient-success: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
       --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
       --gradient-info: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 100%);
+      --gradient-danger: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
     }
     
     * {
@@ -623,7 +624,7 @@
     /* Action Buttons */
     .action-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 10px;
     }
     
@@ -664,10 +665,104 @@
       border-color: var(--accent-teal);
     }
     
+    .reset-btn {
+      background: var(--gradient-danger);
+      color: white;
+      border-color: var(--accent-rose);
+    }
+    
     .action-btn:disabled {
       opacity: 0.5;
       cursor: not-allowed;
       transform: none;
+    }
+    
+    /* Confirmation Modal */
+    .confirmation-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1001;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      padding: 20px;
+    }
+    
+    .confirmation-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .confirmation-modal {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 24px;
+      max-width: 90vw;
+      max-width: min(400px, 90vw);
+      box-shadow: var(--shadow-medium);
+      transform: scale(0.8);
+      transition: transform 0.3s ease;
+    }
+    
+    .confirmation-overlay.show .confirmation-modal {
+      transform: scale(1);
+    }
+    
+    .confirmation-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    
+    .confirmation-text {
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      text-align: center;
+      line-height: 1.5;
+    }
+    
+    .confirmation-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    
+    .confirm-btn, .cancel-btn {
+      padding: 12px 16px;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 14px;
+    }
+    
+    .confirm-btn {
+      background: var(--gradient-danger);
+      color: white;
+    }
+    
+    .cancel-btn {
+      background: var(--glass-bg);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+    }
+    
+    .confirm-btn:hover, .cancel-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-soft);
     }
     
     /* Centered Notification Modal */
@@ -734,9 +829,56 @@
       border-color: var(--accent-emerald);
     }
     
-    /* Hidden */
-    .hidden {
-      display: none !important;
+    /* Fixed Confetti Animation */
+    .confetti {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      pointer-events: none;
+      z-index: 10000;
+      border-radius: 50%;
+    }
+    
+    .confetti.rect {
+      border-radius: 2px;
+      width: 10px;
+      height: 6px;
+    }
+    
+    .confetti.triangle {
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 10px solid;
+      background: transparent !important;
+      border-radius: 0;
+    }
+    
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(calc(100vh + 100px)) rotate(720deg);
+        opacity: 0;
+      }
+    }
+    
+    @keyframes confetti-wiggle {
+      0%, 100% { 
+        transform: translateY(var(--fall-distance, 0px)) translateX(0) rotate(var(--rotation, 0deg)); 
+      }
+      25% { 
+        transform: translateY(var(--fall-distance, 0px)) translateX(-15px) rotate(var(--rotation, 0deg)); 
+      }
+      50% { 
+        transform: translateY(var(--fall-distance, 0px)) translateX(0) rotate(var(--rotation, 0deg)); 
+      }
+      75% { 
+        transform: translateY(var(--fall-distance, 0px)) translateX(15px) rotate(var(--rotation, 0deg)); 
+      }
     }
     
     /* Mobile optimizations */
@@ -791,6 +933,10 @@
         padding: 16px 20px;
       }
     }
+
+    .hidden {
+      display: none !important;
+    }
   </style>
 </head>
 <body>
@@ -800,6 +946,20 @@
   <div class="floating-orb orb-2"></div>
 
   <div class="container">
+    <!-- Confirmation Modal -->
+    <div id="confirmationOverlay" class="confirmation-overlay">
+      <div class="confirmation-modal">
+        <div class="confirmation-title">🗑️ Reset All Data?</div>
+        <div class="confirmation-text">
+          This will permanently delete all your earnings, history, and reset your timer. Your daily goal setting will be preserved.
+        </div>
+        <div class="confirmation-buttons">
+          <button id="cancelReset" class="cancel-btn">Cancel</button>
+          <button id="confirmReset" class="confirm-btn">Reset All</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Centered Notification Overlay -->
     <div id="notificationOverlay" class="notification-overlay">
       <div id="notification" class="notification">
@@ -810,6 +970,13 @@
     <!-- Header -->
     <h1 class="title">💰 Online Work Tracker</h1>
     <p class="subtitle">Track earnings from surveys, freelancing, and online gigs</p>
+    
+    <!-- Instructions -->
+    <div style="background: rgba(79, 70, 229, 0.1); border: 1px solid rgba(79, 70, 229, 0.3); border-radius: 12px; padding: 12px; margin-bottom: 20px; text-align: center;">
+      <div style="color: var(--accent-blue); font-weight: 600; font-size: 13px; line-height: 1.4;">
+        💡 <strong>Quick Start:</strong> Click "Start Timer" to begin your work session, then add amounts as you earn in real-time to easily track your earnings and hourly rate!
+      </div>
+    </div>
     
     <!-- Today's Stats -->
     <div class="stats-box">
@@ -944,7 +1111,8 @@
     <!-- Action Buttons -->
     <div class="action-grid">
       <button id="undoBtn" class="action-btn undo-btn" disabled>↩ Undo</button>
-      <button class="action-btn export-btn">📊 Export</button>
+      <button id="exportBtn" class="action-btn export-btn">📊 Export</button>
+      <button id="resetBtn" class="action-btn reset-btn">🗑️ Reset</button>
     </div>
   </div>
 
@@ -996,7 +1164,12 @@
       notificationText: document.getElementById('notificationText'),
       timerBtn: document.getElementById('timerBtn'),
       timerDisplay: document.getElementById('timerDisplay'),
-      topPlatform: document.getElementById('topPlatform')
+      topPlatform: document.getElementById('topPlatform'),
+      resetBtn: document.getElementById('resetBtn'),
+      exportBtn: document.getElementById('exportBtn'),
+      confirmationOverlay: document.getElementById('confirmationOverlay'),
+      confirmReset: document.getElementById('confirmReset'),
+      cancelReset: document.getElementById('cancelReset')
     };
     
     // localStorage functions
@@ -1034,6 +1207,47 @@
         }
       } catch (error) {
         console.log('Error loading data:', error);
+      }
+    }
+    
+    // Reset confirmation functions
+    function showResetConfirmation() {
+      elements.confirmationOverlay.classList.add('show');
+    }
+    
+    function hideResetConfirmation() {
+      elements.confirmationOverlay.classList.remove('show');
+    }
+    
+    function resetAllData() {
+      // Stop timer if running
+      if (isTimerRunning) {
+        stopTimer();
+      }
+      
+      // Reset all data except daily goal
+      const preservedGoal = dailyGoal;
+      totalEarnings = 0;
+      taskCount = 0;
+      history = [];
+      totalWorkTime = 0;
+      currentPlatform = '';
+      dailyGoal = preservedGoal;
+      
+      // Reset UI
+      resetQuickButtons();
+      
+      // Save the reset state
+      saveData();
+      updateUI();
+      
+      // Hide confirmation and show success
+      hideResetConfirmation();
+      showNotification('All data reset! Ready for a fresh start 🚀', 'milestone');
+      
+      // Haptic feedback
+      if (navigator.vibrate) {
+        navigator.vibrate([100, 50, 100]);
       }
     }
     
@@ -1090,21 +1304,109 @@
       }
     }
     
+    // Fixed Confetti celebration function
+    function createConfetti() {
+      const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7', '#d63031', '#6c5ce7', '#a29bfe', '#fd79a8', '#e84393'];
+      const shapes = ['circle', 'rect', 'triangle'];
+      const confettiCount = 60;
+      
+      for (let i = 0; i < confettiCount; i++) {
+        setTimeout(() => {
+          const confetti = document.createElement('div');
+          const shape = shapes[Math.floor(Math.random() * shapes.length)];
+          const color = colors[Math.floor(Math.random() * colors.length)];
+          
+          confetti.className = 'confetti ' + (shape === 'circle' ? '' : shape);
+          
+          // Random horizontal position
+          confetti.style.left = Math.random() * 100 + 'vw';
+          
+          // Random animation duration and delay
+          const duration = (Math.random() * 2 + 3) + 's';
+          const delay = Math.random() * 2 + 's';
+          
+          // Set colors based on shape
+          if (shape === 'triangle') {
+            confetti.style.borderBottomColor = color;
+          } else {
+            confetti.style.backgroundColor = color;
+          }
+          
+          // Apply main falling animation
+          confetti.style.animation = `confetti-fall ${duration} linear ${delay} forwards`;
+          
+          // Add wiggle effect randomly
+          if (Math.random() > 0.6) {
+            confetti.style.animation += `, confetti-wiggle 1s ease-in-out infinite ${delay}`;
+          }
+          
+          document.body.appendChild(confetti);
+          
+          // Remove confetti after animation completes
+          const totalDuration = (parseFloat(duration) + parseFloat(delay)) * 1000;
+          setTimeout(() => {
+            if (confetti && confetti.parentNode) {
+              confetti.parentNode.removeChild(confetti);
+            }
+          }, totalDuration + 1000);
+          
+        }, i * 50); // Stagger the creation
+      }
+    }
+    
+    // Notification queue to prevent overlaps
+    let notificationQueue = [];
+    let isShowingNotification = false;
+    
     // Show notification (centered modal)
     function showNotification(message, type = 'success') {
+      // Add to queue
+      notificationQueue.push({ message, type });
+      
+      // Process queue if not already showing
+      if (!isShowingNotification) {
+        processNotificationQueue();
+      }
+    }
+    
+    function processNotificationQueue() {
+      if (notificationQueue.length === 0) {
+        isShowingNotification = false;
+        return;
+      }
+      
+      isShowingNotification = true;
+      const { message, type } = notificationQueue.shift();
+      
       elements.notificationText.textContent = message;
       elements.notification.className = 'notification ' + type;
       elements.notificationOverlay.className = 'notification-overlay show';
       
-      // Auto-hide after 3 seconds
+      // Trigger confetti for milestone notifications
+      if (type === 'milestone') {
+        setTimeout(() => {
+          createConfetti();
+        }, 200);
+      }
+      
+      // Different durations for different types
+      const duration = type === 'milestone' ? 2500 : 1500;
+      
       setTimeout(() => {
         elements.notificationOverlay.classList.remove('show');
-      }, 3000);
+        // Small delay before next notification
+        setTimeout(() => {
+          processNotificationQueue();
+        }, 300);
+      }, duration);
       
-      // Allow clicking overlay to dismiss
+      // Allow clicking overlay to dismiss and continue queue
       elements.notificationOverlay.onclick = (e) => {
         if (e.target === elements.notificationOverlay) {
           elements.notificationOverlay.classList.remove('show');
+          setTimeout(() => {
+            processNotificationQueue();
+          }, 100);
         }
       };
     }
@@ -1142,6 +1444,9 @@
       
       // Update undo button
       elements.undoBtn.disabled = history.length === 0;
+      
+      // Update reset button (always enabled)
+      elements.resetBtn.disabled = false;
       
       // Update timer display
       updateTimerDisplay();
@@ -1396,7 +1701,7 @@
           }).join('\n') 
           : '• No earnings recorded yet'
         ) + '\n\n' +
-        '---\nGenerated by 925 ADHD App 🎯';
+        '---\nGenerated by Online Work Tracker 🎯';
       
       // Copy to clipboard
       if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -1454,7 +1759,19 @@
       
       // Action buttons
       elements.undoBtn.addEventListener('click', undoLast);
-      document.querySelector('.export-btn').addEventListener('click', exportData);
+      elements.exportBtn.addEventListener('click', exportData);
+      elements.resetBtn.addEventListener('click', showResetConfirmation);
+      
+      // Reset confirmation buttons
+      elements.confirmReset.addEventListener('click', resetAllData);
+      elements.cancelReset.addEventListener('click', hideResetConfirmation);
+      
+      // Click outside confirmation to close
+      elements.confirmationOverlay.addEventListener('click', (e) => {
+        if (e.target === elements.confirmationOverlay) {
+          hideResetConfirmation();
+        }
+      });
       
       // Default quick buttons
       resetQuickButtons();
