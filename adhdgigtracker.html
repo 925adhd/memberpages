@@ -670,29 +670,49 @@
       transform: none;
     }
     
-    /* Notification */
-    .notification {
+    /* Centered Notification Modal */
+    .notification-overlay {
       position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%) translateY(-100px);
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      padding: 20px;
+    }
+    
+    .notification-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .notification {
       background: var(--glass-bg);
       backdrop-filter: blur(20px);
       border: 1px solid var(--border-subtle);
       color: var(--text-primary);
-      padding: 12px 20px;
-      border-radius: 12px;
+      padding: 20px 24px;
+      border-radius: 16px;
       font-weight: 600;
       box-shadow: var(--shadow-medium);
-      transition: transform 0.3s ease;
-      z-index: 1000;
-      max-width: calc(100vw - 40px);
+      max-width: 90vw;
+      max-width: min(400px, 90vw);
       text-align: center;
-      font-size: 14px;
+      font-size: 16px;
+      transform: scale(0.8);
+      transition: transform 0.3s ease;
     }
     
-    .notification.show {
-      transform: translateX(-50%) translateY(0);
+    .notification-overlay.show .notification {
+      transform: scale(1);
     }
     
     .notification.error {
@@ -765,6 +785,11 @@
       .platform-emoji {
         font-size: 16px;
       }
+      
+      .notification {
+        font-size: 14px;
+        padding: 16px 20px;
+      }
     }
   </style>
 </head>
@@ -775,9 +800,11 @@
   <div class="floating-orb orb-2"></div>
 
   <div class="container">
-    <!-- Notification -->
-    <div id="notification" class="notification">
-      <span id="notificationText"></span>
+    <!-- Centered Notification Overlay -->
+    <div id="notificationOverlay" class="notification-overlay">
+      <div id="notification" class="notification">
+        <span id="notificationText"></span>
+      </div>
     </div>
     
     <!-- Header -->
@@ -964,12 +991,51 @@
       manualInput: document.getElementById('manualInput'),
       manualBtn: document.getElementById('manualBtn'),
       quickGrid: document.getElementById('quickGrid'),
+      notificationOverlay: document.getElementById('notificationOverlay'),
       notification: document.getElementById('notification'),
       notificationText: document.getElementById('notificationText'),
       timerBtn: document.getElementById('timerBtn'),
       timerDisplay: document.getElementById('timerDisplay'),
       topPlatform: document.getElementById('topPlatform')
     };
+    
+    // localStorage functions
+    function saveData() {
+      const data = {
+        totalEarnings,
+        dailyGoal,
+        taskCount,
+        history,
+        totalWorkTime,
+        lastSave: new Date().toDateString()
+      };
+      localStorage.setItem('workTracker', JSON.stringify(data));
+    }
+    
+    function loadData() {
+      try {
+        const saved = localStorage.getItem('workTracker');
+        if (saved) {
+          const data = JSON.parse(saved);
+          const today = new Date().toDateString();
+          
+          // If it's a new day, reset daily stats but keep goal preference
+          if (data.lastSave !== today) {
+            dailyGoal = data.dailyGoal || 25;
+            showNotification('New day, fresh start! Your goal is $' + dailyGoal.toFixed(2) + ' 🌅', 'milestone');
+          } else {
+            // Same day, restore all data
+            totalEarnings = data.totalEarnings || 0;
+            dailyGoal = data.dailyGoal || 25;
+            taskCount = data.taskCount || 0;
+            history = data.history || [];
+            totalWorkTime = data.totalWorkTime || 0;
+          }
+        }
+      } catch (error) {
+        console.log('Error loading data:', error);
+      }
+    }
     
     // Timer functions
     function startTimer() {
@@ -999,6 +1065,7 @@
         elements.timerBtn.classList.remove('stop');
         
         showNotification(`Work session ended! +${sessionTime} minutes`, 'milestone');
+        saveData();
         updateUI();
       }
     }
@@ -1023,13 +1090,23 @@
       }
     }
     
-    // Show notification
+    // Show notification (centered modal)
     function showNotification(message, type = 'success') {
       elements.notificationText.textContent = message;
-      elements.notification.className = 'notification ' + type + ' show';
+      elements.notification.className = 'notification ' + type;
+      elements.notificationOverlay.className = 'notification-overlay show';
+      
+      // Auto-hide after 3 seconds
       setTimeout(() => {
-        elements.notification.classList.remove('show');
+        elements.notificationOverlay.classList.remove('show');
       }, 3000);
+      
+      // Allow clicking overlay to dismiss
+      elements.notificationOverlay.onclick = (e) => {
+        if (e.target === elements.notificationOverlay) {
+          elements.notificationOverlay.classList.remove('show');
+        }
+      };
     }
     
     // Update all UI
@@ -1150,6 +1227,9 @@
         history = history.slice(0, 20);
       }
       
+      // Save data
+      saveData();
+      
       // Check milestones
       checkMilestones();
       
@@ -1265,6 +1345,7 @@
       const newGoal = parseFloat(elements.goalInput.value);
       if (newGoal && newGoal > 0) {
         dailyGoal = newGoal;
+        saveData();
         updateUI();
         showNotification('Goal updated to $' + dailyGoal.toFixed(2) + '! 🎯');
       }
@@ -1284,6 +1365,7 @@
           totalWorkTime = Math.max(0, totalWorkTime - last.sessionTime);
         }
         
+        saveData();
         updateUI();
         showNotification('Undid $' + last.amount.toFixed(2) + ' from ' + last.platform, 'error');
         if (navigator.vibrate) {
@@ -1314,7 +1396,7 @@
           }).join('\n') 
           : '• No earnings recorded yet'
         ) + '\n\n' +
-        '---\nGenerated by Online Work Tracker 🎯';
+        '---\nGenerated by 925 ADHD App 🎯';
       
       // Copy to clipboard
       if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -1380,6 +1462,7 @@
     
     // Initialize app
     function init() {
+      loadData(); // Load saved data first
       setupEventListeners();
       updateUI();
     }
