@@ -224,6 +224,11 @@
     .main-content {
       position: relative;
       min-height: 50vh;
+      display: none;
+    }
+
+    .main-content.visible {
+      display: block;
     }
 
     .form-container {
@@ -743,7 +748,6 @@
 
             <div class="nav-buttons">
               <div></div>
-              <div></div>
             </div>
           </div>
         </div>
@@ -1217,6 +1221,7 @@
       currentQuestion = 0;
       document.getElementById('titleScreen').classList.remove('hidden');
       document.getElementById('progressContainer').classList.remove('visible');
+      document.querySelector('.main-content').classList.remove('visible');
       
       // Hide all question pages and results
       document.querySelectorAll('.question-page').forEach(page => {
@@ -1228,6 +1233,7 @@
     function startQuestionnaire() {
       document.getElementById('titleScreen').classList.add('hidden');
       document.getElementById('progressContainer').classList.add('visible');
+      document.querySelector('.main-content').classList.add('visible');
       goToQuestion(1);
     }
 
@@ -1270,6 +1276,7 @@
         page.classList.remove('active');
       });
       document.getElementById('resultsPage').classList.add('active');
+      document.querySelector('.main-content').classList.add('visible');
       
       // Update progress to complete
       document.getElementById('progressFill').style.width = '100%';
