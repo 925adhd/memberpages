@@ -732,10 +732,6 @@
   <div class="bg-gradient"></div>
 
   <div class="container">
-    <div class="header">
-      <h1 class="title">🧠 <span class="gradient-text">Passion Finder</span></h1>
-      <p class="subtitle">Find your perfect online income stream based on your energy, skills, and goals</p>
-    </div>
 
     <!-- Title Screen -->
     <div class="title-screen" id="titleScreen">
@@ -768,7 +764,7 @@
         </div>
         
         <button class="start-button" id="startButton">
-          🎯 Start Finding Your Path
+          🚀 Start Assessment
         </button>
       </div>
     </div>
@@ -1283,7 +1279,6 @@
       currentQuestion = 0;
       document.getElementById('titleScreen').classList.remove('hidden');
       document.getElementById('progressContainer').classList.remove('visible');
-      document.querySelector('.header').classList.remove('visible');
       
       // Hide all question pages and results
       document.querySelectorAll('.question-page').forEach(page => {
@@ -1295,7 +1290,6 @@
     function startQuestionnaire() {
       document.getElementById('titleScreen').classList.add('hidden');
       document.getElementById('progressContainer').classList.add('visible');
-      document.querySelector('.header').classList.add('visible');
       goToQuestion(1);
     }
 
