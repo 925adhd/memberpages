@@ -27,18 +27,98 @@
             box-sizing: border-box;
         }
 
+        /* Enhanced Progress Bar Styles */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: rgba(26, 26, 46, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(79, 172, 254, 0.2);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--blue), var(--green), var(--purple));
+            background-size: 200% 100%;
+            width: 0%;
+            transition: width 0.25s ease;
+            animation: progressGlow 3s ease-in-out infinite;
+            box-shadow: 0 0 15px rgba(79, 172, 254, 0.5);
+        }
+
+        @keyframes progressGlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .progress-indicator {
+            position: fixed;
+            top: 8px;
+            right: 20px;
+            background: rgba(22, 33, 62, 0.95);
+            color: var(--text-white);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 1001;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(79, 172, 254, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        .progress-indicator.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .progress-indicator .percentage {
+            color: var(--green);
+            font-weight: bold;
+        }
+
+        /* Progress milestones */
+        .progress-milestone {
+            position: absolute;
+            top: -2px;
+            width: 4px;
+            height: 10px;
+            background: var(--yellow);
+            border-radius: 2px;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+        }
+
+        .progress-milestone:hover {
+            opacity: 1;
+            height: 12px;
+            top: -3px;
+        }
+
+        .progress-milestone.reached {
+            opacity: 1;
+            box-shadow: 0 0 8px var(--yellow);
+        }
+
         body {
             font-family: 'Open Sans', sans-serif;
             background: var(--bg-dark);
             color: var(--text-white);
             line-height: 1.8;
             font-size: 18px;
-            padding: 20px;
+            padding: 30px 20px 20px 20px; /* Adjust top padding for progress bar */
         }
 
         .container {
             max-width: 800px;
-            margin: 0 auto;
+            margin: 10px auto 0 auto; /* Adjust margin for progress bar */
         }
 
         /* Big, clear headers */
@@ -365,7 +445,7 @@
         @media (max-width: 768px) {
             body {
                 font-size: 16px;
-                padding: 15px;
+                padding: 25px 15px 15px 15px;
             }
 
             h1 {
@@ -387,6 +467,12 @@
 
             .card {
                 padding: 20px;
+            }
+
+            .progress-indicator {
+                right: 10px;
+                padding: 6px 12px;
+                font-size: 12px;
             }
         }
 
@@ -537,18 +623,6 @@
             margin-bottom: 15px;
         }
 
-        /* Progress indicator */
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--blue), var(--green));
-            z-index: 1001;
-            transition: width 0.3s ease;
-        }
-
         /* Break reminder */
         .break-reminder {
             position: fixed;
@@ -601,8 +675,24 @@
     </style>
 </head>
 <body>
-    <!-- Progress bar -->
-    <div class="progress-bar" id="progressBar"></div>
+    <!-- Enhanced Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar"></div>
+        <!-- Milestones for each major section -->
+        <div class="progress-milestone" style="left: 12.5%;" data-section="overview"></div>
+        <div class="progress-milestone" style="left: 25%;" data-section="earnings"></div>
+        <div class="progress-milestone" style="left: 37.5%;" data-section="platforms"></div>
+        <div class="progress-milestone" style="left: 50%;" data-section="adhd-strategies"></div>
+        <div class="progress-milestone" style="left: 62.5%;" data-section="focus-techniques"></div>
+        <div class="progress-milestone" style="left: 75%;" data-section="time-management"></div>
+        <div class="progress-milestone" style="left: 87.5%;" data-section="real-experiences"></div>
+        <div class="progress-milestone" style="left: 100%;" data-section="getting-started"></div>
+    </div>
+
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <span class="percentage">0%</span> Complete
+    </div>
     
     <!-- Break reminder modal -->
     <div class="break-reminder" id="breakReminder">
@@ -1184,17 +1274,85 @@
     </div>
 
     <script>
-        // Progress tracking
+        // Enhanced Progress Bar Functionality
+        function updateProgress() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercentage = (scrollTop / scrollHeight) * 100;
+            
+            const progressBar = document.querySelector('.progress-bar');
+            const progressIndicator = document.querySelector('.progress-indicator');
+            const percentageSpan = document.querySelector('.percentage');
+            
+            // Update progress bar width
+            progressBar.style.width = Math.min(scrollPercentage, 100) + '%';
+            
+            // Update percentage text
+            percentageSpan.textContent = Math.round(Math.min(scrollPercentage, 100)) + '%';
+            
+            // Show/hide progress indicator based on scroll
+            if (scrollTop > 100) {
+                progressIndicator.classList.add('visible');
+            } else {
+                progressIndicator.classList.remove('visible');
+            }
+            
+            // Update milestone indicators
+            const milestones = document.querySelectorAll('.progress-milestone');
+            const sections = ['overview', 'earnings', 'platforms', 'adhd-strategies', 'focus-techniques', 'time-management', 'real-experiences', 'getting-started'];
+            
+            sections.forEach((sectionId, index) => {
+                const section = document.getElementById(sectionId);
+                const milestone = milestones[index];
+                
+                if (section && milestone) {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    
+                    // Check if section is in view or passed
+                    if (scrollTop + window.innerHeight * 0.3 >= sectionTop) {
+                        milestone.classList.add('reached');
+                    } else {
+                        milestone.classList.remove('reached');
+                    }
+                }
+            });
+        }
+
+        // Throttled scroll event for better performance
+        let ticking = false;
+        function requestTick() {
+            if (!ticking) {
+                requestAnimationFrame(updateProgress);
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', () => {
+            requestTick();
+            ticking = false;
+        });
+
+        // Initial progress update
+        window.addEventListener('load', updateProgress);
+
+        // Progress milestone click navigation
+        document.querySelectorAll('.progress-milestone').forEach(milestone => {
+            milestone.addEventListener('click', function() {
+                const sectionId = this.dataset.section;
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    section.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Rest of the existing JavaScript functionality
         let startTime = Date.now();
         let breakReminderShown = false;
-
-        // Update progress bar based on scroll position
-        function updateProgressBar() {
-            const scrollTop = window.pageYOffset;
-            const docHeight = document.body.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            document.getElementById('progressBar').style.width = scrollPercent + '%';
-        }
 
         // Break reminder after 15 minutes
         function checkBreakReminder() {
@@ -1222,9 +1380,8 @@
             }, 900000); // 15 minutes
         }
 
-        // Event listeners for progress tracking
-        window.addEventListener('scroll', updateProgressBar);
-        setInterval(checkBreakReminder, 60000); // Check every minute
+        // Check for break reminder every minute
+        setInterval(checkBreakReminder, 60000);
 
         // Simple smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1275,7 +1432,7 @@
             const messageDiv = document.createElement('div');
             messageDiv.style.cssText = `
                 position: fixed;
-                top: 20px;
+                top: 60px;
                 right: 20px;
                 background: var(--green);
                 color: var(--bg-dark);
@@ -1386,9 +1543,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             setTimeout(createPayCalculator, 1000);
         });
-
-        // Initialize progress bar
-        updateProgressBar();
     </script>
 </body>
 </html>
