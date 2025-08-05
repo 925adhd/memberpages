@@ -1344,6 +1344,54 @@
       align-items: center;
     }
 
+    .modal-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 1002;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-nav-btn:hover {
+      background: rgba(0, 0, 0, 0.9);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .modal-prev {
+      left: 20px;
+    }
+
+    .modal-next {
+      right: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .modal-nav-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+      }
+
+      .modal-prev {
+        left: 15px;
+      }
+
+      .modal-next {
+        right: 15px;
+      }
+    }
+
     .modal-img {
       max-width: 100%;
       max-height: calc(100vh - 120px);
@@ -2093,6 +2141,8 @@ Most "earning from home" lists are complete garbage — copy-paste junk from peo
   <div id="imageModal" class="modal" onclick="closeModal()">
     <div class="modal-content">
       <span class="modal-close" onclick="closeModal()">&times;</span>
+      <button class="modal-nav-btn modal-prev" onclick="event.stopPropagation(); showPrevImage();">‹</button>
+      <button class="modal-nav-btn modal-next" onclick="event.stopPropagation(); showNextImage();">›</button>
       <img id="modalImg" class="modal-img" alt="Enlarged view">
       <div class="modal-info" id="modalInfo">
         <div id="modalTitle" class="modal-title"></div>
@@ -2171,10 +2221,47 @@ Most "earning from home" lists are complete garbage — copy-paste junk from peo
     let currentX = 0;
     let currentY = 0;
 
+    // Screenshot navigation
+    let currentImageIndex = 0;
+    const screenshots = [
+      {
+        src: 'https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250725_004013_Chrome%20(2).jpg',
+        title: 'App Home Screen'
+      },
+      {
+        src: 'https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250727_190231_Chrome.jpg',
+        title: 'Resource Panel'
+      },
+      {
+        src: 'https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250727_233806_Chrome.jpg',
+        title: 'Setup Guides'
+      },
+      {
+        src: 'https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250725_004113_Chrome.jpg',
+        title: 'Freelance Platforms'
+      },
+      {
+        src: 'https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250725_004121_Chrome.jpg',
+        title: 'Mobile Apps'
+      },
+      {
+        src: 'https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250725_004213_Chrome%20(2).jpg',
+        title: 'Discord Community'
+      },
+      {
+        src: 'https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250725_004131_Chrome.jpg',
+        title: 'ADHD Tools'
+      }
+    ];
+
     function openModal(imageSrc, title, description) {
       const modal = document.getElementById('imageModal');
       const modalImg = document.getElementById('modalImg');
       const modalInfo = document.getElementById('modalInfo');
+      const navHint = document.getElementById('modalNavHint');
+      
+      // Find current image index
+      currentImageIndex = screenshots.findIndex(img => img.src === imageSrc);
       
       modal.style.display = 'block';
       modalImg.src = imageSrc;
@@ -2182,6 +2269,17 @@ Most "earning from home" lists are complete garbage — copy-paste junk from peo
       // Hide the info section completely since title is already shown before clicking
       if (modalInfo) {
         modalInfo.style.display = 'none';
+      }
+      
+      // Show navigation hint
+      if (navHint) {
+        navHint.style.display = 'block';
+        navHint.style.animation = 'fadeInOut 3s ease-in-out';
+        
+        // Hide hint after animation
+        setTimeout(() => {
+          navHint.style.display = 'none';
+        }, 3000);
       }
       
       // Reset zoom
@@ -2196,9 +2294,38 @@ Most "earning from home" lists are complete garbage — copy-paste junk from peo
       document.body.style.overflow = 'hidden';
     }
 
+    function showNextImage() {
+      currentImageIndex = (currentImageIndex + 1) % screenshots.length;
+      updateModalImage();
+    }
+
+    function showPrevImage() {
+      currentImageIndex = (currentImageIndex - 1 + screenshots.length) % screenshots.length;
+      updateModalImage();
+    }
+
+    function updateModalImage() {
+      const modalImg = document.getElementById('modalImg');
+      modalImg.src = screenshots[currentImageIndex].src;
+      
+      // Reset zoom when changing images
+      isZoomed = false;
+      currentScale = 1;
+      currentX = 0;
+      currentY = 0;
+      modalImg.style.transform = 'translate(0px, 0px) scale(1)';
+      modalImg.classList.remove('zoomed');
+    }
+
     function closeModal() {
       const modal = document.getElementById('imageModal');
+      const navHint = document.getElementById('modalNavHint');
+      
       modal.style.display = 'none';
+      
+      if (navHint) {
+        navHint.style.display = 'none';
+      }
       
       // Restore body scroll
       document.body.style.overflow = 'auto';
@@ -2238,6 +2365,15 @@ Most "earning from home" lists are complete garbage — copy-paste junk from peo
           e.preventDefault();
           initialDistance = getDistance(e.touches[0], e.touches[1]);
           initialScale = currentScale;
+        }
+      });
+
+      // Keyboard navigation - only Escape to close
+      document.addEventListener('keydown', function(e) {
+        if (document.getElementById('imageModal').style.display === 'block') {
+          if (e.key === 'Escape') {
+            closeModal();
+          }
         }
       });
 
@@ -2298,6 +2434,57 @@ Most "earning from home" lists are complete garbage — copy-paste junk from peo
         if (document.getElementById('imageModal').style.display === 'block') {
           if (e.key === 'Escape') {
             closeModal();
+          } else if (e.key === 'ArrowRight') {
+            showNextImage();
+          } else if (e.key === 'ArrowLeft') {
+            showPrevImage();
+          }
+        }
+      });
+
+      // Swipe functionality for modal
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchEndX = 0;
+      let touchEndY = 0;
+
+      modalImg.addEventListener('touchstart', function(e) {
+        if (e.touches.length === 1) {
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+        } else if (e.touches.length === 2) {
+          e.preventDefault();
+          initialDistance = getDistance(e.touches[0], e.touches[1]);
+          initialScale = currentScale;
+        }
+      });
+
+      modalImg.addEventListener('touchmove', function(e) {
+        if (e.touches.length === 2) {
+          e.preventDefault();
+          const distance = getDistance(e.touches[0], e.touches[1]);
+          const scale = (distance / initialDistance) * initialScale;
+          currentScale = Math.min(Math.max(1, scale), 3);
+          modalImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${currentScale})`;
+        }
+      });
+
+      modalImg.addEventListener('touchend', function(e) {
+        if (e.changedTouches.length === 1 && currentScale === 1) {
+          touchEndX = e.changedTouches[0].clientX;
+          touchEndY = e.changedTouches[0].clientY;
+          
+          const deltaX = touchEndX - touchStartX;
+          const deltaY = touchEndY - touchStartY;
+          const minSwipeDistance = 50;
+          
+          // Only trigger swipe if horizontal movement is greater than vertical
+          if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
+            if (deltaX > 0) {
+              showPrevImage(); // Swipe right shows previous
+            } else {
+              showNextImage(); // Swipe left shows next
+            }
           }
         }
       });
