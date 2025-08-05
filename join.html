@@ -1380,7 +1380,7 @@
 
     .modal-info {
       position: absolute;
-      bottom: 20px;
+      top: 20px;
       left: 50%;
       transform: translateX(-50%);
       background: rgba(0, 0, 0, 0.8);
@@ -2094,7 +2094,7 @@ Most "earning from home" lists are complete garbage — copy-paste junk from peo
     <div class="modal-content">
       <span class="modal-close" onclick="closeModal()">&times;</span>
       <img id="modalImg" class="modal-img" alt="Enlarged view">
-      <div class="modal-info">
+      <div class="modal-info" id="modalInfo">
         <div id="modalTitle" class="modal-title"></div>
         <div id="modalDesc" class="modal-desc"></div>
       </div>
@@ -2174,13 +2174,15 @@ Most "earning from home" lists are complete garbage — copy-paste junk from peo
     function openModal(imageSrc, title, description) {
       const modal = document.getElementById('imageModal');
       const modalImg = document.getElementById('modalImg');
-      const modalTitle = document.getElementById('modalTitle');
-      const modalDesc = document.getElementById('modalDesc');
+      const modalInfo = document.getElementById('modalInfo');
       
       modal.style.display = 'block';
       modalImg.src = imageSrc;
-      modalTitle.textContent = title;
-      modalDesc.textContent = description;
+      
+      // Hide the info section completely since title is already shown before clicking
+      if (modalInfo) {
+        modalInfo.style.display = 'none';
+      }
       
       // Reset zoom
       isZoomed = false;
