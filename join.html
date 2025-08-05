@@ -812,6 +812,32 @@
       animation: fadeInUp 0.8s ease-out 0.2s both;
     }
 
+    /* Sneak Peek Section */
+    .sneak-peek {
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(16, 185, 129, 0.1));
+      border: 2px solid var(--accent-primary);
+      border-radius: 20px;
+      padding: 40px;
+      margin: 40px auto;
+      max-width: 800px;
+      animation: fadeInUp 0.8s ease-out 0.6s both;
+    }
+
+    .sneak-peek-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent-secondary);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .sneak-peek-subtitle {
+      color: var(--text-secondary);
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+    }
+
     /* Time Hook/Urgency Bar */
     .urgency-bar {
       background: linear-gradient(135deg, var(--accent-warning), #ff7c3c);
@@ -1030,32 +1056,6 @@
     .download-button:hover {
       transform: translateY(-2px);
       box-shadow: var(--shadow-medium);
-    }
-
-    /* Sneak Peek Section */
-    .sneak-peek {
-      background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(16, 185, 129, 0.1));
-      border: 2px solid var(--accent-primary);
-      border-radius: 20px;
-      padding: 40px;
-      margin: 40px auto;
-      max-width: 800px;
-      animation: fadeInUp 0.8s ease-out 0.6s both;
-    }
-
-    .sneak-peek-title {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--accent-secondary);
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .sneak-peek-subtitle {
-      color: var(--text-secondary);
-      text-align: center;
-      margin-bottom: 30px;
-      font-size: 1.1rem;
     }
 
     /* Proof Section */
@@ -1616,6 +1616,88 @@
           I've tested <strong>50+ freelancing platforms</strong> — survived the scams and low-pay sites so you don't have to. With my ADHD brain scattered by endless research, <strong>I organized everything into one simple, focused app.</strong>
         </p>
 
+        <!-- MOVED: Inside The App Section - Now at the top -->
+        <div class="sneak-peek">
+          <h2 class="sneak-peek-title">👀 Inside The App</h2>
+          <p class="sneak-peek-subtitle">Preview the organized, ADHD-friendly platform directory, guides, and tools you'll access instantly</p>
+          
+          <div class="screenshots-container">
+            <div class="screenshots-grid">
+              <div class="screenshot-card" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250725_004013_Chrome%20(2).jpg', 'App Home Screen', 'Main dashboard with organized navigation')">
+                <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250725_004013_Chrome%20(2).jpg" alt="App Home Screen" class="screenshot-img">
+                <div class="screenshot-title">App Home Screen</div>
+                <div class="screenshot-desc">Main dashboard with organized navigation & motivation</div>
+              </div>
+              
+              <div class="screenshot-card" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250727_190231_Chrome.jpg', 'Resource Panel', 'Side panel with additional resources and tools')">
+                <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250727_190231_Chrome.jpg" alt="Resource Panel" class="screenshot-img">
+                <div class="screenshot-title">Resource Panel</div>
+                <div class="screenshot-desc">Side panel with additional resources</div>
+              </div>
+              
+              <div class="screenshot-card" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250727_233806_Chrome.jpg', 'Setup Guides', 'Step-by-step guides for earning categories')">
+                <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250727_233806_Chrome.jpg" alt="Setup Guides" class="screenshot-img">
+                <div class="screenshot-title">Setup Guides</div>
+                <div class="screenshot-desc">Step-by-step guides for earning categories</div>
+              </div>
+              
+              <div class="screenshot-card" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250725_004113_Chrome.jpg', 'Freelance Platforms', 'Curated list of verified freelance platforms')">
+                <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250725_004113_Chrome.jpg" alt="Freelance Platforms" class="screenshot-img">
+                <div class="screenshot-title">Freelance Platforms</div>
+                <div class="screenshot-desc">Curated list of verified platforms with honest reviews and ADHD-friendly breakdowns.</div>
+              </div>
+              
+              <div class="screenshot-card" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250725_004121_Chrome.jpg', 'Mobile Apps', 'Earn money using mobile apps')">
+                <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250725_004121_Chrome.jpg" alt="Mobile Apps" class="screenshot-img">
+                <div class="screenshot-title">Mobile Apps</div>
+                <div class="screenshot-desc">Earn money using mobile apps</div>
+              </div>
+              
+              <div class="screenshot-card" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250725_004213_Chrome%20(2).jpg', 'Discord Community', 'Real-time support & tips from community')">
+                <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250725_004213_Chrome%20(2).jpg" alt="Discord Community" class="screenshot-img">
+                <div class="screenshot-title">Discord Community</div>
+                <div class="screenshot-desc">Real-time support & tips from neurodivergent people earning in unconventional ways.</div>
+              </div>
+              
+              <div class="screenshot-card" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250725_004131_Chrome.jpg', 'ADHD Tools', 'Focus & productivity aids designed for ADHD brains')">
+                <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250725_004131_Chrome.jpg" alt="ADHD Tools" class="screenshot-img">
+                <div class="screenshot-title">ADHD Tools</div>
+                <div class="screenshot-desc">Focus & productivity aids for neurodivergent brains</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Platform Categories Preview -->
+          <div style="background: var(--glass-bg); border: 1px solid var(--accent-secondary); border-radius: 16px; padding: 25px; margin: 30px 0;">
+            <h3 style="text-align: center; color: var(--accent-secondary); margin-bottom: 20px; font-size: 1.2rem;">🔍 Included Catagories:</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+              <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
+                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">📝 AI Training & Data</div>
+                <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$3-$14/hr range</div>
+              </div>
+              <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
+                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">🎯 Surveys & Research</div>
+                <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$1-$150/hr range</div>
+              </div>
+              <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
+                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">✍️ Content Writing</div>
+                <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$15-$500+ per piece</div>
+              </div>
+              <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
+                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">🎨 Creative & Design</div>
+                <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$25-$200+/hr</div>
+              </div>
+            </div>
+            <p style="text-align: center; margin-top: 20px; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5;">
+              <strong>Plus 6 more categories</strong> with detailed platform reviews, signup tips, and ADHD-specific strategies for each
+            </p>
+          </div>
+          
+          <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-primary">
+            🚀 Get Instant Access Now
+          </a>
+        </div>
+
         <div class="urgency-bar">
           🔥 Early Access Special: Lock in $9.25/month before the price increases
         </div>
@@ -1700,88 +1782,6 @@
           </div>
         </div>
 
-        <!-- NEW: Combined Sneak Peek Section -->
-        <div class="sneak-peek">
-          <h2 class="sneak-peek-title">👀 Inside The App</h2>
-          <p class="sneak-peek-subtitle">Preview the organized, ADHD-friendly platform directory, guides, and tools you'll access instantly</p>
-          
-          <div class="screenshots-container">
-            <div class="screenshots-grid">
-              <div class="screenshot-card" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250725_004013_Chrome%20(2).jpg', 'App Home Screen', 'Main dashboard with organized navigation')">
-                <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250725_004013_Chrome%20(2).jpg" alt="App Home Screen" class="screenshot-img">
-                <div class="screenshot-title">App Home Screen</div>
-                <div class="screenshot-desc">Main dashboard with organized navigation & motivation</div>
-              </div>
-              
-              <div class="screenshot-card" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250727_190231_Chrome.jpg', 'Resource Panel', 'Side panel with additional resources and tools')">
-                <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250727_190231_Chrome.jpg" alt="Resource Panel" class="screenshot-img">
-                <div class="screenshot-title">Resource Panel</div>
-                <div class="screenshot-desc">Side panel with additional resources</div>
-              </div>
-              
-              <div class="screenshot-card" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250727_233806_Chrome.jpg', 'Setup Guides', 'Step-by-step guides for earning categories')">
-                <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250727_233806_Chrome.jpg" alt="Setup Guides" class="screenshot-img">
-                <div class="screenshot-title">Setup Guides</div>
-                <div class="screenshot-desc">Step-by-step guides for earning categories</div>
-              </div>
-              
-              <div class="screenshot-card" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250725_004113_Chrome.jpg', 'Freelance Platforms', 'Curated list of verified freelance platforms')">
-                <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250725_004113_Chrome.jpg" alt="Freelance Platforms" class="screenshot-img">
-                <div class="screenshot-title">Freelance Platforms</div>
-                <div class="screenshot-desc">Curated list of verified platforms with honest reviews and ADHD-friendly breakdowns.</div>
-              </div>
-              
-              <div class="screenshot-card" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250725_004121_Chrome.jpg', 'Mobile Apps', 'Earn money using mobile apps')">
-                <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250725_004121_Chrome.jpg" alt="Mobile Apps" class="screenshot-img">
-                <div class="screenshot-title">Mobile Apps</div>
-                <div class="screenshot-desc">Earn money using mobile apps</div>
-              </div>
-              
-              <div class="screenshot-card" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250725_004213_Chrome%20(2).jpg', 'Discord Community', 'Real-time support & tips from community')">
-                <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250725_004213_Chrome%20(2).jpg" alt="Discord Community" class="screenshot-img">
-                <div class="screenshot-title">Discord Community</div>
-                <div class="screenshot-desc">Real-time support & tips from neurodivergent people earning in unconventional ways.</div>
-              </div>
-              
-              <div class="screenshot-card" onclick="openModal('https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250725_004131_Chrome.jpg', 'ADHD Tools', 'Focus & productivity aids designed for ADHD brains')">
-                <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Screenshot_20250725_004131_Chrome.jpg" alt="ADHD Tools" class="screenshot-img">
-                <div class="screenshot-title">ADHD Tools</div>
-                <div class="screenshot-desc">Focus & productivity aids for neurodivergent brains</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Platform Categories Preview -->
-          <div style="background: var(--glass-bg); border: 1px solid var(--accent-secondary); border-radius: 16px; padding: 25px; margin: 30px 0;">
-            <h3 style="text-align: center; color: var(--accent-secondary); margin-bottom: 20px; font-size: 1.2rem;">🔍 Included Catagories:</h3>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-              <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
-                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">📝 AI Training & Data</div>
-                <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$3-$14/hr range</div>
-              </div>
-              <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
-                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">🎯 Surveys & Research</div>
-                <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$1-$150/hr range</div>
-              </div>
-              <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
-                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">✍️ Content Writing</div>
-                <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$15-$500+ per piece</div>
-              </div>
-              <div style="background: var(--card-bg); padding: 15px; border-radius: 8px; text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='rgba(255, 255, 255, 0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='var(--card-bg)'">
-                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 1rem;">🎨 Creative & Design</div>
-                <div style="color: var(--accent-success); font-size: 0.9rem; font-weight: 500;">$25-$200+/hr</div>
-              </div>
-            </div>
-            <p style="text-align: center; margin-top: 20px; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5;">
-              <strong>Plus 6 more categories</strong> with detailed platform reviews, signup tips, and ADHD-specific strategies for each
-            </p>
-          </div>
-          
-          <a href="https://buy.stripe.com/9B67sMcfH8FIfwxbiU7Zu00" target="_blank" rel="noopener noreferrer" class="cta-primary">
-            🚀 Get Instant Access Now
-          </a>
-        </div>
-
         <!-- Web App Explanation Section -->
         <div style="background: linear-gradient(135deg, rgba(79, 70, 229, 0.08), rgba(16, 185, 129, 0.08)); border: 2px solid var(--accent-secondary); border-radius: 16px; padding: 30px; margin: 40px auto; max-width: 700px;">
           <h3 style="text-align: center; color: var(--accent-secondary); margin-bottom: 20px; font-size: 1.3rem;">🌐 Web App — No App Store Download Required</h3>
@@ -1860,7 +1860,7 @@
       <div style="background: var(--glass-bg); border: 1px solid var(--accent-secondary); border-radius: 12px; padding: 25px; margin: 40px auto 0; max-width: 600px; text-align: center;">
         <h3 style="color: var(--accent-secondary); margin-bottom: 15px; font-size: 1.2rem;">🛡️ Why This Matters</h3>
 <p style="color: var(--text-secondary); line-height: 1.6;">
-Most “lists” out there are copy-paste junk — churned out by people who’ve never even logged into half the sites they recommend. I’ve done the gritty work myself: tested dozens of platforms, got burned by scams, slogged through duds, and found the true gems. What you see here isn’t theory — it’s a hard-earned, ADHD-friendly shortlist of platforms that actually pay real money.
+Most "lists" out there are copy-paste junk — churned out by people who've never even logged into half the sites they recommend. I've done the gritty work myself: tested dozens of platforms, got burned by scams, slogged through duds, and found the true gems. What you see here isn't theory — it's a hard-earned, ADHD-friendly shortlist of platforms that actually pay real money.
 </p>
       </div>
 
@@ -2137,38 +2137,4 @@ Most “lists” out there are copy-paste junk — churned out by people who’v
       let dragStartTranslateX = 0;
       let dragStartTranslateY = 0;
 
-      modalImg.addEventListener('mousedown', function(e) {
-        if (currentScale > 1) {
-          isDragging = true;
-          dragStartX = e.clientX;
-          dragStartY = e.clientY;
-          dragStartTranslateX = currentX;
-          dragStartTranslateY = currentY;
-          modalImg.style.cursor = 'grabbing';
-          e.preventDefault();
-        }
-      });
-
-      document.addEventListener('mousemove', function(e) {
-        if (isDragging && currentScale > 1) {
-          const deltaX = e.clientX - dragStartX;
-          const deltaY = e.clientY - dragStartY;
-          currentX = dragStartTranslateX + deltaX;
-          currentY = dragStartTranslateY + deltaY;
-          modalImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(${currentScale})`;
-        }
-      });
-
-      document.addEventListener('mouseup', function() {
-        if (isDragging) {
-          isDragging = false;
-          modalImg.style.cursor = currentScale > 1 ? 'grab' : 'zoom-in';
-        }
-      });
-
-      // Set initial cursor
-      modalImg.style.cursor = 'zoom-in';
-    });
-  </script>
-</body>
-</html>
+      modalImg.addEventListener('mousedown
