@@ -93,6 +93,14 @@
       },
       {
         "@type": "Question",
+        "name": "Is it safe to give you my card info? How do I know this isn't a scam?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Three facts: (1) I never touch your payment info - Stripe handles everything (same processor as Netflix, Uber, Amazon). (2) You get instant access, no subscriptions, no recurring charges. (3) 30-day money-back guarantee - if you don't make money, you get your money back. Zero risk on your end."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "What does lifetime access mean?",
         "acceptedAnswer": {
           "@type": "Answer",
@@ -402,6 +410,40 @@
       display: flex;
       align-items: center;
       gap: 4px;
+    }
+
+    /* Benefits Grid */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 40px 0;
+    }
+
+    .benefit-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 25px 20px;
+      text-align: center;
+    }
+
+    .benefit-icon {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .benefit-title {
+      font-weight: 700;
+      color: var(--accent-success);
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+
+    .benefit-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
     }
 
     /* 3-Step Plan */
@@ -1134,19 +1176,19 @@
       <!-- 3-Step Plan -->
       <ul class="plan-steps">
         <li class="plan-step">
-          <div class="plan-step-number">1) Pick</div>
+          <div class="plan-step-number">1) Pick something that doesn't suck</div>
           <div class="plan-step-title">Choose a Platform</div>
-          <div class="plan-step-desc">Select from platforms that match your skills and available time</div>
+          <div class="plan-step-desc">Choose based on your energy level and attention span today</div>
         </li>
         <li class="plan-step">
-          <div class="plan-step-number">2) Review</div>
+          <div class="plan-step-number">2) We already tested it</div>
           <div class="plan-step-title">Check Our Breakdown</div>
-          <div class="plan-step-desc">Read our honest review and payout details (research already done for you)</div>
+          <div class="plan-step-desc">Skip the "is this legit?" anxiety - we got scammed so you don't have to</div>
         </li>
         <li class="plan-step">
-          <div class="plan-step-number">3) Earn</div>
+          <div class="plan-step-number">3) Get paid</div>
           <div class="plan-step-title">Get Your First Payout</div>
-          <div class="plan-step-desc">Complete your first task and get paid (timeframes vary by platform)</div>
+          <div class="plan-step-desc">Complete tasks, cash out, feel good about actually finishing something</div>
         </li>
       </ul>
     </div>
@@ -1320,7 +1362,7 @@
             </div>
             <div class="feature-item">
               <span class="feature-icon">✓</span>
-              <span>Private Discord Community Access</span>
+              <span>Private Discord Community Access — a space just for members who get it</span>
             </div>
             <div class="feature-item">
               <span class="feature-icon">✓</span>
@@ -1486,6 +1528,13 @@
         </div>
         
         <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <div class="faq-question" itemprop="name">Is it safe to give you my card info? How do I know this isn't a scam?</div>
+          <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <div itemprop="text">Three facts: (1) I never touch your payment info - <strong>Stripe</strong> handles everything (same processor as Netflix, Uber, Amazon). (2) You get <strong>instant access</strong>, no subscriptions, no recurring charges. (3) <strong>30-day money-back guarantee</strong> - if you don't make money, you get your money back. Zero risk on your end.</div>
+          </div>
+        </div>
+        
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
           <div class="faq-question" itemprop="name">What does "lifetime access" mean?</div>
           <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
             <div itemprop="text">Lifetime access to the content and platform directory. If our hosting service ever ends, you'll get an <strong>instant downloadable offline version</strong> plus CSV export of all platform data.</div>
@@ -1509,28 +1558,7 @@
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer style="background: var(--secondary-bg); padding: 40px 0 30px; border-top: 1px solid var(--border-subtle);">
-    <div class="container">
-      <div style="text-align: center;">
-        <div style="margin-bottom: 20px;">
-          <a href="https://925adhd.com" style="color: var(--text-secondary); text-decoration: none; margin: 0 15px; font-size: 0.9rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-secondary)'" onmouseout="this.style.color='var(--text-secondary)'">Home</a>
-          <a href="https://925adhd.com/terms-of-service" style="color: var(--text-secondary); text-decoration: none; margin: 0 15px; font-size: 0.9rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-secondary)'" onmouseout="this.style.color='var(--text-secondary)'">Terms of Service</a>
-          <a href="https://925adhd.com/privacy-policy" style="color: var(--text-secondary); text-decoration: none; margin: 0 15px; font-size: 0.9rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-secondary)'" onmouseout="this.style.color='var(--text-secondary)'">Privacy Policy</a>
-          <a href="https://925adhd.com/disclaimer" style="color: var(--text-secondary); text-decoration: none; margin: 0 15px; font-size: 0.9rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-secondary)'" onmouseout="this.style.color='var(--text-secondary)'">Disclaimer</a>
-          <a href="https://925adhd.com/contact" style="color: var(--text-secondary); text-decoration: none; margin: 0 15px; font-size: 0.9rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-secondary)'" onmouseout="this.style.color='var(--accent-secondary)'">Contact</a>
-        </div>
-        
-        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 10px;">
-          Copyright © 2025 925 ADHD LLC - All Rights Reserved.
-        </p>
-        
-        <p style="color: var(--accent-secondary); font-size: 0.9rem; margin: 0;">
-          💡 Designed with ADHD 🧠's in mind
-        </p>
-      </div>
-    </div>
-  </footer>
+
 
   <!-- Modal for image viewing -->
   <div id="imageModal" class="modal" onclick="closeModal()" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
