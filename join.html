@@ -291,7 +291,7 @@
 
     .header-content {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
       align-items: center;
       padding: 15px 0;
     }
@@ -307,20 +307,41 @@
       width: auto;
     }
 
-    .cta-header {
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 55px;
+      height: 55px;
       background: var(--gradient-primary);
       color: white;
-      padding: 12px 24px;
-      border-radius: 25px;
-      text-decoration: none;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
       font-weight: 700;
-      font-size: 1rem;
+      box-shadow: var(--shadow-medium);
       transition: all 0.3s ease;
-      white-space: nowrap;
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
     }
 
-    .cta-header:hover {
-      transform: translateY(-2px);
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .back-to-top:active {
+      transform: translateY(-1px);
     }
 
     /* HERO Section */
@@ -983,9 +1004,17 @@
 
     /* Larger hit targets on mobile */
     @media (max-width: 768px) {
-      .cta-header, .hero-cta-primary, .pricing-cta {
+      .hero-cta-primary, .pricing-cta {
         min-height: 48px;
         padding: 14px 20px;
+      }
+
+      .back-to-top {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 1.1rem;
       }
     }
     @media (max-width: 768px) {
@@ -993,17 +1022,8 @@
         padding: 0 15px;
       }
 
-      .header-content {
-        gap: 15px;
-      }
-
       .logo-container img {
         height: 36px;
-      }
-
-      .cta-header {
-        padding: 10px 16px;
-        font-size: 0.85rem;
       }
 
       .hero-headline {
@@ -1120,6 +1140,14 @@
         height: 35px !important;
         transform: rotate(8deg) !important;
       }
+
+      .back-to-top {
+        width: 45px;
+        height: 45px;
+        bottom: 15px;
+        right: 15px;
+        font-size: 1rem;
+      }
     }
 
     @media (max-width: 360px) {
@@ -1132,6 +1160,11 @@
 <body>
   <div class="bg-gradient"></div>
 
+  <!-- Back to Top Button -->
+  <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">
+    ↑
+  </button>
+
   <!-- Header -->
   <header class="header" role="banner">
     <div class="container">
@@ -1141,7 +1174,6 @@
             <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/SmartSelect_20241218_055052_Gallery.png/:/rs=h:175,m" alt="925 ADHD Logo" width="40" height="40" loading="eager">
           </a>
         </div>
-        <a href="#pricing" class="cta-header" onclick="trackCTA('header', 'starter', 9.25)">💸 Start for $9.25</a>
       </nav>
     </div>
   </header>
@@ -1157,8 +1189,8 @@
       </p>
       
       <div class="hero-ctas">
-        <a href="https://buy.stripe.com/28E3cw1B33logABev67Zu02" target="_blank" rel="noopener" class="hero-cta-primary" onclick="trackCTA('hero', 'starter', 9.25)" aria-label="Start earning for $9.25">
-          🚀 Start for $9.25 — 30-Day Guarantee
+        <a href="https://buy.stripe.com/28E3cw1B33logABev67Zu02" target="_blank" rel="noopener" class="hero-cta-primary" onclick="trackCTA('hero', 'starter', 0)" aria-label="Start earning with 30-day guarantee">
+          🚀 Get Started — 30-Day Guarantee
         </a>
         <a href="#proof" class="hero-cta-secondary" aria-label="See payout proof">
           See real payouts ↓
@@ -1182,7 +1214,7 @@
         </li>
         <li class="plan-step">
           <div class="plan-step-number">2) Check Our Breakdown</div>
-          <div class="plan-step-title">We already tested it</div>
+          <div class="plan-step-title">Skip the Research</div>
           <div class="plan-step-desc">Skip the "is this legit?" anxiety - we got scammed so you don't have to</div>
         </li>
         <li class="plan-step">
@@ -1564,6 +1596,35 @@
   </div>
 
   <script>
+    // Back to top functionality
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      
+      // Track back to top clicks
+      gtag('event', 'back_to_top', {
+        'event_category': 'navigation',
+        'event_label': 'back_to_top_button'
+      });
+    }
+
+    // Show/hide back to top button based on scroll
+    function toggleBackToTop() {
+      const backToTopBtn = document.querySelector('.back-to-top');
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      if (scrollTop > 300) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+    }
+
+    // Listen for scroll events
+    window.addEventListener('scroll', toggleBackToTop);
+
     function openModal(imageSrc) {
       const modal = document.getElementById('imageModal');
       const modalImg = document.getElementById('modalImg');
