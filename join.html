@@ -291,7 +291,7 @@
 
     .header-content {
       display: flex;
-      justify-content: flex-start;
+      justify-content: center;
       align-items: center;
       padding: 15px 0;
     }
@@ -997,9 +997,13 @@
     }
 
     /* Focus styles for accessibility */
-    button:focus, a:focus, input:focus {
+    button:focus, input:focus {
       outline: 2px solid var(--accent-secondary);
       outline-offset: 2px;
+    }
+    
+    a:focus {
+      outline: none;
     }
 
     /* Larger hit targets on mobile */
