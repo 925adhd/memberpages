@@ -1209,54 +1209,69 @@
         <span>No subscription fees</span>
       </div>
 
-      <!-- 3-Step Plan -->
-      <ul class="plan-steps">
-        <li class="plan-step">
-          <div class="plan-step-number">1) Pick something that doesn't suck</div>
-          <div class="plan-step-title">Choose a Site</div>
-          <div class="plan-step-desc">Choose based on your energy level and attention span today</div>
-        </li>
-        <li class="plan-step">
-          <div class="plan-step-number">2) Check Our Breakdown</div>
-          <div class="plan-step-title">Skip the Research</div>
-          <div class="plan-step-desc">Skip the "is this legit?" anxiety - we got scammed so you don't have to</div>
-        </li>
-        <li class="plan-step">
-          <div class="plan-step-number">3) Get paid</div>
-          <div class="plan-step-title">Get Your First Payout</div>
-          <div class="plan-step-desc">Complete tasks, cash out, feel good about actually finishing something</div>
-        </li>
-      </ul>
-    </div>
-  </section>
+      <!-- Quick Package Selector -->
+      <div style="background: var(--glass-bg); border: 1px solid var(--border-bright); border-radius: 20px; padding: 30px 25px; margin: 40px 0;">
+        <h3 style="text-align: center; font-size: 1.6rem; font-weight: 700; margin-bottom: 25px; color: var(--accent-secondary);">Pick Your Package</h3>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 25px;">
+          <!-- Starter Card -->
+          <div style="background: var(--card-bg); border: 2px solid var(--accent-success); border-radius: 16px; padding: 25px; text-align: center; position: relative;">
+            <div style="position: absolute; top: -8px; left: 50%; transform: translateX(-50%); background: var(--accent-success); color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 700;">POPULAR</div>
+            <div style="font-size: 1.3rem; font-weight: 800; color: var(--accent-success); margin-bottom: 8px;">Starter App</div>
+            <div style="font-size: 2.2rem; font-weight: 900; color: var(--accent-success); margin-bottom: 15px;">$9.25</div>
+            <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 15px; line-height: 1.4;">Perfect for getting started with vetted sites and community access</div>
+            <a href="#starter-package" style="background: var(--gradient-success); color: white; padding: 12px 24px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 0.9rem; display: inline-block; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">Choose Starter</a>
+          </div>
 
-  <!-- PAIN: The Struggle -->
-  <section class="pain-section">
-    <div class="container">
-      <h2 class="pain-headline">Tired of Wasting Hours on Work-From-Home Research?</h2>
-      <p class="pain-subtitle">
-        If you have ADHD, you know the struggle: endless research, overwhelm, and sites that look sketchy. 
-        I've been there — and I found a better way.
-      </p>
+          <!-- Pro Card -->
+          <div style="background: var(--card-bg); border: 2px solid var(--accent-primary); border-radius: 16px; padding: 25px; text-align: center; position: relative;">
+            <div style="position: absolute; top: -8px; left: 50%; transform: translateX(-50%); background: var(--gradient-primary); color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 700;">BEST VALUE</div>
+            <div style="font-size: 1.3rem; font-weight: 800; color: var(--accent-primary); margin-bottom: 8px;">Pro Toolkit</div>
+            <div style="font-size: 2.2rem; font-weight: 900; color: var(--accent-primary); margin-bottom: 15px;">$29</div>
+            <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 15px; line-height: 1.4;">Everything in Starter + ADHD tools, productivity features, and site matching quiz</div>
+            <a href="#pro-package" style="background: var(--gradient-primary); color: white; padding: 12px 24px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 0.9rem; display: inline-block; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">Choose Pro</a>
+          </div>
 
-      <div class="pain-points">
-        <div class="pain-card">
-          <span class="pain-icon">😤</span>
-          <h3 class="pain-title">Research Overwhelm</h3>
-          <p class="pain-desc">Hours scrolling through Reddit threads, YouTube videos, and blog posts just to find legitimate ways to earn online.</p>
+          <!-- Entrepreneur Card -->
+          <div style="background: var(--card-bg); border: 2px solid var(--accent-warning); border-radius: 16px; padding: 25px; text-align: center; position: relative;">
+            <div style="position: absolute; top: -8px; left: 50%; transform: translateX(-50%); background: var(--accent-warning); color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 700;">ENTREPRENEUR</div>
+            <div style="font-size: 1.3rem; font-weight: 800; color: var(--accent-warning); margin-bottom: 8px;">Accelerator</div>
+            <div style="font-size: 2.2rem; font-weight: 900; color: var(--accent-warning); margin-bottom: 15px;">$129</div>
+            <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 15px; line-height: 1.4;">Everything in Pro + personal brand system, 50+ templates, and bonus book voucher</div>
+            <a href="#entrepreneur-package" style="background: linear-gradient(135deg, var(--accent-warning), #ff7c3c); color: white; padding: 12px 24px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 0.9rem; display: inline-block; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">Choose Entrepreneur</a>
+          </div>
         </div>
-
-        <div class="pain-card">
-          <span class="pain-icon">💸</span>
-          <h3 class="pain-title">Sketchy Sites</h3>
-          <p class="pain-desc">MLMs, questionable surveys, and "make $500/day" schemes that waste your time and rarely pay what they promise.</p>
+        
+        <div style="text-align: center; color: var(--text-muted); font-size: 0.85rem;">
+          All packages include 30-day money-back guarantee • Lifetime access • No subscriptions
         </div>
+      </div>
 
-        <div class="pain-card">
-          <span class="pain-icon">🧠</span>
-          <h3 class="pain-title">ADHD Tax</h3>
-          <p class="pain-desc">Sites designed for neurotypical brains with confusing layouts, buried information, and decision paralysis.</p>
-        </div>
+      <!-- Problem + Solution Flow -->
+      <div style="text-align: center; margin: 50px 0;">
+        <h2 style="font-size: 2.2rem; font-weight: 700; color: var(--accent-danger); margin-bottom: 20px;">Tired of Research Overwhelm & ADHD-Unfriendly Sites?</h2>
+        <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
+          Hours scrolling Reddit threads and confusing layouts designed for neurotypical brains. Here's how we solve it in 3 steps:
+        </p>
+        
+        <!-- 3-Step Solution -->
+        <ul class="plan-steps">
+          <li class="plan-step">
+            <div class="plan-step-number">1) Pick something that doesn't suck</div>
+            <div class="plan-step-title">Choose a Site</div>
+            <div class="plan-step-desc">Choose based on your energy level and attention span today</div>
+          </li>
+          <li class="plan-step">
+            <div class="plan-step-number">2) Check Our Breakdown</div>
+            <div class="plan-step-title">Skip the Research</div>
+            <div class="plan-step-desc">Skip the "is this legit?" anxiety - we got scammed so you don't have to</div>
+          </li>
+          <li class="plan-step">
+            <div class="plan-step-number">3) Get paid</div>
+            <div class="plan-step-title">Get Your First Payout</div>
+            <div class="plan-step-desc">Complete tasks, cash out, feel good about actually finishing something</div>
+          </li>
+        </ul>
       </div>
     </div>
   </section>
@@ -1379,7 +1394,7 @@
       
       <div class="pricing-grid">
         <!-- Starter App -->
-        <div class="pricing-card popular">
+        <div id="starter-package" class="pricing-card popular">
           <div class="pricing-badge">MOST POPULAR</div>
           <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/app%20package.png" alt="Starter App package preview" class="pricing-image" loading="lazy">
           <h3 class="pricing-title" style="color: var(--accent-success);">Starter App</h3>
@@ -1416,7 +1431,7 @@
         </div>
 
         <!-- Pro Toolkit -->
-        <div class="pricing-card best-value">
+        <div id="pro-package" class="pricing-card best-value">
           <div class="pricing-badge">BEST VALUE</div>
           <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/popreview-5b6b090.png" alt="Pro Toolkit package preview" class="pricing-image" loading="lazy">
           <h3 class="pricing-title" style="color: var(--accent-primary);">Pro Toolkit</h3>
@@ -1453,7 +1468,7 @@
         </div>
 
         <!-- Entrepreneur Accelerator -->
-        <div class="pricing-card entrepreneur">
+        <div id="entrepreneur-package" class="pricing-card entrepreneur">
           <div class="pricing-badge">ENTREPRENEUR</div>
           <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/premiun-0891a5d.png" alt="Entrepreneur Accelerator package preview" class="pricing-image" loading="lazy">
           <h3 class="pricing-title" style="color: var(--accent-warning);">ADHD Entrepreneur Accelerator</h3>
@@ -1524,7 +1539,7 @@
         </p>
       </div>
     </div>
-  </section>
+  </article>
 
   <!-- FAQ Section with Schema Markup -->
   <section class="faq-section" itemscope itemtype="https://schema.org/FAQPage">
