@@ -184,14 +184,14 @@
     .back-to-top { position: fixed; bottom: 25px; right: 25px; width: 55px; height: 55px; background: var(--gradient-primary); color: #fff; border: 0; border-radius: 50%; cursor: pointer; font-size: 1.2rem; font-weight: 700; box-shadow: var(--shadow-medium); transition: .3s; z-index: 999; opacity: 0; visibility: hidden; transform: translateY(20px); }
     .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
     .back-to-top:hover { transform: translateY(-3px); box-shadow: var(--shadow-strong); }
-    .hero-section { padding: 80px 0 60px; text-align: center; }
-    .hero-badge { display: inline-block; background: var(--gradient-primary); color: #fff; padding: 8px 16px; border-radius: 999px; font-weight: 700; font-size: .9rem; margin-bottom: 20px; }
+    .hero-section { padding: 0px 0px; text-align: center; }
+    .hero-badge { display: inline-block; background: var(--gradient-primary); color: #fff; padding: 8px 16px; border-radius: 999px; font-weight: 700; font-size: .9rem; margin-bottom: 0px; }
     .hero-headline { font-size: 3.2rem; font-weight: 900; line-height: 1.1; margin: 20px 0 16px; background: var(--gradient-adhd); background-size: 200% 200%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
     .hero-subtitle { font-size: 1.3rem; color: var(--text-secondary); max-width: 720px; margin: 0 auto 30px; }
     .hero-ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin: 30px 0 20px; }
-    .hero-cta-primary { background: var(--accent-success); color: #fff; padding: 18px 32px; border-radius: 15px; text-decoration: none; font-weight: 800; font-size: 1.1rem; transition: .3s; box-shadow: var(--shadow-medium); }
+    .hero-cta-primary { background: var(--accent-success); color: #fff; padding: 5px; border-radius: 15px; text-decoration: none; font-weight: 800; font-size: 1.1rem; transition: .3s; box-shadow: var(--shadow-medium); }
     .hero-cta-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-strong); }
-    .hero-cta-secondary { color: var(--accent-secondary); font-weight: 700; text-decoration: none; padding: 18px 0; transition: color .3s; }
+    .hero-cta-secondary { color: var(--accent-secondary); font-weight: 700; text-decoration: none; padding: 0px 0; transition: color .3s; }
     .hero-cta-secondary:hover { color: var(--accent-primary); }
     .social-proof { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; color: var(--text-muted); font-size: .9rem; margin-top: 20px; }
     .plan-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 20px; list-style: none; margin: 40px 0; padding: 0; }
@@ -199,7 +199,7 @@
     .plan-step-number { font-size: 1.2rem; font-weight: 800; color: var(--accent-success); margin-bottom: 8px; }
     .plan-step-title { font-weight: 700; margin-bottom: 5px; }
     .plan-step-desc { font-size: .9rem; color: var(--text-secondary); }
-    .relief-section { padding: 80px 0; background: var(--secondary-bg); }
+    .relief-section { padding: 10px 0; background: var(--secondary-bg); }
     .relief-headline { font-size: 2.8rem; font-weight: 700; margin-bottom: 30px; text-align: center; }
     .solution-preview { background: var(--glass-bg); border: 2px solid var(--accent-primary); border-radius: 20px; padding: 40px; margin-bottom: 40px; text-align: center; }
     .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 20px; margin: 30px 0; }
@@ -296,7 +296,7 @@
   <!-- Header -->
   <header class="header" role="banner">
     <div class="container">
-      <nav class="header-content" role="navigation" aria-label="Main navigation">
+          <nav class="header-content" role="navigation" aria-label="Main navigation">
         <div class="logo-container">
           <a href="https://925adhd.com" aria-label="925 ADHD Home">
             <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/SmartSelect_20241218_055052_Gallery.png/:/rs=h:175,m" alt="925 ADHD Logo" width="175" height="175" loading="eager" fetchpriority="high" decoding="async">
@@ -310,26 +310,34 @@
   <main id="main" role="main">
     <!-- HERO Section -->
     <section class="hero-section" aria-labelledby="hero-title">
+           <h1 id="hero-title" class="hero-headline">Earn Your First $100 Online</h1>
+    <div class="hero-badge" aria-hidden="true">🧠 Built by someone with ADHD</div><br>
+      <p class="hero-subtitle"> <p style="font-size: .95rem; margin: 10px 0 20px;">ADHD‑friendly app with 50+ vetted earning sites, step‑by‑step quick‑starts, and a 30‑day money‑back guarantee.</p>
+      <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/app%20package.png" alt="925 ADHD App Preview" style="max-width: 100%; width: 400px; height: auto; border-radius: 12px;;" loading="eager" fetchpriority="high" decoding="async" width="640" height="360">
+        </div> 
       <div class="container">
-        <div class="hero-badge" aria-hidden="true">🧠 Built by someone with ADHD</div>
-        <h1 id="hero-title" class="hero-headline">Earn Your First $100 Online</h1>
-        <p class="visually-hidden">Start earning online with ADHD‑friendly, vetted websites and step‑by‑step guidance.</p>
+       <div style="text-align: center; margin-bottom: 20px;">
+          
+        
+        
         <p style="color: var(--text-muted); font-size: .85rem; margin: 10px 0 20px; font-style: italic;">*Individual results vary based on effort and site selection.</p>
-        <p class="hero-subtitle">ADHD‑friendly app with 50+ vetted earning sites, step‑by‑step quick‑starts, and a 30‑day money‑back guarantee.</p>
+ 
+        <p class="visually-hidden">Start earning online with ADHD‑friendly, vetted websites and step‑by‑step guidance.</p>
+       
         <div class="hero-ctas">
-          <a href="https://buy.stripe.com/28E3cw1B33logABev67Zu02" target="_blank" rel="noopener" class="hero-cta-primary" onclick="trackCTA('hero','starter',9.25)" aria-label="Start earning with 30-day guarantee">🚀 Get Started — 30‑Day Guarantee</a>
+          <a href="https://buy.stripe.com/28E3cw1B33logABev67Zu02" target="_blank" rel="noopener" class="hero-cta-primary" onclick="trackCTA('hero','starter',9.25)" aria-label="Start earning with 30-day guarantee">30‑Day Guarantee<br>Lifetime access to content<br>No subscription fees</a>
           <ul class="social-proof" aria-label="Key purchase benefits">
-          Lifetime access to content • No subscription fees
+       <br>
         </ul>
-          <a href="#proof" class="hero-cta-secondary" aria-label="See payout proof">See real payouts ↓</a>
-          <a href="#pricing" class="hero-cta-secondary" aria-label="Jump to pricing">See pricing ↓</a>
+          <a href="#proof" class="hero-cta-secondary" aria-label="See payout proof">See real payouts ↓</a><br>
+          <a href="#pricing" class="hero-cta-secondary" aria-label="Jump to pricing">See pricing ↓</a><br>
         </div>
         
 
         <!-- 3-Step Solution - MOVED UP BEFORE PACKAGE SELECTOR -->
         <div style="text-align: center; margin: 50px 0;">
           <h2 style="font-size: 2.2rem; font-weight: 700; color: var(--accent-danger); margin-bottom: 20px;">Stop Wasting Hours on Sketchy Sites That Don't Pay</h2>
-          <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 40px; max-width: 550px; margin-left: auto; margin-right: auto;">Bookmarking 20 "opportunities" you'll never try? Paralyzed by which sites are legit? Your ADHD brain needs clear direction, not research loops.</p>
+          <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 40px; max-width: 550px; margin-left: auto; margin-right: auto;">No more bookmarking 20 "opportunities" you'll never try. Don't get paralyzed by which sites are legit. Your ADHD brain needs clear direction, not research loops.</p>
           <ul class="plan-steps">
             <li class="plan-step"><div class="plan-step-number">1) Browse Our Tested Sites</div><div class="plan-step-title">No More Guesswork</div><div class="plan-step-desc">We already did the boring research</div></li>
             <li class="plan-step"><div class="plan-step-number">2) Pick Based on Your Energy</div><div class="plan-step-title">Match Your Current Capacity</div><div class="plan-step-desc">Low focus? Quick tasks. High energy? Bigger projects.</div></li>
@@ -337,36 +345,7 @@
           </ul>
         </div>
 
-        <!-- Quick Package Selector - MOVED AFTER PROBLEM/SOLUTION -->
-        <div style="background: var(--glass-bg); border: 1px solid var(--border-bright); border-radius: 20px; padding: 30px 25px; margin: 40px 0;">
-          <h2 style="text-align: center; font-size: 1.6rem; font-weight: 700; margin-bottom: 25px; color: var(--accent-secondary);">Pick Your Package</h2>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 20px; margin-bottom: 25px;">
-            <div style="background: var(--card-bg); border: 2px solid var(--accent-success); border-radius: 16px; padding: 25px; text-align: center; position: relative;">
-              <div style="position: absolute; top: -8px; left: 50%; transform: translateX(-50%); background: var(--accent-success); color: #fff; padding: 4px 12px; border-radius: 12px; font-size: .75rem; font-weight: 700;">POPULAR</div>
-              <div style="font-size: 1.3rem; font-weight: 800; color: var(--accent-success); margin-bottom: 8px;">Starter App</div>
-              <div style="font-size: 2.2rem; font-weight: 900; color: var(--accent-success); margin-bottom: 15px;">$9.25</div>
-              <p style="color: var(--text-secondary); font-size: .9rem; margin-bottom: 15px; line-height: 1.4;">Perfect for getting started with vetted sites and community access</p>
-              <a href="#starter-package" style="background: var(--gradient-success); color: #fff; padding: 12px 24px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: .9rem; display: inline-block; transition: transform .2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">Choose Starter</a>
-            </div>
-            <div style="background: var(--card-bg); border: 2px solid var(--accent-primary); border-radius: 16px; padding: 25px; text-align: center; position: relative;">
-              <div style="position: absolute; top: -8px; left: 50%; transform: translateX(-50%); background: var(--gradient-primary); color: #fff; padding: 4px 12px; border-radius: 12px; font-size: .75rem; font-weight: 700;">BEST VALUE</div>
-              <div style="font-size: 1.3rem; font-weight: 800; color: var(--accent-primary); margin-bottom: 8px;">Pro Toolkit</div>
-              <div style="font-size: 2.2rem; font-weight: 900; color: var(--accent-primary); margin-bottom: 15px;">$29</div>
-              <p style="color: var(--text-secondary); font-size: .9rem; margin-bottom: 15px; line-height: 1.4;">Everything in Starter + ADHD tools, productivity features, and site matching quiz</p>
-              <a href="#pro-package" style="background: var(--gradient-primary); color: #fff; padding: 12px 24px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: .9rem; display: inline-block; transition: transform .2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">Choose Pro</a>
-            </div>
-            <div style="background: var(--card-bg); border: 2px solid var(--accent-warning); border-radius: 16px; padding: 25px; text-align: center; position: relative;">
-              <div style="position: absolute; top: -8px; left: 50%; transform: translateX(-50%); background: var(--accent-warning); color: #fff; padding: 4px 12px; border-radius: 12px; font-size: .75rem; font-weight: 700;">ENTREPRENEUR</div>
-              <div style="font-size: 1.3rem; font-weight: 800; color: var(--accent-warning); margin-bottom: 8px;">Accelerator</div>
-              <div style="font-size: 2.2rem; font-weight: 900; color: var(--accent-warning); margin-bottom: 15px;">$129</div>
-              <p style="color: var(--text-secondary); font-size: .9rem; margin-bottom: 15px; line-height: 1.4;">Everything in Pro + personal brand system, 50+ templates, and bonus book voucher</p>
-              <a href="#entrepreneur-package" style="background: linear-gradient(135deg,var(--accent-warning),#ff7c3c); color: #fff; padding: 12px 24px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: .9rem; display: inline-block; transition: transform .2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">Choose Entrepreneur</a>
-            </div>
-          </div>
-          <p style="text-align: center; color: var(--text-muted); font-size: .85rem;">All packages include 30‑day money‑back guarantee • Lifetime access • No subscriptions</p>
-        </div>
-      </div>
-    </section>
+        
 
     <!-- RELIEF: The Solution -->
     <section class="relief-section">
