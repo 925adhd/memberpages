@@ -145,7 +145,7 @@
   }
   </script>
 
-  <!-- Styles -->
+ <!-- Styles -->
   <style>
     :root {
       --primary-bg: #0f1419;
@@ -215,7 +215,17 @@
     .testimonial-author { padding-left: 20px; color: var(--text-primary); font-weight: 600; font-size: .9rem; }
     .offer-section { padding: 80px 0; background: var(--secondary-bg); }
     .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px,1fr)); gap: 30px; margin-top: 50px; max-width: 1000px; margin-left: auto; margin-right: auto; }
-    .pricing-card { background: var(--glass-bg); border: 2px solid var(--border-subtle); border-radius: 20px; padding: 35px; text-align: center; position: relative; }
+    .pricing-card { 
+      background: var(--glass-bg); 
+      border: 2px solid var(--border-subtle); 
+      border-radius: 20px; 
+      padding: 35px; 
+      text-align: center; 
+      position: relative; 
+      overflow: hidden;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
     .pricing-card.popular { border-color: var(--accent-success); }
     .pricing-card.best-value { border-color: var(--accent-primary); }
     .pricing-card.entrepreneur { border-color: var(--accent-warning); }
@@ -223,7 +233,7 @@
     .popular .pricing-badge { background: var(--accent-success); }
     .best-value .pricing-badge { background: linear-gradient(135deg, #4f46e5, #06b6d4); }
     .entrepreneur .pricing-badge { background: var(--accent-warning); }
-    .pricing-image { height: 360px; width: auto; margin: 0 auto 25px; display: block; border-radius: 12px; }
+    .pricing-image { height: 360px; width: auto; margin: 0 auto 25px; display: block; border-radius: 12px; max-width: 100%; }
     .pricing-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 10px; }
     .feature-list { background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; margin-bottom: 20px; text-align: left; }
     .feature-item { display: flex; align-items: flex-start; margin-bottom: 12px; font-size: .95rem; line-height: 1.4; }
@@ -240,7 +250,18 @@
     .entrepreneur .pricing-cta { background: linear-gradient(135deg, var(--accent-warning), #ff7c3c); }
     .guarantee-box { background: rgba(16,185,129,.15); border: 1px solid var(--accent-success); border-radius: 12px; padding: 20px; margin: 20px 0; text-align: center; }
     .guarantee-box strong { color: var(--accent-success); }
-    .bonus-offer { background: linear-gradient(135deg, rgba(245,158,11,.2), rgba(239,68,68,.2)); border: 2px solid var(--accent-danger); border-radius: 12px; padding: 15px; margin-bottom: 20px; animation: pulse 2s infinite; position: relative; overflow: visible; }
+    .bonus-offer { 
+      background: linear-gradient(135deg, rgba(245,158,11,.2), rgba(239,68,68,.2)); 
+      border: 2px solid var(--accent-danger); 
+      border-radius: 12px; 
+      padding: 15px; 
+      margin-bottom: 20px; 
+      animation: pulse 2s infinite; 
+      position: relative; 
+      overflow: visible;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
     @keyframes pulse { 0%{transform:scale(1)} 50%{transform:scale(1.02)} 100%{transform:scale(1)} }
     .bonus-book-image { position: absolute !important; top: -20px !important; right: -15px !important; height: 60px !important; width: auto !important; transform: rotate(15deg) !important; z-index: 10 !important; box-shadow: 0 4px 12px rgba(0,0,0,.3) !important; border-radius: 4px !important; }
     .faq-section { padding: 80px 0; }
@@ -254,6 +275,21 @@
     .modal-close { position: absolute; top: 10px; right: 20px; color: #fff; font-size: 40px; font-weight: 700; cursor: pointer; z-index: 1001; background: rgba(0,0,0,.5); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
     button:focus, input:focus { outline: 2px solid var(--accent-secondary); outline-offset: 2px; }
     a:focus { outline: none; }
+
+    /* Ensure content never overflows */
+    .pricing-card * {
+      max-width: 100%;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      box-sizing: border-box;
+    }
+
+    /* Additional safety for images */
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
     @media (max-width: 768px) {
       .container { padding: 0 15px; }
       .logo-container img { height: 36px; }
@@ -267,7 +303,11 @@
       .section-title { font-size: 2rem; }
       .stats-grid { grid-template-columns: 1fr; gap: 15px; }
       .stat-number { font-size: 1.7rem; }
-      .testimonial-grid, .pricing-grid { grid-template-columns: 1fr; }
+      .testimonial-grid, .pricing-grid { grid-template-columns: 1fr; gap: 20px; }
+      .pricing-card {
+        margin: 0;
+        width: 100%;
+      }
       .pricing-image { height: 280px; }
       .pricing-amount { font-size: 2.5rem; }
       .pricing-cta { padding: 16px 25px; font-size: 1rem; }
@@ -324,13 +364,13 @@
  
         <p class="visually-hidden">Start earning online with ADHD‑friendly, vetted websites and step‑by‑step guidance.</p>
        
-        <div class="hero-ctas">
-          <a href="https://buy.stripe.com/28E3cw1B33logABev67Zu02" target="_blank" rel="noopener" class="hero-cta-primary" onclick="trackCTA('hero','starter',9.25)" aria-label="Start earning with 30-day guarantee">30‑Day Guarantee<br>Lifetime access to content<br>No subscription fees</a>
+       <div class="hero-ctas">
+          <a href="https://buy.stripe.com/28E3cw1B33logABev67Zu02" target="_blank" rel="noopener" class="hero-cta-primary" onclick="trackCTA('hero','starter',9.25)" aria-label="Start earning with 30-day guarantee">🚀 Get Started — 30‑Day Guarantee</a>
           <ul class="social-proof" aria-label="Key purchase benefits">
-       <br>
+          Lifetime access to content • No subscription fees
         </ul>
-          <a href="#proof" class="hero-cta-secondary" aria-label="See payout proof">See real payouts ↓</a><br>
-          <a href="#pricing" class="hero-cta-secondary" aria-label="Jump to pricing">See pricing ↓</a><br>
+          <a href="#proof" class="hero-cta-secondary" aria-label="See payout proof">See real payouts ↓</a>
+          <a href="#pricing" class="hero-cta-secondary" aria-label="Jump to pricing">See pricing ↓</a>
         </div>
         
 
