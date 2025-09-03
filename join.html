@@ -241,9 +241,6 @@
       position: relative;
       max-width: 400px;
       margin: 30px auto;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: var(--shadow-medium);
     }
 
     .gallery-container {
@@ -313,11 +310,16 @@
       transition: background 0.3s ease;
       z-index: 10;
       opacity: 0.8;
+      outline: none;
     }
 
     .gallery-nav:hover {
       background: rgba(0,0,0,0.7);
       opacity: 1;
+    }
+
+    .gallery-nav:focus {
+      outline: none;
     }
 
     .gallery-nav.prev {
@@ -332,6 +334,32 @@
     @media (hover: none) {
       .gallery-nav {
         opacity: 0.4;
+      }
+    }
+
+    /* Desktop layout - show both images side by side */
+    @media (min-width: 769px) {
+      .image-gallery {
+        max-width: 800px;
+      }
+      
+      .gallery-container {
+        transform: none !important;
+        cursor: default;
+        gap: 20px;
+      }
+      
+      .gallery-slide {
+        min-width: calc(50% - 10px);
+        flex: 1;
+      }
+      
+      .gallery-nav {
+        display: none;
+      }
+      
+      .gallery-dots {
+        display: none;
       }
     }
     
