@@ -822,8 +822,11 @@
     
     // Touch/swipe functionality
     let startX = 0;
+    let startY = 0;
     let endX = 0;
+    let endY = 0;
     let isDragging = false;
+    let isHorizontalSwipe = false;
 
     function showSlide(n) {
         if (n >= slides.length) currentSlideIndex = 0;
@@ -854,19 +857,38 @@
     if (galleryContainer) {
         galleryContainer.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
             isDragging = true;
+            isHorizontalSwipe = false;
         });
 
         galleryContainer.addEventListener('touchmove', (e) => {
             if (!isDragging) return;
-            e.preventDefault();
+            
+            const currentX = e.touches[0].clientX;
+            const currentY = e.touches[0].clientY;
+            const diffX = Math.abs(currentX - startX);
+            const diffY = Math.abs(currentY - startY);
+            
+            // Determine swipe direction - only prevent default for horizontal swipes
+            if (diffX > diffY && diffX > 10) {
+                // Horizontal swipe detected - prevent default to handle gallery navigation
+                isHorizontalSwipe = true;
+                e.preventDefault();
+            } else if (diffY > diffX && diffY > 10) {
+                // Vertical swipe detected - allow normal page scrolling
+                isDragging = false;
+                isHorizontalSwipe = false;
+            }
         });
 
         galleryContainer.addEventListener('touchend', (e) => {
-            if (!isDragging) return;
+            if (!isDragging || !isHorizontalSwipe) return;
             endX = e.changedTouches[0].clientX;
+            endY = e.changedTouches[0].clientY;
             handleSwipe();
             isDragging = false;
+            isHorizontalSwipe = false;
         });
 
         // Mouse drag for desktop
