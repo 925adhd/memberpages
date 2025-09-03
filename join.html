@@ -145,7 +145,7 @@
   }
   </script>
 
- <!-- Styles -->
+<!-- Styles -->
   <style>
     :root {
       --primary-bg: #0f1419;
@@ -188,12 +188,54 @@
     .hero-badge { display: inline-block; background: var(--gradient-primary); color: #fff; padding: 8px 16px; border-radius: 999px; font-weight: 700; font-size: .9rem; margin-bottom: 0px; }
     .hero-headline { font-size: 3.2rem; font-weight: 900; line-height: 1.1; margin: 20px 0 16px; background: var(--gradient-adhd); background-size: 200% 200%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
     .hero-subtitle { font-size: 1.3rem; color: var(--text-secondary); max-width: 720px; margin: 0 auto 30px; }
-    .hero-ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin: 30px 0 20px; }
-    .hero-cta-primary { background: var(--accent-success); color: #fff; padding: 5px; border-radius: 15px; text-decoration: none; font-weight: 800; font-size: 1.1rem; transition: .3s; box-shadow: var(--shadow-medium); }
+    
+    /* UPDATED HERO CTA STYLES */
+    .hero-ctas { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 1rem; 
+      align-items: center; 
+      margin: 30px 0 20px; 
+    }
+    
+    .hero-cta-primary { 
+      background: var(--accent-success); 
+      color: #fff; 
+      padding: 15px 30px; 
+      border-radius: 15px; 
+      text-decoration: none; 
+      font-weight: 800; 
+      font-size: 1.1rem; 
+      transition: .3s; 
+      box-shadow: var(--shadow-medium); 
+      display: inline-block;
+    }
     .hero-cta-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-strong); }
-    .hero-cta-secondary { color: var(--accent-secondary); font-weight: 700; text-decoration: none; padding: 0px 0; transition: color .3s; }
+    
+    .social-proof { 
+      margin: 0.5rem 0;
+      text-align: center;
+      color: var(--text-muted); 
+      font-size: .9rem; 
+    }
+    
+    .secondary-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .hero-cta-secondary { 
+      color: var(--accent-secondary); 
+      font-weight: 700; 
+      text-decoration: none; 
+      padding: 8px 0; 
+      transition: color .3s; 
+      margin: 0.25rem;
+    }
     .hero-cta-secondary:hover { color: var(--accent-primary); }
-    .social-proof { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; color: var(--text-muted); font-size: .9rem; margin-top: 20px; }
+    
     .plan-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 20px; list-style: none; margin: 40px 0; padding: 0; }
     .plan-step { background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 25px 20px; text-align: center; }
     .plan-step-number { font-size: 1.2rem; font-weight: 800; color: var(--accent-success); margin-bottom: 8px; }
@@ -295,9 +337,19 @@
       .logo-container img { height: 36px; }
       .hero-headline { font-size: 2.5rem; }
       .hero-subtitle { font-size: 1.1rem; }
-      .hero-ctas { flex-direction: column; align-items: center; }
-      .hero-cta-primary { width: 100%; max-width: 300px; }
-      .social-proof { flex-direction: column; align-items: center; gap: 8px; }
+      .hero-ctas { 
+        gap: 0.75rem; 
+      }
+      .hero-cta-primary { 
+        width: 100%; 
+        max-width: 300px; 
+        padding: 12px 24px;
+      }
+      .secondary-ctas { 
+        flex-direction: column; 
+        align-items: center; 
+        gap: 0.5rem; 
+      }
       .plan-steps { grid-template-columns: 1fr; }
       .relief-headline { font-size: 2rem; }
       .section-title { font-size: 2rem; }
@@ -357,21 +409,32 @@
         </div> 
       <div class="container">
        <div style="text-align: center; margin-bottom: 20px;">
-          
-        
-        
-        <p style="color: var(--text-muted); font-size: .85rem; margin: 10px 0 20px; font-style: italic;">*Individual results vary based on effort and site selection.</p>
- 
-        <p class="visually-hidden">Start earning online with ADHD‑friendly, vetted websites and step‑by‑step guidance.</p>
+       <p style="color: var(--text-muted); font-size: .85rem; margin: 10px 0 20px; font-style: italic;">*Individual results vary based on effort and site selection.</p>
+       <p class="visually-hidden">Start earning online with ADHD‑friendly, vetted websites and step‑by‑step guidance.</p>
        
-       <div class="hero-ctas">
-          <a href="https://buy.stripe.com/28E3cw1B33logABev67Zu02" target="_blank" rel="noopener" class="hero-cta-primary" onclick="trackCTA('hero','starter',9.25)" aria-label="Start earning with 30-day guarantee">🚀 Get Started — 30‑Day Guarantee</a>
-          <ul class="social-proof" aria-label="Key purchase benefits">
-          Lifetime access to content • No subscription fees
-        </ul>
-          <a href="#proof" class="hero-cta-secondary" aria-label="See payout proof">See real payouts ↓</a>
-          <a href="#pricing" class="hero-cta-secondary" aria-label="Jump to pricing">See pricing ↓</a>
-        </div>
+     <div class="hero-ctas">
+  <a href="https://buy.stripe.com/28E3cw1B33logABev67Zu02" 
+     target="_blank" 
+     rel="noopener" 
+     class="hero-cta-primary" 
+     onclick="trackCTA('hero','starter',9.25)" 
+     aria-label="Start earning with 30-day guarantee">
+    🚀 Get Started — 30‑Day Guarantee
+  </a>
+  
+  <div class="social-proof" aria-label="Key purchase benefits">
+    Lifetime access to content • No subscription fees
+  </div>
+  
+  <div class="secondary-ctas">
+    <a href="#proof" class="hero-cta-secondary" aria-label="See payout proof">
+      See real payouts ↓
+    </a>
+    <a href="#pricing" class="hero-cta-secondary" aria-label="Jump to pricing">
+      See pricing ↓
+    </a>
+  </div>
+</div>
         
 
         <!-- 3-Step Solution - MOVED UP BEFORE PACKAGE SELECTOR -->
