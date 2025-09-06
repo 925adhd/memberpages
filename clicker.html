@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ADHD Motivation Button - 925 ADHD</title>
+  <meta name="description" content="Get instant ADHD-friendly motivation, jokes, and productivity tips with a single click.">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/SmartSelect_20241218_055052_Gallery.png/:/rs=h:175,m" sizes="175x175">
+
+  <style>
+    :root {
+      --primary-bg: #0f1419;
+      --secondary-bg: #1a1f2e;
+      --card-bg: rgba(255, 255, 255, 0.08);
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --text-primary: #ffffff;
+      --text-secondary: #a0a8b8;
+      --text-muted: #6b7280;
+      --accent-primary: #4f46e5;
+      --accent-secondary: #06b6d4;
+      --accent-success: #10b981;
+      --accent-warning: #f59e0b;
+      --accent-danger: #ef4444;
+      --border-subtle: rgba(255, 255, 255, 0.12);
+      --border-bright: rgba(255, 255, 255, 0.2);
+      --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.25);
+      --shadow-medium: 0 8px 40px rgba(0, 0, 0, 0.35);
+      --shadow-strong: 0 16px 64px rgba(0, 0, 0, 0.45);
+      --gradient-primary: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+      --gradient-success: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+      --gradient-adhd: linear-gradient(135deg, #4f46e5 0%, #06b6d4 50%, #10b981 100%);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
+      background: var(--primary-bg); 
+      color: var(--text-primary); 
+      line-height: 1.6; 
+      overflow-x: hidden; 
+      min-height: 100vh;
+    }
+
+    .bg-gradient { 
+      position: fixed; 
+      inset: 0; 
+      background:
+        radial-gradient(ellipse at top, rgba(79,70,229,.1) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom right, rgba(16,185,129,.08) 0%, transparent 50%);
+      z-index: -1; 
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    .header { 
+      position: sticky; 
+      top: 0; 
+      z-index: 100; 
+      background: rgba(15,20,25,.95); 
+      backdrop-filter: blur(20px); 
+      border-bottom: 1px solid var(--border-subtle); 
+    }
+
+    .header-content { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      padding: 15px 0; 
+    }
+
+    .logo-container a { 
+      display: flex; 
+      align-items: center; 
+      text-decoration: none; 
+    }
+
+    .logo-container img { height: 40px; width: auto; }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--accent-secondary);
+    }
+
+    .app-title {
+      font-size: 3.2rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin: 40px 0 20px;
+      background: var(--gradient-adhd);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+    }
+
+    .app-subtitle {
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+      max-width: 720px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border: 2px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+      max-width: 600px;
+      margin: 40px auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card:hover {
+      border-color: var(--accent-secondary);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-medium);
+      transition: all 0.3s ease;
+    }
+
+    .feature-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: var(--accent-secondary);
+    }
+
+    .feature-description {
+      color: var(--text-secondary);
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .adhd-button {
+      background: var(--gradient-primary);
+      color: white;
+      border: none;
+      padding: 25px 50px;
+      border-radius: 15px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+      margin-bottom: 30px;
+      max-width: 400px;
+    }
+
+    .adhd-button:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .adhd-button:active {
+      transform: scale(0.98);
+    }
+
+    .motivation-display {
+      background: var(--glass-bg);
+      border: 2px solid var(--border-subtle);
+      border-radius: 15px;
+      padding: 30px;
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-style: italic;
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      line-height: 1.6;
+      transition: all 0.3s ease;
+    }
+
+    .click-count {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--accent-success);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 15px; }
+      .app-title { font-size: 2.5rem; }
+      .app-subtitle { font-size: 1.1rem; }
+      .feature-card { padding: 30px 20px; margin: 20px auto; }
+      .feature-title { font-size: 1.6rem; }
+      .adhd-button { padding: 20px 30px; font-size: 1.2rem; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-gradient" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div class="container">
+      <nav class="header-content" role="navigation" aria-label="Main navigation">
+        <div class="logo-container">
+          <a href="#" aria-label="925 ADHD Home">
+            <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/SmartSelect_20241218_055052_Gallery.png/:/rs=h:175,m" alt="925 ADHD Logo" width="175" height="175">
+          </a>
+        </div>
+        <div class="nav-links">
+          <a href="#" class="active">Motivation</a>
+          <a href="#">Habits</a>
+          <a href="#">Task Wheel</a>
+          <a href="#">Clicker</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main App -->
+  <main role="main">
+    <div class="container">
+      <h1 class="app-title">ADHD Motivation Button</h1>
+      <p class="app-subtitle">Need a quick boost? Get instant motivation, productivity tips, or just a reminder that your ADHD brain is amazing.</p>
+
+      <div class="feature-card">
+        <div class="click-count" id="clickCounter">Clicks: 0</div>
+        <h2 class="feature-title">🧠 Instant Motivation</h2>
+        <p class="feature-description">
+          Perfect for those "I need encouragement RIGHT NOW" moments. Each click gives you a different message crafted specifically for ADHD brains.
+        </p>
+        <button class="adhd-button" onclick="getMotivation()">Give Me Motivation!</button>
+        <div class="motivation-display" id="motivationDisplay">
+          Click the button above for instant ADHD-friendly motivation!
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    let clickCount = 0;
+
+    const motivationMessages = [
+      "Your ADHD brain is not broken - it's beautifully unique! ✨",
+      "Hyperfocus is your superpower. Use it wisely! ⚡",
+      "Done is better than perfect. You've got this! 💪",
+      "Your creativity comes from thinking differently. Embrace it! 🎨",
+      "Small steps count. You don't need to do everything today. 🐢",
+      "Your ADHD gives you the ability to see connections others miss! 🔗",
+      "Procrastination is just your brain asking for a different approach. 🔄",
+      "You're not lazy - your brain just works on a different schedule! ⏰",
+      "Messy desks, brilliant minds. Einstein would relate! 🧠",
+      "Your ability to hyperfocus is what neurotypicals pay for in meditation apps! 🧘",
+      "ADHD = Attention Deficit? More like Attention Different! ✨",
+      "You notice details others miss. That's not a bug, it's a feature! 👀",
+      "Your brain thinks in 3D while others think in 2D. Own it! 📐",
+      "Fidgeting helps you think. Science backs you up! 🔬",
+      "You're not 'too much' - you're exactly enough! 💝",
+      "Your enthusiasm is contagious. The world needs your energy! 🌟",
+      "Time blindness means you live fully in the moment! 🕐",
+      "Your brain creates unique solutions because it thinks outside the box! 📦",
+      "Rejection sensitive dysphoria shows how deeply you care! ❤️",
+      "Your scattered thoughts often lead to breakthrough innovations! 💡",
+      "You see possibilities where others see problems! 🌈",
+      "Your hyperfocus can accomplish in hours what takes others days! 🚀",
+      "ADHD brains are entrepreneurial brains! 💼",
+      "Your emotional intensity makes you incredibly empathetic! 🤗",
+      "You're not behind in life - you're just on your own timeline! ⏳"
+    ];
+
+    function getMotivation() {
+      clickCount++;
+      document.getElementById('clickCounter').textContent = `Clicks: ${clickCount}`;
+      
+      const randomMessage = motivationMessages[Math.floor(Math.random() * motivationMessages.length)];
+      const display = document.getElementById('motivationDisplay');
+      
+      // Add fade effect
+      display.style.opacity = '0.5';
+      display.style.transform = 'scale(0.95)';
+      
+      setTimeout(() => {
+        display.textContent = randomMessage;
+        display.style.opacity = '1';
+        display.style.transform = 'scale(1)';
+        
+        // Random color border effect
+        const colors = ['var(--accent-primary)', 'var(--accent-secondary)', 'var(--accent-success)', 'var(--accent-warning)'];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        display.style.borderColor = randomColor;
+        
+        setTimeout(() => {
+          display.style.borderColor = 'var(--border-subtle)';
+        }, 1000);
+      }, 150);
+    }
+
+    // Add keyboard support
+    document.addEventListener('keydown', function(e) {
+      if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        getMotivation();
+      }
+    });
+
+    // Add some motivational text that changes on page load
+    const welcomeMessages = [
+      "Ready for some brain-positive vibes?",
+      "Your daily dose of ADHD encouragement awaits!",
+      "Time to remind yourself how awesome your brain is!",
+      "Need a confidence boost? You came to the right place!",
+      "Let's celebrate what makes your mind special!"
+    ];
+
+    window.addEventListener('load', function() {
+      setTimeout(() => {
+        const welcomeMsg = welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)];
+        document.getElementById('motivationDisplay').textContent = welcomeMsg;
+      }, 500);
+    });
+  </script>
+</body>
+</html>
