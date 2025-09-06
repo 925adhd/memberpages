@@ -445,47 +445,37 @@
 
             /* Mobile paywall optimizations */
             .paywall-box {
-                padding: 25px 20px;
-                margin: 20px 10px;
+                padding: 20px 15px;
+                margin: 15px 5px;
                 max-height: 90vh;
                 overflow-y: auto;
             }
 
             .paywall-box h2 {
-                font-size: 1.8rem;
-                margin-bottom: 15px;
+                font-size: 1.5rem;
+                margin-bottom: 10px;
             }
 
             .price-highlight {
-                font-size: 2.2rem;
-                margin: 15px 0;
-            }
-
-            .benefits-list {
-                margin: 20px 0;
-            }
-
-            .benefits-list li {
-                padding: 8px 12px;
-                margin: 8px 0;
-                font-size: 0.9rem;
+                font-size: 1.8rem;
+                margin: 10px 0;
             }
 
             .upgrade-button {
-                padding: 15px 25px;
-                font-size: 1.1rem;
-                margin: 15px 0;
+                padding: 12px 20px;
+                font-size: 1rem;
+                margin: 10px 0;
             }
 
             .money-back {
-                padding: 15px;
-                margin: 20px 0;
-                font-size: 0.9rem;
+                padding: 12px;
+                margin: 15px 0;
+                font-size: 0.85rem;
             }
 
             .paywall-box p {
-                font-size: 0.95rem;
-                margin-bottom: 15px;
+                font-size: 0.9rem;
+                margin-bottom: 10px;
             }
         }
 
@@ -674,10 +664,10 @@
             margin-top: 10px;
         }
 
-        /* PAYWALL STYLES */
+        /* COMPACT PAYWALL STYLES */
         .paywall-overlay {
             position: relative;
-            margin-top: 50px;
+            margin-top: 30px;
         }
 
         .blurred-content {
@@ -693,76 +683,68 @@
             top: 50%;
             transform: translateY(-50%);
             background: linear-gradient(135deg, var(--bg-card), rgba(79, 172, 254, 0.1));
-            border: 3px solid var(--blue);
-            border-radius: 20px;
-            padding: 40px;
-            margin: 40px auto;
-            max-width: 600px;
+            border: 2px solid var(--blue);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 500px;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(10px);
             z-index: 100;
         }
 
         .paywall-box h2 {
             color: var(--yellow);
-            font-size: 2.5rem;
-            margin-bottom: 20px;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
             background: none;
             border: none;
             padding: 0;
         }
 
         .price-highlight {
-            font-size: 3rem;
+            font-size: 2.2rem;
             color: var(--green);
             font-weight: bold;
-            text-shadow: 0 0 20px rgba(67, 233, 123, 0.5);
-            margin: 20px 0;
+            text-shadow: 0 0 15px rgba(67, 233, 123, 0.5);
+            margin: 10px 0;
         }
 
         .upgrade-button {
             background: linear-gradient(45deg, var(--green), var(--blue));
             color: white;
-            padding: 20px 40px;
+            padding: 15px 30px;
             border: none;
-            border-radius: 50px;
-            font-size: 1.3rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(67, 233, 123, 0.3);
+            box-shadow: 0 8px 20px rgba(67, 233, 123, 0.3);
             text-decoration: none;
             display: inline-block;
-            margin: 20px 0;
+            margin: 15px 0;
         }
 
         .upgrade-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(67, 233, 123, 0.4);
-        }
-
-        .benefits-list {
-            text-align: left;
-            margin: 30px 0;
-            padding: 0;
-        }
-
-        .benefits-list li {
-            background: rgba(67, 233, 123, 0.1);
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin: 10px 0;
-            border-left: 4px solid var(--green);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(67, 233, 123, 0.4);
         }
 
         .money-back {
             background: rgba(251, 191, 36, 0.2);
-            border: 2px solid var(--yellow);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 30px 0;
+            border: 1px solid var(--yellow);
+            border-radius: 10px;
+            padding: 12px;
+            margin: 15px 0;
             font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .paywall-box p {
+            margin-bottom: 8px;
+            font-size: 1rem;
         }
     </style>
 </head>
@@ -837,192 +819,201 @@
                 <p>A dedicated work email keeps your professional communications organized, helps you track earnings, and presents a professional image to clients. This separation is crucial for managing multiple income streams effectively.</p>
             </div>
 
-            <!-- FREE CONTENT ENDS HERE - START PAYWALL -->
-            <div class="paywall-overlay">
-                <div class="paywall-box">
-                    <h2>🔓 Unlock Complete Guide</h2>
-                    <p style="font-size: 1.2rem; margin-bottom: 20px;">You've seen 25% of this comprehensive online work guide</p>
-                    
-                    <div class="price-highlight">$9.25</div>
-                    <p style="margin-bottom: 30px;">One-time payment • Instant access • Complete guide</p>
-                    
-                    <a href="https://get.925adhd.com" class="upgrade-button">🚀 Get Instant Access - $9.25</a>
-                    
-                    <div class="money-back">
-                        💎 30-Day Money Back Guarantee<br>
-                        Start earning within 30 days or get your money back!
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Choose Your Email Provider</h4>
+                        <p><strong>Recommended:</strong> Gmail (most compatible with platforms)</p>
+                        <p><strong>Privacy-focused:</strong> ProtonMail (extra security)</p>
+                        <p><strong>Business option:</strong> Outlook (professional appearance)</p>
                     </div>
-                    
-
                 </div>
 
-                <!-- BLURRED REMAINING CONTENT -->
-                <div class="blurred-content">
-                    <div class="steps">
-                        <div class="step">
-                            <div class="step-number">1</div>
-                            <div class="step-content">
-                                <h4>Choose Your Email Provider</h4>
-                                <p><strong>Recommended:</strong> Gmail (most compatible with platforms)</p>
-                                <p><strong>Privacy-focused:</strong> ProtonMail (extra security)</p>
-                                <p><strong>Business option:</strong> Outlook (professional appearance)</p>
-                            </div>
-                        </div>
-
-                        <div class="step">
-                            <div class="step-number">2</div>
-                            <div class="step-content">
-                                <h4>Professional Email Format</h4>
-                                <p><strong>Best format:</strong> firstname.lastname.work@gmail.com</p>
-                                <p><strong>Alternative:</strong> firstname.lastname.freelance@gmail.com</p>
-                                <p><strong>Avoid:</strong> Nicknames, numbers, or unprofessional terms</p>
-                            </div>
-                        </div>
-
-                        <div class="step">
-                            <div class="step-number">3</div>
-                            <div class="step-content">
-                                <h4>Secure Your Account</h4>
-                                <p>Use a strong, unique password and enable two-factor authentication. Save credentials in a secure password manager.</p>
-                            </div>
-                        </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Professional Email Format</h4>
+                        <p><strong>Best format:</strong> firstname.lastname.work@gmail.com</p>
+                        <p><strong>Alternative:</strong> firstname.lastname.freelance@gmail.com</p>
+                        <p><strong>Avoid:</strong> Nicknames, numbers, or unprofessional terms</p>
                     </div>
+                </div>
 
-                    <div class="card success">
-                        <h3>✅ Pro Tips for Email Success</h3>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Secure Your Account</h4>
+                        <p>Use a strong, unique password and enable two-factor authentication. Save credentials in a secure password manager.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card success">
+                <h3>✅ Pro Tips for Email Success</h3>
+                <ul>
+                    <li>Set up email forwarding to your main account for notifications</li>
+                    <li>Create folders for different platforms and job types</li>
+                    <li>Use email templates for common responses</li>
+                    <li>Check this email daily during business hours</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="step2">
+            <h2>💳 Step 2: Set Up PayPal for Payments</h2>
+
+            <div class="time-estimate">
+                <p style="font-size: 1.1rem; margin: 0; color: var(--green); font-weight: 600;">⏰ Time Required: 10-15 minutes</p>
+            </div>
+
+            <div class="card tip">
+                <h3>💡 Payment Processing Hub</h3>
+                <p>PayPal is the primary payment method for 80%+ of online work platforms. Setting this up correctly ensures smooth, fast payments and professional transaction management.</p>
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Account Type Selection</h4>
+                        <p>Choose <strong>Business Account</strong> - even as a solo worker, this provides:</p>
                         <ul>
-                            <li>Set up email forwarding to your main account for notifications</li>
-                            <li>Create folders for different platforms and job types</li>
-                            <li>Use email templates for common responses</li>
-                            <li>Check this email daily during business hours</li>
+                            <li>Better payment protection</li>
+                            <li>Professional appearance to clients</li>
+                            <li>Advanced reporting for taxes</li>
+                            <li>Higher transaction limits</li>
                         </ul>
                     </div>
+                </div>
 
-                    <section id="step2">
-                        <h2>💳 Step 2: Set Up PayPal for Payments</h2>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Link Your Work Email</h4>
+                        <p>Use the professional email you just created. This maintains consistency across all platforms.</p>
+                    </div>
+                </div>
 
-                        <div class="time-estimate">
-                            <p style="font-size: 1.1rem; margin: 0; color: var(--green); font-weight: 600;">⏰ Time Required: 10-15 minutes</p>
-                        </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Verify Your Account</h4>
+                        <p>Complete bank account verification for faster withdrawals and higher limits. Add a backup payment method.</p>
+                    </div>
+                </div>
+            </div>
 
-                        <div class="card tip">
-                            <h3>💡 Payment Processing Hub</h3>
-                            <p>PayPal is the primary payment method for 80%+ of online work platforms. Setting this up correctly ensures smooth, fast payments and professional transaction management.</p>
-                        </div>
+            <div class="card money">
+                <h3>💰 Money Management Tips</h3>
+                <ul>
+                    <li><strong>Get the PayPal debit card</strong> - 1% cashback on purchases</li>
+                    <li><strong>Set up automatic transfers</strong> - weekly transfers to savings</li>
+                    <li><strong>Track all transactions</strong> - for tax purposes</li>
+                    <li><strong>Maintain 25% buffer</strong> - for taxes and fees</li>
+                </ul>
+            </div>
 
-                        <div class="steps">
-                            <div class="step">
-                                <div class="step-number">1</div>
-                                <div class="step-content">
-                                    <h4>Account Type Selection</h4>
-                                    <p>Choose <strong>Business Account</strong> - even as a solo worker, this provides:</p>
-                                    <ul>
-                                        <li>Better payment protection</li>
-                                        <li>Professional appearance to clients</li>
-                                        <li>Advanced reporting for taxes</li>
-                                        <li>Higher transaction limits</li>
-                                    </ul>
-                                </div>
-                            </div>
+            <div class="platform-box">
+                <div class="platform-name">🔗 Quick Setup Link</div>
+                <p><a href="https://paypal.com/business" class="platform-link" target="_blank">PayPal.com/business →</a></p>
+                <p>Click "Get Started" and select Business Account</p>
+            </div>
+        </section>
 
-                            <div class="step">
-                                <div class="step-number">2</div>
-                                <div class="step-content">
-                                    <h4>Link Your Work Email</h4>
-                                    <p>Use the professional email you just created. This maintains consistency across all platforms.</p>
-                                </div>
-                            </div>
+        <!-- FREE CONTENT ENDS HERE - START PAYWALL -->
+        <div class="paywall-overlay">
+            <div class="paywall-box">
+                <h2>🔓 Unlock Complete Guide</h2>
+                <p>You've seen 50% of this comprehensive guide</p>
+                
+                <div class="price-highlight">$9.25</div>
+                <p>One-time • Instant access • Complete guide</p>
+                
+                <a href="https://get.925adhd.com" class="upgrade-button">🚀 Get Full Access - $9.25</a>
+                
+                <div class="money-back">
+                    💎 30-Day Money Back Guarantee
+                </div>
+            </div>
 
-                            <div class="step">
-                                <div class="step-number">3</div>
-                                <div class="step-content">
-                                    <h4>Verify Your Account</h4>
-                                    <p>Complete bank account verification for faster withdrawals and higher limits. Add a backup payment method.</p>
-                                </div>
-                            </div>
-                        </div>
+            <!-- BLURRED REMAINING CONTENT -->
+            <div class="blurred-content">
+                <section id="step3">
+                    <h2>🌐 Step 3: Sign Up for Work Platforms</h2>
 
-                        <div class="card money">
-                            <h3>💰 Money Management Tips</h3>
-                            <ul>
-                                <li><strong>Get the PayPal debit card</strong> - 1% cashback on purchases</li>
-                                <li><strong>Set up automatic transfers</strong> - weekly transfers to savings</li>
-                                <li><strong>Track all transactions</strong> - for tax purposes</li>
-                                <li><strong>Maintain 25% buffer</strong> - for taxes and fees</li>
-                            </ul>
+                    <div class="time-estimate">
+                        <p style="font-size: 1.1rem; margin: 0; color: var(--green); font-weight: 600;">⏰ Time Required: 30-45 minutes total</p>
+                    </div>
+
+                    <div class="card warning">
+                        <h3>⚠️ Platform Availability Alert</h3>
+                        <p><strong>Many platforms limit new signups!</strong> Apply to 8-10 platforms today to maximize acceptance chances. Some platforms close registrations without warning, so speed matters.</p>
+                    </div>
+
+                    <div class="card tip">
+                        <h3>🎯 Strategic Approach</h3>
+                        <p>Start with platforms marked "Easy" to build confidence and ratings, then progress to higher-paying opportunities. Diversification across multiple platforms creates income stability.</p>
+                    </div>
+
+                    <h3 style="color: var(--green); margin: 30px 0 20px;">🏆 Tier 1: High-Value Platforms</h3>
+
+                    <div class="platform-grid">
+                        <div class="platform-box">
+                            <div class="platform-name">🌟 Upwork</div>
+                            <div class="pay-range">$15-100+/hour</div>
+                            <div class="difficulty hard">Competitive Entry</div>
+                            <p><strong>Best for:</strong> Professional writing, web development, design</p>
+                            <p><strong>Success tip:</strong> Focus on one skill area initially</p>
+                            <p><a href="https://www.upwork.com" class="platform-link" target="_blank">Apply at Upwork.com →</a></p>
                         </div>
 
                         <div class="platform-box">
-                            <div class="platform-name">🔗 Quick Setup Link</div>
-                            <p><a href="https://paypal.com/business" class="platform-link" target="_blank">PayPal.com/business →</a></p>
-                            <p>Click "Get Started" and select Business Account</p>
-                        </div>
-                    </section>
-
-                    <section id="step3">
-                        <h2>🌐 Step 3: Sign Up for Work Platforms</h2>
-
-                        <div class="time-estimate">
-                            <p style="font-size: 1.1rem; margin: 0; color: var(--green); font-weight: 600;">⏰ Time Required: 30-45 minutes total</p>
+                            <div class="platform-name">🎯 Fiverr</div>
+                            <div class="pay-range">$5-500+/gig</div>
+                            <div class="difficulty easy">Easy Start</div>
+                            <p><strong>Best for:</strong> Creative services, quick tasks</p>
+                            <p><strong>Success tip:</strong> Start with $5-15 services</p>
+                            <p><a href="https://www.fiverr.com" class="platform-link" target="_blank">Apply at Fiverr.com →</a></p>
                         </div>
 
-                        <div class="card warning">
-                            <h3>⚠️ Platform Availability Alert</h3>
-                            <p><strong>Many platforms limit new signups!</strong> Apply to 8-10 platforms today to maximize acceptance chances. Some platforms close registrations without warning, so speed matters.</p>
+                        <div class="platform-box">
+                            <div class="platform-name">🎤 User Interviews</div>
+                            <div class="pay-range">$50-200+/session</div>
+                            <div class="difficulty easy">Very Easy</div>
+                            <p><strong>Best for:</strong> Speaking about your experiences</p>
+                            <p><strong>Success tip:</strong> Complete your profile thoroughly</p>
+                            <p><a href="https://userinterviews.com" class="platform-link" target="_blank">Apply at UserInterviews.com →</a></p>
                         </div>
+                    </div>
 
-                        <div class="card tip">
-                            <h3>🎯 Strategic Approach</h3>
-                            <p>Start with platforms marked "Easy" to build confidence and ratings, then progress to higher-paying opportunities. Diversification across multiple platforms creates income stability.</p>
-                        </div>
-
-                        <h3 style="color: var(--green); margin: 30px 0 20px;">🏆 Tier 1: High-Value Platforms</h3>
-
-                        <div class="platform-grid">
-                            <div class="platform-box">
-                                <div class="platform-name">🌟 Upwork</div>
-                                <div class="pay-range">$15-100+/hour</div>
-                                <div class="difficulty hard">Competitive Entry</div>
-                                <p><strong>Best for:</strong> Professional writing, web development, design</p>
-                                <p><strong>Success tip:</strong> Focus on one skill area initially</p>
-                                <p><a href="https://www.upwork.com" class="platform-link" target="_blank">Apply at Upwork.com →</a></p>
-                            </div>
-
-                            <div class="platform-box">
-                                <div class="platform-name">🎯 Fiverr</div>
-                                <div class="pay-range">$5-500+/gig</div>
-                                <div class="difficulty easy">Easy Start</div>
-                                <p><strong>Best for:</strong> Creative services, quick tasks</p>
-                                <p><strong>Success tip:</strong> Start with $5-15 services</p>
-                                <p><a href="https://www.fiverr.com" class="platform-link" target="_blank">Apply at Fiverr.com →</a></p>
-                            </div>
-
-                            <div class="platform-box">
-                                <div class="platform-name">🎤 User Interviews</div>
-                                <div class="pay-range">$50-200+/session</div>
-                                <div class="difficulty easy">Very Easy</div>
-                                <p><strong>Best for:</strong> Speaking about your experiences</p>
-                                <p><strong>Success tip:</strong> Complete your profile thoroughly</p>
-                                <p><a href="https://userinterviews.com" class="platform-link" target="_blank">Apply at UserInterviews.com →</a></p>
-                            </div>
-                        </div>
-
-                        <!-- Much more content continues but is blurred... -->
-                        <div style="height: 2000px; background: linear-gradient(to bottom, transparent, var(--bg-dark));">
-                            <p>And much more detailed content continues...</p>
-                        </div>
-                    </section>
-                </div>
+                    <!-- Much more content continues but is blurred... -->
+                    <div style="height: 3000px; background: linear-gradient(to bottom, transparent, var(--bg-dark));">
+                        <h3>🎯 Tier 2: Steady Income Platforms</h3>
+                        <p>15+ more platforms with detailed instructions...</p>
+                        
+                        <h2>📱 Step 4: Passive Income Opportunities</h2>
+                        <p>Set and forget income streams...</p>
+                        
+                        <h2>✨ Step 5: Optimize Your Profiles</h2>
+                        <p>Professional profile optimization...</p>
+                        
+                        <h2>🗓️ Your 30-Day Success Timeline</h2>
+                        <p>Week by week action plan...</p>
+                        
+                        <p>And much more detailed content continues...</p>
+                    </div>
+                </section>
             </div>
-        </section>
+        </div>
     </div>
 
     <script>
-        // Progress Bar Functionality (simplified for paywall version)
+        // Progress Bar Functionality (caps at 50%)
         function updateProgress() {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollPercentage = Math.min((scrollTop / scrollHeight) * 100, 25); // Cap at 25%
+            const scrollPercentage = Math.min((scrollTop / scrollHeight) * 100, 50); // Cap at 50%
             
             const progressBar = document.querySelector('.progress-bar');
             const progressIndicator = document.querySelector('.progress-indicator');
