@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ADHD Task Wheel - 925 ADHD</title>
+  <meta name="description" content="Can't decide what to do? Let the ADHD-friendly task wheel choose for you! Perfect for decision paralysis.">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/SmartSelect_20241218_055052_Gallery.png/:/rs=h:175,m" sizes="175x175">
+
+  <style>
+    :root {
+      --primary-bg: #0f1419;
+      --secondary-bg: #1a1f2e;
+      --card-bg: rgba(255, 255, 255, 0.08);
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --text-primary: #ffffff;
+      --text-secondary: #a0a8b8;
+      --text-muted: #6b7280;
+      --accent-primary: #4f46e5;
+      --accent-secondary: #06b6d4;
+      --accent-success: #10b981;
+      --accent-warning: #f59e0b;
+      --accent-danger: #ef4444;
+      --border-subtle: rgba(255, 255, 255, 0.12);
+      --border-bright: rgba(255, 255, 255, 0.2);
+      --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.25);
+      --shadow-medium: 0 8px 40px rgba(0, 0, 0, 0.35);
+      --shadow-strong: 0 16px 64px rgba(0, 0, 0, 0.45);
+      --gradient-primary: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+      --gradient-success: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+      --gradient-adhd: linear-gradient(135deg, #4f46e5 0%, #06b6d4 50%, #10b981 100%);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
+      background: var(--primary-bg); 
+      color: var(--text-primary); 
+      line-height: 1.6; 
+      overflow-x: hidden; 
+      min-height: 100vh;
+    }
+
+    .bg-gradient { 
+      position: fixed; 
+      inset: 0; 
+      background:
+        radial-gradient(ellipse at top, rgba(79,70,229,.1) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom right, rgba(16,185,129,.08) 0%, transparent 50%);
+      z-index: -1; 
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    .header { 
+      position: sticky; 
+      top: 0; 
+      z-index: 100; 
+      background: rgba(15,20,25,.95); 
+      backdrop-filter: blur(20px); 
+      border-bottom: 1px solid var(--border-subtle); 
+    }
+
+    .header-content { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      padding: 15px 0; 
+    }
+
+    .logo-container a { 
+      display: flex; 
+      align-items: center; 
+      text-decoration: none; 
+    }
+
+    .logo-container img { height: 40px; width: auto; }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--accent-secondary);
+    }
+
+    .app-title {
+      font-size: 3.2rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin: 40px 0 20px;
+      background: var(--gradient-adhd);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+    }
+
+    .app-subtitle {
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+      max-width: 720px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border: 2px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 700px;
+      margin: 40px auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card:hover {
+      border-color: var(--accent-secondary);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-medium);
+      transition: all 0.3s ease;
+    }
+
+    .feature-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: var(--accent-secondary);
+      text-align: center;
+    }
+
+    .feature-description {
+      color: var(--text-secondary);
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .task-input-section {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .task-input {
+      flex: 1;
+      padding: 15px;
+      background: var(--glass-bg);
+      border: 2px solid var(--border-subtle);
+      border-radius: 10px;
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .task-input:focus {
+      outline: none;
+      border-color: var(--accent-secondary);
+    }
+
+    .task-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .add-task-btn {
+      background: var(--gradient-success);
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .add-task-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .add-task-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .task-list {
+      max-height: 150px;
+      overflow-y: auto;
+      margin-bottom: 30px;
+      background: var(--glass-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 15px;
+    }
+
+    .task-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background: var(--secondary-bg);
+      border-radius: 8px;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+
+    .task-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .remove-task {
+      background: var(--accent-danger);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 5px 10px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .remove-task:hover {
+      background: #dc2626;
+      transform: scale(1.05);
+    }
+
+    .wheel-container {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      margin: 30px auto;
+    }
+
+    .wheel {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 4px solid var(--accent-secondary);
+      position: relative;
+      overflow: hidden;
+      transition: transform 3s cubic-bezier(0.23, 1, 0.32, 1);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .wheel-segment {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      transform-origin: 100% 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-align: center;
+      padding: 15px 5px;
+      word-wrap: break-word;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .wheel-pointer {
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-top: 25px solid var(--accent-danger);
+      z-index: 10;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+    }
+
+    .wheel-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      background: var(--gradient-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: white;
+      box-shadow: var(--shadow-medium);
+    }
+
+    .spin-btn {
+      background: var(--gradient-primary);
+      color: white;
+      border: none;
+      padding: 20px 40px;
+      border-radius: 15px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      cursor: pointer;
+      margin: 20px auto;
+      display: block;
+      transition: all 0.3s ease;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .spin-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .spin-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .wheel-result {
+      background: var(--glass-bg);
+      border: 2px solid var(--accent-success);
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      margin-top: 20px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--accent-success);
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .empty-state {
+      text-align: center;
+      color: var(--text-muted);
+      font-style: italic;
+      padding: 40px;
+    }
+
+    .task-count {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--accent-warning);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 15px; }
+      .app-title { font-size: 2.5rem; }
+      .app-subtitle { font-size: 1.1rem; }
+      .feature-card { padding: 30px 20px; margin: 20px auto; }
+      .feature-title { font-size: 1.6rem; }
+      .wheel-container { width: 250px; height: 250px; }
+      .wheel-center { width: 50px; height: 50px; font-size: 1.2rem; }
+      .task-input-section { flex-direction: column; }
+      .spin-btn { padding: 15px 30px; font-size: 1.1rem; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-gradient" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div class="container">
+      <nav class="header-content" role="navigation" aria-label="Main navigation">
+        <div class="logo-container">
+          <a href="#" aria-label="925 ADHD Home">
+            <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/SmartSelect_20241218_055052_Gallery.png/:/rs=h:175,m" alt="925 ADHD Logo" width="175" height="175">
+          </a>
+        </div>
+        <div class="nav-links">
+          <a href="#">Motivation</a>
+          <a href="#">Habits</a>
+          <a href="#" class="active">Task Wheel</a>
+          <a href="#">Clicker</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main App -->
+  <main role="main">
+    <div class="container">
+      <h1 class="app-title">Task Decision Wheel</h1>
+      <p class="app-subtitle">Can't decide what to do? Add your tasks and let the wheel choose for you! Perfect for ADHD decision paralysis.</p>
+
+      <div class="feature-card">
+        <div class="task-count" id="taskCount">Tasks: 0/8</div>
+        <h2 class="feature-title">Spin to Decide</h2>
+        <p class="feature-description">
+          Add your tasks, spin the wheel, and let chance decide what you focus on next. Sometimes the best decision is letting go of the decision!
+        </p>
+
+        <div class="task-input-section">
+          <input type="text" class="task-input" id="taskInput" placeholder="Enter a task (e.g., 'Clean desk', 'Call mom')" maxlength="30">
+          <button class="add-task-btn" id="addTaskBtn" onclick="addTask()">Add Task</button>
+        </div>
+
+        <div class="task-list" id="taskList">
+          <div class="empty-state">
+            Add some tasks above to get started!<br>
+            <small>You can add up to 8 tasks</small>
+          </div>
+        </div>
+
+        <div class="wheel-container">
+          <div class="wheel-pointer"></div>
+          <div class="wheel" id="wheel">
+            <div class="empty-state" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 20px;">
+              Add tasks to see the wheel!
+            </div>
+          </div>
+          <div class="wheel-center">🎯</div>
+        </div>
+
+        <button class="spin-btn" id="spinBtn" onclick="spinWheel()" disabled>
+          Add Tasks to Spin!
+        </button>
+
+        <div class="wheel-result" id="wheelResult">
+          Your chosen task will appear here after spinning!
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    let tasks = [];
+    let isSpinning = false;
+    let spinCount = 0;
+
+    function addTask() {
+      const input = document.getElementById('taskInput');
+      const task = input.value.trim();
+      
+      if (task && tasks.length < 8 && !tasks.includes(task)) {
+        tasks.push(task);
+        input.value = '';
+        updateTaskList();
+        updateWheel();
+        updateTaskCount();
+        updateSpinButton();
+        
+        // Save tasks to localStorage
+        localStorage.setItem('wheelTasks', JSON.stringify(tasks));
+        
+        // Add success feedback
+        const addBtn = document.getElementById('addTaskBtn');
+        const originalText = addBtn.textContent;
+        addBtn.textContent = 'Added!';
+        addBtn.style.background = 'var(--accent-success)';
+        
+        setTimeout(() => {
+          addBtn.textContent = originalText;
+          addBtn.style.background = '';
+        }, 1000);
+      } else if (tasks.includes(task)) {
+        // Duplicate task feedback
+        const addBtn = document.getElementById('addTaskBtn');
+        const originalText = addBtn.textContent;
+        addBtn.textContent = 'Already added!';
+        addBtn.style.background = 'var(--accent-warning)';
+        
+        setTimeout(() => {
+          addBtn.textContent = originalText;
+          addBtn.style.background = '';
+        }, 1500);
+      }
+    }
+
+    function removeTask(index) {
+      tasks.splice(index, 1);
+      updateTaskList();
+      updateWheel();
+      updateTaskCount();
+      updateSpinButton();
+      
+      // Save tasks to localStorage
+      localStorage.setItem('wheelTasks', JSON.stringify(tasks));
+    }
+
+    function updateTaskList() {
+      const taskList = document.getElementById('taskList');
+      
+      if (tasks.length === 0) {
+        taskList.innerHTML = `
+          <div class="empty-state">
+            Add some tasks above to get started!<br>
+            <small>You can add up to 8 tasks</small>
+          </div>
+        `;
+      } else {
+        taskList.innerHTML = tasks.map((task, index) => 
+          `<div class="task-item">
+            <span>${task}</span>
+            <button class="remove-task" onclick="removeTask(${index})">Remove</button>
+          </div>`
+        ).join('');
+      }
+    }
+
+    function updateTaskCount() {
+      document.getElementById('taskCount').textContent = `Tasks: ${tasks.length}/8`;
+    }
+
+    function updateSpinButton() {
+      const spinBtn = document.getElementById('spinBtn');
+      const addBtn = document.getElementById('addTaskBtn');
+      
+      if (tasks.length === 0) {
+        spinBtn.textContent = 'Add Tasks to Spin!';
+        spinBtn.disabled = true;
+      } else {
+        spinBtn.textContent = isSpinning ? 'Spinning...' : 'Spin the Wheel!';
+        spinBtn.disabled = isSpinning;
+      }
+      
+      addBtn.disabled = tasks.length >= 8;
+      if (tasks.length >= 8) {
+        addBtn.textContent = 'Max Tasks (8)';
+      } else {
+        addBtn.textContent = 'Add Task';
+      }
+    }
+
+    function updateWheel() {
+      const wheel = document.getElementById('wheel');
+      
+      if (tasks.length === 0) {
+        wheel.innerHTML = `
+          <div class="empty-state" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 20px;">
+            Add tasks to see the wheel!
+          </div>
+        `;
+        return;
+      }
+      
+      wheel.innerHTML = '';
+      
+      const segmentAngle = 360 / tasks.length;
+      const colors = [
+        '#4f46e5', '#06b6d4', '#10b981', '#f59e0b', 
+        '#ef4444', '#8b5cf6', '#ec4899', '#14b8a6'
+      ];
+      
+      tasks.forEach((task, index) => {
+        const segment = document.createElement('div');
+        segment.className = 'wheel-segment';
+        segment.style.background = colors[index % colors.length];
+        segment.style.transform = `rotate(${index * segmentAngle}deg)`;
+        segment.style.clipPath = `polygon(0 0, 100% 0, 0 100%)`;
+        segment.textContent = task;
+        wheel.appendChild(segment);
+      });
+    }
+
+    function spinWheel() {
+      if (tasks.length === 0 || isSpinning) return;
+      
+      isSpinning = true;
+      spinCount++;
+      updateSpinButton();
+      
+      const wheel = document.getElementById('wheel');
+      const randomRotation = 1800 + Math.random() * 1800; // 5-10 full rotations
+      const currentRotation = parseFloat(wheel.style.transform.replace('rotate(', '').replace('deg)', '')) || 0;
+      const finalRotation = currentRotation + randomRotation;
+      
+      wheel.style.transform = `rotate(${finalRotation}deg)`;
+      
+      // Clear previous result
+      document.getElementById('wheelResult').textContent = 'Spinning...';
+      
+      setTimeout(() => {
+        const normalizedAngle = finalRotation % 360;
+        const segmentAngle = 360 / tasks.length;
+        const selectedIndex = Math.floor((360 - normalizedAngle + segmentAngle/2) / segmentAngle) % tasks.length;
+        
+        const selectedTask = tasks[selectedIndex];
+        const resultDiv = document.getElementById('wheelResult');
+        
+        // Celebration effect
+        resultDiv.style.borderColor = 'var(--accent-success)';
+        resultDiv.style.background = 'rgba(16, 185, 129, 0.1)';
+        resultDiv.innerHTML = `
+          <div>🎯 <strong>Your task:</strong> ${selectedTask}</div>
+          <div style="font-size: 0.9rem; margin-top: 5px; opacity: 0.8;">
+            Spin #${spinCount} • Time to focus!
+          </div>
+        `;
+        
+        // Save result
+        localStorage.setItem('lastWheelResult', JSON.stringify({
+          task: selectedTask,
+          timestamp: Date.now(),
+          spinNumber: spinCount
+        }));
+        
+        isSpinning = false;
+        updateSpinButton();
+      }, 3000);
+    }
+
+    function loadSavedTasks() {
+      const saved = localStorage.getItem('wheelTasks');
+      if (saved) {
+        try {
+          tasks = JSON.parse(saved);
+          updateTaskList();
+          updateWheel();
+          updateTaskCount();
+          updateSpinButton();
+        } catch (e) {
+          console.error('Error loading saved tasks:', e);
+        }
+      }
+    }
+
+    function loadLastResult() {
+      const saved = localStorage.getItem('lastWheelResult');
+      if (saved) {
+        try {
+          const result = JSON.parse(saved);
+          const timeDiff = Date.now() - result.timestamp;
+          
+          // Show last result if it's within the last hour
+          if (timeDiff < 3600000) {
+            const resultDiv = document.getElementById('wheelResult');
+            resultDiv.innerHTML = `
+              <div>🔄 <strong>Last result:</strong> ${result.task}</div>
+              <div style="font-size: 0.9rem; margin-top: 5px; opacity: 0.8;">
+                From ${Math.floor(timeDiff / 60000)} minutes ago
+              </div>
+            `;
+          }
+        } catch (e) {
+          console.error('Error loading last result:', e);
+        }
+      }
+    }
+
+    // Initialize
+    loadSavedTasks();
+    loadLastResult();
+    updateTaskCount();
+    updateSpinButton();
+
+    // Enter key support for adding tasks
+    document.getElementById('taskInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        addTask();
+      }
+    });
+
+    // Space bar to spin
+    document.addEventListener('keydown', function(e) {
+      if (e.key === ' ' && tasks.length > 0 && !isSpinning) {
+        e.preventDefault();
+        spinWheel();
+      }
+    });
+  </script>
+</body>
+</html>
