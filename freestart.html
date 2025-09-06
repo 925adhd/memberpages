@@ -1060,8 +1060,8 @@
 
         // Upgrade button functionality
         document.querySelector('.upgrade-button').addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('This would redirect to your payment processor of choice (Stripe, PayPal, etc.)');
+            // Let the link work normally - no need to prevent default
+            // The href will take them to the Stripe checkout
         });
     </script>
 </body>
