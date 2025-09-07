@@ -209,7 +209,7 @@
     }
 
     .filter-section {
-      margin-bottom: 2rem;
+      margin-bottom: 0;
     }
 
     .filter-label {
@@ -287,42 +287,6 @@
       border-color: transparent;
       transform: translateY(-2px);
       box-shadow: var(--shadow-medium);
-    }
-
-    .sort-section {
-      border-top: 1px solid var(--border-subtle);
-      padding-top: 2rem;
-    }
-
-    .sort-label {
-      color: var(--text-primary);
-      font-size: 0.9rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      display: block;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .sort-select {
-      background: var(--card-bg);
-      border: 2px solid var(--border-subtle);
-      color: var(--text-primary);
-      padding: 1rem 1.5rem;
-      border-radius: 16px;
-      backdrop-filter: blur(15px);
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 0.95rem;
-      width: 100%;
-      min-height: 56px;
-      transition: all 0.3s ease;
-      outline: none;
-    }
-
-    .sort-select:focus {
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 20px rgba(79, 70, 229, 0.3);
     }
 
     /* Enhanced Hack Grid */
@@ -841,27 +805,19 @@
 
   <div class="container">
     <header class="header">
-      <h1 class="main-title">925 ADHD Hacks</h1>
-      <p class="subtitle">Life-changing strategies for the neurodivergent mind ✨</p>
+      <h1 class="main-title">⚔️ ADHD Hacks</h1>
+      <p class="subtitle">Community-tested strategies that actually work</p>
     </header>
 
     <div class="controls">
       <div class="filter-section">
-        <label class="filter-label">🔍 Filter by Category</label>
+        <label class="filter-label">Filter by Category</label>
         <div class="filter-buttons">
           <button class="filter-btn active" data-filter="all"><span>All Hacks</span></button>
-          <button class="filter-btn" data-filter="productivity"><span>💼 Productivity</span></button>
-          <button class="filter-btn" data-filter="focus"><span>🎯 Focus</span></button>
-          <button class="filter-btn" data-filter="energy"><span>💚 Energy</span></button>
+          <button class="filter-btn" data-filter="productivity"><span>Productivity</span></button>
+          <button class="filter-btn" data-filter="focus"><span>Focus</span></button>
+          <button class="filter-btn" data-filter="energy"><span>Energy</span></button>
         </div>
-      </div>
-      
-      <div class="sort-section">
-        <label class="sort-label">📊 Sort Options</label>
-        <select class="sort-select" id="sortSelect">
-          <option value="title">📝 Alphabetical Order</option>
-          <option value="category">🏷️ Group by Category</option>
-        </select>
       </div>
     </div>
     
@@ -871,74 +827,156 @@
   </div>
 
   <script>
-    // ADHD Hacks data with streamlined content structure
+    // ADHD Hacks data based on research from Reddit communities
     const adhdHacks = [
       {
-        title: "Staying Organized with a Magnetic Board",
-        description: "Use a visual board to keep important tasks and reminders visible. Perfect for the ADHD brain that needs constant visual cues.",
-        category: "Focus",
-        image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/A%20large%20stylish%20magnetic%20board%20or%20refrigerator.jpg/:/rs=w:600,h:400,cg:true,m",
+        title: "Task Bracelet System",
+        description: "Turn abstract tasks into tangible accomplishments. Make a bracelet for each task and put it around your wrist. When finished, place it in a bowl for instant visual satisfaction and motivation boost.",
+        category: "Productivity",
+        image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&h=400&fit=crop&crop=center",
         steps: [
-          "Get a magnetic board or use your fridge door",
-          "Use colorful sticky notes - one task per note",
-          "Place the board where you'll see it daily",
-          "Move completed tasks to a 'DONE' section for satisfaction"
+          "Get colorful elastic bands or simple bracelets",
+          "Put one bracelet on your wrist for each task you want to complete",
+          "When you finish a task, remove its bracelet and place it in a bowl",
+          "Watch your accomplishment bowl fill up throughout the day for instant dopamine hits"
         ]
       },
       {
-        title: "Boost Productivity with the Power of Comfy Shoes",
-        description: "Wearing shoes at home tricks your brain into work mode. It's a simple psychological switch that signals productivity time.",
-        category: "Energy",
-        image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/Clean%20white%20sneakers%20or%20comfortable%20work%20shoes.jpg/:/rs=w:600,h:400,cg:true,m",
+        title: "Analog Shower Clock for Time Blindness",
+        description: "A cheap analog clock in your shower helps you grasp time better throughout the entire day. This anchors time perception in a sensory-rich environment where your brain can actually track it.",
+        category: "Focus",
+        image: "https://images.unsplash.com/photo-1594736797933-d0c18cb5ef6c?w=600&h=400&fit=crop&crop=center",
         steps: [
-          "Put on comfortable but real shoes (not slippers)",
-          "Keep them on during your entire work session",
-          "Notice how much more 'ready to work' you feel",
+          "Buy a waterproof analog clock from any store",
+          "Mount it in your shower where you can easily see it",
+          "Use it to track your shower time daily",
+          "Notice how this improves your time awareness throughout the entire day"
+        ]
+      },
+      {
+        title: "Finch Virtual Pet Productivity",
+        description: "Use the Finch app to gamify your self-care routine. Take care of a virtual pet by completing your real-life tasks. Users report 50+ day streaks with this emotional accountability system.",
+        category: "Energy",
+        image: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=600&h=400&fit=crop&crop=center",
+        steps: [
+          "Download the Finch app on your phone",
+          "Set up your virtual pet and customize it",
+          "Add your daily self-care tasks and habits",
+          "Complete real tasks to keep your virtual pet happy and healthy"
+        ]
+      },
+      {
+        title: "Inner Influencer Cleaning Hack",
+        description: "Make cleaning engaging by pretending to be an influencer creating content. Look up cleaning aesthetics on social media, use the Pomodoro Technique, and narrate your cleaning like you're filming.",
+        category: "Energy",
+        image: "https://images.unsplash.com/photo-1558618666-9d06c2b1b9b8?w=600&h=400&fit=crop&crop=center",
+        steps: [
+          "Browse cleaning aesthetics on TikTok or Pinterest for inspiration",
+          "Set a 25-minute Pomodoro timer",
+          "Talk to yourself like you're filming an influencer cleaning video",
+          "Focus on making everything look aesthetically pleasing"
+        ]
+      },
+      {
+        title: "Shoes Indoors for Productivity",
+        description: "Wearing real shoes indoors signals your brain to switch into 'get things done' mode. This environmental cue helps with task initiation and maintains productive momentum.",
+        category: "Productivity",
+        image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&h=400&fit=crop&crop=center",
+        steps: [
+          "Put on comfortable but real shoes (not slippers) when you start working",
+          "Keep them on during your entire productive session",
+          "Notice the psychological shift into 'work mode'",
           "Take them off when you're done to signal rest time"
         ]
       },
       {
-        title: "Make Cleaning a Breeze with Dawn Powerwash",
-        description: "Use this spray to make cleaning feel satisfying and effortless. The instant results provide the dopamine hit ADHD brains crave.",
-        category: "Energy",
-        image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/A%20clean%2C%20sparkling%20kitchen%20sink%20or%20counter%20wit.jpg/:/rs=w:600,h:400,cg:true,m",
-        steps: [
-          "Spray Dawn Powerwash directly on the mess",
-          "Wait 30 seconds for the magic to happen",
-          "Rinse with warm water",
-          "Watch everything slide off effortlessly!"
-        ]
-      },
-      {
-        title: "The Two-Minute Task Sweep",
-        description: "Quickly tackle small tasks before they pile up and overwhelm you. If it takes less than 2 minutes, do it now!",
-        category: "Productivity",
-        image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/A%20collection%20of%20productivity%20tools%20arranged%20ae.jpg/:/rs=w:600,h:400,cg:true,m",
-        steps: [
-          "Set a 2-minute timer",
-          "Grab any quick task: file a paper, send a text, put away a cup",
-          "Work fast without overthinking",
-          "Stop when the timer goes off",
-          "Repeat 2-3 times throughout your day"
-        ]
-      },
-      {
-        title: "Mel Robbins' 5-4-3-2-1 Rule",
-        description: "Beat hesitation and jumpstart action with this powerful countdown technique. Perfect for overcoming ADHD paralysis.",
+        title: "Dopamine Anchoring",
+        description: "Pair something enjoyable like music or snacks with dreaded tasks repeatedly. Over time, your brain starts to anticipate pleasure from the task itself, making it easier to start.",
         category: "Focus",
-        image: "https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/A%20sleek%20modern%20stopwatch%20showing%20_5_00_%20on%20a%20c.jpg/:/rs=w:600,h:400,cg:true,m",
+        image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=400&fit=crop&crop=center",
         steps: [
-          "Notice yourself hesitating or procrastinating",
-          "Count backwards out loud: '5... 4... 3... 2... 1...'",
-          "Move immediately when you hit '1' - don't think!",
-          "This interrupts overthinking and activates your brain's control center"
+          "Choose a dreaded task you need to do regularly",
+          "Pick something enjoyable: favorite music, special snacks, or good coffee",
+          "Only allow yourself the enjoyable thing while doing the task",
+          "Repeat this pairing consistently until your brain connects pleasure with the task"
+        ]
+      },
+      {
+        title: "Dry-Erase Markers Everywhere",
+        description: "Keep dry-erase markers in every room to quickly scribble reminders on mirrors, windows, or whiteboards. This eliminates the friction of finding your phone while providing immediate visual cues.",
+        category: "Productivity",
+        image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=600&h=400&fit=crop&crop=center",
+        steps: [
+          "Buy several packs of dry-erase markers",
+          "Place them in every room of your house",
+          "Write quick reminders on mirrors, windows, or any smooth surface",
+          "Erase and update as needed throughout the day"
+        ]
+      },
+      {
+        title: "Multiple Laundry Hampers System",
+        description: "Use separate hampers for lights, darks, and towels. When a hamper is full, just dump it directly into the wash. This cuts down on decision fatigue and sorting paralysis.",
+        category: "Productivity",
+        image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=600&h=400&fit=crop&crop=center",
+        steps: [
+          "Get three labeled hampers: Lights, Darks, Towels",
+          "Sort clothes as you take them off",
+          "When any hamper is full, wash that load immediately",
+          "No more sorting or decision-making at laundry time"
+        ]
+      },
+      {
+        title: "Morning Cardio for Executive Function",
+        description: "Just 30 minutes of morning cardio drastically improves focus, emotional regulation, and ability to start tasks. Exercise acts as a natural stimulant for the ADHD brain.",
+        category: "Energy",
+        image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop&crop=center",
+        steps: [
+          "Set your alarm 30 minutes earlier",
+          "Do any cardio: walking, dancing, jumping jacks, or yoga",
+          "Start with just 10-15 minutes if 30 feels overwhelming",
+          "Notice improved focus and emotional regulation throughout the day"
+        ]
+      },
+      {
+        title: "Eat That Frog Easy Wins",
+        description: "Start with quick, satisfying tasks to build momentum before tackling bigger challenges. Feed your brain the dopamine hit it needs to keep going with harder tasks.",
+        category: "Productivity",
+        image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600&h=400&fit=crop&crop=center",
+        steps: [
+          "List 2-3 easy tasks you can complete in under 10 minutes",
+          "Do these first thing when you start working",
+          "Celebrate each completion with a small reward",
+          "Use this momentum to tackle your bigger, harder tasks"
+        ]
+      },
+      {
+        title: "Morning Anchor Rituals",
+        description: "Use short, engaging activities like Wordle or singing in the shower to wake up your mind and create consistent daily anchors. These rituals provide structure and mental activation.",
+        category: "Focus",
+        image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop&crop=center",
+        steps: [
+          "Choose a 5-10 minute engaging activity you enjoy",
+          "Do it at the same time every morning",
+          "Keep it simple: Wordle, singing, stretching, or journaling",
+          "Use this as your daily 'brain warm-up' before other tasks"
+        ]
+      },
+      {
+        title: "Beauty as Dopamine Fuel",
+        description: "Create beautiful, inspiring environments to turn mundane routines into dopamine-boosting rituals. Work in a lovely park, decorate your desk, or find inspiring surroundings.",
+        category: "Energy",
+        image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&h=400&fit=crop&crop=center",
+        steps: [
+          "Identify one space where you spend a lot of time",
+          "Add elements of beauty: plants, good lighting, nice colors",
+          "Work in beautiful locations when possible: parks, cafes, nice libraries",
+          "Notice how aesthetic environments boost your mood and motivation"
         ]
       }
     ];
 
     let filteredHacks = [...adhdHacks];
     let currentFilter = 'all';
-    let currentSort = 'title';
 
     function getCategoryClass(category) {
       if (category === 'Productivity') return 'productivity';
@@ -958,16 +996,7 @@
         filteredHacks = adhdHacks.filter(hack => hack.category === 'Energy');
       }
       
-      sortHacks(currentSort);
       renderHacks();
-    }
-
-    function sortHacks(sortType) {
-      if (sortType === 'title') {
-        filteredHacks.sort((a, b) => a.title.localeCompare(b.title));
-      } else if (sortType === 'category') {
-        filteredHacks.sort((a, b) => a.category.localeCompare(b.category));
-      }
     }
 
     function renderHacks() {
@@ -976,7 +1005,7 @@
       if (filteredHacks.length === 0) {
         grid.innerHTML = `
           <div style="text-align: center; grid-column: 1 / -1; padding: 4rem;">
-            <h3 style="color: var(--text-secondary); font-size: 1.3rem; margin-bottom: 1rem;">🔍 No hacks found</h3>
+            <h3 style="color: var(--text-secondary); font-size: 1.3rem; margin-bottom: 1rem;">No hacks found</h3>
             <p style="color: var(--text-muted);">Try adjusting your filters to see more results</p>
           </div>
         `;
@@ -985,7 +1014,6 @@
       
       const hacksHtml = filteredHacks.map((hack, index) => {
         const categoryClass = getCategoryClass(hack.category);
-        const emoji = hack.category === 'Productivity' ? '💼' : hack.category === 'Focus' ? '🎯' : '💚';
         
         return `
           <div class="hack-card ${categoryClass}" style="--i: ${index}">
@@ -993,11 +1021,11 @@
               <img src="${hack.image}" alt="${hack.title}" class="featured-image" onerror="this.style.display='none'" loading="lazy" decoding="async">
               <h3 class="hack-title">${hack.title}</h3>
               <div class="hack-meta">
-                <span class="hack-category ${categoryClass}">${emoji} ${hack.category}</span>
+                <span class="hack-category ${categoryClass}">${hack.category}</span>
               </div>
               <div class="hack-description">${hack.description}</div>
               <button class="try-hack" onclick="openHackModal(${index})">
-                Try This Hack 🚀
+                Try This Hack
               </button>
             </div>
           </div>
@@ -1021,14 +1049,14 @@
           <h2 class="modal-title">${hack.title}</h2>
           
           <div class="modal-steps">
-            <h3>🎯 How to do it:</h3>
+            <h3>How to do it:</h3>
             <ol class="step-list">
               ${hack.steps.map(step => `<li><strong>${step}</strong></li>`).join('')}
             </ol>
           </div>
           
           <button class="modal-button" onclick="closeModal()">
-            Got It! Let's Do This 🚀
+            Got It! Let's Do This
           </button>
         </div>
       `;
@@ -1063,7 +1091,6 @@
 
     // Event listeners
     document.addEventListener('DOMContentLoaded', () => {
-      sortHacks(currentSort);
       renderHacks();
 
       // Filter buttons
@@ -1074,13 +1101,6 @@
           currentFilter = btn.dataset.filter;
           filterHacks(currentFilter);
         });
-      });
-
-      // Sort select
-      document.getElementById('sortSelect').addEventListener('change', (e) => {
-        currentSort = e.target.value;
-        sortHacks(currentSort);
-        renderHacks();
       });
     });
 
