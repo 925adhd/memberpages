@@ -55,39 +55,13 @@
       z-index: -1; 
     }
 
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-
-    .header { 
-      position: sticky; 
-      top: 0; 
-      z-index: 100; 
-      background: rgba(15,20,25,.95); 
-      backdrop-filter: blur(20px); 
-      border-bottom: 1px solid var(--border-subtle); 
-    }
-
-    .header-content { 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      padding: 15px 0; 
-    }
-
-    .logo-container a { 
-      display: flex; 
-      align-items: center; 
-      text-decoration: none; 
-    }
-
-    .logo-container img { height: 40px; width: auto; }
-
-
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 15px; }
 
     .app-title {
-      font-size: 3.2rem;
+      font-size: 2rem;
       font-weight: 900;
       line-height: 1.1;
-      margin: 40px 0 20px;
+      margin: 15px 0 10px;
       background: var(--gradient-adhd);
       background-size: 200% 200%;
       -webkit-background-clip: text;
@@ -103,20 +77,20 @@
     }
 
     .app-subtitle {
-      font-size: 1.3rem;
+      font-size: 0.9rem;
       color: var(--text-secondary);
       max-width: 720px;
-      margin: 0 auto 40px;
+      margin: 0 auto 15px;
       text-align: center;
     }
 
     .feature-card {
       background: var(--card-bg);
       border: 2px solid var(--border-subtle);
-      border-radius: 20px;
-      padding: 40px;
+      border-radius: 15px;
+      padding: 15px;
       max-width: 700px;
-      margin: 40px auto;
+      margin: 15px auto;
       position: relative;
       overflow: hidden;
       transition: all 0.3s ease;
@@ -146,19 +120,19 @@
 
     .task-input-section {
       display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
+      gap: 8px;
+      margin-bottom: 12px;
     }
 
     .task-input {
       flex: 1;
-      padding: 15px;
+      padding: 12px;
       background: var(--glass-bg);
       border: 2px solid var(--border-subtle);
       border-radius: 10px;
       color: var(--text-primary);
       font-family: inherit;
-      font-size: 1rem;
+      font-size: 0.95rem;
       transition: all 0.3s ease;
     }
 
@@ -176,12 +150,13 @@
       background: var(--gradient-success);
       color: white;
       border: none;
-      padding: 15px 25px;
+      padding: 12px 20px;
       border-radius: 10px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
       white-space: nowrap;
+      font-size: 0.9rem;
     }
 
     .add-task-btn:hover:not(:disabled) {
@@ -196,13 +171,13 @@
     }
 
     .task-list {
-      max-height: 200px;
+      max-height: 120px;
       overflow-y: auto;
-      margin-bottom: 30px;
+      margin-bottom: 15px;
       background: var(--glass-bg);
       border: 1px solid var(--border-subtle);
       border-radius: 10px;
-      padding: 15px;
+      padding: 10px;
     }
 
     .task-list::-webkit-scrollbar {
@@ -223,11 +198,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 12px;
+      padding: 8px;
       background: var(--secondary-bg);
       border-radius: 8px;
-      margin-bottom: 8px;
-      font-size: 0.95rem;
+      margin-bottom: 6px;
+      font-size: 0.9rem;
       animation: slideIn 0.3s ease;
       border: 1px solid transparent;
       transition: all 0.2s ease;
@@ -279,9 +254,9 @@
 
     .wheel-container {
       position: relative;
-      width: 350px;
-      height: 350px;
-      margin: 30px auto;
+      width: 260px;
+      height: 260px;
+      margin: 15px auto;
     }
 
     .wheel {
@@ -384,16 +359,16 @@
       background: var(--gradient-primary);
       color: white;
       border: none;
-      padding: 20px 40px;
-      border-radius: 15px;
+      padding: 14px 30px;
+      border-radius: 12px;
       font-weight: 700;
-      font-size: 1.2rem;
+      font-size: 1rem;
       cursor: pointer;
-      margin: 20px auto;
+      margin: 12px auto;
       display: block;
       transition: all 0.3s ease;
       width: 100%;
-      max-width: 300px;
+      max-width: 260px;
       position: relative;
       overflow: hidden;
     }
@@ -431,14 +406,14 @@
     .wheel-result {
       background: var(--glass-bg);
       border: 2px solid var(--border-subtle);
-      border-radius: 15px;
-      padding: 25px;
+      border-radius: 12px;
+      padding: 15px;
       text-align: center;
-      margin-bottom: 30px;
-      font-size: 1.15rem;
+      margin-bottom: 15px;
+      font-size: 1rem;
       font-weight: 600;
       color: var(--text-secondary);
-      min-height: 90px;
+      min-height: 60px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -459,12 +434,12 @@
     }
 
     .result-main {
-      font-size: 1.3rem;
-      margin-bottom: 8px;
+      font-size: 1.1rem;
+      margin-bottom: 5px;
     }
 
     .result-meta {
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       opacity: 0.8;
     }
 
@@ -472,14 +447,15 @@
       text-align: center;
       color: var(--text-muted);
       font-style: italic;
-      padding: 40px 20px;
+      padding: 20px 10px;
+      font-size: 0.9rem;
     }
 
     .quick-actions {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       justify-content: center;
-      margin-top: 15px;
+      margin-top: 10px;
       flex-wrap: wrap;
     }
 
@@ -487,9 +463,9 @@
       background: var(--glass-bg);
       border: 2px solid var(--border-subtle);
       color: var(--text-secondary);
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-size: 0.9rem;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.85rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -525,52 +501,52 @@
     }
 
     @media (max-width: 768px) {
-      .container { padding: 0 15px; }
-      .app-title { font-size: 2.2rem; margin: 30px 0 15px; }
-      .app-subtitle { font-size: 1rem; margin-bottom: 30px; padding: 0 10px; }
-      .feature-card { padding: 25px 15px; margin: 20px auto; }
-      .feature-title { font-size: 1.5rem; }
-      .feature-description { font-size: 1rem; margin-bottom: 25px; }
-      .wheel-container { width: 280px; height: 280px; margin: 25px auto; }
-      .wheel-center { width: 60px; height: 60px; font-size: 1.5rem; }
+      .container { padding: 0 10px; }
+      .app-title { font-size: 1.8rem; margin: 10px 0 8px; }
+      .app-subtitle { font-size: 0.85rem; margin-bottom: 10px; padding: 0 5px; }
+      .feature-card { padding: 12px; margin: 10px auto; border-radius: 12px; }
+      .feature-title { font-size: 1.3rem; }
+      .feature-description { font-size: 0.9rem; margin-bottom: 15px; }
+      .wheel-container { width: 240px; height: 240px; margin: 12px auto; }
+      .wheel-center { width: 55px; height: 55px; font-size: 1.3rem; }
       .wheel-pointer { 
-        border-left: 18px solid transparent;
-        border-right: 18px solid transparent;
-        border-top: 26px solid var(--accent-danger);
-        top: -18px;
+        border-left: 16px solid transparent;
+        border-right: 16px solid transparent;
+        border-top: 24px solid var(--accent-danger);
+        top: -16px;
       }
-      .task-input-section { flex-direction: column; gap: 12px; }
-      .task-input { font-size: 1rem; padding: 14px; }
-      .add-task-btn { padding: 14px 20px; font-size: 1rem; width: 100%; }
+      .task-input-section { flex-direction: column; gap: 8px; }
+      .task-input { font-size: 0.9rem; padding: 11px; }
+      .add-task-btn { padding: 11px 18px; font-size: 0.9rem; width: 100%; }
       .spin-btn { 
-        padding: 18px 30px; 
-        font-size: 1.15rem; 
+        padding: 13px 25px; 
+        font-size: 1rem; 
         max-width: 100%;
-        margin: 25px auto;
+        margin: 10px auto;
       }
-      .task-list { max-height: 180px; }
+      .task-list { max-height: 100px; padding: 8px; }
+      .task-item { padding: 7px; font-size: 0.85rem; margin-bottom: 5px; }
       .wheel-result { 
-        padding: 20px; 
-        font-size: 1.05rem; 
-        min-height: 80px;
-        margin-bottom: 25px;
+        padding: 12px; 
+        font-size: 0.95rem; 
+        min-height: 50px;
+        margin-bottom: 12px;
       }
-      .result-main { font-size: 1.2rem; }
-      .result-meta { font-size: 0.85rem; }
-      .quick-actions { gap: 8px; margin-top: 20px; }
+      .result-main { font-size: 1rem; }
+      .result-meta { font-size: 0.75rem; }
+      .quick-actions { gap: 6px; margin-top: 8px; }
       .quick-action-btn { 
-        padding: 12px 18px; 
-        font-size: 0.85rem;
+        padding: 8px 14px; 
+        font-size: 0.8rem;
         flex: 1;
       }
-      .logo-container img { height: 35px; }
-      .header-content { padding: 12px 0; }
+      .empty-state { padding: 15px 8px; font-size: 0.85rem; }
       
       /* Better mobile text sizing on wheel */
       .wheel-segment-text {
-        font-size: 0.7rem;
-        max-width: 55px;
-        line-height: 1.1;
+        font-size: 0.65rem;
+        max-width: 50px;
+        line-height: 1.05;
       }
     }
   </style>
@@ -578,31 +554,10 @@
 <body>
   <div class="bg-gradient" aria-hidden="true"></div>
 
-  <!-- Header -->
-  <header class="header" role="banner">
-    <div class="container">
-      <nav class="header-content" role="navigation" aria-label="Main navigation">
-        <div class="logo-container">
-          <a href="https://925adhd.com" aria-label="925 ADHD Home">
-            <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/SmartSelect_20241218_055052_Gallery.png/:/rs=h:175,m" alt="925 ADHD Logo" width="175" height="175">
-          </a>
-        </div>
-      </nav>
-    </div>
-  </header>
-
   <!-- Main App -->
   <main role="main">
     <div class="container">
-      <h1 class="app-title">Task Decision Wheel</h1>
-      <p class="app-subtitle">Can't decide what to do? Add your tasks and let the wheel choose for you! Perfect for ADHD decision paralysis. 🎯</p>
-
       <div class="feature-card">
-        <h2 class="feature-title">✨ Spin to Decide</h2>
-        <p class="feature-description">
-          Add your tasks, spin the wheel, and let chance decide what you focus on next. Sometimes the best decision is letting go of the decision!
-        </p>
-
         <div class="task-input-section">
           <input 
             type="text" 
@@ -976,8 +931,8 @@
         const angle = (index + 0.5) * segmentAngle;
         const radian = (angle - 90) * Math.PI / 180;
         
-        // Position text inside the slice - 40% from center keeps it visible but inside
-        const radius = 40; // percentage from center - well inside the wheel
+        // Position text closer to center to avoid cutoff - 30% from center
+        const radius = 30; // percentage from center - moved inward
         
         const x = 50 + radius * Math.cos(radian);
         const y = 50 + radius * Math.sin(radian);
