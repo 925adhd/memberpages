@@ -75,9 +75,9 @@
       background: var(--card-bg);
       border: 2px solid var(--border-subtle);
       border-radius: 15px;
-      padding: 15px 10px 15px;
+      padding: 10px 8px 10px;
       max-width: 600px;
-      margin: 8px auto;
+      margin: 5px auto;
       position: relative;
       overflow: hidden;
       text-align: center;
@@ -100,6 +100,7 @@
       margin: 10px 0;
       text-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
       transition: all 0.3s ease;
+      will-change: transform;
     }
 
     .click-button {
@@ -112,8 +113,8 @@
       font-size: 2rem;
       font-weight: 900;
       cursor: pointer;
-      transition: all 0.2s ease;
-      margin: 10px auto;
+      transition: none;
+      margin: 5px auto;
       display: block;
       position: relative;
       overflow: hidden;
@@ -122,6 +123,7 @@
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
       -webkit-touch-callout: none;
+      will-change: transform, background;
     }
 
     .click-button:hover {
@@ -131,6 +133,7 @@
 
     .click-button:active {
       transform: scale(0.95);
+      transition: transform 0.05s;
     }
 
     .click-button::before {
@@ -154,24 +157,24 @@
     .click-message {
       color: var(--accent-warning);
       font-weight: 600;
-      margin: 8px 0;
-      min-height: 24px;
-      font-size: 0.95rem;
-      transition: all 0.3s ease;
+      margin: 4px 0;
+      min-height: 18px;
+      font-size: 0.85rem;
+      transition: all 0.1s ease;
     }
 
     .stats-display {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 10px;
-      margin: 12px 0;
+      gap: 6px;
+      margin: 6px 0;
     }
 
     .stat-card {
       background: var(--glass-bg);
       border: 2px solid var(--border-subtle);
-      border-radius: 15px;
-      padding: 12px;
+      border-radius: 12px;
+      padding: 8px;
       text-align: center;
       transition: all 0.3s ease;
     }
@@ -182,24 +185,24 @@
     }
 
     .stat-number {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: 800;
       color: var(--accent-secondary);
-      margin-bottom: 3px;
+      margin-bottom: 2px;
       transition: all 0.3s ease;
     }
 
     .stat-label {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
       font-weight: 600;
     }
 
     .controls {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       justify-content: center;
-      margin-top: 12px;
+      margin-top: 8px;
       flex-wrap: wrap;
     }
 
@@ -288,9 +291,9 @@
       background: var(--accent-danger);
       color: white;
       border: none;
-      padding: 8px 16px;
+      padding: 6px 14px;
       border-radius: 10px;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -320,9 +323,9 @@
     .achievements {
       background: var(--glass-bg);
       border: 2px solid var(--border-subtle);
-      border-radius: 15px;
-      padding: 12px;
-      margin-top: 12px;
+      border-radius: 12px;
+      padding: 8px;
+      margin-top: 6px;
     }
 
     .achievement-header {
@@ -338,14 +341,14 @@
     }
 
     .achievement-title {
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-weight: 700;
       color: var(--accent-warning);
       margin: 0;
     }
 
     .achievement-toggle {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       transition: transform 0.3s ease;
     }
 
@@ -364,17 +367,17 @@
 
     .achievement-list.open {
       max-height: 1000px;
-      margin-top: 10px;
+      margin-top: 6px;
     }
 
     .achievement {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 8px;
+      padding: 6px;
       background: var(--secondary-bg);
-      border-radius: 8px;
-      font-size: 0.8rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
       transition: all 0.3s ease;
     }
 
@@ -384,7 +387,7 @@
     }
 
     .achievement-emoji {
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
 
     .session-timer {
@@ -420,13 +423,13 @@
     .quick-stats {
       background: var(--glass-bg);
       border: 2px solid var(--border-subtle);
-      border-radius: 15px;
-      padding: 10px;
-      margin-top: 10px;
+      border-radius: 12px;
+      padding: 6px;
+      margin-top: 6px;
       display: flex;
       justify-content: space-around;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 8px;
     }
 
     .quick-stat {
@@ -434,13 +437,13 @@
     }
 
     .quick-stat-value {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-weight: 700;
       color: var(--accent-primary);
     }
 
     .quick-stat-label {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       color: var(--text-muted);
     }
 
@@ -450,7 +453,7 @@
     }
 
     .pulse {
-      animation: pulse 0.3s ease;
+      animation: pulse 0.15s ease;
     }
 
     @keyframes confetti {
@@ -474,80 +477,84 @@
     }
 
     @media (max-width: 768px) {
-      .container { padding: 0 8px; }
+      .container { padding: 0 6px; }
       
       .feature-card { 
-        padding: 12px 8px 12px; 
-        margin: 5px auto; 
-        border-radius: 12px;
+        padding: 8px 6px 8px; 
+        margin: 3px auto; 
+        border-radius: 10px;
       }
       
-      .clicker-display { font-size: 2.5rem; margin: 8px 0; }
+      .clicker-display { font-size: 2.5rem; margin: 4px 0; }
       
       .click-button { 
-        width: 120px; 
-        height: 120px; 
+        width: 115px; 
+        height: 115px; 
         font-size: 1.8rem; 
-        margin: 8px auto;
+        margin: 4px auto;
       }
       
-      .click-message { font-size: 0.85rem; margin: 6px 0; min-height: 20px; }
+      .click-message { font-size: 0.8rem; margin: 4px 0; min-height: 16px; }
       
       .stats-display { 
         grid-template-columns: repeat(2, 1fr); 
-        gap: 8px;
-        margin: 10px 0;
+        gap: 6px;
+        margin: 6px 0;
       }
       
-      .stat-card { padding: 10px; }
-      .stat-number { font-size: 1.3rem; }
-      .stat-label { font-size: 0.75rem; }
+      .stat-card { padding: 6px; border-radius: 10px; }
+      .stat-number { font-size: 1.2rem; }
+      .stat-label { font-size: 0.7rem; }
       
       .quick-stats { 
-        padding: 8px; 
-        margin-top: 8px;
-        gap: 8px;
+        padding: 5px; 
+        margin-top: 5px;
+        gap: 6px;
+        border-radius: 10px;
       }
       
       .quick-stat-value { font-size: 1.1rem; }
-      .quick-stat-label { font-size: 0.65rem; }
+      .quick-stat-label { font-size: 0.6rem; }
       
       .controls { 
         flex-direction: row;
         flex-wrap: wrap;
         align-items: center; 
-        gap: 6px;
-        margin-top: 10px;
+        gap: 5px;
+        margin-top: 6px;
       }
       
       .reset-btn, .auto-btn, .sound-btn {
-        padding: 7px 12px;
-        font-size: 0.8rem;
+        padding: 5px 10px;
+        font-size: 0.75rem;
         flex: 1 1 auto;
-        min-width: 100px;
+        min-width: 90px;
       }
       
       .session-timer, .combo-display { 
         position: absolute;
-        font-size: 0.7rem;
-        padding: 3px 8px;
+        font-size: 0.65rem;
+        padding: 3px 6px;
       }
       
       .achievements { 
-        margin-top: 10px; 
-        padding: 10px;
+        margin-top: 6px; 
+        padding: 6px;
+        border-radius: 10px;
       }
       
-      .achievement-title { font-size: 0.9rem; }
+      .achievement-title { font-size: 0.85rem; }
+      .achievement-toggle { font-size: 1rem; }
       
       .achievement { 
-        padding: 8px 6px; 
-        font-size: 0.75rem;
+        padding: 5px 4px; 
+        font-size: 0.7rem;
         flex-direction: row;
-        gap: 4px;
+        gap: 3px;
+        border-radius: 5px;
       }
       
-      .achievement-emoji { font-size: 1rem; }
+      .achievement-emoji { font-size: 0.9rem; }
     }
   </style>
 </head>
@@ -655,6 +662,17 @@
     let lastClickTime = 0;
     let totalCPSReadings = [];
 
+    // Polyfill for requestIdleCallback
+    window.requestIdleCallback = window.requestIdleCallback || function(cb) {
+      const start = Date.now();
+      return setTimeout(() => {
+        cb({
+          didTimeout: false,
+          timeRemaining: () => Math.max(0, 50 - (Date.now() - start))
+        });
+      }, 1);
+    };
+
     // Click Messages
     const clickMessages = [
       "+1 Brain Cell Saved! 🧠",
@@ -705,49 +723,70 @@
     function playClickSound(pitch = 1.0) {
       if (!soundEnabled) return;
       
-      const oscillator = audioContext.createOscillator();
-      const gainNode = audioContext.createGain();
-      
-      oscillator.connect(gainNode);
-      gainNode.connect(audioContext.destination);
-      
-      oscillator.frequency.value = 400 * pitch;
-      oscillator.type = 'sine';
-      
-      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-      
-      oscillator.start(audioContext.currentTime);
-      oscillator.stop(audioContext.currentTime + 0.1);
+      try {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        // Cleaner frequency and wave type
+        oscillator.frequency.value = 500 * pitch;
+        oscillator.type = 'sine';
+        
+        const now = audioContext.currentTime;
+        
+        // Smooth attack and decay envelope for cleaner sound
+        gainNode.gain.setValueAtTime(0, now);
+        gainNode.gain.linearRampToValueAtTime(0.15, now + 0.01); // Quick attack
+        gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.08); // Smooth decay
+        
+        oscillator.start(now);
+        oscillator.stop(now + 0.08);
+      } catch (e) {
+        console.error('Audio error:', e);
+      }
     }
 
     function playAchievementSound() {
       if (!soundEnabled) return;
       
-      const notes = [523.25, 659.25, 783.99]; // C, E, G (major chord)
-      notes.forEach((freq, i) => {
-        setTimeout(() => {
-          const oscillator = audioContext.createOscillator();
-          const gainNode = audioContext.createGain();
-          
-          oscillator.connect(gainNode);
-          gainNode.connect(audioContext.destination);
-          
-          oscillator.frequency.value = freq;
-          oscillator.type = 'sine';
-          
-          gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
-          gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
-          
-          oscillator.start(audioContext.currentTime);
-          oscillator.stop(audioContext.currentTime + 0.3);
-        }, i * 100);
-      });
+      try {
+        const notes = [523.25, 659.25, 783.99]; // C, E, G (major chord)
+        notes.forEach((freq, i) => {
+          setTimeout(() => {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = freq;
+            oscillator.type = 'sine';
+            
+            const now = audioContext.currentTime;
+            gainNode.gain.setValueAtTime(0, now);
+            gainNode.gain.linearRampToValueAtTime(0.12, now + 0.02);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+            
+            oscillator.start(now);
+            oscillator.stop(now + 0.25);
+          }, i * 100);
+        });
+      } catch (e) {
+        console.error('Audio error:', e);
+      }
     }
 
     // Core Click Function
     function incrementClick() {
       const now = Date.now();
+      
+      // Apply multiplier first (critical path)
+      const clickValue = multiplier;
+      clickCount += clickValue;
+      totalClicks += clickValue;
+      brainCells = Math.floor(totalClicks / 10);
       
       // Update streak
       if (now - lastClickTime < 2000) {
@@ -768,27 +807,27 @@
         updateComboDisplay();
       }, 2000);
       
-      // Apply multiplier
-      const clickValue = multiplier;
-      clickCount += clickValue;
-      totalClicks += clickValue;
-      brainCells = Math.floor(totalClicks / 10);
-      
-      // Play sound with pitch variation
-      const pitch = 1 + (multiplier - 1) * 0.1;
-      playClickSound(pitch);
-      
-      updateDisplays();
-      showClickMessage();
-      updateClicksPerSecond();
-      checkAchievements();
-      saveProgress();
+      // Immediate visual feedback (highest priority)
+      playClickSound(1 + (multiplier - 1) * 0.1);
       animateClick();
       
-      // Confetti for milestones
-      if (totalClicks % 100 === 0) {
-        createConfetti();
-      }
+      // Update displays (can be slightly delayed)
+      requestAnimationFrame(() => {
+        updateDisplays();
+        showClickMessage();
+        updateClicksPerSecond();
+      });
+      
+      // Lower priority tasks
+      requestIdleCallback(() => {
+        checkAchievements();
+        saveProgress();
+        
+        // Confetti for milestones
+        if (totalClicks % 100 === 0) {
+          createConfetti();
+        }
+      }, { timeout: 100 });
     }
 
     // Display Updates
@@ -832,10 +871,11 @@
       messageEl.style.transform = 'scale(1.1)';
       messageEl.style.color = `hsl(${Math.random() * 360}, 70%, 60%)`;
       
+      // Quick reset
       setTimeout(() => {
         messageEl.style.transform = 'scale(1)';
         messageEl.style.color = 'var(--accent-warning)';
-      }, 300);
+      }, 150);
     }
 
     function updateClicksPerSecond() {
@@ -873,21 +913,26 @@
       const button = document.getElementById('clickButton');
       const display = document.getElementById('clickCount');
       
-      // Button animation with color variation
+      // Minimal button flash - no transition delays
       button.classList.add('clicked');
-      const hue = (multiplier - 1) * 30 + 150; // Color changes with multiplier
+      const hue = (multiplier - 1) * 30 + 150;
       button.style.background = `hsl(${hue}, 70%, 50%)`;
       
-      setTimeout(() => {
-        button.classList.remove('clicked');
-        button.style.background = '';
-      }, 200);
+      // Quick reset
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          button.classList.remove('clicked');
+          button.style.background = '';
+        }, 100);
+      });
       
-      // Number scale animation
+      // Number pulse
       display.classList.add('pulse');
-      setTimeout(() => {
-        display.classList.remove('pulse');
-      }, 300);
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          display.classList.remove('pulse');
+        }, 150);
+      });
     }
 
     // Controls
@@ -1147,21 +1192,30 @@
 
     // Event Listeners
     const clickButton = document.getElementById('clickButton');
-    let touchHandled = false;
+    let touchProcessing = false;
     
-    // Mobile touch - instant response, no 300ms delay
-    clickButton.addEventListener('touchstart', function(e) {
-      e.preventDefault(); // Prevent ghost click and any delays
-      touchHandled = true;
+    // Mobile touch - use touchend for more reliable single taps
+    clickButton.addEventListener('touchend', function(e) {
+      if (touchProcessing) return;
+      
+      e.preventDefault(); // Prevent ghost click
+      e.stopPropagation();
+      
+      touchProcessing = true;
       incrementClick();
       
-      // Reset flag after potential ghost click would occur
-      setTimeout(() => { touchHandled = false; }, 500);
+      // Reset flag quickly but after any potential duplicate events
+      setTimeout(() => { touchProcessing = false; }, 100);
     }, { passive: false });
     
-    // Desktop click - but prevent if touch already handled
+    // Prevent touchstart from doing anything
+    clickButton.addEventListener('touchstart', function(e) {
+      e.preventDefault();
+    }, { passive: false });
+    
+    // Desktop click only (touch events will be blocked)
     clickButton.addEventListener('click', function(e) {
-      if (!touchHandled) {
+      if (!touchProcessing && e.detail !== 0) { // e.detail === 0 means programmatic click
         incrementClick();
       }
     });
