@@ -475,19 +475,6 @@
       padding: 40px 20px;
     }
 
-    .task-count {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: var(--accent-warning);
-      color: white;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      box-shadow: var(--shadow-soft);
-    }
-
     .quick-actions {
       display: flex;
       gap: 10px;
@@ -561,7 +548,6 @@
         max-width: 100%;
         margin: 25px auto;
       }
-      .task-count { top: 12px; right: 12px; font-size: 0.8rem; padding: 6px 12px; }
       .task-list { max-height: 180px; }
       .wheel-result { 
         padding: 20px; 
@@ -612,7 +598,6 @@
       <p class="app-subtitle">Can't decide what to do? Add your tasks and let the wheel choose for you! Perfect for ADHD decision paralysis. 🎯</p>
 
       <div class="feature-card">
-        <div class="task-count" id="taskCount">Tasks: 0/8</div>
         <h2 class="feature-title">✨ Spin to Decide</h2>
         <p class="feature-description">
           Add your tasks, spin the wheel, and let chance decide what you focus on next. Sometimes the best decision is letting go of the decision!
@@ -717,7 +702,6 @@
       
       updateTaskList();
       updateWheel();
-      updateTaskCount();
       updateSpinButton();
       saveTasks();
       
@@ -731,7 +715,6 @@
       tasks.splice(index, 1);
       updateTaskList();
       updateWheel();
-      updateTaskCount();
       updateSpinButton();
       saveTasks();
       
@@ -834,7 +817,6 @@
         
         updateTaskList();
         updateWheel();
-        updateTaskCount();
         updateSpinButton();
         saveTasks();
         
@@ -873,7 +855,6 @@
       tasks.push(...tasksToAdd);
       updateTaskList();
       updateWheel();
-      updateTaskCount();
       updateSpinButton();
       saveTasks();
       
@@ -916,19 +897,6 @@
             <button class="remove-task" onclick="removeTask(${index})" title="Remove task">✕</button>
           </div>`
         ).join('');
-      }
-    }
-
-    function updateTaskCount() {
-      const count = document.getElementById('taskCount');
-      count.textContent = `Tasks: ${tasks.length}/8`;
-      
-      if (tasks.length === 8) {
-        count.style.background = 'var(--accent-success)';
-      } else if (tasks.length >= 6) {
-        count.style.background = 'var(--accent-warning)';
-      } else {
-        count.style.background = 'var(--accent-warning)';
       }
     }
 
@@ -1172,7 +1140,6 @@
           tasks = JSON.parse(saved);
           updateTaskList();
           updateWheel();
-          updateTaskCount();
           updateSpinButton();
         }
       } catch (e) {
@@ -1208,7 +1175,6 @@
     document.addEventListener('DOMContentLoaded', function() {
       loadSavedTasks();
       loadLastResult();
-      updateTaskCount();
       updateSpinButton();
       
       // Focus input on load
