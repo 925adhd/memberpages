@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>ADHD Dopamine Clicker - 925 ADHD</title>
   <meta name="description" content="Need instant dopamine? Click the button and watch your brain cells multiply! Perfect for ADHD stimulation seeking.">
   
@@ -44,6 +44,8 @@
       line-height: 1.6; 
       overflow-x: hidden; 
       min-height: 100vh;
+      touch-action: manipulation;
+      -webkit-text-size-adjust: 100%;
     }
 
     .bg-gradient { 
@@ -68,7 +70,7 @@
 
     .header-content { 
       display: flex; 
-      justify-content: space-between; 
+      justify-content: center; 
       align-items: center; 
       padding: 15px 0; 
     }
@@ -81,21 +83,7 @@
 
     .logo-container img { height: 40px; width: auto; }
 
-    .nav-links {
-      display: flex;
-      gap: 20px;
-    }
 
-    .nav-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-
-    .nav-links a:hover, .nav-links a.active {
-      color: var(--accent-secondary);
-    }
 
     .app-title {
       font-size: 3.2rem;
@@ -176,6 +164,8 @@
       position: relative;
       overflow: hidden;
       box-shadow: var(--shadow-medium);
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .click-button:hover {
@@ -254,9 +244,91 @@
       gap: 15px;
       justify-content: center;
       margin-top: 30px;
+      flex-wrap: wrap;
     }
 
-    .reset-btn, .auto-btn {
+    .reset-confirm-dialog {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      backdrop-filter: blur(10px);
+    }
+
+    .reset-confirm-dialog.active {
+      display: flex;
+    }
+
+    .reset-confirm-content {
+      background: var(--secondary-bg);
+      border: 2px solid var(--accent-danger);
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      box-shadow: var(--shadow-strong);
+    }
+
+    .reset-confirm-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent-danger);
+      margin-bottom: 15px;
+    }
+
+    .reset-confirm-message {
+      color: var(--text-secondary);
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .reset-confirm-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .reset-confirm-btn {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-width: 120px;
+    }
+
+    .reset-confirm-yes {
+      background: var(--accent-danger);
+      color: white;
+    }
+
+    .reset-confirm-yes:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .reset-confirm-no {
+      background: var(--glass-bg);
+      color: var(--text-primary);
+      border: 2px solid var(--border-subtle);
+    }
+
+    .reset-confirm-no:hover {
+      border-color: var(--accent-secondary);
+      transform: translateY(-2px);
+    }
+
+    .reset-btn, .auto-btn, .sound-btn {
       background: var(--accent-danger);
       color: white;
       border: none;
@@ -276,7 +348,15 @@
       background: var(--accent-warning);
     }
 
-    .reset-btn:hover, .auto-btn:hover {
+    .sound-btn {
+      background: var(--accent-secondary);
+    }
+
+    .sound-btn.muted {
+      background: var(--text-muted);
+    }
+
+    .reset-btn:hover, .auto-btn:hover, .sound-btn:hover {
       transform: translateY(-2px);
       box-shadow: var(--shadow-medium);
     }
@@ -289,16 +369,46 @@
       margin-top: 30px;
     }
 
+    .achievement-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .achievement-header:hover {
+      opacity: 0.8;
+    }
+
     .achievement-title {
       font-size: 1.2rem;
       font-weight: 700;
       color: var(--accent-warning);
-      margin-bottom: 15px;
+      margin: 0;
+    }
+
+    .achievement-toggle {
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .achievement-toggle.open {
+      transform: rotate(180deg);
     }
 
     .achievement-list {
       display: grid;
       gap: 10px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, margin-top 0.3s ease;
+      margin-top: 0;
+    }
+
+    .achievement-list.open {
+      max-height: 1000px;
+      margin-top: 15px;
     }
 
     .achievement {
@@ -333,18 +443,164 @@
       font-weight: 600;
     }
 
+    .combo-display {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: var(--accent-warning);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .combo-display.active {
+      opacity: 1;
+    }
+
+    .quick-stats {
+      background: var(--glass-bg);
+      border: 2px solid var(--border-subtle);
+      border-radius: 15px;
+      padding: 15px;
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .quick-stat {
+      text-align: center;
+    }
+
+    .quick-stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+    }
+
+    .quick-stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .pulse {
+      animation: pulse 0.3s ease;
+    }
+
+    @keyframes confetti {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
     @media (max-width: 768px) {
       .container { padding: 0 15px; }
-      .app-title { font-size: 2.5rem; }
-      .app-subtitle { font-size: 1.1rem; }
-      .feature-card { padding: 30px 20px; margin: 20px auto; }
-      .feature-title { font-size: 1.6rem; }
-      .clicker-display { font-size: 3.5rem; }
-      .click-button { width: 140px; height: 140px; font-size: 2rem; }
-      .stats-display { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-      .stat-number { font-size: 1.5rem; }
-      .controls { flex-direction: column; align-items: center; }
-      .nav-links { display: none; }
+      .app-title { font-size: 2rem; margin: 20px 0 15px; }
+      .app-subtitle { font-size: 1rem; margin: 0 auto 25px; padding: 0 10px; }
+      
+      .feature-card { 
+        padding: 25px 15px; 
+        margin: 20px auto; 
+        border-radius: 15px;
+      }
+      
+      .feature-title { font-size: 1.5rem; margin-bottom: 10px; }
+      .feature-description { font-size: 1rem; margin-bottom: 20px; }
+      
+      .clicker-display { font-size: 3rem; margin: 20px 0; }
+      
+      .click-button { 
+        width: 150px; 
+        height: 150px; 
+        font-size: 2rem; 
+        margin: 20px auto;
+      }
+      
+      .click-message { font-size: 1rem; margin: 15px 0; }
+      
+      .stats-display { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 12px;
+        margin: 20px 0;
+      }
+      
+      .stat-card { padding: 15px; }
+      .stat-number { font-size: 1.6rem; }
+      .stat-label { font-size: 0.85rem; }
+      
+      .quick-stats { 
+        padding: 12px; 
+        margin-top: 15px;
+        gap: 10px;
+      }
+      
+      .quick-stat-value { font-size: 1.3rem; }
+      .quick-stat-label { font-size: 0.75rem; }
+      
+      .controls { 
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center; 
+        gap: 10px;
+        margin-top: 20px;
+      }
+      
+      .reset-btn, .auto-btn, .sound-btn {
+        padding: 10px 18px;
+        font-size: 0.9rem;
+        flex: 1 1 auto;
+        min-width: 120px;
+      }
+      
+      .session-timer, .combo-display { 
+        position: static; 
+        margin: 8px auto; 
+        display: inline-block;
+        font-size: 0.85rem;
+        padding: 6px 12px;
+      }
+      
+      .achievements { 
+        margin-top: 20px; 
+        padding: 15px;
+      }
+      
+      .achievement-title { font-size: 1.1rem; }
+      
+      .achievement { 
+        padding: 12px 10px; 
+        font-size: 0.85rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+      }
+      
+      .achievement > div:last-child {
+        align-self: flex-end;
+      }
+      
+      .achievement-emoji { font-size: 1.1rem; }
+      
+      .logo-container img { height: 35px; }
+      
+      .header-content { padding: 12px 0; }
     }
   </style>
 </head>
@@ -356,15 +612,9 @@
     <div class="container">
       <nav class="header-content" role="navigation" aria-label="Main navigation">
         <div class="logo-container">
-          <a href="#" aria-label="925 ADHD Home">
+          <a href="https://925adhd.com" aria-label="925 ADHD Home">
             <img src="https://img1.wsimg.com/isteam/ip/e5c52ac6-7189-421d-9701-bbc6d6a027fc/SmartSelect_20241218_055052_Gallery.png/:/rs=h:175,m" alt="925 ADHD Logo" width="175" height="175">
           </a>
-        </div>
-        <div class="nav-links">
-          <a href="#">Motivation</a>
-          <a href="#">Habits</a>
-          <a href="#">Task Wheel</a>
-          <a href="#" class="active">Clicker</a>
         </div>
       </nav>
     </div>
@@ -378,6 +628,8 @@
 
       <div class="feature-card">
         <div class="session-timer" id="sessionTimer">Session: 0:00</div>
+        <div class="combo-display" id="comboDisplay">Combo: x0</div>
+        
         <h2 class="feature-title">Click for Dopamine</h2>
         <p class="feature-description">
           Get instant satisfaction with every click. Watch your brain cells multiply and your clicking skills improve!
@@ -385,7 +637,7 @@
 
         <div class="clicker-display" id="clickCount">0</div>
         
-        <button class="click-button" id="clickButton" onclick="incrementClick()">
+        <button class="click-button" id="clickButton" aria-label="Click for dopamine">
           CLICK
         </button>
         
@@ -410,13 +662,32 @@
           </div>
         </div>
 
+        <div class="quick-stats">
+          <div class="quick-stat">
+            <div class="quick-stat-value" id="avgCPS">0</div>
+            <div class="quick-stat-label">Avg CPS</div>
+          </div>
+          <div class="quick-stat">
+            <div class="quick-stat-value" id="clickStreak">0</div>
+            <div class="quick-stat-label">Streak</div>
+          </div>
+          <div class="quick-stat">
+            <div class="quick-stat-value" id="multiplier">x1</div>
+            <div class="quick-stat-label">Multiplier</div>
+          </div>
+        </div>
+
         <div class="controls">
-          <button class="auto-btn" id="autoBtn" onclick="toggleAuto()">Auto Mode: OFF</button>
-          <button class="reset-btn" onclick="resetClicker()">Reset All</button>
+          <button class="sound-btn" id="soundBtn" aria-label="Toggle sound">🔊 Sound ON</button>
+          <button class="auto-btn" id="autoBtn" aria-label="Toggle auto mode">Auto Mode: OFF</button>
+          <button class="reset-btn" id="resetBtn" aria-label="Reset all progress">Reset All</button>
         </div>
 
         <div class="achievements">
-          <div class="achievement-title">🏆 Achievements</div>
+          <div class="achievement-header" id="achievementHeader">
+            <div class="achievement-title">🏆 Achievements (<span id="achievementCount">0</span>/<span id="totalAchievements">0</span>)</div>
+            <div class="achievement-toggle" id="achievementToggle">▼</div>
+          </div>
           <div class="achievement-list" id="achievementList">
             <!-- Achievements will be populated by JavaScript -->
           </div>
@@ -425,17 +696,40 @@
     </div>
   </main>
 
+  <!-- Reset Confirmation Dialog -->
+  <div class="reset-confirm-dialog" id="resetDialog">
+    <div class="reset-confirm-content">
+      <div class="reset-confirm-title">⚠️ Reset All Progress?</div>
+      <div class="reset-confirm-message">
+        This will delete all your clicks, achievements, and stats. This cannot be undone!
+      </div>
+      <div class="reset-confirm-buttons">
+        <button class="reset-confirm-btn reset-confirm-yes" id="confirmResetYes">Yes, Reset</button>
+        <button class="reset-confirm-btn reset-confirm-no" id="confirmResetNo">Cancel</button>
+      </div>
+    </div>
+  </div>
+
   <script>
+    // State Management
     let clickCount = 0;
-    let totalClicks = parseInt(localStorage.getItem('totalClicks') || '0');
+    let totalClicks = 0;
     let brainCells = 0;
     let clickTimes = [];
-    let bestCPS = parseInt(localStorage.getItem('bestCPS') || '0');
+    let bestCPS = 0;
     let sessionStart = Date.now();
     let autoMode = false;
     let autoInterval = null;
     let achievements = {};
+    let soundEnabled = true;
+    let combo = 0;
+    let comboTimeout = null;
+    let multiplier = 1;
+    let streak = 0;
+    let lastClickTime = 0;
+    let totalCPSReadings = [];
 
+    // Click Messages
     const clickMessages = [
       "+1 Brain Cell Saved! 🧠",
       "Dopamine Delivered! ⚡",
@@ -451,46 +745,164 @@
       "Click Combo! 💥",
       "ADHD Brain Go Brrrr! 🚀",
       "Stimulation Successful! ✨",
-      "Endorphin Rush! 🌈"
+      "Endorphin Rush! 🌈",
+      "Neuron Firing! ⚡",
+      "Executive Function +1! 📊",
+      "Working Memory Boost! 💭",
+      "Attention Span Extended! ⏰",
+      "Motivation Unlocked! 🔑"
     ];
 
+    // Achievement Definitions
     const achievementData = [
       { id: 'first_click', name: 'First Click', desc: 'Click once', threshold: 1, emoji: '👆' },
+      { id: 'getting_started', name: 'Getting Started', desc: 'Click 10 times', threshold: 10, emoji: '🎯' },
+      { id: 'warming_up', name: 'Warming Up', desc: 'Click 50 times', threshold: 50, emoji: '🔥' },
       { id: 'century', name: 'Century Club', desc: 'Click 100 times', threshold: 100, emoji: '💯' },
+      { id: 'dedicated', name: 'Dedicated Clicker', desc: 'Click 500 times', threshold: 500, emoji: '⭐' },
       { id: 'thousand', name: 'Click Master', desc: 'Click 1,000 times', threshold: 1000, emoji: '🎯' },
-      { id: 'speed_demon', name: 'Speed Demon', desc: '10+ clicks per second', threshold: 10, emoji: '⚡', type: 'cps' },
-      { id: 'brain_genius', name: 'Brain Genius', desc: 'Save 100+ brain cells', threshold: 100, emoji: '🧠', type: 'brain' },
       { id: 'marathon', name: 'Click Marathon', desc: 'Click 10,000 times', threshold: 10000, emoji: '🏃‍♂️' },
-      { id: 'hyperfocus', name: 'Hyperfocus Mode', desc: '20+ clicks per second', threshold: 20, emoji: '🔥', type: 'cps' }
+      { id: 'legend', name: 'Legendary Clicker', desc: 'Click 100,000 times', threshold: 100000, emoji: '👑' },
+      { id: 'speed_demon', name: 'Speed Demon', desc: '10+ clicks per second', threshold: 10, emoji: '⚡', type: 'cps' },
+      { id: 'hyperfocus', name: 'Hyperfocus Mode', desc: '20+ clicks per second', threshold: 20, emoji: '🔥', type: 'cps' },
+      { id: 'superhuman', name: 'Superhuman Speed', desc: '30+ clicks per second', threshold: 30, emoji: '💫', type: 'cps' },
+      { id: 'brain_genius', name: 'Brain Genius', desc: 'Save 100+ brain cells', threshold: 100, emoji: '🧠', type: 'brain' },
+      { id: 'brain_lord', name: 'Brain Lord', desc: 'Save 1,000+ brain cells', threshold: 1000, emoji: '🧠', type: 'brain' },
+      { id: 'combo_starter', name: 'Combo Starter', desc: 'Reach 10x combo', threshold: 10, emoji: '🔗', type: 'combo' },
+      { id: 'combo_master', name: 'Combo Master', desc: 'Reach 50x combo', threshold: 50, emoji: '🔗', type: 'combo' },
+      { id: 'streak_5min', name: 'Persistent', desc: 'Click for 5 minutes', threshold: 300, emoji: '⏱️', type: 'session' }
     ];
 
+    // Sound Effects (using Web Audio API for better ADHD feedback)
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    
+    function playClickSound(pitch = 1.0) {
+      if (!soundEnabled) return;
+      
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      oscillator.frequency.value = 400 * pitch;
+      oscillator.type = 'sine';
+      
+      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+      
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 0.1);
+    }
+
+    function playAchievementSound() {
+      if (!soundEnabled) return;
+      
+      const notes = [523.25, 659.25, 783.99]; // C, E, G (major chord)
+      notes.forEach((freq, i) => {
+        setTimeout(() => {
+          const oscillator = audioContext.createOscillator();
+          const gainNode = audioContext.createGain();
+          
+          oscillator.connect(gainNode);
+          gainNode.connect(audioContext.destination);
+          
+          oscillator.frequency.value = freq;
+          oscillator.type = 'sine';
+          
+          gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+          gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+          
+          oscillator.start(audioContext.currentTime);
+          oscillator.stop(audioContext.currentTime + 0.3);
+        }, i * 100);
+      });
+    }
+
+    // Core Click Function
     function incrementClick() {
-      clickCount++;
-      totalClicks++;
+      const now = Date.now();
+      
+      // Update streak
+      if (now - lastClickTime < 2000) {
+        streak++;
+      } else {
+        streak = 1;
+      }
+      lastClickTime = now;
+      
+      // Update combo
+      combo++;
+      multiplier = Math.min(Math.floor(combo / 10) + 1, 10);
+      updateComboDisplay();
+      clearTimeout(comboTimeout);
+      comboTimeout = setTimeout(() => {
+        combo = 0;
+        multiplier = 1;
+        updateComboDisplay();
+      }, 2000);
+      
+      // Apply multiplier
+      const clickValue = multiplier;
+      clickCount += clickValue;
+      totalClicks += clickValue;
       brainCells = Math.floor(totalClicks / 10);
+      
+      // Play sound with pitch variation
+      const pitch = 1 + (multiplier - 1) * 0.1;
+      playClickSound(pitch);
       
       updateDisplays();
       showClickMessage();
       updateClicksPerSecond();
       checkAchievements();
       saveProgress();
-      
-      // Add click animation
       animateClick();
+      
+      // Confetti for milestones
+      if (totalClicks % 100 === 0) {
+        createConfetti();
+      }
     }
 
+    // Display Updates
     function updateDisplays() {
       document.getElementById('clickCount').textContent = clickCount.toLocaleString();
       document.getElementById('totalClicks').textContent = totalClicks.toLocaleString();
       document.getElementById('brainCells').textContent = brainCells.toLocaleString();
       document.getElementById('bestCPS').textContent = bestCPS;
+      document.getElementById('clickStreak').textContent = streak;
+      document.getElementById('multiplier').textContent = 'x' + multiplier;
+      
+      // Calculate average CPS
+      if (totalCPSReadings.length > 0) {
+        const avgCPS = (totalCPSReadings.reduce((a, b) => a + b, 0) / totalCPSReadings.length).toFixed(1);
+        document.getElementById('avgCPS').textContent = avgCPS;
+      }
+    }
+
+    function updateComboDisplay() {
+      const comboEl = document.getElementById('comboDisplay');
+      comboEl.textContent = `Combo: x${combo}`;
+      
+      if (combo > 0) {
+        comboEl.classList.add('active');
+      } else {
+        comboEl.classList.remove('active');
+      }
     }
 
     function showClickMessage() {
       const randomMessage = clickMessages[Math.floor(Math.random() * clickMessages.length)];
       const messageEl = document.getElementById('clickMessage');
       
-      messageEl.textContent = randomMessage;
+      // Add multiplier bonus message
+      let message = randomMessage;
+      if (multiplier > 1) {
+        message += ` [x${multiplier}]`;
+      }
+      
+      messageEl.textContent = message;
       messageEl.style.transform = 'scale(1.1)';
       messageEl.style.color = `hsl(${Math.random() * 360}, 70%, 60%)`;
       
@@ -508,11 +920,18 @@
       const currentCPS = clickTimes.length;
       document.getElementById('clicksPerSecond').textContent = currentCPS;
       
+      // Track CPS for average calculation
+      if (currentCPS > 0) {
+        totalCPSReadings.push(currentCPS);
+        if (totalCPSReadings.length > 100) {
+          totalCPSReadings.shift();
+        }
+      }
+      
       if (currentCPS > bestCPS) {
         bestCPS = currentCPS;
         localStorage.setItem('bestCPS', bestCPS.toString());
         
-        // Celebration for new record
         const cpsEl = document.getElementById('clicksPerSecond');
         cpsEl.style.color = 'var(--accent-success)';
         cpsEl.style.transform = 'scale(1.2)';
@@ -528,9 +947,10 @@
       const button = document.getElementById('clickButton');
       const display = document.getElementById('clickCount');
       
-      // Button animation
+      // Button animation with color variation
       button.classList.add('clicked');
-      button.style.background = `hsl(${Math.random() * 360}, 70%, 50%)`;
+      const hue = (multiplier - 1) * 30 + 150; // Color changes with multiplier
+      button.style.background = `hsl(${hue}, 70%, 50%)`;
       
       setTimeout(() => {
         button.classList.remove('clicked');
@@ -538,12 +958,13 @@
       }, 200);
       
       // Number scale animation
-      display.style.transform = 'scale(1.1)';
+      display.classList.add('pulse');
       setTimeout(() => {
-        display.style.transform = 'scale(1)';
-      }, 150);
+        display.classList.remove('pulse');
+      }, 300);
     }
 
+    // Controls
     function toggleAuto() {
       autoMode = !autoMode;
       const autoBtn = document.getElementById('autoBtn');
@@ -553,7 +974,7 @@
         autoBtn.classList.add('active');
         autoInterval = setInterval(() => {
           incrementClick();
-        }, 100); // 10 clicks per second
+        }, 100);
       } else {
         autoBtn.textContent = 'Auto Mode: OFF';
         autoBtn.classList.remove('active');
@@ -561,27 +982,72 @@
       }
     }
 
-    function resetClicker() {
-      if (confirm('Reset all progress? This cannot be undone!')) {
-        clickCount = 0;
-        totalClicks = 0;
-        brainCells = 0;
-        clickTimes = [];
-        bestCPS = 0;
-        achievements = {};
-        sessionStart = Date.now();
-        
-        if (autoMode) toggleAuto();
-        
-        updateDisplays();
-        updateAchievements();
-        saveProgress();
-        
-        document.getElementById('clickMessage').textContent = 'Fresh start! Time to rebuild those brain cells!';
-        localStorage.clear();
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      const soundBtn = document.getElementById('soundBtn');
+      
+      if (soundEnabled) {
+        soundBtn.textContent = '🔊 Sound ON';
+        soundBtn.classList.remove('muted');
+        playClickSound();
+      } else {
+        soundBtn.textContent = '🔇 Sound OFF';
+        soundBtn.classList.add('muted');
       }
+      
+      localStorage.setItem('soundEnabled', soundEnabled.toString());
     }
 
+    function resetClicker() {
+      // Show custom dialog
+      document.getElementById('resetDialog').classList.add('active');
+    }
+
+    function confirmReset() {
+      // Stop auto mode if running
+      if (autoMode) toggleAuto();
+      
+      // Clear all state
+      clickCount = 0;
+      totalClicks = 0;
+      brainCells = 0;
+      clickTimes = [];
+      bestCPS = 0;
+      achievements = {};
+      sessionStart = Date.now();
+      combo = 0;
+      multiplier = 1;
+      streak = 0;
+      totalCPSReadings = [];
+      lastClickTime = 0;
+      
+      // Clear all localStorage
+      localStorage.clear();
+      
+      // Restore sound preference (don't reset this)
+      localStorage.setItem('soundEnabled', soundEnabled.toString());
+      
+      // Update all displays
+      updateDisplays();
+      updateComboDisplay();
+      updateAchievements();
+      
+      // Reset message
+      document.getElementById('clickMessage').textContent = 'Fresh start! Time to rebuild those brain cells!';
+      
+      // Reset session timer display
+      document.getElementById('sessionTimer').textContent = 'Session: 0:00';
+      
+      // Close dialog
+      document.getElementById('resetDialog').classList.remove('active');
+    }
+
+    function cancelReset() {
+      // Close dialog
+      document.getElementById('resetDialog').classList.remove('active');
+    }
+
+    // Achievements
     function checkAchievements() {
       achievementData.forEach(achievement => {
         if (achievements[achievement.id]) return;
@@ -593,11 +1059,17 @@
           current = bestCPS;
         } else if (achievement.type === 'brain') {
           current = brainCells;
+        } else if (achievement.type === 'combo') {
+          current = combo;
+        } else if (achievement.type === 'session') {
+          current = Math.floor((Date.now() - sessionStart) / 1000);
         }
         
         if (current >= threshold) {
           achievements[achievement.id] = true;
           showAchievementUnlock(achievement);
+          playAchievementSound();
+          createConfetti(20);
         }
       });
       
@@ -611,16 +1083,22 @@
       messageEl.textContent = `🏆 Achievement Unlocked: ${achievement.name}!`;
       messageEl.style.color = 'var(--accent-success)';
       messageEl.style.fontWeight = '700';
+      messageEl.style.fontSize = '1.3rem';
       
       setTimeout(() => {
         messageEl.textContent = originalText;
         messageEl.style.color = 'var(--accent-warning)';
         messageEl.style.fontWeight = '600';
+        messageEl.style.fontSize = '1.1rem';
       }, 3000);
     }
 
     function updateAchievements() {
       const achievementList = document.getElementById('achievementList');
+      const unlockedCount = Object.keys(achievements).length;
+      
+      document.getElementById('achievementCount').textContent = unlockedCount;
+      document.getElementById('totalAchievements').textContent = achievementData.length;
       
       achievementList.innerHTML = achievementData.map(achievement => {
         const isUnlocked = achievements[achievement.id];
@@ -647,11 +1125,33 @@
         current = bestCPS;
       } else if (achievement.type === 'brain') {
         current = brainCells;
+      } else if (achievement.type === 'combo') {
+        current = combo;
+      } else if (achievement.type === 'session') {
+        current = Math.floor((Date.now() - sessionStart) / 1000);
       }
       
-      return `${Math.min(current, achievement.threshold)}/${achievement.threshold}`;
+      const percentage = Math.min((current / achievement.threshold * 100), 100).toFixed(0);
+      return `${percentage}%`;
     }
 
+    // Visual Effects
+    function createConfetti(count = 10) {
+      for (let i = 0; i < count; i++) {
+        setTimeout(() => {
+          const confetti = document.createElement('div');
+          confetti.className = 'confetti';
+          confetti.style.left = Math.random() * 100 + '%';
+          confetti.style.background = `hsl(${Math.random() * 360}, 70%, 60%)`;
+          confetti.style.animation = `confetti ${1 + Math.random()}s linear forwards`;
+          document.body.appendChild(confetti);
+          
+          setTimeout(() => confetti.remove(), 2000);
+        }, i * 50);
+      }
+    }
+
+    // Session Timer
     function updateSessionTimer() {
       const elapsed = Math.floor((Date.now() - sessionStart) / 1000);
       const minutes = Math.floor(elapsed / 60);
@@ -661,46 +1161,113 @@
         `Session: ${minutes}:${seconds.toString().padStart(2, '0')}`;
     }
 
+    // Data Persistence
     function saveProgress() {
-      localStorage.setItem('clickCount', clickCount.toString());
-      localStorage.setItem('totalClicks', totalClicks.toString());
-      localStorage.setItem('brainCells', brainCells.toString());
-      localStorage.setItem('bestCPS', bestCPS.toString());
-      localStorage.setItem('achievements', JSON.stringify(achievements));
+      try {
+        localStorage.setItem('clickCount', clickCount.toString());
+        localStorage.setItem('totalClicks', totalClicks.toString());
+        localStorage.setItem('brainCells', brainCells.toString());
+        localStorage.setItem('bestCPS', bestCPS.toString());
+        localStorage.setItem('achievements', JSON.stringify(achievements));
+        localStorage.setItem('soundEnabled', soundEnabled.toString());
+        localStorage.setItem('totalCPSReadings', JSON.stringify(totalCPSReadings));
+      } catch (e) {
+        console.error('Error saving progress:', e);
+      }
     }
 
     function loadProgress() {
-      clickCount = parseInt(localStorage.getItem('clickCount') || '0');
-      totalClicks = parseInt(localStorage.getItem('totalClicks') || '0');
-      brainCells = parseInt(localStorage.getItem('brainCells') || '0');
-      bestCPS = parseInt(localStorage.getItem('bestCPS') || '0');
-      
-      const savedAchievements = localStorage.getItem('achievements');
-      if (savedAchievements) {
-        achievements = JSON.parse(savedAchievements);
+      try {
+        clickCount = parseInt(localStorage.getItem('clickCount') || '0');
+        totalClicks = parseInt(localStorage.getItem('totalClicks') || '0');
+        brainCells = parseInt(localStorage.getItem('brainCells') || '0');
+        bestCPS = parseInt(localStorage.getItem('bestCPS') || '0');
+        soundEnabled = localStorage.getItem('soundEnabled') !== 'false';
+        
+        const savedAchievements = localStorage.getItem('achievements');
+        if (savedAchievements) {
+          achievements = JSON.parse(savedAchievements);
+        }
+        
+        const savedCPSReadings = localStorage.getItem('totalCPSReadings');
+        if (savedCPSReadings) {
+          totalCPSReadings = JSON.parse(savedCPSReadings);
+        }
+        
+        updateDisplays();
+        updateAchievements();
+        
+        // Update sound button
+        const soundBtn = document.getElementById('soundBtn');
+        if (!soundEnabled) {
+          soundBtn.textContent = '🔇 Sound OFF';
+          soundBtn.classList.add('muted');
+        }
+      } catch (e) {
+        console.error('Error loading progress:', e);
       }
-      
-      updateDisplays();
-      updateAchievements();
     }
 
-    // Initialize
-    loadProgress();
-    updateAchievements();
-    
-    // Session timer
-    setInterval(updateSessionTimer, 1000);
-    
-    // Keyboard support
+    // Event Listeners
+    document.getElementById('clickButton').addEventListener('click', incrementClick);
+    document.getElementById('autoBtn').addEventListener('click', toggleAuto);
+    document.getElementById('soundBtn').addEventListener('click', toggleSound);
+    document.getElementById('resetBtn').addEventListener('click', resetClicker);
+    document.getElementById('confirmResetYes').addEventListener('click', confirmReset);
+    document.getElementById('confirmResetNo').addEventListener('click', cancelReset);
+
+    // Achievement dropdown toggle
+    document.getElementById('achievementHeader').addEventListener('click', function() {
+      const list = document.getElementById('achievementList');
+      const toggle = document.getElementById('achievementToggle');
+      
+      list.classList.toggle('open');
+      toggle.classList.toggle('open');
+      
+      // Save state
+      localStorage.setItem('achievementsOpen', list.classList.contains('open').toString());
+    });
+
+    // Close dialog when clicking outside
+    document.getElementById('resetDialog').addEventListener('click', function(e) {
+      if (e.target.id === 'resetDialog') {
+        cancelReset();
+      }
+    });
+
+    // Keyboard support (ADHD-friendly: spacebar and enter)
     document.addEventListener('keydown', function(e) {
-      if (e.key === ' ' || e.key === 'Enter') {
+      if ((e.key === ' ' || e.key === 'Enter') && e.target.tagName !== 'BUTTON') {
         e.preventDefault();
         incrementClick();
       }
     });
-    
-    // Auto-save every 5 seconds
+
+    // Prevent double-tap zoom on mobile
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', function(e) {
+      const now = Date.now();
+      if (now - lastTouchEnd <= 300) {
+        e.preventDefault();
+      }
+      lastTouchEnd = now;
+    }, false);
+
+    // Initialize
+    loadProgress();
+    updateAchievements();
+    setInterval(updateSessionTimer, 1000);
     setInterval(saveProgress, 5000);
+    
+    // Check achievements periodically
+    setInterval(checkAchievements, 1000);
+    
+    // Load achievement dropdown state
+    const achievementsOpen = localStorage.getItem('achievementsOpen') === 'true';
+    if (achievementsOpen) {
+      document.getElementById('achievementList').classList.add('open');
+      document.getElementById('achievementToggle').classList.add('open');
+    }
   </script>
 </body>
 </html>
