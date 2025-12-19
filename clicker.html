@@ -215,13 +215,16 @@
       background: rgba(0, 0, 0, 0.8);
       display: none;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
+      padding-top: 20px;
       z-index: 10000;
       backdrop-filter: blur(10px);
+      overflow-y: auto;
     }
 
     .reset-confirm-dialog.active {
       display: flex;
+      animation: fadeIn 0.2s ease;
     }
 
     .reset-confirm-content {
@@ -233,6 +236,23 @@
       width: 90%;
       text-align: center;
       box-shadow: var(--shadow-strong);
+      animation: slideDown 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideDown {
+      from { 
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      to { 
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
     .reset-confirm-title {
