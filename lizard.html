@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>LIZARD LIZARD LIZARD</title>
     <style>
         * {
@@ -22,7 +22,7 @@
             overflow-x: hidden;
             overflow-y: auto;
             position: relative;
-            padding: 20px 10px;
+            padding: 10px;
         }
 
         .stars {
@@ -56,22 +56,45 @@
             position: relative;
             width: 100%;
             max-width: 1200px;
-            padding: 20px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sticky-controls {
+            position: sticky;
+            top: 0;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+            z-index: 100;
+            padding: 10px;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .emoji {
+            font-size: clamp(3rem, 12vw, 6rem);
+            margin-bottom: 0.5rem;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
 
         h1 {
-            font-size: clamp(2rem, 8vw, 4rem);
+            font-size: clamp(1.5rem, 7vw, 3.5rem);
             color: #00ff00;
             text-shadow: 
                 0 0 10px #00ff00,
                 0 0 20px #00ff00,
                 0 0 30px #00ff00,
-                3px 3px 0 #000,
-                -3px -3px 0 #000,
-                3px -3px 0 #000,
-                -3px 3px 0 #000;
-            margin-bottom: 1.5rem;
-            letter-spacing: 0.1em;
+                2px 2px 0 #000,
+                -2px -2px 0 #000,
+                2px -2px 0 #000,
+                -2px 2px 0 #000;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
             animation: pulse 2s infinite;
             word-wrap: break-word;
         }
@@ -83,78 +106,77 @@
 
         .lizard-btn {
             background: linear-gradient(145deg, #00ff00, #00cc00);
-            border: 4px solid #000;
-            padding: clamp(15px, 4vw, 30px) clamp(30px, 8vw, 60px);
-            font-size: clamp(1.5rem, 5vw, 3rem);
+            border: 3px solid #000;
+            padding: 20px 40px;
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
             font-family: 'Impact', 'Arial Black', sans-serif;
             color: #000;
             cursor: pointer;
-            border-radius: 20px;
+            border-radius: 15px;
             box-shadow: 
-                0 8px 0 #004400,
-                0 12px 20px rgba(0, 0, 0, 0.5);
+                0 6px 0 #004400,
+                0 10px 15px rgba(0, 0, 0, 0.5);
             transition: all 0.1s;
             text-transform: uppercase;
             position: relative;
             overflow: hidden;
             touch-action: manipulation;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .lizard-btn:hover {
-            background: linear-gradient(145deg, #00ff66, #00dd00);
-            transform: translateY(-2px);
-            box-shadow: 
-                0 10px 0 #004400,
-                0 14px 25px rgba(0, 0, 0, 0.5);
+            -webkit-tap-highlight-color: rgba(0, 255, 0, 0.3);
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         .lizard-btn:active {
             transform: translateY(4px);
             box-shadow: 
-                0 4px 0 #004400,
-                0 6px 10px rgba(0, 0, 0, 0.5);
+                0 2px 0 #004400,
+                0 4px 8px rgba(0, 0, 0, 0.5);
         }
 
         .score-container {
-            margin-top: 2rem;
+            margin-top: 1rem;
             display: flex;
-            gap: clamp(1rem, 3vw, 3rem);
+            gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
         }
 
         .score-box {
             background: rgba(0, 0, 0, 0.5);
-            border: 4px solid #00ff00;
-            border-radius: 15px;
-            padding: clamp(1rem, 2vw, 1.5rem) clamp(1.5rem, 3vw, 2.5rem);
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
-            min-width: 150px;
+            border: 3px solid #00ff00;
+            border-radius: 10px;
+            padding: 0.8rem 1.5rem;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+            min-width: 130px;
+            flex: 1;
+            max-width: 200px;
         }
 
         .score-label {
-            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            font-size: clamp(0.7rem, 2.5vw, 1rem);
             color: #00ff00;
             text-shadow: 
                 0 0 10px #00ff00,
-                2px 2px 0 #000,
-                -2px -2px 0 #000,
-                2px -2px 0 #000,
-                -2px 2px 0 #000;
-            margin-bottom: 0.5rem;
+                1px 1px 0 #000,
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000;
+            margin-bottom: 0.3rem;
             white-space: nowrap;
         }
 
         .score-number {
-            font-size: clamp(2rem, 5vw, 3rem);
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
             color: #00ff00;
             text-shadow: 
                 0 0 20px #00ff00,
-                3px 3px 0 #000,
-                -3px -3px 0 #000,
-                3px -3px 0 #000,
-                -3px 3px 0 #000;
+                2px 2px 0 #000,
+                -2px -2px 0 #000,
+                2px -2px 0 #000,
+                -2px 2px 0 #000;
+        }
+
+        .score-flash {
             animation: scoreFlash 0.3s ease-out;
         }
 
@@ -171,26 +193,50 @@
         @keyframes recordFlash {
             0%, 100% { 
                 border-color: #00ff00;
-                box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+                box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
             }
             50% { 
                 border-color: #ffff00;
-                box-shadow: 0 0 40px rgba(255, 255, 0, 0.8);
+                box-shadow: 0 0 30px rgba(255, 255, 0, 0.8);
             }
         }
 
+        .reset-btn {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            background: rgba(255, 0, 0, 0.3);
+            border: 2px solid #ff0000;
+            padding: 8px 16px;
+            font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            color: #ff0000;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: rgba(255, 0, 0, 0.3);
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .reset-btn:active {
+            background: rgba(255, 0, 0, 0.5);
+            transform: scale(0.95);
+        }
+
         .lizard-text {
-            margin-top: 3rem;
-            margin-bottom: 3rem;
-            font-size: clamp(2rem, 6vw, 5rem);
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+            font-size: clamp(1.5rem, 5vw, 4rem);
             color: #00ff00;
             text-shadow: 
-                0 0 20px #00ff00,
-                3px 3px 0 #000,
-                -3px -3px 0 #000,
-                3px -3px 0 #000,
-                -3px 3px 0 #000;
-            min-height: clamp(3rem, 8vw, 6rem);
+                0 0 15px #00ff00,
+                2px 2px 0 #000,
+                -2px -2px 0 #000,
+                2px -2px 0 #000,
+                -2px 2px 0 #000;
+            min-height: clamp(2rem, 6vw, 4rem);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -200,31 +246,9 @@
             line-height: 1.2;
         }
 
-        .reset-btn {
-            margin-top: 1rem;
-            margin-bottom: 2rem;
-            background: rgba(255, 0, 0, 0.3);
-            border: 3px solid #ff0000;
-            padding: 10px 20px;
-            font-size: clamp(0.8rem, 2vw, 1rem);
-            font-family: 'Impact', 'Arial Black', sans-serif;
-            color: #ff0000;
-            cursor: pointer;
-            border-radius: 10px;
-            transition: all 0.2s;
-            text-transform: uppercase;
-            touch-action: manipulation;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .reset-btn:hover {
-            background: rgba(255, 0, 0, 0.5);
-            transform: scale(1.05);
-        }
-
         .lizard-word {
             display: inline-block;
-            margin: 0 0.2em;
+            margin: 0 0.1em;
             animation: appear 0.3s ease-out;
         }
 
@@ -242,56 +266,57 @@
             }
         }
 
-        .emoji {
-            font-size: clamp(4rem, 10vw, 8rem);
-            margin-bottom: 1rem;
-            animation: bounce 1s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        /* Mobile optimizations */
+        /* Mobile specific adjustments */
         @media (max-width: 768px) {
             body {
-                padding: 15px 5px;
+                padding: 5px;
             }
 
             .container {
-                padding: 10px;
+                padding: 5px;
+            }
+
+            .emoji {
+                margin-bottom: 0.3rem;
             }
 
             h1 {
-                margin-bottom: 1rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .lizard-btn {
+                padding: 18px 35px;
             }
 
             .score-container {
-                margin-top: 1.5rem;
-                gap: 1rem;
+                margin-top: 0.8rem;
+                gap: 0.8rem;
             }
 
             .score-box {
-                min-width: 120px;
+                padding: 0.6rem 1.2rem;
+                min-width: 110px;
+            }
+
+            .reset-btn {
+                margin-top: 0.8rem;
+                margin-bottom: 0.8rem;
             }
 
             .lizard-text {
-                margin-top: 2rem;
-                margin-bottom: 2rem;
+                margin-top: 0.8rem;
             }
         }
 
         /* Very small screens */
         @media (max-width: 480px) {
             .score-container {
-                flex-direction: column;
-                align-items: center;
+                gap: 0.5rem;
             }
 
             .score-box {
-                width: 100%;
-                max-width: 250px;
+                min-width: 100px;
+                padding: 0.5rem 1rem;
             }
         }
     </style>
@@ -300,22 +325,24 @@
     <div class="stars" id="stars"></div>
     
     <div class="container">
-        <div class="emoji">🦎</div>
-        <h1>LIZARD LIZARD</h1>
-        <button class="lizard-btn" onclick="addLizard()">CLICK ME</button>
-        
-        <div class="score-container">
-            <div class="score-box" id="currentBox">
-                <div class="score-label">CURRENT CLICKS</div>
-                <div class="score-number" id="currentScore">0</div>
+        <div class="sticky-controls">
+            <div class="emoji">🦎</div>
+            <h1>LIZARD LIZARD</h1>
+            <button class="lizard-btn" id="lizardBtn">CLICK ME</button>
+            
+            <div class="score-container">
+                <div class="score-box" id="currentBox">
+                    <div class="score-label">CURRENT CLICKS</div>
+                    <div class="score-number" id="currentScore">0</div>
+                </div>
+                <div class="score-box" id="highScoreBox">
+                    <div class="score-label">HIGH SCORE</div>
+                    <div class="score-number" id="highScore">0</div>
+                </div>
             </div>
-            <div class="score-box" id="highScoreBox">
-                <div class="score-label">HIGH SCORE</div>
-                <div class="score-number" id="highScore">0</div>
-            </div>
-        </div>
 
-        <button class="reset-btn" onclick="resetScore()">Reset Counter</button>
+            <button class="reset-btn" id="resetBtn">Reset Counter</button>
+        </div>
         
         <div class="lizard-text" id="lizardText"></div>
     </div>
@@ -339,32 +366,24 @@
         // Display initial high score
         document.getElementById('highScore').textContent = highScore;
 
-        // Create a pool of audio instances for faster playback
-        const audioPool = [];
-        const poolSize = 10;
-        
-        // Initialize audio pool on first user interaction
-        let audioInitialized = false;
-        
-        function initializeAudio() {
-            if (audioInitialized) return;
-            
-            for (let i = 0; i < poolSize; i++) {
-                const utterance = new SpeechSynthesisUtterance('lizard');
-                utterance.rate = 1.5;
-                utterance.pitch = 1.1;
-                utterance.volume = 1;
-                audioPool.push(utterance);
+        // Speech synthesis check
+        const speechAvailable = 'speechSynthesis' in window;
+
+        function playLizardSound() {
+            if (speechAvailable) {
+                try {
+                    const utterance = new SpeechSynthesisUtterance('lizard');
+                    utterance.rate = 1.8;
+                    utterance.pitch = 1.2;
+                    utterance.volume = 1;
+                    window.speechSynthesis.speak(utterance);
+                } catch (e) {
+                    // Silently fail
+                }
             }
-            audioInitialized = true;
         }
-        
-        let currentAudioIndex = 0;
 
         function addLizard() {
-            // Initialize audio on first click
-            initializeAudio();
-            
             const lizardText = document.getElementById('lizardText');
             const span = document.createElement('span');
             span.className = 'lizard-word';
@@ -377,10 +396,9 @@
             currentScoreElement.textContent = currentClicks;
             
             // Trigger flash animation
-            currentScoreElement.style.animation = 'none';
-            setTimeout(() => {
-                currentScoreElement.style.animation = 'scoreFlash 0.3s ease-out';
-            }, 10);
+            currentScoreElement.classList.remove('score-flash');
+            void currentScoreElement.offsetWidth; // Force reflow
+            currentScoreElement.classList.add('score-flash');
             
             // Check and update high score
             if (currentClicks > highScore) {
@@ -396,27 +414,8 @@
                 }, 500);
             }
             
-            // Play audio with fallback for in-app browsers
-            try {
-                if (window.speechSynthesis && window.SpeechSynthesisUtterance) {
-                    const utterance = new SpeechSynthesisUtterance('lizard');
-                    utterance.rate = 1.8;
-                    utterance.pitch = 1.2;
-                    utterance.volume = 1;
-                    window.speechSynthesis.speak(utterance);
-                }
-            } catch (e) {
-                // Silently fail if speech synthesis is not available
-                console.log('Speech synthesis not available');
-            }
-
-            // Auto-scroll to bottom when new lizards are added
-            setTimeout(() => {
-                window.scrollTo({
-                    top: document.body.scrollHeight,
-                    behavior: 'smooth'
-                });
-            }, 100);
+            // Play audio
+            playLizardSound();
         }
 
         function resetScore() {
@@ -424,13 +423,13 @@
             document.getElementById('currentScore').textContent = currentClicks;
             document.getElementById('lizardText').innerHTML = '';
             
-            // Stop all text-to-speech audio with error handling
-            try {
-                if (window.speechSynthesis) {
+            // Stop all text-to-speech audio
+            if (speechAvailable) {
+                try {
                     window.speechSynthesis.cancel();
+                } catch (e) {
+                    // Silently fail
                 }
-            } catch (e) {
-                console.log('Could not cancel speech synthesis');
             }
 
             // Scroll back to top
@@ -439,6 +438,22 @@
                 behavior: 'smooth'
             });
         }
+
+        // Add event listeners for both click and touch
+        const lizardBtn = document.getElementById('lizardBtn');
+        const resetBtn = document.getElementById('resetBtn');
+
+        lizardBtn.addEventListener('click', addLizard);
+        lizardBtn.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            addLizard();
+        });
+
+        resetBtn.addEventListener('click', resetScore);
+        resetBtn.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            resetScore();
+        });
     </script>
 </body>
 </html>
