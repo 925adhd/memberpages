@@ -14,22 +14,20 @@
         body {
             font-family: 'Impact', 'Arial Black', sans-serif;
             background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
-            background-attachment: fixed;
             min-height: 100vh;
-            overflow-x: hidden;
-            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
             position: relative;
         }
 
         .stars {
-            position: fixed;
+            position: absolute;
             width: 100%;
             height: 100%;
             overflow: hidden;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 1;
         }
 
         .star {
@@ -44,15 +42,6 @@
         @keyframes twinkle {
             0%, 100% { opacity: 0.3; }
             50% { opacity: 1; }
-        }
-
-        .sticky-header {
-            position: sticky;
-            top: 0;
-            background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
-            z-index: 100;
-            padding: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
 
         .container {
@@ -118,7 +107,7 @@
         .score-container {
             margin-top: 2rem;
             display: flex;
-            gap: 3rem;
+            gap: 2rem;
             justify-content: center;
             flex-wrap: wrap;
         }
@@ -127,12 +116,12 @@
             background: rgba(0, 0, 0, 0.5);
             border: 4px solid #00ff00;
             border-radius: 15px;
-            padding: 1.5rem 2.5rem;
+            padding: 1rem 1.5rem;
             box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
         }
 
         .score-label {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: #00ff00;
             text-shadow: 
                 0 0 10px #00ff00,
@@ -144,7 +133,7 @@
         }
 
         .score-number {
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: #00ff00;
             text-shadow: 
                 0 0 20px #00ff00,
@@ -176,35 +165,12 @@
             }
         }
 
-        .lizard-text {
-            margin-top: 3rem;
-            margin-bottom: 3rem;
-            padding: 0 20px;
-            font-size: 5rem;
-            color: #00ff00;
-            text-shadow: 
-                0 0 20px #00ff00,
-                3px 3px 0 #000,
-                -3px -3px 0 #000,
-                3px -3px 0 #000,
-                -3px 3px 0 #000;
-            min-height: 6rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            max-width: 90vw;
-            margin-left: auto;
-            margin-right: auto;
-            word-break: break-word;
-        }
-
         .reset-btn {
-            margin-top: 2rem;
+            margin-top: 1.5rem;
             background: rgba(255, 0, 0, 0.3);
             border: 3px solid #ff0000;
-            padding: 10px 20px;
-            font-size: 1rem;
+            padding: 8px 16px;
+            font-size: 0.9rem;
             font-family: 'Impact', 'Arial Black', sans-serif;
             color: #ff0000;
             cursor: pointer;
@@ -216,26 +182,6 @@
         .reset-btn:hover {
             background: rgba(255, 0, 0, 0.5);
             transform: scale(1.05);
-        }
-
-        .lizard-word {
-            display: inline-block;
-            margin: 0 0.2em;
-            animation: appear 0.3s ease-out;
-        }
-
-        @keyframes appear {
-            0% {
-                transform: scale(0) rotate(-180deg);
-                opacity: 0;
-            }
-            60% {
-                transform: scale(1.2) rotate(10deg);
-            }
-            100% {
-                transform: scale(1) rotate(0deg);
-                opacity: 1;
-            }
         }
 
         .emoji {
@@ -251,29 +197,34 @@
 
         @media (max-width: 768px) {
             h1 {
-                font-size: 2.5rem;
+                font-size: 2rem;
+                margin-bottom: 1rem;
             }
             .lizard-btn {
                 padding: 20px 40px;
                 font-size: 2rem;
             }
-            .lizard-text {
-                font-size: 3rem;
-            }
             .emoji {
                 font-size: 5rem;
+                margin-bottom: 0.5rem;
             }
             .score-container {
-                gap: 1.5rem;
+                margin-top: 1rem;
+                gap: 1rem;
             }
             .score-box {
-                padding: 1rem 1.5rem;
+                padding: 0.75rem 1.25rem;
             }
             .score-label {
-                font-size: 1rem;
+                font-size: 0.85rem;
             }
             .score-number {
-                font-size: 2.5rem;
+                font-size: 2rem;
+            }
+            .reset-btn {
+                margin-top: 1rem;
+                padding: 6px 12px;
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -281,28 +232,27 @@
 <body>
     <div class="stars" id="stars"></div>
     
-    <div class="sticky-header">
-        <div class="container">
-            <div class="emoji">🦎</div>
-            <h1>LIZARD LIZARD</h1>
-            <button class="lizard-btn" onclick="addLizard()">CLICK ME</button>
-            
-            <div class="score-container">
-                <div class="score-box" id="currentBox">
-                    <div class="score-label">CURRENT CLICKS</div>
-                    <div class="score-number" id="currentScore">0</div>
-                </div>
-                <div class="score-box" id="highScoreBox">
-                    <div class="score-label">HIGH SCORE</div>
-                    <div class="score-number" id="highScore">0</div>
-                </div>
+    <div class="container">
+        <div class="emoji">🦎</div>
+        <h1>LIZARD LIZARD</h1>
+        <button class="lizard-btn" onclick="addLizard()">CLICK ME</button>
+        
+        <div class="score-container">
+            <div class="score-box" id="currentBox">
+                <div class="score-label">CURRENT CLICKS</div>
+                <div class="score-number" id="currentScore">0</div>
             </div>
+            <div class="score-box" id="highScoreBox">
+                <div class="score-label">HIGH SCORE</div>
+                <div class="score-number" id="highScore">0</div>
+            </div>
+        </div>
 
+        <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap;">
             <button class="reset-btn" onclick="resetScore()">Reset Counter</button>
+            <button class="reset-btn" onclick="resetHighScore()">Reset High Score</button>
         </div>
     </div>
-    
-    <div class="lizard-text" id="lizardText"></div>
 
     <script>
         // Create stars
@@ -349,12 +299,6 @@
             // Initialize audio on first click
             initializeAudio();
             
-            const lizardText = document.getElementById('lizardText');
-            const span = document.createElement('span');
-            span.className = 'lizard-word';
-            span.textContent = 'LIZARD ';
-            lizardText.appendChild(span);
-            
             // Update current clicks
             currentClicks++;
             const currentScoreElement = document.getElementById('currentScore');
@@ -380,40 +324,31 @@
                 }, 500);
             }
             
-            // Play audio with error handling for in-app browsers
-            try {
-                if (window.speechSynthesis && window.SpeechSynthesisUtterance) {
-                    const utterance = new SpeechSynthesisUtterance('lizard');
-                    utterance.rate = 1.8;
-                    utterance.pitch = 1.2;
-                    utterance.volume = 1;
-                    window.speechSynthesis.speak(utterance);
-                }
-            } catch (e) {
-                // Silently fail if speech synthesis is blocked
-                console.log('Speech synthesis not available');
-            }
+            // Play audio - allow queuing for rapid-fire effect
+            const utterance = new SpeechSynthesisUtterance('lizard');
+            utterance.rate = 1.8; // Fast enough for overlapping effect
+            utterance.pitch = 1.2;
+            utterance.volume = 1;
+            window.speechSynthesis.speak(utterance);
         }
 
         function resetScore() {
             currentClicks = 0;
             document.getElementById('currentScore').textContent = currentClicks;
-            document.getElementById('lizardText').innerHTML = '';
             
-            // Stop all text-to-speech audio with error handling
-            try {
-                if (window.speechSynthesis) {
-                    window.speechSynthesis.cancel();
-                }
-            } catch (e) {
-                console.log('Could not cancel speech synthesis');
-            }
+            // Stop all text-to-speech audio
+            window.speechSynthesis.cancel();
+        }
 
-            // Scroll back to top
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+        function resetHighScore() {
+            if (confirm('Are you sure you want to reset your high score?')) {
+                highScore = 0;
+                localStorage.setItem('lizardHighScore', highScore);
+                document.getElementById('highScore').textContent = highScore;
+                
+                // Stop all text-to-speech audio
+                window.speechSynthesis.cancel();
+            }
         }
     </script>
 </body>
