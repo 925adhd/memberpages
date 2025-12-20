@@ -396,12 +396,19 @@
                 }, 500);
             }
             
-            // Play audio - allow queuing for rapid-fire effect
-            const utterance = new SpeechSynthesisUtterance('lizard');
-            utterance.rate = 1.8; // Fast enough for overlapping effect
-            utterance.pitch = 1.2;
-            utterance.volume = 1;
-            window.speechSynthesis.speak(utterance);
+            // Play audio with fallback for in-app browsers
+            try {
+                if (window.speechSynthesis && window.SpeechSynthesisUtterance) {
+                    const utterance = new SpeechSynthesisUtterance('lizard');
+                    utterance.rate = 1.8;
+                    utterance.pitch = 1.2;
+                    utterance.volume = 1;
+                    window.speechSynthesis.speak(utterance);
+                }
+            } catch (e) {
+                // Silently fail if speech synthesis is not available
+                console.log('Speech synthesis not available');
+            }
 
             // Auto-scroll to bottom when new lizards are added
             setTimeout(() => {
@@ -417,8 +424,14 @@
             document.getElementById('currentScore').textContent = currentClicks;
             document.getElementById('lizardText').innerHTML = '';
             
-            // Stop all text-to-speech audio
-            window.speechSynthesis.cancel();
+            // Stop all text-to-speech audio with error handling
+            try {
+                if (window.speechSynthesis) {
+                    window.speechSynthesis.cancel();
+                }
+            } catch (e) {
+                console.log('Could not cancel speech synthesis');
+            }
 
             // Scroll back to top
             window.scrollTo({
