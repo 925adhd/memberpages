@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eBay Reseller Inventory Manager</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            padding: 15px 25px;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 120px;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+        }
+        
+        .controls {
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .search-bar {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .search-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #218838;
+        }
+        
+        .btn-small {
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+        
+        .filters {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .add-item-section {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #667eea;
+        }
+        
+        .add-item-section h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #495057;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 8px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+        
+        .collection-grid {
+            padding: 30px;
+        }
+        
+        .category-section {
+            margin-bottom: 40px;
+            border: 1px solid #e9ecef;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .category-header {
+            background: linear-gradient(135deg, #495057 0%, #6c757d 100%);
+            color: white;
+            padding: 20px;
+            font-size: 1.3em;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .category-stats {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        
+        .item-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 4px solid #667eea;
+        }
+        
+        .item-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .item-name {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #2c3e50;
+            flex: 1;
+        }
+        
+        .quantity-badge {
+            background: #667eea;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .item-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .price-display {
+            background: #e3f2fd;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .price-amount {
+            font-weight: bold;
+            color: #1976d2;
+            font-size: 1.1em;
+        }
+        
+        .loading {
+            color: #666;
+            font-style: italic;
+        }
+        
+        .notes-input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        
+        .sold-indicator {
+            background: #4caf50;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
+        
+        .total-value {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #2c3e50;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            font-weight: bold;
+            z-index: 1000;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: #000;
+        }
+        
+        .item-detail {
+            margin: 10px 0;
+        }
+        
+        .item-detail strong {
+            color: #495057;
+        }
+        
+        @media (max-width: 768px) {
+            .items-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-bar {
+                flex-direction: column;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📦 eBay Reseller Inventory Manager</h1>
+            <p>Manage your inventory, track prices, and maximize profits</p>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalItems">0</div>
+                    <div>Total Items</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalCategories">0</div>
+                    <div>Categories</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalValue">$0</div>
+                    <div>Est. Value</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalSold">$0</div>
+                    <div>Sold Value</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <div class="add-item-section">
+                <h3>➕ Add New Item</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Category *</label>
+                        <input type="text" id="newCategory" placeholder="e.g., Electronics, Clothing, Books">
+                    </div>
+                    <div class="form-group">
+                        <label>Item Name *</label>
+                        <input type="text" id="newItemName" placeholder="e.g., iPhone 13 Pro">
+                    </div>
+                    <div class="form-group">
+                        <label>SKU/ID</label>
+                        <input type="text" id="newItemId" placeholder="Optional identifier">
+                    </div>
+                    <div class="form-group">
+                        <label>Quantity *</label>
+                        <input type="number" id="newQuantity" value="1" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label>Purchase Price</label>
+                        <input type="number" id="newPurchasePrice" step="0.01" placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label>Target Sell Price</label>
+                        <input type="number" id="newSellPrice" step="0.01" placeholder="0.00">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Description/Notes</label>
+                    <textarea id="newDescription" placeholder="Condition, features, flaws, etc."></textarea>
+                </div>
+                <button class="btn btn-success" onclick="addNewItem()">➕ Add Item to Inventory</button>
+            </div>
+            
+            <div class="search-bar">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search inventory...">
+                <button class="btn btn-primary" onclick="searchInventory()">🔍 Search</button>
+                <button class="btn btn-secondary" onclick="showAllItems()">📋 Show All</button>
+            </div>
+            <div class="filters">
+                <button class="btn btn-secondary btn-small" onclick="showHighValue()">💎 High Value ($50+)</button>
+                <button class="btn btn-secondary btn-small" onclick="showNeedsPricing()">❓ Needs Pricing</button>
+                <button class="btn btn-secondary btn-small" onclick="showUnsold()">📦 Available</button>
+                <button class="btn btn-secondary btn-small" onclick="showSoldItems()">✅ Sold</button>
+                <button class="btn btn-secondary btn-small" onclick="exportCSV()">📊 Export CSV</button>
+                <button class="btn btn-secondary btn-small" onclick="generateListings()">📝 Generate Listings</button>
+                <button class="btn btn-secondary btn-small" onclick="importData()">📥 Import</button>
+                <button class="btn btn-secondary btn-small" onclick="clearAll()" style="background: #dc3545;">🗑️ Clear All</button>
+            </div>
+        </div>
+        
+        <div class="collection-grid" id="inventoryGrid">
+            <div style="text-align: center; padding: 40px; color: #6c757d;">
+                <h3>No items in inventory yet</h3>
+                <p>Add your first item using the form above!</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="total-value" id="totalValueDisplay">
+        Inventory Value: $0.00
+    </div>
+
+    <!-- Modal for item details -->
+    <div id="itemModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        let inventory = {};
+        let itemData = {};
+
+        // Initialize the application
+        function initializeApp() {
+            loadStoredData();
+            renderInventory();
+            updateStats();
+        }
+
+        // Load stored data from localStorage
+        function loadStoredData() {
+            const storedInventory = localStorage.getItem('reseller-inventory');
+            const storedData = localStorage.getItem('reseller-item-data');
+            
+            if (storedInventory) {
+                inventory = JSON.parse(storedInventory);
+            }
+            if (storedData) {
+                itemData = JSON.parse(storedData);
+            }
+        }
+
+        // Save data to localStorage
+        function saveData() {
+            localStorage.setItem('reseller-inventory', JSON.stringify(inventory));
+            localStorage.setItem('reseller-item-data', JSON.stringify(itemData));
+        }
+
+        // Add new item to inventory
+        function addNewItem() {
+            const category = document.getElementById('newCategory').value.trim();
+            const itemName = document.getElementById('newItemName').value.trim();
+            const itemId = document.getElementById('newItemId').value.trim() || generateId();
+            const quantity = parseInt(document.getElementById('newQuantity').value) || 1;
+            const purchasePrice = parseFloat(document.getElementById('newPurchasePrice').value) || 0;
+            const sellPrice = parseFloat(document.getElementById('newSellPrice').value) || 0;
+            const description = document.getElementById('newDescription').value.trim();
+
+            if (!category || !itemName) {
+                alert('Please fill in Category and Item Name');
+                return;
+            }
+
+            // Initialize category if it doesn't exist
+            if (!inventory[category]) {
+                inventory[category] = [];
+            }
+
+            // Add item to inventory
+            const item = {
+                id: itemId,
+                name: itemName,
+                quantity: quantity
+            };
+
+            inventory[category].push(item);
+
+            // Add item data
+            const key = `${category}-${itemId}`;
+            itemData[key] = {
+                purchasePrice: purchasePrice,
+                price: sellPrice,
+                notes: description,
+                dateAdded: new Date().toISOString()
+            };
+
+            saveData();
+            renderInventory();
+            updateStats();
+
+            // Clear form
+            document.getElementById('newCategory').value = '';
+            document.getElementById('newItemName').value = '';
+            document.getElementById('newItemId').value = '';
+            document.getElementById('newQuantity').value = '1';
+            document.getElementById('newPurchasePrice').value = '';
+            document.getElementById('newSellPrice').value = '';
+            document.getElementById('newDescription').value = '';
+
+            // Show success message
+            showNotification('✅ Item added successfully!', 'success');
+        }
+
+        // Generate unique ID
+        function generateId() {
+            return 'ITEM' + Date.now() + Math.random().toString(36).substr(2, 9);
+        }
+
+        // Render entire inventory
+        function renderInventory(filteredData = null) {
+            const container = document.getElementById('inventoryGrid');
+            const data = filteredData || inventory;
+            container.innerHTML = '';
+
+            if (Object.keys(data).length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #6c757d;">
+                        <h3>No items to display</h3>
+                        <p>Add items using the form above or adjust your filters</p>
+                    </div>
+                `;
+                return;
+            }
+
+            Object.entries(data).forEach(([category, items]) => {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'category-section';
+                
+                const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
+                const categoryValue = items.reduce((sum, item) => {
+                    const key = `${category}-${item.id}`;
+                    const price = itemData[key]?.price || 0;
+                    return sum + (price * item.quantity);
+                }, 0);
+
+                categoryDiv.innerHTML = `
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <span>${category}</span>
+                        <div class="category-stats">
+                            ${totalItems} items | Est. $${categoryValue.toFixed(2)}
+                        </div>
+                    </div>
+                    <div class="items-grid" id="category-${category.replace(/\s+/g, '-')}">
+                    </div>
+                `;
+                
+                container.appendChild(categoryDiv);
+                
+                const itemsGrid = categoryDiv.querySelector('.items-grid');
+                items.forEach(item => {
+                    const itemCard = createItemCard(category, item);
+                    itemsGrid.appendChild(itemCard);
+                });
+            });
+        }
+
+        // Toggle category visibility
+        function toggleCategory(header) {
+            const grid = header.nextElementSibling;
+            grid.style.display = grid.style.display === 'none' ? 'grid' : 'none';
+        }
+
+        // Create item card
+        function createItemCard(category, item) {
+            const key = `${category}-${item.id}`;
+            const data = itemData[key] || {};
+            
+            const card = document.createElement('div');
+            card.className = 'item-card';
+            
+            const profit = data.price && data.purchasePrice ? 
+                (data.price - data.purchasePrice) * item.quantity : 0;
+            const profitPercent = data.purchasePrice && data.price ?
+                ((data.price - data.purchasePrice) / data.purchasePrice * 100).toFixed(1) : 0;
+            
+            card.innerHTML = `
+                <div class="item-header">
+                    <div class="item-name">${item.name}</div>
+                    <div class="quantity-badge">×${item.quantity}</div>
+                    ${data.sold ? '<span class="sold-indicator">SOLD</span>' : ''}
+                </div>
+                
+                <div class="item-detail"><strong>SKU:</strong> ${item.id}</div>
+                
+                <div class="price-display" id="price-${key}">
+                    ${data.price ? 
+                        `<div class="price-amount">Sell: $${data.price.toFixed(2)} each</div>
+                         ${data.purchasePrice ? `<div style="font-size: 0.9em;">Cost: $${data.purchasePrice.toFixed(2)} | Profit: $${profit.toFixed(2)} (${profitPercent}%)</div>` : ''}
+                         <div>Total Value: $${(data.price * item.quantity).toFixed(2)}</div>` 
+                        : '<div class="loading">Price not set</div>'
+                    }
+                </div>
+                
+                ${data.notes ? `<div class="item-detail"><strong>Notes:</strong> ${data.notes}</div>` : ''}
+                
+                <div class="item-actions">
+                    <button class="btn btn-primary btn-small" onclick="checkEbayPrice('${key}', '${category}', '${item.name}')">
+                        💰 Check eBay
+                    </button>
+                    <button class="btn btn-secondary btn-small" onclick="editItem('${key}', '${category}')">
+                        ✏️ Edit
+                    </button>
+                    <button class="btn btn-secondary btn-small" onclick="toggleSold('${key}')">
+                        ${data.sold ? '📦 Unsold' : '✅ Sold'}
+                    </button>
+                    <button class="btn btn-secondary btn-small" onclick="deleteItem('${key}', '${category}', '${item.id}')">
+                        🗑️ Delete
+                    </button>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Check eBay prices
+        function checkEbayPrice(key, category, itemName) {
+            // Open sold listings
+            const soldUrl = `https://www.ebay.com/sch/i.html?_nkw=${encodeURIComponent(itemName)}&_sacat=0&LH_Sold=1&LH_Complete=1&_sop=13`;
+            window.open(soldUrl, '_blank');
+            
+            // Open current listings
+            const currentUrl = `https://www.ebay.com/sch/i.html?_nkw=${encodeURIComponent(itemName)}&_sacat=0&LH_BIN=1&_sop=15`;
+            window.open(currentUrl, '_blank');
+            
+            showNotification('🔍 Opened eBay sold & current listings in new tabs', 'info');
+        }
+
+        // Edit item
+        function editItem(key, category) {
+            const [cat, id] = key.split('-');
+            const item = inventory[category].find(i => i.id === id);
+            const data = itemData[key] || {};
+            
+            const modalContent = `
+                <h2>Edit Item</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Item Name</label>
+                        <input type="text" id="editName" value="${item.name}">
+                    </div>
+                    <div class="form-group">
+                        <label>Quantity</label>
+                        <input type="number" id="editQuantity" value="${item.quantity}" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label>Purchase Price</label>
+                        <input type="number" id="editPurchasePrice" value="${data.purchasePrice || ''}" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Sell Price</label>
+                        <input type="number" id="editSellPrice" value="${data.price || ''}" step="0.01">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Notes</label>
+                    <textarea id="editNotes">${data.notes || ''}</textarea>
+                </div>
+                <button class="btn btn-success" onclick="saveEdit('${key}', '${category}', '${id}')">💾 Save Changes</button>
+            `;
+            
+            document.getElementById('modalContent').innerHTML = modalContent;
+            document.getElementById('itemModal').style.display = 'block';
+        }
+
+        // Save edited item
+        function saveEdit(key, category, id) {
+            const item = inventory[category].find(i => i.id === id);
+            
+            item.name = document.getElementById('editName').value;
+            item.quantity = parseInt(document.getElementById('editQuantity').value);
+            
+            if (!itemData[key]) itemData[key] = {};
+            itemData[key].purchasePrice = parseFloat(document.getElementById('editPurchasePrice').value) || 0;
+            itemData[key].price = parseFloat(document.getElementById('editSellPrice').value) || 0;
+            itemData[key].notes = document.getElementById('editNotes').value;
+            
+            saveData();
+            renderInventory();
+            updateStats();
+            closeModal();
+            showNotification('✅ Item updated successfully!', 'success');
+        }
+
+        // Toggle sold status
+        function toggleSold(key) {
+            if (!itemData[key]) itemData[key] = {};
+            itemData[key].sold = !itemData[key].sold;
+            
+            if (itemData[key].sold) {
+                itemData[key].dateSold = new Date().toISOString();
+            } else {
+                delete itemData[key].dateSold;
+            }
+            
+            saveData();
+            renderInventory();
+            updateStats();
+        }
+
+        // Delete item
+        function deleteItem(key, category, id) {
+            if (!confirm('Are you sure you want to delete this item?')) return;
+            
+            inventory[category] = inventory[category].filter(i => i.id !== id);
+            
+            // Remove category if empty
+            if (inventory[category].length === 0) {
+                delete inventory[category];
+            }
+            
+            delete itemData[key];
+            
+            saveData();
+            renderInventory();
+            updateStats();
+            showNotification('🗑️ Item deleted', 'info');
+        }
+
+        // Update statistics
+        function updateStats() {
+            let totalItems = 0;
+            let totalValue = 0;
+            let totalSold = 0;
+
+            Object.entries(inventory).forEach(([category, items]) => {
+                items.forEach(item => {
+                    totalItems += item.quantity;
+                    const key = `${category}-${item.id}`;
+                    const data = itemData[key];
+                    
+                    if (data?.price) {
+                        if (data.sold) {
+                            totalSold += data.price * item.quantity;
+                        } else {
+                            totalValue += data.price * item.quantity;
+                        }
+                    }
+                });
+            });
+
+            document.getElementById('totalItems').textContent = totalItems;
+            document.getElementById('totalCategories').textContent = Object.keys(inventory).length;
+            document.getElementById('totalValue').textContent = `$${totalValue.toFixed(0)}`;
+            document.getElementById('totalSold').textContent = `$${totalSold.toFixed(0)}`;
+            document.getElementById('totalValueDisplay').textContent = `Inventory Value: $${totalValue.toFixed(2)}`;
+        }
+
+        // Search inventory
+        function searchInventory() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            if (!query) {
+                renderInventory();
+                return;
+            }
+
+            const filtered = {};
+            Object.entries(inventory).forEach(([category, items]) => {
+                const matchingItems = items.filter(item => 
+                    item.name.toLowerCase().includes(query) ||
+                    category.toLowerCase().includes(query) ||
+                    item.id.toLowerCase().includes(query)
+                );
+                
+                if (matchingItems.length > 0) {
+                    filtered[category] = matchingItems;
+                }
+            });
+
+            renderInventory(filtered);
+        }
+
+        // Show all items
+        function showAllItems() {
+            document.getElementById('searchInput').value = '';
+            renderInventory();
+        }
+
+        // Show high value items
+        function showHighValue() {
+            const filtered = {};
+            Object.entries(inventory).forEach(([category, items]) => {
+                const highValueItems = items.filter(item => {
+                    const key = `${category}-${item.id}`;
+                    const data = itemData[key];
+                    return data?.price && data.price >= 50;
+                });
+                
+                if (highValueItems.length > 0) {
+                    filtered[category] = highValueItems;
+                }
+            });
+
+            renderInventory(filtered);
+        }
+
+        // Show items needing pricing
+        function showNeedsPricing() {
+            const filtered = {};
+            Object.entries(inventory).forEach(([category, items]) => {
+                const unpricedItems = items.filter(item => {
+                    const key = `${category}-${item.id}`;
+                    const data = itemData[key];
+                    return !data?.price;
+                });
+                
+                if (unpricedItems.length > 0) {
+                    filtered[category] = unpricedItems;
+                }
+            });
+
+            renderInventory(filtered);
+        }
+
+        // Show unsold items
+        function showUnsold() {
+            const filtered = {};
+            Object.entries(inventory).forEach(([category, items]) => {
+                const unsoldItems = items.filter(item => {
+                    const key = `${category}-${item.id}`;
+                    const data = itemData[key];
+                    return !data?.sold;
+                });
+                
+                if (unsoldItems.length > 0) {
+                    filtered[category] = unsoldItems;
+                }
+            });
+
+            renderInventory(filtered);
+        }
+
+        // Show sold items
+        function showSoldItems() {
+            const filtered = {};
+            Object.entries(inventory).forEach(([category, items]) => {
+                const soldItems = items.filter(item => {
+                    const key = `${category}-${item.id}`;
+                    const data = itemData[key];
+                    return data?.sold;
+                });
+                
+                if (soldItems.length > 0) {
+                    filtered[category] = soldItems;
+                }
+            });
+
+            renderInventory(filtered);
+        }
+
+        // Export to CSV
+        function exportCSV() {
+            const csvData = ['Category,SKU,Item Name,Quantity,Purchase Price,Sell Price,Profit,Status,Date Added,Date Sold,Notes'];
+            
+            Object.entries(inventory).forEach(([category, items]) => {
+                items.forEach(item => {
+                    const key = `${category}-${item.id}`;
+                    const data = itemData[key] || {};
+                    const profit = data.price && data.purchasePrice ? 
+                        ((data.price - data.purchasePrice) * item.quantity).toFixed(2) : '0.00';
+                    const status = data.sold ? 'Sold' : 'Available';
+                    const notes = (data.notes || '').replace(/,/g, ';').replace(/\n/g, ' ');
+                    
+                    csvData.push(
+                        `"${category}","${item.id}","${item.name}",${item.quantity},` +
+                        `${data.purchasePrice || 0},${data.price || 0},${profit},"${status}",` +
+                        `"${data.dateAdded || ''}","${data.dateSold || ''}","${notes}"`
+                    );
+                });
+            });
+
+            const blob = new Blob([csvData.join('\n')], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `inventory-${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+            
+            showNotification('📊 CSV exported successfully!', 'success');
+        }
+
+        // Generate listings
+        function generateListings() {
+            let listings = [];
+            
+            Object.entries(inventory).forEach(([category, items]) => {
+                items.forEach(item => {
+                    const key = `${category}-${item.id}`;
+                    const data = itemData[key];
+                    
+                    if (data?.price && data.price >= 10 && !data.sold) {
+                        listings.push({
+                            category: category,
+                            name: item.name,
+                            sku: item.id,
+                            quantity: item.quantity,
+                            price: data.price,
+                            notes: data.notes || ''
+                        });
+                    }
+                });
+            });
+
+            listings.sort((a, b) => b.price - a.price);
+
+            const listingDoc = `eBay Listings - Generated ${new Date().toLocaleDateString()}
+========================================
+
+${listings.map((item, index) => `
+${index + 1}. ${item.name}
+   Category: ${item.category}
+   SKU: ${item.sku}
+   Price: $${item.price.toFixed(2)}${item.quantity > 1 ? ` each (${item.quantity} available)` : ''}
+   
+   ${item.notes}
+   
+-------------------------------------------
+`).join('')}
+
+Total Listings: ${listings.length}
+Total Value: $${listings.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2)}
+            `.trim();
+
+            const blob = new Blob([listingDoc], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `listings-${new Date().toISOString().split('T')[0]}.txt`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+            
+            showNotification(`📝 Generated ${listings.length} listings!`, 'success');
+        }
+
+        // Import data
+        function importData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json,.csv';
+            input.onchange = e => {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                reader.onload = event => {
+                    try {
+                        const data = JSON.parse(event.target.result);
+                        if (data.inventory && data.itemData) {
+                            inventory = data.inventory;
+                            itemData = data.itemData;
+                            saveData();
+                            renderInventory();
+                            updateStats();
+                            showNotification('✅ Data imported successfully!', 'success');
+                        }
+                    } catch (error) {
+                        alert('Error importing file. Make sure it\'s a valid JSON export.');
+                    }
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+
+        // Clear all data
+        function clearAll() {
+            if (!confirm('Are you sure you want to clear ALL inventory data? This cannot be undone!')) return;
+            if (!confirm('Really delete everything? Last chance!')) return;
+            
+            inventory = {};
+            itemData = {};
+            saveData();
+            renderInventory();
+            updateStats();
+            showNotification('🗑️ All data cleared', 'info');
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('itemModal').style.display = 'none';
+        }
+
+        // Show notification
+        function showNotification(message, type = 'info') {
+            const colors = {
+                success: '#28a745',
+                info: '#17a2b8',
+                warning: '#ffc107',
+                error: '#dc3545'
+            };
+            
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed; top: 20px; right: 20px; z-index: 1002;
+                background: ${colors[type]}; color: white;
+                padding: 15px 20px; border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                font-weight: bold; max-width: 350px;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.remove(), 3000);
+        }
+
+        // Initialize app on load
+        document.addEventListener('DOMContentLoaded', initializeApp);
+
+        // Search on Enter key
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('searchInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') searchInventory();
+            });
+        });
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            const modal = document.getElementById('itemModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
