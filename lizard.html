@@ -18,16 +18,22 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            justify-content: flex-start;
+            overflow-x: hidden;
+            overflow-y: auto;
             position: relative;
+            padding: 20px 10px;
         }
 
         .stars {
-            position: absolute;
+            position: fixed;
             width: 100%;
             height: 100%;
             overflow: hidden;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
         }
 
         .star {
@@ -48,10 +54,13 @@
             text-align: center;
             z-index: 10;
             position: relative;
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
         }
 
         h1 {
-            font-size: 4rem;
+            font-size: clamp(2rem, 8vw, 4rem);
             color: #00ff00;
             text-shadow: 
                 0 0 10px #00ff00,
@@ -61,9 +70,10 @@
                 -3px -3px 0 #000,
                 3px -3px 0 #000,
                 -3px 3px 0 #000;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             letter-spacing: 0.1em;
             animation: pulse 2s infinite;
+            word-wrap: break-word;
         }
 
         @keyframes pulse {
@@ -74,8 +84,8 @@
         .lizard-btn {
             background: linear-gradient(145deg, #00ff00, #00cc00);
             border: 4px solid #000;
-            padding: 30px 60px;
-            font-size: 3rem;
+            padding: clamp(15px, 4vw, 30px) clamp(30px, 8vw, 60px);
+            font-size: clamp(1.5rem, 5vw, 3rem);
             font-family: 'Impact', 'Arial Black', sans-serif;
             color: #000;
             cursor: pointer;
@@ -87,6 +97,8 @@
             text-transform: uppercase;
             position: relative;
             overflow: hidden;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .lizard-btn:hover {
@@ -107,7 +119,7 @@
         .score-container {
             margin-top: 2rem;
             display: flex;
-            gap: 3rem;
+            gap: clamp(1rem, 3vw, 3rem);
             justify-content: center;
             flex-wrap: wrap;
         }
@@ -116,12 +128,13 @@
             background: rgba(0, 0, 0, 0.5);
             border: 4px solid #00ff00;
             border-radius: 15px;
-            padding: 1.5rem 2.5rem;
+            padding: clamp(1rem, 2vw, 1.5rem) clamp(1.5rem, 3vw, 2.5rem);
             box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            min-width: 150px;
         }
 
         .score-label {
-            font-size: 1.2rem;
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
             color: #00ff00;
             text-shadow: 
                 0 0 10px #00ff00,
@@ -130,10 +143,11 @@
                 2px -2px 0 #000,
                 -2px 2px 0 #000;
             margin-bottom: 0.5rem;
+            white-space: nowrap;
         }
 
         .score-number {
-            font-size: 3rem;
+            font-size: clamp(2rem, 5vw, 3rem);
             color: #00ff00;
             text-shadow: 
                 0 0 20px #00ff00,
@@ -167,7 +181,8 @@
 
         .lizard-text {
             margin-top: 3rem;
-            font-size: 5rem;
+            margin-bottom: 3rem;
+            font-size: clamp(2rem, 6vw, 5rem);
             color: #00ff00;
             text-shadow: 
                 0 0 20px #00ff00,
@@ -175,27 +190,31 @@
                 -3px -3px 0 #000,
                 3px -3px 0 #000,
                 -3px 3px 0 #000;
-            min-height: 6rem;
+            min-height: clamp(3rem, 8vw, 6rem);
             display: flex;
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
-            max-width: 90vw;
+            width: 100%;
             word-break: break-word;
+            line-height: 1.2;
         }
 
         .reset-btn {
-            margin-top: 2rem;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
             background: rgba(255, 0, 0, 0.3);
             border: 3px solid #ff0000;
             padding: 10px 20px;
-            font-size: 1rem;
+            font-size: clamp(0.8rem, 2vw, 1rem);
             font-family: 'Impact', 'Arial Black', sans-serif;
             color: #ff0000;
             cursor: pointer;
             border-radius: 10px;
             transition: all 0.2s;
             text-transform: uppercase;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .reset-btn:hover {
@@ -224,7 +243,7 @@
         }
 
         .emoji {
-            font-size: 8rem;
+            font-size: clamp(4rem, 10vw, 8rem);
             margin-bottom: 1rem;
             animation: bounce 1s infinite;
         }
@@ -234,19 +253,45 @@
             50% { transform: translateY(-20px); }
         }
 
+        /* Mobile optimizations */
         @media (max-width: 768px) {
+            body {
+                padding: 15px 5px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
             h1 {
-                font-size: 2.5rem;
+                margin-bottom: 1rem;
             }
-            .lizard-btn {
-                padding: 20px 40px;
-                font-size: 2rem;
+
+            .score-container {
+                margin-top: 1.5rem;
+                gap: 1rem;
             }
+
+            .score-box {
+                min-width: 120px;
+            }
+
             .lizard-text {
-                font-size: 3rem;
+                margin-top: 2rem;
+                margin-bottom: 2rem;
             }
-            .emoji {
-                font-size: 5rem;
+        }
+
+        /* Very small screens */
+        @media (max-width: 480px) {
+            .score-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .score-box {
+                width: 100%;
+                max-width: 250px;
             }
         }
     </style>
@@ -357,6 +402,14 @@
             utterance.pitch = 1.2;
             utterance.volume = 1;
             window.speechSynthesis.speak(utterance);
+
+            // Auto-scroll to bottom when new lizards are added
+            setTimeout(() => {
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth'
+                });
+            }, 100);
         }
 
         function resetScore() {
@@ -366,6 +419,12 @@
             
             // Stop all text-to-speech audio
             window.speechSynthesis.cancel();
+
+            // Scroll back to top
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         }
     </script>
 </body>
