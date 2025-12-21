@@ -490,37 +490,33 @@
             pointer-events: none;
         }
         
-        #mobileJoystick {
+        .jc {
             position: absolute;
             left: 30px;
             bottom: 0;
-            width: 120px;
-            height: 120px;
+            width: 60px;
+            height: 60px;
+            background: rgba(0,50,0,.8);
+            border: 2px solid #00ff41;
+            border-radius: 50%;
+            touch-action: none;
+            cursor: pointer;
             pointer-events: all;
         }
         
-        .joystick-base {
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(circle, rgba(0, 255, 65, 0.3), rgba(0, 255, 65, 0.1));
-            border: 3px solid #00ff41;
-            border-radius: 50%;
-            position: relative;
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.4), inset 0 0 20px rgba(0, 0, 0, 0.5);
-        }
-        
-        .joystick-stick {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #00ff41, #00cc33);
-            border: 2px solid #fff;
-            border-radius: 50%;
+        .js {
             position: absolute;
+            width: 18px;
+            height: 18px;
+            background: #00ff41;
+            border-radius: 50%;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            transition: all 0.1s ease-out;
+            transform: translate(-50%,-50%);
+            transition: none;
+            box-shadow: 0 0 8px #00ff41;
+            touch-action: none;
+            pointer-events: none;
         }
         
         #mobileJumpBtn {
@@ -837,10 +833,8 @@
         
         <!-- Mobile Controls -->
         <div id="mobileControls">
-            <div id="mobileJoystick">
-                <div class="joystick-base">
-                    <div class="joystick-stick"></div>
-                </div>
+            <div id="mobileJoystick" class="jc">
+                <div class="js joystick-stick"></div>
             </div>
             <button id="mobileJumpBtn">JUMP</button>
         </div>
@@ -1246,7 +1240,6 @@
         class InputHandler {
             constructor() {
                 this.keys = {};
-                this.mobileDirection = null;
                 this.setupKeyboard();
                 this.setupMobile();
                 // Removed setupTouch() - no more swipe controls
@@ -1298,17 +1291,7 @@
             handleContinuousInput() {
                 if (!gameState.isRunning || gameState.isPaused) return;
                 
-                // Debug what's active
-                const activeKeys = Object.keys(this.keys).filter(k => this.keys[k]);
-                if (activeKeys.length > 0) {
-                    console.log('Active keys:', activeKeys);
-                }
-                
-                if (this.mobileDirection !== null) {
-                    console.log('Mobile direction:', this.mobileDirection);
-                }
-                
-                // Keyboard controls
+                // Keyboard controls only
                 if (this.keys['a'] || this.keys['arrowleft']) {
                     player.moveLeft();
                 }
@@ -1320,144 +1303,111 @@
                 } else {
                     player.stopDucking();
                 }
-                
-                // Mobile joystick controls
-                if (this.mobileDirection === 'left') {
-                    player.moveLeft();
-                } else if (this.mobileDirection === 'right') {
-                    player.moveRight();
-                }
             }
             
-            setupMobile() {
-                const joystickBase = document.querySelector('.joystick-base');
-                const joystickStick = document.querySelector('.joystick-stick');
-                const jumpBtn = document.getElementById('mobileJumpBtn');
+            setupMobile(){
+                const jc=document.getElementById('mobileJoystick');
+                const js=document.querySelector('.js');
+                const jumpBtn=document.getElementById('mobileJumpBtn');
                 
-                console.log('Setting up mobile controls:', { joystickBase, joystickStick, jumpBtn });
-                
-                if (!joystickBase || !joystickStick || !jumpBtn) {
-                    // No mobile controls found, ensure direction stays null
-                    console.log('Mobile controls not found!');
-                    this.mobileDirection = null;
+                if(!jc || !js || !jumpBtn){
+                    console.log('Mobile controls not found');
                     return;
                 }
                 
-                // Explicitly set to null
-                this.mobileDirection = null;
+                console.log('Mobile controls initialized');
                 
-                let joystickActive = false;
-                let joystickCenterX = 0;
-                let joystickCenterY = 0;
-                
-                // Joystick touch handling - using arrow functions to preserve 'this'
-                const handleJoystickStart = (e) => {
+                const cx=30; // Center X
+                const cy=30; // Center Y
+                const md=25; // Max distance
+                let startPos={x:0,y:0};
+                this.joystickActive=false;
+
+                const hs=e=>{
+                    if(!gameState.isRunning || gameState.isPaused) return;
                     e.preventDefault();
-                    console.log('Joystick start');
-                    if (!gameState.isRunning || gameState.isPaused) return;
-                    
-                    joystickActive = true;
-                    const rect = joystickBase.getBoundingClientRect();
-                    joystickCenterX = rect.left + rect.width / 2;
-                    joystickCenterY = rect.top + rect.height / 2;
-                    
-                    handleJoystickMove(e);
+                    e.stopPropagation();
+                    this.joystickActive=true;
+                    const r=jc.getBoundingClientRect();
+                    const t=e.touches?e.touches[0]:e;
+                    startPos.x=t.clientX-r.left;
+                    startPos.y=t.clientY-r.top;
+                    jc.style.opacity='1';
+                    this.startJoystickMovement();
                 };
-                
-                const handleJoystickMove = (e) => {
-                    if (!joystickActive) {
-                        // Make absolutely sure direction is null if not active
-                        this.mobileDirection = null;
-                        return;
-                    }
+
+                const hm=e=>{
+                    if(!this.joystickActive) return;
                     e.preventDefault();
-                    
-                    const touch = e.touches ? e.touches[0] : e;
-                    if (!touch) {
-                        this.mobileDirection = null;
-                        return;
+                    e.stopPropagation();
+                    const r=jc.getBoundingClientRect();
+                    const t=e.touches?e.touches[0]:e;
+                    const x=t.clientX-r.left-cx;
+                    const y=t.clientY-r.top-cy;
+                    const d=Math.sqrt(x*x+y*y);
+                    let fx=x, fy=y;
+                    if(d>md){
+                        const a=Math.atan2(y,x);
+                        fx=Math.cos(a)*md;
+                        fy=Math.sin(a)*md;
                     }
-                    
-                    const deltaX = touch.clientX - joystickCenterX;
-                    const deltaY = touch.clientY - joystickCenterY;
-                    
-                    // Limit stick movement to base radius
-                    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-                    const maxDistance = 35;
-                    
-                    let stickX = deltaX;
-                    let stickY = deltaY;
-                    
-                    if (distance > maxDistance) {
-                        const angle = Math.atan2(deltaY, deltaX);
-                        stickX = Math.cos(angle) * maxDistance;
-                        stickY = Math.sin(angle) * maxDistance;
-                    }
-                    
-                    joystickStick.style.transform = `translate(calc(-50% + ${stickX}px), calc(-50% + ${stickY}px))`;
-                    
-                    // Determine direction - require minimum movement
-                    if (Math.abs(deltaX) > 15) {
-                        if (deltaX < 0) {
-                            this.mobileDirection = 'left';
-                            console.log('Moving left');
-                        } else {
-                            this.mobileDirection = 'right';
-                            console.log('Moving right');
-                        }
-                    } else {
-                        this.mobileDirection = null;
-                    }
+                    js.style.transform=`translate(calc(-50% + ${fx}px), calc(-50% + ${fy}px))`;
+                    this.joystickVector={x:fx/md,y:fy/md};
                 };
-                
-                const handleJoystickEnd = (e) => {
+
+                const he=e=>{
                     e.preventDefault();
-                    console.log('Joystick end');
-                    joystickActive = false;
-                    this.mobileDirection = null;
-                    joystickStick.style.transform = 'translate(-50%, -50%)';
+                    e.stopPropagation();
+                    this.joystickActive=false;
+                    js.style.transform='translate(-50%,-50%)';
+                    jc.style.opacity='.8';
+                    this.joystickVector={x:0,y:0};
+                    this.stopJoystickMovement();
                 };
+
+                jc.addEventListener('touchstart',hs,{passive:false});
+                jc.addEventListener('touchmove',hm,{passive:false});
+                jc.addEventListener('touchend',he,{passive:false});
+                jc.addEventListener('mousedown',hs);
+                document.addEventListener('mousemove',hm);
+                document.addEventListener('mouseup',he);
                 
-                // Touch events - arrow functions preserve 'this' context
-                joystickBase.addEventListener('touchstart', handleJoystickStart);
-                joystickBase.addEventListener('touchmove', handleJoystickMove);
-                joystickBase.addEventListener('touchend', handleJoystickEnd);
-                joystickBase.addEventListener('touchcancel', handleJoystickEnd);
-                
-                // Mouse support ONLY for testing
-                let mouseActive = false;
-                joystickBase.addEventListener('mousedown', (e) => {
-                    mouseActive = true;
-                    handleJoystickStart(e);
-                });
-                
-                document.addEventListener('mousemove', (e) => {
-                    if (mouseActive) {
-                        handleJoystickMove(e);
-                    }
-                });
-                
-                document.addEventListener('mouseup', (e) => {
-                    if (mouseActive) {
-                        mouseActive = false;
-                        handleJoystickEnd(e);
-                    }
-                });
-                
+                this.joystickVector={x:0,y:0};
+
                 // Jump button
-                jumpBtn.addEventListener('touchstart', (e) => {
-                    e.preventDefault();
-                    console.log('Jump button touched');
-                    if (!gameState.isRunning || gameState.isPaused) return;
-                    player.jump();
+                const bp=e=>{e.preventDefault();e.stopPropagation()};
+                ['click','touchend'].forEach(evt=>{
+                    jumpBtn.addEventListener(evt,(e)=>{
+                        bp(e);
+                        if(!gameState.isRunning || gameState.isPaused) return;
+                        player.jump();
+                    },{passive:false});
                 });
-                
-                jumpBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    console.log('Jump button clicked');
-                    if (!gameState.isRunning || gameState.isPaused) return;
-                    player.jump();
-                });
+            }
+            
+            startJoystickMovement(){
+                if(this.moveInterval)clearInterval(this.moveInterval);
+                this.moveInterval=setInterval(()=>{
+                    if(this.joystickActive && this.joystickVector && (Math.abs(this.joystickVector.x)>.1)){
+                        if(!gameState.isRunning || gameState.isPaused) return;
+                        const baseSpeed=CONFIG.player.moveSpeed;
+                        let mx=this.joystickVector.x*baseSpeed;
+                        if(Math.abs(mx) > 1){
+                            if(mx < 0){
+                                player.moveLeft();
+                            } else {
+                                player.moveRight();
+                            }
+                        }
+                    }
+                },50);
+            }
+            
+            stopJoystickMovement(){
+                if(this.moveInterval){
+                    clearInterval(this.moveInterval);
+                    this.moveInterval=null;
+                }
             }
             
             setupTouch() {
