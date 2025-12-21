@@ -623,17 +623,76 @@
                 padding: 8px;
             }
             
+            .menu {
+                max-height: 90vh;
+                max-width: 85%;
+                padding: 20px;
+                top: 50%;
+                transform: translate(-50%, -50%) scale(0.9);
+            }
+            
             .menu h2 {
-                font-size: 14px;
+                font-size: 12px;
+                margin-bottom: 10px;
             }
             
             .menu p {
                 font-size: 7px;
+                margin: 5px 0;
+            }
+            
+            .menu-button {
+                font-size: 8px;
+                padding: 10px 20px;
+                margin-top: 10px;
+            }
+        }
+        
+        @media (max-width: 768px) and (max-height: 700px) {
+            .menu {
+                max-height: 85vh;
+                padding: 15px;
+                transform: translate(-50%, -50%) scale(0.85);
+            }
+            
+            .menu h2 {
+                font-size: 11px;
+                margin-bottom: 8px;
+            }
+            
+            .menu p {
+                font-size: 6px;
+                margin: 4px 0;
             }
             
             .menu-button {
                 font-size: 7px;
-                padding: 10px 20px;
+                padding: 8px 16px;
+                margin-top: 8px;
+            }
+        }
+        
+        @media (max-width: 768px) and (max-height: 600px) {
+            .menu {
+                max-height: 80vh;
+                padding: 12px;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            
+            .menu h2 {
+                font-size: 10px;
+                margin-bottom: 6px;
+            }
+            
+            .menu p {
+                font-size: 5px;
+                margin: 3px 0;
+            }
+            
+            .menu-button {
+                font-size: 6px;
+                padding: 6px 12px;
+                margin-top: 6px;
             }
         }
         
@@ -1182,6 +1241,7 @@
         class InputHandler {
             constructor() {
                 this.keys = {};
+                this.mobileDirection = null;
                 this.setupKeyboard();
                 this.setupMobile();
                 this.setupTouch();
@@ -1247,13 +1307,10 @@
                 }
                 
                 // Mobile joystick controls
-                if (this.getMobileDirection) {
-                    const direction = this.getMobileDirection();
-                    if (direction === 'left') {
-                        player.moveLeft();
-                    } else if (direction === 'right') {
-                        player.moveRight();
-                    }
+                if (this.mobileDirection === 'left') {
+                    player.moveLeft();
+                } else if (this.mobileDirection === 'right') {
+                    player.moveRight();
                 }
             }
             
@@ -1267,7 +1324,6 @@
                 let joystickActive = false;
                 let joystickCenterX = 0;
                 let joystickCenterY = 0;
-                let currentDirection = null;
                 
                 // Joystick touch handling
                 const handleJoystickStart = (e) => {
@@ -1305,38 +1361,34 @@
                     
                     joystickStick.style.transform = `translate(calc(-50% + ${stickX}px), calc(-50% + ${stickY}px))`;
                     
-                    // Determine direction but don't auto-move
-                    // Movement will happen in game loop
+                    // Determine direction
                     if (Math.abs(deltaX) > 10) {
                         if (deltaX < 0) {
-                            currentDirection = 'left';
+                            this.mobileDirection = 'left';
                         } else {
-                            currentDirection = 'right';
+                            this.mobileDirection = 'right';
                         }
                     } else {
-                        currentDirection = null;
+                        this.mobileDirection = null;
                     }
                 };
                 
                 const handleJoystickEnd = (e) => {
                     e.preventDefault();
                     joystickActive = false;
-                    currentDirection = null;
+                    this.mobileDirection = null;
                     joystickStick.style.transform = 'translate(-50%, -50%)';
                 };
                 
-                joystickBase.addEventListener('touchstart', handleJoystickStart);
-                joystickBase.addEventListener('touchmove', handleJoystickMove);
-                joystickBase.addEventListener('touchend', handleJoystickEnd);
-                joystickBase.addEventListener('touchcancel', handleJoystickEnd);
+                joystickBase.addEventListener('touchstart', handleJoystickStart.bind(this));
+                joystickBase.addEventListener('touchmove', handleJoystickMove.bind(this));
+                joystickBase.addEventListener('touchend', handleJoystickEnd.bind(this));
+                joystickBase.addEventListener('touchcancel', handleJoystickEnd.bind(this));
                 
                 // Mouse support for desktop testing
-                joystickBase.addEventListener('mousedown', handleJoystickStart);
-                document.addEventListener('mousemove', handleJoystickMove);
-                document.addEventListener('mouseup', handleJoystickEnd);
-                
-                // Make currentDirection accessible to game loop
-                this.getMobileDirection = () => currentDirection;
+                joystickBase.addEventListener('mousedown', handleJoystickStart.bind(this));
+                document.addEventListener('mousemove', handleJoystickMove.bind(this));
+                document.addEventListener('mouseup', handleJoystickEnd.bind(this));
                 
                 // Jump button
                 jumpBtn.addEventListener('touchstart', (e) => {
