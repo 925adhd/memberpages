@@ -1249,7 +1249,7 @@
                 this.mobileDirection = null;
                 this.setupKeyboard();
                 this.setupMobile();
-                this.setupTouch();
+                // Removed setupTouch() - no more swipe controls
             }
             
             setupKeyboard() {
@@ -1324,8 +1324,11 @@
                 const joystickStick = document.querySelector('.joystick-stick');
                 const jumpBtn = document.getElementById('mobileJumpBtn');
                 
+                console.log('Setting up mobile controls:', { joystickBase, joystickStick, jumpBtn });
+                
                 if (!joystickBase || !joystickStick || !jumpBtn) {
                     // No mobile controls found, ensure direction stays null
+                    console.log('Mobile controls not found!');
                     this.mobileDirection = null;
                     return;
                 }
@@ -1337,9 +1340,10 @@
                 let joystickCenterX = 0;
                 let joystickCenterY = 0;
                 
-                // Joystick touch handling
+                // Joystick touch handling - using arrow functions to preserve 'this'
                 const handleJoystickStart = (e) => {
                     e.preventDefault();
+                    console.log('Joystick start');
                     if (!gameState.isRunning || gameState.isPaused) return;
                     
                     joystickActive = true;
@@ -1369,7 +1373,7 @@
                     
                     // Limit stick movement to base radius
                     const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-                    const maxDistance = 35; // Half of base size minus stick size
+                    const maxDistance = 35;
                     
                     let stickX = deltaX;
                     let stickY = deltaY;
@@ -1383,11 +1387,13 @@
                     joystickStick.style.transform = `translate(calc(-50% + ${stickX}px), calc(-50% + ${stickY}px))`;
                     
                     // Determine direction - require minimum movement
-                    if (Math.abs(deltaX) > 15) {  // Increased threshold from 10 to 15
+                    if (Math.abs(deltaX) > 15) {
                         if (deltaX < 0) {
                             this.mobileDirection = 'left';
+                            console.log('Moving left');
                         } else {
                             this.mobileDirection = 'right';
+                            console.log('Moving right');
                         }
                     } else {
                         this.mobileDirection = null;
@@ -1396,46 +1402,49 @@
                 
                 const handleJoystickEnd = (e) => {
                     e.preventDefault();
+                    console.log('Joystick end');
                     joystickActive = false;
                     this.mobileDirection = null;
                     joystickStick.style.transform = 'translate(-50%, -50%)';
                 };
                 
-                // Touch events
-                joystickBase.addEventListener('touchstart', handleJoystickStart.bind(this));
-                joystickBase.addEventListener('touchmove', handleJoystickMove.bind(this));
-                joystickBase.addEventListener('touchend', handleJoystickEnd.bind(this));
-                joystickBase.addEventListener('touchcancel', handleJoystickEnd.bind(this));
+                // Touch events - arrow functions preserve 'this' context
+                joystickBase.addEventListener('touchstart', handleJoystickStart);
+                joystickBase.addEventListener('touchmove', handleJoystickMove);
+                joystickBase.addEventListener('touchend', handleJoystickEnd);
+                joystickBase.addEventListener('touchcancel', handleJoystickEnd);
                 
-                // Mouse support ONLY for testing - only listen when active
+                // Mouse support ONLY for testing
                 let mouseActive = false;
                 joystickBase.addEventListener('mousedown', (e) => {
                     mouseActive = true;
-                    handleJoystickStart.bind(this)(e);
+                    handleJoystickStart(e);
                 });
                 
                 document.addEventListener('mousemove', (e) => {
                     if (mouseActive) {
-                        handleJoystickMove.bind(this)(e);
+                        handleJoystickMove(e);
                     }
                 });
                 
                 document.addEventListener('mouseup', (e) => {
                     if (mouseActive) {
                         mouseActive = false;
-                        handleJoystickEnd.bind(this)(e);
+                        handleJoystickEnd(e);
                     }
                 });
                 
                 // Jump button
                 jumpBtn.addEventListener('touchstart', (e) => {
                     e.preventDefault();
+                    console.log('Jump button touched');
                     if (!gameState.isRunning || gameState.isPaused) return;
                     player.jump();
                 });
                 
                 jumpBtn.addEventListener('click', (e) => {
                     e.preventDefault();
+                    console.log('Jump button clicked');
                     if (!gameState.isRunning || gameState.isPaused) return;
                     player.jump();
                 });
