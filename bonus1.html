@@ -468,58 +468,62 @@
         /* ===== MOBILE CONTROLS ===== */
         #mobileControls {
             position: fixed;
-            bottom: 20px;
+            bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
             display: none;
             z-index: 400;
-            background: rgba(0, 0, 0, 0.85);
-            padding: 15px;
-            border-radius: 12px;
-            border: 3px solid #00ff41;
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 8px;
+            border-radius: 8px;
+            border: 2px solid #00ff41;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.4);
         }
         
         .mobile-controls-row {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
-            margin: 5px 0;
+            gap: 6px;
+            margin: 3px 0;
         }
         
         .mobile-btn {
             background: linear-gradient(135deg, #00ff41, #00cc33);
             color: #000;
             border: none;
-            width: 60px;
-            height: 60px;
-            border-radius: 10px;
+            width: 45px;
+            height: 45px;
+            border-radius: 8px;
             font-family: 'Press Start 2P', cursive;
-            font-size: 16px;
+            font-size: 12px;
             cursor: pointer;
             user-select: none;
             touch-action: manipulation;
-            box-shadow: 0 4px 0 #006622;
+            box-shadow: 0 3px 0 #006622;
             transition: all 0.1s;
         }
         
         .mobile-btn:active {
             transform: translateY(2px);
-            box-shadow: 0 2px 0 #006622;
+            box-shadow: 0 1px 0 #006622;
         }
         
         #mobileJump {
-            width: 100px;
-            height: 70px;
+            width: 70px;
+            height: 50px;
             background: linear-gradient(135deg, #ff6b9d, #c44569);
             color: #fff;
-            font-size: 12px;
-            box-shadow: 0 4px 0 #8b2e4a;
+            font-size: 9px;
+            box-shadow: 0 3px 0 #8b2e4a;
         }
         
         #mobileJump:active {
-            box-shadow: 0 2px 0 #8b2e4a;
+            box-shadow: 0 1px 0 #8b2e4a;
+        }
+        
+        #mobileDuck {
+            font-size: 8px;
         }
         
         /* ===== WAVE INDICATOR ===== */
@@ -624,20 +628,24 @@
             }
             
             #mobileControls {
-                bottom: 10px;
-                padding: 10px;
+                bottom: 5px;
+                padding: 5px;
             }
             
             .mobile-btn {
-                width: 50px;
-                height: 50px;
-                font-size: 14px;
+                width: 40px;
+                height: 40px;
+                font-size: 10px;
             }
             
             #mobileJump {
-                width: 80px;
-                height: 60px;
-                font-size: 10px;
+                width: 60px;
+                height: 45px;
+                font-size: 8px;
+            }
+            
+            #mobileDuck {
+                font-size: 7px;
             }
         }
     </style>
@@ -1165,6 +1173,11 @@
             setupKeyboard() {
                 document.addEventListener('keydown', (e) => {
                     this.keys[e.key.toLowerCase()] = true;
+                    
+                    // Prevent default scrolling on arrow keys, space, and WASD
+                    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' ', 'w', 'a', 's', 'd'].includes(e.key)) {
+                        e.preventDefault();
+                    }
                     
                     // Global shortcuts
                     if (e.key.toLowerCase() === 'p' || e.key === 'Escape') {
