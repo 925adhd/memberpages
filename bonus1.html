@@ -1240,9 +1240,11 @@
         class InputHandler {
             constructor() {
                 this.keys = {};
+                this.joystickActive = false;
+                this.joystickVector = {x: 0, y: 0};
+                this.moveInterval = null;
                 this.setupKeyboard();
                 this.setupMobile();
-                // Removed setupTouch() - no more swipe controls
             }
             
             setupKeyboard() {
@@ -1315,15 +1317,19 @@
                     return;
                 }
                 
-                console.log('Mobile controls initialized');
+                console.log('Mobile controls initialized successfully');
                 
                 const cx=30; // Center X
                 const cy=30; // Center Y
                 const md=25; // Max distance
                 let startPos={x:0,y:0};
+                
+                // Ensure joystick starts inactive
                 this.joystickActive=false;
+                this.joystickVector={x:0,y:0};
 
                 const hs=e=>{
+                    console.log('Joystick touch START');
                     if(!gameState.isRunning || gameState.isPaused) return;
                     e.preventDefault();
                     e.stopPropagation();
@@ -1353,9 +1359,11 @@
                     }
                     js.style.transform=`translate(calc(-50% + ${fx}px), calc(-50% + ${fy}px))`;
                     this.joystickVector={x:fx/md,y:fy/md};
+                    console.log('Joystick vector:', this.joystickVector);
                 };
 
                 const he=e=>{
+                    console.log('Joystick touch END');
                     e.preventDefault();
                     e.stopPropagation();
                     this.joystickActive=false;
@@ -1371,14 +1379,13 @@
                 jc.addEventListener('mousedown',hs);
                 document.addEventListener('mousemove',hm);
                 document.addEventListener('mouseup',he);
-                
-                this.joystickVector={x:0,y:0};
 
                 // Jump button
                 const bp=e=>{e.preventDefault();e.stopPropagation()};
                 ['click','touchend'].forEach(evt=>{
                     jumpBtn.addEventListener(evt,(e)=>{
                         bp(e);
+                        console.log('Jump button pressed');
                         if(!gameState.isRunning || gameState.isPaused) return;
                         player.jump();
                     },{passive:false});
@@ -1388,16 +1395,20 @@
             startJoystickMovement(){
                 if(this.moveInterval)clearInterval(this.moveInterval);
                 this.moveInterval=setInterval(()=>{
-                    if(this.joystickActive && this.joystickVector && (Math.abs(this.joystickVector.x)>.1)){
-                        if(!gameState.isRunning || gameState.isPaused) return;
-                        const baseSpeed=CONFIG.player.moveSpeed;
-                        let mx=this.joystickVector.x*baseSpeed;
-                        if(Math.abs(mx) > 1){
-                            if(mx < 0){
-                                player.moveLeft();
-                            } else {
-                                player.moveRight();
-                            }
+                    // STRICT CHECK: Only move if joystick is active AND vector exists AND has significant X movement
+                    if(!this.joystickActive) return;
+                    if(!this.joystickVector) return;
+                    if(!gameState.isRunning || gameState.isPaused) return;
+                    
+                    const threshold = 0.15; // Require at least 15% movement
+                    if(Math.abs(this.joystickVector.x) > threshold){
+                        const baseSpeed = CONFIG.player.moveSpeed;
+                        let mx = this.joystickVector.x * baseSpeed;
+                        
+                        if(mx < -1){
+                            player.moveLeft();
+                        } else if(mx > 1){
+                            player.moveRight();
                         }
                     }
                 },50);
