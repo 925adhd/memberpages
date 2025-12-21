@@ -1233,6 +1233,7 @@
             handleContinuousInput() {
                 if (!gameState.isRunning || gameState.isPaused) return;
                 
+                // Keyboard controls
                 if (this.keys['a'] || this.keys['arrowleft']) {
                     player.moveLeft();
                 }
@@ -1243,6 +1244,16 @@
                     player.duck();
                 } else {
                     player.stopDucking();
+                }
+                
+                // Mobile joystick controls
+                if (this.getMobileDirection) {
+                    const direction = this.getMobileDirection();
+                    if (direction === 'left') {
+                        player.moveLeft();
+                    } else if (direction === 'right') {
+                        player.moveRight();
+                    }
                 }
             }
             
@@ -1256,6 +1267,7 @@
                 let joystickActive = false;
                 let joystickCenterX = 0;
                 let joystickCenterY = 0;
+                let currentDirection = null;
                 
                 // Joystick touch handling
                 const handleJoystickStart = (e) => {
@@ -1293,19 +1305,23 @@
                     
                     joystickStick.style.transform = `translate(calc(-50% + ${stickX}px), calc(-50% + ${stickY}px))`;
                     
-                    // Move player based on stick position
+                    // Determine direction but don't auto-move
+                    // Movement will happen in game loop
                     if (Math.abs(deltaX) > 10) {
                         if (deltaX < 0) {
-                            player.moveLeft();
+                            currentDirection = 'left';
                         } else {
-                            player.moveRight();
+                            currentDirection = 'right';
                         }
+                    } else {
+                        currentDirection = null;
                     }
                 };
                 
                 const handleJoystickEnd = (e) => {
                     e.preventDefault();
                     joystickActive = false;
+                    currentDirection = null;
                     joystickStick.style.transform = 'translate(-50%, -50%)';
                 };
                 
@@ -1318,6 +1334,9 @@
                 joystickBase.addEventListener('mousedown', handleJoystickStart);
                 document.addEventListener('mousemove', handleJoystickMove);
                 document.addEventListener('mouseup', handleJoystickEnd);
+                
+                // Make currentDirection accessible to game loop
+                this.getMobileDirection = () => currentDirection;
                 
                 // Jump button
                 jumpBtn.addEventListener('touchstart', (e) => {
