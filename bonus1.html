@@ -1298,6 +1298,16 @@
             handleContinuousInput() {
                 if (!gameState.isRunning || gameState.isPaused) return;
                 
+                // Debug what's active
+                const activeKeys = Object.keys(this.keys).filter(k => this.keys[k]);
+                if (activeKeys.length > 0) {
+                    console.log('Active keys:', activeKeys);
+                }
+                
+                if (this.mobileDirection !== null) {
+                    console.log('Mobile direction:', this.mobileDirection);
+                }
+                
                 // Keyboard controls
                 if (this.keys['a'] || this.keys['arrowleft']) {
                     player.moveLeft();
@@ -1805,6 +1815,11 @@
                 highScoreEl.innerHTML = '<strong>Ready to escape the 9-to-5?</strong>';
             }
             
+            // Re-initialize mobile controls after page load to ensure elements exist
+            setTimeout(() => {
+                console.log('Re-initializing mobile controls after load');
+                inputHandler.setupMobile();
+            }, 500);
         });
     </script>
 </body>
