@@ -47,6 +47,19 @@
             border-radius: 8px;
         }
         
+        /* Hide fullscreen button */
+        #gameContainer::-webkit-media-controls-fullscreen-button {
+            display: none !important;
+        }
+        
+        #gameContainer::--webkit-media-controls {
+            display: none !important;
+        }
+        
+        video::-webkit-media-controls-fullscreen-button {
+            display: none;
+        }
+        
         /* ===== GAME FLOOR ===== */
         .floor {
             position: absolute;
@@ -313,6 +326,7 @@
             margin: 4px 0;
         }
         
+        
         .hud-value {
             color: #ffd700;
         }
@@ -468,62 +482,73 @@
         /* ===== MOBILE CONTROLS ===== */
         #mobileControls {
             position: fixed;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
+            bottom: 20px;
+            left: 0;
+            right: 0;
             display: none;
             z-index: 400;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 8px;
-            border-radius: 8px;
-            border: 2px solid #00ff41;
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.4);
+            pointer-events: none;
         }
         
-        .mobile-controls-row {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 6px;
-            margin: 3px 0;
+        #mobileJoystick {
+            position: absolute;
+            left: 30px;
+            bottom: 0;
+            width: 120px;
+            height: 120px;
+            pointer-events: all;
         }
         
-        .mobile-btn {
+        .joystick-base {
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(0, 255, 65, 0.3), rgba(0, 255, 65, 0.1));
+            border: 3px solid #00ff41;
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.4), inset 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .joystick-stick {
+            width: 50px;
+            height: 50px;
             background: linear-gradient(135deg, #00ff41, #00cc33);
-            color: #000;
-            border: none;
-            width: 45px;
-            height: 45px;
-            border-radius: 8px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            transition: all 0.1s ease-out;
+        }
+        
+        #mobileJumpBtn {
+            position: absolute;
+            right: 30px;
+            bottom: 0;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            color: #fff;
+            border: 3px solid #fff;
+            border-radius: 50%;
             font-family: 'Press Start 2P', cursive;
-            font-size: 12px;
+            font-size: 11px;
             cursor: pointer;
             user-select: none;
             touch-action: manipulation;
-            box-shadow: 0 3px 0 #006622;
+            box-shadow: 0 6px 0 #8b2e4a, 0 0 20px rgba(255, 107, 157, 0.5);
             transition: all 0.1s;
+            pointer-events: all;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
-        .mobile-btn:active {
-            transform: translateY(2px);
-            box-shadow: 0 1px 0 #006622;
-        }
-        
-        #mobileJump {
-            width: 70px;
-            height: 50px;
-            background: linear-gradient(135deg, #ff6b9d, #c44569);
-            color: #fff;
-            font-size: 9px;
-            box-shadow: 0 3px 0 #8b2e4a;
-        }
-        
-        #mobileJump:active {
-            box-shadow: 0 1px 0 #8b2e4a;
-        }
-        
-        #mobileDuck {
-            font-size: 8px;
+        #mobileJumpBtn:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #8b2e4a, 0 0 20px rgba(255, 107, 157, 0.5);
         }
         
         /* ===== WAVE INDICATOR ===== */
@@ -632,20 +657,10 @@
                 padding: 5px;
             }
             
-            .mobile-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 10px;
-            }
-            
             #mobileJump {
-                width: 60px;
-                height: 45px;
-                font-size: 8px;
-            }
-            
-            #mobileDuck {
-                font-size: 7px;
+                width: 100px;
+                height: 50px;
+                font-size: 9px;
             }
         }
     </style>
@@ -758,16 +773,12 @@
         
         <!-- Mobile Controls -->
         <div id="mobileControls">
-            <div class="mobile-controls-row">
-                <button class="mobile-btn" id="mobileLeft">←</button>
-                <button class="mobile-btn" id="mobileJump">JUMP</button>
-                <button class="mobile-btn" id="mobileRight">→</button>
+            <div id="mobileJoystick">
+                <div class="joystick-base">
+                    <div class="joystick-stick"></div>
+                </div>
             </div>
-            <div class="mobile-controls-row">
-                <button class="mobile-btn" id="mobileDuck">DUCK</button>
-                <button class="mobile-btn" id="mobilePause">⏸️</button>
-                <button class="mobile-btn" id="mobileHelp">?</button>
-            </div>
+            <button id="mobileJumpBtn">JUMP</button>
         </div>
     </div>
 
@@ -895,6 +906,7 @@
         class Player {
             constructor() {
                 this.element = document.getElementById('player');
+                this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
                 this.reset();
             }
             
@@ -912,6 +924,11 @@
             }
             
             update() {
+                // Auto-run on mobile
+                if (this.isMobile && gameState.isRunning && !gameState.isPaused) {
+                    this.moveRight();
+                }
+                
                 // Apply gravity
                 if (!this.isOnGround) {
                     this.velocityY -= CONFIG.player.gravity;
@@ -1230,65 +1247,89 @@
             }
             
             setupMobile() {
-                const buttons = {
-                    left: document.getElementById('mobileLeft'),
-                    right: document.getElementById('mobileRight'),
-                    jump: document.getElementById('mobileJump'),
-                    duck: document.getElementById('mobileDuck'),
-                    pause: document.getElementById('mobilePause'),
-                    help: document.getElementById('mobileHelp')
+                const joystickBase = document.querySelector('.joystick-base');
+                const joystickStick = document.querySelector('.joystick-stick');
+                const jumpBtn = document.getElementById('mobileJumpBtn');
+                
+                if (!joystickBase || !joystickStick || !jumpBtn) return;
+                
+                let joystickActive = false;
+                let joystickCenterX = 0;
+                let joystickCenterY = 0;
+                
+                // Joystick touch handling
+                const handleJoystickStart = (e) => {
+                    e.preventDefault();
+                    if (!gameState.isRunning || gameState.isPaused) return;
+                    
+                    joystickActive = true;
+                    const rect = joystickBase.getBoundingClientRect();
+                    joystickCenterX = rect.left + rect.width / 2;
+                    joystickCenterY = rect.top + rect.height / 2;
+                    
+                    handleJoystickMove(e);
                 };
                 
-                // Prevent default touch behaviors
-                Object.values(buttons).forEach(btn => {
-                    btn.addEventListener('touchstart', (e) => e.preventDefault());
-                    btn.addEventListener('touchend', (e) => e.preventDefault());
-                });
+                const handleJoystickMove = (e) => {
+                    if (!joystickActive) return;
+                    e.preventDefault();
+                    
+                    const touch = e.touches ? e.touches[0] : e;
+                    const deltaX = touch.clientX - joystickCenterX;
+                    const deltaY = touch.clientY - joystickCenterY;
+                    
+                    // Limit stick movement to base radius
+                    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                    const maxDistance = 35; // Half of base size minus stick size
+                    
+                    let stickX = deltaX;
+                    let stickY = deltaY;
+                    
+                    if (distance > maxDistance) {
+                        const angle = Math.atan2(deltaY, deltaX);
+                        stickX = Math.cos(angle) * maxDistance;
+                        stickY = Math.sin(angle) * maxDistance;
+                    }
+                    
+                    joystickStick.style.transform = `translate(calc(-50% + ${stickX}px), calc(-50% + ${stickY}px))`;
+                    
+                    // Move player based on stick position
+                    if (Math.abs(deltaX) > 10) {
+                        if (deltaX < 0) {
+                            player.moveLeft();
+                        } else {
+                            player.moveRight();
+                        }
+                    }
+                };
                 
-                // Left button
-                let leftInterval;
-                buttons.left.addEventListener('touchstart', () => {
-                    if (!gameState.isRunning || gameState.isPaused) return;
-                    player.moveLeft();
-                    leftInterval = setInterval(() => player.moveLeft(), 16);
-                });
-                buttons.left.addEventListener('touchend', () => clearInterval(leftInterval));
+                const handleJoystickEnd = (e) => {
+                    e.preventDefault();
+                    joystickActive = false;
+                    joystickStick.style.transform = 'translate(-50%, -50%)';
+                };
                 
-                // Right button
-                let rightInterval;
-                buttons.right.addEventListener('touchstart', () => {
-                    if (!gameState.isRunning || gameState.isPaused) return;
-                    player.moveRight();
-                    rightInterval = setInterval(() => player.moveRight(), 16);
-                });
-                buttons.right.addEventListener('touchend', () => clearInterval(rightInterval));
+                joystickBase.addEventListener('touchstart', handleJoystickStart);
+                joystickBase.addEventListener('touchmove', handleJoystickMove);
+                joystickBase.addEventListener('touchend', handleJoystickEnd);
+                joystickBase.addEventListener('touchcancel', handleJoystickEnd);
+                
+                // Mouse support for desktop testing
+                joystickBase.addEventListener('mousedown', handleJoystickStart);
+                document.addEventListener('mousemove', handleJoystickMove);
+                document.addEventListener('mouseup', handleJoystickEnd);
                 
                 // Jump button
-                buttons.jump.addEventListener('touchstart', () => {
+                jumpBtn.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
                     if (!gameState.isRunning || gameState.isPaused) return;
                     player.jump();
                 });
                 
-                // Duck button
-                buttons.duck.addEventListener('touchstart', () => {
+                jumpBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
                     if (!gameState.isRunning || gameState.isPaused) return;
-                    player.duck();
-                });
-                buttons.duck.addEventListener('touchend', () => {
-                    player.stopDucking();
-                });
-                
-                // Pause button
-                buttons.pause.addEventListener('touchstart', () => {
-                    if (gameState.isRunning) game.togglePause();
-                });
-                
-                // Help button
-                buttons.help.addEventListener('touchstart', () => {
-                    if (gameState.isRunning) {
-                        if (!gameState.isPaused) game.togglePause();
-                        game.showControls();
-                    }
+                    player.jump();
                 });
             }
             
@@ -1676,6 +1717,7 @@
             } else {
                 highScoreEl.innerHTML = '<strong>Ready to escape the 9-to-5?</strong>';
             }
+            
         });
     </script>
 </body>
