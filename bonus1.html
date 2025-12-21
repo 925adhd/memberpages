@@ -982,11 +982,6 @@
             }
             
             update() {
-                // Auto-run on mobile
-                if (this.isMobile && gameState.isRunning && !gameState.isPaused) {
-                    this.moveRight();
-                }
-                
                 // Apply gravity
                 if (!this.isOnGround) {
                     this.velocityY -= CONFIG.player.gravity;
